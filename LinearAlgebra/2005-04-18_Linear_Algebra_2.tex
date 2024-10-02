@@ -1,0 +1,1589 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\def\STUDENT{} % \def すると計算問題の解答を印刷しなくなる.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% 線形代数学演習---行列の標準形
+% 
+% 黒木 玄 (東北大学理学部数学教室, kuroki@math.tohoku.ac.jp)
+%
+% この演習問題集は2005年度における東北大学理学部数学科2年生前期の
+% 代数学序論B演習のために作成されました. 
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[12pt,twoside]{jarticle}
+%\documentclass[12pt]{jarticle}
+\usepackage{amsmath,amssymb,amscd}
+\usepackage{eepic}
+\usepackage{enshu}
+%\usepackage{showkeys}
+\allowdisplaybreaks
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setcounter{page}{5}       % この数から始まる
+\setcounter{section}{0}    % この数の次から始まる
+\setcounter{theorem}{0}    % この数の次から始まる
+\setcounter{question}{14}  % この数の次から始まる
+\setcounter{footnote}{0}   % この数の次から始まる
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\ifx\STUDENT\undefined
+%
+% 教師専用
+%
+\newcommand\commentout[1]{#1}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\else
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% 生徒専用
+%
+\newcommand\commentout[1]{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\fi
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\title{\bf 線形代数学演習---行列の標準形
+%  \thanks{この演習問題集は2005年度における東北大学理学部数学科2年生前期の
+%    代数学序論B演習のために作成された.}
+%  \ifx\STUDENT\undefined\\{\normalsize 教師用\quad(計算問題の略解付き)}\fi}
+%  \ifx\STUDENT\undefined\\{\normalsize 計算問題の略解付き}\fi}
+%
+%\author{黒木 玄 \quad (東北大学大学院理学研究科数学専攻)}
+%
+%\date{最終更新2003年11月21日 \quad (作成2005年4月11日)}
+%\date{2004年4月18日}
+
+%\maketitle
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\noindent
+{\Large\bf 線形代数学演習}
+\hfill
+{\large 黒木玄}
+\qquad
+2005年4月18日
+\commentout{\quad (教師用)}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\tableofcontents
+
+\section{行列の基本変形と一次方程式}
+
+\noindent
+{\large 
+{\bf 記号法:}\enspace 以下において $K$ は実数体 $\R$ または複素数体 $\C$ で
+あるとし, 体 $K$ 係数の一次方程式の理論について説明する%
+\footnote{実際には $K$ は任意の体であるとして構わない. しかし, 「任意の体」
+  という抽象代数の言葉に慣れていない方のために $K$ は $\R$ または $\C$ で
+  あることにしている.}.  今まで通り, $K$ の元を成分に持つ $m\times n$ 行列全
+体の集合を $M_{m,n}(K)$ と書き, $K$ の元を成分に持つ $n$ 次正方行列全体の集合
+を $M_n(K)=M_{n,n}(K)$ と書き, $K$ の元を成分に持つ $n$ 次元縦ベクトル全体の
+集合を $K^n = M_{n,1}(K)$ と書くことにする.
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{行列の基本操作と基本変形の導入}
+\label{sec:elem-op-tr}
+
+一次方程式に限らず方程式を解くための基本は
+「方程式をうまく変形してより簡単な形にすること」である.  
+一次方程式に関するそのような手続きは行列の
+{\bf 基本操作 (elementary operation)} と
+{\bf 基本変形 (elementary transformation)} の理論の形で整備されている%
+\footnote{行列の基本変形という考え方は後で
+  Jordan 標準形の理論などの基礎になる単因子論 (elementary divisor theory) 
+  でも重要になる. 単因子論入門には堀田 \cite{10wa} がおすすめである.
+
+  体 $K$ の元を成分に持つ行列の基本変形の理論
+  は $K$ 係数の一次方程式の理論である.  扱う環を
+  体 $K$ から $\Z$ や一変数多項式環 $K[\lambda]$ のような環を
+  含む Euclid 整域 (もしくはさらに一般的に単項イデアル整域) に一般化すると, 
+  一次方程式の理論は単因子論に拡張される.
+
+  扱う環をさらに一般にすると一次方程式の理論もどんどん複雑になる.
+  現代の数学において環上の一次方程式の理論は環上の加群 (module) の
+  理論として整備されている.  環上の加群は体上のベクトル空間の一般化である.
+  
+  なお堀田 \cite{gun-kagun}, \cite{10wa} では基本操作を
+  {\bf 基本変形 (fundamental transformation)} と呼び,
+  基本変形を{\bf 初等変形 (elementary transformation)} と呼んでいる.
+  色々調べてみたが標準的な用語法は決まっていないようである.
+  他の文献を見るときには注意して欲しい.}.
+より抽象的には一般線形群の作用の言葉で整理されることになる.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+$K$ の元を成分に持つ可逆な $m$ 次正方行列全体の集合を次のように表わす:
+\begin{equation*}
+  GL_m(K) = \{\, P\in M_m(K)\mid \text{$P$ は逆行列を持つ}\,\}.
+\end{equation*}
+$GL_m(K)$ は{\bf 一般線形群 (general linear group)} と呼ばれる.
+実際に群であることを示すのが次の問題である.
+
+\begin{question}[一般線形群, 簡単なので5点]
+  $GL_m(K)$ に関して以下が成立している:
+  \begin{enumerate}
+  \item 任意の $P,Q\in GL_m(K)$ に対して $PQ\in GL_m(K)$ であり, 
+    任意の $P,Q,R\in GL_m(K)$ に対して $(PQ)R=P(QR)$ が成立している.
+  \item $m$ 次の単位行列を $E$ と書くと $E\in GL_m(K)$ であり, 
+    任意の $P\in GL_m(K)$ に対して $PE=EP=P$ が成立している.
+  \item 任意の $P\in GL_m(K)$ に対して $P^{-1}\in GL_m(K)$ で
+    あり, $PP^{-1}=P^{-1}P=E$ が成立している.
+    \qed
+  \end{enumerate}
+\end{question}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+$i,j=1,\ldots,m$ かつ $i\ne j$ であり, $\alpha\in K$ の
+とき, $U_{ij}(\alpha)\in GL_m(K)$ を次のように定める:
+\begin{equation*}
+  U_{ij}(\alpha) = E + \alpha E_{ij} =
+  \begin{bmatrix}
+    1 &        &        &        &        & & \bigzerou \\
+      & \ddots &        &        &        & & \\
+      &        & 1      & \cdots & \alpha & & \\
+      &        & \vdots & \ddots & \vdots & & \\
+      &        & 0      & \cdots & 1      & & \\
+      &        &        &        &        & \ddots & \\
+    \bigzerol & &       &        &        &        & 1 \\
+  \end{bmatrix}.
+\end{equation*}
+ここで $i<j$ ならばここに書いたように $\alpha$ は対角線の右上に来る
+が, $i>j$ ならば $\alpha$ は対角線の左下に来ることに注意せよ.
+$E_{ij}$ は $(i,j)$ 成分のみが $1$ で他の成分がすべて $0$ であるよ
+うな行列 (行列単位) であり, $E$ は $m$ 次の単位行列である.
+
+$i,j=1,\ldots,m$ かつ $i\ne j$ のとき, $P_{ij}\in GL_m(K)$ を次のように定め
+る:
+\begin{equation*}
+  P_{ij} = E_{ij} + E_{ji} + \sum_{k\ne i,j} E_{kk} =
+  \begin{bmatrix}
+    1 &        &        &        &        & & \bigzerou \\
+      & \ddots &        &        &        & & \\
+      &        & 0      & \cdots & 1      & & \\
+      &        & \vdots & \ddots & \vdots & & \\
+      &        & 1      & \cdots & 0      & & \\
+      &        &        &        &        & \ddots & \\
+    \bigzerol & &       &        &        &        & 1 \\
+  \end{bmatrix}.
+\end{equation*}
+
+$i=1,\ldots,m$ であり,  $\beta\in K$ かつ $\beta\ne 0$ の
+とき, $D_i(\beta)\in GL_m(K)$ を次のように定める:
+\begin{equation*}
+  D_i(\beta) = \beta E_{ii} + \sum_{k\ne i} E_{kk} 
+  = \diag(1,\ldots,\beta,\ldots,1) =
+  \begin{bmatrix}
+    1 &        &   &       &   & & \bigzerou \\
+      & \ddots &   &       &   & & \\
+      &        & 1 &       &   & & \\
+      &        &   & \beta &   & & \\
+      &        &   &       & 1 & & \\
+      &        &   &       &   & \ddots & \\
+    \bigzerol & &  &       &   &        & 1 \\
+  \end{bmatrix}.
+\end{equation*}
+
+以上で定義した行列 $U_{ij}(\alpha)$, $P_{ij}$, $D_i(\beta)$ 
+に関して $m$ を陽に示したい場合には
+それぞれを $U_{m;ij}(\alpha)$, $P_{m;ij}$, $D_{m;i}(\beta)$ と
+書くことにする%
+\footnote{$U_{ij}(\alpha)$, $P_{ij}$, $D_i(\beta)$ の $U$, $P$, $D$ は
+  それぞれ unipotent (巾単), permutation (置換), diagonal (対角) という意味
+  のつもりである. 単位行列と巾零行列 (nilpotent matrix) の和の形の
+  行列を unipotent matrix (巾単行列) と呼ぶ.  正方行列が巾零であるとは
+  そのある巾が零になることである.}.
+
+\begin{question}[5点]
+  \label{q:inv-U,P,D}
+  $U_{ij}(\alpha)^{-1}=U_{ij}(-\alpha)$, 
+  $P_{ij}^{-1}=P_{ij}$, 
+  $D_i(\beta)^{-1}=D_i(\beta^{-1})$ を示せ. 
+  \qed
+\end{question}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+体 $K$ の元を成分に持つ $m\times n$ 行列 $A=[a_{ij}]\in M_{m,n}(K)$ が与えら
+れたとする.
+
+$A$ の{\bf 行に関する基本操作 (elementary operations of rows)}とは次の3種類
+の操作のことである:
+\begin{enumerate}
+\item[(a)] $A$ のある行の定数倍を他の行に加える.
+\item[(b)] $A$ の2つの行を交換する.
+\item[(c)] $A$ のある行に $0$ でない定数をかける.
+\end{enumerate}
+ここで定数は $K$ の元を意味するものとする.
+有限回の行に関する基本操作によって実現できる $A$ の変形を
+{\bf 行に関する基本変形 (elementary transformations of rows)} と呼ぶ.
+
+$A$ の{\bf 列に関する基本操作 (elementary operations of columns)}とは次の3種類
+の操作のことである:
+\begin{enumerate}
+\item[(a')] $A$ のある列の定数倍を他の列に加える.
+\item[(b')] $A$ の2つの列を交換する.
+\item[(c')] $A$ のある列に $0$ でない定数をかける.
+\end{enumerate}
+ここで定数は $K$ の元を意味するものとする.
+有限回の列に関する基本操作によって実現できる $A$ の変形を
+{\bf 列に関する基本変形 (elementary transformations of columns)} と呼ぶ.
+
+行に関する基本操作と列に関する基本操作を合わせて
+{\bf 行列の基本操作 (elementary operations of matrices)} と呼び,
+行に関する基本変形と列に関する基本変形の合成を
+{\bf 行列の基本変形 (elementary transformations of matrices)} と呼ぶ
+ことにする.
+
+\begin{question}[行列の基本操作の可逆な行列の積による実現, 5点]
+  \label{q:elem-op}
+  $A\in M_{m,n}(K)$ であるとする.
+  $A$ の行に関する基本操作は
+  上で定義した行列 $U_{m;ij}(\alpha)$, $P_{m;ij}$, $D_{m;i}(\beta)$ 
+  のどれかを $A$ に左からかける操作で実現可能である.  
+  より正確に言えば以下が成立している:
+  \begin{enumerate}
+  \item $i,j=1,\ldots,m$ かつ $i\ne j$ であり, $\alpha\in K$ の
+    とき, $A$ の第 $j$ 行の $\alpha$ 倍を第 $i$ 行に加える基本操作
+    は $U_{m;ij}(\alpha)$ を $A$ に左からかける操作に一致する.
+  \item $i,j=1,\ldots,m$ かつ $i\ne j$ のとき, $A$ の第 $i$ 行と第 $j$ 行を
+    交換する基本操作は $P_{m;ij}$ を $A$ に左からかける操作に一致する.
+  \item $i=1,\ldots,m$ であり, $\beta\in K$, $\beta\ne 0$ の
+    とき, $A$ の第 $i$ 行を $\beta$ 倍する基本操作
+    は $D_{m;i}(\beta)$ を $A$ に左からかける操作に一致する.
+  \end{enumerate}
+  同様に   $A$ の列に関する基本操作
+  は $U_{n;ij}(\alpha)$, $P_{n;ij}$, $D_{n;i}(\beta)$ を $A$ に右から
+  かける操作で実現可能である. 
+  \qed
+\end{question}
+
+\begin{proof}[ヒント]
+  実際に $U_{m;ij}(\alpha)A$, $P_{m;ij}A$, $D_{m;i}(\beta)A$ を計算して
+  みればよい. 列に関する基本操作に関する結果は行列の転置を考えれば得られる.
+  \qed
+\end{proof}
+
+\begin{rem}
+  \label{rem:elem-tr}
+  上の問題 \qref{q:elem-op} の結果より, 行列 $A$ の行に関する
+  基本変形 (行に関する基本操作の有限個の合成) は
+  有限個の $U_{m;ij}(\alpha)$, $P_{m;ij}$, $D_{m;i}(\beta)$ たちの
+  積 $P\in GL_m(K)$ を $A$ に左からかける変換
+  \begin{equation*}
+    A \mapsto PA,  \qquad P\in GL_m(K)
+  \end{equation*}
+  で実現可能である.  同様に $A$ の列に関する
+  基本変形 (列に関する基本操作の有限個の合成) は
+  有限個の $U_{n;ij}(\alpha)$, $P_{n;ij}$, $D_{n;i}(\beta)$ たちの
+  積 $Q\in GL_m(K)$ を $A$ に右からかける変換
+  \begin{equation*}
+    A \mapsto AQ,  \qquad Q\in GL_n(K)
+  \end{equation*}
+  で実現可能である. 
+
+  一次方程式 $Ax=b$ を解くことは $Ax=b$ を満たす $x$ 全体の
+  集合 (解空間) を求めることであった.
+  よって, 解くために施される方程式の変形は同値変形でなければいけない.
+  なぜならば, 方程式の変形によって解全体の集合が増えたり減ったりする
+  とまずいからである.
+
+  可逆な $P\in GL_m(K)$ と $Q\in GL_m(K)$ に対して
+  \begin{equation*}
+    \tilde{A}=PAQ, \qquad \tilde{b}=Pb, \qquad \tilde{x}=Q^{-1}x
+  \end{equation*}
+  と置けば
+  \begin{equation*}
+    Ax = b \iff  PAQQ^{-1}x = Pb \iff \tilde{A}\tilde{x}=\tilde{b}
+  \end{equation*}
+  が成立している. したがって, 適当な行列の基本変形に
+  よって $A$ をより簡単な形をしている $\tilde{A}$ に変形
+  できればもとの方程式 $Ax=b$ はより簡単な形の
+  方程式 $\tilde{A}\tilde{x}=\tilde{b}$ に同値変形されることになる.
+
+  変数変換された結果の $\tilde{x}$ ではなく, もとの $x$ のレベルで解を
+  表示したいことが多い. その場合には行だけに関する基本変形
+  を適用した場合 (そのとき  $Q$ が単位行列になる) を考えれば良い.
+
+  ここまで説明すれば行列の基本変形が一次方程式論で基本的な役目を果たすことが
+  納得できるだろう.
+
+  基本的な問題は次の2つである:
+  \begin{itemize}
+  \item 行にだけ関する基本変形で行列をどれだけ簡単な形にできるか?
+  \item 行と列に関する基本変形を用いて行列をどれだけ簡単な形にできるか?
+  \end{itemize}
+  前者については問題 \qref{q:PA} で扱い, 
+  後者については問題 \qref{q:PAQ} で扱うことにする.
+  \qed
+\end{rem}
+
+\begin{guide}
+  \label{guide:elem-tr-2}
+  上の注意への補足. 任意の $P\in GL_m(K)$ が
+  有限個の $U_{ij}(\alpha)$, $P_{ij}$, $D_i(\beta)$ たちの積で
+  表示可能なことはこの時点では証明されていないので, 
+  任意の $P\in GL_m(K)$ に対する変換 $A\mapsto PA$ が $A$ の行に関する
+  基本変形になっているかどうかはまだわからないということにしなければいけない.
+
+  しかし, 任意の $P\in GL_m(K)$ が
+  有限個の $U_{ij}(\alpha)$, $P_{ij}$, $D_i(\beta)$ たちの積で
+  表示可能である%
+  \footnote{$U_{ij}(\alpha)$, $P_{ij}$, $D_i(\beta)$ たちは
+    一般線形群 $GL_m(K)$ の{\bf 生成元 (generators)} であると言う.}%
+  ことを実際に証明できる%
+  \footnote{証明の粗筋を問題 \qref{q:gen-GL} のヒントで説明する.}. 
+  したがって, $A$ の行に関する基本変形は $GL_m(K)$ の元を左からかける変換に
+  一致する.
+
+  単に可逆な行列を定義するだけでは, 
+  具体的にどのような正方行列が可逆になるのかよくわからない.  
+  しかし, 可逆な行列が常に $U_{ij}(\alpha)$, $P_{ij}$, $D_i(\beta)$ の
+  ような基本的な行列たちの有限個の積で表わされることが証明されたならば
+  (実際に証明される), 可逆な行列を系統的に生成する方法が得られたことになる%
+  \footnote{数学に限らず, 科学のイロハのイは「複雑に見える問題を
+    より単純な問題に分解すること」である.}.
+  \qed
+\end{guide}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{行列の基本変形による行列の簡単化}
+\label{sec:simplify}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{question}[行に関する基本変形による階段行列への変換, 20点]
+  \label{q:PA}
+  $A=[a_{ij}]$ は体 $K$ の元を成分に持つ $m\times n$ 行列であるとする.
+  このとき $A$ はある行の定数倍を他の行に加える基本操作(a)と
+  2つの行を交換する基本操作(b)の有限回の繰り返しによって次の形に
+  変形可能である:
+  \begin{equation*}
+    \tilde{A} = 
+    \left[
+      \begin{array}{ccccc}
+        \multicolumn{1}{c|}{\qquad} & c_1 \qquad & & & \bigstaru \\
+        \cline{2-2}
+        \multicolumn{2}{c|}{} & c_2 \qquad & & \\
+        \cline{3-3}
+        \multicolumn{3}{c}{} & \;\;\ddots\;\; & \\
+        \multicolumn{4}{c|}{} & c_r \qquad \\
+        \cline{5-5}
+        \multicolumn{5}{l}{\bigzerol} \\
+      \end{array}
+    \right],
+    \qquad c_1,\ldots,c_r\ne 0.
+  \end{equation*}
+  ここで $\tilde{A}$ の $0$ でない成分は右上の(逆さ)階段状の部分にの
+  み存在し得る.
+  すべての成分が $0$ になる $\tilde{A}$ の左端の数列と
+  すべての成分が $0$ になる $\tilde{A}$ の下端の数行が
+  存在しないこともあり得る%
+  \footnote{たとえば $(m,n)=(3,7)$ で $\tilde{A}$ が
+    \begin{equation*}
+      \tilde{A} = 
+      \begin{bmatrix}
+        0 & 0 & c_1 & * & *   & * & *   \\
+        0 & 0 & 0   & 0 & c_2 & * & *   \\
+        0 & 0 & 0   & 0 & 0   & 0 & c_3 \\
+      \end{bmatrix},
+      \qquad
+      c_1,c_2,c_3\ne 0
+    \end{equation*}
+    のような形であれば $r=3$ であり, 
+    すべての成分が $0$ になる左端の数列はちょうど2列存在し, 
+    すべての成分が $0$ になる下端の数行は存在しない.}.
+  上の $\tilde{A}$ の形の行列を{\bf 階段行列}と呼ぶことにする.
+
+  さらにある行に $0$ でない定数をかけるという基本操作 (c) を用いる
+  ことによって,  
+  行だけに関する基本変形で $A$ を次の形に変形できることがわかる:
+  \begin{equation*}
+    \Tilde{\Tilde{A}} = 
+    \left[
+      \begin{array}{ccccc}
+        \multicolumn{1}{c|}{\qquad} & 1 \qquad & & & \bigstaru \\
+        \cline{2-2}
+        \multicolumn{2}{c|}{} & 1 \qquad & & \\
+        \cline{3-3}
+        \multicolumn{3}{c}{} & \;\;\ddots\;\; & \\
+        \multicolumn{4}{c|}{} & 1 \qquad \\
+        \cline{5-5}
+        \multicolumn{5}{l}{\bigzerol} \\
+      \end{array}
+    \right]. 
+  \end{equation*}
+  この $\Tilde{\Tilde{A}}$ の形の行列を{\bf 正規化された階段行列}と
+  呼ぶことにする.
+  \qed
+\end{question}
+
+\begin{proof}[ヒント]
+  まず, \exampleref{example:kaidan-1}を読み, 
+  問題 \qref{q:kaidan-2} を解いてみて, 感じをつかんでみよ.
+  そうしておけば以下の手続きを納得し易いだろう.
+
+  以下のような手続きで $A$ に対して行に関する基本操作(a),(b)を適用する:
+  \begin{enumerate}
+  \item[I.] $A$ の第1列の成分がすべて $0$ であるとき,
+    \begin{enumerate}
+    \item[1.] $n=1$ ならばこの手続きを終える.
+    \item[2.] $n>1$ ならば $A$ は次のような形をしている:
+      \begin{equation*}
+        A = 
+        \left[
+          \begin{array}{c|c}
+            0      & \\
+            \vdots & \quad B \quad \\
+            0      & \\
+          \end{array}
+        \right],
+        \qquad B\in M_{m,n-1}(K).
+      \end{equation*}
+      \item[3.] $B$ に対してこの手続きを適用する.
+    \end{enumerate}
+  \item[II.] $A$ の第1列の第 $i$ 成分が $0$ でないとき,
+    \begin{enumerate}
+    \item[1.] $m=1$ ならば (このとき $i=1$ である) この手続きを終える.
+    \item[2.] $m>1$ ならば $A$ の第 $i$ 行と第 $1$ 行を交換する.
+    \item[3.] さらに第 $1$ 行の定数倍を 第 $2,\ldots,m$ 行に加えて,
+      第 $1$ 列目の第 $2,\ldots,m$ 成分をすべて $0$ にする.
+      その結果は次のような形になる:
+      \begin{equation*}
+        A' =
+        \left[
+          \begin{array}{c|c}
+            c      & * \cdots * \\
+            \hline
+            0      & \\
+            \vdots & \quad B \quad \\
+            0      & \\
+          \end{array}
+        \right],
+        \qquad c\ne 0, \quad B\in M_{m-1,n-1}(K).
+      \end{equation*}
+    \item[4.] $B$ に対してこの手続きを適用する.
+    \end{enumerate}
+  \end{enumerate}
+  以上の手続きは有限ステップで終了し, $A$ が行のみに関する基本操作(a),(b)に
+  よって $\tilde{A}$ のような階段行列の形に変形できることがわかる.
+
+  上の手続きのIの3とIIの4では, 手続き全体に悪影響を及ぼすこと
+  なく, $B$ の行に関する基本変形が $A$ もしくは $A'$ の行に
+  関する基本変形によって実現できることを仮定している.
+  その仮定が正しいことを示せ(容易である).
+
+  $\tilde{A}$ の第 $1,\ldots,r$ 行のそれぞれに $c_1^{-1},\ldots,c_r^{-1}$ を
+  かければ $\tilde{A}$ は $\Tilde{\Tilde{A}}$ の形に変形される.
+  \qed
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{example}
+  \label{example:kaidan-1}
+  行列 $A$ を次のように定める:
+  \begin{equation*}
+    A = 
+    \begin{bmatrix}
+      1 & 2 & 3  & 4 \\
+      2 & 4 & 7  & 10 \\
+      3 & 6 & 10 & 16 \\
+    \end{bmatrix}.
+  \end{equation*}
+  この $A$ は行に関する基本変形によって次のように階段行列に変形される:
+  \begin{equation*}
+    A =
+    \begin{bmatrix}
+      1 & 2 & 3  & 4 \\
+      2 & 4 & 7  & 10 \\
+      3 & 6 & 10 & 16 \\
+    \end{bmatrix}
+    \to
+    \begin{bmatrix}
+      1 & 2 &  3 &  4 \\
+      0 & 0 &  1 &  2 \\
+      3 & 6 & 10 & 16 \\
+    \end{bmatrix}
+    \to
+    \begin{bmatrix}
+      1 & 2 & 3 & 4 \\
+      0 & 0 & 1 & 2 \\
+      0 & 0 & 1 & 4 \\
+    \end{bmatrix}
+    \to
+    \begin{bmatrix}
+      1 & 2 & 3 & 4 \\
+      0 & 0 & 1 & 2 \\
+      0 & 0 & 0 & 2 \\
+    \end{bmatrix}.
+  \end{equation*}
+  ここで1つ目の矢印は第 $1$ 行の $2$ 倍を第 $2$ 行から引き去る基本操作で
+  あり, 2つ目の矢印は第 $1$ 行の $3$ 倍を第 $3$ 行から引き去る基本操作で
+  あり, 3つ目の矢印は 第 $2$ 行を第 $3$ 行から引き去る基本操作である.
+  \qed
+\end{example}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{question}[5点]
+  \label{q:kaidan-2}
+  行だけに関する基本変形によって次の行列を階段行列に変形せよ:
+  \begin{equation*}
+    A = 
+    \begin{bmatrix}
+      0 & -3 &  1 & 2 \\
+      1 &  3 & -2 & 1 \\
+      2 &  3 & -3 & 4 \\
+    \end{bmatrix}.
+    \qed
+  \end{equation*}
+\end{question}
+
+\commentout{
+\begin{proof}[略解]
+  問題 \qref{q:PA} のヒントの手続きを適用するとき
+  最初に第 $1$ 行と第 $2$ 行を交換すると次のようになる:
+  {\small
+  \begin{equation*}
+    A = 
+    \begin{bmatrix}
+      0 & -3 &  1 & 2 \\
+      1 &  3 & -2 & 1 \\
+      2 &  3 & -3 & 4 \\
+    \end{bmatrix}
+    \to
+    \begin{bmatrix}
+      1 &  3 & -2 & 1 \\
+      0 & -3 &  1 & 2 \\
+      2 &  3 & -3 & 4 \\
+    \end{bmatrix}
+    \to
+    \begin{bmatrix}
+      1 &  3 & -2 & 1 \\
+      0 & -3 &  1 & 2 \\
+      0 & -3 &  1 & 2 \\
+    \end{bmatrix}
+    \to 
+    \begin{bmatrix}
+      1 &  3 & -2 & 1 \\
+      0 & -3 &  1 & 2 \\
+      0 &  0 &  0 & 0 \\
+    \end{bmatrix}.
+    \qed
+  \end{equation*}
+  }
+\end{proof}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{question}[5点]
+  \label{q:kaidan-3}
+  行だけに関する基本変形によって次の行列を階段行列に変形せよ:
+  \begin{equation*}
+    A = 
+    \begin{bmatrix}
+       0 &  2 &  3 &  4 \\
+      -2 & -5 & -8 & -8 \\
+       4 &  8 & 13 & 12 \\
+    \end{bmatrix}.
+    \qed
+  \end{equation*}
+\end{question}
+
+\commentout{
+\begin{proof}[略解]
+  階数は $2$ になる.
+\end{proof}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{question}[行列の基本変形による行列の簡単化, 10点]
+  \label{q:PAQ}
+  $A=[a_{ij}]$ は体 $K$ の元を成分に持つ $m\times n$ 行列であるとする.
+  このとき $A$ は行列の基本変形によって次の形に変形可能である:
+  \begin{equation*}
+    \check{A} = 
+    \left[
+      \begin{array}{cccc}
+        1 &        & \multicolumn{1}{c|}{}  & \qquad \\
+          & \ddots & \multicolumn{1}{c|}{}  & \qquad \\
+          &        & \multicolumn{1}{c|}{1} & \qquad \\
+        \cline{1-3}
+        \vphantom{\bigzerol} & & & \bigzerou \\
+      \end{array}
+    \right].
+  \end{equation*}
+  ここで $\check{A}$ の中に斜めに並んでいる $1$ 以外の成分は
+  すべて $0$ に等しい.
+  \qed
+\end{question}
+
+\begin{proof}[ヒント]
+  問題 \qref{q:PA} の結果より $A$ は行だけに関する基本変形を用いて
+  次の形に変形可能である:
+  \begin{equation*}
+    \Tilde{\Tilde{A}} = 
+    \left[
+      \begin{array}{ccccr}
+        \multicolumn{1}{c|}{\qquad} & 1 *\cdots* & & & \bigstaru \\
+        \cline{2-2}
+        \multicolumn{2}{c|}{} & 1 *\cdots* & & \\
+        \cline{3-3}
+        \multicolumn{3}{c}{} & \;\;\ddots\;\; & \\
+        \multicolumn{4}{c|}{} & 1 *\cdots* \\
+        \cline{5-5}
+        \multicolumn{5}{l}{\bigzerol} \\
+      \end{array}
+    \right]. 
+    \qed
+  \end{equation*}
+  階段のかどの $1$ は左上から順に
+  第 $(1,j_1),(2,j_2),\ldots,(r,j_r)$ 成分にあるとする.
+  このとき第 $j_1$ 列の定数倍をそれより右側の列に加えることに
+  よって第 $1$ 行の $0$ でない成分が第 $(1,j_1)$ 成分の $1$ だけであるように
+  できる. さらに第 $j_2$ 列の定数倍をそれより右側の列に加えることによって
+  第 $1,2$ 行の $0$ でない成分が第 $(1,j_1),(2,j_2)$ 成分の $1$ だけで
+  あるようにできる. 同様の作業を続けることに
+  よって, 行列全体の $0$ でない成分が
+  第 $(1,j_1),(2,j_2),\ldots,(r,j_r)$ 成分の $1$ だけであるようにできる.
+  つまり $\Tilde{\Tilde{A}}$ は列に関する基本変形で次の形に変形できる:
+  \begin{equation*}
+    A' = 
+    \left[
+      \begin{array}{ccccr}
+        \multicolumn{1}{c|}{\qquad} & 1 \; 0\;\cdots\;0 & & & \bigzerou \\
+        \cline{2-2}
+        \multicolumn{2}{c|}{} & 1 \; 0\;\cdots\;0 & & \\
+        \cline{3-3}
+        \multicolumn{3}{c}{} & \;\;\ddots\;\; & \\
+        \multicolumn{4}{c|}{} & 1 \; 0\;\cdots\;0 \\
+        \cline{5-5}
+        \multicolumn{5}{l}{\bigzerol} \\
+      \end{array}
+    \right]. 
+  \end{equation*}
+  列の置換によって $0$ でない列を左側に寄せることに
+  よって, $A'$ は $\check{A}$ の形に変形できる.
+  \qed
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{question}[一般線形群の生成元, 10点]
+  \label{q:gen-GL}
+  $GL_m(K)$ の任意の元は\secref{sec:elem-op-tr}で定義した
+  行列 $U_{ij}(\alpha)$, $P_{ij}$, $D_i(\beta)$ たちの
+  有限個の積で表わされる. \qed
+\end{question}
+
+\begin{proof}[ヒント]
+  \remref{rem:elem-tr}と問題 \qref{q:PAQ} の結果を使う.
+  \qed
+\end{proof}
+
+
+%\begin{proof}[ヒント]
+%  $A\in GL_m(K)$ であるとする.
+%  少し考えれば $A$ の rank は $m$ であることがわかる%
+%  \footnote{ヒント: $A$ の第 $j$ 列を $a_j$ と書き, $\alpha=[\alpha_j]\in K^m$ 
+%    とすると, $A\alpha = \alpha_1 a_1 + \cdots + \alpha_m a_m$ である.
+%    $A$ は逆行列を持つので $A\alpha = 0$ ならば $\alpha = A^{-1}A\alpha = 0$
+%    であるから, $a_1,\ldots,a_m$ は一次独立である. よって $\rank A=m$.
+%    (この議論では $A$ が可逆であることのみを直接用いており, 
+%    行列式による正方行列の可逆性の判定法などの他の道具を何も用いていない.)
+%    同様の議論で $A\in M_{m,n}(K)$, $B\in M_{n,m}(K)$ が $BA=E_n$ ($E_n$ 
+%    は $n$ 次の単位行列) を満たしていれば $\rank A=n$ であることを示せる.}.
+%  \remref{rem:elem-tr}と問題 \qref{q:PAQ} の結果より, 
+%  行列 $U_{ij}(\alpha)$, $P_{ij}$, $D_i(\beta)$ たちの有限個の積で
+%  表わされる行列 $P$, $Q$ で $PAQ=E$ ($E$ は $m$ 次単位行列) を
+%  満たすものが存在する. このとき $A=P^{-1}Q^{-1}$ である.
+%  問題 \qref{q:inv-U,P,D} の結果より, $P^{-1}$, $Q^{-1}$ も
+%  行列 $U_{ij}(\alpha)$, $P_{ij}$, $D_i(\beta)$ たちの有限個の積で
+%  表わされる. 
+%  \qed
+%\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\begin{question}
+%  $A\in M_{m,n}(K)$, $P\in GL_m(K)$, $Q\in GL_n(K)$ に対して
+%  \begin{equation*}
+%    \rank(PAQ) = \rank A.
+%    \qed
+%  \end{equation*}
+%\end{question}
+%
+%\begin{proof}[ヒント]
+%  問題 \qref{q:inv-rank}, \qref{q:gen-GL} を使えばただちに得られる. \qed
+%\end{proof}
+%
+%\begin{guide}
+%  この演習問題集の議論の流れに沿って $\rank(PAQ) = \rank A$ を証明すると
+%  非常に長くなってしまうが, 抽象線形代数を十分に習得すればほとんど自明に
+%  なってしまう%
+%  \footnote{数学的一般論に関する主張は抽象化すればする
+%    ほど自明さが増すことが多い.}.
+%  別証の概略: $P$, $Q$ は可逆なのでベクトル空間としての
+%  像のあいだの同型 $\Image(PAQ)\isom\Image A$ が成立している.
+%  よって $\rank(PAQ) = \dim\Image(PAQ) = \dim\Image A = \rank A$.
+%  \qed
+%\end{guide}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{斉次な一次方程式の解法}
+\label{sec:sol-hom-lin-eq}
+
+$A\in M_{m,n}(K)$ とし, 斉次な一次方程式 $Ax=0$ の解法について説明しよう. 
+(以下の一般的な説明を読む前に\exampleref{example:sol-hom-lin-eq}を読んだ
+方がわかり易いかもしれない.)
+
+問題 \qref{q:PA} の結果より, 行列 $A$ は行だけに関する基本変形によって
+次の形に変形される%
+\footnote{以下の一般的な場合に関する説明を読む前に
+  \exampleref{example:sol-hom-lin-eq}を読んでおいた方が
+  感じがつかみ易いかもしれない.  
+  具体例を試してみて感じをつかむことから始めた方が
+  ややこしい計算の一般論の理解が容易になることが多い.}:
+\begin{equation*}
+  \tA = 
+  \left[
+    \begin{array}{ccccc}
+      \multicolumn{1}{c|}{\qquad} & 1 \qquad & & & \bigstaru \\
+      \cline{2-2}
+      \multicolumn{2}{c|}{} & 1 \qquad & & \\
+      \cline{3-3}
+      \multicolumn{3}{c}{} & \;\;\ddots\;\; & \\
+      \multicolumn{4}{c|}{} & 1 \qquad \\
+      \cline{5-5}
+      \multicolumn{5}{l}{\bigzerol} \\
+    \end{array}
+  \right]. 
+\end{equation*}
+問題 \qref{q:elem-op} の結果より, ある $P\in GL_m(K)$ で $\tA=PA$ となるものが
+存在する. このとき, 
+\begin{equation*}
+  Ax = 0 \iff PAx = 0 \iff \tA x = 0
+\end{equation*}
+なので斉次な一次方程式 $Ax=0$ の解空間と $\tA x=0$ の解空間は等しい.
+したがって, $Ax=0$ と解く代わりに, より簡単な $\tA x=0$ を解けば良い.
+
+正規化された階段行列 $\tA$ の階段のかどの $1$ は
+左上から順に第 $(1,j_1),\ldots,(r,j_r)$ 成分にあるものとし, $\tA$ の $(i,j)$ 
+成分を $\ta_{ij}$ と書くことにすると, 方程式 $\tA x=0$ は次と同値である:
+\begin{equation*}
+%  \left\{
+  \begin{array}{rl}
+    x_{j_1} + \ta_{1,j_1+1}x_{j_1+1} +\cdots\cdots\cdots\cdots\cdots &= 0,
+    \\ 
+    x_{j_2} + \ta_{2,j_2+1}x_{j_2+1} +\cdots\cdots\cdots &= 0,
+    \\ 
+    \qquad\cdots\cdots\cdots\cdots
+    \\ 
+    x_{j_r} + \ta_{1,j_r+1}x_{j_r+1} +\cdots &= 0.
+  \end{array}
+%  \right.
+\end{equation*}
+この連立方程式を下から順に $x_{j_r},\ldots,x_{j_2},x_{j_1}$ に関して解いて
+次の形に同値変形することは易しい:
+\begin{align*}
+  &
+  x_{j_r} = \sum_{j>j_r} c_{rj} x_j,
+  \\ &
+  x_{j_{r-1}} = \sum_{j>j_{r-1},\; j\ne j_r} c_{r-1,j} x_j,
+  \\ &
+  \qquad\cdots\cdots\cdots\cdots
+  \\ &
+  x_{j_2} = \sum_{j>j_2,\; j\ne j_3,\ldots,j_r} c_{2j} x_j,
+  \\ &
+  x_{j_1} = \sum_{j>j_1,\; j\ne j_2,\ldots,j_r} c_{1j} x_j
+  \qquad (c_{\nu j}\in K).
+\end{align*}
+これらの式は $x_{j_\nu}$ たちを $x_j$ ($j\ne j_1,\ldots,j_r$) の一次結合で
+表わす式になっている (右辺は $x_{j_1},\ldots,x_{j_r}$ を含まない).
+よって $x_j$ ($j\ne j_1,\ldots,j_r$) は任意の値を取ることができ,
+その値によって $x_{j_1},\ldots,x_{j_r}$ の値が決定される.
+
+以上の記号のもとで斉次な一次方程式 $Ax=0$ の
+解空間 $\Ker A \,(=\Ker\tA)$ は次のように表わされる:
+\begin{equation*}
+  \Ker A =
+  \left\{\,
+    x=[x_j]_{j=1}^n
+  \,\left|\,
+    \begin{array}{ll}
+      x_j\in K 
+      & \ (j\ne j_1,\ldots,j_r), 
+      \\
+      x_{j_\nu} = \sum_{j>j_\nu,\; j\ne j_{\nu+1},\ldots,j_r} c_{\nu j} x_j
+      & \ (\nu=1,\ldots,r)
+    \end{array}
+  \right.
+  \,\right\}.
+\end{equation*}
+$Ax=0$ の解空間 $\Ker A$ は $K^n$ の部分空間をなす. 
+
+$x_j$ ($j\ne j_1,\ldots,j_r$) の中の $x_k$ に $1$ を代入して
+他を $0$ に置くと, $x_{j_\nu}$ を $x_j$ ($j\ne j_1,\ldots,j_r$) の
+一次結合で表わす式によって, すべての $x_j$ の値が決定される.
+その値を $w^{(k)}_j$ と書くことにする.
+すなわち $k\ne j_1,\ldots,j_r$ に対して, 
+\begin{alignat*}{2}
+  &
+  w^{(k)}_j = \delta_{jk} & \qquad & (j\ne j_1,\ldots,j_r),
+  \\ &
+  w^{(k)}_{j_\nu} = c_{\nu k} & \qquad & (j_{\nu}<k),
+  \\ &
+  w^{(k)}_{j_\nu} = 0 & \qquad & (j_{\nu}>k)
+\end{alignat*}
+と置く. このとき $Ax=0$ の解空間 $\Ker A$ の基底として次が取れる:
+\begin{equation*}
+  w^{(k)} = \left[ w^{(k)}_j \right]_{j=1}^n \in \Ker A,
+  \qquad (k\ne j_1,\ldots,j_r).
+\end{equation*}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{example}
+  \label{example:sol-hom-lin-eq}
+  $A$ が行に関する基本変形によって次の $\tA$ に変形されたとする:
+  \begin{equation*}
+    \tA =
+    \begin{bmatrix}
+      1 & -1 & 1 & -2 &  1 &  3 \\
+      0 &  0 & 1 &  1 & -1 & -2 \\
+      0 &  0 & 0 &  0 &  1 & -1 \\
+      0 &  0 & 0 &  0 &  0 &  0 \\
+    \end{bmatrix}.
+  \end{equation*}
+  このとき $\tA x=0$ は次と同値である:
+  \begin{align*}
+    x_1 - x_2 + x_3 - 2x_4 +  x_5 + 3x_6 &= 0, \\
+                x_3 +  x_4 -  x_5 - 2x_6 &= 0, \\
+                              x_5 -  x_6 &= 0.
+  \end{align*}
+  これは次と同値である:
+  \begin{align*}
+    & 
+    x_5 = x_6,
+    \\ &
+    x_3 = - x_4 + x_5 + 2x_6 = - x_4 + 3x_6,
+    \\ &
+    x_1 = x_2 - x_3 + 2x_4 - x_5 - 3x_6 = x_2 + 3x_4 - 7x_6.
+  \end{align*}
+  したがって
+  \begin{equation*}
+    \Ker A = \Ker\tA =
+    \left\{\,
+      \left.
+        \begin{bmatrix}
+          x_2 + 3x_4 - 7x_6 \\
+          x_2               \\
+              -  x_4 + 3x_6 \\
+                 x_4        \\
+                        x_6 \\
+                        x_6 \\
+        \end{bmatrix}
+      \,\right|\,
+      x_2,x_4,x_6\in K
+    \,\right\}.
+  \end{equation*}
+  $\Ker A$ の基底を $x_2,x_4,x_6$ の一つだけに $1$ を代入して
+  他を $0$ にすることによって得られる次のベクトルの組に取れる:
+  \begin{equation*}
+    w^{(2)} =
+    \begin{bmatrix}
+      1 \\
+      1 \\
+      0 \\
+      0 \\
+      0 \\
+      0 \\
+    \end{bmatrix},
+    \quad
+    w^{(4)} =
+    \begin{bmatrix}
+      3 \\
+      0 \\
+      -1 \\
+      1 \\
+      0 \\
+      0 \\
+    \end{bmatrix},
+    \quad
+    w^{(6)} =
+    \begin{bmatrix}
+      -7 \\
+      0 \\
+      3 \\
+      0 \\
+      1 \\
+      1 \\
+    \end{bmatrix}.
+    \qed
+  \end{equation*}
+\end{example}
+
+\begin{question}[5点]
+  \exampleref{example:sol-hom-lin-eq}の計算が正しいかどうかを確かめよ.
+  もしも正しいならばそのことを確認し, 誤りが含まれているならばそれを修正せよ.
+  \qed
+\end{question}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{question}[5点]
+  \label{q:sol-hom-1}
+  行列 $A$ が次のように定められているとき, 
+  斉次な一次方程式 $Ax=0$ を解け:
+  \begin{equation*}
+    A = 
+    \begin{bmatrix}
+       2 &  1 &   9 & -4 \\
+      -3 &  2 & -13 & -5 \\
+      -1 & -3 &  -8 &  9 \\
+    \end{bmatrix}.
+    \qed
+  \end{equation*}
+\end{question}
+
+\commentout{
+\begin{proof}[略解]
+  問題 \qref{q:sol-inhom-1} の略解を見よ. \qed
+\end{proof}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{question}[5点]
+  \label{q:sol-hom-2}
+  行列 $A$ が次のように定められているとき, 
+  斉次な一次方程式 $Ax=0$ を解け:
+  \begin{equation*}
+    A = 
+    \begin{bmatrix}
+      2 &  2 & 3 & -4 \\
+      3 & -1 & 2 & -5 \\
+      1 &  5 & 4 & -3 \\
+    \end{bmatrix}.
+    \qed
+  \end{equation*}
+\end{question}
+
+\commentout{
+\begin{proof}[略解]
+  問題 \qref{q:sol-inhom-2} の略解を見よ. \qed
+\end{proof}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{question}[5点]
+  \label{q:sol-hom-3}
+  行列 $A$ が次のように定められているとき, 
+  斉次な一次方程式 $Ax=0$ を解け:
+  \begin{equation*}
+    A = 
+    \begin{bmatrix}
+       4 & -8 & 3 &  3 \\
+      -2 &  4 & 1 & -2 \\
+       1 & -2 & 1 &  1 \\
+       2 & -4 & 0 &  1 \\
+    \end{bmatrix}.
+    \qed
+  \end{equation*}
+\end{question}
+
+\commentout{
+\begin{proof}[略解]
+  問題 \qref{q:sol-inhom-3} の略解を見よ. \qed
+\end{proof}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{非斉次な一次方程式の解法}
+\label{sec:sol-inhom-lin-eq}
+
+$A\in M_{m,n}(K)$, $b\in K^m$ とし, 
+非斉次な一次方程式 $Ax=b$ の解法について説明しよう.
+
+問題 \qref{q:PA} の結果より, 行列 $A$ は行だけに関する基本変形によって
+次の形に変形される%
+\footnote{以下の一般的な場合に関する説明を読む前に
+  \exampleref{example:sol-inhom-lin-eq}を読んでおいた方が
+  感じがつかみ易いかもしれない.  
+  具体例を試してみて感じをつかむことから始めた方が
+  ややこしい計算の一般論の理解が容易になることが多い.}:
+\begin{equation*}
+  \tA = 
+  \left[
+    \begin{array}{ccccc}
+      \multicolumn{1}{c|}{\qquad} & 1 \qquad & & & \bigstaru \\
+      \cline{2-2}
+      \multicolumn{2}{c|}{} & 1 \qquad & & \\
+      \cline{3-3}
+      \multicolumn{3}{c}{} & \;\;\ddots\;\; & \\
+      \multicolumn{4}{c|}{} & 1 \qquad \\
+      \cline{5-5}
+      \multicolumn{5}{l}{\bigzerol} \\
+    \end{array}
+  \right]. 
+\end{equation*}
+問題 \qref{q:elem-op} の結果より, ある $P\in GL_m(K)$ で $\tA=PA$ となるものが
+存在する. このとき, $b'=Pb$ と置くと,
+\begin{equation*}
+  Ax = b \iff PAx = Pb \iff \tA x = b'
+\end{equation*}
+なので一次方程式 $Ax=b$ の解空間と $\tA x=b'$ の解空間は等しい.
+したがって, $Ax=b$ と解く代わりに, より簡単な $\tA x=b'$ を解けば良い.
+
+しかし, この方法をそのまま実行するためには, $P$ を求めなければいけなくなる.
+$P$ を求めるためには $A$ を行に関して基本変形するとき, その途中経過をすべて
+記録しておかなければいけない.  この点を改良するためには $A$ の代わり
+に $m\times(n+1)$ 行列 $A'=[A,b]$ に対して行に関する基本変形を適用すればよい.
+$A$ を階段行列に変形するのと同じ行に関する基本変形を $A'$ に適用するこ
+とは $P$ を $A'$ に左からかけることに一致する. 
+そして $PA'=P[A,b]=[PA,Pb]=\left[\tA,b'\right]$ である
+から, 我々が必要とする $\tA$ と $b'$ は $A'$ に対して行に関する基本変形を
+施せば得られることになる.
+
+上の方針の修正版. 
+問題 \qref{q:PA} の結果より, 行列 $A'=[A,b]$ は行だけに関する基本変形によって
+次の形に変形される%
+\footnote{以下の一般的な場合に関する説明を読む前に
+  \exampleref{example:sol-inhom-lin-eq}を読んでおいた方が
+  感じがつかみ易いかもしれない.  
+  具体例を試してみて感じをつかむことから始めた方が
+  ややこしい計算の一般論の理解が容易になることが多い.}:
+\begin{equation*}
+  \tA' 
+  = \left[\tA,b'\right]
+  =
+  \left[
+    \begin{array}{ccccc}
+      \multicolumn{1}{c|}{\qquad} & 1 \qquad & & & \bigstaru \\
+      \cline{2-2}
+      \multicolumn{2}{c|}{} & 1 \qquad & & \\
+      \cline{3-3}
+      \multicolumn{3}{c}{} & \;\;\ddots\;\; & \\
+      \multicolumn{4}{c|}{} & 1 \qquad \\
+      \cline{5-5}
+      \multicolumn{5}{l}{\bigzerol} \\
+    \end{array}
+  \right]. 
+\end{equation*}
+問題 \qref{q:elem-op} の結果より, ある $P\in GL_m(K)$ で $\tA'=PA'$ と
+なるものが存在する. このとき, $\tA=PA$, $b'=Pb$ であるから,
+\begin{equation*}
+  Ax = b \iff PAx = Pb \iff \tA x = b'.
+\end{equation*}
+すなわち一次方程式 $Ax=b$ の解空間と $\tA x=b'$ の解空間は等しい.
+したがって, $Ax=b$ と解く代わりに, より簡単な $\tA x=b'$ を解けば良い.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{example}
+  \label{example:sol-inhom-lin-eq}
+  $A'=[A,b]$ が行に関する基本変形によって次の $\tA'$ に変形されたとする:
+  \begin{equation*}
+    \tA' = \left[\tA,b'\right]
+    \left[
+      \begin{array}{cccccc|c}
+        1 & -1 & 1 & -2 &  1 &  3 & b'_1 \\
+        0 &  0 & 1 &  1 & -1 & -2 & b'_2 \\
+        0 &  0 & 0 &  0 &  1 & -1 & b'_3 \\
+        0 &  0 & 0 &  0 &  0 &  0 & b'_4 \\
+      \end{array}
+    \right].
+  \end{equation*}
+  このとき $\tA x=b'$ は次と同値である:
+  \begin{align*}
+    x_1 - x_2 + x_3 - 2x_4 +  x_5 + 3x_6 &= b'_1, \\
+                x_3 +  x_4 -  x_5 - 2x_6 &= b'_2, \\
+                              x_5 -  x_6 &= b'_3, \\
+                                       0 &= b'_4.
+  \end{align*}
+  この連立方程式が解を持つための必要十分条件は $b'_4=0$ である.
+
+  もしも $b'_4\ne 0$ ならばこの連立方程式は解を持たない.
+
+  もしも $b'_4=0$ ならば\exampleref{example:sol-hom-lin-eq}と
+  同様に上の連立方程式を $x_1,x_3,x_5$ について下から順番に解くことに
+  よって, $Ax=b$ の解空間
+  \begin{equation*}
+    \cS = \{\,x\in K^6 \mid Ax=b \,\} = \{\,x\in K^6 \mid \tA x=b' \,\}
+  \end{equation*}
+  は次のように表わされることがわかる:
+  \begin{equation*}
+    \cS = 
+    \left\{\,
+      \left.
+        \begin{bmatrix}
+          b'_1 - b'_2 - 2b'_3 + x_2 + 3x_4 - 7x_6 \\
+                                x_2               \\
+                 b'_2 + b'_3        -  x_4 + 3x_6 \\
+                                       x_4        \\
+                        b'_3               +  x_6 \\
+                                              x_6 \\
+        \end{bmatrix}
+      \,\right|\,
+      x_2,x_4,x_6\in K
+    \,\right\}.
+    \qed
+  \end{equation*}
+\end{example}
+
+\begin{question}[5点]
+  \exampleref{example:sol-inhom-lin-eq}の計算が正しいかどうかを確かめよ.
+  もしも正しいならばそのことを確認し, 誤りが含まれているならばそれを修正せよ.
+  \qed
+\end{question}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{question}[5点]
+  \label{q:sol-inhom-1}
+  行列 $A$ とベクトル $b$ が次のように定められているとき, 
+  非斉次な一次方程式 $Ax=b$ を上で説明した方法を用いて解け:
+  \begin{equation*}
+    A = 
+    \begin{bmatrix}
+       2 &  1 &   9 & -4 \\
+      -3 &  2 & -13 & -5 \\
+      -1 & -3 &  -8 &  9 \\
+    \end{bmatrix},
+    \qquad
+    b =
+    \begin{bmatrix}
+       1 \\
+       3 \\
+      10 \\
+    \end{bmatrix}.
+    \qed
+  \end{equation*}
+\end{question}
+
+\commentout{
+\begin{proof}[略解]
+  問題より一般的に $b=\tp{[p,q,r]}$ という状況について考える.
+  そのとき $[A,b]$ は行に関する基本変形で次の形に変形できる:
+  \begin{equation*}
+    \left[
+      \begin{array}{cccc|c}
+        1 & -3 &  4 &  9 & -p-q \\
+        0 &  1 & -3 & -4 & 2p+q+r \\
+        0 &  0 & 22 &  6 & -11p-5q-7r \\
+      \end{array}
+    \right].
+  \end{equation*}
+  よって $Ax=b$ は次と同値である:
+  \begin{align*}
+    x_1 -3x_2 + 4x_3 + 9x_4 &= -p-q, \\
+          x_2 - 3x_3 - 4x_4 &= 2p+q+r, \\
+               22x_3 + 6x_4 &= -11p-5q-7r. 
+  \end{align*}
+  これを $x_1,x_2,x_3$ について解くと,
+  \begin{align*}
+    x_1 &= \frac{18x_4}{11} + \frac{55p+19q+31r}{22},
+    \\
+    x_2 &= \frac{35x_4}{11} + \frac{11p+7q+r}{22},
+    \\
+    x_3 &= \frac{-3x_4}{11} + \frac{-11p-5q-7r}{22}.
+  \end{align*}
+  よって $x_4=11t$ と置くと, $Ax=b$ の解の全体は $t\in K$ で次のよう
+  にパラメーター付けられる:
+  \begin{align*}
+    x_1 &= 18t + \frac{55p+19q+31r}{22},
+    \\
+    x_2 &= 35t + \frac{11p+7q+r}{22},
+    \\
+    x_3 &= -3t + \frac{-11p-5q-7r}{22},
+    \\
+    x_4 &= 11t.
+  \end{align*}
+  これに $b=\tp{[p,q,r]}=\tp{[1,3,10]}$ を代入すると,
+  \begin{equation*}
+    x_1 = 18t + \frac{211}{11},
+    \quad
+    x_2 = 35t + \frac{21}{11},
+    \quad
+    x_3 = -3t + \frac{-48}{11},
+    \quad
+    x_4 = 11t.
+    \qed
+  \end{equation*}
+\end{proof}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{question}[5点]
+  \label{q:sol-inhom-2}
+  行列 $A$ とベクトル $b$ を次のように定める:
+  \begin{equation*}
+    A = 
+    \begin{bmatrix}
+      2 &  2 & 3 & -4 \\
+      3 & -1 & 2 & -5 \\
+      1 &  5 & 4 & -3 \\
+    \end{bmatrix},
+    \qquad
+    b =
+    \begin{bmatrix}
+      p \\
+      q \\
+      r \\
+    \end{bmatrix}
+  \end{equation*}
+  一次方程式 $Ax=b$ の解が存在するための必要十分条件を $p,q,r$ に関する
+  条件の形で述べよ.  解が存在する場合に $Ax=b$ を解け. \qed
+\end{question}
+
+\commentout{
+\begin{proof}[略解]
+  行に関する行列の基本で $A'=[A,b]$ を次に変形できる:
+  \begin{equation*}
+    \left[
+      \begin{array}{cccc|c}
+        1 & 5 & 4 & -3 &          r \\
+        0 & 8 & 5 & -2 & -p     +2r \\
+        0 & 0 & 0 &  0 & 2p - q - r \\
+      \end{array}
+    \right].
+  \end{equation*}
+  したがって $Ax=b$ の解が存在するための必要十分条件は $2p-q-r=0$ である.
+  $2p-q-r=0$ と仮定する. このとき $Ax=b$ は次と同値である:
+  \begin{equation*}
+    x_1 + 5x_2 + 4x_3 -3x_4 = r,
+    \quad
+          8x_2 + 5x_3 -2x_4 = -p+2r.
+  \end{equation*}
+  これを $x_1,x_2$ について解くと,
+  \begin{equation*}
+    x_1 = \frac{5p-2r}{8} - \frac{7}{8}x_3 + \frac{7}{4}x_4,
+    \quad
+    x_2 = \frac{-p+2r}{8} - \frac{5}{8}x_3 + \frac{1}{4}x_4.
+  \end{equation*}
+  $x_3=8\alpha$, $x_4=4\beta$ と置くことによって $Ax=b$ の解空間 $\cS$ は次の
+  ように表わされる:
+  \begin{equation*}
+    \cS =
+    \left\{\,
+      \left.
+        \begin{bmatrix}
+          \frac{5p-2r}{8} - 7\alpha + 7\beta \\
+          \frac{-p+2r}{8} - 5\alpha +  \beta \\
+          8\alpha \\
+          4\beta \\
+        \end{bmatrix}
+      \,\right|\,
+      \alpha,\beta\in K
+    \,\right\}.
+    \qed
+  \end{equation*}
+\end{proof}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{question}[5点]
+  \label{q:sol-inhom-3}
+  行列 $A$ とベクトル $b$ を次のように定める:
+  \begin{equation*}
+    A = 
+    \begin{bmatrix}
+       4 & -8 & 3 &  3 \\
+      -2 &  4 & 1 & -2 \\
+       1 & -2 & 1 &  1 \\
+       2 & -4 & 0 &  1 \\
+    \end{bmatrix},
+    \qquad
+    b =
+    \begin{bmatrix}
+      p \\
+      q \\
+      r \\
+      s \\
+    \end{bmatrix}
+  \end{equation*}
+  一次方程式 $Ax=b$ の解が存在するための必要十分条件を $p,q,r,s$ に
+  関する条件の形で述べよ.  解が存在する場合に $Ax=b$ を解け. \qed
+\end{question}
+
+\commentout{
+\begin{proof}[略解]
+  $A'=[A,b]$ は行に関する基本変形で次の形に変形できる:
+  \begin{equation*}
+    \left[
+      \begin{array}{cccc|c}
+        1 & -2 & 1 & 1 & r \\
+        0 &  0 & 1 & 1 & -p+4r \\
+        0 &  0 & 0 & 1 & -2p+6r+s \\
+        0 &  0 & 0 & 0 & -3p+q+8r+3s \\
+      \end{array}
+    \right].
+  \end{equation*}
+  よって $Ax=b$ の解が存在するための必要十分条件は $-3p+q+8r+3s=0$ である.
+  以下その条件を仮定する.  そのとき $Ax=b$ は次と同値である:
+  \begin{equation*}
+    x_1 - 2x_2 + x_3 + x_4 = r, \quad
+    x_3 + x_4 = -p+4r, \quad
+    x_4 = -2p+6r+s.
+  \end{equation*}
+  これを $x_1,x_3,x_4$ について解くと,
+  \begin{equation*}
+    x_1 = p-3r + 2x_2, \quad
+    x_3 = p-2r-s, \quad
+    x_4 = -2p+6r+s.
+  \end{equation*}
+  よって $Ax=b$ の解空間 $\cS$ は次のように表わされる:
+  \begin{equation*}
+    \cS =
+    \left\{\,
+      \left.
+        \begin{bmatrix}
+          p-3r + 2\alpha \\
+          \alpha \\
+          p-2r-s \\
+          -2p+6r+s \\
+        \end{bmatrix}
+      \,\right|\,
+      \alpha\in K
+    \,\right\}.
+    \qed
+  \end{equation*}
+\end{proof}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{置換群と行列式}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{置換群}
+
+正の整数 $n$ に対して集合 $\{1,2,\ldots,n\}$ からそれ自身への全単射全体の
+集合を $S_n$ もしくは $\frakS_n$ と表わし $n$ 次の
+{\bf 置換群 (permutation group)} と呼ぶ.
+
+二つの置換 $\sigma,\tau\in S_n$ の積を %
+$\sigma\tau=\sigma\circ\tau$ と写像の合成そのもので定義する流儀と %
+$\tau\sigma\tau=\tau\circ\sigma$ と定義する流儀がある.
+講義の方では後者にしたがっているようだが, 
+この演習ではどちらの流儀を使っても構わない.
+以下の説明では前者の流儀にしたがう.
+
+\begin{question}[10点]
+  置換群と阿弥陀籤(あみだくじ)の関係について説明せよ. 
+  あみだくじにおける横線は置換群のどの元に対応しているとみなせるか?
+  \qed
+\end{question}
+
+\commentout{
+\begin{proof}[略解]
+  あみだくじにおける $i$ 番目と $i+1$ 番目の縦線のあいだの
+  横線は互換 $s_i=(i,i+1)$ に対応している.
+  基本関係式にも言及していればさらに20点追加する.
+  \qed
+\end{proof}
+}
+
+\begin{question}[15点]
+  縦線が $100$ 本のあみだくじについて考える.
+  縦線には左から順番に $1$ から $100$ までの番号を付けておく.
+  $i$ 番目の縦線の一番上からスタートしてあみだくじの通常のルールに
+  したがって進むと $\sigma(i)$ 番目の縦線でゴールに達するものとする.
+  \begin{enumerate}
+  \item 
+    $i$ を $\sigma(i)$ に対応させる写像は $100$ 次の置換を与えることを説明せよ.
+  \item
+    あみだくじの横線の個数を $1000$ 本にすると, %
+    $i=1,2,\ldots,99$ に対して $\sigma(i)=i+1$ となり $\sigma(100)=1$ と
+    なるようなあみだくじを作ることができないことを証明せよ.
+  \qed
+  \end{enumerate}
+\end{question}
+
+\begin{proof}[ヒント]
+  偶置換と奇置換の概念を自由に用いてよい.
+  \qed
+\end{proof}
+
+\begin{question}[20点]
+  縦線が $n$ 本のあみだくじについて考える.
+  縦線には左から順番に $1$ から $n$ までの番号を付けておく.
+  $i$ 番目の縦線の一番上からスタートしてあみだくじの通常のルールに
+  したがって進むと $\sigma(i)$ 番目の縦線でゴールに達するものとする.
+  \begin{enumerate}
+  \item 
+    $i$ を $\sigma(i)$ に対応させる写像は $n$ 次の置換を与えることを説明せよ.
+  \item
+    置換 $\sigma\in S_n$ の{\bf 長さ (length)}を $\ell(\sigma)$ と
+    書くことにする:
+    \begin{equation*}
+      \ell(\sigma) 
+      = \sharp
+        \{\, (i,j) \mid 
+        \text{$i,j=1,2,\ldots,n$ かつ $i<j$ かつ $\sigma(i)>\sigma(j)$}
+        \,\}.
+    \end{equation*}
+    置換 $\sigma$ を与える横線の本数が $\ell(\sigma)$ 本のあみだくじを
+    作れることを証明せよ.
+    \qed
+  \end{enumerate}
+\end{question}  
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{行列式}
+
+\begin{question}[10点]
+  \label{q:det-(1,n)-model}
+  行列 $K(z)$ を次のように定める:
+  \begin{equation*}
+    K(z) = 
+    \begin{bmatrix}
+      x_1 & 1   & & \\
+          & x_2 & \ddots & \\
+          &     & \ddots & 1 \\
+      z   &     &        & x_n \\
+    \end{bmatrix}.
+  \end{equation*}
+  このとき
+  \begin{equation*}
+    \det\bigl( w + K(z) \bigr)
+    = (-1)^{n-1}z + (w+x_1)\cdots(w+x_n).
+    \qed
+  \end{equation*}
+\end{question}
+
+\begin{question}[50点]
+  \label{q:det-(2,n)-model}
+  行列 $L(z)$ と $F_j(w)$ ($j=1,\ldots,n$) を次のように定める:
+  \begin{equation*}
+    L(z) = 
+    \begin{bmatrix}
+      \eps_1 & f_1    & 1      & & \\
+             & \eps_2 & f_2    & \ddots & \\
+             &        & \eps_3 & \ddots & 1 \\
+      z      &        &        & \ddots & f_{n-1} \\
+      z f_n  & z      &        &        & \eps_n \\
+    \end{bmatrix},
+    \qquad
+    F_j(w)=
+    \begin{bmatrix}
+      f_j        & 1 \\
+      w - \eps_j & 0 \\
+    \end{bmatrix}.
+  \end{equation*}
+  このとき次の公式が成立する:
+  \begin{equation*}
+    \det\bigl( -w + L(z) \bigr)
+    =
+    \det\bigl( (-1)^{n-1}z + F_1(w)\cdots F_n(w) \bigr).
+  \qed
+  \end{equation*}
+\end{question}
+
+\begin{guide}
+  上の問題の公式は周期的戸田格子という完全可積分系と関係がある. \qed
+\end{guide}
+
+\begin{question}[200点]
+  \label{q:det-(m,n)-model}
+  $n\times n$ 行列 $K_1(z),\ldots,K_m(z)$ 
+  と $m\times m$ 行列 $V_1(w),\ldots,V_m(w)$ を次のように定める:
+  \begin{equation*}
+    K_i(z) = 
+    \begin{bmatrix}
+      x_{i1} & 1      & & \\
+             & x_{i2} & \ddots & \\
+             &        & \ddots & 1 \\
+      z      &        &        & x_{in} \\
+    \end{bmatrix},
+    \qquad
+    V_j(z) = 
+    \begin{bmatrix}
+      x_{1j} & 1      & & \\
+             & x_{2j} & \ddots & \\
+             &        & \ddots & 1 \\
+      w      &        &        & x_{mj} \\
+    \end{bmatrix}.
+  \end{equation*}
+  このとき数式処理を用いた実験によって次の公式が成立することを予想できる:
+  \begin{equation*}
+    \det\bigl( (-1)^{m-1}w + K_1(z)\cdots K_m(z) \bigr)
+    =
+    \det\bigl( (-1)^{n-1}z + V_1(w)\cdots V_n(w) \bigr).
+  \end{equation*}
+  この予想を証明せよ. \qed
+\end{question}
+
+\begin{rem}
+  問題 \qref{q:det-(1,n)-model} は
+  問題 \qref{q:det-(m,n)-model} の $m=1$ の場合に等しい.
+  問題 \qref{q:det-(2,n)-model} は
+  問題 \qref{q:det-(m,n)-model} の $m=2$ の場合と同値である.
+  実際, 問題 \qref{q:det-(m,n)-model} の定義のもとで %
+  $m=2$ と仮定し,  $x_j=x_{1j}$, $y_j=y_{2j}$ と置き, 
+  $x_{n+1}=x_1$, $y_{n+1}=y_1$, 
+  $\eps_j = x_jy_j$, $f_j = x_j+y_{j+1}$ と置くと, 
+  \begin{align*}
+    &
+    L(z) = K_1(z)K_2(z),
+    \qquad
+    F_j(w) = P_j^{-1} V_j(w) P_{j+1},
+    \quad
+    P_j = 
+    \begin{bmatrix}
+      1   & 0 \\
+      y_j & 1 \\
+    \end{bmatrix},
+    \\ &
+    \det\bigl( -w + L(z) \bigr)
+    =
+    \det\bigl( -w + K_1(z)K_2(z) \bigr),
+    \\ &
+    \det\bigl( (-1)^{n-1}z + F_1(w)\cdots F_n(w) \bigr)
+    =
+    \det\bigl( (-1)^{n-1}z + V_1(w)\cdots V_n(w) \bigr).
+    \qed
+  \end{align*}
+\end{rem}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{thebibliography}{ABC}
+%
+%\bibitem[佐武]{satake} 佐武一郎: 線型代数学, 裳華房数学選書 1, 324頁.
+%
+%\bibitem[齋藤]{saito} 齋藤正彦: 線型代数入門, 東京大学出版会基礎数学 
+%1, 278頁.
+
+\bibitem[H1]{gun-kagun}
+堀田良之, 代数入門——群と加群——, 数学シリーズ, 裳華房, 1987
+
+\bibitem[H2]{10wa}
+堀田良之, 加群十話——加群入門——, すうがくぶっくす 3, 朝倉書店, 1988
+
+%\bibitem[H3]{Ho}
+%堀田良之, 環と体 1 --- 可換環論, 岩波講座現代数学の基礎 15, 岩波書店, 1997
+
+%\bibitem[志賀]{shiga}
+%志賀浩二: 集合への30講, 朝倉書店 数学30講シリーズ 3, 187頁.
+
+\end{thebibliography}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

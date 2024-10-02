@@ -1,0 +1,472 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\def\STUDENT{} % \def すると計算問題の解答を印刷しなくなる.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[12pt,twoside]{jarticle}
+%\documentclass[12pt]{jarticle}
+\usepackage{amsmath,amssymb,amscd}
+\usepackage{eepic}
+\usepackage{enshu}
+%\usepackage{showkeys}
+%\pagestyle{plain}
+\setlength{\oddsidemargin}{0cm}
+\setlength{\evensidemargin}{0cm}
+\setlength{\topmargin}{-1.8cm}
+\setlength{\textheight}{26cm}
+%\setlength{\topmargin}{-0.8cm}
+%\setlength{\textheight}{24cm}
+\setlength{\textwidth}{16cm}
+\allowdisplaybreaks
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setcounter{page}{55}      % この数から始まる
+\setcounter{section}{5}    % この数の次から始まる
+\setcounter{theorem}{13}   % この数の次から始まる
+\setcounter{question}{108} % この数の次から始まる
+\setcounter{footnote}{0}   % この数の次から始まる
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\ifx\STUDENT\undefined
+%
+% 教師専用
+%
+\newcommand\commentout[1]{#1}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\else
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% 生徒専用
+%
+\newcommand\commentout[1]{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\fi
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\title{\bf 代数学概論B演習
+%  \ifx\STUDENT\undefined\\{\normalsize 教師用\quad(計算問題の略解付き)}\fi}
+%\author{黒木 玄 \quad (東北大学大学院理学研究科数学専攻)}
+%\date{2008年5月26日(月)}
+%\maketitle
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\noindent
+{\Large\bf 代数学概論B演習}
+\hfill
+{\large 黒木玄}
+\qquad
+2008年6月23日(月)
+\commentout{\quad (教師用)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\tableofcontents
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setcounter{section}{4}
+
+\section{一意分解整域 (続き)}
+\label{sec:UFD}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{一意分解整域の定義}
+
+以下 $R$ は(可換な)整域であるとする.
+
+\begin{definition}[素元と既約元]
+ \quad
+ \begin{itemize}
+  \item $p\in R$ が $R$ の{\bf 素元}であるとは $p\ne 0$ かつ $p$ 
+   で生成される単項イデアル $(p)=Rp$ が $R$ の素イデアルになることである.
+   $0\ne p\in R$ のとき, $p$ が $R$ の既約元であること
+   と $a,b\in R$, $p\mid ab$ ならば $p\mid a$ または $p\mid b$ となるこ
+   とは同値である.
+  \item $p\in R$ が $R$ の{\bf 既約元}であるとは $p$ が非可逆で
+   かつ $p=ab$, $a,b\in R$ ならば $a$ または $b$ が可逆になることである.
+   たとえば $1$ は可逆なので既約元ではなく, $0=0\cdot 0$ で $0$ は非可逆
+   なので $0$ は既約元ではない.
+   \qed
+ \end{itemize}
+\end{definition}
+
+\begin{rem}
+ 永尾の教科書 \cite{nagao} では上の意味での既約元を素元と呼んでいる.
+ \qed
+\end{rem}
+
+\begin{definition}[同伴]
+ $R$ における同値関係 $\approx$ を次のように定める:
+ $a,b\in R$ に対して
+ \begin{equation*}
+  a\approx b \iff 
+  \text{$R$ の可逆元 $u$ で $a=ub$ を満たすものが存在する.}
+ \end{equation*}
+ $a\approx b$ が成立するとき $a$ と $b$ は{\bf 同伴}であると言う.
+ \qed
+\end{definition}
+
+$R$ は整域なので $(a)=(b)$ と $a\approx b$ は同値になる.
+$R$ の素元(もしくは既約元)と同伴な元もまた素元(もしくは既約元)になる.
+
+\begin{definition}[一意分解整域, UFD]
+ $R$ が{\bf 一意分解整域 (unique factorization domain, UFD)} であるとは %
+ $R$ が(可換な)整域でかつ以下の条件を満たしていることである:
+ \begin{enumerate}
+ \item[(a)] {\bf 既約元分解の存在:} 
+  $a\in R$ が $0$ でない非可逆元ならば $R$ の
+  既約元 $p_1,p_2,\ldots,p_r$ が存在して $a=p_1p_2\cdots p_r$ 
+  が成立する.
+ \item[(b)] {\bf 既約元分解の一意性:}
+  $p_1,\ldots,p_r,q_1,\ldots,q_s$ が $R$ の既約元で %
+  $p_1\cdots p_r=q_1\cdots q_s$ ならば $r=s$ であり, 
+  適当に番号を付け変えれば $p_i\approx q_i$ ($i=1,\ldots,r$) となる.
+ \qed
+ \end{enumerate}
+\end{definition}
+
+\begin{rem}
+ 上の定義は永尾 \cite{nagao}, p.101 の「一意分解環」の定義と一致している.
+ ただし永尾が素元と呼んでいるものがここでは既約元と呼ばれていることに注
+ 意せよ.
+ \qed
+\end{rem}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{既約元の完全代表系}
+
+$R$ は一意分解整域であるとする.
+
+$R$ の既約元の全体を同伴という同値関係で同値類に類別したときの
+完全代表系 $\cP$ と書く.
+すなわち $\cP$ は $R$ の既約元の集合であり, 
+以下の二つの条件を満たしているとする:
+\begin{enumerate}
+ \item[(A)] $R$ の任意の既約元 $p$ に対して
+   ある $q\in\cP$ が存在して $p\approx q$.
+ \item[(B)] 任意の $p,q\in\cP$ に対して $p\approx q$ ならば $p=q$.
+\end{enumerate}
+このような $\cP$ の存在は選択公理を使って証明される.
+詳しくは同値関係による類別について詳しく解説している任意の教科書を参照せよ.
+$\cP$ を{\bf 既約元の完全代表系}と呼ぶことにする.
+
+\begin{theorem}
+\label{theorem:1}
+このとき以下が成立している:
+\begin{enumerate}
+ \item[(1)] 任意の $0$ でない $a\in R$ に対して $R$ の可逆元 $u$ 
+  と互いに異なる $p_1,\ldots,p_r\in\cP$ と正の整数 $e_1,\dots,e_r$ で
+  次を満たすものが存在する:
+  \begin{equation*}
+   a = u p_1^{e_1} \cdots p_r^{e_r}.
+  \end{equation*}
+ \item[(2)] このような $u$ は $a$ から一意に定まり, 
+  $(p_1,e_1),\ldots,(p_r,e_r)$ は並べる順序を除いて $a$ から一意に定まる.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+(1) $a$ が可逆元ならば $u=a$ とおけばよい. 
+$R$ は一意分解整域なので条件 (a) より $a$ が非可逆ならば $R$ の既約元 %
+$q_1,\ldots,q_s$ が存在して $a=q_1\cdots q_s$ が成立する.
+$\cP$ は既約元の完全代表系なので条件(A)より各 $i=1,\ldots,s$ ごとに
+ある $p_i\in\cP$ が存在して $q_i\approx p'_i$ となる.
+すなわち $R$ の可逆元 $u_i$ が存在して $q_i=u_ip'_i$ となる.
+$u=u_1\cdots u_s$ とおく. $u$ は $R$ の可逆元である.
+$p'_1,\ldots,p'_s$ の中に現われる $\cP$ の互いに異なる元の全体
+を $p_1,\ldots,p_r$ と書き, 
+$p'_1,\ldots,p'_s$ の中に現われる $p_i$ の個数を $e_i$ と書く.
+このとき
+\begin{equation*}
+ a
+ =q_1\cdots q_s
+ =(u_1p'_1)\cdots(u_sp'_s)
+ =u p_1^{e_1}\cdots p_r^{e_r}.
+\end{equation*}
+これで(1)が証明された.
+
+(2) $u,v$ は $R$ の可逆元であり, $p_1,\ldots,p_r,q_1,\ldots,q_s\in\cP$
+であり, $p_1,\ldots,p_r$ は互いに異なり, $q_1,\ldots,q_s$ も互いに異なる
+ものとし, $e_1,\ldots,e_r,f_1,\ldots,f_s$ は正の整数であり, %
+$up_1^{e_1}\cdots p_r^{e_r} = vq_1^{f_1}\cdots q_r^{f_r}$ であると仮定する.
+$u=v$ でかつ $r=s$ で適当に番号を付け変えれば $p_i=q_i$, $e_i=f_i$ 
+($i=1,\ldots,r$) となることを示せばよい.
+
+以下 $p\in\cP$ を含む同伴に関する同値類を $[p]$ と表わす.
+$\cP$ は既約元の完全代表系なので条件(B)より %
+$p,q\in\cP$ に対して $p\approx q$ と $p=q$ は同値になる.
+
+$up_1$, $vq_1$ も $R$ の既約元であり, 
+$up_1\approx p_1$, $vq_1\approx q_1$ でかつ
+\begin{equation*}
+ \underbrace{(up_1)p_1\cdots p_1}_{e_1}\cdots\underbrace{p_r\cdots p_r}_{e_r}
+ =
+ \underbrace{(vq_1)q_1\cdots q_1}_{f_1}\cdots\underbrace{q_s\cdots q_s}_{f_s}.
+\end{equation*}
+$R$ は一意分解整域なので条件(b)より, \(
+ (\underbrace{q_1,\ldots,q_1}_{f_1},
+ \ldots,\underbrace{q_s,\ldots,q_s}_{f_s})
+\) を適当に並び換えて \(
+(\underbrace{p_1,\ldots,p_1}_{e_1},
+\ldots,\underbrace{p_r,\ldots,p_r}_{e_r})
+\) に等しくなるようにできる. $p_1,\ldots,p_r$ は互いに異なり, 
+$q_1,\ldots,q_s$ も互いに異なり, $e_i,f_j$ は正の整数なので %
+$r=s$ でかつ適当に番号を付け変えることによって $p_i=q_i$, $e_i=f_i$
+($i=1,\ldots,r$) が成立する. 
+
+このとき $p_1^{e_1}\cdots p_r^{e_r} = q_1^{f_1}\cdots q_r^{f_r}$ が
+成立するので $R$ が整域であることより $u=v$ が成立することもわかる.
+(整域では一般に $uk=vk$, $k\ne 0$ ならば $u=v$ が成立する.)
+
+以上によって(2)も証明された.
+\qed
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{一意分解整域における最大公約元と最小公倍元}
+
+\begin{definition}[最大公約元, 最小公倍元]
+ $R$ は整域であるとし, $a,b\in R$ であるとする.
+ \begin{itemize}
+  \item $d\in R$ が $a,b$ の{\bf 公約元}であるとは $d\mid a$ かつ $d\mid b$
+   が成立することである.
+  \item $a,b$ の公約元 $g$ が $a,b$ の{\bf 最大公約元}であるとは %
+   $a,b$ の任意の公約元 $d$ に対して $d\mid g$ が成立することである.
+  \item $m\in R$ が $a,b$ の{\bf 公倍元}であるとは $a\mid m$ かつ $a\mid m$
+   が成立することである.
+  \item $a,b$ の公倍元 $l$ が $a,b$ の{\bf 最小公倍元}であるとは %
+   $a,b$ の任意の公倍元 $m$ に対して $l\mid m$ が成立することである.
+   \qed
+ \end{itemize}
+\end{definition}
+
+以下 $R$ は一意分解整域であるとし, 
+$\cP$ は $R$ の既約元の完全代表系であるとする.
+
+\begin{lemma}
+\label{lemma:1}
+ 一意分解整域 $R$ において $0$ でない $a,b\in R$ に対して, 
+ $R$ の可逆元 $u,v$ と互いに異なる $p_1,\ldots,p_r$ と %
+ {\bf 0以上の}整数 $e_i,f_i$ ($i=1,\ldots,r$) が存在して
+ \begin{equation*}
+   a = up_1^{e_1}\cdots p_r^{e_r}, \quad 
+   b = vp_1^{f_1}\cdots p_r^{f_r}.
+   \tag{$*$}
+ \end{equation*}
+\end{lemma}
+
+\begin{proof}
+ \theoremref{theorem:1} (1)より, 
+ $a\ne 0$ に対して $R$ の可逆元 $u$ と
+ 互いに異なる $p_1,\ldots,p_s\in\cP$ と正の整数 $e_1,\ldots,e_s$ 
+ が存在して $a=up_1^{e_1}\cdots p_s^{e_s}$ となる.
+ 同様に $b\ne 0$ に対して $R$ の可逆元 $v$ 
+ と互いに異なる $p_{s+1},\ldots,p_r\in\cP-\{p_1,\ldots,p_s\}$
+ と $0$ 以上の整数 $f_1,\ldots,f_r$ 
+ が存在して $b=vp_1^{f_1}\cdots p_r^{f_r}$ となる.
+ $e_{s+1}=\cdots=e_r=0$ とおけば %
+ $a=up_1^{e_1}\cdots p_r^{e_r}$ が成立する.
+ \qed
+\end{proof}
+
+\begin{lemma}
+\label{lemma:2}
+ $u,v$ は $R$ の可逆元であり, 
+ $p_1,\ldots,p_r\in\cP$ は互いに異なり, 
+ $e_i,f_i$ ($i=1,\ldots,r$) は{\bf 0 以上の}整数であり, \(
+  up_1^{e_1}\dots p_r^{e_r} = vp_1^{f_1}\cdots p_r^{f_r}
+ \) ならば $u=v$ かつ $e_i=f_i$ ($i=1,\ldots,r$) が成立する.
+\end{lemma}
+
+\begin{proof}
+$e_i\ne 0$ となる $i$ の全体を $1\leqq i_1<\cdots<i_s\leqq r$ と書き, 
+$f_j\ne 0$ となる $j$ の全体を $1\leqq j_1<\cdots<j_t\leqq r$ と書く
+と $up_{i_1}^{e_{i_1}}\cdots p_{i_s}^{e_{i_s}}
+=vp_{j_1}^{f_{j_1}}\cdots p_{j_t}^{f_{j_t}}$ が成立する.
+\theoremref{theorem:1} (2)より $u=v$, $s=t$, $i_\nu=j_\nu$, 
+$e_{i_\nu}=f_{j_\nu}$ ($\nu=1,\ldots,s$) が成立しなければいけない.
+$i_1,\ldots,i_s$ 以外の $i$ について $e_i=0=f_i$ が成立している.
+\qed
+\end{proof}
+
+\begin{theorem}
+ 一意分解整域 $R$ において $0$ でない $a,b$ を\lemmaref{lemma:1}の($*$)
+ のように表わしておく. このとき以下が成立している:
+ \begin{enumerate}
+ \item[(i)] $a\mid b$ $\iff$ $e_i\leqq f_i$ ($i=1,\ldots,r$).
+ \item[(ii)] $g=p_1^{d_1}\cdots p_r^{d_r}$, $d_i=\min\{e_i,f_i\}$,
+  $l=p_1^{m_1}\cdots p_r^{m_r}$, $m_i=\max\{e_i,f_i\}$ とおくと %
+  $g,l$ はそれぞれ $a,b$ の最大公約元, 最大公倍元である.
+ \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+ (i)の $\Longleftarrow$.
+ $e_i\leqq f_i$ ($i=1,\ldots,r$) のとき %
+ $c=(vu^{-1})p_1^{f_1-e_1}\cdots p_r^{f_r-e_r}$ とおくと $ac=b$
+ なので $a\mid b$ である.
+
+ (i)の $\Longrightarrow$.
+ $a\mid b$ ならばある $c\in R$ が存在して $ac=b$ となる.
+ $b\ne 0$ より $c\ne 0$ である.
+ \lemmaref{lemma:1}の証明と同様にして $R$ の可逆元 $w$ と
+ 互いに異なる $p_{r+1},\ldots,p_t\in\cP-\{p_1,\ldots,p_r\}$ 
+ と $0$ 以上の整数 $g_1,\ldots,g_t$ が存在して %
+ $c=wp_1^{g_1}\cdots p_t^{g_t}$ となる. このとき $ac=b$ より \(
+  (uw)p_1^{e_1+g_1}\cdots p_r^{e_r+g_r} p_{r+1}^{g_{r+1}}\cdots p_t^{g_t}
+  =
+  vp_1^{f_1}\cdots p_r^{f_r} p_{r+1}^0\cdots p_t^0
+ \) となる. \lemmaref{lemma:2}より $uw=v$, 
+ $e_i+g_i=f_i$ ($i=1,\ldots,r$), $g_j=0$ (j=r+1,\ldots,t) となる. 
+ 特に $e_i\leqq f_i$ ($i=1,\ldots,r$).
+
+ ここで次を示しておこう:
+ \begin{itemize}
+  \item $a,b$ の任意の公約元 $d$ は次のように表わされる:
+  \begin{equation*}
+   d = w p_1^{c_1}\cdots p_r^{c_r}, \quad
+   \text{$w$ は $R$ の可逆元}, \quad
+   0\leqq c_i \leqq \min\{e_i,f_i\} \quad (i=1,\ldots,r).
+  \end{equation*}
+  \item $a,b$ の任意の $0$ でない公約元 $m$ は次のように表わされる:
+  \begin{equation*}
+   m = z p_1^{n_1}\cdots p_r^{n_r}, \quad
+   z\in R, \quad
+   \max\{e_i,f_i\}\leqq n_i \quad (i=1,\ldots,r).
+  \end{equation*}
+ \end{itemize}
+ $m=0$ なら $z=0$, $n_i=\max{e_i,f_i}$ とおけばよい.
+ そこで以下では $m\ne 0$ と仮定する.
+ \lemmaref{lemma:1}の証明と同様にして $R$ の可逆元 $w,y$ と
+ 互いに異なる $p_{r+1},\ldots,p_t\in\cP-\{p_1,\ldots,p_r\}$ 
+ と $0$ 以上の整数 $c_i,n_i$ ($i=1,\ldots,t$) が存在して %
+ $d = w p_1^{c_1}\cdots p_t^{c_t}$,
+ $m = y p_1^{n_1}\cdots p_t^{n_t}$ となる. 
+ (i)の $\Longrightarrow$ より %
+ $c_i\leqq\min\{e_i,f_i\}$ ($i=1,\ldots,r$), 
+ $c_j=0$ ($j=r+1,\ldots,t$),
+ $\max\{e_i,f_i\}\leqq n_i$ ($i=1,\ldots,r$), 
+ $0\leqq n_j$ ($j=r+1,\ldots,t$) となることがわかる.
+ 特に $d = w p_1^{c_1}\cdots p_r^{c_r}$ が成立しており, 
+ $z=yp_{r+1}^{n_{r+1}}\cdots p_t^{n_t}$ とおけば %
+ $m = z p_1^{n_1}\cdots p_r^{n_r}$ も成立している.
+
+ (ii) (i)の $\Longleftarrow$ より $g,l$ がそれぞれ $a,b$ の
+ 公約元, 公倍元であることがわかる. 
+ $d,m$ はそれぞれ $a,b$ の公約元, 公倍元であると仮定し, 
+ 上のようにそれらを表わしておく.
+ このとき (i)の $\Longleftarrow$ より $d\mid g$, $l\mid m$ 
+ となることがわかる.
+ これで $g,l$ がそれぞれ $a,b$ の最大公約元, 最小公倍元である
+ ことが示された.
+ \qed
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{まとめ}
+
+以上の結果を用いて次の定理を証明できる.
+
+%\begin{theorem}
+% $R$ は一意分解整域であり, $\cP$ はその既約元の完全代表系であるとする.
+% $R$ の可逆元全体の集合を $R^\times$ と書く.
+% モノイド(単位元を持つ半群) $\Z_{\geqq0}^{\oplus\cP}$ を次のように定める:
+% \begin{equation*}
+%  \Z_{\geqq0}^{\oplus\cP} =
+%  \{\, (e_p)_{p\in\cP} \mid 
+%  \text{$e_p$ は $0$ 以上の整数であり, 有限個を除いて $e_p=0$} \,\}.
+% \end{equation*}
+% このとき次の写像はモノイドの同型写像である:
+% \begin{equation*}
+%  \varphi:R^\times\times\Z_{\geqq0}^{\oplus\cP} \isomto R\setminus\{0\}, \quad
+%  \left(u,(e_p)_{p\in\cP}\right)\mapsto u\prod_{p\in\cP}p^{e_p}.
+% \end{equation*}
+% 有限個を除いて $e_p=0$ なので $\prod_{p\in\cP}p^{e_p}$ は有限積に
+% なることに注意せよ.
+% \qed
+%\end{theorem}
+%
+%さらにこの結果は商体に次のように拡張される.
+
+\begin{theorem}
+ $R$ は一意分解整域であり, $R$ の商体を $K$ と書く.
+ $\cP$ は $R$ の既約元の完全代表系であるとする.
+ $R$, $K$ の可逆元全体の集合をそれぞれ $R^\times$, $K^\times$ と書き, 
+ 群 $\Z^{\oplus\cP}$ を次のように定める:
+ \begin{equation*}
+  \Z^{\oplus\cP} =
+  \{\, (e_p)_{p\in\cP} \mid 
+  \text{$e_p\in\Z$ であり, 有限個を除いて $e_p=0$} \,\}.
+ \end{equation*}
+ このとき次の写像は群の同型写像である:
+ \begin{equation*}
+  \varphi:R^\times\times\Z^{\oplus\cP} \isomto K^\times, \quad
+  \left(u,(e_p)_{p\in\cP}\right)\mapsto u\prod_{p\in\cP}p^{e_p}.
+ \end{equation*}
+ 有限個を除いて $e_p=0$ なので $\prod_{p\in\cP}p^{e_p}$ は有限積に
+ なることに注意せよ.
+ \qed
+\end{theorem}
+
+\begin{problem}[研究課題]
+ 上の定理を証明せよ.
+ さらに $R=\Z,k[x]$ ($k$ は任意の体) の場合に %
+ $R^\times$ がどうなるかを示し, 既約元の完全代表系 $\cP$ の例を挙げ, 
+ 同型写像 $\varphi$ を記述せよ.
+ \qed
+\end{problem}
+
+%\begin{example}
+% $R=\Z$, $K=\Q$ の場合について考える. 
+% $\Z^\times=\{\pm 1\}$ である. 
+% 素数全体の集合を $\cP$ と書くと $\cP$ は $\Z$ の既約元の完全代表系である.
+% $\Z^{\oplus\cP}$ は次のように表わされる:
+% \begin{equation*}
+%  \Z^{\oplus\cP} =
+%  \{\, (e_2,e_3,e_5,e_7,e_{11},\ldots)\mid 
+%  \text{$e_p\in\Z$ であり, 有限個を除いて $e_p=0$}\,\}.
+% \end{equation*}
+% 上の定理によって次のような群の同型写像が得られる:
+% \begin{equation*}
+%  \varphi:\{\pm 1\}\times\Z^{\oplus\cP}\isomto\Q^\times,
+%  \quad
+%  (u, (e_2,e_3,e_5,e_7,e_{11},\ldots))
+%  \mapsto
+%  u\, 2^{e_2}3^{e_3}5^{e_5}7^{e_7}11^{e_{11}}\cdots
+% \end{equation*}
+% 有限個を除いて $e_p=0$ なので $2^{e_2}3^{e_3}5^{e_5}7^{e_7}11^{e_{11}}\cdots$ 
+% が有限積になることに注意せよ.
+% \qed
+%\end{example}
+
+%\begin{example}
+% $k$ は任意の体であるとし, $R=k[x]$, $K=k(x)$ の場合について考える. 
+% $k[x]^\times=k^\times$ である. 
+% $k[x]$ におけるモニックな既約多項式全体の集合を $\cP$ と書く
+% と $\cP$ は $k[x]$ の既約元の完全代表系である.
+% 上の定理によって次のような群の同型写像が得られる:
+% \begin{equation*}
+%  \varphi:k^\times \times\Z^{\oplus\cP}\isomto k(x)^\times,
+%  \quad
+%  \left(u, (e_p)_{p\in\cP}\right)
+%  \mapsto
+%  u\prod_{p\in\cP}p(x)^{e_p}.
+% \end{equation*}
+% 有限個を除いて $e_p=0$ なので $\prod_{p\in\cP}p(x)^{e_p}$ 
+% が有限積になることに注意せよ.
+% \qed
+%\end{example}
+
+%\begin{problem}[研究課題]
+% 以上の例の内容を確認せよ(証明を省いたところをすべて埋めよ).
+% \qed
+%\end{problem}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{thebibliography}{AB}
+
+\bibitem{nagao}
+永尾汎, 代数学, 新数学講座4, 朝倉書店, 1983
+
+\end{thebibliography}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

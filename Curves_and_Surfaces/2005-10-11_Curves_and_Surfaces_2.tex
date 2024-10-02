@@ -1,0 +1,1351 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\def\STUDENT{} % \def すると計算問題の解答を印刷しなくなる.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[12pt,twoside]{jarticle}
+%\documentclass[12pt]{jarticle}
+\usepackage{amsmath,amssymb,amscd}
+\usepackage{eepic}
+\usepackage{enshu}
+\newcommand\qstar[1]{}
+%\usepackage{showkeys}
+\allowdisplaybreaks
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setcounter{page}{5}       % この数から始まる
+\setcounter{section}{1}    % この数の次から始まる
+\setcounter{theorem}{0}    % この数の次から始まる
+\setcounter{question}{6}   % この数の次から始まる
+\setcounter{footnote}{0}   % この数の次から始まる
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\ifx\STUDENT\undefined
+%
+% 教師専用
+%
+\newcommand\commentout[1]{#1}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\else
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% 生徒専用
+%
+\newcommand\commentout[1]{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\fi
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\title{\bf 幾何学序論B演習
+%  \ifx\STUDENT\undefined\\{\normalsize 教師用\quad(計算問題の略解付き)}\fi}
+%\author{黒木 玄 \quad (東北大学大学院理学研究科数学専攻)}
+%\date{2005年10月4日(火)}
+%\maketitle
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\noindent
+{\Large\bf 幾何学序論B演習}
+\hfill
+{\large 黒木玄}
+\qquad
+2005年10月11日(火)
+\commentout{\quad (教師用)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\tableofcontents
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section*{この演習について (補足)}
+
+この演習では以下のルールを採用する.
+\begin{itemize}
+\item これは幾何の演習なので問題を解く場合には
+  可能な限り図を描かなければいけない.
+\item 自主的に問題を解いてレポートとして提出しても構わない.
+  幾何学に関係した内容であれば一応どのような内容のレポートでも
+  良いものとする.
+\item 自主レポートよりも黒板での発表を数倍高い点数で評価する. 
+  黒板で問題を解く人が少なければ少ないほど黒板での発表を
+  高く評価することにする.
+\item 自力で問題を解いたならば, すでに別の誰かによって解かれてしまった
+  問題を黒板で解いたり, 自主レポートとして提出しても構わない.
+\end{itemize}
+
+勉強の仕方のヒント:
+\begin{itemize}
+\item こちらが出したすべての問題を解く必要はない.
+  そんなことをする余裕があるならばしっかりした数学の本を
+  まるごと一冊読破するような勉強の仕方をするべきである.
+\item 一見して単なるくだらない計算問題に見えても時間をかけて計算する
+  価値がある場合が少なくない.  
+  計算の途中に登場した公式や計算結果の数学的意味
+  や価値についてよく考えてみよ.
+\item 逆に一見して極度に抽象的でまったく意味がわからない問題であっても
+  時間をかけて証明を考えてみることも必要である. 時間をかけて付き合ってい
+  るうちに段々意味がわかってくるだろう.
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{平面曲線}
+
+次の問題を解けば滑らかな函数でパラメータ表示された曲線が滑らかとは限らな
+いことがわかる.
+
+\begin{question}
+  $\R$ から $\R^2$ への $C^\infty$ 写像で, その像が
+  \(
+    \{\, (x, 0) \mid x \ge 0 \}
+    \cup
+    \{\, (0, y) \mid y \ge 0 \}
+  \)
+  と一致するものを構成せよ. \qed
+\end{question}
+
+滑らかでない曲線は滑らかな函数による速度が決してゼロにならない
+パラメータ表示を持たない. たとえば次が成立している.
+
+\begin{question}
+  $\R$ から $\R^2$ への $C^\infty$ 写像 $q$ で, その像が
+  \(
+    \{\, (x, 0) \mid x \ge 0 \}
+    \cup
+    \{\, (0, y) \mid y \ge 0 \}
+  \)%
+  と一致し, さらに, 任意の $t \in \R$ に対して $\dot{q}(t)\ne 0$ をみ
+  たすものが存在しないことを示せ. \qed
+\end{question}
+
+弧長パラメーターは曲線の最も自然なパラーメーター付けである.
+
+\begin{question}[弧長パラメーター]\label{q:alp}
+  $U$ は $\R$ 内の開区間であるとし, $q : U \to \R^n$ は $C^\infty$ 写
+  像であるとし, 任意の $t\in U$ に対して $\dot{q}(t) \ne 0$ が成立して
+  いると仮定する. ここで, $\dot{q}(t)$ は $q(t)$ の $t$ による導函数を
+  意味する. このとき, 任意の $t_0\in U$ に対して, $0$ を含む $\R$ 内の
+  開区間 $V$ と $C^\infty$ 写像 $\tau : V \to U$ の組 $(V, \tau)$ で次
+  の2つの条件を満たすものが唯一存在する:
+  \begin{enumerate}
+  \item 任意の $s \in V$ に対して $\tau'(s) > 0$ であり, $\tau$ は逆写
+    像を持ち, $\tau(0) = t_0$ を満たす.
+  \item 任意の $s \in V$ に対して 
+    $\displaystyle \left| \frac{d}{ds}q(\tau(s)) \right| = 1$.
+  \end{enumerate}
+  (ここで, $|\cdot|$ は $\R^n$ における通常の Euclid ノルムを表わす.) 
+  さらに, これらの条件が成立するとき, 次が成立する:
+  \[
+    \int_{t_0}^{\tau(s)} |\dot{q}(t)| \,dt = s
+    \qquad\text{for}\quad s \in V.
+    \qed
+  \]
+\end{question}
+
+\begin{guide}
+ 同一の曲線には無限通りの異なるパラメーター表示がある.
+ しかし曲線を測るためには何らかのパラメーター表示が必要である.
+ 最近では (おそらく十数年前頃から) そのような選択の自由度を
+ ある流儀で一つに固定してしまうことを物理学用語を流用して
+ 「ゲージを固定する」と言うようである.
+ たとえば曲線のパラメーター表示として弧長パラメーターを常に
+ 使うことにするのはゲージ固定の一例である.
+
+ ゲージ理論は幾何学と物理学の驚くべき関係の一例になっている.
+ 興味のある人は色々調べてみると面白いだろう.
+ 幾何学と物理学は歴史的に見てもかなり相性が良い.
+ \qed
+\end{guide}
+
+\begin{question}[平面曲線の曲率]\qstar{*}
+  $U$ は $\R$ 内の開区間であるとし, 任意の $t_0\in U$ を取る. ベクトル値 
+  $C^\infty$ 函数 $q(t)=(x(t),y(t))\in\R^2$ ($t\in U$)は $|\dot q|>0$ を満たし
+  ていると仮定し, パラメーター $s$ を
+  \begin{equation*}
+     s = \int_{t_0}^t |\dot q(t)|\,dt
+  \end{equation*}
+  によって定めると, $q$ を $s$ の函数とみなすこともできる. このような $s$ を 
+  $q$ の弧長パラメーターと呼ぶ. 以下, 一般に $s$ の函数 $f$の $s$ による導函数
+  を $f'$ と書くことにする. $e_1=q'$ と置き, $e_1$ を正の方向に90度回転してで
+  きるベクトルを $e_2$ と書くことにする. このとき, $e_1'=\kappa e_2$ をみたす 
+  $s$ の函数 $\kappa$ が存在する. $\kappa$ を $q$ の軌跡の描く平面曲線の曲率
+  と呼ぶ. $e_i$ と $\kappa$ は $s$ の函数であるが, $t$ の函数で
+  あるともみなせる. 以下を示せ:
+  \begin{equation*}
+    e_1 = \frac{\dot q}{|\dot q|}, \qquad
+    e_2 = 
+    \frac{1}{|\dot q|}
+    \begin{bmatrix}
+     -\dot y \\ \dot x \\
+    \end{bmatrix}, 
+    \qquad
+    \kappa 
+    = \frac{\dot x \ddot y - \ddot x \dot y}{|\dot q|^3}
+    = \frac{\det[\dot q, \ddot q]}{|\dot q|^3}.
+    \qed
+  \end{equation*}  
+\end{question}
+
+曲率が極大値もしくは極小値を取る点を曲線の{\bf 頂点 (vertex)} と呼ぶ. 
+
+\begin{question}
+ 放物線 $y=ax^2$ を適当にパラメーター表示し,
+ その曲率を計算せよ.
+ さらに放物線の形状と計算した曲率の関係について
+ 図と言葉を用いて説明せよ.
+ 放物線の頂点はどこにあるか?
+ \qed
+\end{question}
+
+\commentout{
+\begin{proof}[略解]
+ $\displaystyle \kappa=\frac{2a}{(1+4a^2t^2)^{3/2}}$.
+ \qed
+\end{proof}
+}
+
+\begin{question}
+  楕円 $x^2/a^2 + y^2/b^2 = 1$ を適当にパラメーター表示し, 
+ その曲率を計算せよ. 
+ さらに楕円の形状と計算した曲率の関係について
+ 図と言葉を用いて説明せよ.
+ 円ではない楕円がちょうど4個の頂点を持つことを示せ.
+ \qed
+\end{question}
+
+\commentout{
+\begin{proof}[略解]
+ $\displaystyle \kappa=\frac{ab}{(a^2\sin^2t+b^2\cos^2t)^{3/2}}$.
+ \qed
+\end{proof}
+}
+
+\begin{question}
+ 双曲線 $x^2/a^2-y^2/b^2=1$ を $\cosh$ と $\sinh$ を
+ 用いてパラメーター表示し, 双曲線の曲率を計算せよ. 
+ さらに双曲線の形状と計算した曲率の関係について
+ 図と言葉を用いて説明せよ.
+ 双曲線の頂点はどこにあるか?
+ \qed
+\end{question}
+
+\commentout{
+\begin{proof}[略解]
+ $\displaystyle \kappa=\frac{-ab}{(a^2\sinh^2t+b^2\cosh^2t)^{3/2}}$.
+ \qed
+\end{proof}
+}
+
+\begin{question}[懸垂線]
+  $a$ は正の定数であるとする. 次の式で表わされる平面曲線の概形を描け:
+  \begin{equation*}
+    y = a \cosh (x/a).
+  \end{equation*}
+  この曲線を{\bf 懸垂線 (catenary)} と呼ぶ. 
+  点 $(0,a)$ から点 $(x,a\cosh(x/a))$ までの
+  弧長 $s$ を計算し, $s$ をパラメーターとする表示を求め, 
+  さらに曲率を計算せよ.
+  \qed
+\end{question}
+
+\begin{question}
+  曲率が $0$ でない一定の値になる平面曲線は円の一部になることを示せ. \qed
+\end{question}
+
+\begin{question}
+ 合同な2つの平面曲線の曲率の絶対値が等しいことを
+ 直接的計算によって示せ. \qed
+\end{question}
+
+\begin{proof}[ヒント]
+ 平面曲線の曲率が合同変換で不変なことを示す.
+ 合同変換は平行移動, 回転, 線対称変換の三種類の合成になる.
+ 平行移動と回転に関して曲率は不変であり, 
+ 線対称変換すると曲率の符号が反転する.
+ 計算を易しくするためには線対称変換として $x$ 軸に関する
+ 線対称変換だけを考えて構わない. 
+ なぜならば一般の直線に関する線対称変換は平行移動と回転と $x$ 軸に
+ 関する線対称変換を使って書けるからである(実際にそうであることを
+ 図を描いて説明せよ).
+ \qed
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{空間曲線}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Frenet-Serret の公式と曲線論の基本定理}
+
+次の問題は空間曲線に関係した微分の計算の基礎になる.
+
+\begin{question}[微分のLeibnitz則]
+  $U$ は $\R$ 内の開区間であるとし, $A$, $B$ はそれぞれ $U$ 上の行列値
+  微分可能函数であるとする. $A(t)$ と $B(t)$ の積 $A(t)B(t)$ が定義さ
+  れるとき, 次が成立することを示せ:
+  \[
+    \frac{d}{dt}\left[A(t)B(t)\right]
+    = \dot{A}(t) B(t) + A(t) \dot{B}(t).
+  \]
+  これを用いて, $u$, $v$ が $\R^n$ 値微分可能函数であるとき, 次が成立
+  することを示せ:
+  \[
+    \frac{d}{dt}\left[u(t)\cdot v(t)\right]
+    = \dot{u}(t) \cdot v(t) + u(t) \cdot \dot{v}(t).
+  \]
+  ここで, $\cdot$ は通常の Euclid 内積を表わす. \qed
+\end{question}
+
+次の問題は上の問題の最も簡単な応用である.
+
+\begin{question}
+  $U$ は $\R$ 内の開区間であるとし, $q : U \to \R^n$ は恒等的に 
+  $|\dot{q}| = 1$ をみたす $C^\infty$ 写像であるとする. このとき, 恒等
+  的に $\dot{q} \cdot \ddot{q} = 0$ が成立することを示せ. (すなわち, 
+  速度ベクトル $\dot{q}$ と加速度ベクトル $\ddot{q}$ は直交する.) ここ
+  で, $\cdot$ は $\R^n$ における通常の Euclid 内積である. \qed
+\end{question}
+
+次の問題は容易である.
+
+\begin{question}
+  $\R^2$ 内の $0$ でないベクトル $a$ を任意に取る. ただし, ベクトルは
+  縦ベクトルであると考える. %
+  このとき, 以下をみたすベクトル $b \in \R^2$ が唯一存在する:
+  \begin{enumerate}
+  \item $b$ は $a$ と直交し, $b$ の長さは $a$ の長さに等しい.
+  \item 2つの縦ベクトル $a$, $b$ を並べてできる行列の行列式 $|a, b|$ %
+    は正である.  \qed
+  \end{enumerate}
+\end{question}
+
+次の問題はすぐ上の問題の3次元の場合への一般化である.
+
+\begin{question}[ベクトル積]\label{q:vector-prod}
+  $\R^3$ 内の一次独立な2つのベクトル $a$, $b$ を任意に取る. ただし, ベ
+  クトルは縦ベクトルであると考えることにする. このとき, 以下をみたすベ
+  クトル $c \in \R^3$ が唯一存在する:
+  \begin{enumerate}
+  \item $c$ は $a$ および $b$ と直交する.
+  \item $c$ の長さは $a$ および $b$ から構成される平行四辺形の面積に等
+    しい.
+  \item 3つの縦ベクトル $a$, $b$, $c$ を並べてできる行列の行列式 %
+    $|a, b, c|$ は正である.
+  \end{enumerate}
+  さらに, $c$ の成分を $a$, $b$ の成分によって具体的に表示せよ. (このと
+  き, $a \times b = c$ と書き, $c$ を $a$ と $b$ の{\bf ベクトル積}と呼ぶ.)
+  \qed
+\end{question}
+
+次の問題は以上の二つの問題の一般次元への一般化である.
+
+\begin{question}[ベクトル積の高次元への拡張]\qstar{*}
+  $\R^n$ 内の一次独立な $n-1$ 本のベクトル $a_1,\dots,a_{n-1}$ を任意
+  に取る. ただし, ベクトルは縦ベクトルであると考える. このとき, 以下を
+  みたすベクトル $b \in \R^n$ が唯一存在することを示せ:
+  \begin{enumerate}
+  \item $b$ は $a_1,\dots,a_{n-1}$ の全てと直交する.
+  \item $b$ の長さは $a_1,\dots,a_{n-1}$ から作られる $n-1$ 次元平行体
+    の体積(面積と言うべきか?)に等しい.
+  \item $a_1,\dots,a_{n-1}, b$ を並べてできる行列の行列式について,
+    $|a_1,\ldots,a_{n-1}, b| > 0$ が成立する. \qed
+  \end{enumerate}
+\end{question}
+
+\begin{proof}[ヒント]
+ ベクトル $a_j$ の成分を $a_j^{i}$ 表わすとき, 形式的には, 
+ \[
+ b
+ =
+ \begin{vmatrix}
+  a_1^1  & a_2^1  & \cdots & a_{n-1}^1 & \mathbf{e}_1 \\
+  a_1^2  & a_2^2  & \cdots & a_{n-1}^2 & \mathbf{e}_2 \\
+  \vdots & \vdots &        & \vdots    & \vdots     \\
+  a_1^n  & a_2^n  & \cdots & a_{n-1}^n & \mathbf{e}_n \\
+ \end{vmatrix}.
+ \]
+ ここで, $\mathbf{e}_i$ は第 $i$ 成分のみが $1$ で他が $0$ であるような単
+ 位ベクトルを表わし, 右辺は最後の列に関して形式的に余因子展開することに
+ よって意味付ける.
+ \qed
+\end{proof}
+
+次の2つの問題を解けば空間曲線の Frenet-Serret の公式の証明が完結し,
+その証明と線形代数の時間に習った直行行列などの概念が役に立つことも
+わかる. その御利益として Frenet-Serret の公式の $\R^n$ 内の曲線への
+一般化の方針がわかる.
+
+\begin{question}\label{q:FS1}
+  この問題中においてベクトルは縦ベクトルであるとみなす. $U$ は $\R$ 内
+  の開区間であるとし, $q : U \to \R^3$ は $U$ 上 $|\dot{q}| = 1$ およ
+  び $|\ddot{q}| > 0$ をみたす任意の $C^\infty$ 写像であるとする. さら
+  に, 
+  \[
+    e_1(t) = \dot{q}(t),
+    \qquad
+    e_2(t) = \frac{\ddot{q}(t)}{|\ddot{q}(t)|},
+    \qquad
+    e_3(t) = e_1(t) \times e_2(t)
+  \]%
+  と置き, $3\times 3$ 行列値函数 $E(t)$ を %
+  $E(t) = [e_1(t), e_2(t), e_3(t)]$ によって定める. このとき, $E(t)$ %
+  は直交行列でかつ $\det E(t) = 1$ が成立している. \qed
+\end{question}
+
+\begin{question}[Frenet-Serretの公式]\label{q:FS2}
+  すぐ上の問題の記号のもとで, $U$ 上の $3 \times 3$ 行列値函数 $A(t)$ 
+  が存在して, $\dot{E}(t) = E(t) A(t)$ が成立し, さらに, 行列 $A(t)$ 
+  は次のような形で表わされる:
+  \[
+    A(t)
+    =
+    \begin{bmatrix}
+          0     &  - \kappa(t) &    0      \\
+       \kappa(t) &       0      & - \tau(t) \\
+          0     &     \tau(t)  &    0      \\
+    \end{bmatrix}.
+  \]%
+  ここで $\kappa(t) = |\ddot{q}(t)| > 0$ 
+  かつ $\tau(t) = e_3\cdot\dot{e}_2$. \qed
+\end{question}
+
+\begin{proof}[ヒント]
+$E(t)$ が直交行列であるという条件 %
+$\transpose{E(t)} E(t) = 1$ の両辺を微分して見よ. 
+\qed 
+\end{proof}
+
+上の問題における, $\kappa(t)$ は{\bf 曲率}, %
+$\tau(t)$ は{\bf 捩率}(れいりつ, torsion)と呼ばれている. %
+条件 $|\dot{q}| = 1$ が成立しない場合でも, 問題 \qref{q:alp}\ の結果を
+用いて, パラメーター $t$ を変換することによって, $|\dot{q}| = 1$ が成
+立するようにできるので, それを利用して曲率と捩率を定義することができる.
+
+\begin{question}[常螺旋]\label{q:helix}
+  写像 $q : \R \to \R^3$ を %
+  $q(t) = (x(t), y(t), z(t)) = (a \cos t, a \sin t, b t)$ %
+  なる式によって定義する. $q(t)$ によって表現される曲線は{\bf 常螺旋}
+  (helix)と呼ばれている. 常螺旋の曲率と捩率を求めよ. \qed
+\end{question}
+
+\begin{question}
+  $U$ は $0$ を含む $\R$ 内の開区間であるとし, $q : U \to \R^3$ は %
+  $U$ 上で $|\dot{q}| = 1$ および $\ddot{q}\ne 0$ を満たす $C^\infty$ %
+  写像であるとする. このとき,
+  問題 \qref{q:FS1}, \qref{q:FS2}{} の記号のもとで, $q(t)$ の $t = 0$ %
+  における Taylor 展開は次のような形になる:
+  \begin{align*}
+    q(t)
+    & = q(0) + t e_1(0) + \frac{t^2}{2} \kappa(0)e_2(0)
+    \\
+    & + \frac{t^3}{3!}
+    (-\kappa(0)^2 e_1(0) + \dot{\kappa}(0) e_2(0) + \kappa(0)\tau(0)e_3(0))
+    + o(t^3).
+    \qed
+  \end{align*}
+\end{question}
+
+\begin{question}
+  \label{q:kappa(t)-tau(t)}
+  空間曲線 $q(t)$ ($t$ は弧長パラメーターとは限らない)に対して, 
+  曲率 $\kappa(t)$, 捩率 $\tau(t)$ は次のような表示を持つ:
+  \[
+    \kappa 
+    = 
+    \frac{|\dot{q} \times \ddot{q}|}
+         {|\dot{q}|^3},
+    \qquad
+    \tau 
+    = 
+    \frac{\det\bigl[\dot{q}, \ddot{q}, \dddot{q}\bigr]}
+         {|\dot{q} \times \ddot{q}|^2}.
+  \qed
+  \]
+\end{question}
+
+\commentout{
+\begin{proof}[略解]
+ 弧長パラメータを $s$ と書き, $t$ の函数 $f$ を $s$ の函数ともみなし, 
+ $s$ にその微分を $f'$ と書くことにする. 
+ 弧長パラメータの定義より $f' = \dot f/|\dot q|$ である.
+
+ 方針: $e_1,q'',\kappa,e_2,e_3$ を順次 $\dot q$, $\ddot q$ で
+ 表わし, $\tau = e_2'\cdot e_3$ を計算する. 
+ そのとき $\dot q$, $\ddot q$ が $e_3$ と直交することを用いて
+ 計算を簡略化する.
+
+ まず最初に $e_1=q'$, $d|\dot q|/dt$, $e_1'=q''$ を $\dot q$, $\ddot q$ 
+ で表わそう:
+ \begin{align*}
+  &
+  e_1 = q' = \frac{\dot q}{|\dot q|},
+  \\ &
+  \frac{d|\dot q|}{dt}
+  = \frac{d}{dt}\sqrt{\dot q\cdot \dot q}
+  = \frac{2\dot q\cdot\ddot q}{2\sqrt{\dot q\cdot \dot q}}
+  = \frac{\dot q\cdot\ddot q}{|\dot q|},
+  \\ &
+  e_1'=q''=\frac{1}{|\dot q|}\frac{d}{dt}\frac{\dot q}{|\dot q|}
+  = \frac{\ddot q}{|\dot q|^2} 
+  - \frac{(\dot q\cdot\ddot q)\dot q}{|\dot q|^4}
+  = \frac{|\dot q|^2\ddot q - (\dot q\cdot\ddot q)\dot q}{|\dot q|^4}.
+ \end{align*}
+ よって $\kappa^2 = |q''|^2$ は次の形になる:
+ \begin{align*}
+  \kappa^2=|q''|^2
+  &
+  = \frac{|\dot q|^4|\ddot q|^2 
+  - 2|\dot q|^2(\dot q\cdot \ddot q)^2 
+  + |\dot q|^2(\dot q\cdot \ddot q)^2}{|\dot q|^8}
+%  \\ &
+  = \frac{|\dot q|^2|\ddot q|^2-(\dot q\cdot \ddot q)^2}{|\dot q|^6}
+  = \frac{|\dot q\times \ddot q|^2}{|\dot q|^6}.
+ \end{align*}
+ ここで公式 $|a\times b|^2=|a|^2|b|^2\sin^2\theta=|a|^2|b|^2-(a\cdot b)^2$
+ ($a,b\in\R^3$, $\theta$ は $a$ と $b$ のあいだの角度) を使った. よって
+ \begin{align*}
+  &
+  \kappa = |q''| = \frac{|\dot q\times \ddot q|}{|\dot q|^3},
+  \qquad
+%  \\ &
+  e_2 = \frac{q''}{|q''|} 
+  = \frac{\ddot q}{\kappa|\dot q|^2} 
+  - \frac{(\dot q\cdot\ddot q)\dot q}{\kappa|\dot q|^4},
+  \qquad
+%  \\ &
+  e_3=e_1\times e_2
+  = \frac{\dot q\times \ddot q}{\kappa|\dot q|^3}.
+ \end{align*}
+ 最後に $\tau=e_3\cdot e'_3$ を求めよう:
+ \begin{align*}
+  &
+  \tau = e_3\cdot e_2' = \frac{1}{|\dot q|}e_3\cdot\dot e_2
+  = 
+  \frac{1}{|\dot q|} 
+  \frac{\dot q\times \ddot q}{\kappa|\dot q|^3}
+  \cdot
+  \frac{\dddot q}{\kappa|\dot q|^2}
+  = \frac{(\dot q\times \ddot q)\cdot \dddot q}{|\dot q\times \ddot q|^2}
+  = \frac{\det[\dot q,\ddot q,\dddot q]}{|\dot q\times \ddot q|^2}.
+ \end{align*}
+ ここで3番目の等号で $\dot q$, $\ddot q$ と $e_3$ が直交することを使い, 
+ 最後の等号でベクトル解析の
+ 公式 $(a\times b)\cdot c=\det[a,b,c]$ ($a,b,c\in\R^3$) を使った.
+ \qed
+\end{proof}
+}
+
+次の2つの問題は曲線論の基本定理を証明する前の助走である.
+
+\begin{question}[行列の指数函数]\label{q:mat-exp}\qstar{*}
+  $n \times n$ 行列 $A$ に対して, 次の行列級数は収束して $t$ の %
+  微分可能函数になることを示せ:
+  \[
+    \exp(tA) = \sum_{k=0}^\infty \frac{1}{k!} (tA)^k.
+  \]
+  さらに, 次の公式が成立する:
+  \[
+    \frac{d}{dt} \exp(tA) = A \exp(tA) = \exp(tA) A,
+    \qquad
+    \det(\exp A) = \exp(\trace A).
+  \qed
+  \]
+\end{question}
+
+次の問題の結果は直観的には時刻 $0$ での位置と速度ベクトルを
+決めてやれば加速度ベクトルだけで点の動きが決まってしまうこと
+を意味している.
+
+\begin{question}
+ $C^\infty$ 函数 $a : \R \to \R^n$ および %
+ $q_0 \in \R^n$, $v_0 \in \R^n$ が任意に与えられていると仮定する. こ
+ のとき, 十分小さな $T>0$ を取ると
+ 以下の条件を満たす $C^\infty$ 写像 $q : (-T,T) \to \R^n$ が唯一
+ 存在することを示せ:
+ \begin{equation*}
+  \ddot{q}(t) = a(t) \quad (-T<t<T),
+   \qquad
+   q(0) = q_0,
+   \qquad
+   \dot{q}(0) = v_0.
+   \qed
+ \end{equation*}
+\end{question}
+
+\begin{question}[曲線論の基本定理]\qstar{*}
+  常微分方程式の初期値問題の解の存在と一意性に関する結果を認めた上で以
+  下を示せ. %
+  $U$ は $\R$ 内の開区間であるとし, $\kappa(t)$, $\tau(t)$ は $U$ 上の
+  $C^\infty$ 函数であり, $U$ 上で $\kappa(t) > 0$ が成立していると仮定
+  する. $t_0 \in U$, $q_0 \in \R^3$ および $3 \times 3$ の直交行列 %
+  $E_0$ で $\det E_0 = 1$ をみたすものを任意に与える. このとき, 
+  $C^\infty$ 写像 $q : U \to \R^3$ で以下を満足
+  するものが唯一存在する:
+  \begin{enumerate}
+  \item $U$ 上 $|\dot{q}(t)| = 1$ が成立している.
+  \item $q(t)$ の曲率と捩率はそれぞれ $\kappa(t)$ および $\tau(t)$ に
+    等しい.
+  \item $q(t_0) = q_0$.
+  \item 問題 \qref{q:FS1}, \qref{q:FS2}\ の記号のもとで $E(t_0) = E_0$.
+  \qed
+  \end{enumerate}
+\end{question}
+
+\begin{question}[円]
+ 曲率が一定あり, 捩率が常に $0$ の空間曲線は
+ 円の一部になることを示せ.
+ \qed
+\end{question}
+
+\begin{question}[常螺旋]
+ 曲率と捩率が一定の正の値であるような空間曲線は常螺旋の一部に
+ (合同に)なることを示せ.
+ \qed
+\end{question}
+
+\begin{question}[球面上の円]
+ 球面上に束縛された空間曲線の曲率が一定ならばその曲線は円の一部である
+ ことを示せ. 
+ \qed
+\end{question}
+
+\subsection{一般次元の Frenet-Serret の公式と空間曲線の基本定理}
+
+次のような疑問を持った人はいるであろうか? 「Frenet-Serret の公式は4次元以上の
+高次元空間内の曲線に関する結果に拡張できるのではないか?」もちろん, この疑問に
+対する答は Yes である. 以下の問題を解いてゆくことによって, そのことが理解でき
+るであろう.
+
+今まで通り, $\R^n$ は縦ベクトルの空間であるとみなし, そこには通常の Euclid 内
+積 $\cdot$ が定義されているとする. また, それの定めるノルムを $|\;|$ と表わす.
+
+\subsubsection{直行行列と正規直行化}
+
+ここからしばらくのあいだ線形代数の復習を行なう.
+
+\begin{question}[特殊直行群]
+  \(
+    SO(n)
+    =
+    \{\, X \mid \text{$X$ は実 $n$ 次直交行列でかつ $\det X = 1$} \,\}
+  \) %
+  と置く. このとき, $SO(n)$ は行列の積について群をなすことを示せ. (群
+  の定義は代数学の教科書を見よ.) $SO(n)$ は{\bf 特殊直交群}(special
+  orthogonal group)と呼ばれている. \qed
+\end{question}
+
+\begin{guide}
+\(
+  O(n)
+  =
+  \{\, X \mid \text{$X$ は実 $n$ 次直交行列である} \,\}
+\) %
+も群をなす. こちらは{\bf 直交群}(orthogonal group)と呼ばれている. 位相
+幾何的には, $O(n)$ は2つの連結成分に分かれていて, その片方は $SO(n)$ 
+であり, もう片方は $\det X = - 1$ という条件によって特徴付けられる. こ
+れによって, 右手系・左手系(空間の向き)という概念が正当化される. 
+\qed 
+\end{guide}
+
+\begin{guide}
+$SO(n)$ は幾何的には $n$ 次元空間の回転全体のなす群で
+あると解釈でき, $O(n)$ は回転と鏡映から生成される群であると解釈できる.
+\qed 
+\end{guide}
+
+\begin{question}[Schmidt の正規直交化法]\label{q:Schmidt}
+  $n$ 個のベクトル $x_1, \dots, x_n \in \R^n$ は互いに一次独立である
+  とし, $i = 1, \dots, n$ に対して $v_i, e_i \in\R^n$ を帰納的に,
+  \[
+    v_k := x_k - \sum_{i=1}^{k-1} (e_i \cdot x_k) e_i,
+    \qquad
+    e_k := v_k / |v_k|
+    \qquad \text{for $k=1,\ldots,n$}
+  \]
+  と定める. (特に, $v_1 = x_1$, $e_1 = x_1 / |x_1|$.) %
+  さらに, $n \times n$ 行列 $X$, $K$ を %
+  $X := [ x_1, \ldots, x_n ]$, % 
+  $K := [ e_1, \ldots, e_n ]$ % 
+  と定める. このとき, 以下が成立する:
+  \begin{enumerate}
+  \item $e_1, \dots, e_n$ は $\R^n$ の正規直交基底である. %
+    すなわち, 行列 $K$ は直交行列である.
+  \item $n \times n$ 行列 $P$ を条件 $X = KP$ によって定めると, $P$ は
+    次のような形の上三角行列になる:
+    \[
+      P =
+      \begin{bmatrix}
+        |v_1|         &        & \smash{\lower 1ex \hbox{\Large $\ast$}} \\
+                      & \ddots & \\
+        \smash{\hbox{\Large $0$}} & & |v_n| \\
+      \end{bmatrix}.
+      \qed
+    \]
+  \end{enumerate}
+\end{question}
+
+直交群 $O(n)$ と特殊直交群 $SO(n)$ を
+\begin{align*}
+  & M(n, F)
+  = \{\, X \mid \text{$X$ は $F$ を係数とする $n$ 次正方行列である.} \,\},
+  \\
+  & O(n) = \{\, X \in M(n,\R) \mid \transpose{X}X = 1 \,\},
+  \\
+  & SO(n) = \{\, X \in O(n) \mid \det X = 1 \,\}
+\end{align*}
+と定義したことを思い出そう. ここで, $F$ は任意の体を表わす, (例えば,
+$F = \Q, \R, \C$.) 以下では, さらに,
+\begin{align*}
+  & GL(n,F) = \{\, X \in M(n,F) \mid \text{$X$ は逆行列を持つ.} \,\},
+  \\
+  & GL^+(n,\R) := \{\, X \in GL(n,\R) \mid \det X > 0. \,\},
+  \\
+  & SL(n,F) = \{\, X \in M(n,F) \mid \det X = 1 \,\},
+  \\
+  & N(n,F) = \left\{\, X \in M(n,F)
+      \,\left|\,
+      X =
+      \begin{bmatrix}
+        1         &        & \smash{\lower 1ex \hbox{\Large $\ast$}} \\
+                  & \ddots & \\
+        \smash{\hbox{\Large $0$}} & & 1 \\
+      \end{bmatrix}.
+    \right. \,\right\},
+  \\
+  & A(n) =
+    \left\{\,\left.
+      X =
+      \begin{bmatrix}
+        a_1 &        & \smash{\lower 1ex \hbox{\Large $0$}} \\
+            & \ddots & \\
+        \smash{\hbox{\Large $0$}} & & a_n \\
+      \end{bmatrix}
+      \in GL(n,\R)
+    \,\right|\,
+      a_1, \dots, a_n > 0.
+    \,\right\}.
+\end{align*}
+という記号も用いる. $GL(n,F)$, $GL^+(n,\R)$, $SL(n,F)$, $N(n,F)$,
+$A(n)$ は行列の積に関して群をなす. $GL(n,F)$, $SL(n,F)$ はそれぞれ %
+{\bf 一般線型群}(general linear group), %
+{\bf 特殊線型群}(special linear group) と呼ばれている.
+
+以下の岩沢分解は本質的に Schmidt の正規直行化の言い換えに過ぎない.
+
+\begin{question}[岩沢分解1]\label{q:Iwasawa1}
+  任意の $X \in GL(n, \R)$ を次の形で一意的に表示できることを示せ:
+  \[
+    X = KAN,
+    \qquad\text{where}\quad
+    K \in O(n),
+    \quad
+    A \in A(n),
+    \quad
+    N \in N(n,\R).
+  \]
+  よって, 行列の積の定める自然な写像 
+  \[
+    O(n)\times A(n) \times N(n,\R) \rightarrow GL(n,\R)
+  \]
+  は全単射である. (この結果を $GL(n,\R)$ の岩沢分解と呼ぶ.) \qed
+\end{question}
+
+\begin{proof}[ヒント]
+表示の存在は Schmidt の正規直交化法の言い換えに過ぎ
+ないので, 表示の一意性を示すことのみが問題になる.
+\qed
+\end{proof}
+
+岩沢分解を使うと $GL(n,\R)$ のトポロジーに関する問題を $O(n)$ の問題
+に帰着できる.
+
+\begin{question}[岩沢分解2]\label{q:Iwasawa2}
+  行列の積の定める写像 %
+  $O(n)\times A(n) \times N(n,\R) \rightarrow GL(n,\R)$ は同相写像であ
+  り, $A(n) \times N(n,\R)$ は $\R^{n(n+1)/2}$ に同相である. \qed
+\end{question}
+
+\begin{question}
+  直交群 $O(n)$ が $GL(n,\R)$ の極大コンパクト部分群であることを示せ.
+  (すなわち, $O(n)$ は $GL(n,\R)$ のコンパクト部分群であり, $O(n)$ を
+  真に含むような $GL(n,\R)$ のコンパクト部分群が存在しないことを示せ.)
+  \qed
+\end{question}
+
+\begin{question}[岩沢分解3]\label{q:Iwasawa3}
+  $SA(n) := SL(n,\R) \cap A(n)$ と置く. このとき, 行列の積の定める写像 %
+  \begin{align*}
+  & SO(n)\times SA(n) \times N(n,\R) \rightarrow SL(n,\R),
+  \\
+  & SO(n)\times A(n) \times N(n,\R) \rightarrow GL^+(n,\R)    
+  \end{align*}
+  は共に同相写像であることを示せ. \qed
+\end{question}
+
+\begin{question}
+  \( \displaystyle
+    SO(2)
+    =
+    \left\{\,
+    \left.
+      \begin{bmatrix} \cos t & - \sin t \\ \sin t & \cos t \end{bmatrix}
+    \,\right|\,
+      t \in \R
+    \,\right\}
+  \) %
+  が成立することを示せ. 特に, $SO(2)$ は円 $S^1$ に同相であり, コンパ
+  クトかつ弧状連結である. このことより, $O(2)$ は2つの $S^1$ の非連結
+  和に同相であることもわかる. \qed
+\end{question}
+
+\begin{question}
+  $\theta \in \R$ に対して, 行列 $A(\theta)$, $B(\theta)$ を次のように
+  定義する:
+  \[
+    A(\theta)
+    =
+    \begin{bmatrix}
+      \cos \theta & - \sin \theta & 0 \\
+      \sin \theta &   \cos \theta & 0 \\
+           0      &   0           & 1 \\
+    \end{bmatrix},
+    \qquad
+    B(\theta)
+    =
+    \begin{bmatrix}
+        \cos \theta & 0 & \sin \theta \\
+             0      & 1 &      0      \\
+      - \sin \theta & 0 & \cos \theta \\
+    \end{bmatrix}.
+  \]
+  このとき, 以下が成立することを示せ:
+  \begin{enumerate}
+  \item $A(\theta), B(\theta) \in SO(3)$.
+  \item 任意の $X \in SO(3)$ に対して, %
+    ある $\phi, \theta, \psi \in \R$ が存在して, %
+    $0 \le \phi < 2\pi$, $0 \le \theta \le \pi$, $0 \le \psi < 2\pi$, 
+    および $X = A(\phi)B(\theta)A(\psi)$ が成立する. %
+    (このとき, $(\phi, \theta, \psi)$ は $X$ の Euler 角であると言う.)
+  \item $(\phi,\theta,\psi)$, $(\phi',\theta',\psi')$ は $X$ の Euler 
+    角であるとする. $\theta \ne 0, \pi$ ならば, %
+    $(\phi,\theta,\psi) = (\phi',\theta',\psi')$ となり, Euler 角の一
+    意性が成立する. %
+    しかし, $\theta = 0, \pi$ のとき, Euler 角の一意性は成立しない.
+  \item $SO(3)$ はコンパクトかつ弧状連結である.
+    \qed
+  \end{enumerate}
+\end{question}
+
+\begin{proof}[ヒント]
+$A(\theta)$, $B(\theta)$ はそれぞれ $z$ 軸および $y$
+軸のまわりの回転を表わす行列である. (自力で解けない場合は例えば 
+\cite{YS} の p.45 を見よ.)
+\qed 
+\end{proof}
+
+\begin{rem}
+$SO(3)$ は実3次元射影空間 $\P^3(\R)$ に同相である. こ
+の手のことについては, \cite{Yokota} に詳しい解説がある. (例えば, p.131 
+を見よ.)
+\qed 
+\end{rem}
+
+\begin{question}
+  $SO(n)$ が弧状連結であることを証明せよ. \qed
+\end{question}
+
+\begin{proof}
+\cite{Satake} の p.178 では直交行列の標準形に関する
+結果を用いて証明している. 他にも Euler 角の考え方を使って $n$ に関する
+帰納法によって証明することもできる. その方針は以下の通り. %
+$e_n = \transpose(0,0,\dots,0,1)$ (第 $n$ 成分のみが $1$ で他は $0$)
+と置く. 回転行列の合成 $A$ によってベクトル $X e_n$ を $e_n$ に移
+すことができる. このとき, $AX \in SO(n)$ かつ行列 $AX$ は %
+\(\displaystyle \begin{bmatrix}X'&0\\0&1\end{bmatrix} \) %
+($X' \in SO(n-1)$) の形になる. これによって, $SO(n)$ の弧状連結性は %
+$SO(n-1)$ の弧状連結性に帰着できることがわかる.
+\qed
+\end{proof}
+
+\begin{question}
+  $GL^+(n,\R)$ が弧状連結であることを示せ. さらに, $GL(n,\R)$ がちょう
+  ど2つの弧状連結成分に分かれることを示せ. \qed
+\end{question}
+
+\noindent ヒント: 岩沢分解と $SO(n)$ の弧状連結性より, $GL^+(n,\R)$ が
+弧状連結であることがわかる. $GL(n,\R)$ の中の行列式が正の行列と行列式
+が負の行列は連続な曲線で結ぶことができない. なぜなら, もしもあるとした
+ら, 中間値の定理より, その曲線上のどこかで行列式が 0 になってしまい 
+$GL(n,\R)$ をはみ出してしまう.
+
+\begin{question}
+  $\R^n$ の基底を与えるようなベクトルの組 $(x_1,\dots,x_n)\in (\R^n)^n$ %
+  の全体の集合を $\Omega$ と表わすことにする. %
+  $(x_1,\dots,x_n)\in (R^n)^n$ と%
+  行列 $X = \begin{bmatrix} x_1 & \cdots & x_n \end{bmatrix}$ を同一視
+  することによって, $(\R^n)^n = M(n,\R)$ とみなす. %
+  このとき, $\Omega = GL(n,\R)$ である. これより, 
+  $\Omega$ はちょうど2つの弧状連結成分に分かれていることが示される. \qed
+\end{question}
+
+\begin{rem}
+{\bf つまり, $\R^n$ の基底全体は, 2つの世界に分かれているの
+である.} (大事なことは, 基底のベクトルを並べる順番が違うものは互いに異
+なると考えることである.) その片方の属す基底を右手系と呼び, もう片方に
+属す基底を左手系と呼ぶことがある. 数学的には2つの弧状連結成分のどちら
+を右手系と呼んでも良いのだが, 特別にどちらか片方を右手系であると指定す
+るとき, 我々は $\R^n$ に{\bf 向き}(orientation)を指定したと言う. 向き
+の概念は幾何的に重要なだけでなく物理学的にも重要である. なお, 面白いこ
+とに我々の住む実世界は右手系と左手系が対称でないことが知られている. こ
+のような話に興味がある人は \cite{Gardner} を見よ.
+\end{rem}
+
+%一般に $n-1$ 次元球面は $S^{n-1} = \{ x \in \R^n \mid |x| = 1 \,\}$ と
+%定義される. $S^2$ は2点であり, $S^1$ は円であり, $S^2$ は(普通の2次元)
+%球面である.
+%
+%ユニタリー群 $U(n)$ と特殊ユニタリー群 $SU(n)$ を次のように定義する:
+%\begin{align*}
+%  & U(n) = \{\, X \in M(n,\C) \mid X^\ast X = 1 \,\},
+%  \\
+%  & SU(n) = \{\, X \in U(n,\C) \mid \det X = 1 \,\}.
+%\end{align*}
+%
+%\begin{question}
+%  $U(n)$, $SU(n)$ が行列の積に関して実際に群をなすことを示せ. \qed
+%\end{question}
+%
+%\begin{question}
+%  \( \displaystyle
+%    SU(2)
+%    =
+%    \left\{\,
+%    \left.
+%      \begin{bmatrix} a & - \bar{b}\, \\ b & \bar{a} \end{bmatrix}
+%    \,\right|\,
+%      a,b\in \C, \quad |a|^2 + |b|^2 = 1
+%    \,\right\}
+%  \) %
+%  が成立することを示せ. よって, $SU(2)$ は3次元球面 $S^3$ と同相であり,
+%  コンパクトかつ弧状連結である. \qed
+%\end{question}
+%
+%\begin{question}
+%  $\su(n) = \{\, X \in M(n,\C) \mid X^* + X = 0,\quad \trace X = 0 \,\}$ %
+%  と置く. このとき, 以下が成立することを示せ:
+%  \begin{enumerate}
+%  \item $X,Y \in \su(n)$ ならば $XY - YX \in \su(n)$.
+%  \item $g(t)$ が $SU(n)$ 内の曲線のとき, %
+%    $g(t)^{-1} \dot{g}(t), \dot{g}(t) g(t)^{-1} \in \su(n)$.
+%  \item $g\in SU(n)$, $X\in\su(n)$ ならば $gXg^{-1} \in \su(n)$.
+%    \qed
+%  \end{enumerate}
+%\end{question}
+%
+%\begin{question}
+%  行列 $J_k$ ($k=1,2,3$) を次のように定義する:
+%  \[
+%    J_1 = \frac{1}{\sqrt{2}} \begin{bmatrix} 0 & i \\ i & 0  \end{bmatrix},
+%    \qquad
+%    J_2 = \frac{1}{\sqrt{2}} \begin{bmatrix} 0 & - 1 \\ 1 & 0 \end{bmatrix},
+%    \qquad
+%    J_3 = \frac{1}{\sqrt{2}} \begin{bmatrix} i & 0 \\ 0 & -i  \end{bmatrix}.
+%  \]
+%  このとき, 以下が成立することを直接に示せ:
+%  \begin{enumerate}
+%  \item $[A,B] := AB - BA$ と置くと,
+%    \[
+%      [J_1, J_2] = J_3,
+%      \qquad
+%      [J_2, J_3] = J_1,
+%      \qquad
+%      [J_3, J_1] = J_2.
+%    \]
+%  \item $\su(2)$ を $\R$ 上のベクトル空間とみたとき, $J_1, J_2, J_3$ は
+%    その基底をなす.
+%  \item $g\in SU(2)$, $X\in\su(2)$ ならば $gXg^{-1} \in \su(2)$.
+%  \item $g\in SU(2)$ に対して, %
+%    $3\times3$ 行列 $A(g) = \left[a_{k,l}(g)\right]$ を
+%    \[
+%      g J_l g^{-1} = \sum_{l=1}^3 J_k a_{k,l}
+%    \]
+%    によって定めると, $A(g) \in SO(3)$ である.
+%  \item 写像 $A : g \mapsto A(g)$ は $SU(2)$ から $SO(3)$ への $A$ は
+%    群の準同型でかつ $\Ker A = \{ \pm 1 \in SU(2) \}$.
+%  \item $A : SU(2) \to SO(3)$ は連続かつ全射である.
+%  \item $SO(3)$ は弧状連結である.
+%    \qed
+%  \end{enumerate}
+%\end{question}
+
+\subsubsection{一般次元の Frenet-Serret の公式と曲線論の基本定理}
+
+長々と脱線してしまったが, この辺で曲線論に戻ることにしよう. Schmidt の
+正規直交化法に関連した問題を出したのは, 以下の問題を解くためにそれが重
+要だからである.
+
+\begin{question}[一般次元における Frenet-Serret の公式]
+  $U$ は $\R$ 内の開区間であり, $q : U \to \R^n$ は $C^\infty$ 写像で
+  あるとし, 任意の $t\in U$ に対して $|\dot{q}(t)| = 1$ および次が成立
+  していると仮定する:
+  \[
+    W(t) := 
+    \det[\dot{q}(t), \ddot{q}(t), \ldots, q^{(n)}(t)]
+    \ne 0.
+  \]%
+  $W(t)$ は $q(t)$ の{\bf Wronski 行列式}(Wronskian)と呼ばれている. %
+  $\dot{q}(t), \ddot{q}(t), \dots, q^{(n)}(t)$ に対して, Schmidt の正
+  規直交化法を適用することによって得られるベクトルを %
+  $e_1(t), \ldots, e_n(t)$ と表わす. このとき, 以下が成立することを示
+  せ:
+  \begin{enumerate}
+  \item 各 $e_i(t)$ は $t$ に関して $C^\infty$級であり, %
+    任意の $t\in U$ において $e_1(t), \dots, e_n(t)$ は $\R^n$ の正規
+    直交基底をなす.
+  \item 導函数 $\dot{e}_i(t)$ は次のような表示を持つ:
+    \[
+      \dot{e}_i(t)
+      = - \kappa_{i-1}(t) e_{i-1}(t) + \kappa_{i+1}(t)e_i(t)
+      \qquad\text{for}\quad
+      i = 1, \dots, n.
+    \]
+    ここで, $e_0(t) = e_{n+1}(t) = 0$ であり, %
+    $\kappa_1(t), \dots, \kappa_n(t)$ は $t\in U$ の正値 $C^\infty$ 函
+    数である. \qed
+  \end{enumerate}
+\end{question}
+
+\begin{question}
+  上の問題において, 「$W(t) \ne 0$」という条件を, %
+  「$\dot{q}(t), \ddot{q}(t), \dots, q^{(n-1)}(t)$ が一次独立である」
+  という条件に弱めた形で再定式化し, それを証明せよ. \qed
+\end{question}
+
+\begin{rem}
+$n=3$ の結果が問題 \qref{q:FS1}, \qref{q:FS2} の
+結果を含むようにするためには, このように仮定の条件を弱めて定式化する必
+要がある. (この辺はそれほど数学的に重要なことだと思われないが, 細い再
+定式化の訓練になると思う.)
+\qed
+\end{rem}
+
+\begin{question}
+  一般の次元における曲線論の基本定理を定式化し, それを証明せよ. \qed
+\end{question}
+
+ここで, 少々, 線型常微分方程式について問題を補足しておこう. 曲線論の基
+本定理の証明のためには, 次の形の方程式の解の存在と一意性が本質的なので
+あった:
+\[
+  \frac{d}{dt} u(t) = A(t) u(t),
+  \qquad
+  u(0) = u_0.
+\]%
+ここで, $u(t)$ はベクトル値函数であり, $A(t)$ は行列値函数であり, 
+$u_0$ は初期値ベクトルである.
+
+もしも, $A(t)$ が定数行列 $A$ に等しいならば, 問題 
+\qref{q:mat-exp}{} の行列の指数函数を用いて, 解を
+\[
+  u(t) = \exp(At) u_0
+\]
+と表わすことができる. 次の問題は $A(t)$ が定数でない場合の結果を与える.
+
+\begin{question}\label{q:DS1}
+  $U$ は $\R$ 内の開区間であるとし, $A: U \to M(n,\C)$ は連続函数であ
+  るとする. このとき, $t_0, t \in U$ ($t_0 \le t$)に対して, 級数
+  \[
+    F(t)
+    :=
+    \sum_{k=0}^\infty
+    \int_{t_0}^t ds_k \int_{t_0}^{s_k} ds_{k-1} \cdots \int_{t_0}^{s_2} ds_1\,
+    [ A(s_k)A(s_{k-1})\cdots A(s_1) ]
+  \] %
+  を考える. ($k=0$ に対応する項は $1$ であるとする.) 右辺の級数は絶対
+  収束し, $U$ 上の行列値 $C^1$ 級函数を与え, 次を満たしていることを示
+  せ:
+  \[
+    \frac{d}{dt} F(t) = A(t) F(t).
+  \qed
+  \]
+\end{question}
+
+\begin{rem}
+この手の問題に出会ったら, ます収束性などの細かいことを
+調べる前に, 形式的に導函数を計算して見よ. 正しそうな式であることが納得
+できる前に厳密性にこだわるのは止めた方が良い. 
+\qed 
+\end{rem}
+
+{\bf 次の問題の公式は基本的でかつ極めて有用である.}
+
+\begin{question}\label{q:DS2}
+  上の問題の続き. $s_1,\dots,s_k\in U$ に対して, %
+  $\{1,\dots,k\}$ の置換 $\sigma$ で %
+  $s_{\sigma(1)} \le \cdots \le s_{\sigma(k)}$ を
+  満たすものを取り, 
+  \[
+    T[A(s_k) A(s_{k-1}) \dots A(s_1)]
+    =
+    A(s_{\sigma(k)}) A(s_{\sigma(k-1)}) \cdots A(s_{\sigma(1)})
+  \]
+  と置く. これを $A(s_1),\dots,A(s_k)$ の time ordering product と呼ぶ.
+  この記号のもとで, 次が成立することを示せ:
+  \[
+    F(t)
+    =
+    \sum_{k=0}^\infty
+    \frac{1}{k!}
+    \int_{t_0}^t ds_k \int_{t_0}^t ds_{k-1} \cdots \int_{t_0}^t ds_1\,
+    T[ A(s_k)A(s_{k-1})\cdots A(s_1) ].
+  \]%
+  さらに, 形式的に無限和および積分と time ordering product を交換する
+  ことによって次の式が得られることを説明せよ:
+  \[
+    F(t) = T\left[ \exp \int_{t_0}^t A(s)\,ds \right].
+  \qed
+  \]
+\end{question}
+
+\begin{proof}[ヒント]
+ この問題は形式的な計算だけでできるので簡単である. \qed
+\end{proof}
+
+\begin{rem}
+この問題の結果は物理学者などには良く知られているようで
+ある. (例えば, \cite{Polyakov} の第7章などを見よ.)
+\qed
+\end{rem}
+
+\begin{question}\label{q:DS3}
+  Picard の逐次近似法から問題 \qref{q:DS1}{} の結果が導かれることを説
+  明せよ. \qed
+\end{question}
+
+\begin{question}\label{q:DS4}
+  問題 \qref{q:DS1} における $F(t)$ をさらに $t$ だけでなく $t$ と 
+  $t_0$ の函数とみなしたものを $F(t,t_0)$ と表わす. %
+  このとき, $F(t, t_0)$ は $(t,t_0)$ の函数として $C^1$ 級であり, 次を
+  満たしていることを示せ:
+  \[
+    \pd{}{t_1} F(t_1,t_0) = A(t_1) F(t_1,t_0),
+    \qquad
+    \pd{}{t_0} F(t_1,t_0) = - F(t_1,t_0) A(t_0).
+  \qed
+  \]
+\end{question}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{空間曲線に関する英語の演習問題}
+
+弧長パラメーター $s$ でパラメーター付けられた滑らかな空間曲線 %
+$q(s)=(x(s),y(s),z(s))$ を考える. $q''(s)$ は曲線上 $0$ にならないと仮定し,
+\begin{equation*}
+  e_1(s) = q'(s),
+  \qquad
+  e_2(s) = \frac{q''(s)}{|q''(s)|},
+  \qquad
+  e_3(s) = e_1(s) \times e_2(s)
+\end{equation*}
+と置く. このとき, 空間曲線 $q(s)$ の曲率 $\kappa(s)$ と捩率 $\tau(s)$ は 
+Frenet-Serret の公式
+\begin{equation*}
+  e_1'(s) = \kappa(s) e_2(s),
+  \qquad
+  e_2'(s) = - \kappa(s) e_1(s) + \tau(s) e_3(s),
+  \qquad
+  e_3'(s) = - \tau(s) e_2(s)
+\end{equation*}
+を満たしている. 以上の記号のもとで, 以下の問題を解け. ただし, 問題を解く前に, 
+問題の内容を図を描いて説明せよ. 英語を日本語にまじめに訳す必要はないが, 
+問題の内容を日本語で詳しく説明すること.
+
+\begin{question}
+  The center of curvature of a space curve is defined as the point at
+  distance $\rho=1/\kappa$ from the curve along the normal $e_2$. Show that
+  if $\kappa$ is constant, then the locus of centers of curvature is
+  orthogonal to the osculating plane of the curve at the corresponding point 
+  and is also a curve of constant curvature.
+  \qed
+\end{question}
+
+\noindent ヒント: 空間曲線 $q$ の点 $q(s)$ における接触平面(the osculating
+plane of the curve $q$ at $q(s)$)とは %
+$\{\,q(s)+u_1e_1(s)+u_2e_2(s)\mid u_1,u_2\in\R\,\}$ のこと.
+
+\begin{question}
+  Prove that a tangent to the locus of centers of curvature of a space curve
+  is orthogonal to the corresponding tangent to the space curve, but that it
+  does not in general fall along the principal normal of the curve.  \qed
+\end{question}
+
+\begin{question}
+  Prove directly from the Frenet-Serret equations that the tangents to a
+  space curve along which $\kappa(s) = c \tau(s)$, with $c$ a constant, make 
+  a constant angle with a fixed line in space.
+  \qed
+\end{question}
+
+以下の剛体(rigid body)の運動に関する問題を解け. ただし, 問題を解く前に, 問題
+の内容を図を描いて説明することを忘れないこと. 記号は上で定めたものを使う.
+
+\begin{question}[ダルブー・ベクトル]
+  If a rigid body moves along a curve $q(s)$ (which we suppose is unit
+  speed), then the motion of the body consists of translation along $q$ and
+  rotation about $q$.  The rotation is determined by an angular velocity
+  vector $\omega$ which satisfies $e_i' = \omega\times e_i$ for $i=1,2,3$.
+  The vector $\omega$ is called the {\em Darboux vector}.  Show that
+  $\omega$, in terms of $e_1$, $e_2$, and $e_3$, is given by 
+  $\omega=\tau e_1 + \kappa e_3$. 
+  \qed
+\end{question}
+
+\begin{question}
+  Show that $e_1'\times e_1''=\kappa^2\omega$ where $\omega$ is the Darboux
+  vector. \qed
+\end{question}
+
+\begin{question}\label{q:framef}
+  Instead of taking the Frenet frame $\{e_1,e_2,e_3\}$ along a (unit speed)
+  curve $q:[a,b]\to\R^3$, we can define a frame $\{f_1,f_2,f_3\}$ by taking
+  $f_1$ to be the unit tangent vector of $q$ as usual and letting $f_2$ be
+  any unit vector field along $q$ with $f_1\cdot f_2=0$. That is,
+  $f_2:[a,b]\to\R^3$ associates a unit vector $f_2(t)$ to each $t\in[a,b]$
+  which is perpendicular $f_1(t)$. Define $f_3=f_1\times f_2$. Show that the 
+  natural equation ({\it i.e.}, ``Frenet Formulas'') for this frame are
+  \begin{align*}
+    f_1' & = \omega_3 f_2 - \omega_2 f_3, \\
+    f_2' & = \omega_1 f_3 - \omega_3 f_1, \\
+    f_3' & = \omega_2 f_1 - \omega_1 f_2,
+  \end{align*}
+  where $\omega_1$, $\omega_2$, and $\omega_3$ are coefficient functions.
+  Furthermore, show that the Darboux vector $\omega$ satisfying
+  $e_i'=\omega\times e_i$ for $i=1,2,3$ is given by
+  $\omega=\omega_1f_1+\omega_2f_2+\omega_3f_3$.
+  \qed
+\end{question}
+
+\begin{question}[定歳差曲線]
+  A unit speed {\em curve of constant precession} is defined by the property 
+  that its (Frenet) Darboux vector $\omega=\tau e_1+\kappa e_3$ resolves
+  about a fixed line in space with constant angle and constant speed. Show,
+  by following the steps below, that a curve of constant precession is
+  characterized by having
+  \begin{equation*}
+    \kappa(s)=a\sin(bs)
+    \qquad\text{and}\qquad
+    \tau(s)=a\cos(bs),
+  \end{equation*}
+  where $a>0$ and $b$ are constant and $c=\sqrt{a^2+b^2}$.  First, show that 
+  the following five properties are equivalent for a vector $A=\omega+be_2$
+  and a line $\ell$ parallel to $A(0)$:
+  \begin{enumerate}
+  \item[(1)] $|\omega|=a$.
+  \item[(2)] $\cos\theta=a/c$, where $\theta$ is the angle between $\omega$
+    and $A$.
+  \item[(3)] $|e_2'|=a$.
+  \item[(4)] $\cos(\pi/2-\theta)=b/c$, where $\pi/2-\theta$ is the angle
+    between $A$ and $e_2$. 
+  \item[(5)] $|A|=c$.
+  \end{enumerate}
+  Second, given any of the properties just listed, show that $A$ is always
+  parallel to $\ell$ ({\it i.e.}, $A(0)$) if and only if
+  $\omega'=-be_2'$. Finally, show that $A'=0$ if and only if
+  \begin{equation*}
+    \tau'=b\kappa
+    \qquad\text{and}\qquad
+    \kappa'=-b\tau.
+  \end{equation*}
+  Solve this system of differential equations to get the result.
+  \qed
+\end{question}
+
+\noindent ヒント: 弧長でパラメーター付けられた曲線が定歳差であるとは,
+その Darboux vector とある固定された空間直線の角度が一定であり, さらに
+Darboux vector の運動の速さが一定であることである. (Darboux vector の運動の
+様子を図示してみよ.)
+
+\pagebreak
+
+\begin{question}[linking number]
+  Let $\alpha$ and $\beta$ be two closed curves ({\it i.e.},
+  $\alpha:[a,b]\to\R^3$, $\alpha(a)=\alpha(b)$, and similarly for $\beta$)
+  which do not intersect.  The {\em linking number} $\Lk(\alpha,\beta)$ of
+  $\alpha$ and $\beta$ is defined by projecting $\R^3$ onto a plane so that
+  at most two point of $\alpha$ and $\beta$ are mapped to a single image.
+  Then, assigning $\pm1$ to every $\alpha(s)$ undercrossing according to the 
+  orientations show below and summing the $\pm1$'s gives
+  $\Lk(\alpha,\beta)$.
+  \begin{center}
+  \input linknum
+  \end{center}
+  Let $\{f_1,f_2,f_3\}$ be a frame as in Exercise \qref{q:framef}. 
+  The {\em twist} of $f_2$ about $\alpha$ is defined to be
+  \begin{equation*}
+    \Tw(\alpha,f_2)
+    =
+    \frac{1}{2\pi}\int_a^b \omega_1\,dt.
+  \end{equation*}
+  Let $\beta=\alpha+\eps f_2$, where $\eps$ is small enough so that $\alpha$
+  and $\beta$ do not intersect.  Show that, if $\alpha$ is a plane curve,
+  then $\Lk(\alpha,\beta)=\Tw(\alpha,f_2)$.  This is a special case of 
+  {\em White's formula} which has proved important to modern DNA research
+  (see \cite{Poh}, \cite{PoR} for instance).
+  \qed
+\end{question}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{thebibliography}{ABC}
+
+\bibitem[Gardner]{Gardner}
+Martin~Gardner: 自然界における左と右, 紀伊国屋書店
+
+%\bibitem[小林]{Kobayashi}
+%小林 昭七: 曲線と曲面の微分幾何, 裳華房
+
+%\bibitem[久賀]{Kuga}
+%久賀 道郎: ドクトル クーガー の数学講座 1, 2, 日本評論社
+
+%\bibitem[松島]{Matsushima}
+%松島与三: 多様体入門, 数学選書 5, 裳華房
+
+\bibitem[Polyakov]{Polyakov}
+A.~M.~Polyakov: Gauge fields and strings, harwood academic publishers,
+Contemporary concepts in physics, Volume 3, 1987
+
+\bibitem[Poh]{Poh}
+W.~Pohl,
+{\em DNA and differential geometry},
+Math. Intell. {\bf 3}, 1980, 20--27.
+
+\bibitem[PoR]{PoR}
+W.~Pohl and G.~Roberts,
+{\em Topological considerations in the theory of replication of DNA},
+J.~Math.~Biology {\bf 6}, 1978, 383--402.
+
+\bibitem[佐武]{Satake}
+佐武 一郎: 線型代数学, 裳華房
+
+%\bibitem[数学辞典]{jiten}
+%岩波数学辞典, 第三版, 岩波書店
+
+%\bibitem[高木]{Takagi}
+%高木貞治: 解析概論, 改訂第三版, 岩波書店
+
+%\bibitem[田村]{Tamura}
+%田村一朗: トポロジー, 岩波全書 276, 岩波書店
+
+%\bibitem[朝永]{Tomonaga}
+%朝永振一郎: 量子力学 I, 第2版, 物理学大系, 基礎物理学篇 VIII, みすず書房
+
+%\bibitem[WW]{WW}
+%E.~T.~Whittaker and G.~N.~Watson: A course of modern analysis,
+Cambridge University Press, Fourth Edition, 1927, Reprinted 1992
+
+\bibitem[山内・杉浦]{YS}
+山内恭彦, 杉浦光雄: 連続群論入門, 培風館, 新数学シリーズ 18
+
+\bibitem[横田]{Yokota}
+横田一郎: 群と位相, 裳華房, 基礎数学選書 5
+
+\end{thebibliography}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

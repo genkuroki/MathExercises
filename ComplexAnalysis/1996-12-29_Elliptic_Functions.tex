@@ -1,0 +1,5493 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% 楕円函数論演習
+%
+% 黒木 玄 (東北大学理学部数学教室, kuroki@math.tohoku.ac.jp)
+%
+\def\VERSION{1996年12月29日(日)版}
+%
+% 日本語 AMS LaTeX (旧ASCII版) でコンパイルしてください.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% History:
+%
+% 1996-12-29  誤植を大幅に修正
+% 1996-07-15  そのまた次のバージョンの作成
+% 1996-07-10  その次のバージョンの作成
+% 1996-07-02  次のバージョンの作成
+% 1996-06-28  最初のバージョンの作成
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\documentstyle[amstex,amssymb,amscd,12pt,elliptic]{jarticle}
+%\documentstyle[amstex,amssymb,amscd,showkeys,12pt,elliptic]{jarticle}
+
+\documentclass[12pt,twoside]{jarticle}
+\usepackage{amsmath,amssymb,amscd}
+\usepackage{enshu}
+\usepackage{eepic}
+
+%%% setminus
+\def\setminus{-}
+
+%%% misc
+\def\O{\cal{O}}
+\def\Sch{\mathop{\cal{S}}\nolimits}  % Schwartz space
+%\def\Sch{\mathop{\scr{S}}\nolimits}  % Schwartz space
+\def\Area{\mathop{\text{\rm Area}}\nolimits}
+\def\Length{\mathop{\text{\rm Length}}\nolimits}
+\def\Vol{\mathop{\text{\rm Vol}}\nolimits}
+\def\Top{\mathop{\text{\rm Top}}\nolimits}
+\def\rank{\mathop{\text{\rm rank}}\nolimits}
+\def\id{\text{\rm id}}
+\def\II{I\!I}
+\def\Mellin{{\cal M}}
+\def\e{{\text{\rm e}}}
+\def\Per{\mathop{\text{\rm Per}}\nolimits}
+\def\Hdr{H_{\text{\rm DR}}}
+\def\pe{\wp}
+\def\Div{{\text{\rm Div}}}
+\def\deg{{\text{\rm deg}}}
+\def\bdr{\partial}
+\def\sn{\mathop{\text{\rm sn}}\nolimits}
+\def\cn{\mathop{\text{\rm cn}}\nolimits}
+\def\dn{\mathop{\text{\rm dn}}\nolimits}
+\def\bcdot{{\raise0.2ex \hbox{\bf.}}}
+\def\bdot{{\raise0.4ex \hbox{\bf.}}}
+\def\Hdr{H_{\text{\tiny DR}}}
+\def\zbar{{\bar z}}
+\def\wbar{{\overline w}}
+\def\Zero{{\text{\Large 0}}}
+\def\vt{\vartheta}
+\def\Omegahat{\widehat\Omega}
+\def\Hom{\mathop{\text{\rm Hom}}\nolimits}
+\def\H{{\frak H}}
+
+%%%
+\def\cosec{\mathop{\mbox{\rm cosec}}\nolimits}
+\def\sec{\mathop{\mbox{\rm sec}}\nolimits}
+
+%%% E-mail address
+\def\atmark{\char'100}
+\def\emailaddress{{\tt kuroki{\atmark}math.tohoku.ac.jp}}
+
+%%% C^n function
+%\def\Class#1{\text{$\text{\rm C}^{#1}$}}
+\def\Class#1{\text{$C^{#1}$}}
+
+%%% N, Z, Q, R, C, P, F
+\def\N{{\Bbb N}} % the set of natural numbers
+\def\Z{{\Bbb Z}} % the set of rational integers
+\def\Q{{\Bbb Q}} % the set of rational numbers
+\def\R{{\Bbb R}} % the set of real numbers
+\def\C{{\Bbb C}} % the set of complex numbers
+\def\P{{\Bbb P}}
+\def\F{{\Bbb F}}
+
+%%% real part, imaginary part
+\def\Repart{\mathop{\text{\rm Re}}\nolimits} % real part
+\def\Impart{\mathop{\text{\rm Im}}\nolimits} % imaginary part
+
+%%% Log
+\def\Log{\mathop{\text{\rm Log}}\nolimits}
+
+%%% upper half plane, unit disk
+\def\UH{{\frak H}} % Upper Half plane
+\def\UD{D}         % Unit Disk
+
+%%% operators acting complex functions
+\def\del{\partial}  % del
+\def\delbar{\overline{\partial}}  % del bar
+\def\Res{\mathop{\text{\rm Res}}} % residue
+\def\ord{\mathop{\text{\rm ord}}\nolimits} % order
+\def\arg{\mathop{\text{\rm arg}}\nolimits} % arg
+
+%%% operators acting on matrices
+%\def\trace{\mathop{\text{\rm Tr}}\nolimits}          % trace
+\def\trace{\mathop{\text{\rm tr}}\nolimits}          % trace
+\def\transposed#1{\,\vphantom{#1}^t\mskip-1.5mu{#1}} % transpose
+%\def\transposed#1{{#1}^t} % transpose
+\def\det{\mathop{\text{\rm det}}\nolimits}          % determinant
+
+%%% Ker, Coker, Im, Coim
+\def\Ker{\mathop{\text{\rm Ker}}\nolimits}   % kernel
+\def\Coker{\mathop{\text{\rm Coker}}\nolimits} % cokernel
+\def\Im{\mathop{\text{\rm Im}}\nolimits}     % image
+\def\Coim{\mathop{\text{\rm Coim}}\nolimits} % coimage
+
+%%% injection, surjection, isomorphism
+\def\injto{\hookrightarrow}
+\def\onto{\twoheadrightarrow}
+\def\isoto{\overset\sim\longrightarrow}
+
+%%% derivative
+\def\od#1#2{\frac{d #1}{d #2}}
+\def\pd#1#2{\frac{\partial #1}{\partial #2}}
+\def\rd{\partial}
+
+%%% vector analysis
+\def\grad{\mathop{\text{\rm grad}}\nolimits}
+\def\rot{\mathop{\text{\rm rot}}\nolimits}
+\def\div{\mathop{\text{\rm div}}\nolimits}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\setcounter{page}{1}       % この数から始まる
+\setcounter{section}{-1}   % この数の次から始まる
+\setcounter{theorem}{0}    % この数の次から始まる
+\setcounter{question}{0}   % この数の次から始まる
+\setcounter{footnote}{0}   % この数の次から始まる
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title{\bfseries 楕円函数論演習}
+
+\author{黒木 玄 \quad (東北大学理学研究科)}
+
+\date{\VERSION}
+
+\maketitle
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{small}
+\tableofcontents
+\end{small}
+%\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{この演習の目的}
+
+この時間の目的は楕円函数論の周辺における初等的な事柄に関する演習を行う
+ことである%
+\footnote{この演習問題集は, 東北大学理学部数学科における1996年度の3年
+  生前期における演習で出した問題に, 幾つか手を加えることによって作成さ
+  れたものである. 楕円函数を勉強したいと思う人にはこの問題集を自由に配
+  布しても構わない.}.
+
+\medskip\noindent
+{\Large 是非とも解いてもらいたい問題には * の印を付けておいた.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 05-20.tex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{指数函数と三角函数および対数函数}
+
+楕円函数と楕円積分以前に, 指数函数と三角函数および対数函数について理解
+しているだろうか?  指数函数と三角函数および対数函数の構成方法を複素函
+数論のみを認めて説明しておくことは, 楕円函数と楕円積分の理解にも役に立
+つ. なぜなら, 楕円函数に比べて三角函数の方がずっと簡単であり, しかも楕
+円函数を調べるときに使う考え方の大部分が三角函数を調べる時点ですでに現
+われているからである.
+
+そこで, この節では, 指数函数($\exp$)および対数函数($\log$)の基礎に関す
+る問題をまとめておく. $\exp$ に関する問題は主に \cite{Kazu} 上巻の第 5 
+章の線に沿って展開している. この節の問題を解くときには, 循環論法を避け
+るために, 指数函数および三角函数と対数函数に関する基本的な結果を既知と
+考えてはいけない.
+
+まず, 準備として以下を示せ. 2項係数 $\alpha \choose k$ を次のように定
+義する:
+\[
+  {\alpha \choose k} =
+  \frac{\alpha(\alpha - 1)\cdots(\alpha - k +1)}{k!}
+  \qquad
+  (\alpha\in\C,\; k=0,1,2,\ldots).
+\]
+
+\begin{question}
+  天下りだが, $\alpha\in\C$ に対して,
+  \[
+    h(\alpha,t) = \sum_{k=0}^\infty {\alpha \choose k} t^k
+  \]
+  と置く. 右辺の巾級数の収束半径は $1$ 以上であり, その収束域における
+  正則函数を定める. 以下が成立することを示せ:
+  \begin{enumerate}
+  \item $h(\alpha,t)f(\beta,t) = h(\alpha+\beta,t)$ \quad
+    ($\alpha,\beta\in\C$, $|t|<1$).
+  \item $h(n,\alpha) = (1 + t)^n$ \quad
+    ($n=0,1,2,\ldots$, $t\in\C$).
+  \item $h(1/n,\alpha)^n = 1 + t$ \quad
+    ($n=1,2,\ldots$, $|t|<1$).
+    \qed
+  \end{enumerate}
+\end{question}
+
+\noindent この問題における $h(\alpha,z)$ の定義式は %
+$(1 + z)^\alpha$ の $z=0$ における Taylor 展開である. %
+任意の $\alpha\in\C$ に対して $(1+z)^\alpha$ は通常 $\exp$ と $\log$ 
+を用いて定義される($w^\alpha := e^{\alpha\log w}$). しかし, %
+$h(\alpha,z)$ を考えるだけなら, $\exp$, $\log$ は必要ない.
+
+\begin{question}
+  $f(z)$ は $z=0$ の近傍における正則函数であり, $f(0)=0$ であると仮定
+  する. 以下を示せ:
+  \begin{enumerate}
+  \item[(1)] $f'(0)\ne 0$ ならば $w=0$ のある近傍における正則函数 %
+    $g(w)$ が存在して, $z=0$ のある近傍, $w=0$ のある近傍のそれぞれの
+    上で $g(f(z))=z$, $f(g(w)) = w$ が成立する. さらに, この $g$ は %
+    $w=0$ のある近傍上で $g'(w) = 1/f'(g(w))$ を満たす.
+  \item[(2)] ある $n=1,2,\ldots$ と $w=0$ のある近傍における正則函数 %
+    $g(w)$ で $g'(0)\ne0$ をみたすものが存在し, $w=0$ のある近傍上で %
+    $f(g(w))=w^n$ が成立する.
+  \item[(3)] $\phi$ は $\C$ 内の連結開集合 $\Omega$ 上の正則函数である
+    とする. $\phi$ が定数函数でなければ, $\phi$ は $\Omega$ から $\C$ 
+    への開写像であることを示せ.  \qed
+  \end{enumerate}
+\end{question}
+
+\noindent ヒント: (1)は多くの複素函数論の教科書に証明が書いてあるはず
+である(複素正則函数に関する逆写像定理). (2)は(1)とすぐ上の問題から次の
+ようにして示される. $f(z)= a z^n(1+\tilde{f}(z))$, $\tilde{f}(0)=0$ と
+書くことができる. $G(z) = a^{1/n} z h(1/n,\tilde{f}(z))$ に対して, (1)
+を適用すると, 局所的に $G$ の逆函数 $g$ が存在することがわかる. (3)は % 
+$z \mapsto z^n$ ($n=1,2,\ldots$) が開写像であることと (1), (2) を使え
+ば簡単に示される. 
+
+\begin{question}[$\exp$ の加法定理と全射性]\label{q:exp1}
+  $\C$ 上の正則函数 $\exp$ を天下りに
+  \[
+    \exp(z) = \sum_{k=0}^\infty \frac{z^k}{k!}
+    \qquad
+    (z\in\C)
+  \]
+  と定義することができる. (右辺の級数が $\C$ 上広義一様絶対収束し,
+  $\C$ 上の正則函数を定めることを示せ.) 以下を示せ:
+  \begin{enumerate}
+  \item $\exp$ は $\C$ から $\C^{\times}$ へのアーベル群の準同型写像で
+    ある.
+  \item $\exp$ は $\C$ から $\C^{\times}$ への開写像である.
+  \item $\exp$ は $\C$ から $\C^{\times}$ への全射である.
+    \qed
+  \end{enumerate}
+\end{question}
+
+\noindent 参考 $\exp$ が群の準同型であるということは具体的に式で書けば, %
+$\exp(z+w)=\exp(z)\exp(w)$ となる. この公式は $\exp$ の加法定理と呼ば
+れている. 一般に $z+w$ における函数の値と $z$, $w$ 各々における函数の
+値の関係式を加法定理と呼ぶ. 
+
+\medskip
+
+\noindent ヒント: (1) まず, $\exp(z+w)=\exp(z)\exp(w)$ を示す. よって,
+$\exp(z)\exp(-z)=1$ が成立するので $\exp(z)\ne0$ である. (2) すぐ上の
+問題を使えば直ちに証明される. 直接証明することも難しくない. 例えば,
+\cite{Kazu} の上巻の p.156 を見よ. (3) $\exp(\C)$ は $\C^{\times}$ の
+空でない開部分群であることに, 次の問題の結果を適用する. 
+
+\begin{question}
+  $G$ は連結位相空間でかつ群であり, 群の演算 $G\times G\to G$, %
+  $(g,g')\mapsto gg'$ は連続であると仮定する. $H$ が $G$ の空
+  でない開部分群ならば $H=G$ である. \qed
+\end{question}
+
+\noindent ヒント: $G$ の連結性と $H$ が $G$ の空でない開集合であること
+より, $H$ が $G$ の閉集合であることを示せば良い. $G$ の群演算の連続性
+より, $G$ の任意の開集合 $U$ と $g\in G$ に対して, $gU$ も $G$ の開集
+合である. $H$ は $G$ の開部分群なので, 特に $1$ のある開近傍 $U_1$ を %
+$H$ は含んでいる. $\overline{H}=H$ を示そう.  任意に %
+$g\in\overline{H}$ を取る. $1$ の任意の開近傍 $U$ に対して, %
+$gU\cap H\ne\emptyset$ が成立する. $U$ として$U_1$ を取ることによって, 
+ある $u_1\in U_1\subset H$ が存在して, $gu_1\in H$ が成立することがわ
+かる. よって, $g\in H$ である. これで, $\overline{H}=H$ が成立すること
+が示された.
+
+\medskip
+
+\noindent 参考: $G$ が Hausdorff 位相空間でかつ群であり, 群の演算 %
+$G\times G \to G$, $(g,g')\mapsto gg'$ と逆元を取る操作 %
+$G\to G$, $g\mapsto g^{-1}$ が共に連続であるとき, $G$ は位相群であると
+言う. 例えば, $\R$, $\R_{>0}$, $GL_n(\R)$, $\C$, $\C^{\times}$,
+$GL_n(\C)$, $\Q_p$, $\Q_p^{\times}$, $GL_n(\Q_p)$ などは位相群である.
+
+\begin{question}
+  $f$ は $\C$ 上の正則函数であり, ある $a,b\in\C$ に対して,
+  $f'=af$, $f(0)=b$ を満たしているとする. このとき, 
+  $f(z) = b e^{az}$ ($z\in\C$)である.  \qed
+\end{question}
+
+\noindent ヒント: まず, $(e^{az})'=a e^{az}$ を示す.
+$g(z)=e^{-az}f(z)$ と置くと, $g'=0$, $g(0)=b$ が成立する. これより,
+$g(z)=b$ ($z\in\C)$ が出る.
+
+\begin{question}[$\exp$ の性質]\label{q:exp2}
+  以下を示せ: 
+  \begin{enumerate}
+  \item[(1)] $x\in\R$ に対して, $\exp(x)\in\R_{>0}$ であり, %
+    $\exp(x)>1$, $\exp(x)=1$, $\exp(x)<1$ のそれぞれと $x>0$, $x=0$,
+    $x<0$ は同値である. 
+  \item[(2)] $|\exp(z)|=\exp(\Repart z)$.  
+  \item[(3)] $|\exp(z)|=1$ と $z\in i\R$ は同値である.
+  \item[(4)] $y\in\R$, $|y|<\sqrt{6}$ であるとき, %
+    $\Impart(\exp(iy))>0$, $\Impart(\exp(iy))=0$,
+    $\Impart(\exp(iy))<0$ のそれぞれと $y>0$, $y=0$, $y<0$ は同値である.
+    \qed
+  \end{enumerate}
+\end{question}
+
+\noindent ヒント: 以下の方針で証明せよ.
+\begin{enumerate}
+\item[(1)] $x>0$ ならば $\exp$ の巾級数による定義式より %
+  $\exp(x)>1$ であり, さらに $\exp(-x)=\exp(x)^{-1}$ 
+  より $0<\exp(-x)<1$ が出る.  
+\item[(2)] $|\exp(z)|^2=\exp(z)\exp(\bar z)=\exp(z+\bar z)
+  =\exp(2\Repart z)=\exp(\Repart z)^2$.
+\item[(3)] (1), (2) より直ちに導かれる.
+\item[(4)] 次のような計算による: $y\in\R$ のとき,
+  \begin{align*}
+    \Impart(\exp(iy)) & =
+    y - \frac{1}{3!}y^3 
+    + \frac{1}{5!}y^5 - \frac{1}{7!}y^7 + \cdots
+    \\
+    & =
+    y \left(1 - \frac{1}{2\cdot3}y^2 \right)
+    + \frac{1}{5!}y^5 \left(1 - \frac{1}{6\cdot7}y^2 \right)
+    + \cdots.
+  \end{align*}
+\end{enumerate}
+
+
+\begin{question}[$\pi$ の定義]\label{q:defpi}
+  一意的に定まる正の実数 $\pi$ が存在して, $\Ker(\exp) = 2\pi i\Z$ が
+  成立する. \qed
+\end{question}
+
+\noindent ヒント: $K=\Ker(\exp)=\{\,z\in\C\mid\exp(z)=1\,\}$ と置く. %
+上の問題の(3)より $K\subset i\R$ である. %
+$K \ne \{0\}$ である. なぜなら, もしも $K = \{0\}$ ならば, $\exp$ の全
+射準同型性より $\exp$ は群の同型写像になるが, $\C^{\times}$ は位数 2 
+の元 $-1$ を含むが $\C$ は位数 2 の元を含まないので, 矛盾が出るからで
+ある. 上の問題の(4)より $K$ は $i\R$ の離散部分群であることがわかる. 
+以上によって, $K$ は $i\R$ の非自明な離散部分群であることがわかった.後
+は次の問題の結果を使えば良い.
+
+\begin{question}
+  $\R$ の任意の離散部分群 $G\ne\{0\}$ に対して, %
+  一意的に定まる正の実数 $\alpha$ が存在して, $G=\alpha\Z$ が成立する.
+  \qed
+\end{question}
+
+以下では, $e^z = \exp(z)$ と置き, $e^z$ の方を頻繁に用いる.
+
+\begin{question}[$\cos$ と $\sin$ の性質]
+  $\C$ 上の正則函数 $\cos$, $\sin$ を天下りに,
+  \[
+    \cos z = \frac{e^{iz} + e^{-iz}}{2},
+    \qquad
+    \sin z = \frac{e^{iz} - e^{-iz}}{2i}
+  \]
+  と定義する.  以下を示せ:
+  \begin{enumerate}
+  \item[(1)] $e^{iz} = \cos z + i \sin z$. さらに, $y\in\R$ のとき,
+    $\Repart e^{iy} = \cos y$, $\Impart e^{iy}=\sin y$.
+  \item[(2)] $(\cos z)^2 + (\sin z)^2 = 1$. 特に, $y\in\R$ に対して,
+    $-1\le \cos y \le 1$, $-1 \le \sin y \le 1$.
+  \item[(3)] $\cos(z+w)=\cos z\,\cos w - \sin z\,\sin w$,
+    \quad $\sin(z+w)=\cos z\,\sin w + \sin z\,\cos w$.
+  \item[(4)] $\cos z \pm \cos w$, $\sin z \pm \sin w$ は $\cos z$,
+    $\cos w$, $\sin z$, $\sin w$ の積の定数倍になる. その公式を求めよ.
+  \item[(5)] %
+    \(
+      \{\,z\in\C\mid \cos z = 0\,\}
+      = \{\,\frac{1}{2}\pi + n\pi \mid n\in\Z \,\}
+    \), \quad
+    \(
+      \{\,z\in\C\mid \sin z = 0\,\}
+      = \{\, n\pi \mid n\in\Z \,\}
+    \).
+  \item[(6)] $\C$ 上の任意の函数 $f$ に対して, $f$ の周期(period)の全
+    体の集合 $\Per(f)$ を次のように定義する:
+    \[
+      \Per(f) :=
+      \{\, \omega\in\C \mid 
+        f(z+\omega)=f(z) \;\;\text{for all $z\in\C$}. \,\}.
+    \]
+    このとき, $\Per(\exp)=2\pi i\Z$, $\Per(\cos)=\Per(\cos)=2\pi\Z$.
+  \item[(7)] $0<y<\pi$ に対して $\sin y > 0$.
+  \item[(8)] %
+    $e^{\pi i/2} = i$, \quad
+    $\sin(\pi/2)=1$,\quad
+    $\sin(z+\pi/2)=\cos z$.
+  \qed
+  \end{enumerate}
+\end{question}
+
+\noindent ヒント: (1), (2), (3), (4) は $\exp$ の性質と $\cos$, $\sin$ %
+の定義から簡単な計算で導かれる. 他は以下のヒントをもとに証明せよ:
+\begin{enumerate}
+\item[(5)] $e^{\pi i} = -1$ より,
+  $2\cos z = e^{iz} - e^{-i(z-\pi)} = e^{-i(z-\pi)}(e^{i(2z-\pi)} - 1)$.
+  $2i\sin z = e^{-iz}(e^{2iz}-1)$.
+\item[(6)] (4)を使う.
+\item[(7)] 問題 \qref{q:exp2} の(4)より, $0<y<\sqrt{6}$ のとき %
+  $\sin y > 0$ である. (4)より $\pi \ge \sqrt{6}$ であり $\sin y$ は 
+  $0<y<\pi$ で $0$ にならない. この2つの結果と $\sin$ は $\R$ 上実数値
+  連続函数であることより, 中間値の定理を用いて(7)が示される.
+\item[(8)] $-1 = (e^{\pi i/2})^2 = (i\sin(\pi/2))^2$ より 
+  $e^{\pi i/2} = \pm i$, $\sin(\pi/2)=\pm 1$ である. $\pm$ の部分が %
+  $+$ でなければいけないことが (7) より示される.
+\end{enumerate}
+
+\begin{question}\label{q:exp3}
+  $S^1 = \{\, z\in\C\mid |z|=1\,\}$ と置く. $S^1$ は乗法に関してアーベ
+  ル群をなす. 写像 $f : \R \to S^1$ を $f(t)=e^{it}$ と定める. $f$ は
+  連続な群の全射準同型であり, $\Ker f = 2\pi\Z$ である. 
+  $f$ は商空間 $\R/2\pi\Z$ から $S^1$ への同相写像を誘導する. \qed
+\end{question}
+
+\noindent ヒント: $\exp : \C \to \C^{\times}$ の全射性と
+問題 \qref{q:exp2} (3) より $f$ が全射であることが出る. $\Ker f$ は %
+$\Ker(\exp)$ に関する結果から計算される. $f$ が誘導する写像 %
+$\phi : \R/2\pi\Z \to S^1$ は連続な全単射である. この逆写像もまた連続
+であることが次の問題の結果を使うと導かれる.
+
+\begin{question}
+  $X$ はコンパクト位相空間であり, $Y$ は Hausdorff 空間であるとし,
+  $f : X \to Y$ は連続写像であるとする. このとき, $f$ は閉写像である. 
+  さらに, $f$ が全射ならば $f$ は開写像である. 
+  \qed
+\end{question}
+
+\noindent ヒント: コンパクト位相空間 $X$ の閉部分集合はコンパクトであ
+り, Hausdorff 空間 $Y$ のコンパクト部分空間は $Y$ の閉部分集合になる.
+
+\begin{question}\label{q:exp4}
+  $\exp : \C \to \C^{\times}$ が誘導する $\C/2\pi i\Z$ から %
+  $\C^{\times}$ への写像を $\epsilon$ と書くことにする. 
+  $\epsilon : \C/2\pi i\Z \to \C^{\times}$ は同相写像でかつ群の同型写
+  像である. \qed
+\end{question}
+
+\noindent ヒント: 問題 \qref{q:exp3} と同様にすれば良いのだが,
+$\epsilon$ が開写像であることを直接示さなければいけない.
+
+\begin{question}
+  滑らかな曲線の長さの定義を述べ, 半径 $r$ の円周の長さが $2\pi r$ に
+  等しいことを示せ. さらに, 半径 $r$ の円周で囲まれた領域の面積が 
+  $\pi r^2$ に等しいことを示せ. \qed
+\end{question}
+
+以上によって, 指数函数, 三角函数, 円周率の理論が厳密に再構成された. も
+ちろん, 出てくる結果はどれも皆よく知っているものばかりであろうが, 上の
+ような議論の展開の仕方を知っておくことは, まだ皆よく知らないであろう楕
+円函数の理論の構成を理解するために役に立つ. 楕円函数の理論は楕円積分の
+理論から出発するのが, ある意味で自然である. 楕円積分の指数函数論におけ
+る類似物は対数函数になる. 以下では対数函数の理論を扱うことにしよう.
+注目するべき点は $\C^{\times}$ 上の正則函数の線積分の理論を整備する過
+程で自然に対数函数(指数函数の逆函数)が現われることである. これは, 楕円
+積分が楕円函数の逆函数であることの, 指数函数の場合における類似である.
+
+以下の問題を解くときには, 指数函数, 三角函数, 円周率に関する基本的な結
+果を既知と考えて良いが, 対数函数に関する基本的な結果を既知とみなしては
+いけない. また, 次の形の Cauchy の積分定理を自由に用いて良い.
+
+\begin{Theorem}[Cauchyの積分定理]
+  $\Omega$ は $\C$ 内の開集合であり, $f$ は $\Omega$ 上の正則函数であ
+  るとする. $z,w\in\Omega$ であり, $C_i$ ($i=0,1$) は $z$ を始点 
+  とし $w$ を終点とする $\Omega$ 内の曲線で有限な長さを持つものである
+  とする. $C_0$ は始点と終点を固定した $\Omega$ 内の連続変形によっ
+  て $C_1$ に変形できると仮定する. このとき, 
+  \[
+    \int_{C_0} f(z)\,dz = \int_{C_1} f(z)\,dz
+  \]
+  が成立する. すなわち, 正則函数の線積分は積分曲線のホモトピー類のみに
+  よる. \qed
+\end{Theorem}
+
+前と同様に $S^1 = \{\,z\in\C\mid |z|=1\,\}$ と置く. $S^1$ に沿った複素
+函数の線積分は
+\[
+  \int_{S^1}f(z)\,dz = \int_0^{2\pi} f(e^{it})\,de^{it}
+  = \int_0^{2\pi} f(e^{it})\,i e^{it}\,dt
+\]
+によって定義しておく. 
+
+\begin{question}
+  $X=\C^{\times}=\C\setminus\{0\}$ と置き, $X$ 上の正則函数全体のなす
+  可換環を $\O(X)$ と表わす. 線型写像 $d : \O(X) \to \O(X)\,dz$ を %
+  $df(z) = f'(z)\,dz$ 定め, %
+  $d$ の核と余核をそれぞれ $H^0(X,\C)$, $H(X,\C)$ と書くことに
+  する. $\theta = f\,dz \in \O(X)\,dz$ の $H^1(X,\C)$ における像を %
+  $[\theta]$ と書くことにする.  このとき, 以下が成立することを示せ:
+  \begin{enumerate}
+  \item $H^0(X,\C) = \{\text{$X$ 上の定数函数全体}\} \simeq \C$.
+  \item 円周 $S^1$ に沿った線積分は線型写像 %
+    $\int_{S^1} : \O(X)\,dz \to \C$ を定める. $\int_{S^1}$ は同型写像 %
+    \(
+      H^1(X,\C)\isoto \C
+    \) %
+    を誘導する. 特に, $\omega = dz/z$ と置くと, %
+    $H^1(X,\C) = \C[\omega]$. \qed
+  \end{enumerate}
+\end{question}
+
+\noindent ヒント: Laurent 展開.
+
+\begin{question}
+  $n\in\Z$, $n\ne0$, $a,b\in \C^{\times}$ であるとし, %
+  $\gamma$ は $a$ から $b$ への $\C^{\times}$ 内の任意の path であると
+  する. このとき, 
+  \[
+    \int_\gamma z^{n-1}\,dz = \frac{b^n - a^n}{n}.
+  \]
+  特に左辺の線積分の値は path $\gamma$ の取り方によらない. \qed
+\end{question}
+
+以下では, この問題では除外された $z^{-1}\,dz$ の線積分を扱うことにしよう.
+
+\begin{question}
+  $\Omega = \C^{\times} \setminus \R_{<0}$ と置く. %
+  $1\in\Omega$ から $z\in\Omega$ への $\Omega$ 内の path $\gamma(z)$ %
+  を任意に取り,
+  \[
+    \Log z := \int_{\gamma(z)} \frac{d\zeta}{\zeta}
+  \]
+  と置く. 以下を示せ:
+  \begin{enumerate}
+  \item $\Log$ の定義式の右辺の積分の値は $\gamma(z)$ の取り方によらない. 
+  \item $\Log$ は $\Omega$ 上の正則函数であり, 
+    $(\Log z)' = 1/z$, $\Log(1)=0$ を満たしている. 
+  \item %
+    \(\displaystyle
+      - \Log(1-t) 
+      = \sum_{k=1}^\infty \frac{t^k}{k}
+      = t + \frac{t^2}{2} + \frac{t^3}{3} + \cdots
+    \) %
+    \quad ($|t|<1$).
+  \item $z\in \exp^{-1}(\Omega)$, $w\in\Omega$ に対して, %
+     $\Log(\exp z) = z$, $\exp(\Log w) = w$.
+    \qed
+  \end{enumerate}
+\end{question}
+
+\noindent ヒント: $f(z)=\Log(\exp z)$ と置くと %
+$f'(z)=1$, $f(0)=0$ であることが合成函数の微分法則(chain rule)より導か
+れるので $f(z)=z$ である. $g(w)=\exp(\Log w)$ も同様にして $w$ に等し
+いことが証明される.
+
+\begin{question}
+  $1\in\C^{\times}$ から $z\in\C^{\times}$ への $\C^{\times}$ 内の
+  path $\gamma(z)$ を任意に取り,
+  \[
+    \log z := \int_{\gamma(z)} \frac{d\zeta}{\zeta}
+  \]
+  と置く. 以下を示せ:
+  \begin{enumerate}
+  \item[(1)] $\log$ の定義式の右辺の積分の値は $\gamma(z)$ の取り方によるが,
+    $2\pi i$ の整数倍の差を無視すれば $\gamma(z)$ の取り方によらない. 
+    すなわち, $\log$ は $\C^{\times}$ から $\C/2\pi i\Z$ への写像を誘
+    導する. この写像を $\lambda$ と書くことにする.
+  \item[(2)] $z\in\C$, $w\in\C^{\times}$ に対して,
+    $\exp(\log w) = w$, $\log(\exp z) \in z + 2\pi i\Z$.
+  \item[(3)] $\lambda : \C^{\times} \to \C/2\pi i\Z$ は同相写像でかつ
+    群の同型写像である. \qed
+  \end{enumerate}
+\end{question}
+
+\noindent ヒント: (3)の証明には問題 \qref{q:exp4} の結果を用い
+よ.
+
+\begin{question}[有理式と三角函数の有理式の不定積分]
+  複素係数の1変数有理式 $f(z)$ の不定積分は有理式と %
+  $\alpha \log(z-\beta)$ ($\alpha,\beta\in\C$) の形の多価函数の有限和
+  で表わされることを示せ.  さらに, $G(X,Y)$ は複素係数の2変数有理式で
+  あるとする. このとき, $g(\theta) = G(\cos \theta, \sin \theta)$
+  ($\theta$ は複素変数と考える)と置くと, $g(\theta)$ は $\C$ 上の有理
+  型函数である. $g(\theta)$ の不定積分を求める計算は, 積分変数の変換 %
+  $z = e^{i\theta}$ によって, 原理的には $z$ の有理式の不定積分を求め
+  る計算の帰着できることを説明せよ. \qed
+\end{question}
+
+\noindent ヒント: まず, 有理式 $f(z)$ は $a(z-b)^n$ %
+($a,b\in\C$, $n\in\Z$) の形の函数の有限和で表わされることを示せ.  この
+問題の後半の考え方を利用して定積分を求める問題がすでに出してある. そち
+らの方も解いてみよ.
+
+\medskip
+
+楕円積分の理論とは上の問題の結果と類似の結果を楕円函数の不定積分の場合
+に得ようとする試みである.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 06-03.tex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{楕円函数の定義と基本性質}
+
+楕円函数をどのように導入するかどうか色々悩んだのであるが, ここでは, 少々
+天下り的であるが2重周期函数として導入することにする. 
+基本的に \cite{HC} の線に沿って議論を進める.
+
+\begin{question}\label{q:per1}
+  $M$ は $\C$ の任意の離散部分加群%
+  \footnote{$\C$ の離散部分集合で部分加群になっているようなものを,
+    $\C$ の離散部分加群と呼ぶ.}%
+  であると仮定する. このとき, 以下のどれかが成立する:
+  \begin{enumerate}
+  \item[(0)] $M = \{0\}$.
+  \item[(1)] ある $\omega_1\in\C$ で $\omega_1\ne0$, $M=\Z\omega_1$ を
+    満たすものが存在する.
+  \item[(2)] $\R$ 上一次独立な $\omega_1,\omega_2\in\C$ で %
+    $M=\Z\omega_1+\Z\omega_2$ を満たすものが存在する. 
+    \qed
+  \end{enumerate}
+\end{question}
+
+\noindent 上の問題を解いた人はついでにすぐ下の問題も解いてしまうのが良
+いと思う.
+
+\begin{question}\label{q:per2}
+  $M$ は $\R^n$ の任意の離散部分加群%
+  \footnote{$\R^n$ の離散部分集合で部分加群になっているようなものを,
+    $\R^n$ の離散部分加群と呼ぶ.}%
+  であると仮定する. このとき, $0\le r \le n$ を満たすある整数 $r$ と %
+  $v_1,\dots,v_r\in M$ で以下を満たすものが存在することを示せ:
+  \begin{enumerate}
+  \item $v_1,\dots,v_r$ は $\R$ 上一次独立である.
+  \item $M$ は $v_1,\dots,v_r$ から加群として生成される. \qed
+  \end{enumerate}
+\end{question}
+
+\noindent ヒント: $n$ に関する帰納法. 
+
+\begin{Definition}[複素平面上の有理型函数の周期の定義]
+  $\omega\in\C$ が $\C$ 上の有理型函数 $f$ の1つの周期であるとは
+  \[
+    f(z+\omega) = f(z)
+    \qquad
+    (\text{$z$ は $f$ の極以外の任意の複素数})
+  \] %
+  が成立していることであると定義する. $f$ の周期全体の集合を $\Per(f)$ %
+  と書くことにする:
+  \[
+    \Per(f) :=
+    \{\, \omega \in\C \mid
+    f(z+\omega) = f(z)\;\;
+    (\text{$z$ は $f$ の極以外の任意の複素数}) \,\}
+  \qed
+  \]
+\end{Definition}
+
+\begin{question}\label{q:per3}
+  $f$ は $\C$ 上の定数でない任意の有理型函数であるとする. このとき,
+  $f$ の周期全体の集合 $\Per(f)$ は $\C$ の離散部分群になることを示せ. 
+  \qed
+\end{question}
+
+\noindent 問題 \qref{q:per1}, \qref{q:per3} より, 定数でない有理型函数 
+$f$ に対して, $f$ の周期全体 $M=\Per(f)$ は問題 \qref{q:per1} の (0),
+(1), (2) のどれかの形になる. (1)が成立するとき $f$ は単周期函数である
+と言い, (2) が成立するとき $f$ は2重周期函数であると言う.
+
+\begin{question}
+  $\omega\in\C$, $\omega\ne0$ であるとし, $f$ は $\C$ 上の周期 %
+  $\omega$ を持つ正則函数であるとする. このとき, $f$ は次の形の広義一
+  様収束する級数に一意的に展開されることを示せ:
+  \[
+    f(z) = \sum_{n\in\Z} a_n \exp\left(\frac{2\pi i n z}{\omega}\right)
+    \qquad
+    (a_n\in\C)
+    \qed
+  \]
+\end{question}
+
+\noindent ヒント: Laurent 展開.
+
+\medskip
+
+\noindent この問題によって単周期正則函数は Fourier 級数で表わされるこ
+とが示されたことになる. 
+
+\begin{Definition}[楕円函数の定義]
+  $\omega_1, \omega_2\in\C$ は $\R$ 上一次独立であると仮定する. $\C$ 
+  上の有理型函数 $f$ が任意の $m_1,m_2\in\Z$ に対して,
+  \[
+    f(u + m_1\omega_1 + m_2\omega_2) = f(u)
+    \qquad
+    (\text{$u$ は $f$ の極以外の任意の複素数})
+  \] %
+  を満たすとき, $f$ は周期 $\omega_1$, $\omega_2$ を持つ楕円函数
+  (elliptic function)である
+  と言う. \qed
+\end{Definition}
+
+\noindent 注意: この天下りの定義の時点では定数以外の楕円函数が存在する
+かどうかは明らかではない. あとで, $\pe$ 函数を(これもまた天下りに)定義
+することよって, 定数以外の楕円函数が存在することを証明する. 周期を固定
+するとき, その周期を持つ任意の楕円函数は $\pe$ およびその導函数 $\pe'$ 
+の有理式で表わすことができることを示すことができる. (後で問題に出す.)
+
+\begin{question}\label{q:ef1}\qstar{*}
+  $\C$ 上全体で正則な楕円函数は定数函数に限ることを示せ. \qed
+\end{question}
+
+\noindent ヒント: 最大値の原理の応用.
+
+\medskip
+
+\noindent 参考: より一般にコンパクト Riemann 面上の正則函数は定数に限
+られることが同様にして示される. よって, コンパクト Riemann 面上で意味
+のある正則函数論を展開するためには, 有理型函数を考えたり, 一般の開集合
+上定義された正則函数も含めて考えたりする必要がある. 後者の任意の開集合
+上の正則函数を考えるというアイデアを抽象化すると層(sheaf)という概念が
+得られる. 層は大変基本的で自然な対象であり, 多くの場面に表われる.
+
+\begin{question}\label{q:ef1+}\qstar{*}
+  $f$, $g$ は共に周期 $\omega_1,\omega_2$ を持つ $0$ でない楕円函数で
+  あるとし, $f$ と $g$ の零点集合と極の集合は一致していて, 各点におけ
+  る零点の位数と極の位数が一致していると仮定する. このとき, $f/g$ は定
+  数になる. \qed
+\end{question}
+
+\begin{question}\label{q:ef2}\qstar{*}
+  $\omega_1,\omega_2\in\C$ は $\R$ 上一次独立であると仮定する. 
+  周期 $\omega_1$, $\omega_2$ を持つ楕円函数全体の集合を $K$ と書くこ
+  とにする. 以下を示せ:
+  \begin{enumerate}
+  \item[(1)] 自然に $\C\subset K$ とみなせる.
+  \item[(2)] $K$ は自然に体をなす.
+  \item[(3)] 任意の $f\in K$ に対して $f'\in K$. %
+    (ここで $f'(u) = \od{}{u}f(u)$.)
+  \item[(4)] 任意の $u_0\in\C$ に対して
+    \[
+      \Xi(u_0) = 
+      \{\,u_0 + t_1 \omega_1 + t_2 \omega_2 \mid 
+        0\le t_i < 1 \; (i=1,2)\,\}
+    \] %
+    と置く. $\Xi(u_0)$ を{\bf 周期平行四辺形}と呼ぶ. 任意の %
+    $f\in K$ に対して $\Xi(u_0)$ に含まれる $f$ の極と零点の個数は有限
+    個である. さらに, $u_0\in\C$ をうまくとると $\Xi(u_0)$ の境界上に 
+    $f$ の極も零点も存在しないようにできる.  \qed
+  \end{enumerate}
+\end{question}
+
+\noindent 解説: 楕円函数 $f$ に対して, 境界線上に $f$ の極も零点も存在
+しないような周期平行四辺形は頻繁に使われる. なぜなら, 周期平行四辺形の
+境界上の周回複素積分を考えることは楕円函数論の最も基本的なテクニックだ
+からである. 次の結果が基本的である.
+
+\begin{question}[留数定理]\label{q:ef3}\qstar{*}
+  任意の楕円函数 $f$ に対して, 周期平行四辺形に属する $f$ の極の留数の
+  総和は零になる. \qed
+\end{question}
+
+\noindent ヒント: 周期平行四辺形の周囲に沿って $f(u)\,du$ を線積分して
+みよ.
+
+\medskip
+
+\noindent 参考: より一般に上の問題と同様の結果が任意のコンパクト 
+Riemann 面においても成立する.
+
+
+\begin{Definition}[楕円函数の位数の定義]
+  $f$ が楕円函数であるとき, 周期平行四辺形に属する $f$ の極の位数の総
+  和を $f$ の位数(order)と呼ぶ. \qed
+\end{Definition}
+
+\begin{question}\label{q:ef4}\qstar{*}
+  位数 $1$ の楕円函数が存在しないことを示せ. \qed
+\end{question}
+
+\noindent ヒント: 問題 \qref{q:ef3} を使えば直ちに証明される. (後で位
+数 $2$ の楕円函数 $\pe$ を構成する.)
+
+\medskip
+
+\noindent 復習: $f$ は $a\in\C$ の近傍上の $0$ でない有理型函数である
+とする. $f$ が $a$ の近くで
+\[
+  f(u) = c_n(u-a)^n + c_{n+1}(u-a)^{n+1} + \cdots,
+  \qquad
+  c_n \ne 0
+\]
+と Laurent 展開されるとき, 以下が成立する:
+\begin{align*}
+  &
+  \Res_{u=a}(d\log f) = 
+  \Res_{u=a}\frac{df}{f} =
+  \Res_{u=a}\frac{f'(u)\,du}{f(u)} = n,
+  \\
+  &
+  \Res_{u=a}(u\,d\log f) = 
+  \Res_{u=a}\frac{u\,df}{f} =
+  \Res_{u=a}\frac{u\,f'(u)\,du}{f(u)} = na.
+\end{align*}
+この前者の式は $f$ の零点の位数および極の位数が留数で書かることを意味
+し, 後者の式は $\text{(零点の位数)}\times\text{(零点の位置)}$ および %
+$\text{(極の位数)}\times\text{(極の位置)}$ も留数で書けることを意味し
+ている. この公式と問題 \qref{q:ef3} を合わせることによって, 以下の結果
+が簡単に示される. 
+
+\begin{question}\label{q:ef5}\qstar{*}
+  $f$ は定数でない位数 $r$ の楕円函数(elliptic function of order $r$)
+  であるとし, $c$ は任意の複素数であるとする. このとき, $f$ は周期平行
+  四辺形上で値 $c$ を重複を込めてちょうど $r$ 回とる. \qed
+\end{question}
+
+\noindent ヒント: $f(a)=c$ であり $f(u)-c$ の点 $u=a$ における零点の位
+数が $k$ のとき, $f$ は点 $a$ において値 $c$ の重複度は $k$ であると定
+義する. $d\log(f(u)-c)$ に問題 \qref{q:ef3} の結果を適用せよ.
+
+\medskip
+
+$M$ は $\C$ の部分加群であるとする. $u,v\in\C$ に対して %
+$u\equiv v\mod M$ であるとは, $u-v\in M$ が成立することであると定義
+する.
+
+\begin{question}\label{q:ef6}\qstar{*}
+  $f$ は定数でない周期 $\omega_1,\omega_2$ を持つ位数 $r$ の楕円函数で
+  あるとし, $c$ は任意の複素数であるとする. 
+  周期平行四辺形上の $f$ が値 $c$ を取る点の全体を重複を込めて %
+  $a_1,\dots,a_r$ と書き, 極の全体を重複を込めて $b_1,\dots,b_r$ と書
+  くことにする. このとき, 次が成立する:
+  \[
+    a_1 + \dots + a_r \equiv b_1 + \dots + b_r
+    \mod \Z\omega_1+\Z\omega_2.
+  \qed
+  \]
+\end{question}
+
+\noindent ヒント: $F(u)\,du:=d\log(f(u)-c)$ と置く. %
+$u\,d\log(f(u)-c)= u F(u)\,du$ を周期平行四辺形 $\Xi=\Xi(u_0)$ の周囲
+に沿って線積分してみる. ただし, $\Xi$ の周囲には $d\log(f(u)-c)$ の零
+点も極も乗っていないものとする. すると,
+\[
+  \frac{1}{2\pi i}\int_{\bdr\Xi} u F(u)\,du
+  = \sum_{a\in\Xi} \Res_{u=a}(u\,d\log(f(u)-c))
+  = (a_1 + \dots + a_r) - (b_1 + \dots + b_r).
+\]
+一方, $F(u)$ が楕円函数であることに注意し, 積分を直接計算すると,
+\[
+  \frac{1}{2\pi i}\int_{\bdr\Xi} u F(u)\,du
+  = 
+  \left(
+    \frac{1}{2\pi i} \int_{u_0}^{u_0+\omega_2} F(u)\,du
+  \right) \omega_1
+  -
+  \left(
+    \frac{1}{2\pi i} \int_{u_0}^{u_0+\omega_1} F(u)\,du
+  \right) \omega_2.
+\] %
+ところが, $F(u)\,du=d\log(f(u)-c)$ であり, $f(u)$ が楕円函数であること
+に注意すると, 
+\[
+  \frac{1}{2\pi i}\int_{u_0}^{u_0+\omega_k} F(u)\,du 
+  \equiv \frac{\log(f(u_0+\omega_k) -c) - \log(f(u_0) - c)}{2\pi i}
+  \equiv 0
+  \mod \Z
+\]
+である. 以上をまとめると,
+\[
+  (a_1 + \dots + a_r) - (b_1 + \dots + b_r)
+  \equiv 0 
+  \mod \Omega
+\]
+であることがわかる.
+
+\medskip
+
+\noindent {\bf 注意: 以上の4つの問題の結果は極めて基本的であり重要であ
+  る.}
+
+\begin{question}[Abelの定理の easy part]
+  $\omega_1,\omega_2\in\C$ は $\R$ 上一次独立であるとし, それらに関す
+  る任意の周期平行四辺形 $\Xi$ を固定する. %
+  周期 $\omega_1,\omega_2$ を持つ楕円函数全体のなす体を $K$ と書くこと
+  にする. %
+  単なる点集合とみなした $\Xi$ から生成される自由加群を $\Div$ と表わ
+  し, $\Div$ の元を divisor と呼ぶことにする. $\Div$ は定義より形式的
+  有限和 $D = \sum n_i p_i$ ($p_i\in\Xi$, $n_i\in\Z$) の全体のなすアー
+  ベル群である. $\deg D := \sum n_i\in\Z$ と置き, これを $D$ の degree 
+  と呼ぶ. $D$ を実際に $\C$ の中での和とみなしたものを $\int^D\in\C$ %
+  と書くことにする. すなわち, $D=\sum n_i p_i\in\Div$ (形式的有限和)に
+  対して, $\int^D := \sum n_i p_i\in\C$ (複素数としての和) と置く.  %
+  $f\in K^{\times}$ に対して$\div f \in \Div$ を次のように定める:
+  \[
+    \div f := \sum_{p\in\Xi} (\ord_p f) p
+  \] %
+  ここで, $\ord_p f$ は $f$ の $p$ における零点の位数である. ($p$ が 
+  $f$ の位数 $k$ の極であるとき $\ord_p f = -k$ であると約束する.)
+  このとき, $\deg : \Div \to \Z$, $\div : K^{\times} \to \Div$ は共に
+  群の準同型写像であり, $\deg : \Div \to \Z$ の kernel を $\Div_0$ と
+  書くとき,
+    \[
+      \div(K^{\times})
+      \subset
+      \{\, D \in \Div_0 \mid
+           \textstyle
+           \int^D \equiv 0 \mod \Z\omega_1+\Z\omega_2 \,\}
+    \]
+  が成立する. \qed
+\end{question}
+
+\noindent ヒント: 上の問題の言い変え.
+
+\medskip 
+
+\noindent 参考: $\R$ 上一次独立な $\omega_1,\omega_2\in\C$ に対して,アー
+ベル群 $E$ を $E = \C/(\Z\omega_1+\Z\omega_2)$ と定義することができる. 
+さらに, $E$ にはコンパクト Riemann 面の構造が入るのだが, Riemann面の定
+義は後でやることにし, ここでは説明しない. 楕円函数とは $E$ 上の有理型
+函数のことであると定義することもできる. なぜなら, 2重周期函数を考える
+ことと, $E$ 上の函数を考えることは等しいからである. 実は上の問題におけ
+る $\Div$ は $E$ 上の divisor 全体のなす群であるとみなせる. %
+$\div(K^{\times})$ の元を principal divisor と呼ぶ. 商アーベル群 %
+$\Div/\div(K^{\times})$ は $E$ 上の line bundle の同型類のなすアーベル
+群に自然に同型であることが知られている. (詳しい内容は \cite{Gun} など
+を見よ.)  実は上の問題の結果における $\subset$ は実は $=$ に置き換えら
+れる. これを(楕円函数に関する)Abelの定理と言う. より一般にAbelの定理は
+一般のコンパクト Riemann 面に対して定式化され, Riemann-Roch の定理と共
+にコンパクト Riemann 面に関する基本定理の1つになっている. 言葉の定義も
+せずに一見難しげなことを述べているようだが, まあ実際にはそんなに難しい
+ことではない. 言葉の定義を知らなくても, この辺のことは(代数)幾何学的な
+言葉を使って奇麗に一般化されているということのみを知っておいて欲しいと
+思い, ごちゃごちゃと書いてみたのである. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Weierstrass の $\pe$ 函数}
+
+前節では楕円函数を2重周期有理型函数と定義したが, 一般的な性質のみを示
+しただけで, まだ定数でない楕円函数が存在することは証明されてない. 問題
+\qref{q:ef1} の結果により, 位数 $0$ の楕円函数(すなわち複素平面全体で
+正則な楕円函数)は定数しか存在しない. 問題 \qref{q:ef4} の結果により, 
+位数 $1$ の楕円函数は存在しない. この節では位数 $2$ の楕円函数で最も基
+本的な $\pe$ 函数を構成し, その性質を調べることにしよう.
+
+\medskip
+
+この節においては, $\R$ 上一次独立な $\omega_1,\omega_2\in\C$ を固定し,
+\[
+  \Omega := \Z \omega_1 + \Z \omega_2
+\] %
+と置き, $\omega_1,\omega_2$ を周期として持つ楕円函数の全体を $K$ と書
+くことにする.
+
+\begin{question}[$\pe$ 函数の定義]\label{q:pe1}\qstar{*}
+  次の無限級数は $\Omega$ の外で広義一様収束し,
+  $\omega_1,\omega_2$ を周期として持つ位数 $2$ の楕円函数与える:
+  \[
+    \pe(u) := 
+    \frac{1}{u^2} +
+    \sum_{\omega\in\Omega\setminus\{0\}}
+    \left(\frac{1}{(u-\omega)^2} - \frac{1}{\omega^2}\right).
+  \]
+  この楕円函数を Weierstrass の $\pe$ 函数と呼ぶ. \qed
+\end{question}
+
+\begin{question}[原点での Laurent 展開]\label{q:pe3}\qstar{*}
+  原点において, Weierstrass の $\pe$ 函数が以下の形の Laurent 展開を持
+  つことを示せ:
+  \[
+    \pe(u) = \frac{1}{u^2} + c_2 u^2 + c_4 u^4 + c_6 u^6 + \cdots.
+  \]
+  ここで, 
+  \[
+    c_n = (n+1)\sum_{\omega\in\Omega\setminus\{0\}} \omega^{-n-2}
+  \qed
+  \]
+\end{question}
+
+\noindent ヒント: $\pe$ 函数は隅函数なので奇数巾の項は消える. 形式的に
+は次の2項展開の公式を使えば簡単に示せる:
+\[
+  (u-\omega)^{-2}
+  = \sum_{n=0}^\infty {-2\choose n} u^n (-\omega)^{-2-n}
+  = \sum_{n=0}^\infty (n+1) \omega^{-n-2} u^n
+  \qquad
+  (|\omega|>|u|).
+\]
+
+\begin{question}\label{q:pe4}\qstar{*}
+  任意の $u,v\in\C\setminus\Omega$ に対して, $\pe(u)=\pe(v)$ が成立す
+  るための必要十分条件は,
+  \[
+    u \equiv \pm v \mod \Omega
+  \]
+  が成立することである. \qed
+\end{question}
+
+\noindent ヒント: 十分性は $\pe$ が楕円函数であることと, 隅函数である
+ことより簡単にわかる. 問題は必要性の証明であるが, そのためには問題 
+\qref{q:ef6} の結果を $\pe$ 函数に適用すれば良い.
+
+\begin{question}\label{q:pe5}\qstar{*}
+  $\Omega\subset\frac{1}{2}\Omega := \{\,\frac{1}{2}\omega \mid
+  \omega\in\Omega\,\}$ である. 以下を示せ:
+  \begin{enumerate}
+  \item $c\in\C\setminus\Omega$ に対して, $\pe'(c)=0$ となるための必要
+    十分条件は $c\in\frac{1}{2}\Omega\setminus\Omega$ が成立することで
+    ある. さらに, $\pe'(u)$ の全ての零点の位数は $1$ である.
+  \item $\Omega$ 上で楕円函数 $f(u)=\pe(u)^{-1}$ は正則であり, %
+    任意の $\omega\in\Omega$ に対して $f'(\omega)=0$. \qed
+  \end{enumerate}
+\end{question}
+
+\noindent ヒント: $c\in\C\setminus\Omega$ とする. $\pe'(c)=0$ が成立す
+るための必要十分条件は $g(u):=\pe(u)-\pe(c)$ の点 $c$ における零点の位
+数が $2$ 以上であることである. ところが, 問題 \qref{q:pe4} (もしくはよ
+り直接的に問題 \qref{q:ef6})の結果より, そのための必要十分条件は %
+$2c\in\Omega$ が成立することであることがわかる.
+
+\medskip
+
+\begin{Definition}
+この演習においては \cite{HC} に従い, $e_1,e_2,e_3$ を次のように定める:
+\[
+  e_1 := \pe\left( \frac{\omega_1}{2} \right), \quad
+  e_2 := \pe\left( \frac{\omega_1+\omega_2}{2} \right), \quad
+  e_3 := \pe\left( \frac{\omega_2}{2} \right). \qed
+\]
+\end{Definition}
+
+\begin{question}[$\pe$ 函数の満たす微分方程式1]\label{q:pede1}\qstar{*}
+  $\pe$ 函数が次の微分方程式を満足することを示せ:
+  \[
+    \pe'(u)^2 = 4(\pe(u) - e_1)(\pe(u) - e_2)(\pe(u) - e_3).
+  \qed
+  \]
+\end{question}
+
+\noindent ヒント: $f(u)=\pe'(u)^2$, %
+$g(u)=(\pe(u) - e_1)(\pe(u) - e_2)(\pe(u) - e_3)$ と置くと, %
+問題\qref{q:pe5}の結果より, $f(u)$, $g(u)$ の極と零点は重複度も込めて
+列挙すると共に
+\[
+  \text{極:}\enspace
+  0,0,0,0,0,0
+  \qquad
+  \text{零点:}\enspace
+  \frac{\omega_1}{2},\frac{\omega_1}{2},
+  \frac{\omega_1+\omega_2}{2},\frac{\omega_1+\omega_2}{2},
+  \frac{\omega_2}{2},\frac{\omega_2}{2}.
+\] %
+よって, 問題\qref{q:ef1+}の結果を使うと $f/g$ は定数になることが
+わかる. 後は原点における Laurent 展開の最初の項の係数を調べれば, %
+$f/g=4$ であることがわかる.
+
+\begin{question}[$\pe$ 函数の満たす微分方程式2]\label{q:pede2}\qstar{*}
+  $\pe$ 函数が次の微分方程式を満足することを示せ:
+  \[
+    \pe'{}^2 = 4\pe^3 - g_2\pe - g_3.
+  \]
+  ただし, 問題\qref{q:pe3}の記号のもとで,
+  \[
+    g_2 = 20 c_2, \qquad g_3 = 28 c_4.
+  \qed
+  \]
+\end{question}
+
+\noindent ヒント: $\pe'{}^2 - (4\pe^3 - 20 c_2 \pe - 28 c_4)$ の原点に
+おける Laurent 展開を調べ, 問題\qref{q:ef1}の結果(正則な楕円函数は定数
+に限るという結果)を用いよ.
+
+\medskip
+
+\noindent 注意: 根と係数の関係より, 
+\[
+  e_1+e_2+e_3=0, \qquad
+  e_1e_2 + e_1e_3 + e_2e_3 = - \frac{1}{4}g_2, \qquad
+  e_1e_2e_3 = \frac{1}{4}g_3
+\]
+が成立することわかる.
+
+\begin{Definition}[判別式]
+  3次方程式
+  \[
+    4x^3 - g_2x - g_3 = 4(x-e_1)(x-e_2)(x-e_3) = 0
+  \]
+  の判別式 $\Delta$ を次の式によって定義する:
+  \[
+    \Delta = 16(e_1-e_2)^2(e_1-e_3)^2(e_2-e_3)^2.
+  \]
+  上の3次方程式が重根を持つことと $\Delta=0$ が成立することは同値であ
+  る. \qed
+\end{Definition}
+
+\noindent 注意: 簡単な計算で
+\[
+  \Delta = g_2{}^3 - 27g_3{}^2
+\]
+が成立することわかる.
+
+\begin{question}
+  $\pe$ 函数の満たす微分方程式を用いて, $\pe$ 函数の原点における 
+  Laurent 展開の係数 $c_n$ (問題\qref{q:pe3}におけるもの)は $g_2$,
+  $g_3$ の正の有理数を係数にもつ多項式で表わされることを示せ. \qed
+\end{question}
+
+\begin{question}[加法公式1]\label{q:peadd1}\qstar{*}
+  $\pe$ 函数とその導函数 $\pe'$ は次の等式を満たす:
+  $$
+  \begin{vmatrix}
+    \pe(u) & \pe'(u) & 1 \\
+    \pe(v) & \pe'(v) & 1 \\
+    \pe(w) & \pe'(w) & 1
+  \end{vmatrix}
+  = 0
+  \qquad
+  \text{if $u+v+w\in\Omega$}.
+  \qed
+  \leqno{(*)}
+  $$
+\end{question}
+
+\noindent ヒント: $u+v+w\in\Omega$ を満たす %
+$u,v,w\in\C\setminus\Omega$ を任意に固定する. %
+問題 \qref{q:pe4} の結果より, $\pe(u)=\pe(v)$ が成立することと %
+$u\equiv\pm v \mod \Omega$ が成立することは同値であり, $\pe$ は隅函数
+なので, 等式 $(*)$ は常に成立することがわかる. そこで, %
+$\pe(u)\ne\pe(v)$ と仮定する. このとき, 複素数 $a$, $b$ に関する方程式
+\[
+  a\pe(u) + b = \pe'(u), \qquad  a\pe(v) + b = \pe'(v)
+\] %
+の解が一意的に存在する. その解を以下 $a$, $b$ と書くことにしよう. この
+とき, $z$ の楕円函数 $f(z)$ を
+\[
+  f(z) = \pe'(z) - a\pe(z) - b
+\] %
+と定めると, $f(u)=f(v)=0$ が成立する. $(*)$ を証明するためには, %
+$u,v,w$ が同一の周期平行四辺形 $\Xi$ の上にあると仮定して良いので, 以
+下ではそう仮定する. $f$ は位数 $3$ の楕円函数なので周期平行四辺形上の
+零点は重複を込めてちょうど $3$ 個ある. すでに, $u$, $v$ の2つの零点が
+得られているので, 残る1つの $\Xi$ 上の零点を $w'$ と書くことにする. と
+ころが, 問題 \qref{q:ef6} の結果より $u+v+w'\in\Omega$ が成
+立する. よって, $w=w'$, $f(w)=0$ である. $f(u)=f(v)=f(w)=0$ より, 等式 %
+$(*)$ が導かれる.
+
+\begin{question}[加法公式2]\label{q:peadd2}
+  $\pe$ 函数とその導函数 $\pe'$ は次の等式を満たす:
+  $$
+    \pe(u+v) +  \pe(u) + \pe(v) 
+    = \frac{1}{4} 
+    \left(\frac{\pe'(u)-\pe'(v)}{\pe(u)-\pe(v)}\right)^2.
+    \leqno{(**)}
+  $$
+  さらに, $P=\pe(u)$, $Q=\pe(v)$, $R=\pe(u+v)$ と置くと次が成立する:
+  $$
+    (P+Q+R)(4PQR - g_3) = \left( PQ+PR+QR + \frac{g_2}{4} \right)^2.
+  \qed
+  \leqno{(***)}
+  $$
+\end{question}
+
+\noindent ヒント: 問題\qref{q:peadd1}のヒントの続き. $\pe$ は隅函数な
+ので $R=\pe(w)$. $a$, $b$ の定義より,
+\[
+  a = \frac{P'-Q'}{P-Q},
+  \qquad
+  b = \frac{PQ'-QP'}{P-Q}.
+\] %
+$\pe$ の満たす微分方程式に $\pe'(z) = a\pe(z) + b(z)$ ($z=u,v,w$) を代
+入することによって, $P$, $Q$, $R$ は次の代数方程式の解になることがわか
+る:
+\[
+  4x^3 - g_2 x - g_3 - (ax+b)^2 = 0.
+\]
+よって, 根と係数の関係より, 
+\[
+  P + Q + R = \frac{a^2}{4},
+  \qquad
+  PQ + PR + QR = - \frac{ab}{2} - \frac{g_2}{4},
+  \qquad
+  PQR = \frac{b^2+g_3}{4}.
+\]
+以上で示された公式を用いると容易に $(**)$, $(***)$ が示される.
+
+\medskip
+
+$\omega_1,\omega_2\in\C$ は $\R$ 上一次独立であるとし, %
+$\Omega:=\Z\omega_1+\Z\omega_2$ と置き, $\pe$ は $\Omega$ を周期格子と
+する Weierstrass の $\pe$ 函数であるとする.
+
+\begin{question}[$\pe$ 函数の周期性と極による特徴付け]
+  以下の3つの条件を満たす $\C$ 上の有理型函数 $f$ の全体の集合を $V$ 
+  と書くことにする:
+  \begin{quote}
+    $(*)$\enspace $f$ は $u$ の有理型函数として $f(u+\omega)=f(u)$
+    ($\omega\in\Omega$) を満たし, $f$ の全ての極は $\Omega$ に含まれ,
+    $f$ の各極の位数は高々 $2$ である.
+  \end{quote}
+  このとき, $V=\C\pe+\C1$, $\dim_\C V=2$ である. \qed
+\end{question}
+
+\noindent ヒント: 問題 \qref{q:ef1}, \qref{q:ef4}の合わせれば簡単に示
+される.
+
+\medskip
+
+\noindent 参考: 上の問題の結果は, 有理型函数の周期と極に関する条件 %
+$(*)$ によって, $\pe$ 函数が定数倍と定数差を除いて特徴付けられることを
+意味している. 周期と極に関する条件によって函数を特徴付けるという考え方
+は, 一般のコンパクトRiemann面上の函数にも拡張され, その考え方を抽象化
+すると, Riemann 面上の line bundle, invertible sheaf, divisor などの話
+になる. その理論において最も基本的で重要なのが Riemann-Roch の定理であ
+る.  Riemann 面の定義などもしてないので, 単に keywords だけを出して, 
+後は逃げることにする. 詳しい話は名著 \cite{Iwasawa} もしくは特色あるコ
+ンパクト Riemann 面の教科書 \cite{Gun} を見て欲しい. 特殊で便利な函数
+を適当な条件によって有限次元の不定性を除いて特徴付けるというアイデアは
+非常に頻繁に使われる手法である. 上のように周期性と極に関する条件を使う
+だけでなく, 微分方程式や函数方程式などもよく使われる.
+
+\begin{question}[$\pe$ 函数の微分方程式による特徴付け]
+  $\C$ 上の有理型函数 $f$ が $\pe$ 函数と同じ微分方程式
+  $$
+    f'{}^2 = 4f^3 - g_2 f - g_3
+    \leqno{(*)}
+  $$ %
+  を満たしているならば, ある定数 $u_0$ が存在して, %
+  $f(u)=\pe(u-u_0)$ が成立する. \qed
+\end{question}
+
+\noindent ヒント: $(*)$ より $f$ は定数ではないので, $f'(a)\ne0$ とな
+る点 $a$ が存在する. $\pe(b)=f(a)=:x_0$ を満たす $b$ を1つ選んでおく. 
+必要ならば $a$ の位置を少しずらすことによって, $\pe'(b)\ne0$ であると
+仮定して良い. このとき, $a$ のある近傍上への $f$ の制限は $x_0$ のある
+近傍上で定義された逆函数 $h$ を持つ. 同様に, $b$ のある近傍上への %
+$\pe$ の制限は $x_0$ のある近傍上で定義された逆函数 $\phi$ を持つ. 逆
+函数の導函数は $h(x)=f'(h(x))^{-1}$ と計算できるので, $x_0$ の近傍で %
+$h$ は次の微分方程式を満足する:
+\[
+  h'(x)^2 = \frac{1}{4x^3 - g_2 x -g_3}.
+\]
+よって, $h(x)$ は $x_0$ を含む開円板上で次のように表わされる:
+\[
+  h(x) = a + \int_{x_0}^x \frac{dx}{\sqrt{4x^3 - g_2 x - g_3}}.
+\]
+同様にして, $\phi(x)$ は同じ開円板上で次のように表わされる:
+\[
+  \phi(x) = b + \int_{x_0}^x \frac{dx}{\sqrt{4x^3 - g_2 x - g_3}}.
+\]
+平方根の取り方は $\pm 1$ 倍の不定性があることに注意すると, $x_0$ を含
+む開円板上で次が成立していることがわかる:
+\[
+  \phi(x) = \pm(h(x)-a)+b = \pm (h(x) - u_0)
+  \qquad
+  (u_0:= a \mp b)
+\]
+よって, $a$ の近傍において,
+\[
+  f(u) = \pe(\phi(f(u))) 
+  = \pe(\pm (h(f(u)) - u_0))
+  = \pe(\pm (u - u_0))
+  = \pe(u - u_0)
+\]
+が成立する. 一致の定理より, この等式は $\C$ 上の等式に拡張される.
+
+\medskip
+
+\noindent 参考: 上のヒントはほとんど完全な解答になっている. その途中で
+微分方程式 $(*)$ を満たす有理型函数は次の型の楕円不定積分の逆函数になっ
+ていることも同時に示されている:
+\[
+  y = \int^x \frac{dx}{\sqrt{4x^3 - g_2 x - g_3}}.
+\] %
+(この楕円積分を第1種楕円積分の Weierstrass の標準形と呼ぶ.) 歴史的には,
+むしろ楕円函数よりも先に楕円不定積分の方が先に登場し, その逆函数を考え
+るというアイデアにより大きく飛躍したのである. この演習では, 証明が短く
+なることの方を重視し, $\pe$ 函数のようなものがどのような経緯で考えられ
+たかについては全く触れずに, 天下りの定義を与えるところから出発したので
+ある. 
+
+\medskip
+
+\noindent 参考: 指数函数・対数函数の理論と楕円函数・楕円不定積分の理論
+を比べると, 次のような類似の関係になっていることがわかる:
+\begin{center}
+\begin{tabular}{lc|lc}
+  リーマン面 &
+  $\C^{\times}\simeq \C/2\pi i\Z$
+  &
+  リーマン面 &
+  $E = \C/\Omega$
+  \\ \hline
+  指数函数 &
+  $\displaystyle \exp(u) = \sum_{n=0}^\infty \frac{u^n}{n!}$
+  &
+  $\pe$ 函数 & 
+  $\displaystyle 
+  \pe(u) = \frac{1}{u^2} 
+  + \sum_{\omega\in\Omega\setminus\{0\}} 
+  \left(\frac{1}{(u-\omega)^2} - \frac{1}{\omega^2}\right)$
+  \\ \hline
+  対数函数 &
+  $\displaystyle \log(x) = \int_1^x \frac{dx}{x}$
+  &
+  楕円不定積分 &
+  $\displaystyle y = \int^x \frac{dx}{\sqrt{4x^3 - g_2 x - g_3}}$
+\end{tabular}
+\end{center}
+
+\bigskip
+
+さて, 以下においては周期格子 $\Omega$ に対する楕円函数体を $K$ と書く
+ことにする. 目標は $K$ の構造を $\pe$ 函数を用いて決定することである.
+
+\begin{question}\label{q:C(pe)}\qstar{*}
+  $\pe', 1,\pe,\pe^2,\pe^3,\ldots$ は $\C$ 上一次独立である. 
+  特に, 任意の複素係数多項式 $F\in\C[X]$ に対して, $F\ne0$ ならば %
+  $F(\pe)\ne 0$ である. \qed
+\end{question}
+
+\noindent ヒント: 原点における☆ー☆☆展☆を調べよ. 
+
+\medskip
+
+\noindent よって, $\pe$ と $\C$ から生成される楕円函数体 $K$ の部分体
+は $X$ に $\pe$ を対応させることによって, 有理函数体 $\C(X)$ に同型で
+ある.
+
+\begin{question}\label{q:f-c}\qstar{*}
+  定数でない任意の楕円函数 $f\in K$ に対して, $f-c$ の全ての零点の位数
+  が $1$ になるような $c\in\C$ の全体の集合は $\C$ の空でない開集合に
+  なる. \qed
+\end{question}
+
+\begin{question}\label{q:evenf}\qstar{*}
+  楕円函数 $f\in K$ が偶函数ならばある有理式 $F(X)\in\C(X)$ で %
+  $f=F(\pe)$ を満たすものが唯一存在する. \qed
+\end{question}
+
+\noindent ヒント: 唯一性は問題 \qref{q:C(pe)} の結果より簡単に示され
+る. 存在の方は以下のようにして示される. $f$ が定数ならば簡単であるか
+ら, $f$ は定数ではないと仮定する. このとき, 問題 \qref{q:f-c} の結果に
+より, 互いに異なる定数 $c$, $d$ で $f-c$ と $f-d$ の全ての零点の位数が %
+$1$ になるものが存在する. $a$ が $f-c$ の零点であるとき, $f$ は偶関数
+なので, $-a$ も $f-c$ の零点であリ, $a\not\equiv -a \mod \Omega$ であ
+る. なぜなら, $a\equiv -a \mod\Omega$ ならば $f'(a)=0$ なることがわか
+り仮定に矛盾するからある. よって, $f-c$ の零点の $\text{mod}\,\Omega$ 
+に関する完全代表系として, $\{u_1,-u_1,\dots,u_k,-u_k\}$ の形の集合が取
+れる. $2k$ は $f$ の楕円函数としての位数に等しい. 同様にして, $f-d$ の
+零点の完全代表系として, $v_1,\dots,v_k,-v_1,\dots,-v_k$ の形の集合が取
+れる. このとき, 次の2つの楕円函数は位数も含めて同じ極と零点を持つ:
+\[
+  P(u)=\frac{f(u)-c}{f(u)-d},
+  \qquad
+  Q(u)=
+  \frac{(\pe(u)-\pe(u_1))\cdots(\pe(u)-\pe(u_k))}
+       {(\pe(u)-\pe(v_1))\cdots(\pe(u)-\pe(v_k))}.
+\]
+よって, ある定数 $C$ が存在して $P=CQ$. このことより, 求める結果が得ら
+れる.
+
+\medskip
+
+以上によって, 次が成立することがわかった:
+\[
+  \{\text{偶楕円函数}\}
+  = \C(\pe)
+  \simeq \C(X)
+  = \text{(有理函数体)}.
+\]
+
+\begin{question}\label{q:K=C(pe,pe')}\qstar{*}
+  任意の楕円函数 $f\in K$ に対して, 有理式 $F,G\in\C(X)$ で %
+  $f=F(\pe)+G(\pe)\pe'$ を満たすものが唯一存在する. \qed
+\end{question}
+
+\noindent ヒント: 奇楕円函数 $f$ に対して $f/\pe'$ は偶楕円函数である.
+任意の楕円函数は偶楕円函数と奇楕円函数の和で一意的に表わされる.
+
+\medskip
+
+\noindent 参考: 一般に, 体 $L'$ が体 $L$ を含んでいるとき, $L'$ は $L$ 
+の拡大体であると言う. $L'$ が $L$ 上のベクトル空間として有限次元である
+とき, $L'$ は $L$ の代数拡大もしくは有限次拡大であると言い,
+\[
+  [L':L] := \dim_L L'
+\] %
+と書き, これを拡大 $L'/L$ の次数と呼ぶ. 体 $k$ 上の有理函数体 $k(X)$ 
+の有限次拡大体は $k$ 上の(1変数)代数函数体(algebraic function field)と
+呼ばれ, $\Q$ の有限次拡大体は代数体(algebraic number field)と呼ばれて
+いる. 以下, 簡単のため $L$ の標数は $0$ であると仮定する. $L'$ が $L$ 
+の有限次 Galois 拡大であるとは, ある多項式 $F\in L[Y]$ が存在して $L'$ 
+が $L$ と $F$ の全ての根から生成されることであると定義する. そのとき,
+$F$ の次数が $n$ であるとき $[L',L]=n$ となる. 問題 
+\qref{q:K=C(pe,pe')} より, 楕円函数体 $K$ は有理函数体 $\C(\pe)=\C(X)$
+(ここで $X=\pe$ と置いた) と $Y^2=4X^3-g_2X-g_3$ の根である $Y=\pe'$ 
+から生成される体になる. よって, 体の Galois 理論の言葉を使うと, 楕円函
+数体の構造に関する結果は次のようにまとめられる.
+
+\begin{Theorem}[楕円函数体の構造]
+  楕円函数体 $K$ は有理函数体 $\C(X)$ に $Y=\sqrt{4X^3-g_2X-g_3}$ を添
+  加することによって得られる $\C(X)$ の2次の Galois 拡大である. \qed
+\end{Theorem}
+
+\noindent Galois 理論の言葉が登場したことは驚くに当たらない. むしろ, 
+楕円函数論およびその一般化である Riemann 面の理論は体の Galois 理論を
+理解する上で大変良いモデルになっていると考えられる. なぜなら, 体の %
+Galois 理論は純代数的過ぎて, 直観的イメージがわき難い話になるのである
+が, 楕円函数や Riemann 面はより具体的・幾何的な対象であり, ずっと親し
+みがわき易い対象だからである. 
+
+\medskip
+
+\noindent 参考: 有理函数体 $\C(X)$ の任意の2次拡大は %
+$\C(X,\sqrt{F})$ ($F\in\C[X]$, $F\not\in\C$, $F$ は平方因子を含まない)
+の形になる.  特に $F$ の次数が $3$ または $4$ であるとき, %
+$\C(X,\sqrt{F})$ は楕円函数体(elliptic function field)に同型になる.
+$F$ の次数が $5$ 以上のとき, $\C(X,\sqrt{F})$ は超楕円函数体
+(hyperelliptic function field)と呼ばれ, $Y^2=F(X)$ で定義される曲線は
+超楕円曲線(hyperelliptic curve)と呼ばれ, 有理式 $G(X,Y)$ に対する積分 %
+\( \displaystyle
+  u = \int G\left(x,\sqrt{F(x)}\right)\,dx
+\) %
+は超楕円積分(hyperelliptic integral)と呼ばれている.
+
+\medskip
+
+\noindent 参考: 例の函数と数の類似の話において, 有理函数体 $\C(X)$ の
+果たす役目は有理数体 $\Q$ と似ているということを説明したのであった.
+$\Q$ の2次拡大は $\Q(\sqrt{m})$ ($m\in\Z$, $m\ne0,1$, $m$ は平方因子を
+含まない)の形になる. $m>0$ のとき $\Q(\sqrt{m})$ は実2次体と呼ばれ, %
+$\Q(\sqrt{-m})$ は虚2次体と呼ばれている. $\Q$ の2次拡大は楕円函数体も
+しくは超楕円函数体の類似の対象であることは明らかであろう. この類似とは
+全く別の意味で, 数学的に極めて深い関係が, 虚2次体(のAbel拡大)と楕円函
+数(の特殊値)の間にあることが知られている. それは{\bf 虚数乗法論}である. 
+興味のある人は{\bf 「Kronecker の青春の夢」}について調べてみると面白い
+であろう.
+
+\medskip
+
+\begin{question}\qstar{*}
+  $\pe$ の偶数階の導函数 $\pe^{(2n)}$ は $\pe$ の $n+1$ 次の有理数係数
+  の多項式になり, その多項式の最高次の係数は $(2n+1)!$ であることを示
+  せ. 特に %
+  \[
+    \pe'' = 6\pe^2 -\frac{1}{2}g_2, \qquad
+    \pe^{(4)} = 120\pe^3 -18g_2\pe -12g_3.
+  \]
+  であることを示せ. \qed
+\end{question}
+
+\begin{question}\qstar{*}
+  整数 $n\in\Z$ に対して $\pe(nu)$ は $\pe(u)$ の有理函数になることを
+  示せ. さらに, $\pe(2u)$ を $\pe(u)$ の有理函数で具体的に表示せよ. \qed
+\end{question}
+
+\noindent ヒント: 加法公式
+\[
+  \pe(u+v)=
+  -\pe(u)-\pe(v)
+  +\frac{1}{4}
+  \left(\frac{\pe'(u)-\pe'(v)}{\pe(u)-\pe(v)}\right)
+\]
+において $v\to u$ とすると,
+\[
+  \pe(2u) = -2 \pe(u)
+  + \frac{1}{4} \left(\frac{\pe''(u)}{\pe'(u)}\right)^2.
+\]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Weierstrass の $\zeta$ 函数と $\sigma$ 函数}
+
+この節においても, 前節と同様に $\omega_1,\omega_2\in\C$ は $\R$ 上一次
+独立であるとし, $\Omega=\Z\omega_1+\Z\omega_2$ と置き, 周期格子 %
+$\Omega$ に関する楕円函数体を $K$ と書くことにする.
+
+\begin{question}[部分分数展開と無限乗積展開]\label{q:sum&prod}\qstar{*}
+  $f$ は $\C$ 上の有理型函数であり, $f$ の全ての極は $1$ 位であり, %
+  簡単のため $0$ は $f$ の極でないと仮定する. $f$ の極全体を %
+  $a_1, a_2, \dots$ ($0<|a_1|\le|a_2|\le\cdots$) と書き, %
+  $a_n$ における $f$ の留数を $A_n$ と書くことにする. 以下を満たす閉曲
+  線の列 $C_1, C_2, \dots$ が存在すると仮定する:
+  \begin{itemize}
+  \item[(a)] $C_n$ は $f$ の極を通らず, $C_n$ はその内側に 
+    $a_1,\dots,a_n$ を含み, 他の極を含まない.
+  \item[(b)] $C_n$ の原点からの最短距離を $R_n$, $C_n$ の長さを $L_n$
+    と書くと, $n\to\infty$ のとき $R_n\to\infty$ であり, $L_n=O(R_n)$.
+  \item[(c)] 非負の整数 $p$ が存在して, $n\to\infty$ のとき 
+    $\sup|f(C_n)| = o({R_n}^{p+1})$.
+  \end{itemize}
+  このとき, 以下が成立する:
+  \begin{enumerate}
+  \item[(1)] $f$ は次のような表示を持つ:
+    \[
+      f(u) = 
+      \sum_{k=0}^{p} \frac{f^{(k)}(0)\,u^k}{k!}
+      + \sum_{n=1}^\infty A_n
+      \left(
+        \frac{1}{u - a_n} +
+        \sum_{k=0}^p\frac{u^k}{{a_n}^{k+1}}
+      \right).
+    \]
+  \item[(2)] $f$ の全ての極の留数は整数であると仮定する($A_n\in\Z$). 
+    このとき, $\C$ 上の正則函数 $g$ であって, $f=g'/g$ を満たし, 次の
+    ような無限積表示を持つものが存在する:
+    \[
+      g(u) =
+      \exp\left(
+        \sum_{k=0}^{p} \frac{f^{(k)}(0)\,u^{k+1}}{(k+1)!}
+      \right)
+      \prod_{n=1}^\infty
+      \left\{
+        \left(1 - \frac{u}{a_n}\right)^{A_n}
+        \exp\left( \sum_{k=0}^p \frac{u^{k+1}}{(k+1)a_n^{k+1}} \right)
+      \right\}.
+    \qed
+    \]
+  \end{enumerate}
+\end{question}
+
+\noindent%
+ヒント: (1) 次の積分が $N\to\infty$ のとき, $u$ に関して広義一様に, %
+$0$ に収束することを示せば良い:
+\[
+  I_N
+  :=
+  \frac{1}{2\pi i}
+  \int_{C_N} \frac{f(\zeta)\,d\zeta}{\zeta^{p+1}(\zeta - u)}
+  =
+  \frac{f(u)}{u^{p+1}}
+  - \sum_{k=0}^p \frac{f^{(k)}(0)\,u^{k-p-1}}{k!} 
+  + \sum_{n=1}^N \frac{A_n}{{a_n}^{p+1}(a_n - u)}.
+\]
+(2) $f$ の極を通らないように $0$ から $u_0$ への曲線 $\Gamma_0$ と % 
+$u_0$ から $u_0$ に十分近い点 $u$ を結ぶ線分を繋げてできる曲線を %
+$\Gamma(u)$ と書くことにする. このとき,
+\[
+  F(u) = \int_{\Gamma(u)} f(\zeta)\,d\zeta
+\] %
+は $u_0$ の近傍における解析函数であり, $f$ の留数が整数であるという仮
+定より, $F(u)$ の値は $\Gamma_0$ の取り方を変ても $2\pi i\Z$ の分しか
+変化しない. よって, $g(u):=e^{F(u)}$ と置くと, $g$ は $\C$ 上の正則函
+数であり, $g'/g=(\log g)'=F'=f$ が成立している. 公式
+\[
+  \log\left(1 - \frac{u}{a} \right)
+  =
+  \int_0^u \frac{d\zeta}{\zeta - a}.
+\]
+を用い, (1)の結果を $F(u)$ の定義式に代入し, 無限和と積分を交換すると,
+\[
+  F(u) = 
+  \sum_{k=0}^{p} \frac{f^{(k+1)}(0)\,u^{k+1}}{(k+1)!}
+  + \sum_{n=1}^\infty A_n
+  \left\{
+    \log\left( 1 - \frac{u}{a_n} \right) +
+    \sum_{k=0}^p\frac{u^{k+1}}{(k+1){a_n}^{k+1}}
+  \right\}.
+\]
+よって, 
+\[
+  g(u) = e^{F(z)} =
+      \exp\left(
+        \sum_{k=0}^{p} \frac{f^{(k)}(0)\,u^{k+1}}{(k+1)!}
+      \right)
+      \prod_{n=1}^\infty
+      \left\{
+        \left(1 - \frac{u}{a_n}\right)^{A_n}
+        \exp\left( \sum_{k=0}^p \frac{u^{k+1}}{(k+1)a_n^{k+1}} \right)
+      \right\}.
+\]
+
+\medskip
+
+\noindent 注意: 以下においては上の問題の結果を認めて自由に使って良い.
+
+\medskip
+
+\begin{question}[$\zeta$ 函数の定義]\label{q:pe2}
+  次の無限級数は $\Omega$ の外で広義一様収束し,
+  $\C$ 上の有理型函数を与える:
+  \[
+    \zeta(u) := 
+    \frac{1}{u} +
+    \sum_{\omega\in\Omega\setminus\{0\}}
+    \left(
+      \frac{1}{u-\omega} + \frac{1}{\omega} + \frac{u}{\omega^2}
+    \right).
+  \]
+  この函数を Weierstrass の $\zeta$ 函数と呼ぶ. 
+  $\zeta$ 函数は $-\zeta'(u)=\pe(u)$ を満たしている. \qed
+\end{question}
+
+\noindent 注意: 言うまでもないことであるが, Euler-Riemann のゼータ函数
+とは別物である.
+
+\medskip
+
+Weierstrass の $\zeta$ 函数に問題 \qref{q:sum&prod} の結果を適用するこ
+とを考えよう.
+
+\begin{question}[$\zeta(u)$ の原点での Laurent 展開]
+  $\zeta(u)$ は $u$ の奇函数であり, $\zeta(u)$ は原点において以下の形
+  の Laurent 展開を持つ:
+  \[
+    \zeta(u) = 
+    \frac{1}{u} -
+    \left(
+    c_2 \frac{u^3}{3} + c_4 \frac{u^5}{5} + c_6 \frac{u^7}{7} + \cdots
+    \right)
+  \]
+  ただし, $c_n$ は $\pe(u)$ の原点における Laurent 展開の $u^n$ の係数
+  である. \qed
+\end{question}
+
+この問題の結果を用いて Weierstrass の $\zeta$ 函数に問題 
+\qref{q:sum&prod} の結果を適用しよう. それによって, Weierstrass の %
+$\sigma$ 函数の定義が得られる.
+$f(u)=\zeta(u)-1/u$ と置くと, 問題 \qref{q:sum&prod} の記号のもとで, 
+$\{a_1,a_2,\ldots\}=\Omega\setminus\{0\}$, $A_n=1$, $p=1$, %
+$f(0)=0$, $f'(0)=0$ の場合になっているので, $\C$ 上の正則函数 $g$ を %
+\(
+  g(u) = 
+  \prod_{\omega\in\Omega\setminus\{0\}}
+  \left\{
+    \left( 1 - \frac{u}{\omega} \right)
+    \exp\left( \frac{u}{\omega} + \frac{u^2}{2\omega^2}\right)
+  \right\}.
+\) %
+なる無限積によって定めることができて, $g'/g=f$ が成立している. %
+Weierstrass の $\sigma$ 函数は次のように定義される:
+\[
+  \sigma(u) =
+  u
+  \prod_{\omega\in\Omega\setminus\{0\}}
+  \left\{
+    \left( 1 - \frac{u}{\omega} \right)
+    \exp\left( \frac{u}{\omega} + \frac{u^2}{2\omega^2}\right)
+  \right\}.
+\] %
+問題 \qref{q:sum&prod} のヒントの内容より, $\sigma$ 函数は
+\[
+  \sigma(u) = 
+  u
+  \exp\left\{
+    \int_0^u \left(\zeta(v) - \frac{1}{v}\right)\,dv
+  \right\},
+  \qquad
+  (\log\sigma)' = \frac{\sigma'}{\sigma} = \zeta
+\] %
+を満たしている. 無限積表示された函数の零点の位置はわかり易い. %
+$\sigma(u)$ の零点の集合は $\Omega$ に一致し, 全て1位である.
+
+\begin{question}[$\sigma$ の原点における展開]\qstar{*}
+  $\sigma(u)$ の原点における巾級数展開は次の形になる:
+  \[
+    \sigma(u) =
+    u + k_5 u^5 + k_7 u^7 + k_9 u^9 + \cdots.
+  \]
+  よって, $\sigma$ は奇函数になる. \qed
+\end{question}
+
+次に Weierstrass の $\zeta$ 函数と $\sigma$ 函数は $u$ を $u+\omega$ %
+に変えたとき, どのような変換性を持つか調べよう.
+
+\begin{question}[$\zeta(u+\omega)$ の公式]\qstar{*}
+  任意の $\omega\in\Omega$ に対して, $\zeta(u+\omega)-\zeta(u)$ は定数
+  である. 定数 $\eta_1$, $\eta_2$ を
+  \[
+    \eta_1 := \zeta(u+\omega_1) - \zeta(u),
+    \qquad
+    \eta_2 := \zeta(u+\omega_2) - \zeta(u)
+  \]
+  と定めると, 次が成立する:
+  \begin{align*}
+    &
+    \zeta(u+m_1\omega_1+m_2\omega_2) = 
+    \zeta(u) + m_1\eta_1 + m_2\eta_2
+    \qquad
+    (m_1,m_2\in\Z),
+    \\ &
+    \begin{vmatrix}
+      \eta_1 & \omega_1 \\
+      \eta_2 & \omega_2
+    \end{vmatrix}
+    = \eta_1 \omega_2 - \eta_2 \omega_1
+    = 2\pi i.
+  \end{align*}
+  最後の式を Legendre の関係式と呼ぶ. \qed
+\end{question}
+
+\noindent ヒント: $\zeta'(u)=-\pe(u)$ は楕円函数なので,
+$\zeta(u+\omega)-\zeta(u)$ の $u$ による導函数は $0$ になる. よって,
+$\zeta(u+\omega)-\zeta(u)$ は定数になる. $\Omega$ に関する周期平行四辺
+形 $\Xi=\Xi(u_0)$ の内部に $\zeta(u)$ は位数 1 で留数 1 の極をちょうど
+1つ持つ. よって,
+\[
+  2\pi i
+  = \int_{\bdr \Xi} \zeta(u)\,du
+  = \int_{u_0}^{u_0+\omega_2} (\zeta(u+\omega_1)-\zeta(u))\,du
+  - \int_{u_0}^{u_0+\omega_1} (\zeta(u+\omega_2)-\zeta(u))\,du.
+\]
+この等式の最後の式は $\omega_2\eta_1-\omega_1\eta_2$ に等しい.
+
+\begin{question}[$\sigma(u+\omega)$ の公式]\qstar{*}
+  $m_1,m_2\in\Omega$ に対して, %
+  \[
+    \omega = m_1 \omega_1 + m_2 \omega_2,
+    \qquad
+    \eta   = m_1 \eta_1   + m_2 \eta_2
+  \] %
+  と置くと次が成立する:
+  \[
+    \sigma(u+\omega) = 
+    (-1)^{m_1+m_2+m_1m_2}
+    e^{\eta \left( u + \frac{\omega}{2} \right)}
+    \sigma(u).
+  \qed
+  \]
+\end{question}
+
+\noindent ヒント: $(\log\sigma(u))'=\zeta(u)$ を %
+$\zeta(u+\omega)=\zeta(u)+\eta$ に代入して, 両辺を積分すれば,
+\[
+  \log\sigma(u+\omega) = \log\sigma(u) + \eta u + c
+  \qquad
+  (\text{$c$ はある定数}).
+\]
+よって, $C=e^{c- \frac{\omega\eta}{2}}\ne 0$ と置くと,
+\[
+  \sigma(u+\omega) = 
+  C e^{\eta \left( u + \frac{\omega}{2} \right)}
+  \sigma(u).
+\]
+定数 $C$ を決定するためには, $u=-\omega/2$ における両辺を比べてみれば
+良い. $\sigma(u)$ の零点の集合は $\Omega$ と一致している. %
+$\omega/2\not\in\Omega$ であるとき($m_1$, $m_2$ の少なくともどちらかか
+奇数であるとき), $\sigma(\omega/2)\ne0$ であり, $\sigma$ が奇函数である
+ことを使うと, 
+\[
+  C 
+  = \frac{\sigma(u+\omega)}
+    {e^{\eta \left( u + \frac{\omega}{2} \right)}\sigma(u)}
+  = \frac{\sigma(\omega/2)}{\sigma(-\omega/2)} = -1.
+\]
+一方, $\omega/2\in\Omega$ であるとき($m_1$, $m_2$ が共に偶数であるとき),
+$\sigma(\omega/2)=0$ であり, $\sigma'$ が偶函数であることを使うと,
+\[
+  C 
+  = \lim_{u\to -\omega/2}
+    \frac{\sigma(u+\omega)}
+    {e^{\eta \left( u + \frac{\omega}{2} \right)}\sigma(u)}
+  = \frac{\sigma'(\omega/2)}{\sigma'(-\omega/2)} = -1.
+\]
+
+\begin{question}[楕円函数の $\zeta$ 函数による表示]\qstar{*}
+  周期格子 $\Omega$ に対する周期平行四辺形 $\Xi$ を任意に固定する.
+  $f$ は周期格子 $\Omega$ に関する楕円函数であるとし, $\Xi$ に含まれる
+  $f$ の極全体を $a_1,\dots,a_r$ と表わし, 各 $a_i$ における $f$ の 
+  Laurent 展開の主要部を
+  \[
+      \frac{A_{i,1}}{u-a_i}
+    + \frac{A_{i,2}}{(u-a_i)^2}
+    + \dots
+    + \frac{A_{i,k_i}}{(u-a_i)^{k_i}}
+  \] %
+  と表わしておく. このとき, ある定数 $A$ が存在して,
+  \[
+    f(u) 
+    = A +
+    \sum_{i=1}^r \sum_{j=1}^{k_i}
+    \frac{(-1)^{j-1}}{(j-1)!} A_{i,j} \zeta^{(j-1)}(u-a_i).
+    \qed
+  \]
+\end{question}
+
+\noindent ヒント: 有理型函数 $g$ を
+\[
+  g(u) = 
+    \sum_{i=1}^r \sum_{j=1}^{k_i}
+    \frac{(-1)^{j-1}}{(j-1)!} A_{i,j} \zeta^{(j-1)}(u-a_i).
+\] %
+と定めると, $g$ の極の集合は $f$ のそれに等しく, $g$ の各々の極の主
+要部は $f$ のそれに等しい. よって, もしも $g$ が楕円函数であれば, %
+$f-g$ は極を持たない楕円函数になるので, 定数函数であることがわかる. %
+$\zeta'=-\pe$ であるから, $\zeta$ の1階以上の導函数は楕円函数である. 
+よって, $g$ の定義における $\zeta(u-a_i)$ の一次結合の部分が楕円函数に
+なるかどうかが問題になる. 留数定理より, $\sum_{i=1}^r A_{i,1}=0$
+であるから, $\omega=m_1\omega_1+m_2\omega_2\in\Omega$ に対して, %
+$\eta=m_1\eta_1+m_2\eta_2$ と置くと, 
+\[
+  g(u+\omega)
+  = g(u) + \sum_{i=1}^r A_{i,1}\eta
+  = g(u).
+\]
+よって, $g$ は楕円函数である.
+
+\noindent 注意: この問題の結果は, 任意の有理式 $f(X)$ が %
+多項式と $A_{i,j}(X-a_i)^{-j}$ 一次結合の和で表示できるということの類
+似になっている.
+
+\begin{question}[楕円函数の $\sigma$ 函数による表示]\label{q:ell-sigma}\qstar{*}
+  周期格子 $\Omega$ に対する周期平行四辺形 $\Xi$ を任意に固定する.  
+  $f$ が $\C$ 上の $0$ でない有理型函数であるとき, $f$ の位数 $k$ の零
+  点 $p$ に対して $\ord_p f:=k$ と置き, $f$ の位数 $l$ の極 $q$ に対し
+  て $\ord_q f:=-l$ と置く. 整数 $k_1\dots,k_n$ と $\Xi$ 内の互いに異
+  なる有限個の点 $p_1,\dots,p_n$ を任意に取る. このとき, 以下の2つの条
+  件は互いに同値である:
+  \begin{enumerate}
+  \item[(a)] $0$ でない楕円函数 $f\in K^{\times}$ で, その $\Xi$ に
+    おける零点と極の全体の集合が $\{p_1,\dots,p_n\}$ に一致し,
+    $\ord_{p_i}f = k_i$ $(i=1,\dots,n)$ を満たすものが存在する. 
+  \item[(b)] $k_1 p_1 + \cdots + k_n p_n \equiv 0 \mod \Omega$.
+  \end{enumerate}
+  さらに, (a)の条件を満たす $f\in K^{\times}$ は次のような表示を持つ:
+  \[
+    f(u) = C\, \sigma(u-p_1)^{k_1} \cdots \sigma(u-p_n)^{k_n},
+    \qquad (C\in\C^{\times}).
+    \qed
+  \]
+\end{question}
+
+\noindent ヒント: (a)ならば(b)であることは問題 \qref{q:ef6} の結果の言
+い変えに過ぎない. (b)が成立しているとき,
+\[
+  \phi(u) = \sigma(u-p_1)^{k_1} \cdots \sigma(u-p_n)^{k_n}
+\]
+と置くと, $\phi$ は楕円函数である. 
+
+\medskip
+
+\noindent 注意: この問題の結果は, 任意の有理式 $f(X)$ が %
+$f(X)=C(X-p_1)^{k_1}\cdots(X-p_n)^{k_n}$ という表示を持つことの類似
+になっている. 
+
+\medskip
+
+\noindent 参考: 次の問題は現在でも興味深いものだと思われている:
+\begin{quote}
+  {\bf\large
+    基本問題: 多項式や有理式で成立する結果を楕円函数の場合に拡張せよ!
+  }
+\end{quote}
+
+\medskip
+
+\noindent 参考: 上の問題の結果より, 問題 \qref{q:ef6} の記号のもとで, 
+次の完全列が得られたことになる:
+\[
+  0
+  @>>> \C^{\times}
+  @>>> K^{\times}
+  @>{\div}>> \Div_0
+  @>{\int}>> \C/\Omega
+  @>>> 0.
+\] %
+この列が完全であることは, $\div:K^{\times}\to\Ker(\int)$ が全射である
+こと以外は容易に示される. ここでは, $\sigma$ 函数の理論を用いて, その
+全射性を証明したことになっている. なお, この完全列は, $X=\C/\Omega$ 上
+の層(sheaf)の単完全列
+\[
+  0 
+  @>>> \O_X^{\times} 
+  @>>> K^{\times} 
+  @>>> K^{\times}/\O_X^{\times}
+  @>>> 0
+\]
+から得られる, 次の層のコホモロジーの長完全列の部分列になっているとみな
+すことができる:
+\[
+\minCDarrowwidth 0.5cm
+\begin{CD}
+  0
+  @>>> H^0(\O_X^{\times})
+  @>>> H^0(K_X^{\times} )
+  @>>> H^0(K_X^{\times}/\O_X^{\times})
+  @>>> H^1(\O_X^{\times})
+  @>>> H^1(K_X^{\times} )
+  \\
+  @.
+  @|
+  @|
+  @|
+  @|
+  @|
+  \\
+  0
+  @>>> \C^{\times}
+  @>>> K^{\times}
+  @>{\div}>> \Div
+  @>{(\int,\deg)}>> (\C/\Omega)\times \Z
+  @>>> 0.
+\end{CD}
+\] %
+ここで, $X$ 上の層 $\cal F$ に対して $H^p(\cal F)=H^p(X,\cal F)$ と書
+いた. この立場では列の完全性は明らかなことである. $H^1(\O_X^{\times})$ %
+は $X$ 上の line bundles の同型類の全体をパラメトライズしているので, 
+この完全列は divisor と line bundle の関係をも記述している. 層の理論の
+簡単な解説とコンパクト Riemann 面の理論への応用については \cite{Gun} 
+を見よ.
+
+\begin{question}\label{q:pe-sigma1}\qstar{*}
+  以下の公式を示せ:
+  \begin{enumerate}
+  \item \(\displaystyle
+    \pe'(u)
+    = -
+    \frac{2}{
+      \sigma(\frac{\omega_1}{2})
+      \sigma(\frac{\omega_2}{2})
+      \sigma(\frac{\omega_1+\omega_2}{2})
+      }
+    \cdot
+    \frac{
+      \sigma\left( u - \frac{\omega_1}{2} \right)
+      \sigma\left( u - \frac{\omega_2}{2} \right)
+      \sigma\left( u + \frac{\omega_1+\omega_2}{2} \right)
+      }{\sigma(u)^3}    
+    \).
+  \item \(\displaystyle
+      \pe(u) - \pe(v)
+      = - \frac{\sigma(u+v)\sigma(u-v)}{\sigma(u)^2\sigma(v)^2}
+    \).
+  \item \(\displaystyle
+      \pe'(u)
+      = - \frac{\sigma(2u)}{\sigma(u)^4}
+    \). \qed
+  \end{enumerate}
+\end{question}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Riemann面の定義}
+
+この節ではRiemann面を定義する. 例えば, $\C$ に無限遠点を付け加えること
+によって構成される複素射影直線 $\P^1(\C) = \C \cup \{\infty\}$ や %
+$E_\tau = \C/(\Z+\Z\tau)$ ($\Impart \tau > 0$)はコンパクト Riemann 面
+の典型的な例になっている.
+
+\begin{Definition}[Riemann 面の定義]
+  $X$ は位相空間であり, $\{U_\lambda\}_{\lambda\in\Lambda}$ は$X$ の開
+  被覆であるとする\footnote{各 $U_\lambda$ が $X$ の開部分集合であり,
+    $X = \bigcup_{\lambda\in\Lambda} U_\lambda$ が成立していること.}. %
+  写像の族 $\{\phi_\lambda : U_\lambda \to \C\}_{\lambda\in\Lambda}$ 
+  が与えられていて, 以下の2つの条件が成立するとき, %
+  $\{(U_\lambda,\phi_\lambda)\}_{\lambda\in\Lambda}$ は $X$ の複素構造
+  (complex structure)であると言う: 
+  \begin{enumerate}
+  \item[(1)] 任意の $\lambda\in\Lambda$ に対して, %
+    $\phi_\lambda(U_\lambda)$ は $\C$の開集合であり, $\phi_\lambda$ は 
+    $U_\lambda$ から $\phi_\lambda(U_\lambda)$ への同相写像を与える.
+  \item[(2)] 任意の $\lambda,\mu\in\Lambda$ に対して, 写像の列
+    \[
+      \phi_\lambda(U_\lambda\cap U_\mu)
+      \overset{\phi_\lambda^{-1}}\longrightarrow
+      U_\lambda\cap U_\mu
+      \overset{\phi_\mu}\longrightarrow
+      \phi_\mu(U_\lambda\cap U_\mu)
+    \] %
+    の合成は双正則%
+    \footnote{$\C$ の開集合間の写像が正則(holomorphic)でかつその逆写像
+      が存在して逆写像も正則のとき, その写像は双正則(biholomorphic)で
+      あると言う.}%
+    である.
+  \end{enumerate}
+  空でない Hausdorff 空間 $X$ に複素構造が与えられたとき, $X$ はリー
+  マン面(Riemann surface)であると言う. \qed
+\end{Definition}
+
+\noindent 要するに, $\C$ の開集合の族が双正則写像によって貼り合わさっ
+てできる面を Riemann 面と呼ぶのである.
+
+\medskip
+
+\noindent 最も簡単な例: $\C$ の空でない開集合 $U$ は $\{U \injto \C\}$ %
+を複素構造とする Riemann 面である.
+
+\begin{question}[複素射影直線]\label{q:proj-line1}\qstar{*}
+  $\C^2 \setminus \{(0,0)\}$ における同値関係 $\sim$ を次のように定める: %
+  $u, v \in \C^2 \setminus\{(0,0)\}$ に対して,
+  \[
+    u \sim v
+    \qquad\Longleftrightarrow\qquad
+    u \in \C^{\times} v.
+  \]
+  商位相空間 $(\C^2 \setminus \{(0,0)\})/{\sim}$ を複素射影直線と呼び, %
+  $\C P^1$ または $\P^1(\C)$ と表わす. %
+  $(z,w)\in\C^2\setminus\{(0,0)\}$ が代表する複素射影直線上の点を %
+  $(z:w)$ と表わす. このとき, 以下が成立している: %
+  \begin{enumerate}
+  \item 複素射影直線は球面 $S^2$ と同相である. 
+  \item $X_0 = \{(1:0)\}$, $X_1 = \{\,(z:1) \mid z \in \C \,\}$ と置く
+    と, $\P^1(\C)$ は $X_0$ と $X_1$ の非連結和になる.
+  \item $U_0 = \{(1:w) \mid w \in \C \,\}$, $U_1 = X_1$ と置き,
+    $\phi_i : U_i \to \C$ を $\phi_0(1:w) = w$, $\phi(z:1) = z$ と定め
+    る. このとき, $\{(U_0,\phi_0),(U_1,\phi_1)\}$ は $\P^1(\C)$ におけ
+    る複素構造である. これによって, $\P^1(\C)$ は Riemann 面である.
+    \qed
+  \end{enumerate}
+\end{question}
+
+\noindent 注意: $U_1$ と $\C=\phi_1(U_1)$ を同一視し, $\P^1(\C)$ は %
+$\C$ に無限遠点 $\infty$ を付け加えたものであるとみなすことが多い.
+
+\begin{question}
+  連結な Riemann 面は弧状連結であることを示せ. \qed
+\end{question}
+
+\noindent ヒント: Riemann 面 $X$ と $x_0 \in X$ に対して, %
+\[
+  A
+  =
+  \{\,
+    q(1) 
+  \mid
+    \text{$q$ は $[0,1]$ から $X$ への連続写像であり $q(0)=x_0$}
+  \,\}
+\] %
+と置く. このとき, $A \ne \emptyset$ かつ $A$ は $M$ の開集合かつ閉集
+合であることを示せ.
+
+\begin{question}
+  $X$ は複素構造 $\{(U_\lambda,\phi_\lambda)\}_{\lambda\in\Lambda}$ 
+  を持つ Riemann 面であるとする.  $X$ の任意の空でない開集合 $V$ に対
+  して, $V_\lambda = V \cap U_\lambda$, %
+  $\psi_\lambda = (\text{$\phi_\lambda$ の $V_\lambda$ 上への制限})$ 
+  と置くと, $\{(V_\lambda,\psi_\lambda)\}_{\lambda\in\Lambda})$ は $V$
+  の複素構造である. これによって, Riemann 面の任意の空でない開集合は 
+  Riemann 面である. \qed
+\end{question}
+
+定義より Riemann 面は Hausdorff 空間であるが, 位相空間 $X$ が 
+Hausdorff でなくても, 複素構造の定義の条件(1), (2)を満たす %
+$\{(U_\lambda,\phi_\lambda)\}$ が存在する場合がある. そのような例の1つ
+を問題に出そう.
+
+\begin{question}
+  $X_0 = \{(z,0)\in\C^2\mid z\in\C\}$, 
+  $X_1 = \{(z,1)\in\C^2\mid z\in\C\}$ と置く. %
+  $X_0\cup X_1$ における同値関係 $\sim$ を次のように定義する: %
+  任意の $(x,y),(x',y')\in X_0\cup X_1$ に対して,
+  \[
+    (x,y)\sim(x',y')
+    \quad\Leftrightarrow\quad
+    \text{$(x,y)=(x',y')$ または $x=x'\ne0$.}
+  \] %
+  商空間 $(X_0\cup X_1)/{\sim}$ を $X$ と書き, $X_i$ の $X$ における像
+  を $U_i$ と書く. $p_i : X_i \to \C$, $(x,y)\mapsto x$ が誘導する 
+  $U_i$ から $\C$ への写像を $\phi_i$ と書くことにする. このとき,
+  $X$ は Hausdorff ではないが, 
+  $\{(\phi_i,U_i)\}_{i=0,1}$ は複素構造の定義の2つの条件を満たしている.
+  \qed
+\end{question}
+
+\noindent この問題における $X$ は $\C$ の2つのコピーをその原点を除いて
+貼り合わせることによって得られる空間である. 
+
+\begin{Definition}[正則座標近傍の定義]
+  $X$ は複素構造 $\{(U_\lambda,\phi_\lambda)\}_{\lambda\in\Lambda})$ %
+  を持つ Riemann 面であるとする. $X$ の開集合 $U$ と写像 $\phi:U\to\C$
+  の組 $(U,\phi)$ が正則座標近傍(holomorphic coordinate neighborhood)
+  であるとは, 以下の条件が成立することである:
+  \begin{enumerate}
+  \item $\phi(U)$ は $\C$ の開集合であり, $\phi$ は $U$ から $\phi(U)$
+    への同相写像を与える.
+  \item 任意の $\lambda\in\Lambda$ に対して, 写像の列
+    \[
+      \phi_\lambda(U_\lambda\cap U_\mu)
+      \overset{\phi_\lambda^{-1}}\longrightarrow
+      U_\lambda\cap U
+      \overset{\phi}\longrightarrow
+      \phi(U_\lambda\cap U)
+    \]%
+    の合成は双正則である.
+    \qed
+  \end{enumerate}
+\end{Definition}
+
+\begin{Definition}[Riemann 面の間の正則写像の定義]
+  $X$, $Y$ は共に Riemann 面であるとする. %
+  写像 $f \colon X \to Y$ が正則(holomorphic)であるとは, %
+  任意の $x\in X$ に対して, %
+  $f(x)$ を含む $Y$ 上の正則座標近傍 $(V, \psi)$ および %
+  $x$ を含み $f^{-1}(V)$ に含まれる $X$ 上の正則座標近傍 $(U, \phi)$ 
+  が存在して,
+  \[
+    \phi(U)
+    \overset{\phi^{-1}}\longrightarrow
+    U
+    \overset{f}\longrightarrow
+    V
+    \overset{\psi}\longrightarrow
+    \psi(V)
+  \]
+  の合成が $\C$ の開集合間の正則写像になることである.  正則写像が正則
+  な逆写像を持つとき, その写像は双正則(biholomorphic map)であると言う.
+  $X$ と $Y$ が双正則であるとは, $X$ から $Y$ への双正則写像が存在する
+  ことである. $X$ に2つの複素構造が入っているとき, $X$ の恒等写像が双
+  正則ならばその2つの複素構造は同値であると言う.  $X$ から $\C$ への正
+  則写像を $X$ 上の正則函数と呼ぶ. 
+  \qed 
+\end{Definition}
+
+\begin{question}[正則写像の連続性]
+  Riemann 面の間の正則写像は連続写像になることを示せ. \qed
+\end{question}
+
+\begin{question}[正則写像の貼り合わせ]
+  $X$, $Y$ は Riemann 面であり, $\{U_i\}_{i\in I}$ は $X$ の開被覆であ
+  るとする. 各 $i\in I$ に対して $f_i$ は $U_i$ から $Y$ への正則写像
+  であり, 任意の $i,j\in I$ に対して $U_i\cap U_j$ 上で $f_i = f_j$ が
+  成立していると仮定する. このとき, $X$ から $Y$ への正則写像 $f$ で各 %
+  $U_i$ 上 $f_i$ と一致するものが唯一存在することを示せ. \qed
+\end{question}
+
+\begin{question}[正則写像の一致の定理]
+  $X$, $Y$ は Riemann 面であるとし, $X$ は連結であると仮定する. %
+  $f$, $g$ は $X$ から $Y$ への正則写像であるとする. $f$ と $g$ の値が 
+  $X$ 内のある集積点を持つ集合上で一致するなるならば, $X$ 全体で一致す
+  ることを示せ. \qed
+\end{question}
+
+\begin{question}[定数でない正則写像の開写像性]
+  $X$, $Y$ は Riemann 面であるとし, $X$ は連結であると仮定する. %
+  定数ではない正則写像 $f : X \to Y$ は開写像であることを示せ. \qed
+\end{question}
+
+\noindent ヒント: 任意の正則写像は, 正則座標系をうまく取ることによって,
+局所的に $f(z) = z^n$, $n\in\Z_{\ge0}$ と表示されることを示す. 
+
+\begin{question}[コンパクト Riemann 面上の正則函数が定数になること]\qstar{*}
+  $X$ は連結なコンパクト Riemann 面であるとする. このとき, $X$ 上大域
+  的に定義された正則函数は定数函数に限ることを示せ. 
+  特に $\P^1(\C)$ 上の正則函数は定数函数に限る. \qed
+\end{question}
+
+\begin{question}[Riemann 面上の有理型函数の定義]
+  $X$ は Riemann 面であるとする. $f$ は $X$ からある離散部分集合 $S$ 
+  を除いたところで定義された正則函数であるとする. $s\in S$ の正則
+  座標近傍 $(U,z)$ を1つ取る. このとき, $f$ は $s$ のある開近傍 $V$ か
+  ら $s$ を除いたところで, 
+  \[
+    f(p) = \sum_{n\in\Z} c_n (z(p) - z(s))^n
+    \qquad
+    (p\in V \setminus \{s\})
+  \]
+  と展開されることを示せ. この展開中に $0$ でない無限個の負巾の項 %
+  $c_n (z(p)-z(s))^n$ ($n<0$) が存在するとき, $s$ は $f$ の真性特異点
+  であると言う. そうでないとき, $s$ は $f$ の高々極であると言う, 
+  $c_n\ne0$ となる最低の $n$ に対する $-n$ を極の位数と呼ぶ.
+  $0$ でない負巾の項が存在しないとき $s$ は $f$ の除去可能特異
+  点であると言う. これらの定義が $s$ の正則座標近傍によらないことを示
+  せ. 全ての $s\in S$ が $f$ の高々極であるとき $f$ は $X$ 上の有理型
+  であると言う. %
+  $f$, $g$ が $X$ 上の有理型函数であり, それぞれ離散部分集合 $S$, $T$ 
+  の外で定義されているとする. $(f,S)$ と $(g,T)$ が同値であるとは,
+  $X\setminus (S\cup T)$ 上で $f=g$ が成立していることであると定義する.
+  $(f,S)$ の同値類の全体の集合を $K_X$ と書くことにする.
+  $K_X$ の元を $X$ 上の有理型函数と呼ぶことにする. %
+  連結な Riemann 面 $X$ に対して, $K_X$ は自然に体をなすことを説明せよ.
+  連結なコンパクト Riemann 面 $X$ に対して, $K_X$ を $X$ の代数函数体
+  と呼ぶ.  \qed
+\end{question}
+
+\noindent 参考: 任意のコンパクト Riemann 面上に定数でない有理型函数が
+存在する. しかし, その証明は non-trivial である. Riemann 自身による原
+証明は調和函数に関する Dirichret の原理を用いたものであったが, Riemann 
+の死後に Weierstrass が Dirichret の原理の証明の論理的欠陥を指摘し,
+Riemann 面の理論の論理的基礎に疑問が持たれたのである. (その辺の歴史的
+事情は例えば \cite{Iwasawa} の緒言に書いてある.) しかし, 現在では 
+Dirichret の原理自身が厳密に定式化証明されている上に, 他の色々な方法で
+コンパクト Riemann 面上の定数でない有理型函数の存在を示す方法が知られ
+ている. 例えば, \cite{Iwasawa}第3章\S4で紹介されている Weyl による直交
+射影の方法やまたそれとは全く違う\cite{Gun}に書かれている方法などがある.
+いずれにせよ, 楕円型の線型偏微分方程式に関する基礎的な結果を使わねばな
+らない. これは, 抽象的に定義された任意のコンパクト Riemann 面に関する
+結果を得ようとするからそうなるのであって, 射影代数曲線として得られたコ
+ンパクト Riemann 面上に定数でない有理型函数が存在することは trivial な
+ことである%
+\footnote{結果的に任意のコンパクト Riemann 面は射影代数曲線と双正則に
+  なることが知られている.}. %
+なぜなら, 射影代数曲線の入れ物である射影空間上の有理型函数を射影代数曲
+線上に制限したものは射影代数曲線上の有理型函数になるからである.
+
+\begin{question}[有理型函数と射影直線への正則写像の関係]\qstar{*}
+  $\P^1(\C)=\C\cup\{\infty\}$ とみなし, %
+  $X$ は Riemann 面であるとする. %
+  $f$ が $X$ の離散部分集合 $S$ の外で正則な $X$ 上の有理型函数である
+  とき, $f$ は $X$ から $\P^1(\C)$ への正則写像に一意的に拡張され
+  ることを示せ. %
+  逆に $X$ から $\P^1(\C)$ への正則写像 $f$ で $f(X) \ne \{\infty\}$ 
+  となるものに対して,  $S=f^{-1}(\infty)$ と置くと, $S$ は $X$ の離散
+  部分集合であり, $f$ は $S$ の外で正則な $X$ 上の有理型函数を与えるこ
+  とを示せ. %
+  \qed
+\end{question}
+
+\noindent ヒント; 任意の $p_0\in X$ に対して, $p_0$ の開近傍 $U$ と %
+$U$ 上の正則函数 $g$, $h$ で, $g(p_0)\ne0$ または $h(p_0)\ne0$ であ
+り, $U$ 上で $f = g/h$ を満たすものが存在する. $U$ を十分小さくとれ
+ば, $U$ から $\P^1(\C)$ への正則写像を $p \mapsto (g(p):h(p))$ と定義
+することができる.
+
+\begin{question}
+  $X$ はコンパクトな位相空間であり,  $Y$ は連結 Hausdorff 空間であり, 
+  $f : X \to Y$ が連続な開写像ならば, $f$ は全射であることを示せ. 
+  この純粋に位相空間論的に証明される結果と上の問題の結果を用いて, 代数
+  学の基本定理を証明せよ. \qed
+\end{question}
+
+\noindent ヒント: 複素係数の1変数多項式 $f$ は $\P^1(\C)$ からそれ自身
+への正則写像とみなせる. $f$ が定数でないならば $f$ が全射になることを
+示せば良い.
+
+\begin{question}\qstar{*}
+  複素射影直線 $X = \P^1(\C)$ に対して, $X$ の代数函数体 $K_X$ は複素1
+  変数有理函数体 $\C(T)$ に同型であることを示せ. \qed
+\end{question}
+
+\noindent 参考: 連結なコンパクト Riemann 面の圏と $\C$ 上の1変数代数函
+数体%
+\footnote{有理函数体 $\C(T)$ を含む体で $\C(T)$ 上の有限次元ベク
+  トル空間をなすものを $\C$ 上の1変数代数函数体と呼ぶ.}%
+の圏は互いに同値になることが知られている. (この辺の話については 
+\cite{Iwasawa} が名著である.) 連結なコンパクト Riemann 面 $X$ に対して,
+$X$ 上の有理型函数全体のなす体 $K = \C(X)$ は $\C$ 上の1変数代数函数体
+をなし, 対応 $X \mapsto K$ が圏同値を与えるのである. この圏同値を通じ
+て, 1変数代数函数体に関する体の Galois 理論と連結なコンパクト Riemann 
+面の(分岐)被覆の Galois 理論が同一の結果を与えることがわかるのである. 
+体の Galois 理論は純代数的に展開され, 被覆の Galois 理論%
+\footnote{被覆の Galois 理論に関する解説については \cite{Kuga1} を見よ.}%
+は純位相幾何的に展開される. このことは,体の Galois 理論に位相幾何的な
+直観が通用する可能性を示唆している.
+実際, 代数体%
+\footnote{$\Q$ を含む体で $\Q$ 上の有限次元ベクトル空間をなすもの
+  を代数体と呼ぶ.}%
+は Riemann 面の代数函数体と類似した性質を持つことが知られている. 代数
+体と Riemann 面の代数函数体の類似をいきなり考えるのではなく, その中間
+の対象として, 有限体上の曲線と有限体上の1変数代数函数体%
+\footnote{有限体 $\F_q$ 上の有理函数体 $\F_q(T)$ を含む体で $\F_q(T)$ 
+  上の有限次元ベクトル空間をなすものを有限体上の1変数代数函数体と呼ぶ.
+  有限体上の滑らかな射影曲線(Riemann面の有限体上での類似)の圏と有限体
+  上の1変数代数函数体の圏は同値である.}%
+を考えると具合が良いことが知られている%
+\footnote{特に有限体上の対象に対しては代数体の場合と同様にしてゼータ函
+  数が定義されることが重要である.  Euler-Riemann のゼータ函数に対する
+  本来の Riemann 予想はまだ解けてないが, 有限体上の曲線の合同ゼータ函
+  数に関する Riemann 予想の類似の結果は Weil によって証明されている. 
+  その結果を高次元の場合に拡張したものを Weil 予想と呼ぶ. Weil 予想も
+  すでに Deligne によって証明されている. Weil 予想の解決に関する読物と
+  しては, \cite{Kuga2} の中の解説が読み易いであろう.}.
+
+\begin{question}
+  任意の Riemann 面は向き付け可能である. \qed
+\end{question}
+
+\noindent ヒント: 複素数 $z$ を $z = x + iy$ ($x,y\in\R$) と表わしてお
+く. $\C$ の開集合上の正則函数 $f(z) = u(x,y) + i v(x,y)$ ($u$, $v$ は
+実数値)に対して, Cauchy-Riemann の方程式より,
+\[
+  \begin{bmatrix}
+    u_x & u_y \\
+    v_x & v_y \\
+  \end{bmatrix}
+  =
+  \begin{bmatrix}
+    u_x & - v_x \\
+    v_x & u_x \\
+  \end{bmatrix}.
+\]
+右辺の行列式は ${u_x}^2 + {v_x}^2 \ge 0$. 
+
+\medskip
+
+\noindent 参考: よって, 任意のコンパクト Riemann 面は向き付け可能な閉
+曲面に同相である. (向き付け可能な閉曲面はジーナスによって分類されるの
+であった.) 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Riemann 面としての楕円曲線}
+
+この節における問題 \qref{q:plane-ec}, \qref{q:torus-ec} における %
+$E$ をどちらも(複素)楕円曲線(elliptic curve)と呼ぶ. 2つの問題における %
+$E$ の定義は一見して全く異なるのだが, 実は同じものを別の視点から眺めた
+ものになっている. そのことが理解するためには, 楕円曲線論(もしくは楕円
+函数論)の基礎的な議論を展開しなければいけない.
+
+歴史的には楕円函数論は楕円積分の研究が出発点になっている. 楕円積分は 
+$x$ および $x$ の3次式もしくは4次式の平方根の有理函数の積分である. 
+問題 \qref{q:plane-ec} は $x$ の3次式の平方根が登場する場合を扱って
+いる. $x$ の3次式 $f(x) = x^3 - A_2 x -A_3$ の平方根を $y$ と書
+くと,
+$$
+  y^2 = f(x) = x^3 - A_2 x -A_3
+  \leqno{(*)}
+$$ %
+が成立する. この式を $(x,y)$ 平面における曲線の定義式とみなす. この式
+によって定義される曲線を平面楕円曲線と呼ぶことにする. $\sqrt{f(x)}$ と %
+$x$ の有理函数の積分(楕円積分)に関する研究は曲線 $(*)$ の研究に帰着さ
+れるのである. $f(x)$ が $x$ の4次式の場合も同様である.
+
+しかし, 曲線 $(*)$ を満足に研究するためには, 曲線 $(*)$ を実数の範囲だ
+けではなく複素数の範囲まで拡張して扱わなければいけない. さらに, 曲線 
+$(*)$ に無限遠点を1つ付け加えて曲線をコンパクト化して扱うこと
+が重要である. この後者のコンパクト化は, 曲線 $(*)$ を複素アフィン平面 
+$\C^2$ ではなく, 複素射影平面 $\P^2(\C)$ 内で考えることによって自然に
+実現される. そのことを説明するためには, まず射影平面について説明する必
+要がある.
+
+まず, 複素射影平面ではなく実射影平面について直観的な説明をしておこう. 
+実射影平面は直観的には平面に無限遠の縁を付けたものであると思うことがで
+きる. つまり, 実際には存在しない地平線上の点が存在すると思うのである. 
+ただし, まっすぐ前を見て見える地平線上の点とその反対側の背中側に見える
+地平線上の点とは同一視しなければいけない%
+\footnote{この辺のことは \cite{Oomori} に詳しく書いてある.}. %
+このことは, 射影平面が円板の縁上の2点が円板の中心に関して対象の位置に
+あるとき同一視することによって得られることを思い出せば納得できるであろ
+う.  我々は円板の内部に住み, 円板の縁は無限遠にあると思うのである. 大
+事なことは, 射影平面は開いた世界に縁を付けて閉じた世界にしたものなので, 
+射影平面はコンパクトであることである.
+
+次に, 実射影平面の代数的な構成について説明しよう. 我々が無限に広い平面
+上に住んでいると考えるとき, その世界の縁をどのように構成したら良いので
+あろうか? その1つの答は地平線を写生する様子を思い描いてみれば得られる.
+しかも, その答は射影平面の純代数的な構成を与える. 我々の住んでいる平面
+は上下の区別のある3次元空間に含まれていると考える. ただし, 空間の座標
+を $(x,y,z)$ と書くとき, 我々の済んでいる平面は $z=-1$ と表示されてい
+ると考え, 自分の視点は原点 $(0,0,0)$ にあると考える. 原点から地平線を
+のぞみ, その様子を画用紙に写生することを考える. つまり, 自分の視点から
+目標物を結ぶ直線と画用紙の交わる点をプロットしてゆくことを考える. 平面
+上には無限遠点は存在しないのだが, 真っ直視点を平らにすると地平線を見る
+ことはできる. 実際には存在しない地平線上の点と原点を結ぶ直線は平面 %
+$z=0$ 上の直線になるものと考えられる. 以上の話を逆転させて, 空間内の原
+点を通る直線を点であると思うことにする. 名前を付けよう. 空間内の原点を
+通る直線全体の集合を射影平面と呼ぶ. 直線は前と後の方向を区別できないの
+で, 前に見える地平線上の点と後に見える地平線上の点は区別できなくなる.
+
+原点を直線全体の集合はどのように記述されるのであろうか? 原点を通る直線
+はその直線上にあるベクトル $u \ne 0$ を与えれば決定される. ベクトル %
+$u\ne0$ と数 $\alpha\ne0$ に対して, $u$ と $\alpha u$ は同じ直線を与え, 
+ベクトル $v\ne0$ が $u$ と同じ直線を与えるためには $v$ が $\alpha u$ 
+の形になっていることが必要である. このことより, $0$ でないベクトル全体
+を考え, $0$ でない定数倍で移るベクトルを互いに同一視すれば直線全体の集
+合が得られたと考えられるのである. この構成は任意の体上で意味を持つ. 次
+元も一般で良い. 次の問題において $\C$ 上の $n$ 次元射影空間を定義して
+おく.
+
+\begin{question}[$n$ 次元複素射影空間]
+  $\C^{n+1} \setminus \{0\}$ における同値関係 $\sim$ を次のように定める:
+  任意の $u,v\in \C^n \setminus \{0\}$ に対して,
+  \[
+    u \sim v
+    \quad\Longleftrightarrow\quad
+    v \in \C^{\times} u.
+  \] %
+  商空間 $(\C^n \setminus \{0\})/{\sim}$ を $n$ 次元%
+  \footnote{複素数上の次元を数えている. 位相的には $2n$ 次元. }%
+  複素射影空間と呼び $\P^n(\C)$ と表わす. 
+  $(z_0,\dots,z_n)\in \C^n \setminus \{0\}$ の $\P^n(\C)$ における像を
+  $(z_0:\dots:z_n)$ と表わす. 
+  $i = 0,1,\dots,n$ に対して,
+  \begin{align*}
+  & X_i =
+    \{\, (z_0:\dots:z_n) \in \P^n(\C)
+    \mid z_i\ne 0,\; z_{i+1} = \dots = z_n = 0 \,\},
+  \\
+  & U_i =
+    \{\, (z_0:\dots:z_n) \in \P^n(\C)
+    \mid z_i \ne 0 \,\},
+  \end{align*}
+  と置く. 以下を示せ:
+  \begin{enumerate}
+  \item $X_n = U_n$.
+  \item 各 $X_i$ は $\C^i$ と同相であり, $\P^n(\C)$ は $X_i$ 達の
+    直和である.
+  \item 各 $U_i$ は $\C^n$ と同相であり, $\{U_i\}_{i=0}^n$ は %
+    $\P^n(\C)$ の開被覆である.
+  \item $X_0\sqcup X_1\sqcup\dots\sqcup X_i$ は $\P^i(\C)$ と同相であ
+    る. \qed
+  \end{enumerate}
+\end{question}
+
+\noindent この問題は次の問題の準備のために用意された.  $n=2$ の場合が
+次の問題で使われる. $\P^2(\C)$ を複素射影平面と呼ばれている.
+
+\medskip
+
+\noindent 参考: 本当は $n$ 次元複素多様体として $\P^n(\C)$ を定義した
+いのであるが, 多変数の複素函数論の準備が必要なので, 今ここでそうするの
+は無理である. 
+
+\begin{question}[平面曲線としての楕円曲線]\label{q:plane-ec}\qstar{*}
+  $A_2,A_3\in\C$ であるとし, $f(x) = 4x^3 - A_2x - A_3$ と置く. %
+  $f(x)$ は重根を持たないと仮定し, $f(x)$ の3つの根を $\lambda_i$ %
+  ($i=1,2,3$) と表わす. 射影平面 $\P^2(\C)$ の部分空間 %
+  $E=E_{A_2,A_3}$ を次のように定義する:
+  \[
+    E = 
+    \{\, (X:Y:Z) \in \P^2(\C) \mid
+      Y^2 Z = 4X^3 - A_2 X Z^2 - A_3 Z^3 \,\}.
+  \] %
+  $U_0 = \{(1:Y:Z)\mid Y,Z\in\C\}$, $U_1=\{(X:1:Z)\mid X,Z\in\C\}$, 
+  $U_2 = \{(X:Y:1)\mid X,Y\in\C\}$ と置く. 
+  $L = \{\,(X:Y:0)\mid(x:y)\in\P^1(\C)\,\}$ を無限遠直線と呼ぶ. 
+  以下を示せ:
+  \begin{enumerate}
+  \item $E$ は $\P^2(\C)$ の閉部分集合になるのでコンパクトである. 
+  \item $E$ と $L$ は集合として1点で交わる. その1点を $\infty\in E$ と
+    書くことにする. 
+  \item $a_i=(\lambda_i:0:1)$ と置く. $a_i\in E$ である. 任意の %
+    $p\in E \setminus\{a_1,a_2,a_3,\infty\}$ %
+    に対して $p$ の $E$ における開近傍 $V_p$ を十分小さく取ると, %
+    $V_p \subset U_2$ となり, $\phi_p : V_p \to \C$ を %
+    $\phi_p(X:Y:1) = X$ と定義することができる. %
+    $p = a_i\in E$ に対して, %
+    $p$ の $E$ における開近傍 $V_p$ を十分小さく取ると, %
+    $V_p \subset U_2$ となり, %
+    $\phi_p : V_p \to \C$ を $\phi(X:Y:1) = Y$ と定義することができる. %
+    $p=\infty\in E$ の $E$ における開近傍 $V_p$ を十分小さく取ると,
+    $V_p\subset U_1$ となり, $\phi_p : V_p \to \C$ を %
+    $\phi_p(X:1:Z) = Z$ と定義することができる. %
+    各 $V_p$ を十分小さく取ると, 
+    $\{(V_p,\phi_p)\}_{p\in E}$ は $E$ に複素構造を与える.
+  \item $E \setminus \{\infty\} = E \cap U_2$ から $\C$ への写像 $f$ 
+    を $f(X:Y:1) = X$ によって定義する. $f$ は $E$ 上の有理型函数を与
+    える. また, この $f$ は $E$ から $\P^1(\C)$ への正則写像に一意的
+    に拡張される.
+    \qed
+  \end{enumerate}
+\end{question}
+
+\noindent ヒント: 次の問題の結果を認めて使って良い.
+
+\begin{question}
+  $G(z,w)$ は複素係数の任意の2変数多項式函数であるとし, $G$ の %
+  $z$, $w$ に関する偏導函数をそれぞれ $G_z$, $G_w$ と表わす. %
+  $(c,d)\in\C^2$ において $G(c,d)=0$, $G_w(c,d)\ne0$ が成立していると
+  仮定する. このとき, $c$ の $\C$ における開近傍 $U$ を十分小さく取る
+  と, $U$ 上の正則函数 $g$ で任意の $z\in U$ に対して $G(z,g(z))=0$ を
+  満たすものが唯一存在する. さらに, %
+  この $g$ は $U$ 上で $g'(z) = - G_z(z,g(z))/G_w(z,g(z))$ を満たして
+  いる.  \qed
+\end{question}
+
+\noindent ヒント: 多変数の複素正則函数論における陰函数定理の特別な場合
+である. 例えば, 実多変数函数の陰函数定理を用いて, 以下のようにし
+て証明される. $z=x_1 + i x_2$, $w = y_1 + i y_2$ ($x_i,y_i\in\R$) によっ
+て, 実座標 $x_i$, $y_i$ を導入し, $G = F_1 + i F_2$ ($F_i\in\R$)によっ
+て, 実数値函数 $F_i$ を定義する. 同様に, $c=a_1+ia_2$, $d=b_1+ib_2$ %
+($a_i,b_i\in\R)$ としておく. $F(c,d)=0$, $F_w(c,d)\ne0$ という条件を %
+$f_i$ に関する条件に書き直すことを考える. すると, $F_i$ の $y_i$ に関
+する Jacobian が $(x_1,x_2,y_1,y_2)=(a_1,a_2,b_1,b_2)$ で消えないこと
+がわかる. なぜなら, $F$ に関する Cauchy-Riemann の方程式を使うと,
+Jacobian に関して次の公式が成立することがわかるからである:
+\[
+  \frac{D(F_1,F_2)}{D(y_1,y_2)}
+  =
+  \begin{vmatrix}
+    \pd{F_1}{y_1} & \pd{F_1}{y_2} \\
+    \pd{F_2}{y_1} & \pd{F_2}{y_2} 
+  \end{vmatrix}
+  = |F_w|^2.
+\]
+よって, 実多変数函数の陰函数の定理より, $(a_1,a_2)$ の開近傍 $U$ を十
+分小さく取ると, $U$ 上の微分可能函数 $f_1$, $f_2$ で $U$ 上で %
+$F_i(x_1,x_2,f_1(x_1,x_2),f_2(x_1,x_2))=0$ ($i=1,2$) を満たすものが唯
+一存在する. さらに, $f_i$ の偏導函数は次のように表わされる:
+\[
+  \begin{bmatrix}
+    \pd{f_1}{x_1} & \pd{f_1}{x_2} \\
+    \pd{f_2}{x_1} & \pd{f_2}{x_2} 
+  \end{bmatrix}
+  = -
+  \begin{bmatrix}
+    \pd{F_1}{y_1} & \pd{F_1}{y_2} \\
+    \pd{F_2}{y_1} & \pd{F_2}{y_2} 
+  \end{bmatrix}^{-1}
+  \begin{bmatrix}
+    \pd{F_1}{x_1} & \pd{F_1}{x_2} \\
+    \pd{F_2}{x_1} & \pd{F_2}{x_2} 
+  \end{bmatrix}.
+\] 
+(ただし, 右辺における $\F_i$ の導函数の $y_i$ には $f_i(x_1,x_2)$ を代
+入する.)  $U$ を $\C$ 内の開集合とみなし, $g=f_1+if_2$ によって $U$ 
+上の複素数値函数 $g$ を定める. $F$ に関する Cauchy-Riemann の方程式
+と $f_i$ の偏導函数の公式を用いて, $g$ は正則函数であることが確かめら
+れる. 
+
+\begin{question}[平面曲線としての楕円曲線の位相]\label{q:top-ec}\qstar{*}
+  問題 \qref{q:plane-ec} における $E$ は向き付け可能なジーナス $1$ の
+  閉曲面に同相である. \qed
+\end{question}
+
+\begin{question}[$\C/\Omega$ としての楕円曲線]\label{q:torus-ec}\qstar{*}
+  $\R$ 上一次独立な $\omega_1,\omega_2\in\C$ を任意に取り, %
+  $\Omega=\Z\omega_1+\Z\omega_2$ と置く. $\C$ における同値関係 %
+  $\sim$ を次のように定める: $z,w\in\C$ に対して,
+  \[
+    z \sim w
+    \quad\Longleftrightarrow\quad
+    z - w \in \Omega
+  \] %
+  $\C$ の $\sim$ による商空間を %
+  $E = E_\Omega = \Z/\Omega$と書くことにする. $\C$ から $E_\Omega$ へ
+  の自然な射影 $\pi$ が正則写像になるような複素構造が $E$ に入ることを
+  示せ. \qed
+\end{question}
+
+\noindent ヒント: 任意の $z\in\C$ に対して, $z$ の開近傍 $V_z$ を十分
+小さく取ると, $V_z$ から $E_\Omega$ への自然な写像は %
+$V_z$ から $U_z := \pi(V_z)$ への同相写像を与える. その逆写像を %
+$\phi_z$ と書くと, $\{(U_z,\phi_z)\}_{z\in\C}$ は複素構造である.
+
+\begin{question}
+  問題 \qref{q:plane-ec} 状況のもとで以下を示せ. %
+  複素平面内の $\lambda_1$ と $\lambda_2$ を結ぶ線分を $I_1$, %
+  $\lambda_2$ と $\lambda_3$ を結ぶ線分を $I_2$ と書くことにする. 
+  $I_1$ のまわりを1周し $I_2$ と1点で交わる単純閉曲線を $\alpha_1$ と
+  書き, $I_2$ のまわりを1周し $I_2$ および $\alpha_1$ と1点で交わる単
+  純閉曲線を $\alpha_2$ と書くことにする. $\omega_i$ ($i=1,2$) を次の
+  式によって定義する:
+  \[
+    \omega_i := 
+    \int_{\alpha_i} \frac{dx}{\sqrt{4x^3-A_2x-A_3}}
+    \qquad
+    (i=1,2).
+  \]
+  このとき, $\omega_1$ と $\omega_2$ は $\R$ 上一次独立である.
+  \qed
+\end{question}
+
+\noindent ヒント: 直接的に証明する方法を私は知らない. 私の知っている証
+明は, コンパクトRiemann 面上の微分形式の積分論を一般的に展開し, それを
+用いるというものである. まず, 所謂 Riemann の不等式を証明し(例えば 
+\cite{Iwasawa}, \cite{Gun}), そのジーナス $1$ の特別な場合がこの問題の
+解答を与える. (この問題の結果を認めて, 以下の問題を解いても良い.)
+
+\begin{question}\qstar{*}
+  上の問題の状況のもとで, $\Omega=\Z\omega_1+\Z\omega_2$ と置き, 
+  $\Omega$ に対する $\pe$ 函数を考える. $\pe$ は次の微分方程式を満たし
+  ている(すなわち, $A_i=g_i$ ($i=2,3$)):
+  \[
+    \pe'{}^2 = 4\pe - A_2 \pe - A_3. \qed
+  \]
+\end{question}
+
+\noindent ヒント: 楕円不定積分
+\[
+  u = \int^x \frac{dx}{\sqrt{4x^3-A_2x-A_3}}
+\]
+の逆函数を $x = f(u)$ と書くと, $f$ は微分方程式 %
+$f'{}^2=4f^3-A_2f-A_3$ を満たし, 周期 $\Omega$ を持つ楕円函数であ
+ることがわかる. このことより, $f$ は周期平行四辺形上で1点のみに極 $u_0$ %
+を持ち, その位数は $2$ であり, その点における Laurent 展開の %
+$(u-u_0)^{-2}$ の係数は $1$ であることがわかる. よって, $f(u+u_0)$ は %
+$\pe(u)$ に等しい.
+
+\begin{question}\qstar{*}
+  上の問題の続き. 上の問題の状況のもとで, %
+  $u\mapsto(\pe(u),\pe'(u))$ は $\C\setminus\Omega$ から
+  問題 \qref{q:plane-ec} における $E=E_{A_2,A_3}$ への写像 $\pi$ を定
+  めることがわかる. 以下を示せ:
+  \begin{enumerate}
+  \item $\pi$ は $\C$ から $E$ への正則写像に一意的に拡張される. (その
+    拡張も $\pi$ と書くことにする.)
+  \item $\pi$ は $\C/\Omega$ から $E$ への正則写像 $\phi$ を誘導する.
+  \item $\phi$ は双正則写像である. \qed
+  \end{enumerate}
+\end{question}
+
+\noindent ヒント: 上の2つの問題の結果を認めると簡単である. もちろん, %
+$\pe$ 函数に関する色々な結果は自由に用いて良い.
+
+\medskip
+
+以上によって, $y^2 = 4x^3 - A_2 x - A_3$ で定義される複素曲線(Riemann 
+面)と, 複素平面を lattice $\Omega$ で割ってできる Riemann 面は本質的に
+同じものを違う見方で見たものであることがわかった. その2つの Riemann 面
+の間を繋ぐのが, 楕円不定積分
+\[
+  u = \int^x \frac{dx}{\sqrt{4x^3 - g_2 x - g_3}}
+\]
+および $\pe$ 函数なのである.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 06-17.tex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\bigskip
+
+\noindent まとめ: この節では2つの Riemann 面の族を扱った. 1つは周期格
+子 $\Omega\subset\C$ を与えるごとに定まる Riemann 面 $\C/\Omega$ であ
+り, もう1つは重根を持たない3次式 $f(x)=4x^3-A_2x-A_3$ を与えるごとに定
+まる $y^2=f(x)$ なる方程式で定義される射影平面上の複素曲線 $E$ である. 
+そして, Weierstrass の $\pe$ 函数の理論によって得られる結論は, その2つ
+の Riemann 面の族は本質的に同じものであるというものである. これによっ
+て, $y^2=f(x)$ によって定義される複素射影曲線上の有理型函数の理論と %
+$\C$ 上の2重周期を持つ有理型函数の理論は同等であることがわかったのであ
+る. (一般にジーナス1の任意のコンパクト Riemann 面はある周期格子 
+$\Omega\subset\C$ に対する $\C/\Omega$ に双正則になることを示すことが
+できる.)
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Riemann 面上の微分形式とその積分}
+
+前節の最後の部分で重要な役目を果たしたのは次の形の楕円不定積分であった:
+$$
+   u = \int^x \frac{dx}{\sqrt{4 x^3 - A_2 x - A_3}}.
+   \leqno{(*)}
+$$ %
+この楕円不定積分の話を抽象化し, この不定積分の定義を明確にするのが, こ
+の節の目標である.
+
+%この節で説明する Riemann 面上の微分形式の一般論などに関するより詳しい
+%説明については \cite{Iwasawa} もしくは \cite{Gun} を見よ.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{楕円積分の合理化の筋道}
+
+楕円不定積分 $(*)$ は正確には複素 $x$ 平面における線積分として定義され
+る. そこで, 注意しなければいけないことは, 複素函数としての平方根は一価
+函数ではないことである. 線積分の経路が $f(x)=4 x^3 - A_2 x - A_3$ の根
+のまわりを1周するたびに $\sqrt{f(x)}$ が $-1$ 倍の変化をすることに注意
+をして積分を行なわなければいけない. しかし, 被積分函数の多価性に常に気
+を配り続けるのは大変である. 
+
+多価函数の繁雑さを避けるためには, 考えている多価函数の定義域を適切に制
+限してしまえば簡単である. 例えば, $\sqrt{f(x)}$ の場合は次のように考え
+ることができる. $f(x)$ の根を $\lambda_i$ ($i=1,2,3$) と書き, %
+$\lambda_1$ と $\lambda_2$ を線分 $I_1$ と $\lambda_3$ から $\infty$ 
+への $I_1$ と交わらない無限半直線 $I_2$ を $\C$ から取り除いてできる領
+域上で $\sqrt{f(x)}$ は一価函数になるのである. 
+
+しかし, この制限によって, $\lambda_i$ のまわりを一周するような積分はで
+きなくなってしまう. この不都合を避けるための1つの方法は次のように考え
+ることである. 上と同様に線分 $I_1$ と無限半直線 $I_2$ を考える. しかし,
+今度は $I_1$, $I_2$ を取り除いて考えるのではなく, 複素平面 $\C$ に %
+$I_1$, $I_2$ のcut(切れ目)が入っているものと考え, 同じ cutの入った複素
+平面をもう一枚用意しておく. そして, cutの入った2枚の複素平面を貼り合わ
+せて(この辺の話は講義でやっているはず), Riemann 面を構成するのである. 
+その Riemann 面上で $\sqrt{f(x)}$ は一価函数になる.  $\lambda_i$ のま
+わりを一周することは, 出発点にいた複素平面から``切れ目''を通って他方の
+複素平面に移動することであると解釈されるので, $\sqrt{f(x)}$ の $-1$ 倍
+分の多価性は定義域の拡張の方に吸収されてしまうのである.
+
+ところが, 被積分函数の定義域が Riemann 面であると考えたければ, その 
+Riemann 面上における線積分の理論が必要になるのである. さらに, 上のよう
+にして構成された Riemann 面だけではなく, 一般の抽象 Riemann 面に対する
+理論を整備しておいた方が便利である.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{複素平面内の開集合上の微分形式とその積分}
+
+まず, $\C$ の開集合上の話から始めよう. $\C$ 全体の座標を $z$ と書き,
+$U$ はその開集合であるとする.
+
+$z\in\C$ に対して $z=x+iy$ ($x,y\in\R$) と書くことにする. $U$ 上の 
+$C^\infty$ 函数のことを $U$ 上の{\bf 可微分0形式}(differentiable
+0-form)と呼ぶ. $U$ 上の $C^\infty$ 函数 $a=a(x,y)$, $b=b(x,y)$ に対す
+る形式和 $a\,dx + b\,dy$ のことを $U$ 上の{\bf 可微分1形式}
+(differentiable 1-form)と呼ぶ. さらに, $U$ 上の $C^\infty$ 函数 
+$c=c(x,y)$ に対する $c\,dx\wedge dy$ を $U$ 上の{\bf 可微分2形式}
+(differentiable 2-form)と呼ぶ. 
+
+$U$ 上の $C^\infty$ 函数 $f$ に対して, その全微分 $df=f_x\,dx+f_y\,dy$
+は可微分1形式である. $dx\wedge dx=dy\wedge dy=0$, %
+$dy\wedge dx=-dx\wedge dy$ なる計算規則を可微分1形式に $C^\infty$ %
+函数上双線形に拡張しておく. 具体的に式を書き下すと
+\[
+  (a\,dx+b\,dy)\wedge(c\,dx+d\,dy)
+  = (ad-bc)\,dx\wedge dy.
+\] %
+(注意: ここで $2\times 2$ 行列の行列式 $ad-bc$ が現われたのは偶然では
+ない.) これを微分形式の{\bf 外積}(exterior product)と呼ぶ. 可微分1形
+式 $a\,dx+b\,dy$ の{\bf 外微分}を次のように定義する:
+\[
+  d(a\,dx+b\,dy)
+  :=da\wedge dx + db\wedge dy
+  =(b_x-a_y)\,dx\wedge dy.
+\]
+可微分2形式の外微分は常に0であると約束しておく. 外微分はそれを2回ほど
+こすと0になるという性質を持っている. 実際, $C^\infty$ 函数 $f$ に対して,
+\[
+  ddf = d(f_x\,dx+f_y\,dy)=(f_{yx}-f_{xy})\,dx\wedge dy = 0.
+\] %
+$U$ 上の可微分 $p$ 形式全体のなす空間を $A^p(U)$ と書くことにする
+($p\ne0,1,2$ に対しては $A^p(U)=\{0\}$ と置く). 外微分 $d$ によって, %
+$A^\bdot(U)$ は余鎖複体(cochain complex)をなす. これを $U$ の de Rham
+複体と呼び, そのコホモロジー群 $H^p(A^\bcdot(U))$ を $U$ の de Rham コ
+ホモロジー群と呼び, $\Hdr^p(U,\C)$ と表わす.
+
+微分形式の積分を定義しよう. $U$ 上の函数 $f$ と $U$ の有限部分集合 $S$
+に対して,
+\[
+  \int_S f := \sum_{p\in S} f(p).
+\] %
+$U$ 上の可微分1形式 $a\,dx+b\,dy$ と $U$ 内の区分的に滑らかな曲線 %
+$\gamma:[t_0,t_1]\to U$, $\gamma(t)=x(t)+iy(t)$ ($x(t),y(t)\in\R$)に対
+して,
+\[
+  \int_\gamma (a\,dx+b\,dy)
+  := \int_{t_0}^{t_1}
+     \left(
+       a(x(t),y(t))\od{x(t)}{t} +
+       b(x(t),y(t))\od{y(t)}{t}
+     \right)\, dt.
+\]
+$U$ 上の可微分2形式 $c\,dx\wedge dy$ と $U$ 内のコンパクト部分集合 $K$
+に対して,
+\[
+  \int_K c\,dx\wedge dy
+  := \int_K c(x,y)\, dx\,dy.
+\] %
+つまり, $U$ 上の可微分 $p$ 形式は $U$ 内の $p$ 次元部分空間上での積分
+の``被積分函数''の役目を果たすのである. 上の一連の定義を見ればわかるこ
+とだが, 微分形式は記号的には単に積分における $\int$ の記号を省略したも
+のとして定義されたのだと考えることもできる.
+
+\begin{question}
+  $\C^{\times}=\C\setminus\{0\}$ の de Rham コホモロジー群は次のように
+  なる:
+  \[
+    \Hdr^0(\C^{\times},\C)\simeq\Hdr^1(\C^{\times},\C)\simeq\C,
+    \qquad
+    \Hdr^p(\C^{\times},\C)=0 \quad(p\ne0). \qed
+  \]
+\end{question}
+
+\noindent 参考: $\C^{\times}$ は極座標を考えることによって %
+$S^1\times\R_{>0}$ と同相であることがわかる. $\R_{>0}$ は可縮であるの
+で, $\C^{\times}$ は $S^1$ とホモトピー同値である. よって, %
+$H_p(\C^{\times},\C)\simeq H_p(S^1,\C)$ であるから, 
+\[
+  H_0(\C^{\times},\C)\simeq H_1(\C^{\times},\C)\simeq \C,
+  \qquad
+  H_p(\C^{\times},\C)=0 \quad (p\ne 0).
+\] %
+が成立する(幾何の方の演習を思い出すこと). これより, $\C$ 係数のホモロ
+ジー群と de Rham コホモロジー群はベクトル空間として同型になることがわ
+かる. これはもちろん偶然ではない. 一般に可微分多様体 $M$ に対して, de
+Rham の定理により, de Rham コホモロジー群はホモロジー群の双対ベクトル
+空間に自然に同型になるのである:
+\[
+  \Hdr^p(M,\C) \simeq H_p(M,\C)^*.
+\]
+
+\bigskip
+
+$U$ 上の正則函数 $h=h(z)$ に対する $h\,dz$ を $U$ 上の{\bf 正則1形式}
+(holomorphic 1-form)と呼ぶ. 記号法上自然に $dz=dx+i\,dy$ であると考え
+る. これによって, 正則1形式は自然に可微分1形式であるとみなせる. よって, 
+正則1形式の線積分が定義されていると考えて良い. $h$ が $U$ 上の有理型函
+数であるとき, $h\,dz$ は $U$ 上の{\bf 有理型1形式}(meromorphic 1-form)
+であると言う.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{微分形式の座標変換}
+
+さて, ここからが大事な点である. 今まで $U$ 上の座標系 $z=x+iy$ を1つ固
+定して話を進めて来た. $U$ に別の座標系 $w=u+iv$ が入っていた場合はどう
+なるのであろうか? $U$ 上の別の(正則)座標系とは $\C$ の別の開集合 $V$ 
+から $U$ への双正則写像 $\phi : V \isoto U$ のことである. ($V$ には座
+標系 $w=u+iv$ が入っているとする.) このとき, $z=x+iv$ は $z=\phi(w)$ 
+によって $V$ 上の函数であるとみなせる. この変数変換によって形式的には
+以下が成立するものと考えられる:
+\begin{align*}
+  &
+  a\,dx+b\,dy
+  = a\,(x_u\,du + x_v\,dv) + b\,(y_u\,du + y_v\,dv)
+  = (a x_u + b y_u)\, du + (a x_v + b y_v)\,dv,
+  \\ &
+  c\,dx\wedge dy
+  = c\,(x_u\,du + x_v\,dv)\wedge(y_u\,du + y_v\,dv)
+  = c \begin{vmatrix}x_u&x_v\\y_u&y_v\end{vmatrix}\,du\wedge dv,
+  \\ &
+  h\,dz
+  = h\,\od{z}{w}\,dw.
+\end{align*}
+形式的に得られたこの公式は微分形式の積分の定義とコンパチブルになってい
+る. この公式によって, $U$ 上の可微分 $p$ 形式と $V$ 上の可微分 $p$ 形
+式を同一視すると, $U$ 上の $p$ 形式としての積分と $V$ 上の $p$ 形式と
+しての積分の値が一致するのである. $\phi$ を通して $U$ と $V$ を同一視
+すると, $U$ の有限部分集合 $S$, $U$ 内の曲線 $\gamma$, $U$ のコンパク
+ト部分集合 $K$ のそれぞれと $V$ の有限部分集合 $T=\phi^{-1}(S)$, $V$ 
+内の曲線 $\eta=\phi^{-1}\circ\gamma$, $V$ のコンパクト部分集合 %
+$L=\phi^{-1}(K)$ が同一視される. $\eta(t)=u(t)+iv(t)$ と表わしておく.
+このとき, 以下が成立する:
+\begin{align*}
+  &
+    \int_S f
+    = \sum_{q\in\phi^{-1}(S)}f(\phi(q))
+    = \int_T (f\circ\phi),
+    \qquad
+  \\ &
+    \int_\gamma (a\,dx+b\,dy)
+    = \int_{t_0}^{t_1} (a\,\dot{x} + b\,\dot{y})\,dt
+    = \int_{t_0}^{t_1}
+      [
+        a\,(x_u\dot{u}+x_v\dot{v}) +
+        b\,(y_u\dot{u}+y_v\dot{v})
+      ]\,dt
+  \\ & \qquad\qquad\qquad
+    = \int_\eta [(a x_u + b y_u)\, du + (a x_v + b y_v)\,dv],
+  \\ &
+    \int_K c\,dx\wedge dy
+    = \int_K c \,dx\,dy
+    = \int_L
+      c \begin{vmatrix} x_u & x_v \\ y_u & y_v \end{vmatrix} \,du\,dv
+    = \int_L
+      c \begin{vmatrix} x_u & x_v \\ y_u & y_v \end{vmatrix} \,du\wedge dv.
+\end{align*}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Riemann 面上の微分形式}
+
+さて, 以上の準備のもとで, Riemann 面上の微分形式を定
+義しよう. $X$ 上の正則座標近傍 %
+$(U_\lambda,\phi_\lambda:U_\lambda\to\C)$ に対して, $\C$ の座標系から
+得られる $\phi_\lambda(U_\lambda)\subset\C$ 上の座標系を %
+$z_\lambda=x_\lambda+iy_\lambda$ と書くことにする. % 
+$X$ 上の $C^\infty$ 函数とは, $X$ 上の函数 $f$ であって, $X$ 上の
+任意の正則座標近傍 $(U_\lambda,\phi_\lambda)$ に対して, %
+$f_\lambda:=f\circ\phi_\lambda^{-1}$ が $\phi(U_\lambda)$ 上の 
+$C^\infty$ 函数になるもののことである. $X$ 上の $C^\infty$ 函数のこと
+を可微分0形式と呼ぶことがある. %
+$X$ 上の任意の正則座標近傍 $(U_\lambda,\phi_\lambda)$ に対して %
+$\phi_\lambda(U_\lambda)$ 上の可微分1形式 %
+$g_\lambda=a_\lambda\,dx_\lambda+b_\lambda\,dy_\lambda$ が与えられてい
+て, 任意の他の正則座標近傍 $(U_\mu,\phi_\mu)$ に対して, %
+$\phi_\mu(U_\lambda\cap U_\mu)$ 上で次の等式が成立しているとき $g$ %
+は $X$ 上の可微分1形式であると言う:
+\[
+  \left(
+    a_\lambda \pd{x_\lambda}{x_\mu} +
+    b_\lambda \pd{y_\lambda}{x_\mu}
+  \right)
+  \,dx_\mu +
+  \left(
+    a_\lambda \pd{x_\lambda}{y_\mu} +
+    b_\lambda \pd{y_\lambda}{y_\mu}
+  \right)
+  \,dy_\mu
+  = a_\mu\,dx_\mu+b_\mu\,dy_\mu.
+\]
+ここで, 正確には左辺の $a_\lambda,b_\lambda,x_\lambda,y_\lambda$ は %
+$\phi_\lambda\circ\phi_\mu^{-1}$ との合成によって %
+$\phi_\mu(U_\lambda\cap U_\mu)$ 上の函数とみなしたものである. この等式の
+左辺は形式的には $a_\lambda\,dx_\lambda+b_\lambda\,dy_\lambda$ に一致
+することに注意せよ. これに注意すれば, 上の等式を憶え易く次のように書く
+ことができる:
+\[
+    a_\lambda\,dx_\lambda+b_\lambda\,dy_\lambda
+  = a_\mu\,dx_\mu+b_\mu\,dy_\mu
+  \qquad
+  \text{on $U_\lambda\cap U_\mu$.}
+\]
+なお, 実際に可微分1形式を得るためには全ての座標近傍に対して %
+$g_\lambda$ を与える必要はない. $X$ を覆うような座標近傍の族
+に含まれるような座標近傍に対してのみ $g_\lambda$ が与えられていれば十
+分である. 残りの座標近傍に対しては上の等式によって $g_\mu$ を定めてや
+れば良いからである%
+\footnote{この定義の仕方は素朴であるが間に合わせ的なものである. 微分形
+  式の定義の仕方は他にも色々な流儀がある. 微分幾何の範疇では, まず余接
+  束(cotangent bundle)を定義し, その外積の切断(section)として微分形式
+  を定義することが多い. 代数幾何の範疇では, まず1形式の層(sheaf)をある
+  種の普遍性によって定義し, その外積として $p$ 形式の層を定義すること
+  が多い.}. %
+可微分2形式の定義も同様である. %
+$X$ 上の任意の正則座標近傍 $(U_\lambda,\phi)$ に対して %
+$\phi(U_\lambda)$ 上の可微分2形式 %
+$g_\lambda=c_\lambda\,dx_\lambda\wedge dy_\lambda$ が与えられてい
+て, 任意の他の正則座標近傍 $(U_\mu,\phi_\mu)$ に対して, %
+$\phi_\mu(U_\lambda\cap U_\mu)$ 上で次の等式が成立しているとき $g$ %
+は $X$ 上の可微分2形式であると言う:
+\[
+  c_\lambda
+  \begin{vmatrix}
+    \pd{x_\lambda}{x_\mu} & \pd{x_\lambda}{y_\mu} \\ 
+    \pd{y_\lambda}{x_\mu} & \pd{y_\lambda}{y_\mu}
+  \end{vmatrix}
+  \,dx_\mu\wedge dx_\mu
+  = c_\mu\,dx_\mu\wedge dy_\mu.
+\]
+ここで, 正確には左辺の $c_\lambda$, etc は %
+$\phi_\lambda\circ\phi_\mu^{-1}$ との合成によって %
+$\phi_\mu(U_\lambda\cap U_\mu)$ 上の函数とみなしたものである. この等式の
+左辺は形式的には $c_\lambda\,dx_\lambda\wedge dy_\lambda$ に一致
+することに注意せよ. これに注意すれば, 上の等式を憶え易く次のように書く
+ことができる:
+\[
+    c_\lambda\,dx_\lambda\wedge dy_\lambda
+  = c_\mu\,dx_\mu\wedge dy_\mu
+  \qquad
+  \text{on $U_\lambda\cap U_\mu$.}
+\]
+なお, 実際に可微分2形式を得るためには全ての座標近傍に対して %
+$g_\lambda$ を与える必要はない. $X$ を覆うような座標近傍の族
+に含まれるような座標近傍に対してのみ $g_\lambda$ が与えられていれば十
+分である. 残りの座標近傍に対しては上の等式によって $g_\mu$ を定めれや
+れば良いからである. %
+Riemann 面上の正則1形式と有理型1形式も全く同じ流儀で定義される. (詳し
+いことは省略する.) $X$ の開集合もまた Riemann 面であるとみなせるので, 
+以上によって Riemann 面の開集合上の微分形式も定義されたことになる.
+
+各正則座標近傍上で外積と外微分を考えることによって, Riemann 面上の微分
+形式の外積と外微分が定義される. Riemann 面 $X$ 上の可微分 $p$ 形式全体
+の空間を $A^p(X)$ と書くと, 外微分 $d : A^p(X)\to A^{p+1}(X)$ によって
+余鎖複体 $A^\bdot(X)$ ができる. これを $X$ の de Rham 複体と呼び, その
+コホモロジー群を $\Hdr^p(X,\C)$ と書き, $X$ の de Rham コホモロジー群と
+呼ぶ. 
+
+\medskip
+
+\noindent 参考: $X$ がジーナス $g$ のコンパクト Riemann 面であるとき, %
+$X$ の de Rham コホモロジー群は次のようになる:
+\[
+  \Hdr^0(X,\C)\simeq \Hdr^2(X,\C) \simeq \C,
+  \quad
+  \Hdr^1(X,\C)=\C^{2g},
+  \quad
+  \Hdr^p(X,\C)=0 \quad (p\ne0,1,2).
+\]
+さらに, $X$ のホモロジー群は次のようになる.
+\[
+  H_0(X,\Z)\simeq H_2(X,\Z) \simeq \Z,
+  \quad
+  H_1(X,\Z)=\Z^{2g},
+  \quad
+  H_p(X,\Z)=0 \quad (p\ne0,1,2).
+\]
+
+\medskip
+
+$X$ 上の可微分 $1$ 形式 $g$ に対して, その複素共役 $\bar g$ を定義しよ
+う. $g$ は
+\[
+  g = a\,dz + b\,d\zbar
+  \qquad
+  (dz=dx+i\,dy,\;\;d\zbar=dx-i\,dy)
+\] %
+と書けるので, $\overline{g}$ を %
+\[
+  \bar g = \bar a \,d\zbar + \bar b \,dz
+\]
+と定義する. この式が正則座標 $z$ の取り方によらないことを示せば, この
+式によって Riemann 面上の可微分1形式の複素共役が定義できることがわかる.
+他の正則座標を $w$ と書き, $z'=\partial z/\partial w$ と置くと, %
+$\partial\zbar/\partial\wbar= \overline{z'}$ が成立するので, 
+\[
+  g = a z'\,dw + b \overline{z'}\,d\wbar
+\]
+が成立し, 一方, 上の $\bar g$ の定義より,
+\[
+  \bar g
+  = \bar a \,d\zbar + \bar b \,dz
+  = \bar a \overline{z'}\,d\wbar  + \bar b z'\,dw
+  = \overline{az'}\,d\wbar  + \overline{b \overline{z'}}\,dw.
+\]
+よって, $z$ を使って $\bar g$ を定義しても $w$ を使って $\bar g$ を定
+義してもそれらは同じものになる.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{正則1形式の例}
+
+\begin{question}
+  $\omega_1,\omega_2\in\C$ は $\R$ 上一次独立であるとし, %
+  $\Omega=\Z\omega_1+\Z\omega_2$ と置く. $\C$ の座標を $u$ と書くと, %
+  $du$ は $\C$ 上の正則1形式であり, $\C/\Omega$ 上の正則1形式を誘導す
+  ることを説明せよ. \qed
+\end{question}
+
+次の問題は正則1形式の重要な例を与える. 次の問題の $n=3,4$ の場合がちょ
+うど楕円積分および楕円曲線の場合に相当している. 一般論の建設の動機になっ
+たと思われる例なので, 次の問題を理解しておくことは大変重要である.
+
+\begin{question}\label{q:1form1}\qstar{*}
+  $n\ge1$ 次の複素係数多項式 $f(x)=a_n x^n + \dots + a_1x+a_0$ %
+  ($a_n\ne0$)は重根を持たないと仮定する. このとき,
+  \[
+    X' = \{\, (x,y)\in\C^2 \mid y^2 = f(x)\,\}
+  \]
+  は自然に Riemann 面とみなせる. さらに, 
+  \[
+    \frac{dx}{y}
+    = \frac{dx}{\sqrt{f(x)}}
+    = \frac{dx}{\sqrt{a_n x^n + \dots + a_1x+a_0}}
+  \]
+  は自然に $X'$ 上の正則1形式とみなせる. しかも, $dx/y$ は $X'$ 上で零
+  点を持たない. \qed
+\end{question}
+
+\noindent ヒント: $f(x)$ の $n$ 個の根を $\lambda_1,\dots,\lambda_n$ 
+と書くことにする. $F(x,y)=f(x)-y^2$ と置くと
+\[
+  dF(x,y) = f'(x)\,dx - 2y\,dy.
+\] %
+($dF$ が $X'=\{F=0\}$ 上で $0$ にならないことが重要である.) %
+$f(x)$ は重根を持たないと仮定したので $f'(\lambda_i)\ne 0$ であるから %
+$(\lambda_i,0)\in X'$ の近傍では $y$ を正則座標として採用し, 他の $X'$ 
+の点 $(x_0,y_0)$ に対しては $-2y_0\ne0$ であるから $x$ を正則座標とし
+て採用することにする. これによって $X'$ に Riemann 面の構造が入ること
+は容易に確かめられる. 次に $dx/y$ を $X'$ 上の正則1形式とみなす方法に
+ついて説明する. $X'$ 上で $F(x,y)=0$ であるから, $F$ を $X$ に沿って全
+微分すると0になる. よって, 上の式より, $X'$ 上で $2y\,dy = f'\,dx$. %
+$X'$ 上の点 $(\lambda_i,0)$ の近傍では $y$ を正則座標として採用したので,
+$y$ のみの式で $dx/y$ を表示しよう. $(\lambda_i,0)$ の近傍においては 
+$x$ は $y$ の正則函数になる. それを $x=x(y)$ と書くことにしよう. 
+$dx= 2y\,dy/f'(x(y))$ であるから,
+\[
+  \frac{dx}{y}
+  = \frac{2y\,dy}{f'(x(y))y}
+  = \frac{2\,dy}{f'}
+  \qquad
+  \text{near $(\lambda_i,0)$.}
+\]
+$(\lambda_i,0)$ の近傍では $f'\ne0$ であるから, これは $y=0$ の近傍に
+おける正則1形式である. $(x_0,y_0)$ は $(\lambda_i,0)$ 以外の $X'$ 上の
+点であるとする. $(x_0,y_0)$ の近傍では $x$ を正則座標として採用したの
+で, $dx/y$ を $x$ のみを使って表示しよう:
+\[
+  \frac{dx}{y}
+  = \frac{dx}{\sqrt{f(x)}}
+  \qquad
+  \text{near $(x_0,y_0)$}.
+\] %
+ここで, $\sqrt{f(x)}$ の分岐は $x_0$ において値 $y_0$ を取るものを選ん
+だ. $\sqrt{f(x)}$ は $x_0$ の近傍で0にならない正則函数であるから, これ
+は $x=x_0$ の近傍における正則1形式である. 以上によって, $dx/y$ は $X'$
+上の正則1形式を定めることがわかった. $dx/y$ が零点を持たないことは以上
+によって得られた式を見れば明らかである.
+
+\medskip
+
+\noindent 参考: 実は上のように考えると``無限遠''での処理が少々面倒にな
+る. 無限遠点における様子を素朴に処理するためには, ``cut'' による処方箋
+の方を使う方が簡単である. 以下, その方法を説明しよう. $f(x)$ の $n$ 個
+の根を $\lambda_i$ ($i=1,\cdots,n$) と書く. $n$ が偶数ならば $n=2g+2$ 
+によって $g$ を定め, $n$ が奇数ならば $n=2g+1$ によって $g$ を定め, %
+$\lambda_{2g+2}=\infty$ と置く. $\lambda_{2k-1}$ と $\lambda_{2k}$ を
+結ぶ $\P^1=\P^1(\C)$ 内の線分を $I_k$ と書く. $\lambda_i$ を適当に並べ
+換えることにより $I_1,\dots,I_{g+1}$ は互いに交わないようにできる. %
+$I_1,\dots,I_{g+1}$ に cut を入れた $\P^1$ のコピーを2つ($X_1$, $X_2$ 
+と書く)用意し, それらを貼り合わせる. ただし, cut を経由して点が移動す
+るとき, 自然に他方の面に移るように貼り合わせる. こうやってできた位相空
+間を $X$ と書くことにする. $X$ は位相的にはジーナス $g$ の閉じた閉曲面
+と同相である. $X$ に複素構造を入れよう. $\lambda_i$ に対応する $X$ 上
+の点を $P_i$ と書くことにする. $P_i$ 以外の点 $P\in X$ の近傍は自然に %
+$\C$ の開集合とみなせるので自然に正則座標が入る. これによって, %
+$X\setminus\{P_1,\dots,P_{2g+2}\}$ は自然に Riemann 面とみなせる.  問題
+は $P_i$ の近傍にも正則座標を導入して $X$ 全体に複素構造を入れることで
+ある. まず, $\lambda_i\ne\infty$ の場合を考える. $\C$ の原点を含む開円
+板 $U$ を考える. 写像 $f_i:U\to X$ を
+\[
+  f_i(w) :=
+  \begin{cases}
+    (w^2 + \lambda_i \ \text{に対応する $X_1$ の点})
+    & \qquad (\arg w \in [0,\pi])
+    \\
+    (w^2 + \lambda_i \ \text{に対応する $X_2$ の点})
+    & \qquad (\arg w\in[\pi,2\pi])
+  \end{cases}
+\] %
+と定義すると, $f(U)$ は $P_i$ の開近傍であり, $f_i$ は $U$ から $f(U)$ 
+への同相写像である. そこで, $f_i$ の逆写像を $P_i$ の近傍における正則
+座標と考えることにする. $f_i$ の逆写像は $(z-\lambda_i)^{1/2}$ を一価
+函数とみなしたものである. $n$ が奇数であり $\lambda_{2g}=\infty$ の場
+合は $\infty$ の近傍における座標として $u=z^{-1}$ を考え, $u^{1/2}$ を
+一価函数とみなしたものを正則座標と考えれば良い. これによって, $X$ はジー
+ナス $g$ のコンパクト Riemann 面であるとみなせる. さて, $dx/y$ は %
+$x=\infty$ の近くでどのように振る舞っているのであろうか? それを調べる
+ためには $x=1/u$ と置き, $u=0$ の近傍における様子を調べれば良い. %
+$dx = - u^{-2}\,du$ であるから,
+\[
+  \frac{dx}{y}
+  = - \sqrt{\frac{u^{n-4}}{a_0u^n+\cdots+a_{n-1}u+a_n}}\,du.
+\] %
+$a_n\ne0$ であることより次が成立していることがわかる:
+\begin{itemize}
+\item $n$ が偶数のとき: $dx/y$ は $u=0$ を中心とする微少な円周上の回転
+  に関する多価性を持たない. $u=0$ に対応する $X$ 上の点は2点存在する. 
+  $dx/y$ はその2点の近傍の有理型に解析接続されるが, それらは平方根の多
+  価性により $u$ に関する有理型1形式として互いに異なる.
+\item $n$ が奇数のとき: $dx/y$ は $u=0$ を中心とする微少な円周上の回転
+  に関して $-1$ 倍の多価性を持つ. $u=0$ に対応する $X$ 上の点は1点だけ
+  である. $dx/y$ はその1点の近傍まで有理型に解析接続される.
+\end{itemize}
+また式から明らかなように, $n\ge4$ のとき $dx/y$ は $u=0$ の近傍でも正
+則であり, $n=4$ ならば $u=0$ においても $0$ にならない. $n=3$ の場合は
+見掛け上 $u=0$ は $dx/y$ の特異点であるように見える. しかし, それは 
+$n$ が奇数の場合は $u=0$ に対応する $X$ 上の点の近傍の正則座標として %
+$u$ ではなく $u^{1/2}$ を取らなければいけないことを忘れているためであ
+る. そこで $u=v^2$ と置くと, 上の式は次のように変形される:
+\[
+  \frac{dx}{y}
+  = -2 \sqrt{\frac{v^{2(n-3)}}{a_0v^{2n}+\cdots+a_{n-1}v^2+a_n}}\,dv.
+\]
+この式より, $n\ge 3$ のとき, $dx/y$ は無限遠でも正則であることがわかる.
+さらに, $n=3$ のとき, $dx/y$ は $v=0$ でも $0$ にならないこともわかる.
+以上をまとめると, $n=3,4$ のとき $dx/y$ はジーナス $1$ の Riemann 面 %
+$X$ 上の零点を持たない正則1形式を定めることがわかった. (ジーナス $1$ 
+の Riemann 面は一般に楕円曲線と呼ばれる.) $n\ge5$ の場合は, $dx/y$ の
+定めるジーナス $g\ge2$ の Riemann 面上の正則1形式は無限遠点を除いて零
+点を持たず, $n$ が偶数のとき $n=2g+2$ であるから2つの無限遠点における
+零点の位数は各々 $g-1$ であり, $n$ が奇数のとき $n=2g+1$ であるから唯
+一の無限遠点における零点の位数は $2g-2$ である. ($y^2=f(x)$ で定義され
+る Riemann 面は超楕円曲線(hyperelliptic curve)と呼ばれている. 超楕円曲
+線のジーナスはいくらでも高くなりうる.)
+
+\medskip
+
+\noindent 参考: Riemann 面に関する一般論より, ジーナス $g\ge 1$ のコン
+パクト Riemann 面上の大域的に定義された0でない正則1形式は重複を込めて %
+$2g-2$ 個の零点を持つことが知られている. 特に $g=1$ すなわち楕円曲線の
+場合は大域的に定義された0でない正則1形式は零点を持たない. $g=0$ すなわ
+ち $\P^1$ の場合は有理型1形式は重複を込めて最低でも2つの極を持つ.
+
+\bigskip
+
+問題\qref{q:1form1}のヒントおよび参考において, 重根を持たない $n\ge1$ 
+次の複素係数多項式 $f(x)=a_nx^n+\dots+a_1x+a_0$ ($a_n\ne0$) に対して,
+\[
+  X' = \{\, (x,y)\in\C^2 \mid y^2 = f(x) \,\}
+\]
+は自然に Riemann 面であるとみなせ, さらに, 
+\[
+  \frac{dx}{y}
+  = \frac{dx}{\sqrt{f(x)}}
+  = \frac{dx}{\sqrt{a_n x^n + \dots + a_1x+a_0}}
+\] %
+は $X'$ 上の零点を持たない正則1形式を定めることを説明した. %
+$X'$ に無限遠点を付け加えることによって, コンパクト Riemann 面 $X$ を
+構成することができる. (カットによる構成の仕方を見よ.) $n$ が偶数である
+か奇数であるかにしたがって, $X'$ に付け加えるべき無限遠点の個数は2個ま
+たは1個になり, $X$ のジーナス $g$ はそれぞれ $(n-2)/2$ または %
+$(n-1)/2$ になる.
+
+$dx/y$ は $X$ 上の正則1形式に一意的に拡張されるのであった. 一般にジー
+ナス $g$ のコンパクト Riemann 面上大域的に正則な正則1形式の全体のなす
+空間の次元は $g$ になることが知られている. $g\ge1$ のとき, $dx/y$ は %
+$X$ 上の正則1形式の1つを与えているのだが, 残りの $g-1$ 個の一次独立な
+正則1形式をどのように構成すればよいのであろうか? その解答を次の問題と
+して提出しておこう. 
+
+\begin{question}
+  $n\ge3$ すなわち $g\ge1$ であると仮定する. このとき, 
+  \[
+    \frac{x^j\,dx}{y}
+    = \frac{x^j\,dx}{\sqrt{f(x)}}
+    = \frac{x^j\,dx}{\sqrt{a_n x^n + \dots + a_1x+a_0}},
+    \qquad
+    j=0,1,\dots,g-1
+  \] %
+  は $X$ 上大域的に正則な正則1形式であり, 互いに一次独立である. \qed
+\end{question}
+
+\noindent ヒント: 無限遠においても正則であることを示せば十分である. %
+$x=1/u=1/v^2$ と置くと,
+\[
+  \frac{x^j\,dx}{y}
+  = - \sqrt{\frac{u^{n-2j-4}}{a_0u^n+\cdots+a_{n-1}u+a_n}}\,du
+  = -2 \sqrt{\frac{v^{2(n-2j-3)}}{a_0v^{2n}+\cdots+a_{n-1}v^2+a_n}}\,dv.
+\] %
+$n$ が偶数のとき, $n=2g+2$ であり, $X$ の無限遠点における正則局所座標
+として $u$ を採用できるので, $n-2j-4=2(g-1-j)\ge0$ のとき, %
+$x^j\,dx/y$ は無限遠点においても正則でもある. $n$ が奇数のとき, %
+$n=2g+1$ であり, $X$ の無限遠点における正則局所座標して $v$ を採用でき
+るので, $n-2j-3=2(g-1-j)\ge0$ のとき, $x^j\,dx/y$ は無限遠点におい
+ても正則である.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Riemann 面上の微分形式の積分}
+
+さて, 次に Riemann 面 $X$ 上の $p$ 形式の積分を定義しよう. $X$ 上の可
+微分 $p$ 形式とは各座標近傍上の可微分 $p$ 形式の族であり, $dx$ や $dy$
+や $dz$ という記号に関して自然な座標変換則を満たすものとして定義したの
+であった. その座標変換則は積分の定義とコンパチブルになっていることも説
+明した. よって, $p$ 形式の積分は各座標近傍上に分けて定義し, それらを貼
+り合わせることによって定義すれば良いことがわかる. 異なる座標近傍上で自
+然に積分を定義すれば, その値は座標近傍の取り方によらないので, 貼り合わ
+せはうまく行くと考えられるからである. 
+例えば, $X$ 上の正則微分形式 $h$ と区分的に滑らかな曲線 % 
+$\gamma:[a,b]\to X$ に対して, 積分 $\int_\gamma g$ を定義する方法を説
+明しよう. 区間 $[a,b]$ を $a=a_0<a_1<\cdots<a_{n-1}<a_n=b$ と分割して,
+各 $[a_{k-1},a_k]$ が $X$ 上の1つの座標近傍 $(U_k,\phi_k)$ に含まれる
+ようにできる. $\phi_k(U_k)$ 上の座標を $z_k$ と書き, %
+$z_k(t)=\phi_k(\gamma(t))$ ($t\in[a_{k-1},a_k]$) と置く. %
+$\phi(U_k)$ 上で $h$ は $h_k(z_k)\,dz_k$ に等しいものとする. %
+$\gamma$ に沿った $h$ の積分は以下のように定義される:
+\[
+  \int_\gamma h :=
+  \sum_{k=1}^n \int_{a_{k-1}}^{a_k} h_k(z_k(t))\od{z_k(t)}{t}\,dt.
+\]
+この積分の値は区間の分割と正則座標近傍の取り方によらない.
+
+初心者の人は複雑なことをしているように見えて難しく感じるかもしれないが,
+微分形式は積分の変数変換の規則を $\int$ 抜きで定式化したものに過ぎない
+ので, その積分の定義が座標の取り方によらないということは当然のことであ
+ると理解して欲しい.
+
+さて, 2次元における微分積分学の基本定理は Green の公式であった. Green 
+の公式は Riemann 面上でも全く同様な形で成立することが証明できる%
+\footnote{各座標近傍上の Green の公式を $X$ 全体に拡張する方法には少な
+  くとも2通りの方法がある. 1つは $X$ を細かく三角形分割し, 各三角形が1
+  つの座標近傍に入るようにし, 各三角形ごとに考えるという方法である. も
+  う1つは1の分割を使い, 微分形式を台が1つの座標近傍に入るような微分形
+  式の局所有限和に分解するという手法である. このようなことは, 多様体論
+  の講義で説明されると思うので, ここでは詳しいことは省略する.}.
+
+\medskip
+
+\noindent {\bf Green の公式:}\enspace Riemann 面 $X$ 上の可微分1形式 
+$g$ と $X$ 内の境界が区分的に滑らかな相対コンパクト領域 $K$ に対し
+て,
+\[
+  \int_{\bdr K} g = \int_K dg
+\] %
+が成立する. ここで, $K$ の境界 $\bdr K$ は $K$ を左手に見ながら進む方
+向に向き付けられているとする. 
+
+\medskip
+
+\noindent Green の公式の特別な場合として Cauchy の積分定理が得られるの
+であった.
+
+\medskip
+
+\noindent {\bf Cauchy の積分定理:}\enspace Riemann 面 $X$ 上の正則1形
+式 $\theta$ と $X$ 内の始点と終点が等しい2つの曲線 $a$, $b$ に対して, %
+$a$ を $b$ に始点を終点を固定したまま連続的に変形できるならば,
+\[
+  \int_a \theta = \int_b \theta
+\] %
+が成立する. すなわち, 正則1形式の線積分は積分経路のホモトピー類(始点と
+終点は固定)のみによる.
+
+\medskip
+
+\noindent 注意: 上の条件のもとで等式 %
+\(
+  \int_a \bar\theta =  \overline{\int_a\theta}.
+\) %
+が成立する.
+
+\medskip
+
+\noindent 複素平面の領域上の函数論の場合と同様に, Riemann 面上の有理型
+1形式に対しても, 零点, 極, 留数などの概念が定義される. 正則1形式の正則
+座標近傍上での零点もしくは極の位数および留数が正則座標変換によって変化
+しないことを確かめれば良い.
+
+\medskip
+
+\noindent 以上の結果の応用として以下を示せ. 以下の問題の解答は全て閉曲
+面のトポロジーに関する結果と微分形式の積分論を組合せてある種の公式を導
+くというパターンになっていることに注目せよ.
+
+\begin{question}[留数定理]
+  コンパクト Riemann 面上の有理型1形式の全ての極にわたる留数の和は0に
+  等しい. \qed
+\end{question}
+
+\noindent ヒント: コンパクト Riemann 面 $X$ のジーナスが $g$ ならば %
+$X$ は $4g$ 角形の辺を貼り合わせてできる面と同相である. $X$ 上の有理型
+1形式 $\theta$ を $4g$ 角形に引き戻して考える. すると, $\theta$ の留数
+の和は $4g$ 角形の周囲に沿った線積分を $2\pi i$ で割ったものに等しくな
+る. ところが, その積分経路を $X$ 上で観察すると, $2g$ 個の閉曲線を各々
+2度づつしかも互いに逆向きに通ることがわかる. そのような経路に沿った積
+分は0でなければいけない.
+
+\medskip
+
+\begin{question}[楕円曲線の周期積分の $\R$ 上の一次独立性]
+  $X$ はジーナス1のコンパクト Riemann 面であるとし, $\phi$ は $X$ 上
+  の0でない正則1形式であるとする. $X$ はトーラスに同相なので, $X$ は四
+  角形の対辺を貼り合わせることによって作ることができる. もとの四角形の
+  4辺の $X$ における像は2つの閉じた曲線になる. その2つの閉曲線に任意に
+  向きを付けたものを $\alpha$, $\beta$ と書くことにする%
+  \footnote{$\alpha$, $\beta$ は $X$ の1次のホモロジー群 %
+    $H_1(X,\Z)$ を生成する.}. %
+  $\xi,\omega\in\C$ を次の積分によって定義する:
+  \[
+    \xi := \int_{\alpha} \phi,
+    \qquad
+    \omega := \int_{\beta} \phi.
+  \]
+  このとき, $\xi$ と $\omega$ は $\R$ 上一次独立である. \qed
+\end{question}
+
+\noindent ヒント: 四角形を $K$ と書き, 全ての話を $K$ に引き戻して考え
+る. $K$ の周囲をまわる曲線を $K$ の辺を左まわりに $a$, $b$, $c$, $d$ %
+と書くとき, $\alpha$, $\beta$ はそれぞれ $a$, $b$ の $X$ における像で %
+あると仮定して良い. (必要なら $\alpha$ と $\beta$ を置き換えたり, %
+$\beta$ を $-\beta$ で置き換えたりすれば良い.) 座標近傍上で 
+$\phi=g\,dz$ と書けているとき, その座標近傍上で,
+\[ %
+  \bar\phi\wedge\phi = 2i|g|^2 dx\wedge dy.
+\]
+よって,
+\[
+  0 
+  < \frac{1}{2i} \int_X \bar\phi\wedge\phi
+  = \frac{1}{2i} \int_K \bar\phi\wedge\phi.
+\] %
+これを Green の公式を使って書き変えることを考える. $K$ の内側の点 %
+$P_0$ を任意に取り, $P_0$ から $P$ への経路に関する積分の値
+\[
+  f(P) = \int_{P_0}^P \phi
+\]
+は $K$ の単連結性より経路の取り方によらない. $f$ は正則函数であり,
+$df=\phi$ を満たしているので,
+\[
+  d(\bar f\,\phi) = \bar\phi\wedge\phi
+\] %
+が成立する. 四角形の辺 $a$ と辺 $c$ の上の互いに貼り合わさる点をそれぞ
+れ $P$, $Q$ と書くと $f(Q)=f(P)+\int_b\phi=f(P)+\omega$ が成立し
+ている. 四角形の辺 $b$ と辺 $d$ の上の互いに貼り合わさる点をそれぞ
+れ $P$, $Q$ と書くと $f(Q)=f(P)-\int_a\phi=f(P)-\xi$ が成立し
+ている. よって,
+\begin{align*}
+  \int_K \bar\phi\wedge\phi
+  & =
+  \int_{\bdr K} \bar f\,\phi
+  =
+    \int_a\bar f\,\phi 
+  + \int_b\bar f\,\phi
+  - \int_a(\bar f + \overline\omega)\phi 
+  - \int_b(\bar f - \overline\xi)\phi
+  \\
+  & =
+    \int_{b} \overline\xi \phi
+  - \int_{a} \overline\omega \phi
+  =
+    \overline\xi \int_{\beta} \phi
+  - \overline\omega \int_{\alpha} \phi
+  =
+  \overline\xi \omega - \xi \overline\omega
+  =
+  2i \Impart (\overline\xi \omega).
+\end{align*}
+以上の結果をまとめると
+\[
+  \Impart(\overline\xi \omega) > 0
+\] %
+であることがわかる%
+\footnote{この不等式より, $\phi$ を定数倍して $\xi=1$ となるようにする
+  と $\Im\omega>0$ が成立することがわかる. このとき, $\omega$ は %
+  $\tau$ と書かれることが多い.}. %
+このことより, $\xi$ と $\omega$ は $\R$ 上一次独立であることがわかる. 
+(例えば, もしも $\xi$ が $\omega$ の実数倍ならば %
+$\overline\xi\omega$ は $|\omega|^2$ の実数倍になるので, %
+$\Impart(\bar\xi\omega)=0$ となってしまう.)
+
+\begin{question}[Riemann の等式と不等式]
+  $X$ はジーナス $g\ge1$ のコンパクト Riemann 面であり, $\phi$ と %
+  $\phi'$ は $X$ 上の正則1形式であるとする. $4g$ 角形の周囲の辺を左まわ
+  りに順に(向きも込めて)
+  \[
+     a_1,b_1,c_1,d_1,\dots,a_g,b_g,c_g,d_g
+  \] %
+  と書くとき, $a_k$, $b_k$ をそれぞれ $c_k$, $d_k$ と逆向きに貼り合
+  わせてできる閉曲面と $X$ は同相である. $a_k$, $b_k$ の像をそれぞれ %
+  $\alpha_k$, $\beta_k$ と書き, $\xi_k,\omega_k,\xi'_k,\omega'_k\in\C$
+  ($k=1,\dots,g$)を次のように定める:
+  \[
+    \xi_k := \int_{\alpha_k}\phi,
+    \qquad
+    \omega_k := \int_{\beta_k}\phi,
+    \qquad
+    \xi'_k := \int_{\alpha_k}\phi',
+    \qquad
+    \omega'_k := \int_{\beta_k}\phi'.
+  \]
+  このとき, 以下が成立する:
+  \begin{enumerate}
+  \item \( \displaystyle
+      \sum_{k=1}^g (\xi_k \omega'_k - \omega_k \xi'_k) = 0
+    \) \quad (Riemann の等式).
+  \item $\phi$ が $0$ でないならば \quad %
+    \( \displaystyle
+      \Im \left( \sum_{k=1}^g \overline\xi_k \omega_k \right) > 0
+    \) \quad (Riemann の不等式). \qed
+  \end{enumerate}
+\end{question}
+
+\noindent ヒント: $4g$ 角形を $K$ と書き, $K$ の内側の点 $P_0$ を任意
+に取り, 
+\[
+  f(P) = \int_{P_0}^P \phi
+  \qquad
+  (P\in K)
+\]
+によって函数 $f$ を定義する. このとき, 1つ前の問題のヒントと同様の方法
+で計算すると,
+\begin{align*}
+  0 
+  & = 
+  \int_K \phi\wedge\phi'
+  =
+  \int_{\bdr K} f \phi'
+  =
+  \sum_{k=1}^g
+  \left(
+      \int_{a_k} f \phi'
+    + \int_{b_k} f \phi'
+    - \int_{a_k} (f + \omega_k) \phi'
+    - \int_{b_k} (f - \xi_k)    \phi'
+  \right)
+  \\
+  & =
+  \sum_{k=1}^g
+  \left(
+      \xi_k    \int_{\beta_k}  \phi'
+    - \omega_k \int_{\alpha_k} \phi'
+  \right)
+  =
+  \sum_{k=1}^g
+  (\xi_k \omega'_k - \omega_k \xi'_k).
+\end{align*}
+これで(1)が証明された. 同様の計算を $\bar\phi\wedge\phi$ に対して実行
+すれば(2)の証明が得られる:
+\begin{align*}
+  0
+  & < 
+  \frac{1}{2i}
+  \int_K \bar\phi\wedge\phi
+  =
+  \frac{1}{2i}
+  \int_{\bdr K} \bar f \phi
+  =
+  \frac{1}{2i}
+  \sum_{k=1}^g
+  \left(
+      \int_{a_k} \bar f \phi
+    + \int_{b_k} \bar f \phi
+    - \int_{a_k} (\bar f + \overline\omega_k) \phi
+    - \int_{b_k} (\bar f - \bar\xi_k)    \phi
+  \right)
+  \\
+  & =
+  \frac{1}{2i}
+  \sum_{k=1}^g
+  \left(
+      \bar\xi_k         \int_{\beta_k}  \phi
+    - \overline\omega_k \int_{\alpha_k} \phi
+  \right)
+  =
+  \frac{1}{2i}
+  \sum_{k=1}^g
+  (\bar\xi_k \omega_k - \overline\omega_k \xi_k)
+  =
+  \Impart \left( \sum_{k=1}^g \bar\xi_k \omega_k \right).
+\end{align*}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{楕円函数の間の代数関係}
+
+$\C$ 上の2つの有理型函数 $f$, $g$ の間に代数関係(algebraic relation)が
+存在するとは, ある0でない複素係数の多項式 $F(X,Y)$ で $F(f,g)=0$ を満
+たすものが存在することであると定義する.
+
+\begin{question}\label{q:alg-rel-equiv}
+  代数関係が存在するという条件は有理型函数全体の空間に同値関係を定める. 
+  \qed
+\end{question}
+
+\noindent ヒント: 推移律を示すためには「消去法」が必要である%
+\footnote{消去法の一般論については \cite{vdW}のIIを見よ.}. %
+そのためには次の問題における Sylvester の行列式を用いるのが簡単である.
+有理型函数 $f$, $g$, $h$ の間に代数関係 $F(f,g)=0$, $G(g,h)=0$ が存在
+すると仮定する. $\C$, $f$, $h$ から生成される有理型函数体の部分体を 
+$K$ と書くと, $F(f,X)$, $G(X,h)$ は $K$ 係数の多項式とみなせる. この2
+つの多項式は $g$ という共通の根を持つので, $F$, $G$ に対する Sylvester 
+の行列式は0になり, それは $f$ と $h$ の代数関係を与えることがわかる.
+
+\begin{question}[Sylvesterの行列式]
+  次の $m+n$ 次の行列式で定義される文字 $A_0,\dots,A_m$, %
+  $B_0,\dots,B_n$ の有理整数係数の多項式 $S(A,B)$ を Sylvester の行列
+  式と呼ぶ:
+  \[
+    S(A,B):=
+    \begin{vmatrix}
+      A_0   & A_1 & \cdots & A_m    &     &        & \Zero \\
+            & A_0 & A_1    & \cdots & A_m &        & \\
+            &     & \ddots & \ddots &     & \ddots & \\
+      \Zero &     &        & A_0    & A_1 & \cdots & A_m \\
+      B_0   & B_1 & \cdots & B_n    &     &        & \Zero \\
+            & B_0 & B_1    & \cdots & B_n &        & \\
+            &     & \ddots & \ddots &     & \ddots & \\
+      \Zero &     &        & B_0    & B_1 & \cdots & B_n \\
+    \end{vmatrix}.
+  \] %
+  ここで, $A=(A_0,\dots,A_m)$, $B=(B_0,\dots,B_n)$. 
+  $k$ は任意の代数閉体であるとし%
+  \footnote{体論の一般論より, 任意の体は代数閉体に埋め込めることが知ら
+    れている. したがって, この仮定は本質的なものではない.}, %
+  $a_i,b_j\in k$, $a_0\ne0$, $b_0\ne0$ に対して, 
+  多項式 $f$, $g$ を次のように定める:
+  \[
+    f(x)=a_0x^m+a_1x^{m-1}+\cdots+a_{m-1}x+a_m,
+    \quad
+    g(x)=b_0x^n+b_1x^{n-1}+\cdots+b_{n-1}x+b_n.
+  \] %
+  $S(A,B)$ における $A$, $B$ に $a=(a_0,\dots,a_m)$, %
+  $b=(b_0,\dots,b_n)$ を代入して得られる $k$ の元を $S(a,b)$ と書くこ
+  とにする. このとき, $f$ と $g$ が共通根を持つことと $S(a,b)=0$ が成
+  立することは同値である. \qed
+\end{question}
+
+\noindent ヒント: 例えば \cite{Satake} の p.70 を見よ. まず, $k$ は任
+意の体であるとし, ある $\alpha\in k$ が存在して $f(\alpha)=0$, %
+$g(\alpha)=0$ が成立するならば $S(a,b)=0$ となることを示そう%
+\footnote{問題 \qref{q:alg-rel-equiv} を解くためにはこれを示せば十分で
+  ある. よって, 問題 \qref{q:alg-rel-equiv} を解くためには $k$ を含む
+  代数閉体が存在するという結果を使う必要はない.}. %
+$m+n$ 個の不定元 $x_0,\dots,x_{m+n-1}$ に関する次の連立一次方程式を考
+える:
+\begin{alignat*}{2}
+  & a_0x_0 + a_1x_1 + \cdots + a_m x_m    & \,=\, & 0, \\
+  & \phantom{a_0x_0 +\,\,}
+  a_0x_1 + a_1x_2 + \cdots + a_m x_{m+1}  & \,=\, & 0, \\
+  & \phantom{a_0x_1 + a_1x_2 + \quad}
+  \cdots\cdots & & \\
+  & \phantom{a_0x_1 + a_1x_2 +\,\,}
+  a_0x_{n-1} + a_1x_n + \cdots + a_n x_{m+n-1} & \,=\, & 0,
+  \\
+  & b_0x_0 + b_1x_1 + \cdots + b_n x_n    & \,=\, & 0, \\
+  & \phantom{b_0x_0 +\,\,}
+  b_0x_1 + b_1x_2 + \cdots + b_n x_{n+1}  & \,=\, & 0, \\
+  & \phantom{b_0x_1 + b_1x_2 + \quad}
+  \cdots\cdots & & \\
+  & \phantom{b_0x_1 + b_1x_2 +\,\,}
+  b_0x_{m-1} + b_1x_m + \cdots + b_n x_{m+n-1} & \,=\, & 0. \\
+\end{alignat*}
+$\alpha\in k$ に関して $f(\alpha)=0$, $g(\alpha)=0$ が成立しているとき,
+この連立一次方程式は
+\[
+  x_0=\alpha^{m+n-1},\;
+  x_1=\alpha^{m+n-2},\;
+  \dots,\;
+  x_{m+n-2}=\alpha,\;
+  x_{m+n-1}=1
+\] %
+を解に持つ. よって, 行列式 $S(a,b)$ は0にならなければいけない. 次に %
+$k$ が代数閉体であると仮定し, $S(a,b)=0$ が成立することと $f$ と $g$ 
+が共通の根を持つことは同値であることを示そう. $k$ は代数閉体であると仮
+定すると, ある $\alpha_i,\beta_j\in k$ が存在して,
+\[
+  f(x)=a_0\prod_{i=1}^m(x-\alpha_i),
+  \qquad
+  g(x)=b_0\prod_{j=1}^n(x-\beta_j)
+\] %
+が成立する. もしも, 次の公式が示されたならば, $S(a,b)=0$ と $f$ と $g$
+が共通の根を持つことは同値であることがわかる:
+$$
+  S(a,b) 
+  = a_0^n b_0^m \prod_{i=1}^m\prod_{j=1}^n (\alpha_i - \beta_j).
+  \leqno{(*)}
+$$
+よって, 以下この公式を示すことを目標とする. 任意の文字 $c$ に対して,
+\[
+  S(cA,B) = c^n S(A,B),
+  \qquad
+  S(A,cB) = c^m S(A,B).
+\]
+が成立する. よって,
+\[
+  S(a,b) = a_0^n b_0^m S(a/a_0, b/b_0)
+\] %
+であるから, $a_0=b_0=1$ の場合に $(*)$ を示せば良いので, 以下これを仮
+定する. $(*)$ を証明するためには, $\alpha_i$, $\beta_j$ を不定元 
+$s_i$, $t_i$ で置き換えて $(*)$ を証明すれば良い. このとき, 解と係数の
+関係より,
+\[
+  a_i = (-1)^i \sum_{1\le l_1<\dots<l_i\le m} s_{l_1}\dots s_{l_i},
+  \qquad
+  b_j = (-1)^j \sum_{1\le l_1<\dots<l_j\le n} t_{l_1}\dots t_{l_j}.
+\] %
+このような置き換えを $S(a,b)$ にほどこすことによって得られる %
+$s_i$, $t_j$ の多項式を $R(s,t)$ と書くことにする. $S(a,b)$ は $f$ と %
+$g$ が共通根を持つとき0になることを上で示したので, $i$, $j$ を任意に選
+び $s_i$ に $t_j$ を代入すると $R(s,t)$ は0になる. よって, $R(s,t)$ は %
+\[
+  \phi(s,t) := \prod_{i=1}^m\prod_{j=1}^m(s_i-t_j)
+\] %
+で割り切れる. 一方, 行列式の定義より, $i=0,\dots,m$ 以外の $i$ に対し
+て $a_i=0$ と置き, $j=0,\dots,n$ 以外の $j$ に対して $b_j=0$ と置くと,
+$S(a,b)$ は以下の形の項の和で表わせる:
+$$
+ \pm
+ a_{i_1-1}a_{i_2-2}\cdots a_{i_n-n}
+ b_{i_{n+1}-1}b_{i_{n+2}-2}\cdots b_{i_{n+m}-m}.
+ \leqno{({*}{*})}
+$$ %
+ここで, $(i_1,i_2,\dots,i_{m+n})$ は $(1,2,\dots,m+n)$ の任意の置換で
+あり, $\pm$ はその置換の符号である. よって, その和における0でない項の 
+$s_i$, $t_j$ の多項式に関する次数は $a_i$, $b_j$ の次数がそれぞれ $i$,
+$j$ であることより,
+\[
+  \sum_{l=1}^n(i_l-l) + \sum_{l=1}^m(i_{n+l}-l)
+  = \sum_{l=1}^{m+n}i_l - \sum_{l=1}^n l - \sum_{l=1}^m -l
+  \textstyle
+  = \frac{(m+n)(m+n+1)}{2} - \frac{n(n+1)}{2} - \frac{m(m+1)}{2}
+  = mn.
+\] %
+一方, $\phi(s,t)$ の多項式としての次数も $mn$ なので, $R(s,t)$ は %
+$\phi(s,t)$ の定数倍でなければいけない. その定数を決定するために特殊な
+項の係数を比べよう. $({*}{*})$ が 0 でなくてしかも $b_n^m$ で割り切れるのは %
+$(i_1,\dots,i_{m+n})=(1,\dots,m+n)$ の場合に限る. このとき, $({*}{*})$ の %
+$\pm$ は $+$ の方になる. よって, $R(s,t)$ における %
+$b_n^m=(-1)^{mn}t_1^m\cdots t_n^m$ の係数は 1 である.  一方, %
+$\phi(s,t)$ における $(-1)^{mn}t_1^m\cdots t_n^m$ の係数も同じく 1 で
+あることは容易にわかる. 以上によって, $R(s,t)=\phi(s,t)$ であることが
+示されたことになる.
+
+\medskip
+
+\noindent 参考: Vandermonde の行列式に関する公式の証明(例えば 
+\cite{Satake} の p.53)と上のヒントにおける論法を比べてみよ. どちらも, 
+行列式の零点, 行列式の多項式としての次数, 特別な項の係数の3つを調べる
+ことによって解答を得ている. 任意の楕円函数が $\sigma$ 函数で書けるとい
+う結果の証明も似たような原理に基いている. 等式を証明するとき(特に``因
+数分解''をするとき)このような論法は標準的である.
+
+\begin{question}[2つの楕円函数の間の代数関係の存在]
+  同じ周期格子に関する2つの楕円函数の間には常に代数関係が存在する. 
+  \qed
+\end{question}
+
+\noindent ヒント: 任意の楕円函数と $\pe$ が代数関係を持つことを示し, 
+問題 \qref{q:alg-rel-equiv} の結果を適用せよ.
+
+\medskip
+
+\noindent 参考: 拡大体の超越次数(transcendental degree)の概念を使う
+ことが許されるなら上の問題の結果の証明は簡単である. 周期格子 $\Omega$ 
+に対する楕円函数体 $K$ は $\C$, $\pe$, $\pe'$ から生成され, $\pe$ は
+$\C$ 上超越的であり, $\pe'{}^2=4\pe^3-g_2\pe-g_3$ であるから, $K$ の %
+$\C$ 上の超越次数は1である. (より一般に $K$ がコンパクト Riemann 面 %
+$X$ の代数函数体($X$ 上の有理型函数全体のなす体)であるとき, $K$ の %
+$\C$ 上の超越次数は1になる. 超越次数が1であることは $X$ の $\C$ 上の次
+元が1であることに対応している%
+\footnote{拡大体の超越次数は独立なパラメーターが何個あるかを測る量であ
+  る. 体 $K$ が別の体 $k$ の拡大体になっているとき, $K$ の $k$ 上の超
+  越基とは $K$ の代数的に独立な部分集合 $S$ であって $K$ が $k(S)$ 上
+  代数拡大になるようなもののことである. 超越基の元の個数(無限の場合は
+  基数)を $K$ の $k$ 上の超越次数と呼ぶ. 例えば, 超越基が %
+  $S=\{s_1,\dots,s_n\}$ であるとき, $k(S)=k(s_1,\dots,s_n)$ は $k$ 上
+  の $n$ 変数の有理式体になり, $K$ の任意の元は $k(s_1,\dots,s_n)$ 係
+  数の多項式の根になっているのである. $s_1,\dots,s_n$ は $k$ 上独立な 
+  $n$ 個のパラメーターであると考えられる. 直観的には拡大体の超越次数が
+  (代数)多様体の次元と関係するのは当然であろう. (多様体の次元の定義に
+  もなりうる.)}.)
+よって, $K$ と $\C$ の中間体の超越次数は1以下である. 特に, 任意の %
+$f,g\in K$ から生成される $\C$ と $K$ の中間体 $\C(f,g)$ の $\C$ 上の
+超越次数は1以下である. よって, $f$ と $g$ の間には代数関係が存在しなけ
+ればいけない. (なぜなら, もしも代数関係が存在しないならば $\C(f,g)$ は %
+$\C$ 上の2変数の有理函数体と同型になるので, $\C(f,g)$ の超越次数は2に
+なってしまう.) 拡大体の超越次数の理論はベクトル空間の次元の理論に似て
+いる. 超越次数についての解説については任意の代数学の教科書を見よ.
+
+\begin{question}[楕円函数が微分方程式を満たすこと]
+  任意の楕円函数 $f$ に対して, ある0でない複素係数多項式 $F(X,Y)$ が存
+  在して, $F(f,f')=0$ が成立する. \qed
+\end{question}
+
+\noindent ヒント: $f$ が楕円函数なら $f'$ もそうである. よって, $f$ 
+と $f'$ の間には代数関係が存在する.
+
+\begin{question}[楕円函数の代数的加法性]
+  任意の楕円函数 $f$ に対して, ある0でない複素係数多項式 $F(X,Y,Z)$ が
+  存在して, $u$, $v$ の有理型函数として $F(f(u+v),f(u),f(v))=0$ が成立
+  する. \qed
+\end{question}
+
+\noindent ヒント: 消去法を用いた証明は \cite{HC}の p.31 や 
+\cite{Takeuchi} の p.153 にある. ここではあえて体の超越次数をの概念用
+いた証明を与えよう. $\C$ 上 $\pe(u)$, $\pe'(u)$, $\pe(v)$, $\pe'(v)$ 
+から生成される2変数の有理型函数全体のなす体を $L$ と書くことにする.
+$L$ は $\pe(u),\pe(v)$ を $\C$ 上の超越基として持つので $L$ の $\C$ 上
+の超越次数は 2 である. $f(u),f(v)\in L$ は互いに代数的に独立である. よっ
+て, $f(u+v)\in L$ を示すことができれば, $f(u),f(v),f(u+v)$ は $\C$ 上
+代数的に独立ではないことがわかる. $\pe$ の加法公式より $\pe(u+v)\in L$ 
+である. 加法公式を $u$ で偏微分し $\pe''$ を $\pe$ と $\pe'$ の式で置
+き直すことにより, $\pe'(u+v)\in L$ であることもわかる. さらに, 複素係
+数の有理式 $F(X,Y)$ が存在して $f=F(\pe,\pe')$ が成立する. よって, %
+$f(u+v)=F(\pe(u+v),\pe'(u+v))\in L$ である.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Weierstrass の楕円函数達に関する雑多な問題}
+
+この節の問題は \cite{WW} の第XX章のから取って来たものである. 例によっ
+て, $\omega_1,\omega_2\in\C$ は $\R$ 上一次独立と仮定し, %
+$\Omega=\Z\omega_1+\Z\omega_2$ と置く.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{雑多な問題}
+
+\begin{question}
+  $f(t)=a_0t^4+4a_1t^3+6a_2t^2+4a_3t+a_4$ ($a_0\ne0$) と置く. %
+  不定積分 $\int_{x_0}^x \frac{dt}{\sqrt{f(t)}}$ を $\pe$ 函数で表示す
+  る方法を説明せよ. \qed 
+\end{question}
+
+\noindent ヒント: \cite{WW} 20.6 (pp.452), \cite{HC} 第6章 \S2. 積分変
+数を $\tau=(t-x_0)^{-1}$ と変換すると $d\tau/\sqrt{\text{$\tau$ の3次式}}$ 
+の積分に帰着できることがわかる.
+
+\begin{question}
+  $\pe(u)$ 函数の定義と類似の方法で $\cosec^2 u = 1/\sin^2 u$ を定義し, 
+  それを出発点にし三角函数論を展開せよ. \qed
+\end{question}
+
+\noindent ヒント: $\cosec^2 u = 1/\sin^2 u$ は次のような無限部分分数展
+開を持つのであった:
+\[
+  \cosec^2 u = \frac{1}{\sin^2 u}
+  = \sum_{m\in\Z}\frac{1}{(u-m\pi)^2}.
+\]
+(特に, $\pe(u)$ の定義式において $\omega_1=\pi$, %
+$\omega_2\to +i\infty$ とすると, $\pe(u)$ は $\cosec^2 u-1/3$ に収束す
+ることがわかる%
+\footnote{$\omega_1=\pi$, $\omega_2\to+i\infty$ とすると,
+  \[
+    \pe(u)
+    \to
+    \frac{1}{u^2}
+    +
+    \sum_{m\in\Z}
+    \left( \frac{1}{(u-m\pi)^2} - \frac{1}{(m\pi)^2} \right)
+    =
+    \sum_{m\in\Z}\frac{1}{(u-m\pi)^2}
+    -
+    \frac{2}{\pi^2} \sum_{n=1}^\infty \frac{1}{n^2}
+    =
+    \cosec^2 u
+    -
+    \frac{2}{\pi^2}\cdot\frac{\pi^2}{6}.
+  \]}.) %
+話を逆転させ, $\omega\in\C^{\times}$ に対して, 有理型函数 $p(u)$ を
+\[
+  p(u) := \sum_{m\in\Z}\frac{1}{(u-m\omega)^2}
+\] %
+と定義し(もちろんこれは %
+$\frac{\omega^2}{\pi^2}\cosec^2(\frac{\pi}{\omega}u)$ に一致する.) こ
+の函数の性質を $\pe$ 函数の場合と同様の手法を用いて調べてみよ. 詳しい
+計算は \cite{WW}の 20.222 (p.438)に書いてある.
+
+\begin{question}
+  Weierstrass の $\pe$ 函数を $u$ と $\Omega=\Z\omega_1+\Z\omega_2$ の
+  函数とみなしたものを $\pe(u;\Omega)$ と書き, $u,g_2,g_3$ の函数とみ
+  たものを $\pe(u;g_2,g_3)$ と書くと, $\lambda\in\C^{\times}$ に対して
+  次が成立する:
+  \[
+    \pe(\lambda u;\lambda\Omega)
+    = \lambda^{-2} \pe(u;\Omega),
+    \qquad
+    \pe(\lambda u;\lambda^{-4} g_2, \lambda^{-6} g_3)
+    = \lambda^{-2} \pe(u;g_2,g_3).
+  \qed
+  \]
+\end{question}
+
+\noindent ヒント: \cite{WW} 20.222 Example 2 (p.439). 前者の式を $\pe$
+の定義から直接示せ. $\pe$ の原点の Laurent 展開を調べることによって, %
+$g_2$, $g_3$ は次のように表わされることを示せ:
+\[
+  g_2 = 
+  60 \sum_{\omega\in\Omega\setminus\{0\}} \frac{1}{\omega^4},
+  \qquad
+  g_3 = 
+  140 \sum_{\omega\in\Omega\setminus\{0\}} \frac{1}{\omega^6}.
+\]
+(実は問題 \qref{q:pe3}, \qref{q:pede2}ですでに示されている.)
+
+\begin{question}
+  $g_2,g_3\in\R$ であり, 判別式(discriminant) $\Delta=g_2^3-27g_3^2$ %
+  は正であると仮定する. このとき, $f(x)=4x^3 - g_2x -g_3$ の3つの根 %
+  $e_1,e_2,e_3$ は互いに異なる実数になる. $e_1>e_2>e_3$ であると仮定す
+  ると, $x>e_1$ において $f(x)>0$ であり, $x<e_3$ において $f(x)<0$ で
+  ある. いつものように正の実数の平方根は正の実数になるものと約束し,
+  \[
+    \omega_1 = 2 \int_{e_1}^\infty \frac{dx}{\sqrt{f(x)}},
+    \qquad
+    \omega_3 = - 2i \int_{-\infty}^{e_3} \frac{dx}{\sqrt{-f(x)}}
+  \] %
+  と置く. $\omega_2$ を $\omega_1+\omega_2+\omega_3=0$ という条件によっ
+  て定め, $\Omega=\Z\omega_1+\Z\omega_2$ に対する $\pe$ 函数を考える.
+  このとき, $\pe(u)$ は実軸上実数値であり, 次が成立する:
+  \[
+    \pe\left(\frac{\omega_k}{2}\right) = e_k
+    \qquad
+    (k=1,2,3).
+  \qed
+  \]
+\end{question}
+
+\noindent ヒント: \cite{WW} 20.32 Example 1 (p.444). $\pe(u)$ 函数は
+\[
+  u = \int_{\pe(u)}^\infty \frac{dz}{\sqrt{4z^3-g_2z-g_3}}
+\]
+によって定義されているとみなせる. Riemann 面上での様子を描いてみよ.
+
+\medskip $\omega_1,\omega_2$ が $\R$ 上一次独立であるとき,
+$\omega_1+\omega_2+\omega_3=0$ によって $\omega_3$ を定義することにす
+る. 
+
+\begin{question}
+  $\Omega=\Z\omega_1+\Z\omega_2$ に対する $\pe$ 函数に関して次が成立し
+  ている:
+  \[
+    \pe'(u)\pe'(u+\omega_1/2)\pe'(u+\omega_2/2)\pe'(u+\omega_3/2)
+    = \Delta.
+  \]
+  ここで, 右辺の $\Delta$ は $f(x)=4x^3-g_2x-g_3$ の判別式 %
+  $g_2^3 -27g_3^2$ である. \qed
+\end{question}
+
+\noindent ヒント: \cite{WW} 20.33 Example 3 (p.444).
+
+\bigskip
+
+$i=1,2,3$ に対して, $\sigma_i(u)$ を次のように定義する%
+\footnote{Jacobi の $\vt$ 函数 $\vt_0$, $\vt_1$, $\vt_2$, $\vt_3$ はそ
+  れぞれ $\sigma_3$, $\sigma_0$, $\sigma_1$, $\sigma_2$ に密接に関係す
+  る. 番号が巡回的にずれている点には注意しなければいけない.}:
+\[
+  \sigma_i(u)=
+  e^{-\frac{\eta_i}{2}u} \frac{\sigma(u+\omega_i/2)}{\sigma(\omega_i/2)}.
+\] %
+ここで, $\eta_i=\zeta(u+\omega_i)-\zeta(u)=\text{const.}$ である. %
+さらに, $\sigma_0(u)=\sigma(u)$ と置く. 以前と同様に %
+$e_i=\pe(\omega_i/2)$ と置く.
+
+\begin{question}
+  $m_1,m_2\in\Omega$ に対して, %
+  \[
+    \omega = m_1 \omega_1 + m_2 \omega_2,
+    \qquad
+    \eta   = m_1 \eta_1   + m_2 \eta_2
+  \] %
+  と置くと次が成立する:
+  \[
+    \sigma_i(u+\omega) = 
+    (-1)^{(1+\epsilon_1)m_1+(1+\epsilon_2)m_2+m_1m_2}
+    e^{\eta \left( u + \frac{\omega}{2} \right)}
+    \sigma_i(u)
+    \qquad(i=0,1,2,3).
+  \]
+  ただし, $i=0,1,2,3$ のそれぞれの場合に応じて,
+  $(\epsilon_1,\epsilon_2)=(0,0),(0,1),(1,1),(1,0)$ であるものとする.
+  \qed
+\end{question}
+
+\noindent ヒント: $\sigma(u)$ の準周期性に関する公式と Legendre の関係
+式 $\eta_1\omega_2 - \omega_1\eta_2=2\pi i$ を使う.
+
+\begin{question}
+  $\sigma_i$ と $\pe$, $e_i$ の間には次の関係式が成立している:
+  \[
+    \pe(u) - e_i = \frac{\sigma_i(u)^2}{\sigma_0(u)^2}.
+    \qed
+  \]
+\end{question}
+
+\noindent ヒント: \cite{WW} 20.53 Example 4 (p.451). $\pe(u)-\pe(v)$ 
+を $\sigma$ 函数で表示する式(問題 \qref{q:pe-sigma1}の(2))を利用せよ. 
+(詳しい証明は \cite{HC}の第2章 \S 4 に書いてある.)
+
+\begin{question}
+  $\phi$ に関する線型常微分方程式
+  $$
+    \left(-\frac{1}{2}\od{^2}{u^2} + 3\pe(u)\right)\phi
+    = - \frac{3}{2}b\,\phi    
+    \leqno{(*)}
+  $$ %
+  を考える. 方程式 $(*)$ は次の形の解を持つ:
+  \[
+    f(u)
+    = \od{}{u}
+    \left[
+      \frac{\sigma(u+c)}{\sigma(u)\sigma(c)}
+      \exp\left\{
+        \frac{u \pe'(c)}{b - 2\pe(c)}
+        - u \zeta(c)
+      \right\}
+    \right].
+  \]
+  ただし, $c$ は次の方程式を満たす定数である:
+  \[
+    (b^2 - 3g_2)\pe(c) = 3 (b^3 + g_3).
+  \]
+  さらに, 方程式 $(*)$ は次の形の解も持つ:
+  \[
+    g(u)
+    = 
+    e^{-u(\zeta(a_1)+\zeta(a_2))}\,
+    \frac{\sigma(u+a_1)\sigma(u+a_2)}{\sigma(u)^2}.
+  \]
+  ただし, 
+  \[
+    \pe(a_1)+\pe(a_2)=b, \qquad
+    \pe'(a_1)+\pe'(a_2)=0
+  \]
+  であり, $a_1+a_2$ と $a_1-a_2$ は周期格子に含まれない. \qed
+\end{question}
+
+\noindent ヒント: これは \cite{WW}の第XX章の Miscellaneous Examples の 
+29 番である. 定義より $\sigma$, $\zeta$, $\pe$ の間には %
+$\sigma' = \zeta\sigma$, $\zeta' = - \pe$ という関係式が存在する. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{三項方程式}
+
+函数 $f(u)$ が三項方程式(three term equation)もしくは三項等式(three
+term identity)を満たしているとは, 次の式が任意の $a,b,c,d$ に対して次
+の等式が成立していることである%
+\footnote{2次元可解格子模型で重要な face 型の Yang-Baxter 方程式の解の
+  構成において三項方程式は基本的である. 可解格子模型や量子可積分系の現
+  代的な研究において, 古典楕円函数論における多くの公式は新たな光を当て
+  られその重要性が再認識されつつある.}:
+\begin{align*}
+    f(a+b)f(a-b)f(c+d)f(c-d)
+& + f(a+c)f(a-c)f(d+b)f(d-b) 
+  \tag{$*$} \\
+& + f(a+d)f(a-d)f(b+c)f(b-c)
+  = 0.
+\end{align*}
+例えば, $f(u)=u$ は三項方程式を満たしている. 実際, $f(u)=u$ に関する
+三項等式は, 公式
+\[
+  (u+v)(u-v)=u^2-v^2
+\] %
+を使えば, 次の公式に帰着される:
+$$
+  (A-B)(C-D)+(A-C)(D-B)+(A-D)(B-C)=0
+  \leqno{(\sharp)}
+$$ %
+さらに, $f(u)=\sin u$ も三項方程式を満たしていることが簡単に確かめられ
+る. なぜなら, $s(u)=\sin u$, $c(u)=\cos u$ 等と置くと,
+\begin{align*}
+  s(u+v)s(u-v)
+  &
+  = (s(u)c(v) + c(u)s(v))(s(u)c(v) - c(u)s(v))
+  = s(u)^2c(v)^2 - c(u)^2s(v)^2
+  \\ &
+  = s(u)^2(1 - s(v)^2) - (1 - s(u)^2)s(v)^2
+  = s(u)^2 - s(v)^2.
+\end{align*}
+これは公式 $(u+v)(u-v)=u^2-v^2$ の三角函数類似である%
+\footnote{この部分節の内容は, 有理函数に関して成立する公式を三角函数, 
+  楕円函数の場合に拡張せよという問題の一部になっている.}. %
+よって, $f(u)=u$ の場合と同様に, $f(u)=\sin u$ に関する三角等式は公式 %
+$(\sharp)$ に帰着される.
+
+\medskip
+
+\noindent {注意:} $f(u)$ が三項方程式を満たすとき, %
+$c e^{\alpha u^2}f(\lambda u)$ ($c,\alpha,\lambda\in\C$)も三項方程式を
+満足する.  このことは,
+\( %
+  (a+b)^2 + (a-b)^2 + (c+d)^2 + (c-d)^2
+  = 2(a^2+b^2+c^2+d^2)
+\) %
+を使えば容易に確かめられる. 
+
+\medskip
+
+さて, 次に Weierstrass の $\sigma$ 函数も三項方程式を満たしていること
+を証明しよう. (\cite{WW} 20.53 (pp.450--452)または\cite{Takeuchi}第三
+章29節(pp.141--144)の記述も参考になるであろう.) %
+まず, 問題 \qref{q:pe-sigma1} (2)の証明の説明から話を始める. %
+問題 \qref{q:pe-sigma1} (2)は次の公式を証明せよという問題であった:
+$$
+  \pe(u) - \pe(v)
+  = - \frac{\sigma(u+v)\sigma(u-v)}{\sigma(u)^2\sigma(v)^2}.
+  \leqno{(!)}
+$$
+この公式は以下のようにして証明される. %
+$v\not\in\frac{1}{2}\Omega$ を任意に固定し $f(u)=\pe(u)-\pe(v)$ と置く. 
+このとき, $f(u)$ の零点と極の重複度を込めた代表系は次のようになる:
+\[
+  \text{零点:}\quad -v, v;
+  \qquad
+  \text{極:}\quad 0, 0.
+\]
+よって, 問題 \qref{q:ell-sigma} の結果より, ある定数 $C\in\C^{\times}$ 
+が存在して, 
+\[
+  \pe(u) - \pe(v) =
+  f(u) = C\, \frac{\sigma(u+v)\sigma(u-v)}{\sigma(u)^2}.
+\]
+定数 $C$ の値を決定しよう. この式の両辺に $u^2$ を掛けて $u\to 0$ とす
+ると, $\pe(u)=1/u^2+O(u^2)$, $\sigma(u)=u+O(u^5)$, %
+$\sigma(-v)=\sigma(v)$ であるから,
+\[
+  1 = C \sigma(-v)\sigma(v) = -C \sigma(v)^2.
+\]
+よって, $C=-1/\sigma(v)^2$ であることがわかった.
+
+\begin{question}
+  以上の結果を用いて, $\sigma$ 函数が三項方程式を満たすことを証明せよ.
+  \qed
+\end{question}
+
+\noindent ヒント: 公式 $(!)$ より,
+\[
+  \sigma(a+b)\sigma(a-b)\sigma(c+d)\sigma(c-d)
+  = (\sigma(a)\sigma(b)\sigma(c)\sigma(d))^2
+    (\pe(a)-\pe(b))(\pe(c)-\pe(d))
+\] %
+が成立する. よって, $\sigma$ 函数の三項等式の証明もやはり等式 %
+$(\sharp)$ に帰着される.
+
+\medskip
+
+\noindent 参考: Jacobi のテータ函数 $\vt_1$ は次のように定義される:
+\[
+  \vt_1(u)
+  = \vt_1(u|\tau)
+  = i \sum_{n\in\Z}
+    (-1)^n
+    q^{\frac{1}{2}\left( n+\frac{1}{2} \right)^2}
+    x^{n+\frac{1}{2}}
+  = \sum_{n\in\Z}
+    \textstyle
+    \e\left( 
+      \frac{1}{2}(n+\frac{1}{2})^2 \tau 
+      + (n+\frac{1}{2})(z+\frac{1}{2})
+    \right).
+\] %
+ここで, $\e(u)=e^{2\pi iu}$, $\Impart\tau>0$, $q=e^{2\pi i\tau}$,
+$x=e^{2\pi i u}$ である. 以下この段落では $\omega_1=1$, %
+$\omega_2=\tau$ であると仮定する. このとき, 次が成立することが知られて
+いる%
+\footnote{例えば, \cite{HC}のp.51, \cite{Takeuchi}のp.174 を見よ.}: %
+\[
+  \sigma(u)
+  = e^{\frac{\eta_1}{2}u^2} \frac{\vt_1(u)}{\vt_1'(0)}.
+\] %
+(ここで, $\eta_1=\zeta(u+1)-\zeta(u) = \text{const.}$) 
+よって, $\vt_1(u)$ も三項方程式を満たしている.
+
+\medskip
+
+実は三項方程式を満たす $\C$ 上の正則函数は本質的に上で述べた場合で尽き
+ていることが知られている. 証明の概略が \cite{WW}の第XX章
+p.461 の例38のヒントにある%
+\footnote{\cite{WW}では Hermite の {\it Fonctions elliptique},
+    I,~p.~187 を引用している.}%
+ので紹介しよう.
+
+\medskip
+
+$f$ は $\C$ 上の正則函数であり, 次の三項方程式を満たしていると仮定する:
+\begin{align*}
+    f(a+b)f(a-b)f(c+d)f(c-d)
+& + f(a+c)f(a-c)f(d+b)f(d-b) 
+  \tag{$*$} \\
+& + f(a+d)f(a-d)f(b+c)f(b-c)
+  = 0.
+\end{align*}
+$f$ が恒等的に $0$ ならば三項方程式を満たしていることは明らかであるの
+で, 以下においては $f$ は恒等的には $0$ でないと仮定する.
+
+$a=b=c=d=0$ と置くと, $(*)$ は $3f(0)^4=0$ と変形される. よって, %
+$f(0)=0$ である. $d=c$ と置くと, $f(0)=0$ より, $(*)$ は
+\[
+  f(a+c)f(a-c)f(c+b)f(c-b)+f(a+c)f(a-c)f(b+c)f(b-c)=0
+\]
+となる. $f$ は恒等的には $0$ でないと仮定したので, 共通した因子で割る
+ことにより,
+\[
+  f(b-c)+f(c-b)=0
+\]
+を得る. よって, $f$ は奇函数である.
+
+$F=(\log f)'=f'/f$ と置く%
+\footnote{例えば, $f(u)=u,\sin u, \sigma(u)$ のそれぞれに対して, %
+  $F(u)=1/u, \cot u, \zeta(u)$.}. %
+$(*)$ の両辺を $c$ で偏微分し $d=c$ と置き, さらに両辺を %
+$f(a+b)f(a-c)f(b+c)f(b-c)$ で割ることによって, 次の式を得る:
+\[
+  \frac{f(a+b)f(a-b)f(2c)f'(0)}{f(a+b)f(a-c)f(b+c)f(b-c)}
+  = F(a+c) - F(a-c) - F(b+c) + F(b-c).
+\]
+さらに, この等式の両辺を $c$ で偏微分し $c=0$ と置き, 両辺を2で割ると,
+$$
+  \frac{f(a+b)f(a-b)f'(0)^2}{f(a)^2f(b)^2}
+  = F'(a) - F'(b).
+  \leqno{(1)}
+$$ %
+(注意: 三項方程式のみから $f$ が $(!)$ と類似の等式を満たすことが示さ
+れた. 逆に, この等式および次に示す $f'(0)\ne0$ から $f$ に対する三項方
+程式が復元できることが, $\sigma$ 函数の場合と同様にして示される.)
+
+$f'(0)\ne0$ を示そう. もしも, $f'(0)=0$ ならばすぐ上の等式より, %
+$F'=(\log f)''$ は定数函数になる. よって, $f$ は $f(u)=e^{Au^2+Bu+C}$ %
+と表わされる. これは $f(0)=0$ と矛盾する.
+
+$\Phi=-F'=-(\log f)''= -(ff''-f'{}^2)/f^2$ と置く%
+\footnote{例えば, $f(u)=u,\sin u, \sigma(u)$ のそれぞれに対して, %
+  $\Phi(u)=1/u^2, \cosec^2 u, \pe(u)$.}. %
+$\Phi$ の満たす微分方程式を求めよう. 
+
+まず, $\Phi''$ が $\Phi$ の2次式に等しいことを示す. %
+$f=f(a)$, $f'=f'(a)$, $f''=f''(a)$, etc と書くことにすると,
+\begin{align*}
+  f(a+b)f(a-b) & =
+  f^2 + (ff''-f'{}^2)b^2
+  + \frac{1}{12}(ff^{(4)} - 4 f'f''' + 3 f''{}^2)b^4
+  + O(b^6),
+  \\
+  \Phi(a)^2 & =
+  \frac{1}{f^4}(f^2f''{}^2 -2ff'{}^2f''+f'{}^4),
+  \\
+  - \Phi'(a) & =
+  \frac{1}{f^3}
+  (f^2f''' - 3 ff'f'' + 2f'{}^3),
+  \\
+  - \Phi''(a) & =
+  \frac{1}{f^4}
+  (f^3f^{(4)} - 3 f^2f''{}^2 - 4 f^2f'f''' + 12 ff'{}^2f'' - 6 f'{}^4)
+\end{align*}
+であるから,
+\[
+  6\Phi(a)^2 - \Phi''(a) =
+  \frac{1}{f^2}\
+  (ff^{(4)} + 3 f''{}^2 - 4 f'f''').
+\] %
+よって, $\text{($(1)$の左辺)}\times 12f(b)^2$ の $b$ に関する展開
+の $b^4$ の係数は,
+\[
+  f'(0)^2 ( 6 \Phi(a)^2 - \Phi''(a) )
+\] %
+に等しいことがわかる. 一方, 
+\[
+  \text{($(1)$の左辺)}\times 12f(b)^2
+  = - 12 f(b)^2( \Phi(a) - \Phi(b))
+\]
+であるから, $\text{($(1)$の左辺)}\times 12f(b)^2$ の $b$ に関す
+る展開の係数は $\Phi(a)$ の1次式になる. 以上によって, ある定数 $A$,
+$B$ が存在して,
+$$
+  \Phi'' = 6\Phi^2 + 12A \Phi + B.
+  \leqno{(2)}
+$$
+が成立することがわかる.
+
+等式 $(2)$ の両辺に $2\Phi'$ を掛けて, 不定積分することによって, 次の
+等式を得る:
+$$
+  (\Phi')^2 = 4 \Phi^3 + 12A \Phi^2 + 2 B \Phi + C.
+  \leqno{(3)}
+$$ %
+ここで, $C$ は積分定数である. よって, $\Phi(u)=\phi(u)-A$ と置くこ
+とによって, 次の形の微分方程式を得る:
+$$
+  \phi'{}^2 = 4\phi^3 - g_2 \phi - g_3.
+  \leqno{(4)}
+$$ %
+ここで, $g_2$, $g_3$ は定数である. $G(x)=4x^3-g_2x-g_3$ と置く.
+
+$G(x)$ が重根を持たない:\enspace このとき (4)より, ある定数 $\alpha$ 
+が存在して, $\phi(u)=\pe(u+\alpha)$ である. ここで, $\pe$ は $g_2$,
+$g_3$ に対する $\pe$ 函数である. このとき, %
+$(\log f(u))''=-\Phi(u)=-\phi(u)+A=-\pe(u+\alpha)+A$ であるから, 
+$f(u)=e^{\frac{1}{2}Au^2+Ku+L}\sigma(u+\alpha)$. しかし, $f$, $\sigma$ は
+奇函数であるから $K=0$, $\alpha=0$. よって,
+\[
+  f(u) = e^{\frac{1}{2}Au^2+L}\sigma(u).
+\]
+
+$G(x)$ は2重根を持つとき:\enspace このとき, 定数 $A'$ を適切に定め, %
+$\Phi(u)=\psi(u)-A'$ と置くと, 微分方程式(3)より, 次の形の微分方程式を
+得る:
+\[
+  \psi'{}^2 = 4\psi^2(\psi - \lambda^2)
+  \qquad
+  (\lambda\ne0).
+\]
+この微分方程式を解くことによって, %
+$\psi(u)=\lambda^2\cosec^2(\lambda(u-\alpha))$ を得る. このとき, %
+$f$ は $f(u)=e^{\frac{1}{2}A'u^2+Ku+L}\sin(\lambda(u-\alpha))$ という
+形になる. しかし, $f$, $\sin$ は奇函数であるから $K=0$, $\alpha=0$. よっ
+て, 
+\[
+  f(u) = e^{\frac{1}{2}A'u^2+L}\sin(\lambda u).
+\]
+
+$G(x)$ が3重根を持つとき:\enspace $G(x)=4x^3$ であるから, %
+$\phi' = 2\phi^{3/2}$ である. %
+よって, $\phi(u)=(u-\alpha)^{-2}$. このとき, %
+$f(u)=e^{\frac{1}{2}Au^2+Ku+L}(u-\alpha)$. しかし, $f$ は奇函数である
+から $K=0$, $\alpha=0$. よって,
+\[
+  f(u) = e^{\frac{1}{2}Au^2+L}u.
+\]
+
+以上の結果をまとめると, 次の定理が証明されたことになる.
+
+\begin{Theorem}
+  三項方程式 $(*)$ の $\C$ 上の正則函数による解は以下の形のものに限られる:
+  \[
+    c e^{\alpha u^2} f(\lambda u)
+    \qquad
+    \text{(ここで, $c,\alpha,\lambda\in\C$ 
+      かつ $f(u)=u,\sin u,\sigma(u)$).}
+    \qed
+  \]
+\end{Theorem}
+
+\begin{question}
+  三項方程式の正則函数解の分類に関する以上の説明の細部を埋めよ. \qed
+\end{question}
+
+\noindent 参考: $\sigma(u)$ したがって $\vt_1(u)$ が三項方程式を満たす
+という結果, 任意のコンパクト Riemann 面に対する Fay の trisecant
+formula に一般化される. Fay の trisecant formula は \cite{Fay} の 
+p.34 における公式 (45) として得られた. 等式(45)はより一般のテータ函数
+の $n$ 次の行列式に関する公式(\cite{Fay} Corollary 2.19)の $n=2$ の特
+殊な場合として得られる. Fay の trisecant formula は \cite{TataII} でも
+紹介されている. さらに, Fay の得た一般の公式の楕円テータ函数版は
+\cite{Hasegawa} Appendix A においてさらに一般化されていることを注意し
+ておく. \cite{Hasegawa}で得られた公式がよりジーナスの高いコンパクト
+Riemann面に対して一般化可能かどうかはまだ知られていない%
+\footnote{少なくとも筆者は知らない(1996年7月2日). \cite{Hasegawa}の公
+  式は Fay の公式の ``楕円 $q$ 類似'' とでも呼ぶべきものである. 今のと
+  ころ ``$q$ 類似'' の理論はジーナス1以下のコンパクト Riemann 面のみで
+  展開され, ジーナスが高い場合についてそれが可能であるという証拠はまだ
+  無い(と思う).}. %
+Fay の公式も \cite{Hasegawa}の公式も, 可積分系の理論において重要な役目
+を果たしていることは強調されるべきことである.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{$\pe$ 函数の加法公式の一般化}
+
+\begin{question}
+  次の公式を示し, それから $\pe$ 函数の加法公式を導け:
+  \[
+    \frac{1}{2}
+    \begin{vmatrix}
+      1 & \pe(u) & \pe'(u) \\
+      1 & \pe(v) & \pe'(v) \\
+      1 & \pe(w) & \pe'(w) \\
+    \end{vmatrix}
+    =
+    \frac
+    {\sigma(u+v+w)\sigma(u-v)\sigma(v-w)\sigma(w-u)}
+    {\sigma(u)^3\sigma(v)^3\sigma(w)^3}.
+  \qed
+  \]
+\end{question}
+
+\noindent ヒント: これは \cite{WW}の第XX章の Miscellaneous Examples の 
+20 番である. 求める公式を認めれば, $\pe$ 函数の加法公式($u+v+w=0$ のと
+き示したい公式の左辺の行列式が0になること)は $\sigma(0)=0$ より明らか
+である. 公式を証明しよう. 問題 \qref{q:pe-sigma1} (2)の結果を次のように表現する
+こともできる:
+\[
+  \phi(u,v)
+  :=
+  \begin{vmatrix}
+    1 & \pe(u) \\
+    1 & \pe(v) \\
+  \end{vmatrix}
+  =
+  \frac{\sigma(u+v)\sigma(u-v)}{\sigma(u)^2\sigma(v)^2}.
+\] %
+以下, これが0にならないような $u$, $v$ を固定し, 示したい公式の左辺を %
+$w$ のみの函数とみなし, その $-1$ 倍を $f(w)$ と書くことにする. %
+$u$, $v$ に対する仮定より, $f(w)$ は $w=0$ に3位の極を持つ3位の楕円函
+数であり, $w=u$, $w=v$ に零点を持つことがすぐにわかる. 周期平行四辺形
+に含まれる楕円函数の極の位置の和と零点の位置の和の差は周期格子に含まれ
+るので, $f(w)$ は $w=-u-v$ にも零点を持つことがわかる. よって, 楕円函
+数の $\sigma$ 函数による表示に関する結果より, ある定数 $C\ne0$ が存在
+して,
+\[
+  f(w) = C\frac{\sigma(u+v+w)\sigma(u-w)\sigma(v-w)}{\sigma(w)^3}.
+\]
+この両辺の $w=0$ における Laurent 展開における $1/w^3$ の係数を比べる
+ことより,
+\[
+  \phi(u,v) = C\sigma(u+v)\sigma(u)\sigma(v)
+\] %
+であることがわかる. よって,
+\[
+  C = - \frac{\sigma(u-v)}{\sigma(u)^3\sigma(v)^3}.
+\]
+以上の結果をまとめると, 次が成立することがわかる:
+\[
+  - \frac{1}{2}
+  \begin{vmatrix}
+    1 & \pe(u) & \pe'(u) \\
+    1 & \pe(v) & \pe'(v) \\
+    1 & \pe(w) & \pe'(w) \\
+  \end{vmatrix}
+  = \frac
+  {\sigma(u+v+w)\sigma(u-v)\sigma(v-w)\sigma(u-w)}
+  {\sigma(u)^3\sigma(v)^3\sigma(w)^3}.
+\]
+これは, $\sigma(u)$ が奇函数であることより示したい公式と同値である. %
+
+\begin{question}
+  $\pe$ 函数の導函数と1からなるサイズ $n+1$ の行列式に関して次が成立す
+  ることを証明せよ:
+  \[
+    \frac
+    {(-1)^{\frac{1}{2}n(n-1)}}
+    {1!2!\cdots n!}
+    \begin{vmatrix}
+      1      & \pe(u_0) & \pe'(u_0) & \hdots & \pe^{(n-1)}(u_0) \\ 
+      1      & \pe(u_1) & \pe'(u_1) & \hdots & \pe^{(n-1)}(u_1) \\ 
+      \vdots & \vdots   & \vdots    &        & \vdots & \\
+      1      & \pe(u_n) & \pe'(u_n) & \hdots & \pe^{(n-1)}(u_n) \\ 
+    \end{vmatrix}
+    =
+    \frac
+    {
+      \displaystyle
+      \sigma(u_0+\cdots+u_n)
+      \prod_{0\le\lambda<\mu\le n}\sigma(u_\lambda - u_\mu)
+    }{
+      \displaystyle
+        \prod_{\nu=0}^n \sigma(u_\nu)^n
+    }.
+  \qed
+  \]
+\end{question}
+
+\noindent ヒント: これは \cite{WW}の第XX章の Miscellaneous Examples の 
+21 番である. 上の問題の公式の証明は $n=1$ の場合から $n=2$ の場合を導
+くという論法を使っている. それと同様のやり方で帰納法を使えば, この問題
+の公式を証明することができる. \cite{Fay}の p.36 では, ジーナス1以上の
+コンパクト Riemann 面に対して成立する一般的な公式の特別な場合として, 
+この問題の公式を紹介している.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{楕円曲線のAbel群構造について}
+
+%\noindent ${*}{*}{*}{*}{*}{*}{*}$ メモ: 
+%まず, Weierstrass の標準形における群構造の記述を与える(直線との交わり). 
+%一般の場合の群構造の入れ方の概略の説明. 不変正則1形式とその不定積分と
+%楕円函数の加法公式.
+
+$\omega_1,\omega_2\in\C$ は $\R$ 上一次独立であるとし, %
+$\Omega=\Z\omega_1+\Z\omega_2$ と置く. 格子 $\Omega$ に対する 
+Weierstrass の $\pe$ 函数を考える. $\pe$ 函数は次の加法公式を満たして
+いるのであった: 
+$$
+  \begin{vmatrix}
+    \pe(u_1) & \pe'(u_1) & 1 \\
+    \pe(u_2) & \pe'(u_2) & 1 \\
+    \pe(u_3) & \pe'(u_3) & 1 \\
+  \end{vmatrix}
+  = 0
+  \qquad
+  \text{if $u_1+u_2+u_3\in\Omega$}.
+%  \leqno{(*)}
+$$
+この加法公式の幾何的な意味を説明しよう.
+
+\begin{question}
+  平面上の3点 $(x_k,y_k)$ ($k=1,2,3$) が同一の直線上に乗っているための
+  必要十分条件は
+  \[
+  \begin{vmatrix}
+    x_1 & y_1 & 1 \\
+    x_2 & y_2 & 1 \\
+    x_3 & y_3 & 1
+  \end{vmatrix}
+  = 0
+  \]
+  が成立することである. \qed
+\end{question}
+
+\noindent このことより, $u_1+u_2+u_3\in\Omega$ でかつ %
+$u_k\not\in\Omega$ ($k=1,2,3$) のとき, 3点 $(\pe(u_k),\pe'(u_k))$ %
+($k=1,2,3$) は同一直線上に乗っていることになる.
+
+\medskip
+
+複素射影平面 $\P^2(\C)$ を簡単のために, 以下では $\P^2$ と書くことにす
+る. $\P^2$ 内の直線とは $\C^3$ 内の原点を通る平面の $\P^2$ への射影の
+像のことである. すなわち, $(A,B,C)\in\C^3\setminus\{0\}$ に対する
+\[
+  \{\, (X:Y:Z)\in\P^3
+  \mid AX+BY+CZ=0 \,\}
+\] %
+を $\P^2$ 内の直線と呼ぶ. 
+
+\begin{question}
+  射影平面内の3点 $P_k=(X_k:Y_k:Z_k)\in\P^2$ が同一直線上に乗っている
+  ための必要十分条件は
+  \[
+  \begin{vmatrix}
+    X_1 & Y_1 & Z_1 \\
+    X_2 & Y_2 & Z_2 \\
+    X_3 & Y_3 & Z_3
+  \end{vmatrix}
+  = 0
+  \] %
+  が成立することである. \qed
+\end{question}
+
+$g_2,g_3\in\C$ であるとし, $f(x)=4x^3-g_2x-g_3$ と置く. $f(x)$ は重根
+を持たないと仮定する. このとき, 複素射影平面 $\P^2$ 内の曲線 $E$ を
+\[
+  E :=
+  \{\, (X:Y:Z)\in\P^3
+  \mid Y^2Z = 4X^3 - g_2 XZ^2 - g_3 Z^3 \,\}
+\] %
+と定義すると, $E$ には自然にコンパクト Riemann 面の構造が入るのであっ
+た. $E$ と無限遠直線 $Z=0$ は唯一の点 $\infty=(0:1:0)$ で(3重に)交わ
+るのであった.
+
+$E$ に対して $\R$ 上一次独立な $\omega_1,\omega_2\in\C$ が存在して, %
+$\Omega=\Z\omega_1+\Z\omega_2$ に関する $\pe$ 函数によって, 正則写像
+\[
+  f : \C \to E,
+  \qquad
+  u \mapsto (\pe(u),\pe'(u),1)
+\]
+が定まり($u\in\Omega$ に対しては $f(u)=\infty$), %
+双正則写像 $\C/\Omega \isoto E$ を誘導するのであった. %
+$\C/\Omega$ はAbel群なので, この双正則写像を通じて, $E$ にAbel群の構造
+が定義される. そのAbel群構造に関して $\infty\in E$ は $E$ の単位元であ
+る. そこで, 以下 $\infty$ を $E$ の単位元とみなすときには $O$ と書くこ
+とにする.
+
+$\pe$ 函数の加法公式をより詳しく調べることにより, $E$ のAbel群の構造に
+関して次が成立することが確かめられる:
+\begin{quote}
+  任意の $P_1,P_2,P_3\in E$ に対して, $P_1+P_2+P_3=O$ であるための必要
+  十分条件は3点 $P_1,P_2,P_3$ が射影平面内で同一直線上にあることである.
+\end{quote}
+この命題は $\pe$ 函数を含んでない. 実は $\pe$ 函数を用いずに, この命題
+を $E$ のAbel群構造の定義として採用することができる.
+
+\begin{question}
+  $\P^2$ 内の任意の直線と $E$ は重複を込めて3点で交わる. %
+  $P,Q\in E$ に対して, $P\ne Q$ ならば $P$, $Q$ の2点を通る唯一の直線
+  を $L_{P,Q}$ と書き, $P=Q$ ならば点 $P$ で $E$ と接する唯一の直線を 
+  $L_{P,Q}$ と書くことにする. %
+  $L_{P,Q}$ と $E$ が交わる3点を $P$, $Q$, $R$ と書き, さらに直線 %
+  $L_{O,R}$ と $E$ が交わる3点を $O$, $R$, $S$ と書くことにする. 以上
+  によって, 写像 $E\times E\to E$, $(P,Q)\mapsto S$ が定義された. %
+  $P+Q=S$ と置くことによって, $E$ にAbel群の構造が入ることを示せ. \qed
+\end{question}
+
+\noindent ヒント: 定義の仕方より, $P+Q=Q+P$, $P+O=P$ が成立することは
+すぐにわかる. $L_{O,O}$ と $E$ が交わる3点を $O$, $O$, $N$ と書き, %
+$L_{P,N}$ と $E$ の交わる3点を $P$, $N$, $P'$ と書くことにすると, %
+$P+P'=O$ が成立することが, $+$ の定義よりすぐに確かめられる. よって, 
+問題になるのは結合法則の証明だけである. 直接の計算的な証明を試みてみよ.
+(2点の座標から残りの1点の座標を計算し, その式を利用して結合法則を証明
+することを試みてみよ.)
+
+\medskip
+
+\noindent 参考: 結合法則は以下のようにして示すこともできる. 直線 $L$ %
+に対して, その定義線型方程式を $\phi_L=\phi_L(X,Y,Z)=A_LX+B_LY+C_LZ=0$ 
+と書き, $P,Q\in E$ に対して $\phi_{P,Q}:=\phi_{L_{P,Q}}$ と置く. %
+$\phi_{P,Q}/\phi(O,P+Q)$ の $E$ 上への制限 $f_{P,Q}$ は $E$ 上の有理型
+函数を定める. $f_{P,Q}$ は $P$, $Q$ に零点を持ち, $O,P+Q$ に極を持ち, 
+他では正則である. よって, $g_{P,Q,R}=f_{P,Q}f_{P+Q,R}$ は点 $P$, $Q$,
+$R$ に零点を持ち, $O$, $O$, $(P+Q)+R$ に極を持つ. %
+一方, $h_{P,Q,R}=f_{P,Q+R}f_{Q,R}$ は$P$, $Q$, $R$ に零点を持ち, $O$,
+$O$, $P+(Q+R)$ に極を持つ. よって, もしも, $(P+Q)+R\ne P+(Q+R)$ ならば %
+$k_{P,Q,R}=g_{P,Q,R}/h_{P,Q,R}$ は $(P+Q)+R$ に1位の極を持ち, 他では正
+則である. $E$ 上には零点を持たない大域的な正則1形式 ``$dx/y$'' が存在
+する. よって $k_{P,Q,R} dx/y$ に留数定理を適用することによって, %
+$k_{P,Q,R}$ の1位の極 $(P+Q)+R$ における留数が0であるという変な結論が
+得られる. よって, $(P+Q)+R=P+(Q+R)$ でなければいけない.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{楕円函数の加法公式の証明の仕方に関するメモ}
+
+\cite{WW} 20.312 (p.442) に Weierstrass の $\pe$ 函数の加法公式の Abel 
+の方法による証明の概略が書いてある. それは, 楕円曲線の Weierstrass の
+標準形
+\[
+  y^2 = 4 x^3 - g_2 x - g_3
+\]
+と直線 $y = mx + n$ の交点を $(x_i, y_i) = (\pe(u_i), \pe'(u_i))$
+($i=1,2,3$) と書くとき, 直線を微少に動かしても $u_1 + u_2 + u_3$ が変
+化しないということを直接的な計算で示すというものである. $\pe(u)$ の定
+義より, $dx/y = du$ であるから,
+$$
+  \frac{dx_1}{y_1} +
+  \frac{dx_2}{y_2} +
+  \frac{dx_3}{y_3} = 0
+  \leqno{(*)}
+$$ %
+を代数的な計算で示せば良いのである. これによって, $\pe$ の次の形での加
+法公式が証明される: $u_1 + u_2 + u_3 = 0$ のとき, $x_i = \pe(u_i)$, 
+$y_i = \pe'(u_i)$ と置くと,
+\[
+  \begin{vmatrix}
+    x_1 & y_1 & 1 \\
+    x_2 & y_2 & 1 \\
+    x_3 & y_3 & 1 \\
+  \end{vmatrix} = 0
+\] %
+(直線との交わりを利用しているので行列式 $= 0$ の形で書ける.) なお, 公
+式 $(*)$ は以下を認めれば自明な式になる:
+\begin{itemize}
+\item 楕円曲線のAbel群構造は Weierstrass の標準形において直線との交点
+  を用いて表現できる. 
+\item $dx/y$ が楕円曲線のAbel群構造に関して平行移動不変であるというこ
+  とを認めれば自明な式になる. 
+\end{itemize}
+
+次に, \cite{WW} 22.2 Example 5 の Hint (p.497) を見ると, Abelの方法で 
+$\sn$ の加法公式を求めるやり方の概略が説明してある. それは, 楕円曲線
+\[
+        y^2 = (1 - x^2)(1 - k^2 x^2)
+\] %
+と放物線 $y = 1 + m x + n x^2$ の交点の全体を $(x_0,y_0)=(0,1)$, 
+$(x_i, y_i) = (\sn u_i, \sn' u_i) = (\sn u_i, \cn u_i \dn u_i)$
+($i=1,2,3$) と書くとき, 放物線を微少に動かしても $u_1 + u_2 + u_3$ が
+変化しないということを示すというものである. 計算の仕方は $\pe$ の場合と
+同様でである.
+
+しかし, $y = 1 + m x + n x^2$ との交点を考えると楕円曲線のAbel群構造が
+つかまるのはなぜかという疑問は残る. 一方, $\pe$ の加法公式の証明の方で
+直線との交わりを考えれば楕円曲線のAbel群構造がつかまるということの理由
+は, 楕円曲線の群構造の定義(Picard 群と同一視するという方法による定義)
+を見ればよくわかる.
+
+そこで, さらに \cite{WW} を読み進めると, 第22章の Misc.~Examples の 21
+(p.530)に必要な式が書いてあることに気付く. それは,
+\[
+  x^2 + y^2 = 1, \qquad  k^2 x^2 + z^2 = 1
+\] %
+なる連立方程式で定義される楕円曲線と超平面 $l x + m y + n z = 1$ の交
+点を調べることによって次の加法公式を証明するというものである: %
+$u_1 + u_2 + u_3 + u_4 = 0$ のとき, $x_i=\sn u_i$, $y_i=\cn u_i$, %
+$z_i=\dn u_i$ と置くと,
+\[
+  \begin{vmatrix}
+    x_1 & y_1 & z_1 & 1 \\
+    x_2 & y_2 & z_2 & 1 \\
+    x_3 & y_3 & z_3 & 1 \\
+    x_4 & y_4 & z_4 & 1 \\
+  \end{vmatrix} = 0.
+\] %
+これも, $\pe$ の場合と同様に, 楕円曲線の超平面切断を利用しているので代
+数幾何的な由来ははっきりしていると考えられる. 
+
+この場合の $(x,y,z)$ を $(x,yz)$ に射影すれば, 上の 22.2 Example 5 が
+再現される.  実際, $y^2 = 1 - x^2$, $z^2 = 1 - k^2 x^2$ より, %
+$X = x$, $Y = yz$ と置くと,
+\[
+  Y^2 = (1 - X^2)(1 - k^2 X^2).
+\] %
+また, 連立方程式 $l x + m y + n z = 1$, $x^2 + y^2 = 1$, %
+$k^2 x^2 + z^2 = 1$ の解の $(x,y,z)\mapsto(X,Y)=(x,yz)$ による像は曲線
+\[
+  (1 - lX)^2 = (my + nz)^2 = m^2(1 - X^2) + n^2(1 - k^2 X^2) + 2mnY,
+\]
+すなわち, 放物線
+\[
+  2mnY = (l^2 + m^2 + k^2 n^2) X^2 - 2 l X + 1 - m^2 - n^2
+\] %
+の上に乗っていることもすぐにわかる. これは, $m + n = \pm1$ のとき, %
+\cite{WW} 22.2 Example 5 で使った放物線を与える.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{2重周期性の条件の一般化}
+
+楕円函数は天下り的には $\C$ 上の2重周期有理型函数として定義された. こ
+こでは, その2重周期性の条件を2通りに一般化し, その条件を満たす函数の空
+間を調べる. (Jacobiの楕円函数 $\sn$, $\cn$, $\dn$ とテータ函数はそれぞ
+れ2通りの一般化の特殊な例になっている.)  
+以前と同様に, $\omega_1,\omega_2$ は $\R$ 上一次独立であるとし, %
+$\Omega=\Z\omega_1+\Z\omega_2$ と置く.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{第2種楕円函数 (flat line bundle)}
+
+まず, 第1の一般化について説明しよう. %
+$\Omega$ から $\C^{\times}$ への準同型写像全体のなすAbel群を %
+$\Omega^*=\Hom(\Omega,\C^{\times})$ と書くことにする. 絶対値が1の複素
+数全体のなすAbel群を
+\[
+  U(1)=\{\,z\in\C^{\times}\mid|z|=1\,\}
+\] %
+と書き, $\Omega$ から $U(1)$ への準同型写像全体のなす $\Omega^*$ の部
+分群を $\Omegahat=\Hom(\Omega,U(1))$ と書くことにする. %
+複素数 $\alpha\in\C$ に対して, % 
+$\chi_\alpha\in\Omega^*$ を次のように定義する:
+\[
+  \chi_\alpha(\omega)=e^{\alpha\omega}
+  \qquad
+  (\omega\in\Omega).
+\] %
+$\chi_0$ は $\Omega^*$ の単位元なので $1$ と書くことがある. %
+$\Omega^*$ の部分群 $\Omega^*_0$ を次のように定める:
+\[
+  \Omega^*_0 := \{\,\chi_\alpha \mid \alpha\in\C \,\}.
+\] %
+$\rho,\rho'\in\Omega^*$ が $\rho'\in\rho\Omega^*_0$ を満たすとき %
+$\rho$ と $\rho'$ は同値であると言うことにする.
+
+\begin{question}
+  任意の $\rho\in\Omega^*=\Hom(\Omega,\C^{\times})$ に対して, $\rho$ 
+  と同値な $\rho'\in\Omegahat=\Hom(\Omega,U(1))$ が唯一存在する. よっ
+  て, $\Omega^*/\Omega^*_0\simeq\Omegahat$ (群の同型) が成立している.
+  \qed
+\end{question}
+
+$\rho\in\Omega^*$ に対して, 以下の条件を満たす $\C$ 上の有理型函数 $f$ 
+の全体の空間を $K_\rho$ と書くことにする:
+\[
+  f(u+\omega) = \rho(\omega)f(u)
+  \qquad
+  (\omega\in\Omega).
+\] %
+$K_\rho$ に含まれる函数を $\rho$ に付随する{\bf 第2種楕円函数}
+(elliptic function of the second kind)と呼ぶこともある. %
+(通常の楕円函数は{\bf 第1種楕円函数}(elliptic function of the first
+kind)と呼ばれる.)  $\C$ 上の正則函数全体の空間を $\O(\C)$ と書くことに
+する. $K_1=K_{\chi_0}$ は周期格子 $\Omega$ に対する楕円函数体に一致
+する. よって, $K_\rho$ 内の有理型函数は楕円函数の一般化であると言える. 
+極を持たない楕円函数は定数函数に限るので, $K_1\cap\O(\C)=\C$ が成立し
+ている.
+
+\begin{question}
+  任意の $\rho\in\Omega^*$ に対して,
+  \begin{enumerate}
+  \item $\rho$ が $1$ に同値ならば, ある $\alpha\in\C^{\times}$ が存在
+    して $K_\rho\cap\O(\C) = \C e^{\alpha u}$.
+  \item $\rho$ が $1$ に同値でないならば $K_\rho\cap\O(\C)=\{0\}$. \qed
+  \end{enumerate}
+\end{question}
+
+\noindent ヒント: $e^{\alpha u}K_\rho = K_{\chi_\alpha\rho}$ が成立す
+る. よって, $\rho,\rho'\Omega^*$ が同値ならば, ある $\alpha\in\C$ が存
+在して $e^{\alpha u}$ を掛け算する写像は $K_\rho$ と $K_{\rho'}$ の間
+の同型写像を定める. 一方, これとは別に, $\rho\in\Omegahat$ であるとき, %
+$\rho=1$ ならば $K_\rho\cap\O(\C)=\C$ であり, $\rho\ne1$ ならば %
+$K_\rho\cap\O(\C)=\{0\}$ であることを示すことができる. 任意の %
+$\Omega^*$ の元は唯一の $\Omegahat$ の元に同値になるので, 問題の結果が
+導かれる.
+
+\medskip
+
+\noindent 参考: 上の問題は極を持たないような $K_\rho$ 内の函数がどれだ
+けあるかに関する完全な解答を与えている. 実は極をある程度許したときにど
+れだけの函数が存在するかに関しても完全な解答を与えることができるが, そ
+れは後で説明することにする.
+
+\medskip
+
+\noindent 参考: $\Omega$ は自然に $E=\C/\Omega$ の基本群と同一視可能で
+ある. ($\C$ は $E$ の普遍被覆(universal covering)であるので, これは, 
+普遍被覆の被覆変換群が基本群に同型になるという一般的な定理の特別な例に
+なっている%
+\footnote{私が見たところ, 今の3年生は基本群や普遍被覆に全く疎いようで
+  ある. 基本群と普遍被覆という考え方は多くの数学で非常に重要になる考え
+  方であるので, 色々な数学を理解したいという希望を持つものは, できるだ
+  け詳しく復習しておくことが望ましい. 楽しく読める本に \cite{Kuga1} が
+  あるので参照すると良いであろう.}.) %
+今の場合は $E$ の基本群はAbel群になるので $\Omega$ は $E$ の1次元ホモ
+ロジー群 $H_1(E,\Z)$ とも同一視可能である. $H_1(E,\Z)$ から %
+$\C^{\times}$ への準同型写像を $E$ 上の階数1の局所系(local system of
+rank 1)と呼ぶ. すなわち, $\Omega^*$ は $E$ 上の階数の局所系全体のなす
+Abel群である. 階数1の局所系と flat line bundle (connection の与えられ
+た holomorohic line bundle と言っても同じ)の同型類は自然に一対一に対応
+する. この対応によって $\Omega^*_0$ の元は trivial line bundle に 
+connection を入れたものに対応している. $E$ 上の line bundle に 
+connection が入るための必要十分条件はその line bundle の degree が 0 
+であることである. 以上の話を認めると, $\Omega^*/\Omega^*_0$ は $E$ 上
+の degree 0 の line bundles の同型類全体のなすAbel群に同型になる. %
+また, $\Omega^*/\Omega^*_0\simeq\Omegahat$ は $E$ 上の degree 0 の任意
+の line bundle に unitary な connection が入ることを意味している. %
+$\rho\in\Omega^*$ に対応する flat line bundle を %
+$(L_\rho,\nabla_\rho)$ と書くことにする($L_\rho$ は degree 0 の line
+bundle であり, $\nabla_\rho$ は connection). このとき, 上の問題の結果
+は, $L_\rho$ が trivial line bundle ならば $H^0(E,L_\rho)\sim\C$ であ
+り, そうでないならば $H^0(E,L_\rho)=0$ であることを意味している.
+
+\begin{question}
+  $\omega_1=1$, $\omega_2=\tau$, $\Impart\tau>0$ であると仮定し, %
+  \(
+    \Xi = \{\, s + t\tau \mid 0\le s,t<1 \,\}
+  \)
+  と置く. ($\Xi$ は $\Omega=\Z+\Z\tau$ の周期平行四辺形の1つである.) 
+  $\xi\in\C$ に対して, $\rho_\xi\in\Omega^*$ を次の条件によって定める:
+  \[
+    \rho_\xi(1)=1,
+    \qquad
+    \rho_\xi(\tau)=e^{2\pi i\xi}.
+  \] %
+  任意の $\rho\in\Omega^*$ に対して, $\rho$ と $\rho_\xi$ が同値になる
+  ような $\xi\in\Xi$ が唯一存在する. \qed
+\end{question}
+
+\noindent 参考: この問題の結果は $\xi\in\C$ に対して %
+$\rho_\xi\in\Omega^*$ を対応させる写像が $E=\C/\Omega$ から %
+$\Omega^*/\Omega_0$ への同型写像を誘導することを意味している. %
+よって, $E$ は $E$ 上の degree 0 の line bundle の同型類全体のなすAbel
+群と同型である. 一般に代数多様体 $X$ が与えられたとき, その上の line
+bundle の同型類の分類と, line bundle $L$ の global section の空間の %
+$H^0(X,L)$ の計算は最初の基本的な問題になる. 
+
+\medskip
+
+\noindent {\bf 以上では「参考」と称して, 言葉の説明抜きで色々書いてし
+  まったが, それらの言葉を知らなくても問題を解くための支障にはならない
+  ことを注意しておく.}
+
+\begin{question}
+  周期格子 $\Omega$ に対する周期平行四辺形 $\Xi$ を任意に固定し, %
+  $\rho\in\Omega^*$ であるとする. $\rho(\omega_k)$ を次のように表わし
+  ておく:
+  \[
+    \rho(\omega_k) = e^{2\pi i\xi_k},
+    \qquad
+    \xi_k\in\C
+    \qquad
+    (k=1,2).
+  \] %
+  恒等的には0でない $f\in K_\rho$ に対して以下が成立する:
+  \begin{enumerate}
+  \item $\Xi$ に含まれる $f$ の零点と極の個数は重複度を含めて数えれば
+    互いに等しい.
+  \item $\Xi$ に含まれる $f$ の零点の全体を重複を込めて %
+    $a_1,\dots,a_r$ と書き, 極の全体を重複を込めて $b_1,\dots,b_r$ と
+    書くとき, 次が成立している:
+    \[
+      (a_1 + \dots + a_r) - (b_1 + \dots + b_r)
+      \equiv
+      \xi_2\omega_1 - \xi_1\omega_2
+      \mod \Omega. 
+    \]
+    特に, $\omega_1=1$, $\xi_1=0$, $\xi_2=\xi$ であるとき,
+    \[
+      (a_1 + \dots + a_r) - (b_1 + \dots + b_r)
+      \equiv
+      \xi
+      \mod \Omega. 
+    \qed
+    \]
+  \end{enumerate}
+\end{question}
+
+\noindent ヒント: $f\in K_\rho$, $f\ne0$ に対して, $F=(\log f)'=f'/f$ 
+は周期格子 $\Omega$ に関する楕円函数である. よって, 楕円函数の場合と同
+様に $F(u)\,du$ と $uF(u)\,du$ を $\Xi$ の周囲に沿って線積分すれば求め
+る結果が得られる. そのとき, $f(u+\omega_k)=e^{2\pi i\xi_k}f(u)$ より, 
+次が成立することに注意せよ:
+\[
+  \frac{1}{2\pi i}\int_{u_0}^{u_0+\omega_k} d\log f(u)
+  \equiv \frac{\log (e^{2\pi i\xi_k}f(u_0))  - \log f(u_0)}{2\pi i}
+  \equiv \xi_k
+  \mod \Z.
+\]
+
+\begin{question}
+  周期格子 $\Omega$ に対する周期平行四辺形 $\Xi$ を任意に固定し, %
+  $\rho\in\Omega^*$ であるとする. $\rho(\omega_k)$ を次のように表わし
+  ておく:
+  \[
+    \rho(\omega_k) = e^{2\pi i\xi_k},
+    \qquad
+    \xi_k\in\C
+    \qquad
+    (k=1,2).
+  \] %
+  $K_\rho\ne\{0\}$ が成立することを認めた上で以下を示せ. %
+  $a_j,b_j\in\Xi$ ($j=1,\dots,r$) が
+  \[
+    (a_1 + \dots + a_r) - (b_1 + \dots + b_r)
+    \equiv
+    \xi_2\omega_1 - \xi_1\omega_2
+    \mod \Omega. 
+  \] %
+  を満たしているとき, ある $f\in K_\rho$ で $\Xi$ に含まれる零点と極の
+  全体が重複も込めてそれぞれ $a_1,\dots,a_r$ と $b_1,\dots,b_r$ になる
+  ものが定数倍の違いを除いて唯一存在する. \qed
+\end{question}
+
+\noindent ヒント: $0$ でない $f_0\in K_\rho$ を任意に選んでおき, 周期
+格子 $\Omega$ に関する楕円函数体を $K$ と書くことにすると, %
+$K_\rho=K f_0$ が成立する. このことを利用すると上の問題は楕円函数の場
+合に帰着されることがわかる.
+
+\medskip
+
+\noindent 注意: $K_\rho\ne\{0\}$ は次の部分節(subsection)で示される.
+
+\begin{question}
+  $\rho\in\Omega^*$ と $c\in\C$ に対して, $c+\Omega$ の上に高々 $n$ 位
+  の極を持ち, その外では正則な $K_\rho$ に含まれる有理型函数全体の空間
+  を $K_{\rho,c,n}$ と書くことにする. このとき以下が成立する:
+  \begin{enumerate}
+  \item[(1)] $\rho$ が $1$ に同値であるとき, 
+    $n=0,1$ に対して $\dim K_{\rho,c,n}=1$ であり, %
+    $n\ge2$ に対して $\dim K_{\rho,c,n}=n$ である. 
+  \item[(2)] $\rho$ が $1$ に同値でないとき, %
+    $\dim K_{\rho,c,n}=n$ である. \qed
+  \end{enumerate}
+\end{question}
+
+\noindent ヒント: (1) $\pe$ 函数を使う. (2) 上の問題の結果を使う.
+
+\medskip
+
+\noindent 参考: $\rho_k\in\Omegahat$ ($k=1,2,3$) と次のように定める(こ
+こだけの記号):
+\[
+  (\rho_1(\omega_1),\rho_1(\omega_2))=(-1,1),
+  \quad
+  (\rho_2(\omega_1),\rho_1(\omega_2))=(-1,-1),
+  \quad
+  (\rho_3(\omega_1),\rho_1(\omega_2))=(1,-1).
+\]
+$\rho_1,\rho_2,\rho_3$ のそれぞれに対して, 上の問題における %
+$\xi_1,\xi_2$ は以下のように取れる:
+\[
+\textstyle
+  (\xi_1,\xi_2)
+  =
+  (\frac{1}{2},0), 
+  (\frac{1}{2},\frac{1}{2}),
+  (0,\frac{1}{2}).
+\]
+$\omega'_k:=\omega_k/2$ と置く. 上の問題の結果より以下が成立することが
+わかる: 
+\begin{enumerate}
+\item $0$ に1位の零点を持ち %
+  $\omega'_2$ に1位の極を持つ %
+  $f_1\in K_{\rho_1}$ が定数倍の違いを除いて唯一存在する.
+\item $\omega'_1$ に1位の零点を持ち %
+  $\omega'_2$ に1位の極を持つ % 
+  $f_2\in K_{\rho_2}$ が定数倍の違いを除いて唯一存在する.
+\item $\omega'_1+\omega'_2$ に1位の零点を持ち %
+  $\omega'_2$ に1位の極を持つ % 
+  $f_3\in K_{\rho_3}$ が定数倍の違いを除いて唯一存在する.
+\end{enumerate}
+定数倍の不定性は $f'_1(0)=1$, $f_2(0)=f_3(0)=1$ という条件を課せば無く
+なる. このとき, $f_1,f_2,f_3$ はそれぞれ Jacobi の楕円函数 %
+$\sn,\cn,\dn$ に一致する. Jacobi の楕円函数については, Jacobi のテータ
+函数と共に, 後で詳しく説明されるであろう.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{第3種楕円函数 (theta function)}
+
+上半平面を $\H=\{\,\tau\in\C\mid\Impart\tau>0\,\}$ と書くことにする.
+
+少々天下りであるが, $z\in\C$, $\tau\in\H$, $a,b\in\R$ の函数 %
+$\vt_{a,b}(z,\tau)$ を次のように定義する%
+\footnote{例えば \cite{TataI} p.10 なども参照せよ.}:
+\[
+  \textstyle
+  \vt_{a,b}(z,\tau)
+  = \sum\limits_{k\in\Z}
+    \e\left(
+      \frac{1}{2}(k+a)^2\tau + (k+a)(z+b)
+    \right).
+\]
+ここで, $\e(u)=\exp(2\pi i u)$ である. 
+
+\begin{question}
+  $\vt_{a,b}(z,\tau)$ の定義式の級数は $z\in\C$, $\tau\in\H$,
+  $a,b\in\R$ に関して広義一様絶対収束する. \qed
+\end{question}
+
+\noindent ヒント: $\Impart\tau>0$ より, $\Repart(i\tau)<0$ であるから,
+$\left|\e(\frac{1}{2}k^2\tau)\right| = \exp(\Repart(i\tau)\pi k^2)$ は %
+$k\to\infty$ のとき急激に小さくなる.
+
+\medskip
+
+\noindent この問題の結果より, $\vt_{a,b}(z,\tau)$ は $z\in\C$, %
+$\tau\in\H$ の正則函数になることがわかる.
+
+\medskip
+
+以下, $\omega_1=1$, $\omega_2=\tau\in\H$ であるとし, %
+$\Omega=\Z+\Z\tau$ の場合を考える.
+
+\medskip
+
+\noindent 注意: $\omega_1,\omega_2\in\C$ が $\R$ 上一次独立であるとき,
+必要なら $\omega_1$ と $\omega_2$ を交換することによって, %
+$\omega_2/\omega_1\in\H$ であるとして良い. $\tau:=\omega_2/\omega_1$ %
+と置く. $\C$ の座標 $u$ を $z=u/\omega_1$ に変換すると, 座標 $z$ にお
+いて $\omega_1$, $\omega_2$ は $1$, $\tau$ に移る. このことに注意する
+と, 一般の周期格子 $\Omega$ に関する問題の多くは $1$ と $\tau\in\H$ か
+ら生成される周期格子の場合の問題に帰着できる. 例えば, 一般の場合に %
+$K_\rho\ne\{0\}$ を示すためには, $\Omega=\Z+\Z\tau$ ($\tau\in\H$)の場
+合に示せば十分である.
+
+\begin{question}[テータ函数の準周期性]
+  $m,n\in\Z$ に対して,
+  \[
+  \textstyle
+    \vt_{a,b}(z+m+n\tau,\tau)
+    = \e\left(ma - n(\frac{1}{2}\tau n + z + b)\right) \vt_{a,b}(z,\tau).
+  \] %
+  これを $\vt$ 函数の準周期性(quasi periodicity)と呼ぶ. 特に,
+  \[
+  \textstyle
+    \vt_{a,b}(z+1,\tau)=\e(a)\vt_{a,b}(z,\tau),
+    \qquad
+    \vt_{a,b}(z+\tau,\tau)=\e(-\frac{1}{2}\tau-z-b)\vt_{a,b}(z,\tau).
+    \qed
+  \]
+\end{question}
+
+次の問題の結果は前節で認めて使ったものである.
+
+\begin{question}
+  任意の $\rho\in\Omega^*$ に対して $K_\rho\ne\{0\}$. \qed
+\end{question}
+
+\noindent ヒント: $\rho$ はある $\rho'\in\Omegahat$ に同値であり, %
+そのとき $K_\rho\simeq K_{\rho'}$ であるから, 始めから %
+$\rho\in\Omegahat$ であると仮定して良い. このとき, $\rho(1)$,
+$\rho(\tau)$ は次のように表示可能である:
+\[
+  \rho(1)=\e(a), \qquad
+  \rho(\tau)=\e(-b), \qquad
+  a,b\in\R.
+\] %
+$f(z):=\vt_{a,b}(z,\tau)/\vt_{0,0}(z,\tau)$ と置くと, %
+$f\ne0$, $f\in K_\rho$ であることが簡単に確かめられる.
+
+\begin{question}
+  $\vt_{a,b}(z)=\vt_{a,b}(z,\tau)$ は $\Omega$ に対する任意の周期平行
+  四辺形の上に唯一の零点を持ち, しかもその零点は1位である. \qed
+\end{question}
+
+\noindent ヒント: $\Xi=\Xi(z_0)=\{\,z_0+s+t\tau\mid 0\le s,t<1\,\}$ と
+置く.  $\vt$ 函数の準周期性より $\bdr\Xi$ 上に $\vt_{a,b}(z)$ の零点が
+存在しない場合について示せば十分である. $F(z)=(\log \vt_{a,b}(z))'$ と
+置くと,
+\[
+  \frac{1}{2\pi i} \int_{\bdr \Xi} F(z)\,dz
+  =
+  \frac{1}{2\pi i} \int_{\bdr \Xi} d\log f(z)
+  =
+  (\text{$\Xi$ に含まれる $f$ の零点の位数の総和}).
+\] %
+一方, $f$ の準周期性より, $F(z+1)=F(z)$, $F(z+\tau)=F(z)-2\pi i$ であ
+ることがわかる. よって,
+\[
+  \frac{1}{2\pi i} \int_{\bdr \Xi} F(z)\,dz
+  =
+  \frac{1}{2\pi i} \int_{z_0}^{z_0+1} (F(z)-F(z+\tau))\,dz
+  -
+  \frac{1}{2\pi i} \int_{z_0}^{z_0+\tau} (F(z)-F(z+1))\,dz
+  = 1.
+\]
+以上によって, $f$ は $\Xi$ 内に唯一の零点を持ち, しかもその零点の位数
+は1であることがわかった.
+
+\begin{question}
+  $\vt_{a,b}(z)=\vt_{a,b}(z,\tau)$ の零点集合は次に等しい:
+  \[
+  \textstyle
+    (\frac{1}{2}-a)\tau + (\frac{1}{2}-b) + \Omega.
+  \qed
+  \]
+\end{question}
+
+\noindent ヒント: 直接の計算により $\vt_{\frac12,\frac12}(z)$ が奇函数
+であることが確かめられる. 特に $\vt_{\frac12,\frac12}(0)=0$ である. 後
+は次の公式を用いれば良い:
+\[
+\textstyle
+  \vt_{a+a',b+b'}(z)
+  =
+  \e\left(\frac{1}{2}a'{}^2\tau+a'(z+b+b')\right)
+  \vt_{a,b}(z+a'\tau+b').
+\]
+
+\medskip
+
+\noindent 参考: %
+$(a,b)=(0,0),(\frac12,0),(0,\frac12),(\frac12,\frac12)$ に対する % 
+$\vt_{a,b}$は Jacobi のテータ函数と呼ばれている. Jacobi のテータ函数に
+ついては次の節で詳しく扱う予定である.
+
+\begin{question}
+  $\tau\in\H$, $a,b\in\R$ に対して, 次の準周期性を持つ $\C$ 上の正則函
+  数 $f$ の全体の空間を $L_{a,b}$ と書くことにする:
+  \[
+  \textstyle
+    f(z+m+n\tau)
+    = \e\left(m a - n (\frac{1}{2}\tau n + z + b)\right) f(z).
+  \] %
+  このとき, $\dim L_{a,b}=1$ が成立している. \qed
+\end{question}
+
+\noindent ヒント1: $f\in L_{a,b}$ に対して, %
+$g(z)=f(z)/\vt_{a,b}(z,\tau)$ と置くと, $g$ は格子 $\Z+\Z\tau$ に関す
+る1以下の位数を持つ楕円函数である. よって, $g$ は定数函数である.
+
+\medskip
+
+\noindent ヒント2: $f\in L_{0,0}$ に対して,
+\[
+\textstyle
+  g(z) = 
+  \e\left(\frac{1}{2}a^2\tau + a(z+b)\right)
+  f(z+a\tau+b).
+\] %
+によって, $g$ を定めると $g\in L_{a,b}$ である. %
+このことから, ベクトル空間として $L_{0,0}$ と $L_{a,b}$ は同型であるこ
+とがわかる. $f\in L_{0,0}$ は $f(z+1)=f(z)$ を満たしているので %
+\[
+  f(z) = \sum_{k\in\Z} a_k \e(kz)
+\]
+と Fourier 展開される. %
+さらに, $f(z+\tau)=\e(-\frac{1}{2}\tau-z)f(z)$ を使うと $f(z)$ は %
+$\vt_{0,0}(z,\tau)$ の定数倍になることが確かめられる.
+
+\medskip
+
+$\omega_1,\omega_2\in\C$ は $\R$ 上一次独立であるとし, %
+$\Omega=\Z\omega_1+\Z\omega_2$ と置く. 一般に $\C$ 上の有理型函数 $f$ 
+がある定数 $A_i,B_i\in\C$ ($i=1,2$) に対して, 
+\[
+  f(u+\omega_i) = \e(A_i u + B_i) f(u)
+  \qquad
+  (i=1,2)
+\] %
+を満たしているとき, $f$ は $\C$ 上の{\bf 第3種楕円函数}(elliptic
+function of the third kind)であると言う. %
+上で定義した $\vt_{a,b}(z)=\vt_{a,b}(z,\tau)$ は %
+$\omega_1=1$, $\omega_2=\tau$ に対する第3種楕円函数である. Weierstrass
+の $\sigma$ 函数も第3種楕円函数である.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Jacobi のテータ函数 (まだ書いてない)}
+
+%\noindent ${*}{*}{*}{*}{*}{*}{*}$ メモ: 
+%定義, 無限積, etc. 三項等式の別証明.
+
+この節では Jacobi のテータ函数
+\begin{align*}
+  & \vt_1(z)=\vt_{\frac12,\frac12}(z)
+  = i \sum_{n\in\Z} (-1)^n q^{(n-\frac12)^2/2} x^{n-\frac12}
+  =
+  q^{\frac18} \frac{x^{\frac12}-x^{-\frac12}}{i}
+  \varphi
+  \prod_{n=1}^\infty
+  \{(1 - q^n x) (1 - q^n x^{-1})\},
+  \\
+  & \vt_2(z)=\vt_{\frac12,0}(z)
+  = \sum_{n\in\Z} q^{(n-\frac12)^2/2} x^{n-\frac12}
+  =
+  q^{\frac18} (x^{\frac12}+x^{-\frac12})
+  \varphi
+  \prod_{n=1}^\infty
+  \{(1 + q^n x) (1 + q^n x^{-1})\}
+  \\
+    & \vt_3(z)=\vt_{0,0}(z)
+  = \sum_{n\in\Z} q^{n^2/2} x^n
+  =
+  \varphi
+  \prod_{n=1}^\infty
+  \{(1 + q^{\frac{2n-1}{2}} x) (1 + q^{\frac{2n-1}{2}} x^{-1})\},
+  \\
+  & \vt_0(z)=\vt_{0,\frac12}(z)
+  = \sum_{n\in\Z} (-1)^n q^{n^2/2} x^n
+  =
+  \varphi
+  \prod_{n=1}^\infty
+  \{(1 - q^{\frac{2n-1}{2}} x) (1 - q^{\frac{2n-1}{2}} x^{-1})\},
+\end{align*}
+を扱う予定である. ここで, $q=\e(\tau)$, $x=\e(z)$,
+\[
+  \varphi = \prod_{n=1}^\infty (1 - q^n)
+\]
+と置いた. $\eta=q^{1/24}\varphi$ を Dedekind の $\eta$ 函数と呼ぶ.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Jacobi の楕円函数 (まだ書いてない)}
+
+%\noindent ${*}{*}{*}{*}{*}{*}{*}$ メモ: 
+%色々, 書きたいことはあるが, さて, どうしよう….
+
+この節では Jacobi の楕円函数
+\[
+  \sn u = \frac{\sigma_0(u)}{\sigma_3(u)}
+  = \omega_2 \frac{\vt_0(0)\vt_1(v)}{\vt_1'(0)\vt_0(v)},
+  \quad
+  \cn u = \frac{\sigma_1(u)}{\sigma_3(u)}
+  = \frac{\vt_0(0)\vt_2(v)}{\vt_2(0)\vt_0(v)},
+  \quad
+  \dn u = \frac{\sigma_2(u)}{\sigma_3(u)}
+  = \frac{\vt_0(0)\vt_3(v)}{\vt_3(0)\vt_0(v)}
+\]
+を扱う予定である. ここで, $\tau\in\H$, $\omega_2=\omega_1\tau\ne0$, %
+$v=u/\omega_1$ である. $k=(\vt_2(0)/\vt_3(0))^2$ と置くと, 
+\[
+  \cn^2 u + \sn^2 u = 1,
+  \qquad
+  \dn^2 u + k^2 \sn^2 u = 1,
+  \qquad
+  (\sn u)' = \cn u\, \dn u
+\]
+が成立している. 特に, $s=\sn u$ は次の微分方程式を満たしている:
+\[
+  s'{}^2 = (1 - s^2)(1- k^2 s^2).
+\]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{楕円モジュラー函数 (まだ書いてない)}
+
+この節では $J$ 函数
+\[
+  J(\tau) = \frac{g_2(\tau)^2}{\Delta(\tau)},
+  \qquad
+  \Delta(\tau) = g_2(\tau)^3 - 27 g_3(\tau)^2
+\]
+を扱う予定である.
+
+\bigskip
+
+結局, この楕円函数論の演習において, モジュラー函数(modular function)お
+よびモジュラー形式(modular form)の理論があるが, 残念ながら全く触れるこ
+とができなかった. 楕円函数は $\C$ 上の2つの独立な周期 %
+$\omega_1,\omega_2$ を持つ2重周期函数として定義されたのであった. 楕円
+函数と言う場合には主に $\C$上の函数としての性質に注目したのであった. 
+楕円函数の世界に現われる函数を $\C$ 上の函数と考えるだけではなく,
+$\omega_1$, $\omega_2$ の函数とみなすことによってモジュラー函数の概念
+に達することができる. モジュラー函数およびモジュラー形式の理論とその周
+辺に関する文献として \cite{Lang2} のみを挙げておく. 必要な参考文献は 
+\cite{Lang2} の文献表を参照して欲しい.
+
+$\R$ 上一次独立な $\omega_1,\omega_2$ に対して, %
+$\Omega=\Z\omega_1+\Z\omega_2$ と置き, $E=\C/\Omega$ と置く. 任意のジー
+ナス1のコンパクト Riemann 面(楕円曲線)はある $\Omega$ に対する $E$ に
+双正則同型になることが知られている. しかし, 異なる $\Omega$ に対する %
+$E$ が互いに双正則同型になることもありえる. また, 異なる %
+$\omega_1,\omega_2$ に対して同一の $\Omega$ が得られることもありえる.
+よって, 楕円曲線(の双正則同型類)を分類を得るためには, どのような %
+$\omega_1,\omega_2$ に対して互いに双正則な $E$ が得られるかを決定すれ
+ば良い. 互いに双正則な $E$ を与える $\Omega$ は $\alpha\in\C^{\times}$ 
+の作用 $\Omega\mapsto\alpha\Omega$ によって移り合うことを証明すること
+ができる. また, 同じ $\Omega$ を与える $\omega_1,\omega_2$ の
+組は $g=\begin{bmatrix}a&b\\c&d\end{bmatrix}\in GL(2,\Z)$ の作用 %
+$(\omega_2,\omega_1)\mapsto(a\omega_2+b\omega_1,c\omega_2+d\omega_1)$ %
+によって互いに移り合うことがわかる. $\tau=\omega_2/\omega_1$ と置く. 
+必要なら $\omega_1$ と $\omega_2$ を交換して, $\Impart\tau>0$ であると
+仮定して良い. 上半平面 $\frak H=\{\,\tau\in\C\mid\Impart\tau>0\,\}$ を %
+$\Gamma=PSL(2,\Z)$ による一次分数変換の作用で割ってできる商空間 %
+$\Gamma\backslash\frak H$ を考える. 以上で述べた結果をまとめると, %
+楕円曲線の双正則同型類と $\Gamma\backslash\frak H$ の点は一対一に対応
+していることがわかる. $\Gamma\backslash\H$ は楕円曲線のモジュライ空間
+(moduli space)であると言う. 一般にある幾何学的対象の同型類をパラメトラ
+イズする空間のことを○○のモジュライ空間を呼ぶのである.
+
+$\Gamma=PSL(2,\Z)$ に関するモジュラー函数とは, 上半平面 $\frak H$ 上の
+有理型函数であって, $\Gamma$ の作用に関して不変な函数のことである. %
+$PSL(2,\Z)$ の色々な部分群を考えたり, 不変性の条件を適切に弛めたりする
+ことによって, 色々なヴァリアントを考えることができる. このようにして得
+られる函数の理論がモジュラー函数もしくはモジュラー形式の理論である.
+
+以上の大雑把な説明から分かるように, モジュラー形式の理論は楕円曲線の同
+型類の全てを扱うことになり, 固定された楕円曲線上の楕円函数論よりも一段
+深い理論であることがわかる. しかも, そこには楕円曲線という代数幾何的対
+象だけではなく, $GL(2,\Z)$ や $PSL(2,\Z)$ のような群が登場して来る.. 
+これらは,連続群 $GL(2,\R)$, $PSL(2,\R)$ の離散部分群である. この点に注
+目して, モジュラー形式の理論を $GL(2,\R)$ の表現論を用いて構成すること
+もできる. これによって, モジュラー形式の研究は, 楕円曲線のモジュライ空
+間上の函数論という代数幾何的な見方と, $GL(2,\R)$ を用いた表現論的な見
+方の2つの側面を持つのである.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{数理物理学の問題への応用 (まだ未完成)}
+
+\begin{question}[単振り子]
+  長さ $l$ の糸で吊った単振り子の運動方程式
+  \[
+    \od{^2\varphi}{t^2} = - a^2 \sin \varphi,
+    \qquad \left(a=\sqrt{l/g}\right)
+  \] %
+  の解は,
+  \[
+  \textstyle
+    \sin(\varphi/2) = k \sn(a(t - t_0), k),
+    \qquad
+    (k\ge 0, t_0\in\R)
+  \]
+  を満たしていることを示せ. \qed
+\end{question}
+
+\noindent ヒント: \cite{Terakan} 第12章問題20 (p.564)の解答(p.695)を見よ.
+
+\begin{question}[剛体の回転運動]
+  \cite{Terakan} 第12章問題21 (p.564)を解け. \qed
+\end{question}
+
+\begin{question}[独楽の回転運動]
+  \cite{Terakan} 第12章問題22 (p.564)を解け. \qed
+\end{question}
+
+\noindent 参考: 他にも, %
+Yang-Baxter 方程式%
+\footnote{\cite{Baxter}, \cite{Belavin}, \cite{BD}, \cite{JKMO}など多数.}, %
+Lam\'e 方程式%
+\footnote{\cite{WW}の第XXIII章.} %
+など多くの話題がある.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{歴史 --- 楕円函数論は19世紀数学の花形}
+
+楕円函数論は19世紀数学の花形である. その歴史については Klein による
+『19世紀の数学』(\cite{Klein})を参照されたい. 19世紀は楕円函数に限らず
+色々な特殊函数に関する多くの公式を生産している. その一端に触れてみたい
+人は \cite{WW} を見て欲しい. (以下の解説も主に \cite{Klein} によるもの
+である.)
+
+2重周期函数としての楕円函数論を独立に発見をしたのは, 次の3人であると言
+われている:
+\begin{itemize}
+\item ガウス (Carl Friedrich Gauss, 1777.4.30--1855.2.23)
+\item アーベル (Niels Henrik Abel, 1802.8.5--1829.4.6)
+\item ヤコビ (Carl Gustav Jacob Jacobi, 1804.12.10--1851.2.18)
+\end{itemize}
+
+ガウスはブラウンシュヴァイク(Braunschweig)の貧しい家に生まれたが, その
+極めて希な数学的才能が注目され, 結果として恵まれた環境のもとで一生を過
+ごした. ガウスは19世紀数学に新しい見地を切り開いた大天才である. その数
+学的業績はあまりにも多岐にわたるのでここでは簡単に紹介することはできな
+い. 数学の真の天才について知りたい人は, まずガウスについて調べてみるべ
+きである.
+
+アーベルはノルウェーの寒村 Find\"o の貧しい牧師の子として生まれ, その
+短い一生を恵まれない境遇で過ごした. 数学もほとんど独学で学び, 貧困と闘
+いながら数学の研究を続けたが, 無理がたたって肺結核にかかり26歳でその短
+い生涯を終えた. アーベルは数学的問題を抽象化・一般化し, その問題の普遍
+的・本質的側面を明らかにする能力において極めて優れていた. (この点にお
+いては, アーベル以上に短命なガロア(\'Evariste Galois,
+1811.10.25--1832.5.31)においても同様である.)
+
+ヤコビはプロシアのポツダムの裕福な銀行家の家に生まれ, 恵まれた家庭教育
+のもとで高い教養を身に付けた. ベルリン大学に進んだが, 数学の講義はほと
+んど聴かず, オイラーの著作に没頭したらしい%
+\footnote{優秀な数学者になるためには講義に真面目に出席することは必要で
+  はないようである. しかし, 数学を理解するためには, 自分の意思で基本的
+  で重要な文献をじっくりと楽しんで読むという作業は必要不可欠である. こ
+  れは現在でも同様であり, 講義および演習に出席するだけでは数学を理解す
+  ることは不可能である. 理解したければ, 基本的で重要な文献をじっくり読
+  むことが必要である. しかし, 現在では極めてたくさんの文献が存在するの
+  で, 読むべき文献を各人が精選しなければいけない. あらゆるものに手を付
+  けようとすると, 最終的には何も得ることができずに終わってしまう危険性
+  がある. ずっと先の方を睨みながら, 基礎的な事柄を必要に応じて順番に勉
+  強して行くことが重要である.}. %
+ヤコビは非常に攻撃的な性格の持ち主であり, 他人にとって不愉快なことを平
+気で言い, 反感を買うことも少なくなかった. しかし, ヤコビはアーベルの研
+究の価値を早くから認め, 数学研究上の出逢いの直後に死んでしまった自身よ
+り少し年上のアーベルを大変尊敬していたのである.  例えば, 一般の代数函
+数の不定積分に関する「アーベルの定理」はヤコビが命名したものである. ヤ
+コビはその当時知られていたあらゆる数学を研究したが, 厳密な論理展開には
+あまり注意を払わなかった. ヤコビは晩年に財産も失い, 研究も進まず, 恵ま
+れない境遇のもとで, 天然痘にかかり46歳でその生涯を閉じている.
+
+このように3人の一生を簡潔にまとめてみると, 境遇においてはガウスが最も
+恵まれていて, アーベルが最も悲惨である. しかし, 楕円函数の理論を世界で
+初めて発表したのはアーベルであった. (ガウスは楕円函数の存在を知ってい
+たが発表しなかった.) アーベルによる楕円函数に関する研究は『クレレ誌』
+の第2巻(1827年9月20日)と第3巻(1828年5月26日)に発表された. 『クレレ誌』
+の正式名称は ``Journals f\"ur reine und angewandte Mathematik'' (『純
+粋および応用数学に関する雑誌』)である. 『クレレ誌』は19世紀ドイツにお
+ける純粋数学の発展において重要な役目を果たした. アーベルの第1論文もこ
+の『クレレ誌』の第1号に掲載されている. アーベルは恵まれない境遇で一生
+を過ごしたが, クレレと知り合いになれたことは数少ない好運な出来事の一
+つであった. (もちろん, クレレにとっても好運なことであった.)
+
+アーベルより2歳ほど年下のヤコビが楕円函数に関係した論文を発表し始める
+のは1827年9月からである. 1827年11月には楕円不定積分の逆函数を考察する
+というアーベルと同様のアイデアを発表している. アーベルが楕円函数論に関
+する研究を発表し始めたのも1827年の後半なので, 翌年の1828年は楕円函数論
+の構築に関する激しい競争の年になる. しかし, アーベルは貧困と研究の無理
+がたたり肺結核で1829年の4月6日に死んでしまうのである. しかも, ベルリン
+に招聘するという吉報が届いたのはアーベルの死の数日後であった.
+
+アーベルが優れていた点は問題の一般化・普遍化の能力である. アーベルが他
+の二人を越えている点は楕円函数を越えて任意の代数函数の積分という一段高
+い見地に達したことである. その理論は現在においてはコンパクト Riemann 
+面上の微分形式およびその積分の理論として整備されている. Riemann 面のジー
+ナスが1の場合がちょうど楕円函数の理論に対応している. アーベルはジーナ
+ス1を越えて一般の場合も扱ったのである.
+
+ヤコビは先を見通した卓越した計算力に長けていた. ヤコビはテータ函数(多
+変数の場合を含む)を独立に取り上げ, 楕円函数およびテータ函数に関する重
+要な公式をたくさん計算した. 楕円函数およびテータ函数に関する多くの記号
+や公式はヤコビに由来するのである%
+\footnote{リーマンがゼータ函数に $\zeta(s)$ の記号を採用したのは, テー
+  タ $\vartheta$ と似た発音の記号を採用したからであるという説もある.
+  これが本当ならゼータ函数の記号も間接的にヤコビに関係していると考える
+  ことができる. (リーマンはゼータ函数が楕円テータ函数のメリン変換によっ
+  て得られることを発見し, テータ函数に関する函数等式からゼータ函数に関
+  する函数等式を導いた.)}. %
+ヤコビが築いた世界は現在においてもその重要性は失われていない. (可解格
+子模型などの研究を通じて, その重要性はむしろ増したように感じられる.)
+
+アーベルが長生きしていれば, アーベルの長所とヤコビの長所が互いに補完し
+合って, 研究は滑らかにしかも急速に進歩したと思われるので大変残念なこと
+である.
+
+さて, 楕円函数論の存在を知っていながら発表を控えたガウスであるが, ガウ
+スによる楕円函数の研究が他の二人の研究に全て包含されているわけでもない. 
+ガウスはモジュラー函数(modular function)の理論を手中にしていた. 
+
+モジュラー函数およびモジュラー形式の理論は数論において極めて重要な役目
+を果たしている. 最近のフェルマー予想のワイルスによる解決もその範中に入っ
+ていると考えて良い.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\bigskip\bigskip\bigskip 
+
+{\Large\bf %
+  この手加減抜きの問題集はまだ未完成であるが, 以上で今学期に渡す楕円函
+  数に関するプリントはお終いとする(予定である).
+}
+\medskip
+
+講義の方では主に Jacobi の楕円函数 $\sn u$, $\cn u$, $\dn u$ (特に %
+$\sn u$)に関する解説がなされたようだが,演習の方では主に Weierstrass の
+楕円函数 $\pe(u)$, $\zeta(u)$, $\sigma(u)$ を扱うことになってしまった.
+そのせいで理解し難い点が生じた点については申し訳なく思っている.
+
+Jacobi の楕円函数の現代的な解釈の仕方の一つによると, Jacobi の楕円函数
+は楕円曲線上の function ではなく, 楕円曲線上の非常に特別な line
+bundles の sections とみなされる. この見方によると, Jacobi の楕円函数
+達と相性の良い Jacobi のテータ函数もやはり同じ line bundles の 
+sections とみなされる. つまり, 代数幾何的には同一の対象を調べるために,
+色々な表現(例えば $\sn$ 函数やテータ函数)を用いていると考えるのである.
+Weierstrass の $\pe$ 函数もこれと同様に考えることができるのであるが, 
+$\pe$ の住みかである line bundle は Jacobi の楕円函数達とは全く異なる.
+(楕円曲線を $(E,P_0)$ ($P_0$ は原点)と書くとき, $\pe$ は $\O_E(2P_0)$ 
+の global holomorphic section である. 一方, Jacobi の楕円函数達は %
+$L^{\otimes2}=\O_E$ を満たす non-trivial line bundle $L$ に対する %
+$L(P)$ ($P$ は $X$ のある点)の定数倍を除いて唯一の non-trivial global
+holomorphic section である. このような $L$ は同型を除いてちょうど3個あ
+り, それぞれが $\sn$, $\cn$, $\dn$ の住みかになっているのである.)
+Jacobi の楕円函数達と Weierstrass の $\pe$ 函数の``臭い''が異なるのは, 
+それらの住みかが違うことが原因であると考えることができるのである.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{thebibliography}{ABC}
+
+\bibitem[Bax]{Baxter}
+R.~J.~Baxter: Exactly solved models in statistical mechanics, Academic
+Press, 1982
+
+\bibitem[BD]{BD}
+A.~A.~Belavin and V.~G.~Drinfel'd: Solutions of the classical
+Yang-Baxter equation for simple Lie algebras, %
+Funct.~Anal.~Appl.~{\bf 16}, 159--180, 1982
+
+\bibitem[Bel]{Belavin}
+A.~A.~Belavin: Dynamical symmetry of integrable quantum systems, 
+Nucl.\ Phys.\ {\bf B180} [FS2], 189--200, 1981
+
+\bibitem[Fay]{Fay}
+J.~D.~Fay: Theta functions on Riemann surfaces, Lecture Notes in
+Mathematics {\bf 352}, Springer-Verlag
+Berlin $\cdot$ Heidelberg $\cdot$ New York 1973
+
+\bibitem[Gun]{Gun}
+R.~C.~Gunning: Lectures on Riemann surfaces, Princeton University
+Press, Princeton, New Jersey, 1966
+
+\bibitem[Has]{Hasegawa}
+K.~Hasegawa: Ruijsenaars' commuting difference operators as commuting
+transfer matrices, preprint 1995
+
+\bibitem[HC]{HC}
+A.~フルヴィッツ, R.~クーラント: 楕円関数論, シュプリンガー・フェアラー
+ク東京, 足立恒雄・小松啓一訳
+
+\bibitem[JKMO]{JKMO}
+M.~Jimbo, A.~Kuniba, T.~Miwa, and M.~Okado: The $A_n^{(1)}$ face
+models, Comm.\ Math.\ Phys.\ {\bf 119}, 543--565, 1988
+
+\bibitem[数]{Kazu}
+エビングハウス他著: 数  (上, 下), シュプリンガー・フェアラーク東京 1991
+(Zhalen の邦訳, 訳者 成木勇夫)
+
+\bibitem[Klein]{Klein}
+F.~クライン: 19世紀の数学, 共立出版, 1995 (Felix Klein: Vorlesungen
+\"uber die Entwicklung der Mathematik im 19, Jahrhundert I, Springer,
+1926 の邦訳)
+
+\bibitem[久賀1]{Kuga1}
+久賀 道郎: ガロアの夢, 日本評論社
+
+\bibitem[久賀2]{Kuga2}
+久賀 道郎: ドクトル クーガー の数学講座 (1, 2), 日本評論社
+
+\bibitem[今井]{Imai}
+今井 功: 流体力学と複素解析, 日本評論社
+
+\bibitem[岩澤]{Iwasawa}
+岩澤 健吉: 代数函数論 増補版, 岩波書店
+
+\bibitem[Lang1]{Lang}
+Serge Lang: Real analysis, 1969, Addison-Wesley Publishing Company,
+Inc. (邦訳: 現代の解析学, 1981, 共立出版)
+
+\bibitem[Lang2]{Lang2}
+Serge Lang: Elliptic functions, second edition, GTM 112,
+Springer-Verlag, 1987
+
+\bibitem[大森]{Oomori}
+大森 英樹: 幾何学の見方・考え方, 日本評論社
+
+\bibitem[竹内]{Takeuchi}
+竹内 端三: 楕圓凾數論, 岩波全書 74, 岩波書店
+
+\bibitem[Mumford1]{TataI}
+David Mumford: Tata Lectures on Theta I,
+Progress in Mathematics Vol.~28, 1993, Birkh\"auser
+
+\bibitem[Mumford2]{TataII}
+David Mumford: Tata Lectures on Theta II, 
+Progress in Mathematics Vol.~43, 1984, Birkh\"auser
+
+\bibitem[佐武]{Satake}
+佐武 一郎: 線型代数学, 数学選書 1, 裳華房
+
+\bibitem[数学辞典]{Sugakujiten}
+岩波 数学辞典 第3版, 日本数学会編集, 岩波書店 1985
+
+\bibitem[高木]{kaiseki-gairon}
+高木 貞治: 解析概論, 改定第三版, 岩波書店
+
+\bibitem[寺沢]{Terakan}
+寺沢 寛一: 自然科学者のための数学概論, 増訂版, 岩波書店
+
+\bibitem[vdW]{vdW}
+B.~L.~van der Waerden: Moderne Algebra I, II, Springer
+(東京図書から邦訳『現代代数学』が出ている.)
+
+\bibitem[WW]{WW}
+E.~T.~Whittaker and G.~N.~Watson: A course of modern analysis,
+Cambridge University Press, Fourth Edition, 1927, Reprinted 1992
+
+\end{thebibliography}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

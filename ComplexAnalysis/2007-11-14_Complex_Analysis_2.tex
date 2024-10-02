@@ -1,0 +1,2964 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\def\STUDENT{} % \def すると計算問題の解答を印刷しなくなる.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[12pt,twoside]{jarticle}
+%\documentclass[12pt]{jarticle}
+\usepackage{amsmath,amssymb,amscd}
+\usepackage{eepic}
+\usepackage{enshu}
+%\usepackage{showkeys}
+\allowdisplaybreaks
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newlabel{q:less->leqq(1)}{{4}{5}}
+\newlabel{q:less->leqq(2)}{{5}{5}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setcounter{page}{24}      % この数から始まる
+\setcounter{section}{4}    % この数の次から始まる
+\setcounter{theorem}{0}    % この数の次から始まる
+\setcounter{question}{102} % この数の次から始まる
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\ifx\STUDENT\undefined
+%
+% 教師専用
+%
+\newcommand\commentout[1]{#1}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\else
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% 生徒専用
+%
+\newcommand\commentout[1]{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\fi
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\title{\bf 解析学概論A1演習
+%  \ifx\STUDENT\undefined\\{\normalsize 教師用\quad(計算問題の略解付き)}\fi}
+%\author{黒木 玄 \quad (東北大学大学院理学研究科数学専攻)}
+%\date{2007年11月7日(水)}
+%\maketitle
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\noindent
+{\Large\bf 解析学概論A1演習}
+\hfill
+{\large 黒木玄}
+\qquad
+2007年11月14日(水)
+%\commentout{\quad (教師用)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\tableofcontents
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{初等函数から得られる流れの図}
+
+\begin{figure}[hbtp]
+  \begin{center}
+%    \input 04-12-fig0
+\setlength{\unitlength}{0.0070in}
+\begin{picture}(320,335)(0,20)
+\thicklines
+\path(0,160)(320,160)
+\path(304.000,156.000)(320.000,160.000)(304.000,164.000)
+\path(160,0)(160,320)
+\path(164.000,304.000)(160.000,320.000)(156.000,304.000)
+\thinlines
+\path(170,0)    (170.622,8.388)
+        (171.228,16.188)
+        (171.820,23.429)
+        (172.403,30.139)
+        (173.556,42.088)
+        (174.715,52.269)
+        (175.910,60.916)
+        (177.169,68.264)
+        (180.000,80.000)
+
+\path(180,80)   (183.275,89.368)
+        (188.109,100.747)
+        (193.889,111.753)
+        (200.000,120.000)
+
+\path(200,120)  (208.247,126.111)
+        (219.253,131.891)
+        (230.632,136.725)
+        (240.000,140.000)
+
+\path(240,140)  (251.736,142.831)
+        (259.084,144.090)
+        (267.731,145.285)
+        (277.912,146.444)
+        (289.861,147.597)
+        (296.571,148.180)
+        (303.812,148.772)
+        (311.612,149.378)
+        (320.000,150.000)
+
+\path(312.166,147.425)(320.000,150.000)(311.876,151.415)
+\path(150,320)  (149.272,311.499)
+        (148.586,303.602)
+        (147.935,296.278)
+        (147.312,289.500)
+        (146.133,277.461)
+        (145.000,267.250)
+        (143.867,258.633)
+        (142.688,251.375)
+        (140.000,240.000)
+
+\path(140,240)  (136.312,230.234)
+        (131.500,218.875)
+        (125.938,208.078)
+        (120.000,200.000)
+
+\path(120,200)  (111.922,194.062)
+        (101.125,188.500)
+        (89.766,183.688)
+        (80.000,180.000)
+
+\path(80,180)   (68.625,177.312)
+        (61.367,176.133)
+        (52.750,175.000)
+        (42.539,173.867)
+        (30.500,172.688)
+        (23.722,172.065)
+        (16.398,171.414)
+        (8.501,170.728)
+        (0.000,170.000)
+
+\path(7.802,172.671)(0.000,170.000)(8.141,168.686)
+\path(150,0)    (149.272,8.501)
+        (148.586,16.398)
+        (147.935,23.722)
+        (147.312,30.500)
+        (146.133,42.539)
+        (145.000,52.750)
+        (143.867,61.367)
+        (142.688,68.625)
+        (140.000,80.000)
+
+\path(140,80)   (136.312,89.766)
+        (131.500,101.125)
+        (125.938,111.922)
+        (120.000,120.000)
+
+\path(120,120)  (111.922,125.938)
+        (101.125,131.500)
+        (89.766,136.312)
+        (80.000,140.000)
+
+\path(80,140)   (68.625,142.688)
+        (61.367,143.867)
+        (52.750,145.000)
+        (42.539,146.133)
+        (30.500,147.312)
+        (23.722,147.935)
+        (16.398,148.586)
+        (8.501,149.272)
+        (0.000,150.000)
+
+\path(8.141,151.314)(0.000,150.000)(7.802,147.329)
+\path(170,320)  (170.728,311.499)
+        (171.414,303.602)
+        (172.065,296.278)
+        (172.688,289.500)
+        (173.867,277.461)
+        (175.000,267.250)
+        (176.133,258.633)
+        (177.312,251.375)
+        (180.000,240.000)
+
+\path(180,240)  (183.688,230.234)
+        (188.500,218.875)
+        (194.062,208.078)
+        (200.000,200.000)
+
+\path(200,200)  (208.078,194.062)
+        (218.875,188.500)
+        (230.234,183.688)
+        (240.000,180.000)
+
+\path(240,180)  (251.375,177.312)
+        (258.633,176.133)
+        (267.250,175.000)
+        (277.461,173.867)
+        (289.500,172.688)
+        (296.278,172.065)
+        (303.602,171.414)
+        (311.499,170.728)
+        (320.000,170.000)
+
+\path(311.859,168.686)(320.000,170.000)(312.198,172.671)
+\put(145,140){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{$0$}}}}}
+\end{picture}
+  \end{center}
+  \caption{$f(z)=z$}
+  \label{fig:func-z}
+\end{figure}
+
+複素平面 $\C$ 上の複素数値函数 $f$ を与えるとき, $f(z) = u - iv$
+($z\in\C$, $u,v\in\R$)であるとき, 複素平面上の点 $z$ にベクトル 
+$(u,v)$ で表わされる矢印を描くことにする. 例えば, $f(z)=z$ ならば, そ
+の図は図 \ref{fig:func-z}\ のようになる. このような図を以下の函数に
+対しても描け.
+
+\begin{question}
+  $f(z) = z^2$. \qed
+\end{question}
+
+\begin{question}
+  $f(z) = z^3$. \qed
+\end{question}
+
+\begin{question}
+  $f(z) = z^n$ ($n$ は $0$ 以上の整数) の場合はどうなるか? \qed
+\end{question}
+
+\begin{question}
+  $f(z) = z(z-1)$. \qed
+\end{question}
+
+\begin{question}
+  $f(z) = e^z$. \qed
+\end{question}
+
+\begin{question}
+  $f(z) = 1/z$ \quad (定義域は $z\ne0$). \qed
+\end{question}
+
+\begin{question}
+  $f(z) = -i/z$ \quad (定義域は $z\ne0$). \qed
+\end{question}
+
+\begin{question}
+  $f(z) = 1/z^2$ \quad (定義域は $z\ne0$). \qed
+\end{question}
+
+\begin{question}
+  $f(z) = 1/z^3$ \quad (定義域は $z\ne0$). \qed
+\end{question}
+
+\begin{question}
+  $f(z) = z^n$ ($n$ は負の整数) の場合はどうなるか? \qed
+\end{question}
+
+\begin{question}
+  $f(z) = 1/z(z-1)$ \quad (定義域は $z\ne0,1$). \qed
+\end{question}
+
+\noindent ヒント: $f(z)=z^n$ に対しては, $z=re^{i\theta}$ ($r>0$,
+$\theta$ は実数) と置き, $e^{i\theta}=\cos\theta+i\sin\theta$ を用いる
+とわかり易いであろう. 
+
+\noindent 以上の函数に対する図は, 2次元における縮まない渦無し・湧き出
+し無しの流れのように見えるはずである. ただし, 函数の「特異点」では渦や
+湧き出しがあるように見える. これらの事実は, 後で, 任意の正則函数や有理
+型函数に一般化される. これらのことは, 文献 \cite{Imai} の中で詳しく解
+説されている.  \cite{Imai} は複素函数論に関する極めてすぐれた副読本で
+ある.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{超幾何函数の定義とその簡単な性質}
+
+$n\in\Z$ に対して, $n\ge 0$ ならば $(a;n) = a(a+1)(a+2)\cdots(a+n-1)$ %
+と置く. $\alpha$, $\beta$, $\gamma$ は複素数であり, 
+$\gamma\notin\{0,-1,-2,\dots\}$ であると仮定し, 次の巾級数を考える:
+\[
+  F(\alpha,\beta,\gamma; z) 
+  = \sum_{n=0}^{\infty} \frac{(\alpha;n)(\beta;n)}{(\gamma;n)n!} z^n.
+\]
+この級数を(Gaussの)超幾何級数と呼ぶ.
+
+\begin{question}
+  超幾何級数の収束半径が $1$ 以上であることを示せ. \qed
+\end{question}
+
+\noindent 超幾何級数の定める函数を超幾何函数と呼ぶ.
+
+\begin{question}
+  超幾何函数 $F(\alpha,\beta,\gamma;z)$ は次をみたす:
+  \[
+    \left[
+      z(1 - z) \frac{d^2}{dz^2}
+      + (\gamma - (\alpha + \beta + 1) z) \frac{d}{dz}
+      - \alpha\beta
+    \right] F(\alpha,\beta,\gamma\,; z) = 0.
+  \]%
+  この線型微分方程式を(Gaussの)超幾何微分方程式と呼ぶ. \qed
+\end{question}
+
+数学の世界には, 面白い特殊函数がたくさんが存在するが, それらの多くはあ
+る超幾何函数の特殊な場合になっていることが知っれている. 例えば, 初等函
+数は以下のようにして得られる:
+
+\begin{question}
+  $F(\alpha,\gamma,\gamma\,; z) = (1 - z)^{-\alpha}$ を示せ. \qed
+\end{question}
+
+\begin{question}
+  $z F(1,1,2\,; z) = - \Log(1 - z)$ を示せ. ここで, $\Log(1 - z)$ は 
+  $z=0$ で値が $0$ になるような分岐を選んでいるものとする. \qed
+\end{question}
+
+\begin{question}
+  $\lim_{\beta\to\infty}F(1,\beta,1\,;z/\beta) = e^z$ を示せ. \qed
+\end{question}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Euler-Riemannのゼータ函数の定義とその簡単な性質}
+
+\begin{question}
+  任意の実数 $a > 1$ に対して, 
+  級数 $\sum_{n=1}^{\infty}n^{-s}$ は $\Repart s \ge a$ で一様絶対収束す
+  ることを示せ%
+  \footnote{正の実数 $t$ と複素数 $z$ に対して, $t^z = e^{z\log t}$ と
+    定義する. $\Repart s$ は複素数 $s$ の実部を表わす.}. %
+  %
+  \qed
+\end{question}
+
+\noindent そこで, $\{\,s\in\C \mid \Repart s > 1\,\}$ 上の函数 
+$\zeta(s)$ を次によって定義する:
+\[
+  \zeta(s) = \sum_{n=1}^{\infty}n^{-s}
+  \qquad \text{if} \quad \Repart s > 1.
+\]%
+これを Euler-Riemann のゼータ函数と呼ぶ. (今のところ $\zeta(s)$ は 
+$\Repart s > 1$ における函数として定義されたが, 実は複素平面全体に有理
+型に解析接続される. その極は $s=1$ のみでその位数も留数も $1$ である.) 
+一般に, $\sum_{n=1}^{\infty} a_n n^{-s}$ の形の級数を Dirichlet 級数と
+呼ぶ.
+
+\begin{question}[Euler積]
+  $\Repart s > 1$ において次の等式が成立している:
+  \[
+    \zeta(s) = \prod_{p:\text{素数}} (1 - p^{-s})^{-1}.
+  \]%
+  右辺の素数全体にわたる無限積を Euler 積と呼ぶ.
+  \qed
+\end{question}
+
+\begin{question}
+  $\Repart s > 1$ において $\zeta(s) \ne 0$. (注意: この事実は Dirichlet 級
+  数によるゼータ函数の定義からは想像もできないことである.)  \qed
+\end{question}
+
+\begin{question}
+  級数 $\zeta(1) = \sum_{n=1}^{\infty}n^{-1}$ が無限大に発散することを
+  示せ. \qed
+\end{question}
+
+\noindent この結果とゼータ函数のEuler積を合せることによって, さらに, 
+次の結果が得られる.
+
+\begin{question}
+  級数 
+  \(
+    \displaystyle
+    \sum_{p : \text{素数}} p^{-1}
+  \)
+  が無限大に発散することを示せ. 
+  \qed
+\end{question}
+
+\noindent 素数が無限個あることは容易に証明されるのだが, この結果は,そ
+れよりも明らかに良い結果である. なぜなら, 単に無限個あるというだけでは,
+素数分の一の和が無限大に発散することは出てこないからである. 
+
+ゼータ函数と素数の全体の間には Euler 積以外にも色々な関係が存在してい
+る. それらを追及することによって, 単に素数が無限個存在するだけではなく, 
+自然数全体の中に素数がどのような密度で分布しているかまで知ることができ
+るのである. 例えば, 素数の分布に関係した未解決問題として名高い Riemann 
+予想と呼ばれる大変深い予想がある. それは次のような予想である.
+
+\begin{conjecture}[Riemann]\label{Riemann-Hypothesis}
+  $0\le \Repart s \le 1$ かつ $\zeta(s)=0$ ならば $\Repart s = 1/2$ で
+  あろう. 
+  \qed
+\end{conjecture}
+
+\noindent これだけ述べてもこの予想の面白さも難しさもわからないと思うが, 
+ひとまず, 数論や幾何学において色々なゼータ函数が定義されていて広くて深
+い数学に発展していることを注意しておく.
+
+\begin{question}
+  Riemann 予想を証明もしくは反証せよ. \qed
+\end{question}
+
+\noindent もちろん, これは冗談であるが, もしもこの問題が解けた場合は, 
+この演習の単位が直ちにもらえることは言うまでもない. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{微分積分学の復習}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{実2変数函数の微分}
+
+$z=(x,y)\in\R$ に対して, $||z||:=\sqrt{x^2+y^2}$ と置く. $\R^2$ 上の2
+点の距離 $z$, $w$ の間の距離を $||z-w||$ によって定義する.
+
+$\Omega$ は $\R^2$ の開集合であるとし, $f$ は $\Omega$ 上の実数値函数
+であるとする. 点 $c=(a,b)\in\Omega$ において $f$ が微分可能であるとは, 
+以下をみたすようなある実数 $A$, $B$ が存在することである: 任意の 
+$\varepsilon>0$ に対して, ある $\delta>0$ が存在して, $||z - c||<\delta$ 
+をみたす任意の $z=(x,y)\in\Omega$ に対して,
+\[
+  |f(x,y) - f(a,b) - A(x - a) - B(y - b)| < \varepsilon ||z - c||.
+\]%
+大雑把に言えば $f(x,y)$ が点 $c=(a,b)$ の近くで一次函数 %
+$f(a,b) + A(x-a) + B(y-b)$ でよく近似されるとき, 
+点 $c=(a,b)$ において函数 $f(x,y)$ は微分可能であると言うのである. 
+
+\begin{question}
+  $f$ が点 $c$ で微分可能ならば, 上の記号のもとで,
+  \[
+    \frac{\del f}{\del x}(c) = A,
+    \qquad
+    \frac{\del f}{\del y}(c) = B. \qed
+  \]%
+\end{question}
+
+$\Omega$ のすべての点で $f$ が微分可能なとき, $f$ は $\Omega$ において
+微分可能であると言う. そのとき, $df = f_x dx + f_y dy$ を $f$ の全微分
+と呼ぶ. 連続函数のことを\Class{0}函数と呼ぶ. $f$ が($\Omega$において)
+微分可能であり, その偏導函数 $f_x$, $f_y$ が連続なとき, $f$ は
+\Class{1}函数であると言う. $f$ が微分可能でありその偏導函数がすべて
+\Class{n-1}函数であるとき, 帰納的に $f$ は\Class{n}函数であると言う. 
+任意の $n$ に対して $f$ が\Class{n}函数であるとき, $f$ は
+\Class{\infty}函数であると言う.
+
+\begin{question}
+  $\Omega$上で $f$ の偏導函数 $f_x$, $f_y$ で連続なものが存在するとき,
+  $f$ は\Class{1}函数である. \qed
+\end{question}
+
+\begin{question}
+  $\R^2$ 上の函数 $f$ が次の式で与えられているとする:
+  \[
+    f(x,y) = (x^2+y^2)^{1/2} \frac{xy}{x^2+y^2} 
+    \quad\text{if}\quad (x,y) \ne 0,
+    \qquad
+    f(0,0) = 0.
+  \]%
+  このとき, $f$ は原点 $(0,0)$ で偏微分可能だが微分不可能であることを
+  示せ.
+\end{question}
+
+\begin{question}
+  $f$ が\Class{2}函数ならば, 
+  \[
+    \frac{\del}{\del x} \frac{\del}{\del y} f
+    = \frac{\del}{\del y} \frac{\del}{\del x} f. \qed
+  \]%
+\end{question}
+
+\begin{question}
+  $\R^2$ 上の函数 $f$ が次の式で与えられているとする:
+  \[
+    f(x,y) = xy \frac{x^2-y^2}{x^2+y^2} 
+    \quad\text{if} (x,y)\ne0,
+    \qquad
+    f(0,0) = 0.
+  \]%
+  このとき, 以下が成立する:
+  \begin{enumerate}
+  \item $\left(\frac{\del}{\del x}\frac{\del}{\del y}f\right)(x,y)$ も 
+    $\left(\frac{\del}{\del y}\frac{\del}{\del x}f\right)(x,y)$ も任意の 
+    $(x,y)\in\R^2$ に対して存在する. 
+  \item $\left(\frac{\del}{\del x}\frac{\del}{\del y}f\right)(0,0) \ne
+    \left(\frac{\del}{\del y} \frac{\del}{\del x}f\right)(0,0)$.  \qed
+  \end{enumerate}
+\end{question}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{実2変数函数の線積分}
+
+\begin{question}
+  $\Omega$ は $\R^2$ の領域であり, 写像 $f:\Omega\to\R^2$ は連続である
+  とし, $f(x,y)=(u(x,y),v(x,y))$ と書くことにする. 写像 
+  $z:[a,b]\to\Omega$ は\Class{1}写像であるとし, $z(t)=(x(t),y(t))$ 
+  と書くことにする. 実数 $M$, $L$ を次のように定める:
+  \[
+    M = \sup_{t\in[a,b]}||f(z(t))||,
+    \qquad
+    L = \int_a^b \left|\left| \frac{dz(t)}{dt} \right|\right| dt
+  \]%
+  すなわち, $M$ は $f$ の $z(t)$ の描く軌跡上での最大値であり, $L$ は 
+  $z(t)$ の描く軌跡の長さである. このとき, 次の不等式が成立する:
+  \[
+    \left| 
+      \int_a^b 
+      \left(
+        u(x(t),y(t)) \frac{dx(t)}{dt} + v(x(t),y(t))) \frac{dy(t)}{dt}
+      \right)
+      dt
+    \right|
+    \le 
+    \int_a^b 
+      ||f(z(t))||
+      \left|\left| \frac{dz(t)}{dt} \right|\right|
+    dt
+    \le
+    ML. \qed
+  \]%
+\end{question}
+
+\begin{question}[正方形領域に対する Green の公式]
+  $K=[0,1] \times [0,1]$ と置き, $K$ の開近傍 $\Omega$ を任意に取る. 
+  $u$, $v$ は $\Omega$ 上の\Class{1}函数であるとする. 写像 
+  $z:[0,4]\to\R^2$ を次のように定義する:
+  \[
+    z(t)=
+    \begin{cases}
+      (t,0)   \quad & \text{if}\ t\in [0,1], \\
+      (1,t-1) \quad & \text{if}\ t\in [1,2], \\
+      (3-t,1) \quad & \text{if}\ t\in [2,3], \\
+      (0,4-t) \quad & \text{if}\ t\in [3,4].
+    \end{cases}
+  \]%
+  $z(t)=(x(t),y(t))$ と書くことにする.  $z(t)$ は $K$ の境界を正の向き
+  にまわる曲線である. このとき, 次が成立する:
+  \begin{align*}
+    &
+    \int_0^4 
+    \left( 
+      u(x(t),y(t)) \frac{dx(t)}{dt} + v(x(t),y(t)) \frac{dy(t)}{dt}
+    \right)
+    dt
+    =
+    \int_K
+    \left(
+      \frac{\del v(x,y)}{\del x} - \frac{\del u(x,y)}{\del y} 
+    \right)
+    \,dx\,dy,
+    \\
+    &
+    \int_0^4 
+    \left( 
+      u(x(t),y(t)) \frac{dy(t)}{dt} - v(x(t),y(t)) \frac{dx(t)}{dt}
+    \right)
+    dt
+    =
+    \int_K
+    \left(
+      \frac{\del u(x,y)}{\del x} + \frac{\del v(x,y)}{\del y} 
+    \right)
+    \,dx\,dy.  \qed
+  \end{align*}
+\end{question}
+
+\noindent この公式を Green の公式と呼ぶ. 以下のように省略した方が見易
+い:
+\[
+  \int_{\del K} u \,dx + v \,dy
+  =
+  \int_K (v_x - u_y)\,dx\,dy,
+  \qquad
+  \int_{\del K} u \,dy - v \,dx
+  =
+  \int_K (u_x + v_y)\,dx\,dy.
+\]%
+
+\begin{question}
+  記号 $dx$, $dy$ を基底にもつベクトル空間を $V_1 = \R\,dx + \R\,dy$ 
+  と書く.  $\R^2$ の開部分集合 $\Omega$ 上の実数値\Class{1}函数 $u$ に
+  対して, $\Omega$ 上の $V_1$ に値をもつ函数が %
+  $(x,y)\mapsto du(x,y) = u_x(x,y)\,dx + u_y(x,y)\,dy$ によって定義さ
+  れる. 記号 $dx\wedge dy$ を基底にもつベクトル空間を %
+  $V_2 = \R\,dx\wedge dy$ と書く. $V_1\times V_1$ から $V_2$ への双線
+  型写像 $(\alpha,\beta)\mapsto \alpha\wedge\beta$ を次によって定める:
+  \[
+    (dx,dx) \mapsto 0, \quad
+    (dx,dy) \mapsto dx\wedge dy, \quad
+    (dy,dx) \mapsto - dx\wedge dy, \quad
+    (dy,dy) \mapsto 0.
+  \]%
+  このとき, $\Omega$ 上の\Class{1}実数値函数 $u$, $v$ に対して, 次が成
+  立する:
+  \[
+    du\wedge dx + dv\wedge dy = (v_x - u_y) dx\wedge dy,
+    \qquad
+    du\wedge dy - dv\wedge dx = (u_x + v_y) dx\wedge dy. \qed
+  \]
+\end{question}
+
+\noindent これは, 微分形式の理論のほんの一部を取り出すことによって作ら
+れた問題である. 例えば, $\omega=u\,dx+v\,dy$ 等と置くと, %
+$d\omega=du \wedge dx + dv\wedge dy$ 等が成立し, Green の定理を次のよ
+うに書くことができる:
+\[
+  \int_{\del K} \omega = \int_K d\omega.
+\]%
+この公式は $n$ 次元多様体でも全く同様な形で成立する(Stokes の定理)%
+\footnote{微分形式 $\omega$ と積分領域 $K$, 外微分 $d\omega$ と境界 
+  $\del K$ の双対性に注意せよ. Stokes の定理はトポロジーにおけ
+  るコホモロジーとホモロジーの双対性に関係しているのである.}.
+%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{多変数函数の微分}
+
+体 $F$ 上の $(m,n)$ 型行列全体のなす空間を $M(m,n\,;F)$ と書くことにする.
+
+\begin{question}
+  $U$, $V$ はそれぞれ $\R^l$, $\R^m$ の開集合であるとし, %
+  写像 $f:U\to V$, $g:V\to\R^n$ はともに\Class{1}級であるとする. %
+  このとき, 写像の合成 $g\circ f:U\to \R^n$ も\Class{1}級である. %
+  $U$, $V$ の座標を縦ベクトルで $x=\transposed(x_1,\dots,x_l)$,
+  $\transposed(y_1,\dots,y_m)$ と書き, 写像 $f$, $g$ の成分も 
+  $f=\transposed{(f_1,\dots,f_m)}$, $g=\transposed{(g_1,\dots,g_n)}$ 
+  と縦ベクトルで書くことにする. % 
+  行列値函数 $f':U\to M(m,l\,;\R)$, $g':V\to M(n,m\,;\R)$, %
+  $(g\circ f)': U\to M(n,l\,;\R)$ を次のように定める:
+  \begin{align*}
+    &
+    f' =
+    \begin{pmatrix}
+      \frac{\del f}{\del x_1} & \cdots & \frac{\del f}{\del x_l}
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+      \frac{\del f_1}{\del x_1} & \cdots & \frac{\del f_1}{\del x_l} \\
+      \vdots                    &        & \vdots                    \\
+      \frac{\del f_m}{\del x_1} & \cdots & \frac{\del f_m}{\del x_l}
+    \end{pmatrix},
+    \\
+    &
+    g' =
+    \begin{pmatrix}
+      \frac{\del g}{\del y_1} & \cdots & \frac{\del g}{\del y_m}
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+      \frac{\del g_1}{\del y_1} & \cdots & \frac{\del g_1}{\del y_m} \\
+      \vdots                    &        & \vdots                    \\
+      \frac{\del g_n}{\del y_1} & \cdots & \frac{\del g_n}{\del y_m}
+    \end{pmatrix},
+    \\
+    &
+    (g\circ f)' =
+    \begin{pmatrix}
+      \frac{\del(g\circ f)}{\del x_1} & \cdots & \frac{\del(g\circ f)}{\del x_l}
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+      \frac{\del(g_1\circ f)}{\del x_1} & \cdots & \frac{\del(g_1\circ f)}{\del x_l} \\
+      \vdots                            &        & \vdots                    \\
+      \frac{\del(g_n\circ f)}{\del x_1} & \cdots & \frac{\del(g_n\circ f)}{\del x_l}
+    \end{pmatrix}.
+  \end{align*}
+  このとき, 次が成立する:
+  \[
+    (g\circ f)'(x) = g'(f(x))f'(x)
+    \qquad \text{for} \quad x \in U.
+  \]%
+  (注意: この問題を合成函数の微分法則を使って解いてはいけない. 微分の
+  定義に基いて直接証明して欲しい.)
+  \qed
+\end{question}
+
+\noindent さらに, $y=f(x)$, $\frac{dy}{dx}=f'(x)$, $z=g(y)$,
+$\frac{dz}{dy}=g'(y)$, $\frac{dz}{dx}=(g\circ f)'(x)$ と書くと, 上の式
+は次のように書くことができる:
+\[
+  \frac{dz}{dx} = \frac{dz}{dy}\frac{dy}{dx}
+    \qquad\text{on}\quad U.
+\]%
+ここで右辺の積は行列の積である. (このように記号法を工夫すると, 多変数
+の場合の合成函数の微分法則が, 1変数の場合と同様な記号で書くことができ
+るのである.) このように行列の積が表われるのは偶然ではない. 函数の微分
+とは函数の線型近似のことであるから, 線型写像の合成の表現として行列の積
+が出て来るのは当然のことなのである.
+
+以下, $\R^{2n}$, $\C^n$ は縦ベクトルの空間であるとみなす. %
+写像 $\phi_n : \R^{2n} \to \C^n$ を
+\[%
+  \phi_n(\transposed{(x_1, \dots, x_n, y_1, \dots, y_n)})
+  = \transposed{(x_1 + i y_1, \dots, x_n + iy_n)}
+\]%
+と定める. 
+
+\begin{question}
+  実 $(n,m)$ 型行列 $A$, $B$ に対して $C=A+iB$ と置く. 写像 
+  $f:\C^m\to\C^n$, $f_\R:\R^{2m}\to\R^{2n}$  を次のように定める:
+  \[
+    f(z) = C z \quad\text{for}\quad z \in \C^m,
+    \qquad
+    f_\R = \phi_n^{-1} \circ f \circ \phi_m.
+  \]%
+  このとき, $f_\R$ の導函数 ${f_\R}'$ は次のように表わされる:
+  \[%
+    {f_\R}'
+    =
+    \begin{pmatrix}
+      A & -B \\
+      B &  A
+    \end{pmatrix}. 
+    \qed
+  \]%
+\end{question}
+
+\begin{question}
+  実 $n$ 次正方行列 $A$, $B$ に対して, 
+  \[%
+    \begin{vmatrix}
+      A & -B \\
+      B &  A
+    \end{vmatrix}
+    =
+    |\det(A+iB)|^2.
+  \]%
+  特に, 複素 $n$ 次正方行列 $C=A+iB$ から $\phi_n$ を通して得られる実 
+  $2n$ 次正方行列の行列式は $0$ 以上である. 
+  \qed
+\end{question}
+
+\noindent この結果は, 複素多様体が向き付け可能であることの証明に使われ
+る. 行列式が正の実正方行列はベクトル空間の向きを保つのである. (複素多
+様体や「向き」の概念の解説はここではしない.)
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{積分記号下での微分}
+
+\begin{theorem}[積分記号下での複素微分]
+ $U$ は $\C$ の開部分集合であり, $f$ は $U\times [a,b]$ 上の複素数値連続
+ 函数であるとし, 次の二つの条件を仮定する:
+ \begin{enumerate}
+ \item[(a)] 任意の $t\in [a,b]$ について, 
+  函数 $U\to\C$, $z\mapsto f(t,z)$ は複素微分可能である.
+ \item[(b)] $f(t,z)$ の $z$ に関する
+  偏導函数 $f_z(z,t)$ は $U\times [a,b]$ 上で連続である.
+ \end{enumerate}
+ このとき $U$ 上の函数 $F$ を
+ \begin{equation*}
+  F(z) := \int_a^b f(z,t)\,dt \quad (z\in U)
+ \end{equation*}
+ と定めると, $F$ もまた複素微分可能であり,
+ \begin{equation*}
+  F'(z) = \int_a^b f_z(z,t)\,dt \quad (z\in U).
+  \qed
+ \end{equation*}
+\end{theorem}
+
+この定理の結果は後で自由に用いて良い.
+
+\begin{question}
+ 上の定理を証明せよ. \qed
+\end{question}
+
+\begin{proof}[解答に近いヒント]
+ 任意に $\eps>0$ と $z\in U$ を取る.
+ $U$ は $\C$ の開集合なので十分小さな $r>0$ を取ると, %
+ $D:=\{\,w\in\C\mid |w-z|\leqq r\,\}$ は $U$ に含まれる.
+ $f_z(z,t)$ は $U\times[a,b]$ 上連続なので
+ そのコンパクト部分集合 $D\times[a,b]$ 上一様連続である.
+ したがってある $\delta>0$ が存在して %
+ $w\in D$, $|w-z|<\delta$, $a\leqq t\leqq b$ ならば %
+ $|f_z(w,t)-f_z(z,t))|\leqq\eps$ となる.
+ よって $|h|\leqq\min\{r,\delta\}$ ならば
+ \begin{align*}
+  &
+  \left|
+   F(z+h) - F(z) - h\int_a^b f_z(z,t)\,dt
+  \right|
+  \\ &
+  =
+  \left|
+   \int_a^b f(z+h,t) - f(z,t) - h f_z(z,t) \,dt
+  \right|
+  \\ &
+  =
+  \left|
+   \int_a^b 
+   \left(
+    \int_0^1 h f_z(z+sh,t)\,ds  - \int_0^1 h f_z(z,t)\,ds
+   \right)
+   dt
+  \right|
+  \\ &
+  =
+  \left|
+   h
+   \int_a^b 
+   \left(
+    \int_0^1 f_z(z+sh,t) - f_z(z,t)\,ds
+   \right)
+   dt
+  \right|
+  \\ &
+  \leqq
+   |h|
+   \int_a^b 
+    \int_0^1 
+    \left|
+    f_z(z+sh,t) - f_z(z,t)
+    \right|
+   \,ds
+   \,dt
+  \\ &
+  \leqq 
+  |h||b-a|\eps.
+ \end{align*}
+ ただし二つ目の等号では $g(s)=f(z+sh,t)$ と置くと $g'(s)=h f_z(z+sh,t)$ 
+ であること(要証明)を使った.
+ これで $F$ が複素微分可能でかつ $F'(z)=\int_a^b f_z(z,t)\,dt$ であるこ
+ とがわかった.
+ \qed
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{複素正則函数の理論}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{正則函数}
+
+この節に含まれる正則函数に関する一般論は講義で詳しく解説されるはずであ
+る. 一般論をも演習問題として提出したのは基本的な事実をまとめておいた方
+が便利であろうと思ったからである. 演習の主眼は一般論の応用や色々な具体
+例の方にあることを忘れてはならない. 
+
+$\C$ の複素座標を $z$ と書き, 実座標 $(x,y)$ を $z=x+iy$ によって入れ
+る.
+
+\begin{question}
+  記号 $dx$, $dy$ を基底にもつ複素ベクトル空間を $V=\C dx+\C dy$ と書
+  き, $\C$ の開集合 $\Omega$ 上の微分可能函数 $f$ に対して, $V$に値を
+  もつ次の函数を考える:
+  \[
+    df = \frac{\del f}{\del x}dx + \frac{\del f}{\del y}dy.
+  \]%
+  これを $f$ の外微分と呼ぶ. $dz,d\bar{z}\in V$ を $dz=dx+i\,dy$,
+  $d\bar{z}=dx-i\,dy$ と定める. 等式
+  \[
+    df = A\,dz + B\,d\bar{z}
+  \]%
+  によって, $\Omega$ 上の函数 $A$, $B$ を定義すると次が成立する:
+  \[
+    A =
+    \frac{1}{2}
+    \left(
+      \frac{\del f}{\del x} + \frac{1}{i} \frac{\del f}{\del y}
+    \right),
+    \qquad
+    B =
+    \frac{1}{2}
+    \left(
+      \frac{\del f}{\del x} - \frac{1}{i} \frac{\del f}{\del y}
+    \right). 
+    \qed
+  \]%
+\end{question}
+
+\noindent そこで, 作用素 $\frac{\del}{\del z}$,
+$\frac{\del}{\del\bar{z}}$, を次のように定義する:
+\[
+  \frac{\del}{\del z} =
+  \frac{1}{2}
+  \left( \frac{\del}{\del x} + \frac{1}{i} \frac{\del}{\del y} \right),
+  \qquad
+  \frac{\del}{\del\bar z} =
+  \frac{1}{2}
+  \left( \frac{\del}{\del x} - \frac{1}{i} \frac{\del}{\del y} \right).
+\]%
+$\frac{\del}{\del z}$, $\frac{\del}{\del\bar{z}}$ の定義はこの天下り的
+な公式を暗記するより, 上の問題の定式化の形で憶えた方が楽である. また, 
+微分形式の計算は非常に便利なので, 早目に修得するように努力した方が良い. 
+$df$ の定義を真似て $\del f$, $\delbar f$ を次のように定義する:
+\[
+  \del f = \frac{\del f}{\del z}dz,
+  \qquad
+  \delbar f = \frac{\del f}{\del\bar z}d\bar{z}.
+\]%
+
+
+\begin{question}\label{q:seisoku-kansu}
+  $\C$ の開集合 $\Omega$ 上の\Class{1}函数 $f$ に対して以下の条件が互
+  いに同値であることを証明せよ:
+  \begin{enumerate}
+  \item 任意の $z\in\Omega$ に対して次の極限が存在する:
+    \[
+      \lim_{h\to 0}\frac{f(z+h) - f(z)}{h}.
+    \]%
+    \label{item:fukuso-bibun}
+  \vskip -\bigskipamount
+  \vskip -\bigskipamount
+  \item $\Omega$ 上で, $\delbar f = 0$.
+  \item 実数値函数 $u$, $v$ によって, $f$ を $f = u + iv$ と表示すると
+    $\Omega$ 上で次が成立する:
+    \[
+      u_x = v_y,
+      \qquad
+      u_y = - v_x.
+    \]
+  \item 実数値函数 $u$, $v$ によって, $f$ を $f = u - iv$ と表示すると
+    $\Omega$ 上で次が成立する:
+    \[
+      v_x - u_y = 0,
+      \qquad
+      u_x + v_y = 0.
+    \]
+  \end{enumerate}
+  そして, これらの条件のどれかが成立すれば, (\ref{item:fukuso-bibun})
+  の極限は $\pd{f}{z}(z)$ に一致する. 
+  \qed
+\end{question}
+
+\noindent この問題の条件をみたす函数 $f$ を $\Omega$ 上の正則函数
+(holomorphic function on $\Omega$)と呼ぶ. 正則函数を特徴付けている微分
+方程式(2)または(3)を Cauchy-Riemann の方程式と呼ぶ. (4) とGreen の公式
+の関係に注意せよ.
+
+
+上の問題において $f$ は\Class{1}函数であることを仮定した. しかし,
+\Class{1}性を仮定せずに正則函数を定義する流儀もある. (もちろん,
+\Class{1}性を仮定する定義と結果的には同値になる.) 例えば,
+\cite{takagi} の第5章%
+\footnote{\cite{takagi} の第5章はたったの 67 頁しかない. し
+  かし, 初等函数とガンマ函数の理論を含んでおり内容的には豊かである. 
+  しかも, その解説は簡潔で美しい.}
+%
+はそのような流儀で書かれている. その流儀の方が数学的な美しさにおいて勝
+るのであるが, 実用的に\Class{1}性を仮定しても不都合が生じることはない.
+
+\begin{question}
+  $\Omega$ は $\C$ の開部分集合であるとし, $f$ は $\Omega$ 上の正則函
+  数であるとし, $f$ は $\Omega$ のどの点でも $0$ にならないと仮定する.
+  このとき, $g=1/f$ は $\Omega$ 上の正則函数を定める. \qed
+\end{question}
+
+\begin{question}
+  $\Omega$ は $\C$ の連結開部分集合であり, $f$ は $\Omega$ 上の正則函数
+  であるとする. このとき, $f$ が定数函数であるための必要十分条件は,
+  $\Omega$ のすべての点で $df/dz=0$ が成立していることである. \qed
+\end{question}
+
+\begin{question}
+  $\Omega$ は $\C$ の連結開部分集合であり, $f$ は $\Omega$ 上の正則函
+  数であるとする. このとき, $f$ が定数函数であるための必要十分条件は,
+  $|f|$ が定数函数であることである. \qed
+\end{question}
+
+\begin{question}
+  $\Omega$ は $\C$ の連結開部分集合であり, $f$ は $\Omega$ 上の定数では
+  ない正則函数であるとする. %
+  $\Omega^*=\{\,z\in\C \mid \bar z \in \Omega\,\}$ と置く. このとき,
+  $g(z)=f(\bar z)$ と置くと, $g$ は $\Omega^*$ 上の函数であるが, 正則
+  函数にはならないことを示せ. \qed
+\end{question}
+
+\begin{question}
+  非負の整数 $n$ に対して $f_n(z)=z^n$ ($z\in\C$) と置き, 負の整数 $n$ 
+  に対して $f_n(z)=z^n$ ($z \in \C^* = \C - \{ 0 \}$) と置く. $f_n$ が
+  その定義域上の正則函数であることを定義に基き直接証明せよ. \qed
+\end{question}
+
+\begin{question}
+  任意の複素解析函数は正則函数であることを示せ. \qed
+\end{question}
+
+\begin{question}
+  $f(z)=|z|^2$ ($z\in\C$) と置く. $f$ は $\C$ 上の実解析函数であるが, 
+  正則函数ではないことを示せ. \qed
+\end{question}
+
+
+以下, $K$ は滑らかに三角形分割可能であるような $\C$ のコンパクト部分集
+合であるとする. $K$ に対する Green の定理を以下の問題の解答において自
+由に用いて良い. %
+$\Omega$ は $K$ の開近傍であるとし, $K$ の内部を $U$ と表わす. %
+(面倒なら, %
+$K=\{\,z\in\C\mid \Repart z, \Impart z \in [0,1] \,\}$ %
+と仮定して問題を解いても良い. この場合, %
+$U=\{\,z\in\C\mid \Repart z, \Impart z \in (0,1) \,\}$ %
+である.)
+
+\begin{question}[Cauchy の積分定理]
+  $f$ が $\Omega$ 上の\Class{1}函数であるとき, 次が成立する:
+  \[
+    \int_{\del U} f\,dz = \int_U  \delbar f \wedge dz.
+  \]%
+  特に, $f$ の $U$ への制限が正則函数ならば次が成立する:
+  \[
+    \int_{\del U} f\,dz = 0.
+  \]%
+  正則函数に関するこの結果は, Cauchy の積分定理と呼ばれている.
+  \qed
+\end{question}
+
+\noindent ヒント: Green の公式を使う. $dz\wedge dz = 0$ より, 
+\(
+  d(f\,dz) = df\wedge dz = \delbar f \wedge dz.
+\) %
+が成立する%
+\footnote{ここで微分形式の記号を用いているが, 解答において微分形式の
+  概念を用いることを強制するつもりはない. しかし, 微分形式の概念を用い
+  た方が証明はもちろん簡単になる.}. 
+%
+
+
+\begin{question}[正則函数の不定積分]
+  $\Omega$ は $\C$ の中の開円板であるとし, $f$ は $\Omega$ 上の正則函
+  数であるとする. 固定された点 $a\in\Omega$ から任意の点 $z\in\Omega$ 
+  への滑らかな道 $\gamma$ を取り, 積分
+  \[
+    F(z) = \int_{\gamma} f(z)\,dz
+  \]%
+  を考える. このとき, $F(z)$ は積分経路 $\gamma$ の取り方によらず $a$,
+  $z$ のみによって決まり, さらに, $F'(z)=f(z)$ が成立している.
+\end{question}
+
+
+\begin{question}[Cauchy の積分公式] 
+  $f$ が $\Omega$ 上の\Class{1}函数であるとき, 次が成立する:
+  \[
+    f(z)
+    =
+    \frac{1}{2\pi i}
+    \left(
+      \int_{\del U} \frac{f(\zeta)\,d\zeta}{\zeta - z}
+      -
+      \int_U \frac{\delbar f(\zeta) \wedge d\zeta}{\zeta - z}
+    \right)
+    \qquad
+    \text{for}\quad z\in U
+  \]%
+  特に, $f$ の $U$ への制限が正則函数ならば次が成立する:
+  \[
+    f(z)
+    =
+    \frac{1}{2\pi i}
+    \int_{\del U} \frac{f(\zeta)\,d\zeta}{\zeta - z}.
+    \qquad
+    \text{for}\quad z\in U.
+  \]%
+  この公式は Cauchy の積分公式(もしくは積分表示)と呼ばれている. 
+  \qed
+\end{question}
+
+\noindent ヒント: まず, $z$ を中心とする十分小さな半径 %
+$\varepsilon > 0$ を持つ開円板 $U_\varepsilon(z)$ を取り, %
+$K - U_\varepsilon(z)$ に対する Green の公式を考え, %
+$\varepsilon \to 0$ の極限を考える.
+
+\begin{question}[Cauchy の係数評価式]
+  $R > 0$ に対して, $D_R = \{\, z\in\C \mid |z| < R$ \,\} と置く. $f$ 
+  は $D_R$ 上の正則函数であるとする. $D_R$ 上で $|f|\le M$ が成立して
+  いると仮定する. このとき, $0< r < R$ ならば,
+  \[
+    \sup_{z\in D_r}
+      \left| \frac{1}{n!} \frac{d^n}{dz^n} f(z) \right|
+    \le
+    \frac{M r}{(R - r)^{n+1}}.
+  \qed
+  \]%
+\end{question}
+
+
+\begin{question}
+  任意の正則函数は複素解析函数であることを示せ. \qed
+\end{question}
+
+
+\begin{question}
+  $\R$ 上の\Class{\infty}函数だが実解析的でない函数を構成せよ. 
+  \qed
+\end{question}
+
+\noindent ヒント: $\R$ 上の空でないコンパクトな台をもつ\Class{\infty}
+函数を構成せよ. 
+
+
+% 正則函数の導函数の積分表示
+\begin{question}
+  $f$ は $\Omega$ 上の正則函数であると仮定する. %
+  このとき, 任意の $z\in U$ に対して,
+  \[
+    \frac{1}{n!} \frac{d^n}{dz^n}f(z)
+    =
+    \frac{1}{2\pi i}
+    \int_{\del U} \frac{f(\zeta)\,d\zeta}{(\zeta - z)^{n+1}}.
+    \qed
+  \]%
+\end{question}
+
+
+\begin{question}[Morera の定理]
+  Cauchy の積分定理の逆が成立することを示せ. \qed
+\end{question}
+
+
+\begin{question}
+  $f$ は $U$ の境界 $\del U$ 上の任意の連続函数であるとし, 
+  \[
+    u(z) = \int_{\del U} \frac{f(\zeta)\,d\zeta}{\zeta - z}
+    \qquad
+    \text{for}\quad z\in U
+  \]%
+  と置く. このとき, $u$ は $U$ 上の正則函数である. %
+  しかも, $u$ は $K = \overline{U}$ 上に連続函数として一意的に拡張され, 
+  その境界上の値は $f$ と一致する. \qed
+\end{question}
+
+\noindent この結果は, 次の境界値問題の解法を与えている:
+\[
+  \delbar u = 0 \quad\text{on}\ U,
+  \qquad
+  u|_{\del U} = f.
+\]
+
+
+\begin{question}
+  一様収束する正則函数列の収束先もまた正則函数であることを示せ. \qed
+\end{question}
+
+\noindent 実解析函数に対してはこのような簡明な結果は得られない. (次の
+問題を見よ.)
+
+\begin{question}
+  $f(x)=|x|$ ($x\in\R$) と置く. $\R$上の多項式函数の列で $[-1,1]$ 上 
+  $f$ に一様収束するものを構成せよ. \qed
+\end{question}
+
+\noindent 実は, $\R$ 内の任意の閉区間上の連続函数は多項式函数で一様近
+似されることが知られている(Weierstrassの近似定理). もちろん, この結果
+を認めれば上の問題の解答は trivial になってしまう. これでは演習になら
+ないので, 直接に具体的な多項式函数の列を見付けて欲しい%
+\footnote{実は逆にそのような函数はStone-Weierstrassの近似定理の一般の
+  場合を証明するために役に立つ. (例えば, \cite{Lang}の第3章を見よ.)}.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{解析函数の孤立特異点}
+
+
+$a\in\C$, $0\le r<R$ とし, 円環領域 $A$ を
+\[%
+    A = \{\, z\in\C \mid r < |z - a| < R \,\}
+\]%
+と定める. $r<\rho<R$ なる $\rho$ に対する %
+$A$ 内の曲線 $\rho e^{it}+a$ ($0\le t \le 2\pi$)を $\gamma$ と書く.
+
+\begin{question}[Laurent 展開]
+  $A$ 上の正則函数 $f$ に対して, 
+  \[
+    c_n =
+    \frac{1}{2\pi i}
+    \int_{\gamma} \frac{f(\zeta)\,d\zeta}{(\zeta - a)^{n+1}}
+    \qquad
+    \text{for}\quad n\in\Z
+  \]%
+  と置く. このとき, 任意の $z\in A$ に対して, 
+  \[
+    f(z) = \sum_{n\in\Z} c_n (z - a)^n
+  \]%
+  が成立する. 右辺の Laurent 級数は $A$ において広義一様絶対収束してい
+  る. さらに, すべての $n<0$ に対して $c_n = 0$ であるならば, この 
+  Laurent 級数(実際には巾級数になる)は $|z-a|<R$ において収束する. 
+  \qed
+\end{question}
+
+\begin{question}
+  次の級数は $A$ において一様絶対収束していると仮定する:
+  \[
+    f(z) = \sum_{n\in\Z} c_n (z - a)^n.
+  \]%
+  このとき, $f$ は $A$ 上の正則函数を定める. さらに, 次が成立している:
+  \[
+    \frac{1}{2\pi i}
+    \int_{\gamma} \frac{f(\zeta)\,d\zeta}{(\zeta - a)^{n+1}}
+    = c_n
+    \qquad
+    \text{for}\quad n\in\Z.
+    \qed
+  \]%
+\end{question}
+
+\noindent 特に, 
+\[
+  \frac{1}{2\pi i} \int_{\gamma} f(\zeta)\,d\zeta = c_{-1}.
+\]%
+である. つまり, $a$ にまわりを正の向きに一周する経路によって $f$ を積
+分すると $(z-a)^{-1}$ の係数が得られるのである. この結果の証明自体は非
+常に簡単なのであるが, Cauchy の積分定理と合わせて用いることによって, 
+定積分の計算に対して極めて強力な方法を与える.
+
+
+以下, $r=0$ の場合を考える. $R > 0$ とし, 
+\[%
+  D = \{\, z\in\C \mid |z - a| < R \,\},
+  \qquad
+  D^* = \{\, z\in D \mid z \ne a,\},
+\]%
+と置き, $f$ は $D^*$ における正則函数であるとする. $a$ を $f$ の孤立特
+異点と呼ぶ. $f$ が $D$ 上の正則函数に拡張可能なとき, $a$ は除去可能特
+異点であると言う. $f$ の $a$ を中心とする Laurent 展開が
+\[%
+  f(z) =
+  \frac{c_{-n}}{(z-a)^n}
+  + \frac{c_{-n+1}}{(z-a)^{n-1}}
+  + \frac{c_{-n+2}}{(z-a)^{n-2}}
+  + \cdots,
+  \qquad
+  (n > 0, \quad c_{-n}\ne 0)
+\]%
+の形になるとき, $a$ は $f$ の $n$ 位の極(pole)であると言う. これに対し,
+Laurent 展開の中に(0ではない)負巾の項が無限個出てくるとき, $a$ は $f$ の
+真性特異点であると言う.
+
+\begin{question}
+  $f(z)=\exp(1/z)$ ($z\in\C-\{0\}$) と置く. $f(z)$ の $z=0$ を中心とす
+  る Laurent 展開を求めよ. $z=0$ は $f$ の真性特異点である. $f$ は 
+  $\C-\{0\}$ において決して $0$ にならない. しかし, 任意の %
+  $\varepsilon>0$ と任意の $c\in\C-\{0\}$ に対して, ある 
+  $z\in\C-\{0\}$ が存在して, $|z|<\varepsilon$ かつ $f(z)=c$ をみたす.
+  \qed
+\end{question}
+
+\begin{question}
+  $f(z)=\sin(1/z)$ ($z\in\C-\{0\}$) と置く. $f(z)$ の $z=0$ を中心とす
+  る Laurent 展開を求めよ. $z=0$ は $f$ の真性特異点である. このとき, 
+  任意の $\varepsilon>0$ と任意の $c\in\C$ に対して, ある 
+  $z\in\C-\{0\}$ が存在して, $|z|<\varepsilon$ かつ $f(z)=c$ をみたす.
+  \qed
+\end{question}
+
+\noindent これで次のことがわかった. $\exp(1/z)$ の取り得る値としては例
+外値 $0$ が存在するが, $\sin(1/z)$ に対してそのような例外値は存在しな
+い.
+
+\begin{question}
+  $g$ は $D$ 上の正則函数であり, $a$ は $g$ の $k$ 位の零点であるとす
+  る. このとき, $a$ は $f=1/g$ の $k$ 位の極である. \qed
+\end{question}
+
+\begin{question}
+  $a$ が $f$ の$k>0$位の極ならば, $z\to a$ のとき $|f|\to\infty$ とな
+  る. \qed
+\end{question}
+
+\begin{question}[Weierstrass の定理]
+  $a$ は $f$ の真性特異点であると仮定する.  このとき, $a$ に収束する点
+  列 $(z_n)_{n=1}^\infty$ で $|f(z_n)|\to\infty$ をみたすものが存在す
+  る. また, 任意の $c\in\C$ に対して, $a$ に収束する点列 
+  $(z_n)_{n=1}^\infty$ で $f(z_n)\to c$ をみたすものも存在する.  \qed
+\end{question}
+
+\begin{question}
+  $f$ が $D^*$ 上有界なとき, $a$ は $f$ の除去可能特異点である. \qed
+\end{question}
+
+
+今度は $a=\infty$ (無限遠点)の場合について考えよう. $R > 0$ とし, $f$ は %
+$\{|z|>R\}$ 上の正則函数であるとする. このとき, $f$ は変数変換 $z=1/w$ %
+によって $\{0<|w|<1/R\}$ 上の正則函数であるとみなせる. すなわち,
+$g(w)=f(1/w)$ と置くと, $g$ は $\{0<|w|<1/R\}$ 上の正則函数である. 点 %
+$0$ が $g$ の除去可能特異点, $k$ 位の零点, $k$ 位の極, 真性特異点であ
+るとき, それぞれの場合に応じて, $\infty$ は $f$ の除去可能特異点, $k$ %
+位の零点, $k$ 位の極, 真性特異点であると言う%
+\footnote{複素平面に無限遠点を付け加えた 
+  $\P^1(\C)=\widehat{\C}=\C\cup\{\infty\}$ を Riemann 面としてとらえる
+  ことによって, $\infty$ も特別な点ではなく他の点と同様に考えることが
+  できる.}.
+
+\begin{question}[Liouville の定理]
+  $\C$ 上の有界な正則函数は定数函数に限る. \qed
+\end{question}
+
+\begin{question}[代数学の基本定理]
+  $1$ 次以上の任意の複素係数多項式 $f$ に対して, $f(a)=0$ をみたすある
+  複素数 $a$ が存在する. したがって, $f$ が $n$ 次のとき, $f$ は %
+  $f(z)=c\,(z-a_1)\cdots(z-a_n)$ ($c,a_k\in\C$, $c\ne0$) と表わされる.
+  \qed
+\end{question}
+
+\noindent ヒント: 結論を否定し, $1/f$ に Liouville の定理を適用すると矛
+盾が出る.
+
+\begin{question}
+  $f$ は $\C-\{a_1,\dots,a_N\}$ 上の正則函数であり, %
+  各々の $a_1,\dots,a_N,\infty$ は $f$ の真性特異点ではないと仮定する.
+  このとき, $f(z)$ は $z$ の有理函数になる. (すなわち, 多項式の分数
+  の形で表わされる.)
+\end{question}
+
+\noindent 真性特異点を持たない函数を有理型函数(meromorphic function) 
+と呼ぶ. すぐ上の結果は $\P^1(\C)$ 上の有理型函数は有理函数(rational
+function)に限ることを主張している. このことは, $\P^1(\C)$ がコンパクト
+であることに深く関係している%
+\footnote{これは, GAGAの原理の最も簡単な場合である.}.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{最大値の原理}
+
+% 最大絶対値の原理
+\begin{question}[最大絶対値の原理]
+  $\Omega$ は $\C$ の連結開部分集合であるとし, $f$ は $\Omega$ 上の正
+  則函数であるとする. このとき, $|f|$ が $\Omega$ において最大値をとる
+  ならば, $f$ は定数函数である. \qed
+\end{question}
+
+\begin{question}
+  $\omega_1/\omega_2\notin\R$ をみたす $\omega_1,\omega_2\in\C-\{0\}$ 
+  を任意に与える. $f$ は $\C$ 上の正則函数であり, 
+  \[
+    f(z + n_1\omega_1 + n_2\omega_2) = f(z)
+    \qquad
+    \text{for}
+    \quad
+    z\in\C,\;\; n_1,n_2\in\Z
+  \]%
+  をみたしていると仮定する. このとき, $f$ は定数函数である. \qed
+\end{question}
+
+\noindent この結果はいたるところ正則な楕円函数は定数函数に限ることを表
+わしている. 一般にコンパクト Riemann 面上の大域的に定義された正則函数
+は定数函数に限る. (コンパクト Riemann 面という面白い対象の演習は後に行
+なわれるであろう.)
+
+
+% Schwarzの定理
+\begin{question}[Schwarz の定理]
+  開円板 $D=\{|z|<R\,\}$ 上の正則函数 $f$ は $f(0)=0$ および 
+  $|f(z)|\le M$ ($z\in D$) をみたしていると仮定する. このとき, 任意の 
+  $z\in D$ に対して, 次の不等式が成立している:
+  \[
+    |f(z)| \le \frac{M}{R} |z|.
+  \]%
+  さらに, ある一点 $z_0\in D - \{0\}$ おいて等号が成立していれば, ある
+  実数 $\theta$ が存在して, $f$ は次のように表わされる:
+  \[
+    f(z) = \frac{M}{R} e^{i\theta} z
+    \qquad
+    \text{for}
+    \quad
+    z \in D.
+  \qed
+  \]%
+\end{question}
+
+
+\begin{question}[Vitali の定理]
+  $\Omega$ は $\C$ の連結開集合であり, $(f_n)_{n=1}^{\infty}$ は 
+  $\Omega$ 上の正則函数の列であるとし, 次を仮定する:
+  \begin{enumerate}
+  \item $(f_n)_{n=1}^{\infty}$ は一様有界である. すなわち, ある定数 
+    $M > 0$ で次をみたすものが存在する:
+    \[
+      |f_n(z)| \le M
+      \qquad\text{for}\quad
+      z\in\Omega,\;\; n=1,2,3,\dots.
+    \]%
+  \item $\Omega$ の内部に集積点を持つ $\Omega$ の部分集合 $E$ が存在し
+    て, 各々の $\zeta\in E$ に対して数列 $(f_n(\zeta))_{n=1}^{\infty}$ 
+    が収束している.
+  \end{enumerate}
+  このとき, $(f_n)_{n=1}^{\infty}$ は $\Omega$ において, 広義一様収束
+  する. 
+  \qed
+\end{question}
+
+\noindent ヒント: (1) %
+\(
+  \Omega'=
+  \{\, z \in \Omega \mid 
+       \text{$z$ のある近傍で函数列 $(f_n)$ は一様収束する}\,\}
+\)%
+と置く. $\Omega = \Omega'$ を示したいのだが, $\Omega$ の連結性より,
+$\Omega'$ が $\Omega$ の中で開かつ閉であり空でないことを示せばよい.
+開であることは明らかなので, 閉でありかつ空でないことを示すことが問題に
+なるが, $\Omega'$ の集積点 $a$ を中心とする十分小さな円板上で $(f_n)$ 
+が一様収束することを示せば十分である(一致の定理の証明で使った論法). %
+(2) $f_n(z)=\sum_{k=0}^{\infty}c_{k,n}(z-a)^k$ と Taylor 展開する. $k$ 
+に関する帰納法によって, すべての $k$ に対して $(c_{k,n})_{n=1}^{\infty}$ 
+が収束することを示す. まず, $f_n - c_{0,n}$ に対して Schwarz の定理
+を適用すると, 数列 $(c_{0,n})_{n=1}^{\infty}$ が収束していることが確か
+められる. ($\C$ の完備性を使う.) $f_{1,n}(z)=(f_n-c_{0,n})/(z-a)$ と置
+くと, $(f_{1,n})_{n=1}^{\infty}$ にも同様の議論を適用できることがわか
+る. 以下これを繰り返えせばよい. %
+(3) $(c_{k,n})_{n=1}^{\infty}$ の収束先を $c_k$ と書く. $c_{k,n}$ に対
+する Cauchy の係数評価式より $c_k$ の評価が得られる. それを使うと, 
+$f(z)=\sum_{k=0}^{\infty}c_k(z-a)^k$ が $a$ の近傍で収束することがわか
+る. %
+(4) 最後に, $a$ の近傍で $(f_n)$ が $f$ に一様収束することを示す.
+\qed
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{正則函数の巾級数展開の収束半径}
+
+\begin{question}
+  $f$ は $a\in\C$ を中心とする半径 $R>0$ の開円板 $D$ 上の正則函数であ
+  るとする. このとき, $f$ の $a$ を中心とする巾級数展開は $D$ 上で絶対
+  収束する. 特に, その収束半径は $R$ 以上である. \qed
+\end{question}
+
+\begin{question}
+  $S$ は $\C$ の空でない離散部分集合であるとする. $f$ は $\C-S$ 上の正
+  則函数であり, $S$ は $f$ の除去可能特異点を含まないと仮定する. この
+  とき, $a\in\C-S$ を中心とする $f$ の巾級数展開の収束半径は, $a$ から 
+  $S$ への距離に等しい. ($a$ から $S$ への距離とは $a$ に最も近い $S$ 
+  の点と $a$ の間の距離のことである.) \qed
+\end{question}
+
+\begin{question}
+  $N$ は正の整数とし, $f(z)=(1-z)^{-N}$ と置く. $f$ の $0$ における巾
+  級数展開を求め, その収束半径が $1$ であることを証明せよ. \qed
+\end{question}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{留数}
+
+$f$ が領域 $0<|z-a|<r$ における正則函数であるとき, $f$ は
+\[%
+  f(z) = \sum_{n\in\Z} c_n (z - a)^n
+  \qquad\text{if}\quad
+  0 < |z -a| < r.
+\]%
+と Laurent 展開される. このとき, $(z - a)^{-1}$ の係数 $c_{-1}$ を %
+微分形式%
+\footnote{函数 $f(z)$ の「留数」は座標不変な概念ではないが, 微分形式の
+  留数は座標不変な概念である.} %
+$\omega = f(z)\,dz$ の $z = a$ における留数 (residue) と呼び,
+\[%
+  \Res_{z=a}f(z)\,dz = c_{-1}
+\]%
+と表わす. さらに, $f\ne0$ かつ $z=a$ が $f$ の真性特異点ではないとき,
+$c_n$ が $0$ にならないような最小の $n$ を函数 $f$ の $z=a$ における
+(零の)位数と呼び $\ord_a f$ と表わす. %
+($a$ が $f$ の極のとき, $\ord_a f$ は負の整数になる.)
+
+\begin{question}[留数の計算の仕方]
+  $f$ が $0<|z-a|<r$ における正則函数であり, $z=a$ は $f$ の $n$ 位の
+  極であるとする. このとき, 次が成立する:
+  \[
+    \Res_{z=a}f(z)\,dz
+    \quad = \quad
+    \frac{1}{(n-1)!}
+    \lim_{z\to a}
+    \frac{d^{n-1}}{dz^{n-1}}\left( (z-a)^n f(z) \right).
+  \]
+  特に, $n=1$ のとき,
+  \[
+    \Res_{z=a}f(z)\,dz
+    \quad = \quad
+    \lim_{z\to a} (z-a)f(z).
+    \qed
+  \]
+\end{question}
+
+\noindent この結果は実際に留数を計算するときに有用である.
+
+以下, $K$ は滑らかに三角形分割可能であるような $\C$ のコンパクト部分集
+合であるとする. 以下の問題の解答において, $K$ に対する Cauchy の積分公
+式を自由に用いて良い. $\Omega$ は $K$ の任意の開近傍であるとし, $K$ の
+内部を $U$ と表わす.
+
+\begin{question}
+  $S$ は $U$ の有限部分集合であるとし, $f$ は $\Omega - S$ 上の正則函
+  数であるとする. このとき, 次が成立する:
+  \[%
+    \frac{1}{2\pi i} \int_{\del U} f(z)\,dz
+    \quad = \quad
+    \sum_{a\in S} \Res_{z=a} f(z)\,dz.
+  \qed
+  \]%
+\end{question}
+
+\noindent 上の公式は定積分を計算するときに利用される. 
+
+\begin{question}
+  $f$ は $\Omega$ 上の有理型函数であるとし, $\Omega$ の各連結成分の上
+  で恒等的には $0$ でないとし, $\del U$ 上に極と零点を持たないと仮定す
+  る. このとき, 次が成立する:
+  \[%
+    \frac{1}{2\pi i} \int_{\del U} \frac{f'(z)\,dz}{f(z)}
+    \quad = \quad
+    \sum_{a\in U} \ord_a f.
+  \qed 
+  \]%
+\end{question}
+
+\begin{question}[偏角の原理]
+  $f$ は $\Omega$ 上の有理型函数であるとし, $\Omega$ の各連結成分の上
+  で恒等的には $0$ でないとし, $\del U$ 上に極と零点を持たないと仮定す
+  る. このとき, 次が成立する:
+  \[
+    \frac{1}{2\pi}\int_{\del U} d\arg f
+    \quad = \quad
+    N - P.
+  \]
+  ここで, $N$ は $f$ の $U$ における零点の個数であり, $P$ は $U$ にお
+  ける極の個数である. ただし, 零点と極の個数は重複度を込めて数えるもの
+  とする. \qed
+\end{question}
+
+\noindent ヒント: $df/f = d\log f = d\log|f| + i\,d\arg f$. \qed
+
+\begin{question}[Rouch\'e の定理]
+  $f$ と $g$ は $\Omega$ 上の正則函数であり, $\del U$ 上で $|g| < |f|$
+  が成立していると仮定する. このとき, $f + g$ と $f$ は $U$ において同
+  数の零点を持つ. ただし, 零点の個数は重複度を込めて数えるものとする.
+\end{question}
+
+\begin{question}
+  Rouch\'e の定理を用いて,代数学の基本定理を証明せよ. \qed
+\end{question}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{定積分の計算}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{定積分の計算 (I)}
+
+\begin{question}
+  $e^{iz}/z$ に対する Cauchy の積分定理を利用して, 次の公式を証明せよ:
+  \[
+    \lim_{R\to\infty} \int_0^R \frac{\sin x}{x}\,dx 
+    \quad = \quad
+    \frac{\pi}{2}.
+    \qed
+  \]
+\end{question}
+
+\begin{question}
+  $f(x)= \sin x/x$ は $(0,\infty)$ 上で(Lebesgue の意味で)積分可能では
+  ないことを示せ.  \qed
+\end{question}
+
+\noindent この例は, 広義積分可能であるが, Lebesgue 積分可能でない函数
+の典型的な例である%
+\footnote{絶対収束しないが条件収束する級数に関しては Abel の変形法が
+  重要である. \cite{kaiseki-gairon} の p.153 を見よ. Abel の変形法は, 
+  積分の場合にも容易に一般化される.}. 
+
+\begin{question}[Fresnel の積分]
+  まず, 
+  \[
+    \int_0^\infty e^{-x^2}\,dx
+    \quad = \quad
+    \frac{\sqrt{\pi}}{2}
+  \]
+  を示せ. この結果および $e^{-z^2}$ に対する Cauchy の積分定理を利用し,
+  次の公式を証明せよ:
+  \[
+    \lim_{R\to\infty}\int_0^R \cos(x^2)\,dx
+    \quad = \quad
+    \lim_{R\to\infty}\int_0^R \sin(x^2)\,dx
+    \quad = \quad
+    \frac{1}{2}\sqrt{\frac{\pi}{2}}.
+    \qed
+  \]
+\end{question}
+
+\begin{question}
+  $r \ge 0$ に対して,
+  \[
+    \int_0^\pi \log(1 - 2r\cos\theta + r^2)\,d\theta
+    \quad = \quad
+    \begin{cases}
+      \quad 0    \qquad & \text{if}\quad 0 \le r \le 1, \\
+      2\pi\log r \qquad & \text{if}\quad r > 1
+    \end{cases}
+  \]
+  が成立することを示せ. \qed
+\end{question}
+
+\noindent ヒント: $0 \le r < 1$ の場合は, 原点を中心とした半径 $r$ の
+円と $\log(1 - z)/z$ に対する Cauchy の積分定理を考えよ. $r>1$ の場合
+は $r<1$ の場合に帰着される. \qed
+
+\begin{question}
+  まず,
+  \[
+    \Res_{z=i}\frac{dz}{1+z^2} 
+    \quad = \quad
+    \frac{1}{2i}
+  \]
+  を示せ. この結果を用いて, 次の公式を証明せよ:
+  \[
+    \int_0^\infty \frac{dx}{1+x^2} 
+    \quad = \quad
+    \frac{\pi}{2}.
+    \qed
+  \]
+\end{question}
+
+\begin{question}
+  まず, 
+  \[
+    \Res_{z=ai}\frac{e^{iz}\,dz}{z^2 + a^2} 
+    \quad = \quad
+    \frac{e^{-a}}{2ai}
+  \]
+  を示せ. この結果を利用して, $a > 0$ に対する次の公式を証明せよ:
+  \[
+    \int_0^\infty \frac{\cos x}{x^2 + a^2}\,dx
+    \quad = \quad
+    \frac{\pi e^{-a}}{2a}.
+  \qed
+  \]
+\end{question}
+
+\begin{question}
+  $n = 0,1,2,\dots$ に対して,
+  \[
+    \int_{-\infty}^\infty \frac{dx}{(1+x^2)^{n+1}}
+    \quad = \quad
+    \frac{\pi}{2^{2n}}\frac{(2n)!}{(n!)^2}
+    \quad = \quad
+    \pi \frac{1 \cdot 3 \cdot 5 \cdots (2n - 1)}
+             {2 \cdot 4 \cdot 6 \cdots 2n}.
+    \qed
+  \]
+\end{question}
+
+\begin{question}
+  $n=0,1,2,\dots$ に対して,
+  \[
+    \int_0^\pi \frac{\cos n\theta\,d\theta}
+                    {1 - 2a \cos\theta + a^2}
+    \quad = \quad
+    \begin{cases}
+      \displaystyle \;\;\;
+      \frac{\pi a^n}{1 - a^2}  \qquad & \text{if}\quad |a|<1,\\
+      \displaystyle
+      \frac{\pi}{a^n(a^2 - 1)} \qquad & \text{if}\quad |a|>1. \qed
+    \end{cases}
+  \]
+\end{question}
+
+\noindent ヒント: $|a|<1$ の場合は, $|t|<1$ とし, 単位円 $\gamma$ に関
+する積分
+\[
+  \frac{1}{2\pi i} \int_\gamma \frac{dz}{(tz-1)(z-a)(az-1)}
+\]
+を計算し, $t$ に関する巾級数展開の係数を見る. $|a|>1$ の場合は $|a|<1$ %
+の場合に帰着する. \qed
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{定積分の計算 (II)}
+
+\begin{question}
+  $\Gamma(R)$ は次によって定められる半径 $R > 0$ の半円であるとする:
+  \[
+    \Gamma(R) := \{ \,R e^{i\theta} \mid 0 \le \theta \le \pi \,\}.
+  \]%
+  この曲線の向きを $1$ から $-1$ への左回りと定める. %
+  $M > 0$, $k > 1$ とし, $F(z)$ は絶対値が十分に大きな複素数 $z$ の連
+  続函数であるとする.  $F(z)$ は次の不等式を満たしていると仮定する:
+  \[
+    |F(z)| \le M / |z|^k  \qquad\mbox{($|z|$は十分大きいとする)}.
+  \]
+  このとき, 次が成立することを示せ:
+  \[
+    \lim_{R\to\infty} \int_{\Gamma(R)} F(z)\,dz = 0.
+    \qed
+  \]
+\end{question}
+
+\begin{question}
+  $P(z)$ は $z$ の多項式函数であるとし, その次数は $d$, 最高次の項の係
+  数は $a \ne 0$ であるとする. このとき, 次の不等式が成立する:
+  \[
+    |P(z)| \ge |a| |z|^d / 2  \qquad\mbox{($|z|$は十分大きいとする)}.
+    \qed
+  \]%
+\end{question}
+
+\noindent
+以上の二つの結果は以前の定積分の計算にも以下の計算にも利用できる.
+
+\begin{question}
+  \(
+    \displaystyle
+    \int_0^\infty \frac{dx}{x^4 + 1} = \frac{\sqrt{2}\pi}{4}.
+  \)
+  \qed
+\end{question}
+
+\begin{question}
+  \(
+    \displaystyle
+    \int_0^\infty \frac{dx}{x^6 + 1} = \frac{\pi}{3}.
+  \)
+  \qed
+\end{question}
+
+\vspace{-50pt}
+\begin{question}\label{q:sekibun-0}
+  正の整数 $k$ に対して, 
+  \(
+    \displaystyle
+    \int_0^\infty \frac{dx}{x^{2k} + 1}
+    = \frac{\pi}{2k\sin{\displaystyle\frac{\pi}{2k}}}.
+  \)
+  \qed
+  \hfil
+  ヒント: 
+%  \input 11-01-fig0
+\setlength{\unitlength}{0.0080in}
+%\begin{picture}(168,115)(0,-10)
+\begin{picture}(168,115)(0,20)
+\thicklines
+\put(-12.500,18.125){\arc{355.020}{5.8038}{6.2726}}
+\thinlines
+\put(25.962,25.962){\arc{19.799}{5.1326}{7.0632}}
+\thicklines
+\path(5,20)(165,20)
+\path(5,20)(145,100)
+\path(120,58)(130,48)
+\path(130,58)(120,48)
+\put(0,0){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{$0$}}}}}
+\put(160,0){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{$R$}}}}}
+\put(45,30){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{$\pi/k$}}}}}
+\end{picture}
+  \hfil
+\end{question}
+
+\begin{question}
+  \(
+    \displaystyle
+    \int_{-\infty}^\infty
+      \frac{x^2\,dx}{(x^2 + 1)^2 (x^2+2x+2)}
+    = \frac{7\pi}{50}.
+  \)
+  \qed
+\end{question}
+
+$F(X,Y)$ が $X$, $Y$ の有理式であるとき, 
+\( \displaystyle \int_a^b F(\cos\theta, \sin\theta)\,d\theta \) 
+の型の定積分の計算は, 
+$\displaystyle z = e^{i\theta}$, 
+$\displaystyle \cos\theta = \frac{z + z^{-1}}{2}$, 
+$\displaystyle \sin\theta = \frac{z - z^{-1}}{2i}$ 
+と置くことによって, $z$ の有理式の複素線積分の計算に帰着できる. 
+
+\begin{question}
+  \(
+    \displaystyle
+    \int_0^{2\pi} \frac{d\theta}{3 - 2 \cos\theta + \sin\theta} = \pi.
+  \) 
+  \qed
+\end{question}
+
+\begin{question}
+  $a$, $b$ はともに実数で $a > |b|$ を満たしているとする. このとき,
+  \[
+    \int_0^{2\pi} \frac{d\theta}{a + b\sin\theta}
+    = \frac{2\pi}{\sqrt{a^2 - b^2}}.
+  \qed
+  \]%
+\end{question}
+
+\noindent 
+この公式の両辺を $a$ で偏微分することによって, 
+\(\displaystyle
+  \int_0^{2\pi} \frac{d\theta}{(a + b\sin\theta)^n}
+\)
+に関する公式が得られることに注意せよ. 
+
+\begin{question}
+  \(\displaystyle
+    \int_0^{2\pi} \frac{d\theta}{(5 - 3\sin\theta)^2}
+    = \frac{5\pi}{32}.
+  \qed
+  \)
+\end{question}
+
+\begin{question}
+  \(\displaystyle
+    \int_0^{2\pi} \frac{\cos\theta\,d\theta}{5 - 3\cos\theta}
+    = \frac{\pi}{6}.
+  \qed
+  \)
+\end{question}
+
+\begin{question}
+  $F(X,Y)$ は有理数係数の有理式であるとする. %
+  (すなわち, $F(X,Y) \in \Q(X,Y)$.) %
+  任意の $(x,y)\in \{\, (x,y)\in\R^2 \mid x^2 + y^2 = 1 \,\}$ に対して,
+  $F(x,y)\ne 0$ であると仮定する. %
+  このとき, ある代数的数 $\alpha$ が存在して,
+  \[
+    \int_0^{2\pi} F(\cos\theta,\sin\theta)\,d\theta = A\pi.
+    \qed
+  \] %
+  ここで, 複素数 $\alpha$ が代数的数であるとは, $\alpha$ が $0$ でない
+  ある有理数係数の多項式の根になっていることである. \qed
+\end{question}
+
+\begin{question}\label{q:sekibun-1}
+  $0<p<1$ のとき, 
+  \(\displaystyle
+    \int_0^\infty \frac{x^p}{x+1} \frac{dx}{x}
+    = \frac{\pi}{\sin p\pi}.
+  \qed
+  \)
+\end{question}
+
+\begin{question}\label{q:sekibun-2}
+  $-1 < a < 1$ のとき, 
+  \(\displaystyle
+    \int_0^\infty \frac{\cosh ax}{\cosh x} \,dx
+    = \frac{\pi}{2\cos(\pi a/2)}.
+  \qed
+  \)
+\end{question}
+
+\begin{question}\label{q:sekibun-3}
+  $a>0$, $t>0$ に対して, 
+  \(\displaystyle
+    \frac{1}{2\pi i}
+    \int_{a-i\infty}^{a+i\infty} \frac{e^{tz}}{\sqrt{z+1}}\,dz
+    = \frac{e^{-t}}{\sqrt{\pi t}}.
+    \qed
+  \)
+\end{question}
+
+\noindent
+ヒント: 以下の図の積分経路を用いると良い. なお \qref{q:sekibun-3} の計
+算において次の公式を用いて良い:
+\[
+  \int_0^\infty \frac{e^{-tu}}{\sqrt{u}}\,du
+  =
+  \int_0^\infty e^{-tx^2} \,dx
+  =
+  \frac{1}{\sqrt{\pi t}}
+  \qquad
+  (t > 0, \quad\mbox{$u = x^2$ と変数変換}). 
+  \qed
+\]
+
+\begin{figure}[htbp]
+  \begin{minipage}[t]{.25\textwidth}
+  \begin{center}
+    \leavevmode
+%    \input 11-01-fig1
+\setlength{\unitlength}{0.0040in}
+\begin{picture}(282,301)(0,-10)
+\thicklines
+\put(142.000,141.000){\arc{280.179}{0.0357}{6.2475}}
+\put(139.500,141.000){\arc{65.765}{0.1526}{6.1305}}
+\path(152,286)(142,281)(152,276)
+\path(57,146)(67,136)
+\path(67,146)(57,136)
+\path(172,146)(282,146)
+\path(172,136)(282,136)
+\path(146,114)(136,109)(146,104)
+\end{picture}
+    \caption{\qref{q:sekibun-1}のヒント}
+    \label{fig:sekibun-1}
+  \end{center}
+  \end{minipage}
+  \hfil
+  \begin{minipage}[t]{.30\textwidth}
+  \begin{center}
+    \leavevmode
+%    \input 11-01-fig2
+\setlength{\unitlength}{0.0040in}
+\begin{picture}(400,110)(0,-10)
+\path(0,5)(400,5)
+\thicklines
+\path(360,5)(360,85)(40,85)
+        (40,5)(360,5)
+\path(205,95)(190,85)(205,80)
+\path(190,15)(210,5)(205,5)(190,0)
+\path(195,50)(205,40)
+\path(205,50)(195,40)
+\end{picture}
+    \caption{\qref{q:sekibun-2}のヒント}
+    \label{fig:sekibun-2}
+  \end{center}
+  \end{minipage}
+  \hfil
+  \begin{minipage}[t]{.40\textwidth}
+  \begin{center}
+    \leavevmode
+%    \input 11-01-fig3
+\setlength{\unitlength}{0.0030in}
+\begin{picture}(445,485)(0,-10)
+\thicklines
+\put(227.698,235.000){\arc{453.394}{0.6656}{5.6175}}
+\put(146,235){\ellipse{54}{54}}
+\path(406,375)(406,95)
+\path(4,235)(120,235)
+\path(141,240)(151,230)
+\path(151,240)(141,230)
+\path(226,460)(246,470)
+\path(226,460)(246,455)
+\path(221,20)(246,10)(221,0)
+\path(166,245)(171,225)(181,245)
+\path(46,245)(26,235)(46,230)
+\path(81,245)(101,235)(81,230)
+\path(396,230)(406,260)(416,230)
+\thinlines
+\path(221,240)(231,230)
+\path(231,240)(221,230)
+\put(421,370){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]
+    {\shortstack[l]{{$a+iT$}}}}}
+\put(421,95){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]
+    {\shortstack[l]{{$a-iT$}}}}}
+\end{picture}
+    \caption{\qref{q:sekibun-3}のヒント}
+    \label{fig:sekibun-3}
+  \end{center}
+  \end{minipage}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{複素函数の部分分数展開と無限乗積展開}
+
+\begin{question}[無限積の絶対収束]
+  $(u_n)_{n=1}^\infty$ は $0$ に収束する複素数列であるとし, 次の無限積
+  を考える:
+  \begin{itemize}
+  \item[($\ast$)]
+    \hfil
+    \(\displaystyle
+      \prod_{n=1}^\infty (1 + u_n) 
+      =
+      \lim_{N\to\infty} \prod_{n=1}^N (1 + u_n) 
+    \)%
+    \hfil
+  \end{itemize}
+  このとき, 以下が成立する:
+  \begin{enumerate}
+  \item \(\displaystyle \sum_{n=1}^\infty |u_n| \) が収束するとき, 
+    無限積($\ast$)も収束する. %
+    (したがって, %
+    \(\displaystyle \prod_{n=1}^\infty (1 + |u_n|) \) も収束する.)
+    このとき, 無限積($\ast$)は絶対収束すると言う. 以下, ($\ast$)の絶
+    対収束性を仮定する. 
+  \item このとき, 無限積($\ast$)の収束先は積の順序によらない. 
+  \item さらに, 全ての $n = 1,2,\dots$ に対して $1 + u_n \ne 0$ である
+    とき, 無限積($\ast$)の収束先は決して $0$ にはならない.
+  \end{enumerate}
+\end{question}
+
+\begin{question}
+  $|z|<1$ のとき, 
+  \(\displaystyle
+    \prod_{n=0}^\infty (1 + z^{2^n}) 
+    =
+    (1 + z)(1 + z^2)(1 + z^4)(1 + z^8) \cdots
+    =
+    \frac{1}{1 - z}.
+  \)
+  \qed
+\end{question}
+
+\begin{question}[有理型函数の部分分数展開]\label{q:bubun-bunsu-tenkai}
+  $f$ は $\C$ 上の有理型函数であり, %
+  (簡単のため)その全ての極 $a_1, a_2, \dots$ %
+  ($0 < |a_1| \le |a_2| \le \cdots$) は $1$ 位であるとし, %
+  $\displaystyle A_n := \Res_{z=a_n}f(z)\,dz$と置く.  %
+  以下を満たす閉曲線の列 $C_1, C_2, \dots$ が存在すると仮定する:
+  \begin{itemize}
+  \item[(a)] $C_n$ は $f$ の極を通らず, $C_n$ はその内側に 
+    $a_1,\dots,a_n$ を含み, 他の極を含まない.
+  \item[(b)] $C_n$ の原点からの最短距離を $R_n$, $C_n$ の長さを $L_n$
+    と書くと, $n\to\infty$ のとき $R_n\to\infty$ であり, $L_n=O(R_n)$.
+  \item[(c)] 非負の整数 $p$ が存在して, $n\to\infty$ のとき 
+    $\sup|f(C_n)| = o({R_n}^{p+1})$.
+  \end{itemize}
+  このとき, 次が成立する:
+  \[
+    f(z) = 
+    \sum_{k=0}^{p} \frac{f^{(k)}(0)\,z^k}{k!}
+    + \sum_{n=1}^\infty A_n
+      \left( \frac{1}{z - a_n} 
+           + \sum_{k=0}^p\frac{z^k}{{a_n}^{k+1}} \right).
+    \qed
+  \]
+\end{question}
+
+\noindent%
+ヒント: 次の積分が $N\to\infty$ のとき $0$ に収束することを示せば良い:
+\[
+  I_N
+  :=
+  \frac{1}{2\pi i}
+  \int_{C_N} \frac{f(\zeta)\,d\zeta}{\zeta^{p+1}(\zeta - z)}
+  =
+  \frac{f(z)}{z^{p+1}}
+  - \sum_{k=0}^p \frac{f^{(k)}(0)\,z^{k-p-1}}{k!} 
+  + \sum_{n=1}^N \frac{A_n}{{a_n}^{p+1}(a_n - z)}.
+\]
+
+\begin{question}[正則函数の無限乗積展開]\label{q:mugen-joseki-tenkai}
+  $g$ は $\C$ 上の正則函数であるとし, %
+  (簡単のため)その全ての零点 $a_1, a_2, \dots$ %
+  ($0 < |a_1| \le |a_2| \le \cdots$) は $1$ 位であるとする. 
+  このとき, $f := g'/g$ と置くと, $f$ は $\C$ 上の有理型函数であり, そ
+  の極の全体は $a_1, a_2, \dots$ に一致し, 全ての極は $1$ 位であり, 全
+  ての留数は $1$ である. %
+  さらに, $f$ は問題\qref{q:bubun-bunsu-tenkai}の(a),(b),(c)を満たして
+  いて, かつ $p=0$ であると仮定する. このとき, 次が成立する:
+  \[
+    g(z) = g(0)
+           \exp\left( z \frac{g'(0)}{g(0)} \right)
+           \prod_{n=1}^\infty
+             \left\{
+               \left( 1 - \frac{z}{a_n} \right)
+               \exp\left( \frac{z}{a_n} \right)
+             \right\}.
+  \qed
+  \]
+\end{question}
+
+\noindent
+ヒント: $f$ の極を通らないように $0$ から $z$ までの積分路 $\Gamma$ を
+取ると,
+\[
+  \int_\Gamma f(\zeta)\,d\zeta
+  = \int_0^z d\log g(\zeta)
+  = \log g(z) - \log g(0).
+\]
+
+\begin{question}
+  \(\displaystyle
+    \cot z
+    =
+    \frac{1}{z}
+    + \sum_{n=1}^\infty
+    \left( \frac{1}{z - n\pi} + \frac{1}{z + n\pi} \right)
+    =
+    \frac{1}{z}
+    + 2 z \sum_{n=1}^\infty \frac{1}{z^2 - n^2\pi^2}.
+  \)
+  \qed
+\end{question}
+
+\begin{question}
+  \(\displaystyle
+    \sin z =
+    z \prod_{n=1}^\infty \left( 1 - \frac{z^2}{n^2\pi^2} \right).
+  \)
+  \qed
+\end{question}
+
+\noindent
+ヒント: 上の問題と
+\(\displaystyle
+  \frac{d}{dz}\log\frac{\sin z}{z} = \cot z - \frac{1}{z}
+\)
+を利用する. 直接\qref{q:mugen-joseki-tenkai}を用いてもよい. 
+
+\begin{question}
+  \(\displaystyle
+    \cos z =
+    \prod_{n=1}^\infty \left( 1 - \frac{z^2}{(n-1/2)^2\pi^2} \right).
+  \)
+  \qed
+\end{question}
+
+\begin{question}
+  \(\displaystyle
+    \frac{1}{\sin z} 
+    =
+    \frac{1}{z}
+    + \sum_{n=1}^\infty (-1)^n
+    \left( \frac{1}{z - n\pi} + \frac{1}{z + n\pi} \right)
+    =
+    \frac{1}{z}
+    + 2 z \sum_{n=1}^\infty \frac{(-1)^n}{z^2 - n^2\pi^2}.
+  \)
+  \qed
+\end{question}
+
+\begin{question}
+  上の結果を利用して, $1/\cos z$ と $\tan z$ の部分分数展開を求めよ.
+  \qed
+\end{question}
+
+\begin{question}
+  \(\displaystyle
+    \frac{1}{e^z - 1} 
+    =
+    \frac{1}{z}
+    - \frac{1}{2}
+    + 2 z \sum_{n=1}^\infty \frac{1}{z^2 + 4n^2\pi^2}
+  \)
+  \qed
+\end{question}
+
+\begin{question}
+  Euler-Riemann のゼータ函数を $\zeta(s) := \sum_{n=1}^\infty n^{-s}$ 
+  ($\Repart s > 1$) と書く. このとき, 次が成立する:
+  \[
+    z \cot z
+    =
+    1 - 2 \sum_{n=1}^\infty \zeta(2n) \left(\frac{z}{\pi}\right)^{2n}
+    \qquad (|z| < \pi).
+  \]
+  この結果と問題{\bf [144]}を比べると次の公式を得る:
+  \[
+    \zeta(2n) = \frac{2^{2n-1}B_n}{(2n)!} \pi^{2n}
+    \qquad
+    \mbox{for}\quad n = 1,2,3,\dots.
+  \]
+  ここで, $B_n$ は Bernoulli 数を表わす.
+  \qed
+\end{question}
+
+\noindent %
+このことより, 特に, Euler-Riemann のゼータ函数の正の偶数 $2n$ における
+特殊値は$\pi^{2n}$の有理数倍であることがわかった. 例えば,
+\[
+  \zeta(2) = 1 + \frac{1}{4} + \frac{1}{9} + \cdots = \frac{\pi^2}{6},
+  \qquad
+  \zeta(4) = 1 + \frac{1}{16} + \frac{1}{81} + \cdots = \frac{\pi^4}{90}.
+\]
+
+\begin{question}
+  \quad
+  \(\displaystyle
+    \sum_{n=1}^\infty \frac{(-1)^{n-1}}{n^{2k}}
+    = 1 - \frac{1}{2^{2k}} + \frac{1}{3^{2k}} - \cdots
+    = \frac{(2^{2k-1}-1)B_k}{(2k)!}\pi^{2k}
+    \quad
+    \mbox{for}\quad k = 1,2,3,\cdots.
+  \)
+  \qed
+\end{question}
+
+\begin{question}
+  $l=1,2,3,\dots$ に対して, 無限和 %
+  \(\displaystyle
+    \sigma_l := \sum_{n=1}^\infty \frac{(-1)^{n-1}}{(2n-1)^l}
+  \)%
+  を考える. ($l=1$ のとき, この無限和は絶対収束しないが条件収束する.) 
+  このとき, $k=0,1,2,\cdots$ に対して, $\sigma_{2k+1}$ は $\pi^{2k+1}$ 
+  の有理数倍になる.
+\end{question}
+
+\noindent
+ヒント: $1/\cos z$ の原点での Taylor 展開を二通りに考える. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{ガンマ函数}
+
+ガンマ函数は基本的でかつ大変重要な特殊函数である. この節の目的はガンマ
+函数の基本的性質に証明を付けることである. 
+
+複素数 $s$ と正の実軸 $\{x > 0\}$ 上の可測函数 $f$ に対して,
+\[
+  \Mellin f(s) = \int_0^\infty f(x) \, x^s \frac{dx}{x}
+\]%
+と置き, これを $f(x)$ のメリン変換(Mellin transform)と呼ぶ. (左辺は右
+辺の積分が収束するような $s$に対して定義されているものとする.) なお, 
+ここで, $x^s = e^{s\log x}$ であり, $\log x$ は主値を表わす.
+
+\begin{question}[メリン変換とフーリエ変換の関係]
+  $s=it$, $x=e^y$, $g(y)=f(e^y)$ と置くと,
+  \[
+    \Mellin f(s) = \int_{-\infty}^\infty g(y) e^{ity}\, dy.
+  \]
+  すなわち, $f$ のメリン変換は $g$ の逆フーリエ変換に等しい.
+  \qed
+\end{question}
+
+\begin{question}[ガンマ函数の定義]
+  $f(x) = e^{-x}$ に対して, 
+  \[
+    \Gamma(s)
+    := \Mellin f(s) = \int_0^\infty e^{-x}\,x^{s-1}\,dx
+  \]%
+  と置くと, $\Gamma(s)$ は $\Repart s > 0$ における正則函数である.
+  これをガンマ函数と呼ぶ.
+  \qed
+\end{question}
+
+\begin{question}[函数等式と解析接続]
+\label{q:Gamma-func-id}
+  $\Repart s > 0$ のとき, 次の等式が成立することを示せ:
+  \[
+    \Gamma(s+1) = s \Gamma(s).
+  \]%
+  この函数等式を用いて, $\Gamma(s)$ が複素平面上の有理型函数に解析接続
+  されることを示せ. 以下, 解析接続によって得られる有理型函数をも 
+  $\Gamma(s)$ と表わす. $\Gamma(s)$ の極は全て$1$位であり, 極全体の集
+  合は $\{0,-1,-2,\dots\}$ に等しく, 留数に関して次が成立している:
+  \[
+    \Res_{s=-k} \Gamma(s)\,ds = \frac{(-1)^k}{k!}
+    \qquad\mbox{for}\quad
+    k = 0,1,2,\dots.
+  \qed
+  \]%
+\end{question}
+
+\noindent ヒント: 
+前半は $\od{}{x}x^s = s x^{s-1}$ と部分積分によって証明される. 
+後半は $\Gamma(1)=1$, $\Gamma(s) = \frac{\Gamma(s+k+1)}{s(s+1)\cdots(s+k)}$
+($k=0,1,2,\dots$) を使う.
+
+\noindent 函数等式と $\Gamma(1)=1$ より, $n=0,1,2,\dots$ に対して,
+$\Gamma(n+1) = n!$ となることを帰納法によって簡単に示すことができる. 
+ガンマ函数は $n$ の階乗を複素函数に拡張したものだとみなせる.
+
+\begin{question}[対数凸性]
+  $s > 0$ において, $\Gamma(s) > 0$ であり, $\log \Gamma(s)$ は下に凸
+  な函数である.
+  \qed
+\end{question}
+
+\noindent ヒント: $s > 0$ において, %
+\(
+%  \displaystyle
+  \frac{d^2}{ds^2}\log\Gamma(s)
+  = \frac{\Gamma\Gamma'' - {\Gamma'}^2}{\Gamma^2}
+  \ge 0
+\)%
+が成立することを示せば良い. そのためには任意の $u$ に対して,
+$u^2\Gamma+2u\Gamma'+\Gamma''\ge0$ となることを示せば良い. なぜなら, 
+そのとき, 左辺の $u$ に関する$2$次式の判別式 %
+${\Gamma'}^2 - \Gamma\Gamma'$ が $0$ 以下になるからである.
+
+ガンマ函数は函数等式と対数凸性によって, 定数倍を除いて一意に特徴付けら
+れる. 実は次が成立する.
+
+\begin{question}[Gauss の公式]
+  正の実数 $s > 0$ の連続函数 $f(s)$ が以下の性質を満たしていると仮定
+  する:
+  \begin{enumerate}
+  \item $f(s+1) = s f(s)$ \quad ($s > 0$).
+  \item $f(1) = 1$.
+  \item $s > 0$ において $f(s) > 0$ であり, $\log f(s)$ は下に凸な函数
+    である.
+  \end{enumerate}
+  このとき, 次が成立する:
+  \[
+    f(s)
+    = \Gamma(s)
+    = \lim_{n\to\infty} \frac{n!\,n^s}{s(s+1)\cdots(s+n)}
+    \qquad\text{for}\quad s > 0.
+  \]
+  この最後の式を Gauss の公式と呼ぶ.
+  \qed
+\end{question}
+
+\noindent この結果を利用すると次の公式を証明することができる.
+
+\begin{question}[Weierstrass の公式]
+  $C$ は次によって定義される Euler の定数であるとする:
+  \[
+    C :=
+    \lim_{n\to\infty}
+    \left( \frac{1}{1} + \frac{1}{2} + \dots + \frac{1}{n} - \log n\right)
+  \]%
+  %Euler の定数の well-definedness を示せ. 
+  このとき, 任意の複素数 $s$ に対して,
+  \[
+    \frac{1}{\Gamma(s)}
+    =
+    \lim_{n\to\infty}
+    \frac{s(s+1)\cdots(s+n)}{n!\,n^s}
+    =
+    e^{Cs} s \prod_{n=1}^{\infty}\left( 1 + \frac{s}{n} \right) e^{-s/n}
+  \]%
+  が成立する. このとき, 右側の無限乗積は $s$ に関して広義一様絶対収
+  束する. よって, $1/\Gamma(s)$ は複素平面上の正則函数を定める. 
+  この最後の式の無限積を Weierstrass の公式と呼ぶ.
+  \qed
+\end{question}
+
+\noindent ヒント: 例えば \cite{kaiseki-gairon}の第68節 p.250 を見よ. 
+
+\begin{question}[$\sin$ との関係]
+\label{q:Gamma-and-Sin}
+  \(
+  \displaystyle
+    \Gamma(s)\Gamma(1-s) = \frac{\pi}{\sin \pi s}.
+  \)
+  \quad
+  特に, 
+  \(
+  \displaystyle
+    \Gamma\left( \frac{1}{2} \right) = \sqrt{\pi}.
+  \)
+  \qed
+\end{question}
+
+\noindent ヒント: $\Gamma(1-s)=-s\Gamma(-s)$ と Weierstrass の公式と 
+$\sin$ の無限乗積展開の公式を使えば簡単に証明できる.
+
+\begin{question}[ベータ函数との関係]
+  $\Repart p > 0$, $\Repart q > 0$ なる複素数 $p$, $q$ に対して,
+  \[
+    B(p,q) = \int_0^1 x^{p-1} (1-x)^{q-1}\,dx
+  \]%
+と置く. 右辺の積分は絶対収束する. このとき, 次の公式が成立する:
+  \[
+    B(p,q) = \frac{\Gamma(p)\Gamma(q)}{\Gamma(p+q)}.
+  \qed
+  \]
+\end{question}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{超幾何函数の積分表示式}
+
+超幾何級数は以下のように定義されたのであった:
+\[
+  F(\alpha,\beta,\gamma; z) 
+  = \sum_{n=0}^{\infty} \frac{(\alpha;n)(\beta;n)}{(\gamma;n)n!} z^n.
+\]%
+(収束半径は $1$ 以上.) ここで, $(a;n) = a(a+1)(a+2)\cdots(a+n-1)$ かつ %
+$\gamma \ne 0,-1,-2,\dots$.
+
+\begin{question}\label{q:hypergeom-Euler-1}
+  $\Repart \alpha > 0$, $\Repart(\gamma-\alpha) > 0$, %
+  $\gamma \ne 0,-1,-2, \dots$, $|z|<1$ のとき, 次が成立する:
+  \[
+    F(\alpha,\beta,\gamma; z)
+    =
+    \frac{\Gamma(\gamma)}{\Gamma(\alpha)\Gamma(\gamma-\alpha)}
+    \int_0^1 t^{\alpha-1} (1 - t)^{\gamma-\alpha-1} (1 - zt)^\beta \,dt.
+  \]%
+  これを, 超幾何函数の Euler 型の積分表示式と呼ぶ.
+  \qed
+\end{question}
+
+\noindent ヒント: 公式 $(\alpha;n)=\Gamma(\alpha+n)/\Gamma(\alpha)$ と, 
+ベータ函数とガンマ函数の関係より,
+\[
+  \frac{(\alpha;n)}{(\gamma;n)}
+  =
+  \frac{\Gamma(\alpha+n)\Gamma(\gamma)}{\Gamma(\alpha)\Gamma(\gamma+n)}
+  =
+  \frac{\Gamma(\gamma)}{\Gamma(\alpha)}
+  \frac{B(\alpha+n,\gamma-\alpha)}{\Gamma(\gamma-\alpha)}.
+\]%
+この式を, 超幾何級数に代入し, さらに, ベータ函数の定義式(積分表示式)を
+代入する. 無限和と積分の順序を交換し, 次の $2$ 項展開の公式を用いると
+求める結果を得る:
+\[
+  (1 - w)^\beta \sum_{n=0}^\infty \frac{(\lambda;n)}{n!}w^n
+  \qquad\text{if}\quad |w|<1.
+\]%
+もしくは, 以上の手続きの逆をたどっても良い. (そちらの方が簡単かもしれ
+ない.)
+\qed
+
+\begin{question}
+  $\Repart \alpha > 0$, $\Repart(\gamma-\alpha) > 0$ のとき, 問題 
+  \qref{q:hypergeom-Euler-1} における超幾何函数の Euler 型の積分表示式
+  は任意の $z\in\C-\{0,1\}$ において広義一様絶対収束し, $\C-\{0,1\}$ 
+  上の多価正則函数を与えることを証明せよ.
+  \qed
+\end{question}
+
+\begin{question}
+  問題 \qref{q:hypergeom-Euler-1} における超幾何函数の Euler 型の積分
+  表示式が次の超幾何微分方程式を満たしていることを直接証明せよ:
+  \[
+    \left[
+      z(1 - z) \frac{d^2}{dz^2}
+      + (\gamma - (\alpha + \beta + 1) z) \frac{d}{dz}
+      - \alpha\beta
+    \right] u = 0.
+  \]%
+  超幾何級数がこの方程式を満たしていることを使ってはいけない.
+  \qed
+\end{question}
+
+\noindent ヒント: 超幾何級数が超幾何微分方程式を満たしていることを使う
+ことが許されるなら, 解析函数の一致の定理より簡単である. 直接証明するた
+めには部分積分を使う. 
+\qed
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Euler-Riemann のゼータ函数の基本性質}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Bernoulli 数と Bernoulli 多項式}
+
+\begin{question}[Bernoulli 数]
+  数列 $\{B_n\}_{n=1}^{\infty}$ を次の式によって定義する:
+  \[
+    \frac{z}{e^z - 1}
+    \quad = \quad 
+    1 - \frac{z}{2} - \sum_{n=1}^{\infty}\frac{(-1)^n B_n z^{2n}}{(2n)!}.
+  \]
+  \begin{enumerate}
+  \item 実際に左辺が右辺の形に展開されることを示せ. 
+  \item $B_1$, $B_2$, $B_3$, $B_4$, $B_5$, $B_6$ を計算せよ.
+  \item 次が成立することを示せ:
+  \[
+      {2n + 1 \choose 2} B_1
+    - {2n + 1 \choose 4} B_2
+    + \cdots 
+    + (-1)^{n-1} {2n + 1 \choose 2n} B_n
+    = n - \frac{1}{2}.
+  \]
+  \item $B_n$ が有理数になることを証明せよ.
+    \qed
+  \end{enumerate}
+\end{question}
+
+\noindent この問題において定義された数 $B_n$ は Bernoulli 数と呼ばれて
+いる.
+
+\begin{question}
+  \(
+    \displaystyle
+    z \cot z
+    = 1 - \sum_{n=1}^\infty \frac{2^{2n}B_nz^{2n}}{(2n)!}
+    \qquad (|z| < \pi).
+  \)
+  \qed
+\end{question}
+
+\begin{question}
+  \(
+    \displaystyle
+    \tan z
+    = \sum_{n=1}^\infty \frac{2^{2n}(2^{2n}-1)B_nz^{2n-1}}{(2n)!}
+    \qquad \left( |z| < \frac{\pi}{2} \right).
+  \)
+  \qed
+\end{question}
+
+\begin{question}[Bernoulli 多項式]
+  多項式 $B_n(x)$ を次の式によって定義する:
+  \[
+    \varphi(x,z)
+    \quad = \quad
+    \frac{z e^{xz}}{e^z - 1}
+    \quad = \quad 
+    \sum_{n=0}^{\infty}\frac{B_n(x)}{n!}z^n.
+  \]
+  $B_n(x)$ は Bernoulli 多項式と呼ばれている. 
+  \begin{enumerate}
+  \item
+    \(
+    \displaystyle
+      B_n(x)
+      = 
+      x^n - \frac{n}{2}x^{n-1}
+      - \sum_{\nu=1}^{[n/2]} (-1)^\nu {n \choose 2\nu} B_\nu x^{n-2\nu}
+    \).
+    ここで, $[n/2]$ は $n/2$ 以下の最大の整数を表わす.
+  \item
+    \(
+      \varphi(x+1,z) = \varphi(x,z) + z e^{xz}
+    \)
+    を用いて, 
+    \(
+      B_{n+1}(x+1) - B_{n+1}(x) = (n + 1) x^n
+    \)
+    を示せ.
+  \item 
+    \(
+      S_n(k) = 1^n + 2^n + \cdots + k^n
+    \)
+    と置く. このとき, 次が成立する:
+    \begin{align*}
+      S_n(k) 
+      & =
+      \frac{1}{n+1}\left( B_{n+1}(k) - B_{n+1}(0) \right) + k^n
+      \\
+      & =
+      \frac{k^{n+1}}{n+1} + \frac{k^n}{2}
+      - \sum_{\nu=1}^{[(n+1)/2]}
+        (-1)^\nu {n \choose 2\nu-1} \frac{B_\nu}{2\nu} k^{n-(2\nu-1)}.
+    \end{align*}
+    このように, $S_n(k)$ は $k$ の Bernoulli 数を用いて表わされる $k$ 
+    の多項式になるのである. \qed
+  \end{enumerate}
+\end{question}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Euler-Riemann のゼータ函数の解析接続}
+
+$\Repart s > 1$ において, (Euler-Riemann の)ゼータ函数は次の式によって
+定義されたのであった:
+\[
+  \zeta(s)
+  = \sum_{n=1}^\infty n^{-s}. 
+\]%
+この式は, $\Repart s > 1$ における正則函数を定義する. 以下では, ゼータ
+函数を複素平面全体に解析接続するという問題について考える.
+
+\begin{question}\label{q:Mellin-exp}
+  $f(x) = e^{- \alpha x}$ と置くと,
+  $\alpha > 0$, $\Repart s > 1$ のとき, 
+  \[
+    \Mellin f(s) = \Gamma(s) \alpha^{-s}.
+  \qed
+  \]
+\end{question}
+
+\begin{question}
+  $\displaystyle g(x) = \frac{1}{e^x - 1}$ と置くと,
+  $\Repart s > 1$ のとき, 
+  \[
+    \Mellin g(s) = \Gamma(s) \zeta(s).
+  \qed
+  \]
+\end{question}
+
+\noindent ヒント: $x > 0$ のとき, $g(x) = \sum_{n=1}^\infty e^{-nx}$.
+
+\begin{question}[積分表示式1]\label{q:Zeta-int1}
+  $C$ は図 \ref{fig:path} のような曲線であるとする. %
+  $\log(-z)$ は $|\arg(-z)| < \pi$ なる分岐によって定められた %
+  $\C - \{\, z\in\R \mid z \ge 0\,\}$ 上の函数を表わすものとし, %
+  $(-z)^{s-1} = \exp\{(s-1)\log(-z)\}$ と置く. 
+  このとき, 
+  \[
+    \zeta(s)
+    =
+    - \frac{\Gamma(1-s)}{2\pi i}
+      \int_C \frac{(-z)^{s-1}\,dz}{e^z - 1} .
+  \qed
+  \]
+\end{question}
+\vspace{-20pt}
+\begin{figure}[htbp]
+  \begin{center}
+    \leavevmode
+%    \input 13-10-fig0.tex
+\setlength{\unitlength}{0.0070in}
+\begin{picture}(433,274)(0,20)
+\thicklines
+\put(120.000,115.000){\arc{120.000}{1.5708}{4.7124}}
+\path(400,175)(220,175)
+\path(236.000,179.000)(220.000,175.000)(236.000,171.000)
+\path(230,55)(400,55)
+\path(120,55)(230,55)
+\path(214.000,51.000)(230.000,55.000)(214.000,59.000)
+\thinlines
+\path(0,115)(0,115)(400,115)
+\path(392.000,113.000)(400.000,115.000)(392.000,117.000)
+\path(120,0)(120,240)
+\path(122.000,232.000)(120.000,240.000)(118.000,232.000)
+\thicklines
+\path(220,175)(120,175)
+\path(60,90)(73,80)(70,95)
+\put(130,95){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{$0$}}}}}
+\put(410,110){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{$\Repart z$}}}}}
+\put(115,250){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\shortstack[l]{{$\Impart z$}}}}}
+\end{picture}
+  \end{center}
+  \caption{曲線 $C$}
+  \label{fig:path}
+\end{figure}
+
+\noindent ヒント:
+$\displaystyle g(z) = \frac{1}{e^z - 1}$ と置くと, 
+\[
+  \int_C g(z) (-z)^{s-1}\,dz
+  = (e^{\pi i(s-1)} - e^{-\pi i(s-1)}) \Mellin g(s)
+  = - 2i \sin(\pi s) \Mellin g(s).
+\]%
+この式を整理すれば目的の式が得られる.
+
+\begin{question}
+  以上の記号のもとで, 積分 $\displaystyle \int_C g(z) (-z)^{s-1}\,dz$ 
+  は $s$ の函数として複素平面全体で正則である. %
+  このことを用いて, $\zeta(s)$ が複素平面上の有理型函数に解析接続され
+  ることを示せ. 以下, 解析接続によって得られる有理型函数をも 
+  $\zeta(s)$ と表わす. $\zeta(s)$ の極は $s=1$ のみであり, その位数は 
+  $1$ であり, 留数は $1$ に等しい.
+  \qed
+\end{question}
+
+\begin{question}
+  上の方法を使うと, 函数等式を使わなくても %
+  (cf. \qref{q:Gamma-func-id}), ガンマ函数の複素平面全体への解析接続を
+  証明できそうである. 実際にそれを遂行せよ.
+  \qed
+\end{question}
+
+\noindent 上の結果から副産物としてゼータ函数の特殊値に関する結果が得ら
+れる.
+
+\begin{question}\label{q:Zeta-spval1}
+  Bernoulli 数を $B_n$ と書く. このとき,  
+  \[
+    \zeta(0) = - \frac{1}{2},
+    \qquad
+    \zeta(1-2n) = - \frac{B_n}{2n},
+    \qquad
+    \zeta(-2n) = 0
+    \qquad\mbox{for}\quad  n = 1,2,3,\dots.
+  \]%
+  特に, $\zeta(s)$ の $0$ 以下の整数における値は $0$ 以下の有理数である.
+  \qed
+\end{question}
+
+\noindent ヒント: Bernoulli 数の定義を少し変形すると,
+\[
+  \frac{1}{e^z - 1}
+  = \frac{1}{z} - \frac{1}{2}
+    - \sum_{n=1}^\infty \frac{(-1)^n B_n z^{2n-1}}{(2n)!}.
+\]%
+この式を\qref{q:Zeta-int1}によって得られたゼータ函数の積分表示式に代入
+せよ.  $s$ が $0$ 以下の整数のときその積分は $0$ のまわりの周回積分に
+一致し, 留数計算に帰着する.
+
+さて, 問題 \qref{q:Zeta-spval1} の結果と以前別の方法(三角函数の無限乗
+積展開を使う方法)で計算した正の偶数におけるゼータ函数の値を比べてみよ
+う. すると次の等式が得られることがわかる:
+\[
+  \zeta(1 - 2n) = 2^{1 - 2n} \pi^{-2n} (2n-1)!\, \zeta(2n)
+  \qquad\mbox{for}\quad
+  n = 1,2,3,\dots.
+\]%
+複素函数論が存在しなかったにもかかわらず, Euler がすでにこの結果を示し
+ている. この結果は, より一般的に, $\zeta(1-s)$ と $\zeta(s)$ の間に関
+係式(函数等式)が存在することを強く示唆している. 実際, そのような等式は
+存在し, それを初めて証明したのは Riemann である. ゼータ函数の函数等式
+を証明するためにはテータ函数の函数等式が必要になる.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{楕円テータ函数}
+
+この節では, 函数 $\exp(2\pi iz)$ が何度も出てくるので, 記号の簡単のた
+めに,
+\[
+  \e(z) := \exp(2\pi iz)
+  \qquad\text{for}\quad z\in\C
+\]%
+と置く. $\UH := \{\, \tau \in \C \mid \Impart \tau > 0 \,\}$ (上半平面)
+と置く.
+
+\begin{question}[定義]
+  $(z,\tau)\in\C\times\UH$ に対して,
+  \[
+    \vartheta(z,\tau)
+    := \sum_{n\in\Z} \e\left( \frac{1}{2}n^2\tau + nz \right)
+  \]%
+  と置く. 右辺は $\UH\times\C$ 上で広義一様絶対収束するので,
+  $\vartheta(z,\tau)$ は $\UH\times\C$ 上の正則函数である. 
+  $\vartheta(z,\tau)$ を(楕円)テータ函数と呼ぶ.
+  \qed
+\end{question}
+
+\noindent テータ函数の入門には \cite{TataI} が良い%
+%
+\footnote{ただし, その p.36 の Table V の最後の式は, 
+  \( \vartheta_{11}(\text{''}) = -i (\text{''})\vartheta_{11}(\text{''}) \)
+  が正しい. 右辺の $i$ が抜けているの注意しなければいけない.}.
+%
+
+\begin{question}[準周期性]
+  \(\displaystyle
+    \vartheta(z + a\tau + b,\tau)
+    = \e\left( -\frac{1}{2}a^2\tau - az \right) \vartheta(z,\tau)
+  \) \quad
+  for $a,b\in\Z$.
+  \qed
+\end{question}
+
+\begin{question}\label{q:periodic-func}
+  $f$ は $\C$ 上の正則函数であり, 条件 $f(z+1)=f(z)$ を満たしていると
+  仮定する. このとき, 次を満たすような $(a_n)_{n=1}^\infty \in \C^\Z$ 
+  が唯一存在する:
+  \[
+    f(z) = \sum_{n\in\Z} a_n \e(nz)
+    \qquad\text{for}\quad z \in \C.
+  \]%
+  このとき, 右辺の級数は広義一様絶対収束する.
+  \qed
+\end{question}
+
+\noindent ヒント: %
+$f(z+1)=f(z)$ より, $w \ne 0$ に対して $f(\frac{\log w}{2\pi i})$ の値
+は $\log w$ の分岐の取り方よらずに定まる. その値を $g(w)$ と置くと, 
+$g$ は $\C-\{0\}$ 上の正則函数であり, $g(\e(z))=f(z)$ を満たしている. 
+$g$ の Laurent 展開に関する結果を $f$ の方に翻訳すると求める結果が得ら
+れる. 
+
+\begin{question}[準周期性による特徴付け]
+  $\tau\in\UH$ を任意に固定する. $f$ は $\C$ 上の正則函数であり, 次を
+  満たしていると仮定する:
+  \[
+     f(z + a\tau + b)
+    = \e\left( -\frac{1}{2}a^2\tau - az \right) f(z)
+  \qquad\text{for}\quad a,b\in\Z
+  \]%
+  このとき, $z$ によらないある定数 $c\in\C$ が存在して, %
+  $f(z) = c \vartheta(z,\tau)$.
+  \qed
+\end{question}
+
+\noindent ヒント: 問題 \qref{q:periodic-func} の結果を $f$ に適用する.
+さらに, $f(z+\tau) = \e(-\tau/2 - z) f(z)$ を用いると, $a_n$ の間の関
+係式が得られる. それを整理すれば目的の結果が得られる($c=a_0$).
+
+\begin{question}[熱方程式]
+  $t > 0$, $x\in\R$ に対して, $p(t,x) := \theta(x,it)$ と置くと,
+  $p(t,x)$ は正の実数値函数であり, 次の方程式を満たす:
+  \[
+    \frac{1}{2\pi}\pd{}{t} p(t,x) = \frac{1}{2(2\pi)^2}\pd{^2}{x^2} p(t,x),
+    \qquad
+    p(t,x+1) = p(t,x).
+  \qed
+  \]%
+\end{question}
+
+\noindent %
+すなわち, テータ函数は円周上の熱方程式を満たしているのである. (前者の
+偏微分方程式が熱方程式であり, 後者の周期性が「円周上の」という条件を数
+学的に表現している
+%
+\footnote{%
+  直線 $\R$ から円周への写像を $x\mapsto(\cos 2\pi x, \sin 2\pi x)$ に
+  よって与える. このとき, $x$ と $y$ が円周上の同一の点を与えるための
+  必要十分条件は $x$ と $y$ の差が整数になることである. $\R$ 上の函数 
+  $f$ が周期性 $f(x+1)=f(x)$ を満たしているとき, $f(x)$ の値は $x$ に
+  対応する円周上の点だけから決まる. よって, $f$ から自然に円周上の函数
+  が得られるのである. 気持ちの上では, 周期函数 $f$ その
+  ものを円周上の函数であると思ってよろしい. }.) 
+%
+さらに, $t\searrow 0$ のとき, $p(t,x)$ は円周 $\R/\Z$ 上の %
+($0 + \Z$ に台を持つ) デルタ超函数に収束することが知られている(超函数
+の収束の定義を知っていればその証明は簡単). $p(t,x)$ は円周上の熱方程式
+の基本解である. 物理的には, 時刻 $0$ に円周の一点を瞬間的に熱したとき, 
+時刻 $t$ における温度の分布函数は $x \mapsto p(t,x)$ によって与えられ
+るのである. 
+
+以下で必要になるフーリエ解析の結果をまとめておこう. $g$ は $\R$ 上の
+\Class{\infty}函数であり, 周期条件 $g(x+1)=g(x)$ を満たしていると仮定
+する. $g$ のフーリエ係数 $g_k$ を次のように定義する:
+\[
+  g_n := \int_0^1 g(x) \e(nx) \,dx
+  \qquad\text{for}\quad n \in \Z.
+\]
+このとき, 任意の $x\in\R$ に対して,
+\[
+  g(x) = \sum_{n\in\Z} g_n \e(nx)
+\]%
+が成立する. ここで, 右辺の級数(フーリエ級数)は $\R$ 上一様絶対収束する.
+この結果は以下において自由に用いて良い.
+
+$\R$ 上の \Class{\infty} 函数全体の空間を $\Class{\infty}(\R)$ と書く
+ことにする. Schwartz の急減少函数の空間 $\Sch(\R)$ を次のように定義す
+る:
+\[
+  \Sch(\R)
+  :=
+  \{\, f \in \Class{\infty}(\R) \mid
+       \lim_{|x|\to\infty} |x|^m f^{(n)}(x) = 0
+       \enspace \text{for}\  m,n = 0,1,2,\dots \,\}.
+\]%
+ここで, $f^{(n)}$ は $f$ の $n$ 階の導函数を表わす. $\R$ 上の可積分函
+数 $f$ に対して, そのフーリエ変換 $\hat f$ を次のように
+定義する:
+\[
+  \hat f(p) := \int_\R f(x)\,\e(-px)\,dx
+  \qquad\text{for}\quad p \in \R.
+\]%
+以下では使わないことだが, $f \in \Sch(\R)$ に対して, 逆変換の公式
+\[
+  f(x) = \int_\R \hat f(p)\,\e(px)\,dp
+\]
+が成立することを注意しておく.
+
+\begin{question}[Poisson の和公式]
+  $f \in \Sch(\R)$ に対して, 
+  \[
+    \sum_{m\in\Z} f(m) = \sum_{n\in\Z} \hat f(n).
+  \qed
+  \]
+\end{question}
+
+\noindent ヒント: より一般に次が成立する:
+\[
+  \sum_{m\in\Z} f(x+m) = \sum_{n\in\Z} \hat f(n) e^{2\pi inx}.
+\]%
+この式において $x=0$ と置けば Poisson の和公式が得られる. %
+$g(x) := \sum_{m\in\Z} f(x+m)$ と置くと, $g \in \Class{\infty}(\R)$ で
+あるから,
+\(
+  g(x) = \sum_{n\in\Z} g_n \e(nx)
+\)%
+が成立する. ところが, 
+\begin{align*}
+  g_n & = \int_0^1 \sum_{m\in\Z} f(x+m) \, \e(-nx) \,dx 
+        = \sum_{m\in\Z} \int_0^1 f(x+m) \, \e(-nx) \,dx \\
+      & = \sum_{m\in\Z} \int_{m}^{m+1} f(y) \, \e(-ny) \,dy
+        = \int_\R f(y) \, \e(-ny) \,dy = \hat f(n).
+\end{align*}
+
+以下において, $\sqrt{w}$ は $\C - \{\,w\in\R\mid w \le 0\,\}$ 上の 
+$|\arg(\sqrt{w})| < \pi$ なる分岐を選んでいるものとする. 
+
+\begin{question}[テータ函数の函数等式]
+  \(
+    \vartheta(z/\tau, -1/\tau)
+    = \sqrt{-i\tau}
+      \,\, \e(\frac{1}{2} z^2/\tau)
+      \, \vartheta(z,\tau)
+  \)
+  \quad
+  for $\tau\in\UH$, $z\in\C$.
+\end{question}
+
+\noindent ヒント: $\tau\in\UH$, $z\in\C$ を任意に固定し, %
+$f(x) := \e(\frac{1}{2}x^2\tau + xz)$ と置くと, $f\in\Sch(\R)$ である. 
+よって, $f$ に Poisson の和公式を適用できる. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Euler-Riemann のゼータ函数の函数等式}
+
+記号の簡単のため, $x>0$ に対して, $\theta(x):=(\vartheta(0,ix)-1)/2$ 
+と置く. すなわち,
+\[
+  \theta(x) = \sum_{n=1}^\infty \exp(- \pi n^2 x)
+  \qquad\text{for}\quad x > 0.
+\]%
+
+\begin{question}\label{q:Theta-junbi}
+  $\theta(x)$ は $x > 0$ における正値函数であり, 以下を満たす:
+  \begin{enumerate}
+  \item[(1)]
+    $1 + 2\theta(1/x) = x^{1/2} (1 + 2\theta(x))$ \quad for $x > 0$.
+  \item[(2)]
+    $\theta(x) \le 2 \, e^{- \pi x}$ \quad if $x \ge 1$.
+  \item[(3)]
+    $\theta(x) \le 2 \, x^{-1/2}$    \enspace if $0 < x \le 1$.
+  \qed
+  \end{enumerate}
+\end{question}
+
+\noindent ヒント: (1)は $\vartheta(z,\tau)$ の函数等式からただちに得ら
+れる. (1)と(2)から(3)を導くことも簡単である. したがって, (2)だけが問題
+になるが, $n^2 \ge 2n - 1$ を使うと, $x > 0$ に対して次が成立すること
+がわかる:
+\[
+  \theta(x)
+  =
+  \sum_{n=1}^\infty e^{-\pi n^2 x}
+  \le
+  \sum_{n=1}^\infty e^{-\pi(2n - 1)x}
+  =
+  \frac{e^{-\pi x}}{1 - e^{-2\pi x}}.
+\]%
+
+ゼータ函数の函数等式を扱うためには, 完備化されたゼータ函数 % 
+$\hat\zeta(s)$ を次のように定義しておいた方が良い:
+\[
+  \hat\zeta(s) := \pi^{-s/2} \Gamma(s/2) \zeta(s).
+\]%
+ゼータ函数の函数等式は, $\zeta(s)$ そのものよりも, むしろ 
+$\hat\zeta(s)$ に関する結果として証明される. 
+
+
+\begin{question}[テータ函数とゼータ函数の関係]\label{q:Theta-and-Zeta}
+  $\Repart s > 2$ のとき,
+  \[
+    \hat\zeta(s)
+    = \Mellin \theta(s/2)
+    = \int_0^\infty \theta(x) x^{s/2}\,\frac{dx}{x}.
+  \qed
+  \]
+\end{question}
+
+\noindent ヒント: \qref{q:Mellin-exp} の結果を用いて形式的に計算すれば
+望みの結果が得られることはすぐにわかる. よって, その形式的な計算が厳密
+に成立していることを示せば良い.
+
+\begin{question}[積分表示式 2]\label{q:Zeta-int2}
+  任意の $s\in\C - \{0,1\}$ に対して, 
+  \[
+    \hat\zeta(s)
+    =
+    - \frac{1}{s}
+    - \frac{1}{1-s}
+    + \int_1^\infty \theta(x) (x^{s/2} + x^{(1-s)/2}) \,\frac{dx}{x}.
+  \qed
+  \]
+\end{question}
+
+\noindent ヒント: \qref{q:Theta-junbi}の(2),(3)より, 右辺の積分は任意
+の $s\in\C$ に対して収束し, 複素平面上の正則函数を与えることがわかる. 
+よって, 解析函数の一致の定理より $\Repart s > 2$ の範囲で 
+\qref{q:Theta-and-Zeta} の結果を求める形に変形できれば良い. そのためには, 
+まず, メリン変換における積分を $0 < x \le 1$ の範囲と $1\le x$ の範囲
+の積分に分割する. 前者の方の積分変数を $1/x$ に変換し, %
+\qref{q:Theta-junbi}の(1)を用いる. すると求める結果が得られる. 具体的
+には以下のように計算する. $\Repart s > 2$ のとき,
+\begin{align*}
+  \hat\zeta(s)
+  & = \Mellin \theta(s/2)
+    = \int_0^1      \theta(x) x^{s/2}\,\frac{dx}{x}
+    + \int_1^\infty \theta(x) x^{s/2}\,\frac{dx}{x}
+  \\
+  & = \int_1^\infty 
+        \left\{
+          - \frac{1}{2}x^{-s/2}
+          + \frac{1}{2}x^{(1-s)/2}
+          + \theta(x) x^{(1-s)/2}
+          + \theta(x) x^{s/2}
+        \right\}
+      \,\frac{dx}{x}.
+\end{align*}
+この最後の式を整理すれば, 求める結果が得られる. 
+
+上の問題によって得られたゼータ函数の積分表示式は $s$ と $1-s$ の交換に
+対して不変な形をしている. よって, 次の定理が得られた:
+
+\begin{theorem}[ゼータ函数の函数等式]
+  ゼータ函数は次の函数等式を満たす:
+  \[
+    \hat\zeta(1-s) = \hat\zeta(s).
+  \qed
+  \]
+\end{theorem}
+
+\noindent テータ函数の函数等式から, メリン変換を通じて, ゼータ函数の函
+数等式が得られたのである.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{thebibliography}{AB}
+
+\bibitem{Imai}
+今井 功: 流体力学と複素解析, 日本評論社
+
+\bibitem{takagi}
+高木貞治, 解析概論, 岩波書店, 1983
+
+\bibitem{Lang}
+Serge Lang: Real analysis, 1969, Addison-Wesley Publishing Company,
+Inc. (邦訳: 現代の解析学, 1981, 共立出版株式会社)
+
+\bibitem{TataI}
+David Mumford: Tata Lectures on Theta I,
+Progress in Mathematics Vol.~28, 1993, Birkh\"auser
+
+\end{thebibliography}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

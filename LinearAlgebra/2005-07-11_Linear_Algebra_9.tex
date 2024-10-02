@@ -1,0 +1,889 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\STUDENT{} % \def すると計算問題の解答を印刷しなくなる.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% 線形代数学演習---行列の標準形
+% 
+% 黒木 玄 (東北大学理学部数学教室, kuroki@math.tohoku.ac.jp)
+%
+% この演習問題集は2005年度における東北大学理学部数学科2年生前期の
+% 代数学序論B演習のために作成されました. 
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[12pt,twoside]{jarticle}
+%\documentclass[12pt]{jarticle}
+\usepackage{amsmath,amssymb,amscd}
+\usepackage{eepic}
+\usepackage{enshu}
+%\usepackage{showkeys}
+\allowdisplaybreaks
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setcounter{page}{277}     % この数から始まる
+\setcounter{section}{27}   % この数の次から始まる
+\setcounter{theorem}{0}    % この数の次から始まる
+\setcounter{question}{532} % この数の次から始まる
+\setcounter{footnote}{0}   % この数の次から始まる
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\ifx\STUDENT\undefined
+%
+% 教師専用
+%
+\newcommand\commentout[1]{#1}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\else
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% 生徒専用
+%
+\newcommand\commentout[1]{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\fi
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\title{\bf 線形代数学演習---行列の標準形
+%  \thanks{この演習問題集は2005年度における東北大学理学部数学科2年生前期の
+%    代数学序論B演習のために作成された.}
+%  \ifx\STUDENT\undefined\\{\normalsize 教師用\quad(計算問題の略解付き)}\fi}
+%  \ifx\STUDENT\undefined\\{\normalsize 計算問題の略解付き}\fi}
+%
+%\author{黒木 玄 \quad (東北大学大学院理学研究科数学専攻)}
+%
+%\date{最終更新2003年11月21日 \quad (作成2005年4月11日)}
+%\date{2004年4月25日}
+
+%\maketitle
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\noindent
+{\Large\bf 線形代数学演習}
+\hfill
+{\large 黒木玄}
+\qquad
+2005年7月11日
+\commentout{\quad (教師用)}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\tableofcontents
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{必修問題略解}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{正規行列}
+
+\begin{proof}[\protect{[150]}略解]
+  $A$ は対称行列なので直交行列で対角化できる.
+  $A$ の固有値は $1,2,4$ であり, 
+  それぞれに属する単位固有ベクトルとして以下が取れる:
+  \begin{equation*}
+    \frac{1}{\sqrt{3}}
+    \begin{bmatrix}
+      1 \\ -1 \\ 1 \\
+    \end{bmatrix}, 
+    \quad
+    \frac{1}{\sqrt{2}}
+    \begin{bmatrix}
+      -1 \\ 0 \\ 1 \\
+    \end{bmatrix}, 
+    \quad
+    \frac{1}{\sqrt{6}}
+    \begin{bmatrix}
+      1 \\ 2 \\ 1 \\
+    \end{bmatrix}.
+  \end{equation*}
+
+  一般に $n$ 次の正規行列 $X$ と $n$ 次の単位行列 $E$ と複素数 $c$ に
+  対して $X+cE$ も正規行列になることが容易に確かめらる.
+  $B-2E$ は反 Hermite 行列なので正規である. 
+  よって $B$ 自身も正規である.
+  $B$ の固有値は $2, 2+\sqrt{5}i, 2-\sqrt{5}i$ であり,
+  それぞれに属する単位固有ベクトルとして次が取れる:
+  \begin{equation*}
+    \frac{1}{\sqrt{5}}
+    \begin{bmatrix}
+      2 \\ 0 \\ -1 \\
+    \end{bmatrix},
+    \quad
+    \frac{1}{\sqrt{10}}
+    \begin{bmatrix}
+      1 \\ \sqrt{5} \\ 2 \\
+    \end{bmatrix},
+    \quad
+    \frac{1}{\sqrt{10}}
+    \begin{bmatrix}
+      1 \\ -\sqrt{5} \\ 2 \\
+    \end{bmatrix}.
+  \end{equation*}
+
+  $C$ は Hermite 行列なので正規行列である.
+  $C$ の固有値は $0$ (重複度 $2$ ) と $3$ である.
+  固有値 $0$ に属する固有空間の正規直交基底 $u_1,u_2$ と
+  固有値 $3$ に属する単位固有ベクトル $u_3$ として次が取れる:
+  \begin{equation*}
+    \frac{1}{\sqrt{2}}
+    \begin{bmatrix}
+      i \\ 1 \\ 0 \\
+    \end{bmatrix},
+    \quad
+    \frac{1}{\sqrt{6}}
+    \begin{bmatrix}
+      1 \\ i \\ -2 \\
+    \end{bmatrix},
+    \quad
+    \frac{1}{\sqrt{3}}
+    \begin{bmatrix}
+      1 \\ i \\ 1 \\
+    \end{bmatrix}.
+    \qed
+  \end{equation*}
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{proof}[\protect{[151]}略解]
+  実対称行列, 実交代行列, 実直交行列はそれぞれ
+  Hermite 行列, 反 Hermite 行列, ユニタリー行列の特別な場合である.
+  $A$ は $n$ 次複素正方行列であり, $\alpha\in\C$ は $A$ の固有値で
+  あり, $Au=\alpha u$, $u\in\C^n$, $u\ne 0$ と仮定する.
+  $A$ が Hermite ($A^*=A$) ならば
+  \begin{equation*}
+    \cc\alpha(u,u) = (\alpha u,u) = (Au,u) = (u,A^*u)
+    = (u,Au) = (u,\alpha u) = \alpha(u,u).
+  \end{equation*}
+  よって $\cc\alpha = \alpha$ となり, $\alpha$ は実数になる.
+  $A$ が反 Hermite ($A^*=-A$) ならば
+  \begin{equation*}
+    \cc\alpha(u,u)  = (\alpha u,u)= (Au,u) = (u,A^*u) 
+    = (u,-Au) = (u,-\alpha u) = -\alpha(u,u).
+  \end{equation*}
+  よって $\cc\alpha = -\alpha$ となり, $\alpha$ は純虚数になる.
+  $A$ がユニタリ ($A^*A=AA^*=E$) ならば
+  \begin{equation*}
+    |\alpha|^2(u,u) = \cc\alpha\alpha(u,u) = (\alpha u,\alpha u)
+    = (Au,Au) = (u,A^*Au) = (u,u).
+  \end{equation*}
+  よって $|\alpha|^2=1$ となり, $\alpha$ の絶対値は $1$ になる.
+  \qed
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{proof}[\protect{[152]}略解]
+  $A$ は $n$ 次の Hermite 行列であるとし, 
+  $\C^n$ の標準的な内積を $(u,v)=u^*v$ ($u,v\in\C^n$) と書くことにする.
+  $A$ の固有値はすべて実数である.
+  $A$ の互いに異なる固有値 $\alpha,\beta\in\R$ と
+  それぞれに属する固有ベクトル $u,v$ を任意に取る.
+  このとき
+  \begin{equation*}
+    \alpha(u,v)=(\alpha u,v)=(Au,v)=(u,A^*v)=(u,Av)=(u,\beta v)=\beta(u,v).
+  \end{equation*}
+  $\alpha\ne\beta$ であるから $(u,v)=0$. \qed
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{proof}[\protect{[153]}略解]
+  存在.
+  一般に複素正方行列 $A$ に対して $A_{\pm}=(A\pm A^*)/2$ と置く
+  と, $A_+$ は Hermite 行列になり, $A_-$ は反 Hermite 行列になる. 
+  $A$ が正規行列すなわち $A$ と $A^*$ が互いに可換
+  ならば $A_\pm$ も互いに可換になる.
+
+  一意性.
+  $A=A_++A_-$, $A_+$ は Hermite, $A_-$ は反 Hermite であると仮定する
+  と $A^*=A_+-A_-$ である. よって $A_\pm=(A\pm A^*)/2$ となる.
+  これで一意性も示された.
+  \qed
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{proof}[\protect{[154]}略解]
+  正規行列 $A$ は Toeplitz の定理より, あるユニタリ行列 $P$ 
+  と $A$ の固有値を対角成分に持つ対角行列 $A_0$ に
+  よって $A=PA_0P^{-1}=PA_0P^*$ と表わされる.
+  $A_0$ は対角成分が非負の実数である対角行列 $H_0$ と
+  対角成分が絶対値 $1$ の複素数である対角行列 $U_0$ に
+  よって $A_0=H_0U_0=U_0H_0$ と表わされる.
+  $H=PH_0P^{-1}=PH_0P^*$, $U=PU_0P^{-1}=PU_0P^*$ と置く. 
+  そのとき $H$ は Hermite 行列であり, $U$ はユニタリ行列で
+  あり, $A=HU=UH$ であることが容易に確かめられる.
+  (実際に確かめてみよ!)
+  \qed
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Sylvesterの慣性法則}
+
+\begin{proof}[\protect{[155]}略解]
+(1) $x$ について平方完成し, $4yz = (y+z)^2 - (y-z)^2$ を使うと,
+\begin{equation*}
+  f(x,y,z) 
+  = x^2 + y^2 + 4z^2 + 2xy + 4xz + 8yz
+  = (x+y+2z)^2 + (y+z)^2 - (y-z)^2.
+\end{equation*}
+よって符号数は $(2,1)$ である.
+
+\bigskip
+
+\noindent
+(2) $x=(X+Y)/2$, $y=(X-Y)/2$ と置くと
+\begin{align*}
+  g(x,y,z) 
+  &
+  = 4xy - 8xz + 4yz 
+%  \\ &
+  = (X+Y)(X-Y)  - 4(X+Y)z + 2(X-Y)z
+  \\ &
+  = X^2 - Y^2 - 2zX - 6zY
+%  \\ &
+  = (X - z)^2 - z^2 - Y^2 - 6zY
+  \\ &
+  = (X - z)^2 - (Y + 3z)^2 + 9z^2 - z^2
+%  \\ &
+  = (X - z)^2 - (Y + 3z)^2 + 8z^2
+  \\ &
+  = (x + y - z)^2 - (x - y + 3z)^2 + 8z^2.
+\end{align*}
+よって符号数は $(2,1)$.
+\qed
+\end{proof}
+
+
+
+\begin{proof}[\protect{[156]}略解]
+  問題文とヒントの「$(1,-1)$」を「$(1,1)$」に訂正する.
+
+  実二次形式が任意の実数値を取り得るかは標準形に変形してチェックすればよい.
+  変数 $x,y$ の実二次形式の符号数は $(0,0)$, $(1,0)$, $(0,1)$, %
+  $(2,0)$, $(1,1)$, $(0,2)$ のどれかである.
+  それぞれの値域は $\{0\}$, $\R_{\ge0}$, $\R_{\le0}$, %
+  $\R_{\ge0}$, $\R$, $\R_{\le0}$ である.
+  よって任意の実数値を値に取り得るのは符号数が $(1,1)$ の場合だけである.
+  \qed
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{べき零行列のJordan標準形の計算の仕方の解説}
+
+講義での Jordan 標準形の計算の仕方の解説が速過ぎて理解できなかったという
+声を聞いたので, 具体例に沿ってできるだけ易しく Jordan 標準形の計算の仕方
+を解説することにする.
+
+第一の原理はべき零行列の Jordan 標準形であり, 
+第二の原理は一般固有空間分解である.
+この二つを理解することが重要である.
+
+べき零行列の標準形の計算の仕方がわかっていれば
+単位行列の定数倍を引けば零行列になるような行列の Jordan 標準形を計算できる.
+
+さらに一般固有空間分解の計算の仕方がわかっていれば
+一般の行列の Jordan 標準形の計算を上の場合に帰着できる.
+
+まず最初にべき零行列の標準形について簡単に説明しよう.
+
+以下 $A$ は体 $K$ の元を成分に持つ $n$ 次正方行列であるとする.
+
+たとえば $n=8$ で $K^n=K^8$ の基底として $v_1,\ldots,v_8$ で以下の
+条件を満たすものが存在すると仮定する:
+\begin{align*}
+  &
+  Av_1=0,\quad Av_2=v_1,\quad Av_3=v_2,
+  \\ &
+  Av_4=0,\quad Av_6=v_4,
+  \\ &
+  Av_5=0,\quad Av_7=v_5,
+  \\ &
+  Av_8=0.
+\end{align*}
+すなわち $A$ は基底 $\{v_1,\ldots,v_8\}$ の元を次のように移すと仮定する:
+\begin{align*}
+  &
+  0 \leftarrow v_1 \leftarrow v_2 \leftarrow v_3,
+  \\ &
+  0 \leftarrow v_4 \leftarrow v_6,
+  \\ &
+  0 \leftarrow v_5 \leftarrow v_7,
+  \\ &
+  0 \leftarrow v_8.
+\end{align*}
+基底の任意の元を $A$ で有限回移すだけで $0$ になってしまうので $A$ は
+べき零になる. この場合は高々3回移すと $0$ になるので $A^3=0$ となる.
+さらに基底 $(v_1,v_2,v_3,v_4,v_6,v_5,v_7,v_8)$ (並べる順番に注意せよ) に
+関する行列 $A$ が定める一次変換の行列表現は次のように計算される:
+\begin{align*}
+  [Av_1,Av_2,Av_3,Av_4,Av_6,Av_5,Av_7,Av_8]
+  &=[0,v_1,v_2,0,v_4,0,v_5,0]
+  \\
+  &=[v_1,v_2,v_3,v_4,v_6,v_5,v_7,v_8]J.
+\end{align*}
+ここで
+\begin{equation*}
+  J = 
+  \begin{bmatrix}
+    0 & 1 & 0 &   &   &   &   &   \\
+    0 & 0 & 1 &   &   &   &   &   \\
+    0 & 0 & 0 &   &   &   &   &   \\
+      &   &   & 0 & 1 &   &   &   \\
+      &   &   & 0 & 0 &   &   &   \\
+      &   &   &   &   & 0 & 1 &   \\
+      &   &   &   &   & 0 & 0 &   \\
+      &   &   &   &   &   &   & 0 \\
+  \end{bmatrix}.
+\end{equation*}
+この $J$ が基底 $(v_1,v_2,v_3,v_4,v_6,v_5,v_7,v_8)$ に関する $A$ の
+行列表現である. $J$ はちょうど(べき零行列)の Jordan 標準形になっている.
+
+\begin{theorem}[べき零行列のJordan標準形]
+  任意のべき零行列に対して適切な基底を取ることによって
+  上の例と同様の状況が成立するようにできる. \qed
+\end{theorem}
+
+この定理の文は少々曖昧である.
+正確な内容と証明に関しては教科書 \cite{satake} pp.148--151 を参照して欲しい.
+(いきなり \cite{satake} を見るよりも以下の例を計算してから見た方が
+わかり易いはずである.)
+
+\begin{example}
+  実正方行列 $A$ を次のように定める({\bf[158]}の $A_5$):
+  \begin{equation*}
+    A =
+    \begin{bmatrix}
+      -5 &  8 & -6 &  4 \\
+      -3 &  5 & -5 &  4 \\
+      -2 &  4 & -5 &  4 \\
+      -1 &  2 & -2 &  1 \\
+    \end{bmatrix}
+  \end{equation*}
+  $A$ の特性多項式 $p_A(\lambda)=|\lambda E - A|$ を計算すると
+  ($4\times 4$ なのでそれなりに大変), $p_A(\lambda)=(\lambda+1)^4$ で
+  あることがわかる. Cayley-Hamilton の定理より $p_A(A)=(A+E)^4=0$ である.
+  特に 
+  \begin{equation*}
+    N := A+E =
+    \begin{bmatrix}
+      -4 & 8 & -6 & 4 \\
+      -3 & 6 & -5 & 4 \\
+      -2 & 4 & -4 & 4 \\
+      -1 & 2 & -2 & 2 \\
+    \end{bmatrix}
+  \end{equation*}
+  はベキ零行列である. $A=-E+N$ の Jordan 標準形は
+  べき零行列 $N$ の Jordan 標準形と $-E$ の和に等しい.
+  $N^2$ を実際に計算すると
+  (計算を始める前は面倒に感じるが実際にやってみれば
+  次々に消えて $0$ になるのでそれほど大変ではない),
+  $N^2=0$ であることがわかる(実際にやってみよ).
+  すなわち $N$ の列ベクトルに $N$ を作用させると $0$ になる.
+  $N$ の rank を計算すると $2$ であることがわかる(確認せよ).
+  さらに $N$ の列ベクトルで張られるベクトル空間 $\Image N$ の基底と
+  して $N$ の第1列ベクトルと第4列ベクトルが取れることもわかる.
+  それらを $v_1,v_2$ と書くことにする:
+  \begin{equation*}
+    v_1 =
+    \begin{bmatrix}
+      -4 \\
+      -3 \\
+      -2 \\
+      -1 \\
+    \end{bmatrix}, 
+    \quad
+    v_2 =
+    \begin{bmatrix}
+      4 \\
+      4 \\
+      4 \\
+      2 \\
+    \end{bmatrix}.
+  \end{equation*}
+  一般に第 $i$ 成分だけが $1$ で他の成分が $0$ の縦ベクトルを $e_i$ と
+  書くと $Ne_i$ は $N$ の第 $i$ 列ベクトルに等しくなる.
+  よって $v_3=e_1$, $v_4=e_4$ と置くと $Nv_3=v_1$, $Nv_4=v_2$.
+  さらに $(v_1,v_3,v_2,v_4)$ が基底であることも容易に確かめられる(確かめよ).
+  その基底に関する $N$ の行列表現は次のように計算される:
+  \begin{equation*}
+    [Nv_1,Nv_3,Nv_2,Nv_4]
+    = [0,v_1,0,v_2] 
+    = [v_1,v_3,v_2,v_4]
+    \begin{bmatrix}
+      0 & 1 &   &   \\
+      0 & 0 &   &   \\
+        &   & 0 & 1 \\
+        &   & 0 & 0 \\
+    \end{bmatrix}.
+  \end{equation*}
+  よって $P$, $J_N$ を次のように定めると $N=PJ_NP^{-1}$ である:
+  \begin{equation*}
+    P = [v_1,v_3,v_2,v_4] =
+    \begin{bmatrix}
+      -4 & 1 & 4 & 0 \\
+      -3 & 0 & 4 & 0 \\
+      -2 & 0 & 4 & 0 \\
+      -1 & 0 & 2 & 1 \\
+    \end{bmatrix},
+    \quad
+    J_N =
+    \begin{bmatrix}
+      0 & 1 &   &   \\
+      0 & 0 &   &   \\
+        &   & 0 & 1 \\
+        &   & 0 & 0 \\
+    \end{bmatrix}.
+  \end{equation*}
+  したがって $J=-E+J_N$ と置けば $A=PJP^{-1}$ であり, 
+  $J$ は $A$ の Jordan 標準形である.
+  \qed
+\end{example}
+
+\begin{example}
+  実正方行列 $B$ を次のように定める:
+  \begin{equation*}
+    B =
+    \begin{bmatrix}
+      -11 &  2 & -3 &   9 \\
+       21 & -4 &  6 & -17 \\
+       21 & -4 &  6 & -17 \\
+      -11 &  2 & -3 &   9 \\
+    \end{bmatrix}.
+  \end{equation*}
+  $B$ の特性多項式は $|\lambda E - B|=\lambda^4$ となることがわかる
+  (かなり面倒な計算になるが実際に計算して確かめてみよ).
+  よって Cayley-Hamilton の定理より $B^4=0$ である.
+  そこで $B^2$, $B^3$ を計算すると次のようになることがわかる(確認せよ):
+  \begin{equation*}
+    B^2 = 
+    \begin{bmatrix}
+       1 & 0 & 0 & -1 \\
+      -2 & 0 & 0 &  2 \\
+      -2 & 0 & 0 &  2 \\
+       1 & 0 & 0 & -1 \\
+    \end{bmatrix},
+    \qquad
+    B^3 = 0.
+  \end{equation*}
+  $\Image B^2$ の基底として $B^2$ の第1列ベクトルが取れる.
+  $B^2$ の第1列ベクトルは $B$ の第1列ベクトルに $B$ を作用させた結果に等しい.
+  第 $i$ 成分だけが $1$ で他の成分が $0$ の列ベクトルを $e_i$ と表わす.
+  $B$ の第1列ベクトルは $Be_1$ に等しい.
+  以上をまとめると, $v_1,v_2,v_3$ を
+  \begin{equation*}
+    v_1 = 
+    \begin{bmatrix}
+       1 \\
+      -2 \\
+      -2 \\
+       1 \\
+    \end{bmatrix},
+    \quad
+    v_2 =
+    \begin{bmatrix}
+      -11 \\
+       21 \\
+       21 \\
+      -11 \\
+    \end{bmatrix},
+    \quad
+    v_3 =
+    \begin{bmatrix}
+      1 \\
+      0 \\
+      0 \\
+      0 \\
+    \end{bmatrix}.
+  \end{equation*}
+  と定めると $Bv_1=0$, $Bv_2=v_1$, $Bv_3=v_2$ が成立していることがわかる.
+  $v_1,v_2,v_3,e_2$ は基底をなすことを確かめられる(確認せよ).
+  $Be_2 = \text{($B$ の第2列ベクトル)} = 2v_1$ であるから,
+  \begin{equation*}
+    v_4 = e_2 - 2v_2 =
+    \begin{bmatrix}
+       22 \\
+      -41 \\
+      -42 \\
+       22 \\
+    \end{bmatrix}
+  \end{equation*}
+  と置くと $Bv_4=Be_2-2Bv_2=Be_2-2v_1=0$ である
+  {\bf (この部分がこの例の議論で最も重要なところ)}.
+  $v_1,v_2,v_3,v_4$ は基底をなす.
+  基底 $(v_1,v_2,v_3,v_4)$ に関する $B$ の行列表現 $J$ は次のように
+  計算される:
+  \begin{equation*}
+    [Bv_1,Bv_2,Bv_3,Bv_4]
+    = [0,v_1,v_2,0]
+    = [v_1,v_2,v_3,v_4] J.
+  \end{equation*}
+  ここで
+  \begin{equation*}
+    J = 
+    \begin{bmatrix}
+      0 & 1 & 0 &   \\
+      0 & 0 & 1 &   \\
+      0 & 0 & 0 &   \\
+        &   &   & 0 \\
+    \end{bmatrix}.
+  \end{equation*}
+  正方行列 $P$ を $P=[v_1,v_2,v_3,v_4]$ と定めると $B=PJP^{-1}$ が成立し, 
+  $J$ は $B$ の Jordan 標準形である.
+  \qed
+\end{example}
+
+以上においてべき零行列および単位行列の定数倍を引くとべき零になる行列の
+Jordan 標準形の計算の実例を解説した.
+べき零でない行列の Jordan 標準形の計算は一般固有空間分解を行なえば
+単位行列の定数倍を引くとべき零になる行列の Jordan 標準形の計算に帰着される.
+そういう実例の計算を以下で解説しよう.
+
+\begin{example}
+  実正方行列行列 $C$ を次のように定める({\bf[158]の $A_4$}):
+  \begin{equation*}
+    C =
+    \begin{bmatrix}
+       -4 &  -6 &   5 &   5 \\
+       -4 &   7 &  -9 & -11 \\
+      -24 &  -9 &   1 &  -3 \\
+       16 &  12 &  -7 &  -6 \\
+    \end{bmatrix}.
+  \end{equation*}
+  $C$ の特性多項式は $|\lambda E - C| = (\lambda-1)^2(\lambda+2)^2$ である.
+  Cayley-Hamilton の定理より $(C-E)^2(C+2E)^2=(C+2E)^2(C-E)^2=0$ である.
+  $(C-E)^2$ と $(C+2E)^2$ を計算するとその結果は
+  \begin{equation*}
+    (C-E)^2=
+    \begin{bmatrix}
+        9 &   9 &  -6 & -9 \\
+       36 &   9 &   3 & 18 \\
+      108 &  54 & -18 &  0 \\
+      -72 & -45 &  21 & 18 \\
+    \end{bmatrix},
+    \quad
+    (C+2E)^2 =
+    \begin{bmatrix}
+      -12 & -27 &  24 &  21 \\
+       12 &  54 & -51 & -48 \\
+      -36 &   0 &  -9 & -18 \\
+       24 &  27 & -21 & -15 \\
+    \end{bmatrix}.
+  \end{equation*}
+  $(C-E)^2$ と $(C+2E)^2$ の rank はともに $2$ であることがわかる.
+  $u_1,u_2$ は $(C-E)^2$ の第2,4列の $1/9$ 倍であるとし,
+  $u_3,u_4$ はそれぞれ $(C+2E)^2$ の第1列の $1/12$ 倍, 第2列の $1/27$ 倍
+  であるとする:
+  \begin{equation*}
+    u_1 =
+    \begin{bmatrix}
+      1 \\ 1 \\ 6 \\ -5 \\
+    \end{bmatrix},
+    \quad
+    u_2 =
+    \begin{bmatrix}
+      -1 \\ 2 \\ 0 \\ 2 \\
+    \end{bmatrix},
+    \quad
+    u_3 =
+    \begin{bmatrix}
+      -1 \\ 1 \\ -3 \\ 2 \\
+    \end{bmatrix},
+    \quad
+    u_4 =
+    \begin{bmatrix}
+      -1 \\ 2 \\ 0 \\ 1 \\
+    \end{bmatrix}.
+  \end{equation*}
+  このとき $\Image(C-E)^2$ の基底として $u_1,u_2$ が取れ,
+  $\Image(C+2E)^2$ の基底として $u_3,u_4$ が取れることがわかる.
+  $u_1,\ldots,u_4$ は全体の基底をなす.
+  Cayley-Hamilton の定理と次元公式より, 
+  $\Ker(C-E)^2=\Image(C+2E)^2$ であり,
+  $\Ker(C+2E)^2=\Image(C-E)^2$ であることもわかる.
+  基底 $(u_3,u_4,u_1,u_2)$ に関する $C$ の行列表現を計算しよう.
+  \begin{align*}
+    &
+    Cu_3 =
+    \begin{bmatrix}
+      -7 \\ 16 \\ 6 \\ 5 \\
+    \end{bmatrix}
+    = -2u_3 + 9u_4, \quad
+    Cu_4 =
+    \begin{bmatrix}
+      -3 \\ 7 \\ 3 \\ 2 \\
+    \end{bmatrix}
+    =  -u_3 + 4u_4, 
+    \\ &
+    Cu_1 =
+    \begin{bmatrix}
+      -5 \\ 4 \\ -12 \\ 16 \\
+    \end{bmatrix}
+    = -2u_1 + 3u_2, \quad
+    Cu_2 =
+    \begin{bmatrix}
+      2 \\ -4 \\ 0 \\ -4 \\
+    \end{bmatrix}
+    = -2u_1.
+  \end{align*}
+  よって
+  \begin{equation*}
+    P = [u_3,u_4,u_1,u_2], \qquad
+    C' = 
+    \begin{bmatrix}
+      -2 & -1 &    &    \\
+       9 &  4 &    &    \\
+         &    & -2 &  0 \\
+         &    &  3 & -2 \\
+    \end{bmatrix}
+  \end{equation*}
+  と置くと $C=PC'P^{-1}$ である. 
+  $C'$ は $2\times 2$ の2つのブロックに分かれているので
+  その各々の Jordan 標準形を計算し ($2\times 2$ なので容易), 
+  それらを対角線に並べたものが $C$ および $C'$ の Jordan 標準形になる.
+  しかも左上の $2\times 2$ ブロックは単位行列を引くとべき零になり,
+  左下の $2\times 2$ ブロックは単位行列の $-2$ 倍を引くとべき零になる.
+  実際に Jordan 標準形を計算しよう({\bf[42]}の略解の方法と同じやり方で
+  計算してみよ).
+  \begin{equation*}
+    Q = 
+    \begin{bmatrix}
+      -1 & 0 &   &   \\
+       3 & 1 &   &   \\
+         &   & 0 & 1 \\
+         &   & 3 & 0 \\
+    \end{bmatrix},
+    \qquad
+    J =
+    \begin{bmatrix}
+      1 & 1 &    &    \\
+      0 & 1 &    &    \\
+        &   & -2 &  1 \\
+        &   &  0 & -2 \\
+    \end{bmatrix}
+  \end{equation*}
+  と置くと $C' = QJQ^{-1}$ かつ $C=PC'P^{-1}=PQJ(PQ)^{-1}$ であり, 
+  $J$ は $C$ および $C'$ の Jordan 標準形である.
+  \qed
+\end{example}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Jordan標準形の計算}
+
+\begin{proof}[\protect{[42]}の略解とコメント]
+$B$ の固有多項式は $(\lambda-3)^2$ なので 
+Cayley-Hamilton の定理より $(B-3E)^2=0$.  
+よって $v=
+\begin{bmatrix}
+  0 \\
+  1 \\
+\end{bmatrix}$ と置き, $u = (B-3E)v = (\text{$B-3E$ の第 $2$ 列}) = 
+\begin{bmatrix}
+  2 \\
+  -4 \\
+\end{bmatrix}$ と置くと, $(B-3E)u=(B-3E)^2v=0$. そのとき
+\begin{equation*}
+  Bu = 3u, \qquad Bv = u + 3v.
+\end{equation*}
+すなわち $P = [u,v] = 
+\begin{bmatrix}
+   2 & 0 \\
+  -4 & 1 \\
+\end{bmatrix}$ と置くと $P^{-1}BP=
+\begin{bmatrix}
+  3 & 1 \\
+  0 & 3 \\
+\end{bmatrix}$.
+
+\medskip\noindent {\bf コメント.} 
+$2$ 次や $3$ 次の正方行列の Jordan 標準形への相似変換の計算
+は Cayley-Hamilton の定理を使うと楽にできる.
+\qed
+\end{proof}
+
+\begin{proof}[\protect{[56]}略解]
+計算結果は次のようになる:
+\begin{align*}
+  &
+  \text{(1)} \quad
+  A = PJP^{-1},
+  \quad
+  P =
+  \begin{bmatrix}
+     0 &  1 &  0 \\
+     1 &  1 & -1 \\
+    -1 &  1 &  0 \\
+  \end{bmatrix},
+  \quad
+  J = 
+  \begin{bmatrix}
+    -1 &  1 &  0 \\
+     0 & -1 &  0 \\
+     0 &  0 &  2 \\
+  \end{bmatrix},
+  \\ &
+  \text{(2)} \quad
+  B = QKQ^{-1},
+  \quad
+  Q =
+  \begin{bmatrix}
+    1 & 1 & 1 \\
+    3 & 1 & 0 \\
+    1 & 0 & 0 \\
+  \end{bmatrix},
+  \quad
+  K = 
+  \begin{bmatrix}
+    2 & 1 & 0 \\
+    0 & 2 & 1 \\
+    0 & 0 & 2 \\
+  \end{bmatrix}.
+  \qed
+\end{align*}
+\end{proof}
+
+\begin{proof}[\protect{[158]}の略解とコメント]
+以下のように $J_i$, $P_i$ を定めると $P_i^{-1}A_iP_i=J_i$ である
+($P_i$ の取り方は一意ではない):
+{\small
+\begin{alignat*}{3}
+  &
+  J_1 =
+  \begin{bmatrix}
+    -2 &  1 &  0 &  0 \\
+     0 & -2 &  1 &  0 \\
+     0 &  0 & -2 &  0 \\
+     0 &  0 &  0 &  2 \\
+  \end{bmatrix},
+  & \quad &
+  J_2 =
+  \begin{bmatrix}
+    -1 &  0 &  0 &  0 \\
+     0 & -1 &  0 &  0 \\
+     0 &  0 &  1 &  0 \\
+     0 &  0 &  0 &  1 \\
+  \end{bmatrix},
+  & \quad &
+  J_3 =
+  \begin{bmatrix}
+    -2 &  1 &  0 &  0 \\
+     0 & -2 &  0 &  0 \\
+     0 &  0 &  1 &  0 \\
+     0 &  0 &  0 &  1 \\
+  \end{bmatrix},
+  \\ &
+  P_1 =
+  \begin{bmatrix}
+     1 &  0 &  0 &  1 \\
+    -2 & -1 &  0 &  1 \\
+    -2 & -1 & -3 &  0 \\
+     1 &  0 & -1 &  1 \\
+  \end{bmatrix},
+  & \quad &
+  P_2 =
+  \begin{bmatrix}
+     3 &  0 &  4 &  2 \\
+     6 & -1 &  4 &  4 \\
+     0 &  2 &  9 &  0 \\
+     2 & -1 & -2 &  1 \\
+  \end{bmatrix},
+  & \quad &
+  P_3 =
+  \begin{bmatrix}
+     1 &  2 &  1 &  2 \\
+     0 &  3 &  1 &  1 \\
+    -1 &  0 &  0 & -1 \\
+    -1 & -1 & -1 & -1 \\
+  \end{bmatrix},
+\end{alignat*}
+\begin{alignat*}{3}
+  &
+  J_4 =
+  \begin{bmatrix}
+    -2 &  1 &  0 &  0 \\
+     0 & -2 &  0 &  0 \\
+     0 &  0 &  1 &  1 \\
+     0 &  0 &  0 &  1 \\
+  \end{bmatrix},
+  & \quad &
+  J_5 =
+  \begin{bmatrix}
+    -1 &  1 &  0 &  0 \\
+     0 & -1 &  0 &  0 \\
+     0 &  0 & -1 &  1 \\
+     0 &  0 &  0 & -1 \\
+  \end{bmatrix},
+  & \quad &
+  J_6 =
+  \begin{bmatrix}
+    -1 &  1 &  0 &  0 \\
+     0 & -1 &  0 &  0 \\
+     0 &  0 & -1 &  0 \\
+     0 &  0 &  0 & -1 \\
+  \end{bmatrix},
+  \\ &
+  P_4 =
+  \begin{bmatrix}
+    -1 &  0 & -2 & -1 \\
+     2 &  1 &  5 &  2 \\
+     0 &  2 &  3 &  0 \\
+     2 & -1 &  1 &  1 \\
+  \end{bmatrix},
+  & \quad &
+  P_5 =
+  \begin{bmatrix}
+    4 & 3 & 2 & 1 \\
+    3 & 3 & 2 & 1 \\
+    2 & 2 & 2 & 1 \\
+    1 & 1 & 1 & 1 \\
+  \end{bmatrix},
+  & \quad &
+  P_6 =
+  \begin{bmatrix}
+     1 &  0 &  1 &  1 \\
+    -2 & -1 &  1 &  1 \\
+    -2 & -1 & -3 &  0 \\
+     1 &  0 &  0 &  1 \\
+  \end{bmatrix}.
+\end{alignat*}
+}
+
+\medskip\noindent{\bf コメント.}
+$A_i$ の最小多項式を $\varphi_i(\lambda)$ と書くと,
+{\small
+\begin{alignat*}{3}
+  &
+  \varphi_1(\lambda) = (\lambda+2)^3(\lambda-2),
+  & \quad &
+  \varphi_2(\lambda) = (\lambda+1)(\lambda-1),
+  & \quad &
+  \varphi_3(\lambda) = (\lambda+2)^2(\lambda-1),
+  \\ &
+  \varphi_4(\lambda) = (\lambda+2)^2(\lambda-1)^2,
+  & \quad &
+  \varphi_5(\lambda) = (\lambda+1)^2,
+  & \quad &
+  \varphi_6(\lambda) = (\lambda+1)^2,
+\end{alignat*}
+}$A_5$ と $A_6$ の最小多項式は等しいのに Jordan 標準形は異なることに注意せよ.
+そのような場合は3次行列では起こり得ない. 3次以下の行列では最小多項式だけで 
+Jordan 標準形がわかってしまう.
+\qed
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{thebibliography}{ABC}
+
+\bibitem[佐武]{satake} 佐武一郎: 線型代数学, 裳華房数学選書 1, 324頁.
+
+\end{thebibliography}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

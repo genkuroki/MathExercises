@@ -1,0 +1,210 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\def\STUDENT{} % \def すると計算問題の解答を印刷しなくなる.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[12pt,twoside]{jarticle}
+%\documentclass[12pt]{jarticle}
+\usepackage{amsmath,amssymb,amscd}
+\usepackage{eepic}
+\usepackage{enshu}
+%\usepackage{showkeys}
+\allowdisplaybreaks
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setcounter{page}{1}       % この数から始まる
+\setcounter{section}{-1}   % この数の次から始まる
+\setcounter{theorem}{0}    % この数の次から始まる
+\setcounter{question}{0}   % この数の次から始まる
+\setcounter{footnote}{0}   % この数の次から始まる
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\ifx\STUDENT\undefined
+%
+% 教師専用
+%
+\newcommand\commentout[1]{#1}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\else
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% 生徒専用
+%
+\newcommand\commentout[1]{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\fi
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title{\bf 幾何学序論B演習
+  \ifx\STUDENT\undefined\\{\normalsize 教師用\quad(計算問題の略解付き)}\fi}
+
+\author{黒木 玄 \quad (東北大学大学院理学研究科数学専攻)}
+
+\date{2005年10月4日(火)}
+
+\maketitle
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\tableofcontents
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{この演習について}
+
+この演習では曲線と曲面に関する幾何学序論Bの演習を行なう. 単位は
+黒板での発表, 自主的なレポート, こちらが提出を求めたレポートの内容
+で評価する. 
+
+演習の時間には色々役に立つ話をする予定なので
+できる限り出席するようにして欲しい.
+
+数学をマスターするためには最初に「自力で正確な証明を書き下す能力」を
+身に付けることが必要である. そのためには繰り返し数学の文章を書く練習を
+しなければいけない. その能力が身に付いた人だけが自分が好きなように
+数学について考える権利を手に入れたことになる. 数学的自由のためには
+論理的な能力が不可欠である.
+
+すでにそういう能力がすでに身に付いている人は本格的内容の
+数学の本を丸ごと一冊読んでしまうことに挑戦することをおすすめする.
+この演習で出した問題をすべて解こうとするような勉強の仕方は
+おすすめできない.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{折線と多面体からの入門}
+\label{sec:intro}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{折線からの曲線論入門}
+\label{sec:oresen}
+
+演習の最初の時間に折線について色々説明する.
+\begin{itemize}
+\item 折線の各頂点の曲率
+\item 閉折線の回転数
+\item 回転数に関する Whitney の公式 (証明抜き)
+\item 閉折線の Whitney の定理 (証明抜き)
+\end{itemize}
+これらの結果は「局所的な曲がり方」を全て足し上げると
+「大域的なトポロジー」と関係が付くという
+幾何学の最も典型的なパターンの最も簡単な例になっている.
+半年の講義の前半では滑らかな曲線の話を聴くことがある.
+
+\begin{figure}[htbp]
+  \centering
+  \input polyline01.tex
+  \caption{閉折線A}
+  \label{fig:polyline01}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \input polyline02.tex
+  \caption{閉折線B}
+  \label{fig:polyline02}
+\end{figure}
+
+\begin{question}
+  \figureref{fig:polyline01}の閉折線Aの回転数を
+  曲率の和を計算することによって求めよ.
+  \qed
+\end{question}
+
+\begin{question}
+  \figureref{fig:polyline01}の閉折線Aの回転数を
+  Whitney の公式を用いて計算せよ.
+  \qed
+\end{question}
+
+\begin{question}
+  \figureref{fig:polyline01}の閉折線Aを
+  \figureref{fig:polyline02}の閉折線Bに正則変形できることを
+  正則変形の過程を図に描いて説明せよ.
+  \qed
+\end{question}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{多面体からの曲面論入門}
+\label{sec:oresen}
+
+演習の時間に少し一般化された多面体について色々説明する.
+\begin{itemize}
+\item 多面体の頂点の曲率
+\item 閉多面体の Euler 数
+\item 閉多面体の Gauss-Bonnet の定理 (証明は演習)
+\end{itemize}
+これらの結果は「局所的な曲がり方」を全て足し上げると
+「大域的なトポロジー」と関係が付くという
+幾何学の最も典型的なパターンの簡単な例になっている.
+半年の講義の後半では滑らかな曲面の場合の話を聴くことになる.
+
+通常多面体と言えば凸なものだけを考えるが, 
+ここでは凸でないものも考える.
+さらに各面は必ずしも多角形でなくても構わないが, 
+各面は閉円板に同相でなければいけないとする.
+
+\begin{question}
+  \figureref{fig:polyhedron01}の一般多面体Aの
+  すべての頂点の曲率の和と Euler 数を計算して, 
+  その場合には Gauss-Bonnet の定理が成立していることを確認せよ.
+  \qed
+\end{question}
+
+\begin{question}
+  \figureref{fig:polyhedron02}の一般多面体Bの
+  すべての頂点の曲率の和と Euler 数を計算して, 
+  その場合には Gauss-Bonnet の定理が成立していることを確認せよ.
+  \qed
+\end{question}
+
+\begin{question}
+  一般多面体に関する Gauss-Bonnet の定理を証明せよ.
+\end{question}
+
+\begin{proof}[ヒント]
+  各面ごとに次の公式が成立している:
+  \begin{equation*}
+      2\pi
+    = \text{(すべての外角の和)}
+    = \pi\times\text{(辺の個数)} - \text{(すべての内角の和)}.
+  \end{equation*}
+  よって一般多面体全体に関して次が成立している:
+  \begin{align*}
+    \text{(すべての頂点の曲率の和)}
+    &
+    = 2\pi\times\text{(頂点の個数)} - \text{(すべての面のすべての内角の和)}
+    \\ &
+    = 2\pi\times\text{(頂点の個数)} 
+    - \sum_{\text{すべての面}}(\pi\times\text{(各面の辺の個数)} - 2\pi).
+  \end{align*}
+  各辺は2つの面で共有されているのですべての面に渡る各面の辺の個数の和は
+  一般多面体全体の辺の個数の2倍になる. よって
+  \begin{equation*}
+    \text{(すべての頂点の曲率の和)}
+    = 2\pi\times
+    \bigl(\text{(頂点の個数)} - \text{(辺の個数)} + \text{(面の個数)}\bigr).
+  \end{equation*}
+  以上の議論を省略せずに確に書き下せば厳密な証明が得られる.  \qed
+\end{proof}
+
+\newpage
+
+\begin{figure}[htbp]
+  \centering
+%  \input polyhedron01.tex
+  \vspace{9cm}
+  \caption{一般多面体A}
+  \label{fig:polyhedron01}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+%  \input polyhedron02.tex
+  \vspace{8cm}
+  \caption{一般多面体B}
+  \label{fig:polyhedron02}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

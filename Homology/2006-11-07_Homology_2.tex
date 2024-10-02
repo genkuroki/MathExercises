@@ -1,0 +1,1551 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\def\STUDENT{} % \def すると計算問題の解答を印刷しなくなる.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[12pt,twoside]{jarticle}
+%\documentclass[12pt]{jarticle}
+\usepackage{amsmath,amssymb,amscd}
+\usepackage{eepic}
+\usepackage{enshu}
+%\usepackage{showkeys}
+\allowdisplaybreaks
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newlabel{sec:kagun}{{1.2}{7}}
+\newlabel{q:T^2-Delta}{{14}{11}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setcounter{page}{18}      % この数から始まる
+\setcounter{section}{2}    % この数の次から始まる
+\setcounter{theorem}{0}    % この数の次から始まる
+\setcounter{question}{29}  % この数の次から始まる
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\ifx\STUDENT\undefined
+%
+% 教師専用
+%
+\newcommand\commentout[1]{#1}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\else
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% 生徒専用
+%
+\newcommand\commentout[1]{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\fi
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\title{\bf 幾何学概論B演習
+%  \ifx\STUDENT\undefined\\{\normalsize 教師用\quad(計算問題の略解付き)}\fi}
+%\author{黒木 玄 \quad (東北大学大学院理学研究科数学専攻)}
+%\date{2005年10月6日(木)}
+%\maketitle
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\noindent
+{\Large\bf 幾何学概論B演習}
+\hfill
+{\large 黒木玄}
+\qquad
+2006年11月7日(火)
+\commentout{\quad (教師用)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\tableofcontents
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{ホモロジー群に関する様々な問題}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{鎖複体の準同型が誘導するホモロジー群の準同型}
+
+%すべて $p\in\Z$ に対して $\Z$ 加群 $C_p$ と準同型 $\bdr:C_p\to C_{p-1}$ 
+%が与えられており, 
+%\[
+%\begin{CD}
+%  C_p @>\bdr>> C_{p-1} @>\bdr>> C_{p-2}
+%\end{CD}
+%\]
+%の合成がすべて $0$ になるとき, $C_\bcdot = (\{C_p\}, \partial)$ は $\Z$ 加群
+%の{\bf 鎖複体 (chain complex)} と呼ばれる.
+%
+%$C_\bcdot$ は $\Z$ 加群の鎖複体であるとする. 
+%この鎖複体の {\bf $p$ 次の輪体 ($p$-cycles)} のなす加群 $Z_p(C_\bcdot)$ 
+%と {\bf $p$ 次の境界 ($p$-boundaries)} のなす加群 $B_p(C_\cdot)$ を
+%それぞれ次のように定義する:
+%\[ 
+%  Z_p(C_\bcdot) := \Ker (\partial : C_p \to C_{p-1}), \quad
+%  B_p(C_\bcdot) := \Image (\partial : C_{p+1} \to C_p)
+%\] %
+%このとき, 鎖複体の定義より $B_p(C_\cdot) \subseteq Z_p(C_\bcdot)$ が成
+%立している. そこで, $C_\bcdot$ の{\bf ホモロジー群} $H_p(C_\bcdot)$ を次のよ
+%うに定義する:
+%\[
+%  H_p(C_\bcdot) := Z_p(C_\bcdot)/B_p(C_\bcdot).
+%\]
+
+$C_\bdot$, $D_\bdot$ が $\Z$ 加群の鎖複体であるとき, 
+すべての $p\in\Z$ に対して, 準同型 $f_p:C_p\to D_p$ が与えられており, 図式
+\[
+\begin{CD}
+  C_p        @>\partial>> C_{p-1} \\
+  @V{f_p}VV               @VV{f_{p-1}}V \\
+  D_p        @>\partial>> D_{p-1} \\
+\end{CD}
+\]
+が可換になるとき (すなわち $\partial\circ f_p = f_{p-1}\circ\partial$ が
+成立するとき), $f_\bdot = \{f_p\}$ は{\bf 鎖複体の準同型}もしくは
+{\bf 鎖写像 (chain map)} と呼ばれる.
+
+\begin{question}[鎖複体の準同型が誘導するホモロジー群の準同型]
+  鎖複体のあいだの準同型
+  \[ f_\bcdot : C_\bcdot \to D_\bcdot \]
+  が与えられたとき, 
+  $f_p(B_p(C_\bcdot)) \subset B_p(D_\bcdot)$, %
+  $f_p(Z_p(C_\bcdot)) \subset Z_p(D_\bcdot)$ が成立し,
+  各 $f_p$ が自然な準同形写像 %
+  \[ H_p(f_\bcdot) : H_p(C_\bcdot) \to H_p(D_\bcdot) \] を
+  誘導することを示せ.
+  \qed
+\end{question}
+
+\noindent
+すぐ上の問題の結果は今後自由に使われる.
+非常に重要なので必ず解いておくように.
+
+\begin{question}[$H_p(\cdot)$ の函手性]
+  鎖複体のあいだの準同型 %
+  $f_\bdot, f'_\bdot : C_\bdot\to D_\bdot$, %
+  $g_\bdot : D_\bdot\to E_\bdot$ が与えられたとき, %
+  $H_p(\id_{C_{\raise0.05ex\hbox{\bf.}}})
+  =\id_{H_p(C_{\raise0.05ex\hbox{\bf.}})}$, %
+  $H_p(g_\bcdot\circ f_\bcdot) = H_p(g_\bcdot)\circ H_p(f_\bcdot)$, %
+  $H_p(f_\bcdot + f'_\bcdot) = H_p(f_\bcdot) + H_p(f'_\bcdot)$ が成立す
+  ることを示せ. \qed
+\end{question}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{鎖ホモトピーの原理}
+
+
+\begin{question}[鎖ホモトピーの原理]\qstar{*}
+  $f_\bcdot, g_\bcdot : C_\bcdot \to D_\bcdot$ は $\Z$ 加群の鎖複体の
+  準同形写像であるとする. 任意に $p\in\Z$ を固定する. 
+  加群の準同形写像 $\lambda_p : C_p \to D_{p+1}$, %
+  $\lambda_{p-1}: C_{p-1} \to D_p$ で, 
+  \[
+    f_p - g_p = \lambda_{p-1}\circ \bdr_p + \bdr_{p+1} \circ \lambda_p
+    \qquad (p\in\Z)
+  \] %
+  を満たすものが存在すると仮定する. %
+  このとき, $H_p(f_\bcdot) = H_p(g_\bcdot)$ が成立する. よって, 特に
+  $C_\bcdot = D_\bcdot$, $f_p = \id_{C_{\raise0.05ex\hbox{\bf.}}}$,
+  $g_p = 0$ であるとき, $H_p(C_\bcdot) = 0$ が成立する. \qed
+\end{question}
+
+\noindent 全ての $p\in\Z$ に対して $\lambda_p$ が与えられていて, この
+問題の条件を満たしているとき, $\lambda_\bcdot$ は $f_\bcdot$ と %
+$g_\bcdot$ の間の鎖ホモトピー (chain homotopy) であると言う. 
+$f_\bcdot$ と $g_\bcdot$ の間の鎖ホモトピーが存在するとき, %
+$f_\bcdot$ と $g_\bcdot$ は鎖ホモトピック (chain homotopic) であると言う. 
+鎖ホモトピーは大変重要なアイデアであり, 今後頻繁に使われる.
+
+\begin{question}[単体のホモロジー群]\qstar{*}\label{q:H_p(n-simplex)}
+ 自然に $\Delta$ 複体と
+ みなされた $n$ 次元単体 $\Delta^n=|v_0v_1\cdots v_n|$ の
+ ホモロジー群について,
+  \[
+    H_0(\Delta^n,\Z) \isom \Z,
+    \qquad
+    H_p(\Delta^n,\Z) = 0 \quad (p\ne 0) 
+  \]
+  が成立することを示せ. \qed
+\end{question}
+
+\begin{proof}[ヒント]
+$C_\bcdot$ は $\Delta^n$ に対応する鎖複体であるとする.
+すなわち $C_p$ は $\Delta^n$ の $p$ 次元辺単体から生成された自由加群であり, 
+境界準同型は自然に定義されたものとする. 
+鎖複体の準同形 $\eps_\bcdot : C_\bcdot \to C_\bcdot$ を %
+$\eps_0(\lgl v_i\rgl) = \lgl v_0\rgl$, $\eps_p = 0$ ($p\ne0$) 
+という条件よって定義する. %
+さらに, 準同形写像 $\lambda_p : C_p \to C_{p+1}$ を次の条件によっ
+て定義する:
+\[
+  \lambda_p(\lgl v_{i_0} \cdots v_{i_p} \rgl)
+  := \lgl v_0 v_{i_0} \cdots v_{i_p} \rgl
+  \qquad
+  (\lgl v_{i_0} \cdots v_{i_p} \rgl \in C_p)
+\]
+($v_{i_k}$ のどれかが $v_0$ に等しいとき右辺は $0$ とみなす.)
+このとき, $\lambda_\bcdot$ は $\id_{C_\bcdot}$ と %
+$\eps_\bcdot$ の間の鎖ホモトピーを与えることを計算によって示すこと
+ができる. 後は上の問題の結果を使えば良い.
+\qed
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{$0$ 次元ホモロジー群の幾何学的意味}
+
+$X$ は $\Delta$ 複体であり、その $Y\subset X$ が自然に $\Delta$ 複体と
+みなされるとき, $Y$ は $X$ の {\bf $\Delta$ 部分複体 
+($\Delta$-subcomplex)} であると言う.
+
+\begin{question}[連結成分]
+ $X$ は $\Delta$ 複体であるとし, $X$ の位相空間としての
+ 連結成分の全体を $\{X_a\}_{a\in A}$ と表わす. 
+ このとき各連結成分 $X_a$ は $X$ の $\Delta$ 部分複体であり,
+ \[
+   H_p(X) = \bigoplus_{a\in A} H_p(X_a)
+ \]
+ が成立することを示せ.   \qed
+\end{question}
+
+\begin{question}[$0$次のホモロジー群の幾何学的意味]
+ $X$ は $\Delta$ 複体であるとする. 
+ このとき, $X$ が位相空間として連結であることと %
+ $H_0(X) \isom \Z$ が成立することが同値であることを示せ. 
+ さらに, $H_0(X)$ は $X$ の連結成分全体の集合から
+ 生成される自由加群に同型になることを示せ.  \qed
+\end{question}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{球面のホモロジー群}
+
+\begin{question}\qstar{*}
+ $n$ 単体 $\Delta^n$ の表面 $\bdr\Delta^n$ は $\Delta^n$ の $\Delta$ 
+ 部分複体をなす. そのホモロジー群に関して次が成立している:
+ \[
+  H_p(\bdr\Delta^n) \isom
+  \begin{cases}
+   \Z  & \qquad (p = 0,n-1),     \\
+   0   & \qquad (p \ne 0, n-1). \qed
+  \end{cases}
+ \]
+\end{question}
+
+\noindent この問題の結果は実は $n-1$ 次元球面のホモロジー群を計算した
+ことになっている.
+
+\begin{proof}[ヒント1]
+計算の仕方には色々な方法があるが, 最も直接的な方法は
+$n$ 単体のホモロジー群の計算に登場した鎖ホモトピーをこの場合にも流用す
+ることである. \qed
+\end{proof}
+
+\begin{proof}[ヒント2]
+他にも, 鎖複体の短完全列からホモロジー長完全列を使って計
+算するという方法もある. 長完全列については後の節で説明する. %
+$D_n = \Z$, $D_p = 0$ ($p\ne n$) によって鎖複体 $D_\bcdot$ を定義し,
+\[
+  0 \to C_\bcdot(\bdr \Delta^n)
+    \to C_\bcdot(\Delta^n)
+    \to D_\bcdot
+    \to 0
+\] %
+なる短完全列が存在することを確かめ, この短完全列から得られる長完全列を
+調べると, 簡単に上の問題を解くことができる. \qed
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{ホモロジー群の長完全列}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{ホモロジー群の長完全列}
+
+加群の準同型の列 $A\to B\to C$ が{\bf 完全 (exact)} である
+とは $\Image(A\to B) = \Ker(B\to C)$ が成立することである.
+加群の準同型の列 $\cdots \to A_p \to A_{p-1} \to A_{p-2} \to \cdots$ が
+{\bf 完全列 (exact sequence)} であるとは
+そのすべての部分列 $A_p\to A_{p-1}\to A_{p-2}$ が完全であることである.
+
+特に $0 \to A \to B \to C \to 0$ の形の完全列を{\bf 短完全列 
+(short exact sequence)} と呼ぶ.
+加群の準同形写像の列 $0 \to A \to B \to C \to 0$ が短完全列であるこ
+とと $A \to B$ が単射であり $B \to C$ が
+同型 $C \isom B/\Image(A\to B)$ を誘導することは同値である.
+
+$C_\bcdot$, $D_\bcdot$, $E_\bcdot$ は加群 ($\Z$ 加群) の鎖複体であり,
+$f\bcdot : C_\bcdot \to D_\bcdot$, $g\bcdot : D_\bcdot \to E_\bcdot$ 
+は鎖複体の準同形であるとする. 全ての $p$ に対して
+\[
+\begin{CD}
+  0 @>>> C_p @>f_p>> D_p @>g_p>> E_p @>>> 0
+\end{CD}
+\]
+が短完全列(short exact sequence)をなすとき,
+\[
+\begin{CD}
+  0 @>>>
+  C_\bcdot @>f_{\raise0.05ex\hbox{\bf.}}>>
+  D_\bcdot @>g_{\raise0.05ex\hbox{\bf.}}>> E_\bcdot @>>> 0
+\end{CD}
+\]
+は{\bf 鎖複体の短完全列}であると言う.  
+鎖複体の短完全列は非常に役に立つ.
+
+\medskip
+{\large\bf 次の問題は極めて重要である. 
+一生のうち一度以上は完璧な証明を付けておくことが望ましい!}
+
+\begin{question}[ホモロジー長完全列]\qstar{*}
+  以下の図式は可換図式であり%
+  \footnote{この場合は %
+    $d_\bcdot \circ f_\bcdot = f'_\bcdot \circ c_\bcdot$ および %
+    $e_\bcdot \circ g_\bcdot = g'_\bcdot \circ d_\bcdot$ が
+    成立しているということ. 以下も同様.}, %
+  加群の鎖複体の準同形によって構成されていて, 横向きの2つの列は
+  短完全列であると仮定する: %
+  \[
+  \begin{CD}
+    0 @>>>
+    C_\bcdot @>f_{\raise0.05ex\hbox{\bf.}}>>
+    D_\bcdot @>g_{\raise0.05ex\hbox{\bf.}}>>
+    E_\bcdot @>>>
+    0
+    \\
+    @.
+    @VV{c_{\raise0.05ex\hbox{\bf.}}}V
+    @VV{d_{\raise0.05ex\hbox{\bf.}}}V
+    @VV{e_{\raise0.05ex\hbox{\bf.}}}V
+    @.
+    \\
+    0 @>>>
+    C'_\bcdot @>f'_{\raise0.05ex\hbox{\bf.}}>>
+    D'_\bcdot @>g'_{\raise0.05ex\hbox{\bf.}}>>
+    E'_\bcdot @>>>
+    0
+  \end{CD}
+  \] %
+  このとき, 次の可換図式が自然に得られることを示せ:
+  \[
+  \begin{CD}
+    \cdots @>>>
+    H_p(C_\bcdot) @>H_p(f{\raise0.05ex\hbox{\bf.}})>>
+    H_p(D_\bcdot) @>H_p(g{\raise0.05ex\hbox{\bf.}})>>
+    H_p(E_\bcdot) @>\delta_p>>
+    H_{p-1}(C_\bcdot) @>>>
+    \cdots
+    \\
+    @.
+    @VV{H_p(c{\raise0.05ex\hbox{\bf.}})}V
+    @VV{H_p(d{\raise0.05ex\hbox{\bf.}})}V
+    @VV{H_p(e{\raise0.05ex\hbox{\bf.}})}V
+    @VV{H_{p-1}(c{\raise0.05ex\hbox{\bf.}})}V
+    @.
+    \\
+    \cdots @>>>
+    H_p(C'_\bcdot) @>H_p(f'{\raise0.05ex\hbox{\bf.}})>>
+    H_p(D'_\bcdot) @>H_p(g'{\raise0.05ex\hbox{\bf.}})>>
+    H_p(E'_\bcdot) @>\delta'_p>>
+    H_{p-1}(C'_\bcdot) @>>>
+    \cdots
+  \end{CD}
+  \]
+  さらに, この図式の横向きの列は完全列になることを示せ. \qed
+\end{question}
+
+\noindent この問題における横向きの長い完全列を{\bf ホモロジー長完全列
+(homology long exact sequence)} と呼ぶ. 鎖複体の短完全列から, ホモロジー
+長完全列が得られるということは, ホモロジー代数において最も基本的なこと
+である. ホモロジー(もしくはコホモロジー)という言葉が出てくる数学的対象
+を扱うときには, 役に立つ長完全列を生み出す短完全列がないかどうか探し出
+すことによって, 必要な結果が得られる場合が結構多い. ホモロジー長完全列
+が大変便利な道具である.
+
+\begin{question}\qstar{*}
+  $A \to B \to C \to D$ が加群の完全列であるとき, 以下が成立することを
+  示せ:
+  \begin{enumerate}
+  \item $A\to B$ が $0$ であることと, $B\to C$ が単射であることは同値
+    である.
+  \item $C\to D$ が $0$ であることと, $B\to C$ が全射であることは同値
+    である.
+  \item $A\to B$ と $C\to D$ が共に $0$ であることと, $B\to C$ が同型
+    であることは同値である. \qed
+  \end{enumerate}
+\end{question}
+
+\noindent ホモロジー長完全列を得ることができた場合は, まずこの問題の結
+果をそれに適用したときどのような結論が得られるかを調べてみよ.
+ホモロジー長完全列の重要な例として, 
+{\bf マイヤー・ヴィートリス(Mayer-Vietoris)の完全列}
+と
+{\bf 相対ホモロジー群の長完全列}
+を挙げておこう.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Mayer-Vietorisの完全列}
+
+鎖複体 $C_\bcdot$, $D_\bcdot$ に対して, その直和鎖複体 %
+$E_\bcdot = C_\bcdot \oplus D_\bcdot$ を次のように定める:
+\begin{align*}
+& E_p = C_p \oplus D_p = C_p \times D_p,
+\\
+& \bdr(c,d) := (\bdr c, \bdr d)
+  \qquad (\text{$c\in C_p$, $d\in D_p$}).
+\end{align*}
+
+\begin{question}[Mayer-Vietorisの完全列]\qstar{*}
+ $X$ は $\Delta$ 複体であるとし, $X_1$, $X_2$ は
+ その $\Delta$ 部分複体であるとし,
+ $X = X_1 \cup X_2$ が成立しているものとする. 
+ このとき次の完全列が存在することを示せ:
+ \[
+  \cdots \to
+  H_p(X_1\cap X_2) \to
+  H_p(X_1)\oplus H_p(X_2) \to
+  H_p(X) \to
+  H_{p-1}(X_1\cap X_2) \to
+  \cdots.
+ \]
+ この完全列を {\bf Mayer-Vietoris の完全列}と呼ぶ. \qed
+\end{question}
+
+\begin{proof}[ヒント]
+次の短完全列が存在することを示せ:
+\[
+  0 \to
+  C_\bcdot(X_1\cap X_2) \to
+  C_\bcdot(X_1)\oplus C_\bcdot(X_2) \to
+  C_\bcdot(X) \to
+  0.
+\] %
+この完全列の作り方は以下の通り. %
+$C_\bcdot(X_1\cap X_2) \subset C_\bcdot(X_i) \subset C_\bcdot(K)$ であ
+ることに注意し, $C_\bcdot(X_1)\oplus C_\bcdot(X_2)\to C_\bcdot(X)$ を %
+$(c_1,c_2) \mapsto c_1 + c_2$ で定義し, %
+$C_\bcdot(X_1\cap X_2)\to C_\bcdot(X_1)\oplus C_\bcdot(X_2)$ を %
+$c' \mapsto (c', -c')$ で定義すれば良い. \qed
+\end{proof}
+
+\begin{guide}
+$\Delta$ 複体 $X$ を2つの $\Delta$ 複体 $X_1$, $X_2$ の貼り合わせとし
+て構成するとき, $X$ のホモロジー群と $X_1$, $X_2$ および貼り合せ部分 
+$X_1\cap X_2$ のホモロジー群の間にどのような関係があるかという問題は
+基本的で重要である. Mayer-Vietoris の完全列はこの問題への一つの解答を
+与えている.  基本群に対する類似の問題の解答は van Kampen の定理に
+よって与えられる.
+\qed
+\end{guide}
+
+\begin{question}[bouquet, ブーケ, 花束]\qstar{*}
+  $n \ge 1$ であるとし, %
+  $\R^N$ 内の $r$ 個の$n+1$ 単体 %
+  $\sigma^{n+1}_1,\dots,\sigma^{n+1}_r$ が1つの頂点 $a$ を共有しており,
+  互いにそれ以外の共通点を持たないと仮定する. 
+  $\sigma^{n+1}_1,\dots,\sigma^{n+1}_r$ の $n$ 次元以下の辺単体全体
+  の和集合を $X_{n,r}$ と書くと, $X_{n,r}$ は自然に $\Delta$ 複体をなす. 
+  $N=2$, $n=1$, $r=4$ の場合における $X_{n,r}$ を図示せよ.
+  次が成立することを示せ:
+  \[
+    H_p(X_{n,r}) \isom
+    \begin{cases}
+      \Z   & \qquad (p = 0), \\
+      \Z^r & \qquad (p = n), \\
+      0    & \qquad (p \ne 0,n).
+      \qed
+    \end{cases}
+  \]
+\end{question}
+
+\begin{proof}[ヒント]
+ 自力で解けなければ \cite{Tamura} の p.119 を見よ.
+ Mayer-Vietoris の完全列を使った $r$ に関する帰納法で証明することができる. 
+ \qed
+\end{proof}
+
+\begin{guide}
+ $\sigma^{n+1}_1,\dots,\sigma^{n+1}_r$ の和集合 $Y$ は自然に $\Delta$ 複
+ 体とみなされ, $H_0(Y)\isom\Z$, $H_p(Y)=0$ ($p\ne 0$) が成立する. 
+ ($Y$ は可縮なのでこのことはホモロジー群の
+ ホモトピー不変性を使えばただちに得られる.) 
+ これを認めれば, $(Y, X_{n,r})$ に対して相対ホモロジー群の完全列を適用する
+ ことによって, $X_{n,r}$ のホモロジー群を帰納法に頼らずに計算することができる.
+ \qed
+\end{guide}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Mayer-Vietoris の完全列の使い方}
+
+\begin{theorem}[Mayer-Vietorisの完全列]
+  $X$ は $\Delta$ 複体であるとし, $X_1$, $X_2$ はその部分複体であるとし,
+  $X = X_1 \cup X_2$ が成立しているとする. 
+  このとき次のような鎖複体の短完全列が自然に得られる:
+  \begin{equation*}
+    0
+    \leftarrow C_\bcdot(X)
+    \leftarrow C_\bcdot(X_1)\oplus C_\bcdot(X_2)
+    \leftarrow C_\bcdot(X_1\cap X_2)
+    \leftarrow 0.
+  \end{equation*}
+  ここで $C_\bcdot(X)\leftarrow C_\bcdot(X_1)\oplus C_\bcdot(X_2)$ 
+  は $(c_1, c_2)$ を $c_1+c_2$ に対応させる写像であり, %
+  $C_\bcdot(X_1)\oplus C_\bcdot(X_2) \leftarrow C_\bcdot(X_1\cap X_2)$
+  は $c$ を $(c,-c)$ に対応させる写像である.
+  さらにこの短完全列から次の長完全列が自然に得られる:
+  \begin{equation*}
+    \cdots
+    \leftarrow H_{p-1}(X_1\cap X_2)
+    \leftarrow H_p(X)
+    \leftarrow H_p(X_1)\oplus H_1(X_2)
+    \leftarrow H_p(X_1\cap X_2)
+    \leftarrow \cdots
+  \end{equation*}
+  この完全列を {\bf Mayer-Vietoris の完全列}と呼ぶ.
+  (完全系列と言う場合もある.)
+  \qed
+\end{theorem}
+
+上の定理の $H_{p-1}(X_1\cap X_2)\leftarrow H_p(X)$ を以下では $\delta_p$ と
+書き, {\bf connecting homomorphism} と呼ぶことにする. 
+Connecting homomorphism は ``tic tac toe'' method によって調子良く構成される.
+
+%初心者のあいだは connecting homomorphism の構成は複雑に感じられるはずなので,
+%最初はその構成がどうであったかを使わなくても 
+%Mayer-Vietoris の完全列の完全性のみからどれだけのことが導き出せるか
+%について考えてみると良い.
+%(むしろ積極的にそうすべきである.)
+%そして, 次々に詳細な情報を加えて行って, 目標である $K$ 自身のホモロジー群
+%を計算するようにすると良い.
+
+\medskip\noindent
+{\bf Mayer-Vietoris の完全列の使い方の概略:}
+\begin{enumerate}
+\item まず最初に Mayer-Vietoris の完全列を書き下し, 
+  すでにわかっているホモロジー群の構造をそこに書き込む.
+\item Mayer-Vietoris の完全列の中の準同型写像たちが具体的にどのように
+  構成されているかに触れずに, その完全性のみから純代数的にどれだけのこと
+  が言えるかについて考える.
+\item さらに, $H_p(X)\leftarrow H_p(X_1)\oplus H_1(X_2)$ 
+  が $([c_1],[c_2])$ を $[c_1+c_2]$ に対応させる写像であること
+  および $H_p(X_1)\oplus H_1(X_2) \leftarrow H_p(X_1\cap X_2)$ 
+  が $[c]$ を $([c], -[c])$ に対応させる写像であることを使えば
+  新たな情報がどれだけ得られるかについて考える.
+\item さらにさらに, connecting homomorphism %
+  $H_{p-1}(X_1\cap X_2)\leftarrow H_p(X)$ の具体的な構成の仕方を使えば
+  どれだけ新たな情報が得られるかについて考える.
+\end{enumerate}
+
+以下のホモロジー群は「すでにわかっている」とみなして構わないことにする:
+\begin{itemize}
+\item 一点だけからなる空間 $\pt$ のホモロジー群は $H_0\cong\Z$, %
+  $H_p(\pt)\cong 0$ ($p\ne 0$) となる.
+\item 可縮な空間 $X$ のホモロジー群は一点だけからなる空間のホモロジー群に
+  同型である. たとえば任意次元の閉単体のホモロジー群は $H_p(\pt)$ に
+  同型である.
+\item $\Delta$ 複体 $X$ が連結であるための必要十分条件は $H_0(X)\cong\Z$ が
+  成立することである.
+\item $H_0(S^1)\cong H_1(S^1)\cong\Z$, $H_p(S^1)\cong 0$ ($p\ne 0,1$).
+\end{itemize}
+もっとたくさんの計算結果をすでに持っていて
+自由に使いたい人はそうしても構わない.
+
+\begin{question}[以下の問題のヒントでよく使われる結果]
+\label{q:ZZ2ZM}
+  加群の準同型の列 
+  \begin{equation*}
+    \Z \leftarrow \Z^2 \leftarrow \Z \leftarrow M
+  \end{equation*}
+  が完全ならば $\Z\leftarrow M$ は $0$ 写像になる. \qed
+\end{question}
+
+\begin{proof}[ヒント]
+  $\Z\leftarrow\Z^2$ を $f$ と書き, $\Z^2\leftarrow\Z$ を $g$ と
+  書き, $\Z\leftarrow M$ を $h$ と書くことにする.
+  $h\ne 0$ と仮定して矛盾を導く.
+
+  もしも $h\ne 0$ ならば $\Z\supset \Image h \ne 0$ となる.
+  $\Image h$ は $\Z$ の部分加群なので, $0$ でない $a\in\Z$ 
+  で $\Image h = \Z a$ を満たすものが存在する($\Z$ は PID).
+  
+  $\Z^2\leftarrow\Z\leftarrow M$ の完全性より, 
+  $\Ker g = \Image h = \Z a$ である.
+  準同型定理より $\Image g \cong \Z/\Z a$ となる.
+  $\Z/\Z a$ の任意の元は $a$ 倍すると $0$ になるが,
+  $\Z^2$ の元で $a$ 倍して $0$ になるのは $(0,0)$ だけである.
+  よって $\Z/\Z a \cong 0$ でなければいけない.
+  これは $\Ker g = \Image h = \Z a = \Z$ であることを意味している.
+  つまり $g=0$ となる.
+
+  $\Z \leftarrow \Z^2 \leftarrow \Z$ の完全性より,
+  $\Ker f = \Image g = 0$ である.
+  よって $f$ は単射になる.
+  しかし $\Z^2$ から $\Z$ への単射準同型は存在しない.
+  (この部分を自力で証明してみよ.)
+
+  これで $h\ne 0$ と仮定すると矛盾が導かれることがわかった.
+  よって $h=0$ である.
+  (以上とは別の証明法もあるので各自工夫してみよ.)
+  \qed
+\end{proof}
+
+\begin{question}[\qref{q:ZZ2ZM} の一般化]
+ 加群の準同型の列 $\Z^r\to\Z^{r+s}\to\Z^s$ が完全(exact)ならば
+ 以下が成立することを示せ:
+ \begin{enumerate}
+ \item $\Z^r\to\Z^{r+s}$ は単射である.
+ \item $\Z^{r+s}\to\Z^s$ の像は $\Z^s$ に同型になる.\\
+  ($\Image(\Z^{r+s}\to\Z^s) = \Z^s$ となるとは限らない.)
+  \qed
+ \end{enumerate}
+\end{question}
+
+\begin{question}[∞]
+  \label{q:infty}
+  閉 $1$ 単体 $|AB|$ の点 $A$ と $B$ を貼り合わせてできる $\Delta$ 複体
+  を $X_1$ と書き, 
+  閉 $1$ 単体 $|CD|$ の点 $C$ と $D$ を貼り合わせてできる $\Delta$ 複体
+  を $X_2$ と書き,
+  $X_1$, $X_2$ の点 $A=B$ と $C=D$ を貼り合わせてできる $\Delta$ 複体を $X$ 
+  と書くことにする.
+  $X$, $X_1$, $X_2$ に関する Mayer-Vietoris の完全列を
+  用いて $X$ のホモロジー群を計算せよ.
+  \qed
+\end{question}
+
+\begin{proof}[ヒント]
+  常に図を描いて説明することを忘れずに.
+  $H_p(X_1)\cong H_p(X_2)\cong H_p(S^1)$ 
+  および $H_p(X_1\cap X_2)=H_p(\pt)$ については
+  上に書いたようにすでにわかっているとみなして構わない.
+  さらに $K$ の連結性より $H_0(X)\cong\Z$ も成立している.
+  よって Mayer-Vietoris の完全列から次の完全列が得られる:
+  \begin{equation*}
+    0
+    \leftarrow \Z
+    \leftarrow \Z^2
+    \leftarrow \Z
+    \leftarrow H_1(X)
+    \leftarrow \Z^2
+    \leftarrow 0.
+  \end{equation*}
+  これが完全列であるということだけから $\Z\leftarrow H_1(X)$ が $0$ 写像
+  になることを示すことができる
+  (問題 \qref{q:ZZ2ZM} を見よ).
+  よってこの完全列は次の二つの完全列に分解される:
+  \begin{equation*}
+    0
+    \leftarrow \Z
+    \leftarrow \Z^2
+    \leftarrow \Z
+    \leftarrow 0,
+    \quad
+    0
+    \leftarrow H_1(K)
+    \leftarrow \Z^2
+    \leftarrow 0.
+  \end{equation*}
+  この後者の完全列より $H_1(X)\cong\Z^2$ であることがわかる.
+  Mayer-Vietoris の完全列の使い方の概略のステップ2までで
+  この問題は完全に解けてしまう!
+  \qed
+\end{proof}
+
+\begin{question}[ブーケ]
+  各 $i=1,\ldots,n$ に対して, $Y_i$ は閉 $1$ 単体 $|A_iB_i|$ の
+  両端 $A_i$, $B_i$ を貼り合わせてできる $\Delta$ 複体であるとする.
+  $Z_n$ は $i=1,\ldots,n$ に対する $Y_i$ の点 $A_i=B_i$ の
+  すべてを一点に貼り合わせてできる $\Delta$ 複体であるとする.
+  このとき, $X=Z_n$, $X_1=Y_1\cup\cdots\cup Y_{n-1}$, $X_2=Y_n$ に
+  関する Mayer-Vietoris の完全列を用い, $Z_n$ のホモロジー群
+  を $n$ に関して帰納的に計算せよ.
+  \qed
+\end{question}
+
+\begin{proof}[ヒント]
+  問題 \qref{q:infty} はこの問題の $n=2$ の場合である.
+  この問題でも問題 \qref{q:infty} と同様の考え方をすればよい.
+  \qed
+\end{proof}
+
+\begin{question}[日1]
+  \label{q:hi-1}
+  $X_1$ は二つの閉 $1$ 単体 $|AB|$ と $|CD|$ を $A\sim C$, $B\sim D$ と
+  貼り合わせてできる $\Delta$ 複体であるとし, 
+  $X_2$ は二つの閉 $1$ 単体 $|C'D'|$ と $|EF|$ を $C'\sim E$, $D'\sim F$ と
+  貼り合わせてできる $\Delta$ 複体であるとする.
+  $X$ は $X_1$ の $|CD|$ と $X_2$ の $|c'd'|$ と自然な線形同相で貼り合わせて
+  できる $\Delta$ 複体であるとする. $X=X_1\cup X_2$ の様子の図を描き, 
+  $X$, $X_1$, $X_2$ に関する Mayer-Vietoris の完全列を用いて $X$ の
+  ホモロジー群を計算せよ. 
+  \qed
+\end{question}
+
+\begin{proof}[ヒント]
+  $H_p(X_1)\cong H_p(X_2)\cong H_p(S^1)$ であることなどを
+  自由に用いれば, 問題 \qref{q:infty} とほとんど同じである.
+  \qed
+\end{proof}
+
+\begin{question}[この結果もよく使われる]
+\label{q:0ZMN}
+  加群の準同型の列
+  \begin{equation*}
+    0 \leftarrow \Z^k \leftarrow M \leftarrow N
+  \end{equation*}
+  が完全ならば $M \cong \Z^k\oplus \Image(M\leftarrow N)$ となる.
+  特に $M\cong \Z^n$ ならば $\Image(M\leftarrow N)\cong \Z^{n-k}$ となる.
+  (ここで $\Image(M\leftarrow N)$ は準同型写像 $M\leftarrow N$ の像を
+  意味している.)
+  \qed
+\end{question}
+
+\begin{proof}[ヒント]
+  $\Z^k\leftarrow M$ を $f$ と書き, $\Z^k$ の標準的な基を $e_1,\ldots,e_k$ と
+  書く.  $f$ は全射になるのである $v_i\in M$ で $e_i=f(v_i)$ となるものが
+  存在する. 準同型 $g:\Z^k\to M$ が $g(e_i)=v_i$ ($i=1,\ldots,k$) という
+  条件で一意に定まる. $g$ は単射であり, $f\circ g=\id_{\Z^k}$ を満たしている.
+
+  $M=\Image g\oplus\Ker f$ を示そう.
+  (これを示せば $\Image g \cong\Z^k$, $\Ker f=\Image(M\leftarrow N)$ より
+  第一の主張が示される.)
+
+  $v\in M$ に対して $u=v-g(f(v))$ と置くと $f(u)=0$ である.
+  よって $v$ は $v=g(f(v))+u$ と $\Image g$ と $\Ker f$ の元の和で
+  表わされる.
+
+  $v\in\Image g\cap\Ker f$ と仮定する. 
+  $v\in\Image g$ より, ある $x\in\Z^k$ で $v=g(x)$ となるものが存在する. 
+  $v\in\Ker f$ より, $0=f(v)=f(g(v))=v$ となる.
+  
+  以上によって $M=\Image g\oplus\Ker f\cong\Z^k\oplus\Image(M\leftarrow N)$ が
+  証明された.
+
+  第二の主張は有限生成Abel群の基本定理を認めれば
+  第一の主張からただちに得られる.
+  (そういう証明が気にいらなければ直接的な証明も考えてみよ.)
+  \qed
+\end{proof}
+
+\begin{question}[日2]
+  \label{q:hi-2}
+  $X_1$ は二つの閉 $1$ 単体 $|AB|$ と $|CD|$ を $A\sim C$, $B\sim D$ と
+  貼り合わせてできる $\Delta$ 複体であるとし, 
+  $X_2$ は閉 $1$ 単体 $|EF|$ であるとする.
+  $X$ は $X_1$ と $X_2$ を $A\sim E$, $B\sim F$ と貼り合わせて
+  できる $\Delta$ 複体であるとする. $X=X_1\cup X_2$ の様子の図を描き, 
+  $X$, $X_1$, $X_2$ に関する Mayer-Vietoris の完全列を用いて $X$ の
+  ホモロジー群を計算せよ. 
+  \qed
+\end{question}
+
+\begin{proof}[ヒント]
+  この問題の $X$ は問題 \qref{q:hi-1} の $X$ に等しい.
+  同じ $X$ のホモロジー群を異なる Mayer-Vietoris の完全列を用いて
+  計算せよというのがこの問題の内容である.
+  ここまで順番に問題を解いて来た人はノーヒントで解けるはずである.
+  \qed
+\end{proof}
+
+\begin{question}[2次元球面]
+  $X_1$, $X_2$ はそれぞれ $\Delta$ 複体とみなされた
+  閉 $2$ 単体 $|ABC|$, $|DEF|$ であるとする.
+  $X_1$, $X_2$ の辺を次の組み合わせについて自然な線形同相で
+  貼り合わせてできる $\Delta$ 複体を $X$ と書くことにする:
+  \begin{equation*}
+    |AB|\sim|DE|, \quad
+    |BC|\sim|EF|, \quad
+    |CA|\sim|FD|.
+  \end{equation*}
+  $X$, $X_1$, $X_2$ に関する Mayer-Vietrois の完全列を
+  用いて $X$ のホモロジー群を計算せよ.
+  \qed
+\end{question}
+
+\begin{proof}[ヒント]
+  $H_p(X_1)\cong H_p(X_2)\cong H_p(\pt)$ 
+  および $H_p(X_1\cap X_2)\cong H_p(S^1)$ 
+  および $X$ の連結性 $H_0(X)\cong \Z$ を
+  Mayer-Vietroris の完全列に適用すると次の完全列が得られる:
+  \begin{equation*}
+    0
+    \leftarrow \Z
+    \leftarrow \Z^2
+    \leftarrow \Z
+    \leftarrow H_1(X)
+    \leftarrow 0
+    \leftarrow \Z
+    \leftarrow H_2(X)
+    \leftarrow 0.
+  \end{equation*}
+  純代数的な議論によって $\Z\leftarrow H_1(X)$ が $0$ 写像であることがわかる.
+  (問題 \qref{q:ZZ2ZM} を見よ).
+  よって $H_1(X)=0$, $H_2(X)\cong\Z$ であることがわかる.
+  この問題も Mayer-Vietoris の完全列の使い方の概略のステップ2までで
+  完全に解けてしまう!
+  \qed
+\end{proof}
+
+\begin{question}[3次元球面]
+  $X_1$, $X_2$ はそれぞれ $\Delta$ 複体とみなされた
+  閉 $3$ 単体 $|ABCD|$, $|EFGH|$ であるとする.
+  $X_1$, $X_2$ の辺を次の組み合わせについて自然な線形同相で
+  貼り合わせてできる $\Delta$ 複体を $X$ と書くことにする:
+  \begin{equation*}
+    |BCD|\sim|FGH|, \quad
+    |ACD|\sim|EGH|, \quad
+    |ABD|\sim|EFH|, \quad
+    |ABC|\sim|EFG|.
+  \end{equation*}
+  $X$, $X_1$, $X_2$ に関する Mayer-Vietrois の完全列を
+  用いて $X$ のホモロジー群を計算せよ.
+  ただし $H_p(X_1\cap X_2)\cong H_p(S^2)$ は上の問題の結果に
+  よって既知とみなして構わない: 
+  $H_0(S^2)\cong H_2(S^2)\cong\Z$, $H_p(S^2)=0$ ($p\ne 0,2$).
+  \qed
+\end{question}
+
+\begin{proof}[ヒント]
+  $H_p(X_1)\cong H_p(X_2)\cong H_p(\pt)$ 
+  および $H_p(X_1\cap X_2)\cong H_p(S^2)$
+  および $X$ の連結性 $H_0(X)\cong \Z$ を
+  Mayer-Vietroris の完全列に適用すると次の完全列が得られる:
+  \begin{equation*}
+    0
+    \leftarrow \Z
+    \leftarrow \Z^2
+    \leftarrow \Z
+    \leftarrow H_1(X)
+    \leftarrow 0
+    \leftarrow 0
+    \leftarrow H_2(X)
+    \leftarrow 0
+    \leftarrow \Z
+    \leftarrow H_3(X)
+    \leftarrow 0.
+  \end{equation*}
+  純代数的な議論によって $\Z\leftarrow H_1(X)$ が $0$ 写像であることがわかる.
+  (問題 \qref{q:ZZ2ZM} を見よ).
+  よって $H_1(X)=H_2(X)=0$, $H_3(X)\cong\Z$ であることがわかる.
+  この問題も Mayer-Vietoris の完全列の使い方の概略のステップ2までで
+  完全に解けてしまう!
+  \qed
+\end{proof}
+
+\begin{guide}
+  上の二つの問題を $n$ 次元に一般化することによって $n$ に関して
+  帰納的に $S^n$ ($n=1,2,\ldots$) のホモロジー群が容易に計算される. 
+  その結果は $H_0(S^n)\cong H_n(S^n)\cong\Z$, $H_p(S^n)=0$ ($p\ne0,n$).
+
+  より本質的な $H_p(S^n)$ の計算の仕方は $n+1$ 次元閉球体 $D^{n+1}$ と
+  その表面と同一視される $n$ 次元球面 $S^n$ に関する相対ホモロジーの
+  完全列から得られる. 次の問題を見よ.
+  \qed
+\end{guide}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{相対ホモロジー群の長完全列}
+\label{sec:relative-homology}
+
+\begin{question}
+  $D_\bcdot$ が鎖複体であり, $p\in\Z$ に対して $C_p$ は $D_p$ の部分
+  加群であり, $\bdr C_p \subset C_{p-1}$ が成立していると仮定する. 
+  このとき, $C_\bcdot$ は $D_\bcdot$ の鎖部分複体(chain subcomplex)
+  であると言う. $E_p = D_p/C_p$ と置くことによって, 鎖複体 $E_\bcdot$
+  が定まることを説明せよ. 以上の状況のもとで, 鎖複体の短完全列
+  \[
+    0 \to
+    C_\bcdot \to
+    D_\bcdot \to
+    E_\bcdot \to
+    0
+  \]
+  が存在することを示せ. \qed
+\end{question}
+
+$\Delta$ 複体 $X$ から定まる鎖複体を $C_\bcdot(X)$ と書くことにする.
+$\Delta$ 複体 $X$ とその部分複体 $Y$ に対して,
+$C_\bcdot(X)$ は $C_\bcdot(Y)$ の鎖部分複体をなす. 
+上の問題の結果より, 
+\[
+C_p(X,Y)=C_p(X)/C_p(Y)  
+\]
+によって鎖複体 $C_\bcdot(X,Y)$ を
+定義することができる.
+$C_\bcdot(X,Y)$ のホモロジー群を %
+$H_\bcdot(X,Y)$ と書き, $(X,Y)$ の{\bf 相対ホモロジー群}と呼ぶ. 
+
+\begin{question}[相対ホモロジー群の長完全列]\qstar{*}
+  $X$, $Y$, $Z$ は $\Delta$ 複体であり, $Z \subset Y \subset X$ が成立
+  しているとする. このとき, 次の完全列が存在する:
+  \[
+    \cdots \to
+    H_p(Y,Z) \to
+    H_p(X,Z) \to
+    H_p(X,Y)  \to
+    H_{p-1}(Y,Z) \to
+    \cdots.
+  \]
+  特に, $Z = \emptyset$ の場合を考えることによって, 次の完全列が存在
+  することもわかる:
+  \[
+    \cdots \to
+    H_p(Y) \to
+    H_p(X) \to
+    H_p(X,Y) \to
+    H_{p-1}(Y) \to
+    \cdots.
+   \qed
+  \]
+\end{question}
+
+\begin{proof}[ヒント]
+ 次の短完全列の存在を示せ:
+ \[
+  0 \to
+  C_\bcdot(Y,Z) \to
+  C_\bcdot(X,Z) \to
+  C_\bcdot(X,Y) \to
+  0.
+  \qed
+ \]
+\end{proof}
+
+\begin{question}
+  $n$ 単体 $\Delta^n$ に対して,
+  \[
+    H_p(\Delta^n, \bdr\Delta^n) \isom
+    \begin{cases}
+      \Z & \qquad (p = n), \\
+      0  & \qquad (p \ne n)
+    \end{cases}
+  \]
+  が成立する. 
+  これを利用して, $n\ge2$ のとき $n$ 単体 $\Delta^n$ に対して, 
+  \[
+    H_p(\bdr\Delta^n) \isom
+    \begin{cases}
+      \Z & \qquad (p = 0,n-1), \\
+      0  & \qquad (p \ne 0,n-1)
+    \end{cases}
+  \]
+  が成立することを示せ.  \qed
+\end{question}
+
+\begin{question}
+ \label{q:Delta(n,n-2)}
+ $\Delta^n_{\le n-2}$ は $n$ 単体 $\Delta^n$ の $n-2$ 次元以下の
+ 辺単体全体の和集合のなす $\Delta$ 複体であるとする.  
+ $n = 3$ の場合に $\Delta^n_{\le n-2}$ の図を描け. 
+ $n\ge 3$ のとき, 次が成立する
+ ことを示せ:
+ \[
+  H_p(\Delta^n_{\le n-2}) \isom
+  \begin{cases}
+    \Z   & \qquad (p = 0), \\
+    \Z^n & \qquad (p = n-2), \\
+    0    & \qquad (p \ne 0,n-2). \qed
+  \end{cases}
+ \]
+\end{question}
+
+\begin{proof}[ヒント]
+$H_p(\Delta^n,\Delta^n_{\le n-2})=0$ ($p\ne n-1, n$), %
+$H_{n-1}(\Delta^n,\Delta^n_{\le n-2}) \isom \Z^n$, %
+$H_n(\Delta^n,\Delta^n_{\le n-2}) \isom \Z$. \qed
+\end{proof}
+
+\begin{question}[$n$ 次元球面]
+  $n$ は $2$ 以上の整数であると仮定する.
+  $Y$ は $n+1$ 次元閉単体 $\sigma=\Delta^{n+1}$ であるとし, 
+  $X=Y_{\le n}$ はその $n$ 次元切片 ($\Delta^{n+1}$ の表面) であるとする. 
+  このとき $C_p(Y,X)=C_p(Y)/C_p(X)$ と置くことによって
+  自然に鎖複体 $C_\bcdot(Y,X)$ と鎖複体の短完全列が得られる:
+  \begin{equation*}
+    0
+    \leftarrow C_\bcdot(Y,X) 
+    \leftarrow C_\bcdot(Y)
+    \leftarrow C_\bcdot(X)
+    \leftarrow 0
+  \end{equation*}
+  が得られる. この短完全列に対応するホモロジー長完全列を利用
+  して $X$ のホモロジー群を計算せよ.
+  \qed
+\end{question}
+
+\begin{proof}[ヒント]
+  $C_{n+1}(Y,X)\cong\Z\bra\sigma\ket$ であり, 
+  それ以外の $C_p(Y,X)$ は $0$ になる.
+  よって鎖複体 $C_\bcdot(Y,X)$ のホモロジー群を $H_p(Y,X)$ と書くと,
+  $H_{n+1}(Y,X)\cong\Z$, $H_p(Y,X)=0$ ($p\ne n+1$).
+  $Y$ は $n+1$ 次元閉単体なので $H_0(Y)\cong\Z$, $H_p(Y)\cong 0$ ($p\ne 0$).
+  さらに $X$ の連結性より $H_0(X)\cong\Z$ である.
+  したがってホモロジー長完全列より, 次の完全列が得られる:
+  \begin{equation*}
+    0
+    \leftarrow 0
+    \leftarrow \Z
+    \leftarrow \Z
+    \leftarrow 0
+    \leftarrow 0
+    \leftarrow H_1(X)
+    \leftarrow 0
+    \leftarrow \cdots
+    \leftarrow 0
+    \leftarrow H_{n-1}(X)
+    \leftarrow 0
+    \leftarrow 0
+    \leftarrow H_n(X)
+    \leftarrow \Z
+    \leftarrow 0.
+  \end{equation*}
+  よって $H_n(X)\cong\Z$ かつ $H_p(X)=0$ ($p=1,\ldots,n-1$).
+  \qed
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{有限生成加群の基本定理とEuler数}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{有限生成 Abel 群の基本定理}
+
+以下 Abel 群の群の演算を加法で表わすことにし, Abel 群を $\Z$ 加群とみなして
+扱うことにする. 有限生成 Abel 群と有限生成 $\Z$ 加群は同じものである.
+
+正の有理整数全体の集合を $\Z_{>0}$ と書き, 
+非負の有理整数全体の集合を $\Z_{\ge0}$ と書くことにする.
+$\Z/m\Z$ は集合として $\{0,1,\ldots,m-1\}$ と同一視でき, 
+$a,b=0,1,\ldots,m-1$ に対して群の演算の結果としての $a+b\in\Z/m\Z$ は %
+整数としての $a$ と $b$ の和を $m$ で割った余りとして定義される.
+$\Z/m\Z$ は $1$ から生成される位数 $m$ の巡回群になる.
+
+\begin{question}[有限次元ベクトル空間の基本定理]
+  $K$ は体であるとし, $V$ は有限個のベクトルで張られる $K$ 上のベクトル
+  空間であるとする. このとき $V$ に対して $m_0\in\Z_{\ge0}$ で
+  \begin{equation*}
+    V \isom K^{m_0}
+    \qquad
+    \text{($K$ 上のベクトル空間として同型)}
+  \end{equation*}
+  を満たすものが唯一存在する. $m_0$ を $V$ の次元 (dimension) と呼ぶ.
+  \qed
+\end{question}
+
+\begin{question}[一般の可換環上の有限生成自由加群の階数]
+  $R$ は任意の可換環であるとし, $M$ は $R$ 上の有限生成自由 $R$ 加群で
+  あるとする. %
+  $M$ の部分集合 $B$ で $M \isom \bigoplus_{b\in B} R\,b$ を満たすも
+  のを $M$ の基と呼ぶ. $M$ の基の元の個数は, 常に有限であり, 基の取り
+  方によらないことを示せ. $M$ の基の元の個数を自由加群 $M$ の{\bf 階数
+  (rank)} と呼ぶ. \qed
+\end{question}
+
+\begin{proof}[ヒント]
+極大イデアルの存在定理を用いて, 体上のベクトル空間の
+理論に帰着する. \qed
+\end{proof}
+
+\medskip
+
+以上の問題は体上の有限次元ベクトル空間や一般の可換環上の有限生成自由加群の
+同型類が非負の整数 (次元もしくは階数) でパラメトライズされることを意味して
+いる. 問題は自由加群でない場合の分類である. 一般の可換環上の有限生成加群の
+同型類の分類はおそろしく複雑な問題だが, 有限生成 $\Z$ 加群の同型類の分類
+はそう難しくない.
+
+ここで行列の基本変形について復習しておこう. %
+$R$ は任意の環(結合的で $1$ を持つが可換とは限らない, もちろん可換でもよい)
+であるとし, $R$ の元を成分とする行列を考える. 
+以下のような行列の変形を行列の($R$ 上の)左基本変形と呼ぶ:
+\begin{itemize}
+\item 任意の行に $R^{\times}$ の元を左からかける.
+\item 任意の行を他の行と交換する.
+\item 任意の行に $R$ の元を左からかけたものを他の行に加える.
+\end{itemize}
+以下のような行列の変形を行列の($R$ 上の)右基本変形と呼ぶ:
+\begin{itemize}
+\item 任意の列に $R^{\times}$ の元を右からかける.
+\item 任意の列を他の列と交換する.
+\item 任意の列に $R$ の元を右からかけたものを他の列に加える.
+\end{itemize}
+行列の左基本変形と右基本変形を合わせて行列の基本変形と呼ぶ.
+
+\begin{question}[整数を成分に持つ行列の単因子]
+  $\Z$ の元を成分とする任意の行列は行列の基本変形を有限回繰り返
+  すことによって, 次の形の行列に変形可能である:
+  \[
+    \begin{bmatrix}
+      d_1 &        &     &   & \text{\large 0} \\
+          & \ddots &     &   & \\
+          &        & d_r &   & \\
+          &        &     & 0 & \\
+      \text{\large 0} & &     &   & \ddots
+    \end{bmatrix},
+    \qquad
+    \text{ここで各 $d_i$ は正の整数であり $d_1 | d_2 | \cdots | d_r$.}
+  \]
+  しかも, $r$ および $d_i$ はもとの行列から一意的に決まる. 
+  $d_1,\ldots,d_r$ をもとの行列の単因子と呼ぶ.
+  \qed
+\end{question}
+
+\begin{question}[有限生成自由 $\Z$ 加群の部分加群]
+  $M$ は有限生成自由 $\Z$ 加群であるとし, $N$ はその部分加群であるとする. 
+  このとき $M$ のある自由 $\Z$ 基底 $v_1,\ldots,v_n$ と
+  正の整数 $d_1,\ldots,d_r$ で
+  \begin{equation*}
+    N = \Z d_1 v_1 \oplus \cdots \oplus \Z d_r v_r,
+    \qquad
+    d_1 | d_2 | \cdots | d_r
+  \end{equation*}
+  を満たすものが一意に存在する.
+  特に $N$ もまた有限生成自由 $\Z$ 加群である. 
+  \qed
+\end{question}
+
+\begin{proof}[ヒント]
+ この問題を解くためにすぐ上の単因子に関する結果を用いて良い. \qed
+\end{proof}
+
+\begin{theorem}[有限生成Abel群の基本定理1]
+ 任意の有限生成 Abel 群 $M$ に対して, %
+ $0$ 以上の整数 $r$ と %
+ $2$ 以上のある整数たち $d_1,d_2,\ldots,d_s$ で
+ 群の同型
+ \begin{equation*}
+  M \isom 
+  (\Z/d_1\Z)\times(\Z/d_2\Z)\times\cdots\times(\Z/d_s\Z)\times\Z^r,
+  \quad
+  d_1\mid d_2\mid \cdots\mid d_s
+ \end{equation*}
+ を満たしているものが一意に存在する.
+ \qed
+\end{theorem}
+
+\begin{proof}[ヒント]
+この問題を解くためにすぐ上の有限生成自由 $\Z$ 加群の部分加群に
+関する結果を用いてよい.
+\qed
+\end{proof}
+
+\begin{theorem}[有限生成Abel群の基本定理2]
+ 任意の有限 Abel 群 $M$ に対して, %
+ $0$ 以上の整数 $r$ と %
+ 素数の正の整数べき $p_1^{f_1}, p_2^{f_2},\ldots, p_N^{f_N}$ で
+ 群の同型
+ \begin{equation*}
+  M \isom 
+  (\Z/p_1^{f_1}\Z)\times(\Z/p_2^{f_2}\Z)\times\cdots\times(\Z/p_N^{f_N}\Z)
+  \times\Z^r
+ \end{equation*}
+ を満たしているもの
+ が $p_j^{f_j}$ たちを並べる順序の違いを除いて一意に存在する.
+ \qed
+\end{theorem}
+
+\begin{proof}[ヒント]
+この問題を解くためにすぐ上の有限生成 Abel 群の基本定理1の
+結果を用いてよい. Chinese Remainder Theorem を使え.
+\qed
+\end{proof}
+
+有限生成 Abel 群の基本定理は一度証明ができたならば他の問題で自由に用いて良い. 
+
+\medskip
+
+%{\bf\large 上の有限生成 Abel 群の基本定理とその内容について
+%  演習の時間に解説を加える.}
+
+(有限)単体複体の $\Z$ 係数のホモロジー群を扱うためには有限生成 $\Z$ 加群の
+計算ができなければいけない. 整数を成分に持つ行列の単因子と有限生成 Abel 群
+の基本定理を証明するテクニックはそのまま具体的な計算に適用可能である.
+その意味で上の結果の証明を復習し, そこに登場したアイデアを具体的な
+計算の場面に適用しようとすることは非常に重要である.
+
+\begin{rem}[有限生成 $\Z$ 加群の計算とは?]
+  体 $K$ 上の有限次元ベクトル空間の同型類は次元だけで決まるので
+  様々なやり方で構成される有限次元ベクトル空間の構造を知るために
+  まず次元が幾つであるかを数えることが出発点になる.
+
+  それと同様に様々なやり方で構成される有限生成 $\Z$ 加群の構造を知るため
+  にはまずその加群がどの同型類に属するかを知ることが出発点になる.
+  ホモロジー群の計算結果を
+  \begin{equation*}
+    H_p(X,\Z) \isom
+    \begin{cases}
+      \Z             & \quad (p=0), \\
+      \Z\oplus\Z/2\Z & \quad (p=1), \\
+      0              & \quad (p\ne 0,1) \\
+    \end{cases}
+  \end{equation*}
+  のように書くことがよくある(実はこれは $X$ が Klein の壷の場合). 
+  これは各ホモロジー群 $H_p(X,\Z)$ がどの同型類に属すかがわかるように
+  結果を書いているのである. 目的に応じてどの同型類に属すかだけではなく, 
+  その生成元が具体的にどのようなサイクルで代表されるかに関する情報が
+  要求される場合もある. この演習では「$\Z$ 係数のホモロジー群を計算せよ」
+  という問題は, 特別に断らない限り, 「ホモロジー群がどの同型類に属すかを
+  述べよ」を意味するものとする.
+
+  技術的には特に商加群の計算をどのようにやらばよいかが問題になる.
+  そのための助けになるのが行列の基本変形と単因子の計算である.
+  実は単因子には $d_1|d_2|\cdots|d_r$ というきつい条件が付いているが
+  実際の計算では必ずしのその条件を満たす $d_i$ を計算できなくても構わない.
+  次の弱い結果で十分である.
+
+  $\Z$ の元を成分とする任意の行列は行列の基本変形を有限回繰り返
+  すことによって, 次の形の行列に変形可能である:
+  \[
+    \begin{bmatrix}
+      n_1 &        &     &   & \text{\large 0} \\
+          & \ddots &     &   & \\
+          &        & n_s &   & \\
+          &        &     & 0 & \\
+      \text{\large 0} & &     &   & \ddots
+    \end{bmatrix},
+    \qquad
+    \text{ここで各 $n_1,\ldots,n_s$ は正の整数.}
+  \]
+
+  $n_i$ たちの計算の仕方がわかれば有限生成自由 $\Z$ 加群をその部分加群で
+  割る計算をどのようにやったらよいかがわかる.
+%  {\bf\large 詳しい内容は演習の時間に説明する.}
+  \qed
+\end{rem}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{一変数多項式環上の有限生成加群の基本定理}
+
+この subsection の内容は「おまけ」である.
+「おまけ」に興味がない人は無視して構わない.
+(しかし有限生成 Abel 群の理論と Jordan 標準形の理論の類似という
+数学的に重要な事実を理解するためには重要である.)
+
+有限生成 Abel 群の基本定理は単項イデアル整域(pricipal ideal domain, PID)
+上の有限生成加群に関する結果に一般化される. 
+よく使われるのは, 単項イデアル整域として一変数多項式環を考える場合である. 
+一変数多項式環上の加群の構造論を用いれば, 行列
+の Jordan 標準形の存在を簡単に示せる. 以下, このことを問題に出そう. 
+一般に, 環上の加群の構造論(環の表現論)を具体的な場合に翻訳することによっ
+て面白い結果が色々得られるのである. $\Z$ 上のみならず, 一変数多項式環上
+の有限生成加群の構造論は重要なので問題に出しておく. 
+
+\begin{question}[一変数多項式環上の有限生成加群の基本定理]\qstar{*}
+  $k$ は任意の体であるとし, $k$ 係数の1変数多項式環を $R = k[T]$ と表
+  わす. 順次以下を示せ.
+  \begin{enumerate}
+  \item[(1)] $R$ の元を成分とする任意の行列は, 行列の基本変形を有限回繰り返
+    すことによって, 次の形の行列に変形可能である:
+    \[
+    \begin{bmatrix}
+      d_1 &        &     &   & \text{\large 0} \\
+          & \ddots &     &   & \\
+          &        & d_r &   & \\
+          &        &     & 0 & \\
+      \text{\large 0} & &     &   & \ddots
+    \end{bmatrix},
+    \qquad
+    \text{ここで 各 $d_i$ は monic な多項式であり $d_1 | d_2 | \cdots$.}
+    \]
+    しかも, $r$ および $d_i$ はもとの行列から一意的に決まる.
+  \item[(2)] 任意の有限生成 $R$ 加群 $M$ に対して, %
+    monic な $d_1,\dots,d_r\in R$ および $l\in\Z_{\ge0}$ の組で
+    \[
+      M \isom R^l \oplus R/d_1R \oplus \dots \oplus R/d_rR
+      \quad
+      \text{($R$ 加群としての同型)},
+    \qquad
+      d_1 |d_2 | \cdots
+    \]
+    を満たすものが唯一存在する.
+  \item[(3)] $k$ は代数閉体であると仮定する. 集合 $Q$ を次のように定義する:
+    \[
+      \{\, (T - \alpha)^n \mid \alpha \in k,\; n\in\Z_{\ge0} \,\}
+    \]
+    任意の有限生成 $R$ 加群 $M$ に対して, $m_0\in\Z_{\ge0}$ と %
+    $(m_q)_{q\in Q} \in (\Z_{\ge0})^Q$ (有限個を除いて$m_q = 0$)の組
+    で
+    \[
+      M \isom 
+      R^{m_0} \oplus \bigoplus_{q\in Q} (R/qR)^{m_q}
+      \qquad
+      \text{($R$ 加群として同型)}
+    \] %
+    を満たすものが唯一存在する.  \qed
+  \end{enumerate}
+\end{question}
+
+\begin{proof}[ヒント]
+たとえば, \cite{10wa} の第3話と第4話を見よ.
+(\cite{10wa} は色々面白いことが書いてありお買い得である.)
+\qed
+\end{proof}
+
+\begin{question}[Jordan標準形]\qstar{*}
+  $k$ は代数閉体であると仮定する. 上の問題と同様に $R=k[T]$ と書くこと
+  にする. 上の問題の結果を用いて以下を示せ:
+  \begin{enumerate}
+  \item[(1)] $m\in\Z_{>0}$ と $\alpha\in k$ に対して %
+    $M = R/(T-\alpha)^nR$ と置く. $M$ の $k$ 上の基底として, %
+    $1,T-\alpha,\dots,(T-\alpha)^{n-1}$ が取れる. 
+    この基底を用いて, $T$ の $M$ への作用が定める $M$ から $M$ への %
+    $k$ 線型写像を行列表示すると次の形になる: 
+    \[
+    J_{\alpha,n} = 
+    \begin{bmatrix}
+      \alpha &        &        & \text{\large 0} \\
+         1   & \alpha &        &        \\
+             & \ddots & \ddots &        \\
+      \text{\large 0} & &  1   & \alpha
+    \end{bmatrix}
+    \qquad (\text{$n\times n$ 行列}).
+    \]
+  \item[(2)] $k$ 係数の任意の正方行列は有限回の基本変形によって次の形
+    に変形できる: 
+    \[
+    \begin{bmatrix}
+      J_{\alpha_1,n_1} &        & \text{\large 0} \\
+                       & \ddots & \\
+      \text{\large 0}  &        & J_{\alpha_N,n_N}
+    \end{bmatrix}.
+    \] %
+    しかも, 列 $(\alpha_1,n_1),\dots,(\alpha_N,n_N)$ はもとの行列から
+    順序の交換を除いて一意に決まる. 上の変形結果をもとの行列の 
+    Jordan 標準形と呼ぶ. \qed
+  \end{enumerate}
+\end{question}
+
+\begin{proof}[(2)のヒント]
+$A$ は $k$ 係数の $N$ 次正方行列であるとする. %
+$M := k^n$ に $R := k[T]$ を
+\[
+  f(T)v = f(A)v
+  \qquad
+  (f\in R,\; v\in M)
+\]
+と作用させることによって, $M$ は有限生成 $R$ 加群であるとみなせる. %
+$M = k^n$ の $R = k[T]$ 加群としての構造論を行列 $A$ の言葉に焼き直す
+ことによって, $A$ の Jordan 標準形の理論が導かれるのである.
+\qed 
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Euler数}
+
+有限集合 $X$ の元の個数を $\sharp X$ と書くことにする.
+
+\begin{question}\label{q:euler1}
+  $X$ は有限集合であり, 
+  $X_0,X_1,\dots,X_n$ はその部分集合であり,
+  $X=X_0\cup X_1\cup\dots\cup X_n$ が成立していると仮定する. %
+  このとき, 次の等式が成立すること直接証明せよ:
+  \[
+    \sharp X
+    =
+    \sum_{p=0}^n
+    (-1)^p
+    \sum_{0\le i_0<i_1<\dots<i_p\le n}
+    \sharp(X_{i_0}\cap X_{i_1}\cap\dots\cap X_{i_p}).
+  \qed
+  \]
+\end{question}
+
+\begin{question}[Euler数とBetti数の定義]\label{q:euler2}
+  $F$ は任意の体であるとし, $C_\bcdot$ は $F$ 上のベクトル空間と線型写
+  像からなる鎖複体であるとする. $H_p(C_\bcdot) \ne 0$ を満たす $p$ が有
+  限個しかないとき, $C_\bcdot$ の {\bf Euler 数} $\chi(C_\bcdot)$ を次の式に
+  よって定義する:
+  \[
+    \chi(C_\bcdot) := \sum_p (-1)^p \dim_F H_p(C_\bcdot).
+  \] %
+  各 $b_p(C_\bcdot):=\dim_F H_p(C_\bcdot)$ を $C_\bcdot$ の $p$ 次元 
+  {\bf Betti 数}と呼ぶ. $C_\bcdot$ は $F$ 上の有限次元ベクトル空間
+  からなる有限鎖複体%
+  \footnote{有限個の $p$ のみに対して $C_p\ne 0$ であるような鎖複体 
+    $C_\bcdot$ を有限鎖複体と呼ぶ.}%
+  であるとき, 次の公式が成立することを示せ: 
+  \[
+    \chi(C_\bcdot) = \sum_p (-1)^p \dim_F C_p.
+    \qed
+  \]
+\end{question}
+
+\begin{question}[鎖複体の準同型の trace]
+  $F$ は任意の体であるとし, $C_\bcdot$ は $F$ 上のベクトル空間と線型写
+  像からなる鎖複体であるとし, $f_\bcdot$ は $C_\bcdot$ からそれ自身への
+  鎖複体の準同型であるとする.
+  $C_\bcdot$ は $F$ 上の有限次元ベクトル空間からなる有限鎖複体
+  であるとする. このとき次の公式が成立することを示せ: 
+  \[
+    \sum_p (-1)^p 
+    \trace \bigl( H_p(f_\bcdot) : H_p(C_\bcdot) \to H_p(C_\bcdot)\bigr)
+    = 
+    \sum_p (-1)^p 
+    \trace \bigl( f_p : C_p \to C_p \bigr).
+  \]
+ この左辺は {\bf Lefschetz 数}と呼ばれることがある.
+ \qed
+\end{question}
+
+\begin{guide}
+ 上の問題の trace の公式は幾何的に重要な応用を持つ.
+ 余裕がある人は Lefschetz の不動点定理
+ もしくは Lefschetz の不動点公式について調べてみよ.
+ \qed
+\end{guide}
+
+\begin{question}
+  $X$ は集合であり, 
+  $\{X_i\}_{i\in I}$ はその部分集合の族であり,
+  $X=\bigcup_{i\in I}X_i$ が成立していると仮定する. %
+  添字集合 $I$ 上の全順序 $<$ が与えられていると仮定する.
+  $p\ge 0$ に対して集合 $K_p$ を次のように定義する:
+  \[
+    K_p :=
+    \{\, (i_0,i_1,\dots,i_p;x) \mid
+      i_k\in I,\;
+      i_0<i_1<\dots<i_p,\;
+      x\in X_{i_0}\cap X_{i_1}\cap\dots\cap X_{i_p}
+    \,\}.
+  \]
+  $F$ は任意の体であるとし, $K_p$ を基底として持つ $F$ 上のベクトル空
+  間を $C_p$ と表わす. ($p<0$ に対しては $C_p=0$ と置く.)
+  $\bdr_p : C_p \to C_{p-1}$ を次の条件によって定義する:
+  \[
+    \bdr_p (i_0,\dots,i_p;x) :=
+    \sum_{k=0}^p (-1)^k (i_0,\dots,\widehat{i_k},\dots,i_p;x).
+  \]
+  ここで, $1\le i_0<\dots<i_p\le n$, %
+  $x\in X_{i_0}\cap X_{i_1}\cap\dots\cap X_{i_p}$ であり,
+  $\widehat{i_k}$ は $i_k$ を取り去るという意味である.
+  これによって鎖複体 $C_\bcdot$ が定義され,
+  \[
+    H_0(C_\bcdot) \isom 
+    \text{($X$ を基底として持つ $F$ 上のベクトル空間)},
+    \qquad
+    H_p(C_\bcdot) = 0 \quad (p\ne0)
+  \] %
+  が成立することを示せ. この結果と問題 \qref{q:euler2} の結果を用いて, 
+  問題 \qref{q:euler1} の結果を導け. \qed
+\end{question}
+
+\begin{guide}
+この問題は離散位相の入った $X$ の被覆 %
+$\{X_i\}_{i\in I}$ に対する \Cech のホモロジー群を計算する問題になって
+いる. \Cech のホモロジー群は任意の位相空間に対して定義される. 
+しかしここではその説明をする余裕はない.
+\qed 
+\end{guide}
+
+\begin{question}[Betti数とEuler数]
+  有限生成加群の基本定理を認めた上で以下を示せ:
+  \begin{enumerate}
+  \item $M$ が有限生成自由加群であり, $N$ はその部分加群であるとする. 
+    このとき, $N$ も有限生成自由加群であり, %
+    $\rank(M/N) = \rank M - \rank N$ が成立する
+    \footnote{有限生成加群 $M$ の階数(rank)を $\rank M$ と書いた.}.
+  \item $X$ が(有限) $\Delta$ 複体であるとき, その $p$ 次元 Betti 数 $b_p(X)$ %
+    および Euler 数 $\chi(X)$ を次のように定義する:
+    \[
+      b_p(X) := \rank H_p(X),
+      \qquad
+      \chi(X) := \sum_p (-1)^p b_p(X).
+    \]
+    このとき, 次が成立する:
+    \[
+      b_p \le \rank C_p(X)
+      \qquad
+      \chi(K) = \sum_p (-1)^p \rank C_p(X).
+      \qed
+    \]
+  \end{enumerate}
+\end{question}
+
+\begin{guide}
+ホモロジー群は $\Delta$ 複体の位相不変量(実はもっと強くホモトピー
+不変量)なので, Betti数とEuler数も位相不変量である. \qed
+\end{guide}
+
+%\noindent 抽象的有限単体複体 $\Sigma$, 有限生成自由加群の有限鎖複体 %
+%$C_\bcdot$ に対しても同様に Betti 数と Euler 数が定義される. それ
+%らを$b_p(\Sigma)$, $b_p(C_\bcdot)$, $\chi(\Sigma)$, $\chi(C_\bcdot)$ 
+%と書くことにする.
+
+\begin{question}
+  $0\to C_\bcdot \to D_\bcdot \to E_\bcdot \to 0$ は有限生成自由加群の
+  有限鎖複体からなる短完全列であるとする. このとき,
+  \[
+    \chi(D_\bcdot) = \chi(C_\bcdot) + \chi(E_\bcdot)
+  \]
+  が成立することを示せ. \qed
+\end{question}
+
+\begin{question}
+  $0\to C_{0,\bcdot}\to C_{1,\bcdot}\to\dots\to C_{r,\bcdot}\to 0$ は
+  有限生成自由加群の有限鎖複体からなる完全列であるとする. このとき,
+  \[
+    \sum_{i=0}^r (-1)^i \chi(C_{i,\bcdot}) = 0
+  \]
+  が成立することを示せ. \qed
+\end{question}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{thebibliography}{ABC}
+
+%\bibitem[BT]{BT}
+%R.~Bott and L.~W.~Tu: Differential forms in algebraic topology, GTM
+%82, Springer-Verlag, 1982
+
+%\bibitem[Dold]{Dold}
+%A.~Dold: Lectures on Algebraic Topology, Classics in Mathematics,
+%Springer-Verlag Berlin Heidelberg 1995 (オリジナルの初版は1972) 
+
+%\bibitem[H]{hatcher}
+%Hatcher, Allen: \verb,http://www.math.cornell.edu/~hatcher/AT/ATpage.html,
+
+\bibitem[堀田]{10wa}
+堀田良之: 加群十話 --- 代数学入門 ---, すうがくぶっくす 3, 
+朝倉書店 1988 
+
+%\bibitem[Kir]{Kirwan}
+%F.~Kirwan: An introduction to intersection homology theory, Oitman
+%Research Notes in Mathematics Series, Longman Scientific \verb|&|
+%Technical 1988
+
+%\bibitem[KS]{KS}
+%M.~Kashiwara and P.~Schapira: Sheaves on Manifolds, 
+%Grundlehren der mathematischen Wissenschaften {\bf 292}, A Series of
+%Comprehensive Studied in Mathematics, Springer-Verlag 1994
+
+%\bibitem[Milnor]{Milnor}
+%J.~ミルナー: モース理論 --- 多様体上の解析学とトポロジーとの関連 ---,
+%数学叢書 8, 吉岡書店 (J.~Milnor: Morse Theory, Princeton University
+%Press, Princeton, 1963 の邦訳.)
+
+%\bibitem[久賀1]{Kuga1}
+%久賀 道郎: ガロアの夢, 日本評論社
+
+%\bibitem[久賀2]{Kuga2}
+%久賀 道郎: ドクトル クーガー の数学講座 (1, 2), 日本評論社
+
+\bibitem[ST]{ST}
+I.~M.~シンガー ＆ J.~A.~ソープ: トポロジーと幾何学入門, 培風館 
+(I.~M.~Singer and J.~A.~Thorpe: Lecture notes on elementary topology
+and geometry, 1967 の邦訳)
+
+%\bibitem[数学辞典]{Sugakujiten}
+%岩波 数学辞典 第3版, 日本数学会編集, 岩波書店 1985
+
+\bibitem[田村]{Tamura}
+田村一郎: トポロジー, 岩波全書 276, 岩波書店 1972
+
+\end{thebibliography}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

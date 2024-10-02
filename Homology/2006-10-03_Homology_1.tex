@@ -1,0 +1,1323 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\def\STUDENT{} % \def すると計算問題の解答を印刷しなくなる.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[12pt,twoside]{jarticle}
+%\documentclass[12pt]{jarticle}
+\usepackage{amsmath,amssymb,amscd}
+\usepackage{eepic}
+\usepackage{enshu}
+%\usepackage{showkeys}
+\allowdisplaybreaks
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setcounter{page}{1}       % この数から始まる
+\setcounter{section}{-1}   % この数の次から始まる
+\setcounter{theorem}{0}    % この数の次から始まる
+\setcounter{question}{0}   % この数の次から始まる
+\setcounter{footnote}{0}   % この数の次から始まる
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\ifx\STUDENT\undefined
+%
+% 教師専用
+%
+\newcommand\commentout[1]{#1}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\else
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% 生徒専用
+%
+\newcommand\commentout[1]{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\fi
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title{\bf 幾何学概論B演習
+  \ifx\STUDENT\undefined\\{\normalsize 教師用\quad(計算問題の略解付き)}\fi}
+
+\author{黒木 玄 \quad (東北大学大学院理学研究科数学専攻)}
+
+\date{2006年10月3日(火)}
+
+\maketitle
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\tableofcontents
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{この演習のルール}
+
+%この演習では今までのルールを大幅に変える.
+%ルールの変更点の重要なポイントは太字の大きな文字で書いておいた.
+
+私が渡した文書に誤りを見つけた場合には気軽に指摘して欲しい.
+
+\subsection{各演習時間の基本スケジュール}
+
+\begin{description}
+ \item[個人学習時間]
+  渡された演習問題を解いて黒板の前で発表する準備をする. \\
+  もしくは自主レポートの準備をする.
+ \item[午後1時〜1時半] 
+  黒板の前で発表したい人はこのあいだに解答を黒板に書く. \\
+  この時間にレポートの内容を黒板で説明して欲しい人を指名するかもしれない.
+ \item[午後1時半]
+  自主レポートの提出を受け付け, それが終了したら黒板の前での発表開始.
+ \item[演習終了後]
+  個人的に数学の質問に答える. 
+  数学の勉強の仕方に関する相談にものる.
+\end{description}
+
+\subsection{数学をマスターするために必要な勉強法}
+
+さて, ある程度以上のレベルの数学をマスターするためには
+{\bf しっかり書かれた数学の本を丸ごと読む}
+という勉強が必要になる. そのとき必要なことは
+\begin{itemize}
+ \item 証明の理解に論理的ギャップがあってはいけない,
+ \item 数学的な具体例にはどのようなものがあるかをよく調べる,
+ \item 本では説明が省略されている部分を完璧に埋める,
+ \item 本よりも詳しい説明が書かれているノートを作る,
+ \item 最終的には自家製の教科書を完成することを目指す,
+ \item 何よりも重要なのは「数学的本質は何か」について考え続けること
+\end{itemize}
+などである. 
+一冊の本を丸ごと読めない場合には
+少なくとも章単位で丸ごと読むように努力するのが良い.
+ノートの作成も重要である.
+「教科書を読むよりも君のノートを読んだ方がわかりやすい」
+と他人に言ってもらえるようなノートを書くことを目指して欲しい.
+
+高校までの数学では問題単位で解き方を習得するような勉強の仕方をしていた人
+が多いと思う. しかし現在勉強しているような数学を習得するためには
+「数学の世界がどんな様子をしているか, その本質は何か」を理解するように
+努力しなければいけない. 
+
+私がたくさんの演習問題を渡すのはそれらの問題をすべて解いて欲しいからでは
+ない. 演習問題を解く過程でまとまった知識の重要性に気付き, 
+上に書いたような勉強に進むきっかけを作りたいからである.
+演習の時間に「余計なこと」を話そうと努力しているのも同様の理由からである.
+
+以上のような考え方に基づき, 
+この演習では自主レポートとして
+\begin{center}
+ \large\bf 私が渡した問題を順番に大量に解いて提出することは禁止
+\end{center}
+する. 私が渡した問題を大量に解き続ける時間があるなら, 
+上に書いたような勉強の仕方をした方が良い.
+逆に, 上で説明した方法で幾何学を勉強しながら, 
+\begin{center}
+ \large\bf 疑問を質問にまとめてレポートとして提出することは推奨
+\end{center}
+される.
+場合によっては問題を解いたレポートよりも質問のレポートの方を高く評価する
+こともありえる.  自分が理解できていないことを論理的に説明することは
+自分が理解していることをまとめるよりも圧倒的に難しい.
+個人的に数学科の卒業生には「自分の疑問を論理的にまとめる能力」
+が要求されると思う.
+
+\subsection{論理的に口頭で説明できる能力も身に付けよう}
+
+ここの数学科の卒業生が身に付けることができる能力は
+\begin{itemize}
+ \item 現代の進んだ数学の知識を身に付けること
+ \item 英語で書かれた数学の文献を読めるようになること
+ \item 単に日本語や英語の数学文献を読めるだけではなく, \\
+  その内容を他人に対して口頭で論理的に説明できること
+\end{itemize}
+の3つだと思う.  4年生のときのセミナーで英語の文献を読むことになるので,
+卒業までにしっかり勉強すれば英語で書かれた数学の文献も読めるようになる.
+この演習では「数学の知識」だけではなく, 
+「論理的に説明できること」をも身に付けてもらいたいと考えている.
+
+以上の考え方に基づき, 
+この演習では単位取得の必要条件として
+一回以上黒板の前で発表することを義務として課すことにする. 
+\begin{center}
+ \large\bf 単位が欲しければ最低でも一回以上黒板の前で発表すること!
+\end{center}
+(自主)レポートも成績の参考にするが, 
+単位を取得するためにはそれだけでは足りない. 
+最終的に救済措置を設ける可能性もあるが, 
+最初からそう期待しないこと.
+
+しかし, 残念ながら演習の時間は限られているので話す練習を十分にできない
+だろう. 一人当たり1〜3回程度黒板の前に立つだけで終わってしまうと思う.
+しかし各自が問題の解答をノートにまとめるときに
+他人に説明するために使えるような書き方を心がけるようにすれば
+「話す準備の練習」は十分にできるように思われる.
+数学の文章(問題の解答を含む)を書くときには
+常に口頭での説明を要求されることを前提に書くべきである.
+自分が説明するためにさえ使えないようでは書く意味がない.
+
+問題の解答を書いたレポートや質問を書いたレポートを提出した場合には, 
+レポートを見た後(提出の次週以降になる)に適当に見繕って
+\begin{center}
+ \large\bf
+ レポートの内容を黒板の前で説明することを要求するかもしれない.
+\end{center}
+特に黒板に書かれた解答が少ない場合はそうするだろう.
+主としてレポートを提出していても黒板の前で発表していない人
+の中から選ぶ予定である.
+
+黒板の前での発表を強制すると嫌われる場合があるのだが, 
+数学について口頭での発表ができる能力は数学科の卒業生として
+当然要求されるべき能力だと思うので以上のような方針を採用することにした.
+
+\subsection{成績評価の方針}
+
+{\small
+\begin{itemize}
+ \item 黒板の前での発表と自主レポートの内容で成績を評価する.
+ \item 各問題の基本点は10点であるが, 
+       易しい問題にはそれ未満の点数が付けられ, 
+       難しい問題には20点〜∞点の点数が付けられる.
+       黒板の前で発表するとその基本点が5倍以上になり, 
+       自主レポートで提出した場合には基本点がそのまま付けられる.
+ \item {\bf 単位が欲しければ最低でも一回以上黒板の前で発表すること.}
+ \item 救済措置があるかもしれないが, 最初からそう期待しないこと.
+ \item 黒板の前で一回以上発表して最後まで
+       論理的ギャップを埋めれば C 以上で単位を出す.
+ \item 自力で解いた場合には他の人が黒板ですでに
+       解いてしまったのと同じ問題の解答を黒板で発表してよい.
+ \item 黒板の前での自主的な発表には自主レポート提出の5倍以上の点数を付ける.
+ \item {\bf 自主レポートの内容を黒板の前で発表することを要求するかもしれない.}
+ \item こちらが指名してレポートの内容を黒板の前で説明してもらった場合には
+       「黒板の前での説明一回分」とはみなさない.
+       しかし説明の内容が特別に良ければ例外的に
+       「黒板の前での説明一回分」とみなされ, 
+       5倍以上の点数が付けられることになる.
+ \item 内容に論理的にギャップがある場合には減点する.
+ \item {\bf 自主レポートで問題を大量に解いて提出することは禁止.\\
+       1回のレポート提出あたり2問以下にして欲しい.}
+ \item 一つのテーマについて同じような問題を複数解いて
+       レポートとして提出するのではなく, 
+       複数のテーマに関して複数のレポートを提出するように努力して欲しい.
+ \item 幾何学の本を読みながら感じた疑問を質問にまとめて
+       レポートとして提出しても良い.
+       そのようなレポートは高く評価し, 
+       最低でも30点以上の点数を付ける.
+       質問の内容が高度なものであれば
+       100点以上の点数を付けてしまうかもしれない.
+       ただし疑問の内容を私が理解できない場合は
+       黒板の前での説明をお願いするかもしれない.
+ \item 現在習っていることよりも進んだ数学について勉強した結果を
+       自主レポートとして提出しても構わない.
+ \item 問題に誤りを見つけた場合には適切に訂正して解こうとすること.
+\end{itemize}
+}
+
+黒板の前で一回以上発表しているという条件を満たしており, 
+40点以上ならC, 70点以上ならB, 100点以上ならA, 130点以上ならAAの
+成績を付ける予定である.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{復習}
+\label{sec:hukushu}
+
+この演習の最初の目標は位相空間 (位相幾何的な図形) のホモロジー群を
+($\Delta$)複体を用いて計算できるようになることである.
+($\Delta$)複体を用いたホモロジー群の計算は次の2つのステップで実行される.
+\begin{enumerate}
+\item 与えられた位相空間を単体の貼り合せで表示する. 
+\item 加群の部分加群と商加群の計算によってホモロジー群を計算する.
+\end{enumerate}
+単体とは次元の低い順に一点, 線分, 三角形, 中身の詰まった四面体, $\ldots$ の
+ことである. 単体は組み合わせ論的な扱いに便利な簡単な位相空間である.
+与えられた複雑な位相空間を簡単な部品である単体に分割し,
+その分割に基いてホモロジー群を代数的に計算することになる.
+
+以上の2つのステップを数学的に完壁に理解するためには
+位相空間の貼り合わせと加群の部分加群と商加群の計算の仕方を
+復習しておく必要がある.
+
+今日, 渡すプリントではこれから必要になりそうなことを簡単に説明し,
+実際にどのように使われるかを例と演習問題の形で示すことにする.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{位相空間論の復習}
+\label{sec:top}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsubsection{貼り合わせの補題}
+\label{sec:hariawase}
+
+次の補題を知っておくと単体の貼り合わせで位相空間を表示することを
+数学的に厳密に行なうことが易しくなる.
+
+\begin{lemma}[貼り合わせの補題]
+  \label{lemma:hariawase}
+  $X$ は Hausdorff 空間であり, %
+  $Y$ はコンパクト空間であるとし, %
+  $f: Y\to X$ は全射連続写像であるとする.
+  $Y$ における同値関係 $\sim$ を $y,y'\in Y$ に対して
+  \begin{equation*}
+    y\sim y' \iff f(y) = f(y')
+  \end{equation*}
+  で定め, $Y$ の商位相空間 $Y/{\sim}$ を考える.
+  このとき $f$ が誘導する写像
+  \begin{equation*}
+  \phi: Y/{\sim} \to X, \qquad 
+  \phi([y])=f(y)\quad (y\in Y)   
+  \end{equation*}
+  は同相写像である.
+  \qed
+\end{lemma}
+
+この演習で重要なのはこの補題の証明よりもその応用の仕方である.
+証明を知りたい人は後の方の演習問題を見て欲しい.
+
+この演習では $X$, $Y$, $f:Y\to X$, $Y/\sim$ として
+以下のようなものをよく考える:
+\begin{itemize}
+\item Hausdorff 空間 $X$ としてよく考えるのはホモロジー群を計算したい
+  位相空間である.
+\item コンパクト空間 $Y$ としてよく考えるのは
+  有限個の(閉)単体 $\{\, \sigma \mid \sigma\in K\,\}$ の非連結和
+  (disjoint union, 交わりのない和) である:
+  \begin{equation*}
+    Y = \bigsqcup_{\sigma\in K}\sigma.
+  \end{equation*}
+  各単体はユークリッド空間の有界閉集合なのでコンパクトである. 
+  コンパクト空間の有限和もまたコンパクトなので
+  このような $Y$ もコンパクトである.
+\item 全射 $f:Y=\bigsqcup_{\sigma\in K} \sigma\to X$ としてよく考えるのは
+  単体 $\sigma\in K$ たちの貼り合わせ方を記述する写像である.
+\item そのとき商位相空間 $Y/{\sim} 
+  = \bigl(\bigsqcup_{\sigma\in K}\sigma\bigr)\big/{\sim}$ は
+  単体 $\sigma\in K$ たちを $f$ で定義される同値関係で貼り合わせて
+  作った位相空間になる.
+\end{itemize}
+上の\lemmaref{lemma:hariawase}はコンパクト空間 $Y$ を連続写像で
+貼り合わせて集合として Haussdorf 空間 $X$ と同一視できるものを構成したとき, 
+それは位相空間としても $X$ と同一視できることを意味している.
+
+一般に集合として同一視できても位相空間として同一視できるとは限らない.
+しかし\lemmaref{lemma:hariawase}の条件が満たされていれば
+その点が自動的にうまく行くのである.
+
+\begin{example}
+  \label{example:I-S^1}
+  Haussdorff 空間 $X$ として
+  円周 $S^1=\{\,(x,y)\in\R^2\,\mid x^2+y^2=1\,\}$ を考え, 
+  コンパクト空間 $Y$ として閉区間 $I=[0,1]$ ($1$ 単体) を考え,
+  全射連続写像 $f:I\to S^1$, $f(t)=(\cos 2\pi t, \sin 2\pi t)$ 
+  ($t\in I$) を考える.
+  このとき $f(t)=f(t')$ と $t=t'$ または $\{t,t'\}=\{0,1\}$ は同値である.
+  したがって $f$ が定める同値関係 $\sim$ は $0$ と $1$ を貼り合わせる
+  同値関係になる.
+  \lemmaref{lemma:hariawase}より閉区間 $Y=I=[0,1]$ の $0$ と $1$ を
+  貼り合わせて作った商位相空間 $I/{\sim}$ は円周 $S^1$ と同相になる.
+  \qed
+\end{example}
+
+\begin{example}
+  \label{example:I+I-S^1}
+  Haussdorff 空間 $X$ として
+  円周 $S^1=\{\,(x,y)\in\R^2\,\mid x^2+y^2=1\,\}$ を考え, 
+  コンパクト空間 $Y$ として2つの閉区間の非連結和 $Y=[0,1]\cup[3,4]$ を考え,
+  全射連続写像 $f:Y\to S^1$, $f(t)=(\cos \pi t, \sin \pi t)$ 
+  ($t\in Y$) を考える.
+  このとき $f(t)=f(t')$ と $t=t'$ または $\{t,t'\}=\{0,4\}$ 
+  または $\{t,t'\}=\{1,3\}$ は同値である.
+  したがって $f$ が定める同値関係 $\sim$ は $0$ と $4$ を
+  貼り合わせ, $1$ と $3$ を貼り合わせる同値関係になる.
+  \lemmaref{lemma:hariawase}より$Y=[0,1]\cup[3,4]$ をそのように
+  貼り合わせて作った商位相空間 $I/{\sim}$ は円周 $S^1$ と同相になる.
+  \qed
+\end{example}
+
+\begin{question}
+  2つの線分の端点をうまく貼り合わせて $8$ の字型の図形
+  \begin{equation*}
+    X = \{\, (x,y)\in\R^2 \mid (x^2+(y+1)^2-1)(x^2+(y-1)^2-1)=0 \,\}
+  \end{equation*}
+  と同相な位相空間を構成できることを\lemmaref{lemma:hariawase}を用いて示せ.
+  \qed
+\end{question}
+
+\begin{question}
+  三角形 $2$ 枚の辺をうまく貼り合わせて $2$ 次元球面
+  \begin{equation*}
+    S^2 = \{\, (x,y,z)\in\R^3 \mid x^2+y^2+z^2=1 \,\}
+  \end{equation*}
+  と同相な位相空間を構成できることを\lemmaref{lemma:hariawase}を用いて示せ.
+  \qed
+\end{question}
+
+\begin{question}
+  三角形 $2$ 枚の辺をうまく貼り合わせて $2$ 次元トーラス
+  $T=S^1\times S^1$ と同相な位相空間を構成できること
+  を\lemmaref{lemma:hariawase}を用いて示せ.
+  \qed
+\end{question}
+
+%{\bf 以上の3つの問題を解き終わるまでここから先を読まないことが好ましい.}
+%\\
+%(どうしても読みたい人は読んでも構わない.)
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsubsection{貼り合わせの補題の証明}
+\label{sec:hariawase-proof}
+
+\lemmaref{lemma:hariawase}を以下の問題の羅列を解くことによって証明せよ.
+おそらく位相空間論の教科書を見れば以下のほとんどの問題の答が
+書いてあるはずである.
+
+\begin{question}
+  $X$, $Y$ は集合であり, $f:Y\to X$ は全射であるとし,
+  $Y$ における同値関係 $\sim$ を $y,y'\in Y$ に対して
+  \begin{equation*}
+    y\sim y' \iff f(y) = f(y')
+  \end{equation*}
+  で定め, $Y$ の商位集合 $Y/{\sim}$ を考える.
+  このとき $f$ が誘導する写像
+  \begin{equation*}
+  \phi: Y/{\sim} \to X, \qquad 
+  \phi([y])=f(y)\quad (y\in Y)   
+  \end{equation*}
+  は全単射である.
+  \qed
+\end{question}
+
+\begin{question}
+  $X$, $Y$ は位相空間であり, $f:Y\to X$ は連続写像であるとし,
+  $Y$ における同値関係 $\sim$ を $y,y'\in Y$ に対して
+  \begin{equation*}
+    y\sim y' \iff f(y) = f(y')
+  \end{equation*}
+  で定め, $Y$ の商位相空間 $Y/{\sim}$ を考える.
+  このとき $f$ が誘導する写像
+  \begin{equation*}
+  \phi: Y/{\sim} \to X, \qquad 
+  \phi([y])=f(y)\quad (y\in Y)   
+  \end{equation*}
+  は連続である.
+  \qed
+\end{question}
+
+\begin{proof}[ヒント]
+  $Y$ から $Y/{\sim}$ への自然な射影を $\pi(y)=[y]$ ($y\in Y$) と書く
+  とき商位相空間 $Y/{\sim}$ での誘導位相は次のように定義される:
+  \begin{equation*}
+    \text{$U\subset Y/{\sim}$ が $Y/{\sim}$ の開集合である}
+    \iff
+    \text{$\pi^{-1}(U)\subset Y$ は $Y$ の開集合である}.
+  \end{equation*}
+  (このヒントの自然な射影 $\pi:Y\to Y/{\sim}$ が全射連続写像である
+  ことにも注意せよ.)
+  \qed
+\end{proof}
+
+以上の2つの問題の結果より, 
+\lemmaref{lemma:hariawase}の $\phi:Y/{\sim}\to X$ は
+全単射連続写像であることがわかる.
+
+\begin{question}
+  コンパクト空間の連続写像による像もまたコンパクトである.
+  \qed
+\end{question}
+
+したがって $Y/{\sim}$ もコンパクト空間である.
+
+\begin{question}
+  コンパクト空間の閉集合もまたコンパクトである. \qed
+\end{question}
+
+\begin{question}
+  Haussdorff 空間 $X$ のコンパクト部分集合は閉集合である.
+  \qed
+\end{question}
+
+以上の2つの問題の結果を使うと次の問題の結果をただちに証明できる.
+
+\begin{question}
+  コンパクト空間から Hausdorff 空間への連続写像は閉写像である.
+  \qed
+\end{question}
+
+以上の結果をまとめると, \lemmaref{lemma:hariawase}の $\phi:Y/{\sim}\to X$ 
+は全単射閉連続写像であることがわかる.
+
+\begin{question}
+  全単射閉連続写像は同相写像である. \qed
+\end{question}
+
+\begin{proof}[ヒント]
+  逆写像が連続であることのみを示せば十分である.
+  写像が連続であることと閉集合の引き戻しが常に閉集合になることは同値である.
+  \qed
+\end{proof}
+
+以上の問題をすべて解けば\lemmaref{lemma:hariawase}の証明が完結する.
+位相空間論について忘れてしまった人は
+以上の問題をすべて解けば良い復習になるだろう.
+単なる抽象論で難しいことを何一つ使わない.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{加群の理論の復習}
+\label{sec:kagun}
+
+この演習は幾何の演習であり, 代数の演習ではないので,
+できる限り, 幾何的な状況に密着しながら代数の復習を行なう.
+
+\begin{definition}[鎖複体とそのホモロジー群]
+  $C_p$ ($p\in\Z$) は $\Z$ 加群であり,
+  $\d_p : C_p \to C_{p-1}$ は $\Z$ 加群の準同型写像であるとする.
+  このとき $(C_\bcdot, \d_\bcdot)$ が{\bf 鎖複体 (chain complex)} で
+  あるとは2つの $\d_{p-1}\circ\d_p = 0$ ($p\in\Z$) が成立することである:
+  \begin{equation*}
+   ( C_{p-2} \xleftarrow{\d_{p-1}} C_{p-1} \xleftarrow{\d_p} C_p) 
+   = (C_{p-2} \xleftarrow{0} C_p).
+  \end{equation*}
+  鎖複体 $C_\bcdot$ において $\d_p$ の定義域と値域が
+  文脈によって明らかな場合には $\d_p$ を単に $\d$ と書くことが多い.
+  $\d$ は{\bf 境界準同型 (boundary homomorphism)}と呼ばれる.
+
+  鎖複体 $C_\bcdot$ に対して
+  {\bf 輪体群 (group of cycles)} $Z_p=Z_p(C_\bcdot)$, 
+  {\bf 境界群 (group of boundaries)} $B_p=B_p(C_\bcdot)$, 
+  {\bf ホモロジー群 (homology group)} $H_p=H_p(C_\bcdot)$ を
+  次のように定義する:
+  \begin{align*}
+    &
+    Z_p = \Ker(\d: C_p\to C_{p-1})
+    = \{\, c_p\in C_p \mid \d c_p = 0 \,\},
+    \\ &
+    B_p = \Image(\d: C_{p+1}\to C_p)
+    = \{\, \d c_{p+1} \mid c_{p+1}\in C_{p+1}\,\},
+    \\ &
+    H_p = Z_p/B_p
+    = (\text{$Z_p$ において $B_p$ の元をすべて $0$ とみなしてできる加群}).
+  \end{align*}
+  最後の商加群 $Z_p/B_p$ が well-defined になるために
+  は $B_p\subset Z_p$ でなければいけないが,
+  そのことは $\d(\d c_{p+1})=\d\circ\d(c_{p+1})=0$ からすぐにわかる.
+
+  $z\in Z_p$ の $H_p$ における像を $[z]$ と書き, 
+  $[z]$ を {\bf 輪体 (cycle)} $z$ で代表される
+  {\bf ホモロジークラス (homology class)} と呼ぶ.
+
+  以上の定義は純粋に代数的であるが,
+  用語法だけは「輪体」=「サイクル」や「境界」=「バウンダリー」のような
+  明らかに幾何的な言葉を用いている.
+  その意味は講義と演習での解説を聴けばすぐに明らかになるだろう.
+  \qed
+\end{definition}
+
+\begin{example}[$S^1$ のホモロジー群 (計算が自明な場合)]
+\label{example:S^1-trivial}
+  \exampleref{example:I-S^1}の状況を考える.
+  このとき円周 $S^1$ は $0,1$ の像である一点 $v_0$ と
+  開区間 $(0,1)$ の像 $a$ の非連結和に分解される. 
+  図を描いてみよ.
+
+  一点 $v_0$ から生成される自由 $\Z$ 加群を $C_0=\Z\bra v_0\ket$ と書き,
+  開区間 $(0,1)$ の像 $\ell$ から生成される自由 $\Z$ 加群を $C_1=\Z\bra a\ket$ 
+  と書くことにする. さらに $p\ne 0,1$ に対して $C_p$ は零加群であるとする.
+  $\Z$ 加群の準同型写像 $\d: C_1 \to C_0$ を $\d\bra a\ket=v_0-v_0=0$ 
+  という条件によって定める.
+  これによってすべての境界準同型が $0$ であるような鎖複体 $C_\bcdot$ が
+  定まる.
+
+  この鎖複体の $Z_p$, $B_p$, $H_p$ が消えないのは $p=0,1$ の場合だけ
+  であり, それらは以下のように計算される:
+  \begin{align*}
+    &
+    Z_0 = \Ker(0:C_0\to 0) = C_0 = \Z\bra v_0\ket,
+    \\ &
+    Z_1 = \Ker(0:C_1\to 0) = C_1 = \Z\bra a\ket,
+    \\ &
+    B_0 = \Image(0:C_1\to C_0) = 0,
+    \\ &
+    B_1 = \Ker(0:0\to C_1) = 0,
+    \\ &
+    H_0 = Z_0/B_0 = C_0/0 \isom C_0 = \Z\bra v_0\ket \isom \Z,
+    \\ &
+    H_1 = Z_1/B_1 = C_1/0 \isom C_1 = \Z\bra a\ket \isom \Z.
+    \qed
+  \end{align*}
+\end{example}
+
+\begin{question}[8の字のホモロジー群]
+\label{q:8-trivial}
+  上の例と同様にして8の字のホモロジー群を計算せよ.
+  \qed
+\end{question}
+
+\begin{example}[$S^1$ のホモロジー群 (計算が非自明な最も簡単な場合)]
+\label{example:S^1-nontrivial}
+  \exampleref{example:I+I-S^1}の状況を考える.
+  このとき円周 $S^1$ は $0,4$ の像である一点 $v_0$ 
+  と $1,3$ の像である一点 $v_0$ と
+  開区間 $(0,1)$ の像 $a$ と開区間 $(3,4)$ の像 $b$ の
+  非連結和に分解される. 
+  図を描いてみよ.
+
+  2点 $v_0,v_1$ から生成される自由 $\Z$ 加群を
+  \begin{equation*}
+    C_0 = \Z\bra v_0\ket\oplus\Z\bra v_1\ket
+    = \{\, k\bra v_0\ket+l\bra v_1\ket \mid k,l\in\Z\,\}
+  \end{equation*}
+  と書き, $a$, $b$ から生成される自由 $\Z$ 加群を
+  \begin{equation*}
+    C_1 = \Z\bra a\ket\oplus\Z\bra b\ket
+    = \{\, m\bra a\ket+n\bra b\ket \mid m,n\in\Z\,\}
+  \end{equation*}
+  と書くことにする. さらに $p\ne 0,1$ に対して $C_p$ は零加群であるとする.
+  $\Z$ 加群の準同型写像 $\d=\d_1: C_1 \to C_0$ を
+  \begin{equation*}
+    \d\bra a\ket = \bra v_1\ket - \bra v_0\ket, 
+    \qquad 
+    \d\bra b\ket = \bra v_0\ket - \bra v_1\ket
+  \end{equation*}
+  という条件によって定める. 他の $p\ne 1$ に対する $\d_p$ は
+  すべて零写像であるとする.
+  これによって鎖複体 $C_\bcdot$ が定まる.
+  
+  この鎖複体の $Z_p$, $B_p$, $H_p$ が消えないのは $p=0,1$ の場合だけ
+  であり, それらは以下のようにして計算される.
+
+  まず次は容易である:
+  \begin{align*}
+    &
+    Z_0 = \Ker(C_0\to 0) = C_0 
+    = \{\, k\bra v_0\ket+l\bra v_1\ket \mid k,l\in\Z\,\},
+    \\ &
+    B_1 = \Image(0\to C_1) = 0.
+  \end{align*}
+  任意に $m\bra a\ket+n\bra b\ket\in C_1$ を取ると
+  \begin{equation*}
+    \d(m\bra a\ket+n\bra b\ket) 
+    = m(\bra v_1\ket-\bra v_0\ket)+n(\bra v_0\ket-\bra v_1\ket) 
+    = (m-n)(\bra v_1\ket-\bra v_0\ket).
+  \end{equation*}
+  よって $\d(m\bra a\ket+n\bra b\ket)=0$ 
+  と $m=n$ と $m\bra a\ket+n\bra b\ket=m(\bra a\ket+\bra b\ket)$ は同値である:
+  \begin{equation*}
+    Z_1 = \Ker(\d:C_1\to C_0) 
+    = \{\, m(\bra a\ket+\bra b\ket) \mid m\in\Z\,\} 
+    = \Z(\bra a\ket+\bra b\ket).
+  \end{equation*}
+  さらに $m-n$ は任意の整数を動くので次が成立することもわかる:
+  \begin{equation*}
+    B_0 = \Image(\d:C_1\to C_0) 
+    = \{\, k(\bra v_1\ket-\bra v_0\ket) \mid k\in\Z\,\} 
+    = \Z(\bra v_1\ket-\bra v_0\ket).
+  \end{equation*}
+  であることもわかる. $B_1=0$ より次は易しい:
+  \begin{equation*}
+    H_1 = Z_1/B_1 
+    = \Z(\bra a\ket+\bra b\ket)/0 \isom \Z(\bra a\ket+\bra b\ket) \isom \Z.
+  \end{equation*}
+  ここまでは易しい. 最後に残された問題は $H_0=Z_0/B_0$ の計算である.
+  
+  $H_0=Z_0/B_0$ の計算の仕方 1 {\bf (答を予想して準同型定理で証明する方法)}.
+  $\bra v_i\ket\in C_0=Z_0$ の $H_0$ における像を $[v_i]$ と書くことにする.
+  $H_0=Z_0/B_0=C_0/B_0$ は直観的には $C_0$ において $B_0$ の元を
+  すべて $0$ とみなしてできる加群である. 
+  $B_0=\Z(\bra v_1\ket-\bra v_0\ket)$ である
+  から $B_0$ の元をすべて $0$ とみなすこと
+  と $\bra v_0\ket$ と $\bra v_1\ket$ を同一視することは同値である.
+  よって商加群 $H_0$ は $\bra v_0\ket$ の像 $[v_0]$ だけから
+  生成される $\Z$ 自由加群に同型なはずである. 
+  実際これが正しいことを次のようにして確かめることができる.
+  準同型写像 $\phi:C_0\to\Z$ を $\phi(k\bra v_0\ket+l\bra v_1\ket)=k+l$ 
+  ($k,l\in\Z$) と定める. 
+  $\phi$ は全射であり, $\Ker\phi=B_0$ であることがすぐにわかる.
+  よって準同型定理より $H_0=Z_0/B_0=C_0/B_0\isomto\Z$ であることがわかる.
+  この同型写像は $\phi$ から誘導され, $[v_0]$ を $\Z$ の生成元 $1$ に移す.
+  これで $H_0$ が $[v_0]$ から生成される $\Z$ 自由加群であることがわかった.
+
+  もしも準同型定理について忘れているならばこの機会に復習せよ.
+
+  $H_0=Z_0/B_0$ の計算の仕方 2 {\bf (単因子論)}.
+  $Z_0=C_0=\Z\bra v_0\ket\oplus\Z\bra v_1\ket$ の自由基底と
+  して $\bra v_0\ket$, $\bra v_1\ket - \bra v_0\ket$ が取れる.
+  実際, 任意の $C_0$ の元は $k\bra v_0\ket+l\bra v_1
+  = (k+l)\bra v_0\ket + l(\bra v_1\ket - \bra v_0\ket)$ と表わせ,
+  $m\bra v_0\ket + n(\bra v_1\ket - \bra v_0\ket)
+  =(m-n)\bra v_0\ket + n\bra v_1\ket = 0$ ならば $m=n=0$ である.
+  これで $C_0=\Z\bra v_0\ket\oplus\Z(\bra v_1\ket - \bra v_0\ket)
+  = \Z\bra v_0\ket\oplus B_0$ であることがわかった.
+  よって $H_0=C_0/B_0\isom \Z\bra v_0\ket\isom \Z$ である.
+
+  単因子論より有限生成自由 $\Z$ 加群 $M$ の
+  任意の部分 $\Z$ 加群 $N$ は $M$ の適当な自由 $\Z$ 基底 $b_1,\ldots,b_n$ 
+  と整数 $d_1,\ldots,d_r$ ($r\le n$) を
+  取ることによって $N=\Z d_1b_1\oplus\cdots\oplus\Z d_rb_r$ と表わされる.
+
+  $M=C_0$, $N=B_0$ の場合はこのような自由基底を見付けるのは簡単である. 
+  より一般の簡単でない場合であっても単因子の計算のアルゴリズムを使えば
+  原理的にはいつでもそのような自由基底を見付けることができる.
+  \qed
+\end{example}
+
+{\bf 以下の3つの問題は全員が解くべきである.}
+以下の3つの問題は講義を理解するために必ず役に立つ.
+
+\begin{question}[$S^1$ のホモロジー群 (最小の単体分割)]
+\label{q:S^1-sc}
+  3本の線分の端点を貼り合わせて作った周だけの三角形 $ABC$ 
+  は円周 $S^1$ と同相である.
+  そこで周だけの三角形 $ABC$ と円周 $S^1$ を同一視することにする.
+  3点 $A,B,C$ から生成される自由 $\Z$ 加群を $C_0$ と書き,
+  向きの付いた3本の線分 $AB$, $BC$, $CA$ から生成される自由 $\Z$ 加群
+  を $C_1$ と書くことにする:
+  \begin{equation*}
+    C_0 = \Z\bra A\ket\oplus\Z\bra B\ket\oplus\Z\bra C\ket,
+    \qquad
+    C_1 = \Z\bra AB\ket\oplus\Z\bra BC\ket\oplus\Z\bra CA\ket.
+  \end{equation*}
+  $p\ne 0,1$ に対する $C_p$ はすべて零加群であるとする.
+  準同型写像 $\d=\d_1:C_1\to C_0$ を次の条件によって定める:
+  \begin{equation*}
+    \d\bra AB\ket = \bra B\ket - \bra A \ket, \qquad
+    \d\bra BC\ket = \bra C\ket - \bra B \ket, \qquad
+    \d\bra CA\ket = \bra A\ket - \bra C \ket.
+  \end{equation*}
+  $p\ne 1$ に対する $\d_p:C_p\to C_{p-1}$ はすべて零写像であるとする.
+  これで鎖複体 $C_\bcdot$ が構成された.
+  この鎖複体のホモロジー群を上の例と同様に計算せよ.
+  \qed
+\end{question}
+
+\begin{question}[$S^2$ のホモロジー群 ($\Delta$ 複体の方法)]
+\label{q:S^2-Delta}
+  2枚の内側を含む三角形 $ABC$, $DEF$ を次のように貼り合わせる:
+  \begin{itemize}
+  \item 有向線分 $AB$ と $DE$ を向きを合わせて貼り合わせる. 
+  \item 有向線分 $BC$ と $EF$ を向きを合わせて貼り合わせる. 
+  \item 有向線分 $CA$ と $FD$ を向きを合わせて貼り合わせる. 
+  \end{itemize}
+  ここで「向きを合わせて貼り合わせる」とはたとえば $A$ と $D$, $B$ と $E$ が
+  貼り合わさるように線分 $AB$ と $DE$ を貼り合わせることであり, 他についても
+  同様である. このようにして2枚の三角形を貼り合わせて作った位相空間
+  は $2$ 次元球面 $S^2$ と同相である.
+
+  3点 %
+  $\bra A\ket =\bra D\ket$, 
+  $\bra B\ket =\bra E\ket$, 
+  $\bra C\ket =\bra F\ket$ から生成される自由 $\Z$ 加群を $C_0$ と書き, 
+  3本の有向線分 %
+  $\bra AB\ket = \bra DE\ket$, 
+  $\bra BC\ket = \bra EF\ket$, 
+  $\bra CA\ket = \bra FD\ket$ から生成される自由 $\Z$ 加群を $C_1$ と書き, 
+  2枚の三角形 %
+  $\bra ABC\ket$, $\bra DEF\ket$ から生成される自由 $\Z$ 加群を $C_2$ と書く.
+  $p\ne 0,1,2$ に対する $C_p$ は零加群であるとする.
+
+  $p=1,2$ に対して準同型写像 $\d=\d_p:C_p\to C_{p-1}$ を次のように定める:
+  \begin{align*}
+    &
+    \d\bra XY\ket = \bra Y\ket - \bra X\ket
+    \qquad (\bra XY\ket = \bra AB\ket, \bra BC\ket, \bra CA\ket),
+    \\ &
+    \d\bra XYZ\ket = \bra XY\ket + \bra YZ\ket + \bra ZX\ket
+    \qquad (\bra XYZ\ket = \bra ABC\ket, \bra DEF\ket).
+  \end{align*}
+  $p\ne 1,2$ に対して $\d_p:C_p\to C_{p-1}$ は零写像であるとする.
+ 
+  これで鎖複体 $C_\bcdot$ が構成された.
+  この鎖複体のホモロジー群を計算せよ.
+  \qed
+\end{question}
+
+\begin{question}[2次元トーラス $T^2$ のホモロジー群 ($\Delta$ 複体の方法)]
+\label{q:T^2-Delta}
+  2枚の(内側を含む)直角二等辺三角形 $ABC$, $DEF$ を考える.
+  ただし直角のは点 $B$ と $E$ にあるとする.
+  それらを次のように貼り合わせる:
+  \begin{itemize}
+  \item 有向線分 $CA$ と $DF$ を向きを合わせて貼り合わせる. 
+  \item 有向線分 $BC$ と $FE$ を向きを合わせて貼り合わせる. 
+  \item 有向線分 $AB$ と $ED$ を向きを合わせて貼り合わせる. 
+  \end{itemize}
+  このようにして2枚の三角形を貼り合わせて作った位相空間
+  は $2$ 次元トーラス $T^2$ に同相である.
+  貼り合わせの様子の図を描け.
+  6つの点 $A,B,C,D,E,F$ のトーラス上での像は同一の1点になる.
+
+  1点 %
+  $\bra A\ket = \bra B\ket = \bra C\ket 
+  = \bra D\ket = \bra E\ket = \bra F\ket$
+  から生成される自由 $\Z$ 加群を $C_0$ と書き, 
+  3本の有向線分 %
+  $\bra AB\ket = \bra ED\ket$, 
+  $\bra BC\ket = \bra FE\ket$, 
+  $\bra CA\ket = \bra DF\ket$ から生成される自由 $\Z$ 加群を $C_1$ と書き, 
+  2枚の三角形 %
+  $\bra ABC\ket$, $\bra DEF\ket$ から生成される自由 $\Z$ 加群を $C_2$ と書く.
+  $p\ne 0,1,2$ に対する $C_p$ は零加群であるとする.
+
+  $p=1,2$ に対して準同型写像 $\d=\d_p:C_p\to C_{p-1}$ を次のように定める:
+  \begin{align*}
+    &
+    \d\bra XY\ket = \bra Y\ket - \bra X\ket
+    \qquad (\bra XY\ket = \bra AB\ket, \bra BC\ket, \bra CA\ket),
+    \\ &
+    \d\bra XYZ\ket = \bra XY\ket + \bra YZ\ket + \bra ZX\ket
+    \qquad (\bra XYZ\ket = \bra ABC\ket, \bra DEF\ket).
+  \end{align*}
+  ただし $\bra YX\ket = -\bra XY\ket$ と約束しておく.
+  $p\ne 1,2$ に対して $\d_p:C_p\to C_{p-1}$ は零写像であるとする.
+ 
+  これで鎖複体 $C_\bcdot$ が構成された.
+  この鎖複体のホモロジー群を計算せよ.
+  \qed
+\end{question}
+
+以上の問題を何も見ずにすぐに解けるようになった人は
+すでにこの演習の単位をもらう資格があるかもしれない.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{$\Delta$ 複体}
+\label{sec:Delta-complex}
+
+%途中の諸定義の詳細よりも具体的なホモロジー群の計算に興味があるならば, 
+%途中を跳ばして\secref{sec:Delta-homology}に進んだ方が良い.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{単体の定義}
+\label{sec:simplex}
+
+Euclid 空間 $\R^N$ の $n+1$ 個の点 $v_0,v_1,\ldots,v_n$ が
+{\bf 一般の位置にある}とは $n$ 本のベクトル $v_1-v_0,\ldots,v_n-v_0$ が
+一次独立であることである. 
+
+一般の位置にある Euclid 空間の $n+1$ 個の点 $v_0,v_1,\ldots,v_n$ で
+張られる{\bf 閉 $n$ 単体 (closed $n$-simplex)} %
+$\sigma=|v_0v_1\cdots v_n|=|v_0,v_1,\ldots,v_n|$ が次のように定義される:
+\begin{equation*}
+  \sigma = |v_0v_1\cdots v_n|
+  =
+  \{\, t_0v_0+t_1v_1+\cdots+t_nv_n 
+  \mid t_i\geqq 0,\ t_0+t_1+\cdots+t_n=1 \,\}.
+\end{equation*}
+$(t_0,t_1,\ldots,t_n)$ を{\bf 重心座標 (barycentric coordinate)} と呼ぶ.
+簡単のため閉 $n$ 単体を単に {\bf $n$ 単体 ($n$-simplex)}と呼ぶことにする.
+たとえば $0$ 単体は一点になり, $1$ 単体は閉線分になり, $2$ 単体は三角形
+になり, $3$ 単体は中身の詰まった四面体になる.
+
+同様にして{\bf 開 $n$ 単体 (open $n$-simplex)} %
+$\open\sigma = (v_0v_1\cdots v_n)=(v_0,v_1,\ldots,v_n)$ が
+次のように定義される:
+\begin{equation*}
+  \open\sigma = (v_0v_1\cdots v_n)
+  =
+  \{\, t_0v_0+t_1v_1+\cdots+t_nv_n 
+  \mid t_i>0,\ t_0+t_1+\cdots+t_n=1 \,\}.
+\end{equation*}
+たとえば開 $0$ 単体は一点になり, 開 $1$ 単体は開線分になり, %
+開 $2$ 単体は境界を含まない三角形になり, %
+開 $3$ 単体は境界を含まない四面体になる.
+$n=0$ の場合に限って開 $n$ 単体と閉 $n$ 単体が等しくなり, 
+それ以外の場合には開 $n$ 単体は閉 $n$ 単体から境界を除いたものになる.
+
+ホモロジー群の定義や単体の貼り合わせの定義のためには
+頂点の順序の情報が必要になる. 
+{\bf 頂点が順序付けられた単体 (simplex with an ordering of its vertices)}
+を $\sigma = |v_0v_1\cdots v_n|$ と書くとき,
+頂点の順序は $v_0,v_1,\ldots,v_n$ の順に指定されているとみなす.
+たとえば, 単なる $2$ 単体
+として $|ABC|$, $|ACB|$, $|BAC|$, $|BCA|$, $|CAB|$, $|CBA|$ は
+互いに等しいが, 頂点が順序付けられた $2$ 単体としては互いに異なると考える.
+
+次元が等しい頂点が順序付けられた二つの単体 %
+$\sigma = |u_0\cdots u_p|$, $\tau = |v_0\cdots v_p|$ の
+あいだの{\bf 自然な線形同相 (canonical linear homeomorphism)}を
+次のように定める:
+\begin{equation*}
+  \sigma\isomto\tau,
+  \quad 
+  \sum_{i=0}^n t_i u_i 
+  \mapsto
+  \sum_{i=0}^n t_i v_i
+  \qquad \Bigl(t_i\geqq 0,\ \sum_{i=0}^n t_i=1\Bigr).
+\end{equation*}
+単体のあいだの写像 $f:\sigma\to\tau$ が $\sigma$ と $\tau$ の
+頂点の適当な順序付けに関する自然な線形同相になっているとき, 
+$f$ は{\bf 線形同相 (linear homeomorphism)} であると言う.
+開単体のあいだの線形同相も同様に定義される.
+
+$n$ 単体 $\sigma=|v_0\cdots v_n|$ の頂点全体の集合の
+部分集合 $\{v_{i_0},\ldots,v_{i_p}\}$ で張られる
+単体 $\tau=|v_{i_0}\cdots v_{i_p}|$
+を $\sigma$ の $p$ 次元{\bf 辺単体}もしくは
+単に{\bf 辺}または{\bf 面 (face)} と呼ぶ.
+
+\begin{question}
+  $3$ 次元 Euclid 空間の中に
+  ある $2$ 次元閉単体 $|v_0v_1v_2| \subset \R^3$ の図を描き,
+  以下の点の位置を書き込め:
+  \begin{equation*}
+    v_0, \ v_1, \ v_2, \ %
+    \frac{v_0+v_1}{2}, \ %
+    \frac{v_0+v_2}{2}, \ %
+    \frac{v_1+v_2}{2}, \ %
+    \frac{v_0+v_1+v_2}{3}, %
+    \frac{v_0+v_1+4v_2}{6}.
+  \end{equation*}
+  図にはそれぞれの点の重心座標を書き込め.
+  さらに図がそのように描かれる理由(証明)も説明せよ.
+  \qed
+\end{question}
+
+\begin{question}
+ 閉 $n$ 単体 $|v_0v_1\cdots v_n|\subset\R^N$ 
+ は $n+1$ 個の点 $v_0,v_1,\ldots,v_n$ を含む最小の凸集合であることを示せ.
+ さらに
+ 開 $n$ 単体 $(v_0v_1\cdots v_n)\subset\R^N$ の $\R^N$ の中での
+ 閉包が $n$ 次元閉単体 $|v_0v_1\cdots v_n|$ に一致することを示せ.
+ \qed
+\end{question}
+
+\begin{question}
+ 閉 $n$ 単体 $\sigma$ が $n$ 次元
+ 閉球体 $D^n = \{\, (x_1,\ldots,x_n)\in\R^n
+ \mid x_1^2+\cdots+x_n^2 \leqq 1 \,\}$ に同相であることを示せ.
+ さらにそれらのあいだの同相写像が, 
+ 開 $n$ 単体 $\open\sigma$ と $n$ 次元
+ 開球体 $U^n = \{\, (x_1,\ldots,x_n)\in\R^n
+ \mid x_1^2+\cdots+x_n^2 < 1 \,\}$ のあいだの同相写像および
+ $n$ 単体の表面 $\d\sigma = \sigma - \open\sigma$ と $n-1$ 次元
+ 球面 $S^{n-1} = \{\, (x_1,\ldots,x_n)\in\R^n
+ \mid x_1^2+\cdots+x_n^2 = 1 \,\}$ のあいだの同相写像を
+ 誘導することを示せ. \qed
+\end{question}
+
+\begin{question}[$A_2^{(1)}$ 型 affine Weyl 群]
+ $\R^3$ 内の平面 $V$ と $2$ 単体 $\Delta$ を次のように定義する:
+ \begin{equation*}
+  V = \{\,(x,y,z)\in\R^3\mid x+y+z=1\,\}, \qquad
+  \Delta = \{\,(x,y,z)\in V\mid x,y,z\geqq 0\,\}.
+ \end{equation*}
+ 平面 $V$ と $xy$ 平面の交わりを $\ell_1$ と書き, 
+ 平面 $V$ と $xz$ 平面の交わりを $\ell_2$ と書き, 
+ 平面 $V$ と $yz$ 平面の交わりを $\ell_0$ と書く.
+ 平面 $V$ における直線 $\ell_i$ に関する線対称変換を $s_i$ と
+ 書くことにする.
+ $2$ 単体 $\Delta$ を $s_0,s_1,s_2$ による変換で次々に移してやると
+ 平面 $V$ 全体が埋め尽くされることを図を描いて説明せよ.
+ $s_1,s_2$ だけを使って $\Delta$ を移した場合には $V$ のどの部分が
+ 埋め尽くされるかも図に描き込め.
+ \qed
+\end{question}
+
+\begin{question}[$A_n^{(1)}$ 型 affine Weyl 群]
+ 上の問題の結果を $\R^{n+1}$ 内の超平面と $n$ 単体の場合に一般化せよ. \qed
+\end{question}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{$\Delta$ 複体の定義}
+\label{sec:Delta-complex-def}
+
+\begin{definition}[$\Delta$ 複体の定義1]
+ 閉単体の辺を線形同相で貼り合わせてできる位相空間 $X$ 
+ と貼り合わせ方の情報の組を{\bf $\Delta$ 複体}と呼ぶ.
+ \qed
+\end{definition}
+
+よくわかっている人が相手であればこの定義で十分なのだが,
+より厳密でしかも後でホモロジー群を定義するために便利な
+次の定義を採用することもできる.
+
+\begin{definition}[$\Delta$ 複体の定義2]
+\label{def:Delta-complex}
+  $X$ は Hausdorff 空間であるとし,
+  $K$ は単体の集合であるとし, 
+  $K$ に含まれる $n$ 単体全体の集合を $K_n$ と書くことにする:
+  \begin{equation*}
+   K_n = \{\, \sigma\in K \mid \text{$\sigma$ は $n$ 単体} \,\}.
+  \end{equation*}
+  単体 $\sigma\in K$ から $X$ への写像の
+  族 $\{\phi_\sigma:\sigma\to X\}_{\sigma\in K}$ で
+  以下の条件を満たすものを空間 $X$ 
+  の {\bf $\Delta$ 複体構造 ($\Delta$-complex structure)} と呼ぶ:
+  \begin{enumerate}
+  \item[(i)] 任意の単体 $\sigma\in K$ に対して、$\phi_\sigma$ の $\sigma$ の
+    内部への制限 $\phi_{\open\sigma}:\open\sigma\to X$ は単射であり, %
+    $X$ はそれらの像の非連結和である:
+    \begin{equation*}
+     X=\bigsqcup_{\sigma\in K}\phi_\sigma(\open\sigma).
+    \end{equation*}
+  \item[(ii)] 任意の $n$ 単体 $\sigma\in K_n$ とその
+    任意の $n-1$ 次元辺単体 $\sigma'$ に対して, 
+    $n-1$ 次元単体 $\tau\in K_{n-1}$ と
+    線形同相写像 $\psi_{\sigma'}:\tau\isomto\sigma'$ で 
+    $\phi_\sigma\circ\psi_{\sigma'}=\phi_\tau$ を満たすものが存在する.
+    (このとき条件(i)より, $\tau$ と $\psi_{\sigma'}$ は $\sigma'$ 
+    から一意に定まり, $\sigma'$ の頂点の順序付けから $\tau$ の
+    頂点の順序付けが $\psi_{\sigma'}$ を通して一意的に定まる.
+    この注意は後で $\Delta$ 複体のホモロジー群を定義するときに重要になる.)
+  \item[(iii)] 任意の $U\subset X$ に対して, $U$ が $X$ の開集合であること
+    と任意の $\sigma\in K$ に対して $\phi_\sigma^{-1}(U)$ 
+    が $\sigma$ の開集合になることは同値である. 
+  \end{enumerate}
+  $X$ とその $\Delta$ 複体構造の
+  組 $X_\Delta=(X,\; \{\phi_\sigma:\sigma\to X\}_{\sigma\in K})$ を
+  {\bf $\Delta$ 複体 ($\Delta$-complex)} と呼ぶ. 
+  \qed
+\end{definition}
+
+まじめに $\Delta$ 複体を定義してしまったが,
+これからやるホモロジー論を理解するためには定義そのものを忠実に理解するよ
+りも定義の直観的内容の方を重視する方が好ましい.
+論理的厳密性に関わる細かい事柄に関しては, 
+この演習の時間ではこちらから特別な指示が
+無い限りごまかしてもも良いことにする.
+たとえば貼り合わせ結果の Hausdorff 性は特別な指示が
+無い限り証明しなくて構わない.
+しかし幾何的内容に関わる議論に関してはクリアに説明しなければいけない.
+
+\begin{rem}[上の定義の解説]
+ 定義の条件(i)は「$X$ は集合として有限個の開単体 $\open\sigma$ 
+ ($\sigma\in K$) の非連結和と同一視可能であること」を意味している.
+
+ 定義の条件(ii)は「閉単体 $\sigma\in K$ の次元が一つ下の辺単体たちを
+ 線形同相でうまく貼り合わせることによって $X$ が構成されていること」
+ を意味している. (少々曖昧な言い方だが意味はわかるだろう.)
+
+ 定義の条件(iii)は「$X$ は閉単体 $\sigma\in K$ たち
+ の非連結和をある同値関係 $\sim$ で割ってできる
+ 商位相空間と同一視可能であること」を意味している:
+ \begin{equation*}
+  X = \bigsqcup_{\sigma\in K}\sigma\Big/{\sim}.
+ \end{equation*}
+ ただし同値関係 $\sim$ は次のように定義されたものである:
+ $x,x'\in \bigsqcup_{\sigma\in K}\sigma$ に対して
+ \begin{equation*}
+  x\sim x' \iff \phi(x) = \phi(x').
+ \end{equation*}
+ ここで $\phi$ は $\phi_{\sigma}$ ($\sigma\in K$) が定める自然な写像である.
+ 一般に集合のあいだの全射 $\phi:Y\to X$ が与えらえたとき, $Y$ に
+ 同値関係 $\sim$ を
+ \begin{equation*}
+  y\sim y' \iff \phi(y) = \phi(y')  \qquad (y,y'\in Y)
+ \end{equation*}
+ によって定めると, $\phi$ は自然な全単射 $\tilde{\phi}:Y/{\sim}\isoto X$ 
+ が誘導される. さらに $Y$ が位相空間であるとき, $X$ の位相を $U\subset X$ 
+ に対して
+ \begin{equation*}
+  \text{$U$ は $X$ の開集合} \iff \text{$\phi^{-1}(U)$ は $Y$ の開集合}
+ \end{equation*}
+ と定めると, 商空間の誘導位相の定義
+ より $\tilde{\phi}:Y/{\sim}\isoto X$ は同相写像になる.
+ この結果を $Y=\bigsqcup_{\sigma\in K}\sigma$ の場合に適用すれば
+ この段落の最初の主張が確かめられる.
+ \qed
+\end{rem}
+
+\begin{rem}[$\Delta$ 複体の定義の出所]
+ \definitionref{def:Delta-complex}の $\Delta$ 複体の定義は本質的に
+ \begin{quote}
+ \verb,http://www.math.cornell.edu/~hatcher/AT/ATpage.html,
+ \end{quote}
+ からダウンロードできる Allen Hatcher, ``Algebraic Topology''
+ の Chapter 2 の第2.1節の定義に等しい.  
+ ただし条件(ii)を少し一般化してあるので Hatcher の意味での $\Delta$ 複体
+ よりもこの演習での $\Delta$ 複体の範囲の方が少し広くなっている.  
+ たとえば Hatcher 氏が $\Delta$ 複体にならない場合として挙げている
+ 問題 \qref{q:hatcher-non-Delta-complex-example} の例は
+ この演習の定義では $\Delta$ 複体とみなされる.
+ \qed
+\end{rem}
+
+\begin{question}[dunce cap, スカタン帽]
+\label{q:dunce-cap}
+ $2$ 単体 $|ABC|$ の頂点が順序付けられた
+ 辺単体 $|AB|$, $|BC|$, $|AC|$ を自然な線形同相で
+ 一つに貼り合わせてできる Hausdorff 空間を $X$ とする.
+ $X$ は以下のように定義される自然な $\Delta$ 複体構造を持つ:
+ \begin{align*}
+  &
+  K = \{ |A|=|B|=|C|, |AB|=|BC|=|AC|, |ABC| \},
+  \\ &
+  \phi_{\sigma}(x) = (\text{点 $x$ の $X$ における像}) 
+  \qquad(x\in\sigma\in K).
+ \end{align*}
+ 以上の事実を図を描いて説明せよ. \qed
+\end{question}
+
+\begin{question}
+\label{q:hatcher-non-Delta-complex-example}
+ $2$ 単体 $|ABC|$ の頂点が順序付けられた
+ 辺単体 $|AB|$, $|BC|$, $|CA|$ を自然な線形同相で
+ 一つに貼り合わせてできる Hausdorff 空間を $X$ とする.
+ 上の問題と同様にして $X$ に自然に $\Delta$ 複体構造が入ることを
+ 図を描いて説明せよ.
+ \qed
+\end{question}
+
+\begin{rem}
+ 上の2つの問題で完成品の空間 $X$ 自体の図を描こうとすると大変なことに
+ なる. 興味があれば挑戦しても構わないが, 相当な工夫を要することに
+ なるだろう.  私も完成品の図をどのように描いたら良いかはよくわからない.
+ (スカタン帽の完成品の図は何とか描けたと思う.)
+ \qed
+\end{rem}
+
+%\begin{rem}[裏話]
+% この演習では {\bf $\Delta$ 複体 ($\Delta$-complex)}を
+% 用いてホモロジー群を導入する.
+%
+% しかし数学科の教育でより一般的に行なわれているのは定義の
+% 条件がよりきびしい{\bf 単体複体 (simplicial complex)}を
+% 用いてホモロジー群を導入することである.
+% 単体複体の方が組み合わせ論的な扱いが直接的になるという利点があるのだが,
+% 条件がきびし過ぎてトポロジーの本質と無関係なところで
+% 「確かにそれは三角形への分割にはなっているが単体分割の条件は
+% 満たしていない」などと言わなければいけなくなる.
+%
+% 定義の条件が非常にゆるい{\bf CW複体 (CW complex)}は
+% 数学の世界で標準的によく使われている. しかし, 教育上は様々な都合が
+% あるので, いきなりCW複体でホモロジー論を教えるのはおそらく無謀である.
+%
+% さらに定義から位相不変性が明らかな特異ホモロジーによってホモロジー群を
+% 導入することもできる. しかし特異ホモロジーは直接計算できないので
+% 結局はどこかで単体複体, $\Delta$ 複体, CW複体などの概念を導入する
+% 必要が生じる.
+%
+% $\Delta$ 複体は単体複体とCW複体の中間に位置する概念である. 
+% ホモロジー論の教育目的には中庸を得た最も適切な複体概念だと思われる.
+% $\Delta$ 複体でホモロジー論を教えると良いということを
+% 藤原耕二氏に教わった.
+% \qed
+%\end{rem}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{$\Delta$ 複体のホモロジー群}
+\label{sec:Delta-homology}
+
+\begin{definition}[$\Delta$ 複体のホモロジー群]
+ $\Delta$ 複体 $X_\Delta=(X,\; \{\phi_\sigma:\sigma\to X\}_{\sigma\in K})$ 
+ に対して鎖複体 $C_\bcdot=C_\bcdot(X_\Delta)=C_\bcdot(X_\Delta,\Z)$ を
+ 定義しよう. 
+
+ 各単体 $\sigma=|v_0v_1\cdots v_n|\in K$ の頂点の順序を一つ固定し, 
+ 記号 $\bra\sigma\ket = \bra v_0v_1\cdots v_n\ket$ を用意しておく.
+ $C_n$ は $\{\bra\sigma\ket\}_{\sigma\in K_n}$ から
+ 生成された自由 $\Z$ 加群であるとする:
+ \begin{equation*}
+  C_n = \bigoplus_{\sigma\in K_n} \Z\bra\sigma\ket.
+ \end{equation*}
+
+ 頂点が順序付けられた単体 $\sigma=|v_0v_1\cdots v_n|\in K_n$ 
+ と $0,1,\ldots,n$ の置換 $w$ に対して
+ \begin{equation*}
+  \bra v_{i_0}v_{i_1}\cdots v_{i_n}\ket 
+  = \sgn(w) \,\bra v_0v_1\cdots v_n\ket \in C_n,
+  \qquad
+  i_k = w(k)
+ \end{equation*}
+ と置く. ここで $\sgn(w)$ は置換 $w$ の符号である.
+ $v_0,\ldots,\widehat{v_k},\ldots,v_n$ (ここで $\widehat{\ }$ は
+ 取り除くという意味) で張られた $\sigma$ の $n-1$ 次元
+ 辺単体を $\sigma_k = |v_0\cdots\widehat{v_k}\cdots v_n|$ と書くことにする.
+ $\Delta$ 複体の定義より, 
+ ある $n-1$ 単体 $\tau_k\in K_{n-1}$ と
+ 線形同相 $\psi_k:\tau_k\isomto\sigma_k$ 
+ で  $\phi_\sigma\circ\psi_k=\phi_{\tau_k}$ を満たすものが一意に存在する.
+ $\tau_k$ の頂点の順序は $\psi_k$ を
+ 通して $v_0,\ldots,\widehat{v_k},\ldots,v_n$ と同じ順に揃えておき, 
+ $\bra\sigma_k\ket = \bra v_0\cdots\widehat{v_k}\cdots v_n\ket$
+ を次のように定める:
+ \begin{equation*}
+  \bra\sigma_k\ket
+  = \bra v_0\cdots\widehat{v_k}\cdots v_n\ket
+  := \bra\tau_k\ket \in C_{n-1}.
+ \end{equation*}
+ 境界準同型 $\d$ を次のように定める:
+ \begin{equation*}
+  \d\bra\sigma\ket = \d\bra v_0v_1\cdots v_n\ket
+  := \sum_{k=0}^n (-1)^k \bra\sigma_k\ket 
+  =  \sum_{k=0}^n (-1)^k \bra v_0\cdots\widehat{v_k}\cdots v_n\ket.
+ \end{equation*}
+ この $\d$ が $\d\circ\d = 0$ を満たしていることは
+ 演習問題 \qref{q:dd=0} にしておく.
+
+ 以上のように定義された鎖複体 $C_\bcdot$ の
+ ホモロジー群を $H_p(X_\Delta)=H_p(X_\Delta,\Z)$ と書き, %
+ $\Delta$ 複体 $X_\Delta$ のホモロジー群と呼ぶ.
+ \qed
+\end{definition}
+
+\begin{question}
+\label{q:dd=0}
+ 上の定義の $\d$ が $\d\circ\d=0$ を実際に満たしていることを示せ.
+ \qed
+\end{question}
+
+\begin{proof}[ヒント]
+ 一時的に $\sigma_k$ と $\tau_k$ を同一視することにし, 
+ 次のような計算に持ち込む:
+ \begin{align*}
+  &
+  \d\d\bra v_0v_1\cdots v_n\ket
+  \\ &
+  = \d\sum_{k=0}^n (-1)^k \bra v_0\cdots\widehat{v_k}\cdots v_n\ket
+%  \\ &
+  = \sum_{k=0}^n (-1)^k \d\bra v_0\cdots\widehat{v_k}\cdots v_n\ket
+  \\ &
+  = \sum_{k=0}^n \sum_{l=0}^{k-1}
+     (-1)^{k+l}   \bra v_0\cdots\widehat{v_l}\cdots\widehat{v_k}\cdots v_n\ket
+%  \\ &
+  + \sum_{k=0}^n \sum_{l=k+1}^{n}
+     (-1)^{k+l-1} \bra v_0\cdots\widehat{v_k}\cdots\widehat{v_l}\cdots v_n\ket
+  \\ &
+  = \sum_{l<k}
+     (-1)^{l+k}   \bra v_0\cdots\widehat{v_l}\cdots\widehat{v_k}\cdots v_n\ket
+%  \\ &
+  - \sum_{k<l}
+     (-1)^{k+l} \bra v_0\cdots\widehat{v_k}\cdots\widehat{v_l}\cdots v_n\ket
+%  \\ &
+  = 0.
+ \end{align*}
+ 余談. 幾何的にはこの問題の結果は「何かの境界は境界を持たない」
+ と一言で述べることができる. たとえば
+ \begin{align*}
+  &
+  \d\bra ABC\ket 
+  = \bra BC\ket - \bra AC\ket + \bra AB\ket
+  = \bra AB\ket + \bra BC\ket + \bra CA\ket,
+  \\ &
+  \d\d\bra ABC\ket 
+  = \bra C\ket - \bra B\ket
+  - \bra C\ket + \bra A\ket
+  + \bra B\ket - \bra A\ket
+  = 0.
+ \end{align*}
+ まずこの計算例の図を描いてみよ. 
+ さらに $\d\d\bra ABCD\ket=0$ も図を描いて納得してみよ.
+ 低次元の図を描ける場合には必ずを図を描かなければいけない.
+ \qed
+\end{proof}
+
+\begin{example}
+ \secref{sec:kagun}の例と問題は実はどれも $\Delta$ 複体の
+ ホモロジー群の計算例になっている.
+ \qed
+\end{example}
+
+\begin{question}[dunce cap, スカタン帽]
+\label{q:dunce-cap-homology}
+ 問題 \qref{q:dunce-cap} の $\Delta$ 複体
+ のホモロジー群を計算せよ.
+ \qed
+\end{question}
+
+\commentout{
+\begin{proof}[略解]
+ $H_0=\Z[A]\isom\Z$, 他は $0$.
+ \qed
+\end{proof}
+}
+
+\begin{question}
+\label{q:hatcher-non-Delta-complex-example-homology}
+ 問題 \qref{q:hatcher-non-Delta-complex-example} の $\Delta$ 複体
+ のホモロジー群を計算せよ.
+ \qed
+\end{question}
+
+\commentout{
+\begin{proof}[略解]
+ $H_0=\Z[A]\isom\Z$, $H_1=(\Z/3\Z)[AB]\isom\Z/3\Z$, 他は $0$.
+ \qed
+\end{proof}
+}
+
+\begin{question}[dunce cap, スカタン帽]
+ 問題 \qref{q:dunce-cap} と同様
+ に $2$ 単体 $|ABC|$ の頂点が順序付けられた辺 $|AB|$, $|BC|$, $|AC|$ 
+ を自然な線形同相によって一つに貼り合わせてできる空間を $X$ とする.
+ $2$ 単体 $|ABC|$ の内部に点 $D$ を取り, 
+ $2$ 単体 $|ABC|$ は三つの $2$ 単体 $|ABD|$, $|BCD|$, $|CAD|$ の
+ 貼り合わせで構成されていると考える.
+ これによって $X$ に 
+ 問題 \qref{q:hatcher-non-Delta-complex-example} とは
+ 異なる $\Delta$ 複体構造を入れることができる.
+ このようにして構成された $\Delta$ 複体のホモロジー群を
+ 定義に基づいて計算せよ.
+ \qed
+\end{question}
+
+\begin{question}
+ 問題 \qref{q:hatcher-non-Delta-complex-example} と同様
+ に $2$ 単体 $|ABC|$ の頂点が順序付けられた辺 $|AB|$, $|BC|$, $|CA|$ 
+ を自然な線形同相によって一つに貼り合わせてできる空間を $X$ とする.
+ $2$ 単体 $|ABC|$ の内部に点 $D$ を取り, 
+ $2$ 単体 $|ABC|$ は三つの $2$ 単体 $|ABD|$, $|BCD|$, $|CAD|$ の
+ 貼り合わせで構成されていると考える.
+ これによって $X$ に 
+ 問題 \qref{q:hatcher-non-Delta-complex-example} とは
+ 異なる $\Delta$ 複体構造を入れることができる.
+ このようにして構成された $\Delta$ 複体のホモロジー群を
+ 定義に基づいて計算せよ.
+ \qed
+\end{question}
+
+以下の三つの問題は全員が一度は解かなければいけない.
+
+\begin{question}[2次元トーラス]
+ 四角形 $ABCD$ が二つの $2$ 単体 $|ABC|$, $|CDA|$ の貼り合わせで
+ 構成されていると考える.
+ 四角形 $ABCD$ の辺を次のように貼り合わせる:
+ \begin{itemize}
+  \item 頂点が順序付けられた $1$ 単体 $|BC|$ と $|AD|$ を
+    自然な線形同相で貼り合わせる.
+  \item 頂点が順序付けられた $1$ 単体 $|AB|$ と $|DC|$ を
+    自然な線形同相で貼り合わせる.
+ \end{itemize}
+ このようにして構成された位相空間 $X$ は自然に $\Delta$ 複体とみなせる.
+ この $\Delta$ 複体のホモロジー群を定義に基づき計算せよ.
+ (この問題は本質的に問題 \qref{q:T^2-Delta} に等しい.)
+ \qed
+\end{question}
+
+\begin{question}[実射影平面]
+ 四角形 $ABCD$ が二つの $2$ 単体 $|ABC|$, $|CDA|$ の貼り合わせで
+ 構成されていると考える.
+ 四角形 $ABCD$ の辺を次のように貼り合わせる:
+ \begin{itemize}
+  \item 頂点が順序付けられた $1$ 単体 $|AB|$ と $|CD|$ を
+    自然な線形同相で貼り合わせる.
+  \item 頂点が順序付けられた $1$ 単体 $|BC|$ と $|DA|$ を
+    自然な線形同相で貼り合わせる.
+ \end{itemize}
+ このようにして構成された位相空間 $X$ は自然に $\Delta$ 複体とみなせる.
+ この $\Delta$ 複体のホモロジー群を定義に基づき計算せよ.
+ ($K_0$ の元の個数が $2$ になることに注意せよ.)
+ \qed
+\end{question}
+
+\begin{question}[Klein の壷]
+ 四角形 $ABCD$ が二つの $2$ 単体 $|ABC|$, $|CDA|$ の貼り合わせで
+ 構成されていると考える.
+ 四角形 $ABCD$ の辺を次のように貼り合わせる:
+ \begin{itemize}
+  \item 頂点が順序付けられた $1$ 単体 $|BC|$ と $|AD|$ を
+    自然な線形同相で貼り合わせる.
+  \item 頂点が順序付けられた $1$ 単体 $|AB|$ と $|CD|$ を
+    自然な線形同相で貼り合わせる.
+ \end{itemize}
+ このようにして構成された位相空間 $X$ は自然に $\Delta$ 複体とみなせる.
+ この $\Delta$ 複体のホモロジー群を定義に基づき計算せよ.
+ \qed
+\end{question}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

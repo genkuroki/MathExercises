@@ -1,0 +1,1665 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\def\STUDENT{} % \def すると計算問題の解答を印刷しなくなる.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[12pt,twoside]{jarticle}
+%\documentclass[12pt]{jarticle}
+\usepackage{amsmath,amssymb,amscd}
+\usepackage{eepic}
+\usepackage{enshu}
+%\usepackage{showkeys}
+\allowdisplaybreaks
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\newlabel{q:Wilson-theorem}{{16}{14}}
+%\newlabel{q:ring-hom-th-2}{{18}{15}}
+%\newlabel{q:prime=>irred'}{{21}{16}}
+%\newlabel{q:Eisenstein/Z}{{24}{17}}
+%\newlabel{q:Z[sqrt(-26)]}{{30}{25}}
+%\newlabel{q:def-frac-ring}{{49}{36}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setcounter{page}{37}      % この数から始まる
+\setcounter{section}{2}    % この数の次から始まる
+\setcounter{theorem}{0}    % この数の次から始まる
+\setcounter{question}{56}  % この数の次から始まる
+\setcounter{footnote}{0}   % この数の次から始まる
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\ifx\STUDENT\undefined
+%
+% 教師専用
+%
+\newcommand\commentout[1]{#1}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\else
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% 生徒専用
+%
+\newcommand\commentout[1]{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\fi
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\title{\bf 代数学概論B演習
+%  \ifx\STUDENT\undefined\\{\normalsize 教師用\quad(計算問題の略解付き)}\fi}
+%\author{黒木 玄 \quad (東北大学大学院理学研究科数学専攻)}
+%\date{2006年4月10日(月)}
+%\maketitle
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\noindent
+{\Large\bf 代数学概論B演習}
+\hfill
+{\large 黒木玄}
+\qquad
+2006年6月16日(月)
+\commentout{\quad (教師用)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\tableofcontents
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section*{研究課題}
+
+「研究課題」＝「講義とは無関係に単位が欲しい人が解くべき問題」という意味
+である. 研究課題を解いた人は演習以外の時間に解いてレポートにまとめて提出
+して欲しい.
+
+積閉集合によって定義される分数環に関する問題演習が
+足りないような気がするので以下の問題を出すことにする.
+講義とは無関係に単位が欲しくない人であっても, %
+「``$S^{-1}R$'' の例を複数挙げよ」
+「$R$ が整域でない場合の ``$S^{-1}R$'' の例を挙げよ」
+のような質問にすぐに答えることができない人は
+以下の問題をざっと読んで結論だけは確認しておいて欲しい.
+
+さらに二次体の整数環に関する簡単な問題とUFDに関する問題も出しておく.
+「UFDの例を複数挙げよ」や「UFDではない可換整域の例を挙げよ」
+のような質問にすぐに答えることができない人は
+後の方の問題をざっと読んで結論だけは確認しておいて欲しい.
+
+将来, 代数系の分野を専攻しようと考えている人は単位とは無関係に
+以下に出したような基本的な問題を解けるようになっていることが好ましい.
+
+\section{積閉集合によって定義される分数環}
+
+\begin{definition}[積閉集合]
+ 可換環 $R$ の部分集合 $S$ が
+ {\bf 積閉(部分)集合 (multiplicatively closed (sub-)set)} であるとは, 
+ $1\in S$ かつ $0\not\in S$ で $S$ が積で閉じていることである.
+ \qed
+\end{definition}
+
+\begin{question}
+ 以下の集合 $S$ が積閉集合であることを示せ:
+ \begin{enumerate}
+ \item $R$ が可換環のとき %
+  $S=\{\, a\in R \mid\text{$a$ は $R$ の零因子ではない}\,\}$.
+ \item $R$ が整域のとき $S=R\setminus\{0\}$. 
+ \item $R$ が可換環で $P$ がその素イデアルのとき $S=R\setminus P$.
+ \qed
+ \end{enumerate}
+\end{question}
+
+\begin{definition}[分数環, 全分数環環, 商体, 素イデアルにおける局所化]
+ $R$ は可換環であり, $S$ はその積閉集合であるとする.
+ 直積集合 $R\times S$ に次のように同値関係を入れる:
+ \begin{equation*}
+  (a,s)\sim (a',s')
+  \iff
+  \text{ある $t\in S$ で $t(s'a-sa')=0$ を満たすものが存在する}.
+ \end{equation*}
+ $S^{-1}R=R\times S/{\sim}$ と置き, %
+ $(a,s)$ で代表される $S^{-1}R$ の元を $\dfrac{a}{s}$ と書く.
+ $S^{-1}R$ の和と積を $a/s, a'/s'\in S^{-1}R$ に対して
+ \begin{equation*}
+  \frac{a}{s}+\frac{a'}{s'}=
+  \frac{s'a+sa'}{ss'},
+  \quad
+  \frac{a}{s}\frac{a'}{s'}=
+  \frac{aa'}{ss'}
+ \end{equation*}
+ と定めることができる. これによって $S^{-1}R$ は可換環をなす.
+ $S^{-1}R$ を %
+ $S$ によって定義された{\bf 分数環 (fractional ring)} 
+ もしくは{\bf 商環 (quotient ring)} 
+ もしくは{\bf 分数の環 (ring of fractions)} 
+ もしくは $S$ による{\bf 局所化 (localization)} と呼ぶ.
+ 環準同型 
+ \begin{equation*}
+  i_S:R\to S^{-1}R, \quad i_S(a)=\dfrac{a}{1} \quad (a\in R) 
+ \end{equation*}
+ を{\bf 自然な環準同型}と呼ぶ.
+ 特に $S$ が $R$ の非零因子全体の集合のとき $S^{-1}R$ 
+ を $R$ の{\bf 全分数環 (total fractional ring)} 
+ もしくは{\bf 全商環 (total quotient ring)} と呼ぶ.
+ $R$ が整域で $S=R\setminus\{0\}$ のとき $S^{-1}R$ は体になるの
+ で $S^{-1}R$ を $R$ の{\bf 商体 (quotient field)} と呼ぶ.
+ $R$ が可換環で $P$ がその素イデアルで $S=R\setminus P$ の
+ とき $S^{-1}R$ を $R_P$ と書き, $R$ の $P$ における
+ {\bf 局所化 (localization)} と呼ぶ.
+ \qed
+\end{definition}
+
+\begin{rem}
+  上の定義において $S$ が零因子を含まなければ同値関係 $\sim$ は次に等しい:
+ \begin{equation*}\
+  (a,s)\approx (a',s') \iff s'a=sa'.
+ \end{equation*}
+ $R$ が整域ならば $R$ の任意の積閉集合は零因子を含まないことに注意せよ.
+ \qed
+\end{rem}
+
+\begin{question}[定義の確認]
+\label{q:def-frac-ring}
+ 以下を示せ:
+ \begin{enumerate}
+  \item 上の定義において $S^{-1}R$ の和と積がうまく定義されている
+   (well-defined である).
+  \item 写像 $i_S$ は実際に環準同型になっている.
+  \item \(\Ker i_S = 
+   \{\,a\in R\mid \text{ある $s\in S$ で $sa=0$ となるものが存在する}\,\}\).
+  \item $S$ が零因子を含まなければ $i_S$ は単射なので, %
+   $a\in R$ と $a/1\in S^{-1}R$ を同一視して, $R$ を $S^{-1}R$ の
+   部分環とみなせる.
+  \qed
+ \end{enumerate}
+\end{question}
+
+\begin{question}[分数環の普遍性]
+ $R$ は可換環であり, $S$ はその積閉集合であるとする.
+ $f:R\to R'$ は $R$ から可換環 $R'$ への環準同型であり, 
+ 任意の $s\in S$ に対して $f(s)$ は $R'$ の単元であると仮定する.
+ このとき, ある環準同型 $\phi:S^{-1}R\to R'$ で $\phi\circ i_S=f$ を
+ みたすものが唯一存在する.
+ \qed
+\end{question}
+
+\begin{definition}[局所環]
+ 可換環 $R$ が唯一の極大イデアル $\frakm$ しか持たないとき $(R,\frakm)$ 
+ もしくは $R$ を{\bf 局所環 (local ring)} と呼ぶ.
+ 局所環 $(R,\frakm)$ に対して体 $R/\frakm$ を
+ 局所環 $R$ の{\bf 剰余体 (residue field)} と呼ぶ.
+ \qed
+\end{definition}
+
+\begin{question}
+ 可換環 $R$ が局所環ための必要十分条件は $R$ の非単元全体の
+ 集合 $\frakm=R\setminus U(R)$ が $R$ のイデアルをなすことである.
+ そのとき $\frakm$ は $R$ の唯一の極大イデアルになる.
+ \qed
+\end{question}
+
+\begin{question}[$R_P$ は局所環]
+ 可換環 $R$ の素イデアル $P$ における局所化 $R_P$ が局所環であり, 
+ その唯一の極大イデアルは $\frakm_P=\{\,p/s\mid p\in P,\ s\in R\setminus P\,\}$
+ であることを示せ.
+ \qed
+\end{question}
+
+\begin{question}
+ $p$ が素数ならば $\Z$ の単項イデアル $(p)$ は素イデアル
+ (実際には極大イデアル) になる.
+ このとき $\Z$ の $(p)$ における局所化 $\Z_{(p)}$ は %
+ 分母が $p$ で割り切れない有理数全体の集合に一致している:
+ \begin{equation*}
+  \Z_{(p)} = 
+  \left\{\,\left. \frac{a}{b} \,\right|\, a,b\in\Z,\ p\nmid b \,\right\}.
+ \end{equation*}
+ $\Z_{(p)}$ の唯一の極大イデアルは
+ \begin{equation*}
+  p\Z_{(p)} =
+  \left\{\,\left. \frac{a}{b} 
+  \,\right|\, a,b\in\Z,\ p\mid a,\ p\nmid b \,\right\}
+ \end{equation*}
+ であり, 剰余体は位数 $p$ の有限体 $\F_p$ に等しい.
+ \qed
+\end{question}
+
+\begin{question}
+ $\alpha\in\C$ に対して $\C[x]$ の単項イデアル $(x-\alpha)$ は素イデアル
+ (実際には極大イデアル) になる. 
+ このとき $\C[x]$ の $(x-\alpha)$ における局所化 $\C[x]_{(x-\alpha)}$ は %
+ $x=\alpha$ に極を持たない複素有理函数全体の集合に一致している:
+ \begin{equation*}
+  \C[x]_{(x-\alpha)} =
+   \left\{\,\left. \frac{f(x)}{g(x)} 
+   \,\right|\, f(x),g(x)\in\C[x],\ g(\alpha)\ne 0 \,\right\}.
+ \end{equation*}
+ $\C[x]_{(x-\alpha)}$ の唯一の極大イデアルは
+ \begin{equation*}
+  \frakm = (x-\alpha)\C[x]_{(x-\alpha)} =
+   \left\{\,\left. \frac{f(x)}{g(x)} 
+   \,\right|\, f(x),g(x)\in\C[x],\ f(\alpha)=0,\ g(\alpha)\ne 0 \,\right\}
+ \end{equation*}
+ であり, 剰余体は $\C$ に同型である:
+ \begin{equation*}
+  \C[x]_{(x-\alpha)}/\frakm \isomto \C, \quad
+  \frac{f(x)}{g(x)}\MOD\frakm \mapsto \frac{f(\alpha)}{g(\alpha)}.
+  \qed
+ \end{equation*}
+\end{question}
+
+\begin{guide}
+ すぐ上の問題はどうして $R_P$ を局所化と呼ぶかを理解するために参考になる.
+ 基本的に $R$ の元が函数とみなせるとき, 
+ 函数たちに共通する定義域を縮小する操作が局所化になっている.
+ すぐ上の問題の場合は $\C[x]$ の任意の元は $\C$ 上の函数とみなせるが, 
+ 局所化 $\C[x]_{(x-\alpha)}$ の元が定義されている領域の共通部分
+ は $\alpha$ の一点になってしまう.
+ \qed
+\end{guide}
+
+\begin{question}
+ $\alpha,\beta\in\C$ に対して %
+ $\C[x,y]$ のイデアル $(x-\alpha,y-\beta)$ は極大イデアルである.
+ $\C[x,y]$ の $(x-\alpha,y-\beta)$ による
+ 局所化は $x,y$ の複素有理函数で $(x,y)=(\alpha,\beta)$ でも
+ 値が定義されているもの全体の集合に一致している:
+ \begin{equation*}
+  \C[x,y]_{(x-\alpha,y-\beta)}
+   \left\{\,\left. \frac{f(x,y)}{g(x,y)} 
+   \,\right|\, f(x,y),g(x,y)\in\C[x,y],\ g(\alpha,\beta)\ne 0 \,\right\}.
+ \end{equation*}
+ $\C[x,y]_{(x-\alpha,y-\beta)}$ の唯一の極大イデアルは
+ \begin{equation*}
+  \frakm =
+   \left\{\,\left. \frac{f(x,y)}{g(x,y)} 
+   \,\right|\, f(x,y),g(x,y)\in\C[x,y],\ %
+   f(\alpha,\beta)=0,\ g(\alpha,\beta)\ne 0 \,\right\}
+ \end{equation*}
+ であり, 剰余体は $\C$ に同型である:
+ \begin{equation*}
+  \C[x,y]_{(x-\alpha)}/\frakm \isomto \C, \quad
+  \frac{f(x,y)}{g(x,y)}\MOD\frakm
+  \mapsto \frac{f(\alpha,\beta)}{g(\alpha,\beta)}.
+  \qed
+ \end{equation*}
+\end{question}
+
+\begin{question}
+ $\alpha\in\C$ に対して %
+ $\C[x,y]$ の単項イデアル $(x-\alpha)$ は $\C[x,y]$ の
+ 極大ではない素イデアルである.
+ $\C[x,y]$ の $(x-\alpha)$ による局所化は $x,y$ の複素有理函数体 $\C(x,y)$ の
+ 部分集合として具体的に次のように表わされる:
+ \begin{equation*}
+  \C[x,y]_{(x-\alpha)} =
+   \left\{\,\left. \frac{f(x,y)}{g(x,y)} 
+   \,\right|\, f(x,y),g(x,y)\in\C[x,y],\ g(\alpha,y)\ne 0 \,\right\}.
+ \end{equation*}
+ $\C[x,y]_{(x-\alpha)}$ の唯一の極大イデアルは
+ \begin{equation*}
+  \frakm =
+   \left\{\,\left. \frac{f(x,y)}{g(x,y)} 
+   \,\right|\, f(x,y),g(x,y)\in\C[x,y],\ %
+   f(\alpha,y)=0,\ g(\alpha,y)\ne 0 \,\right\}
+ \end{equation*}
+ であり, 剰余体は $\C(y)$ に同型である:
+ \begin{equation*}
+  \C[x,y]_{(x-\alpha)}/\frakm \isomto \C(x),
+  \quad
+  \frac{f(x,y)}{g(x,y)} \MOD \frakm \mapsto \frac{f(\alpha,y)}{g(\alpha,y)}.
+  \qed
+ \end{equation*}
+\end{question}
+
+\begin{guide}
+ 上の問題の $\C[x,y]$ の素イデアル $(x-\alpha)$ は $y$ 軸に
+ 平行な直線 $x=\alpha$ に対応している. 
+ 直線 $x=\alpha$ 上の有理函数体は $\C(y)$ に同型である.
+ この $\C(y)$ が剰余体になっている.
+
+ 実は一般の場合も極大でない素イデアルによる局所化の剰余体も
+ 同じような感じになっている.
+ この事実を正確に説明するためには
+ 代数幾何の初歩の話をしなければいけないのでここでは無理である.
+ 興味のある人は図書室などで代数幾何 (algebraic geometry) の教科書を
+ 探して読んで欲しい.
+ \qed
+\end{guide}
+
+\begin{question}[整域の商体への埋め込み, 簡単]
+ 可換環 $R$ が整域であるための必要十分条件はある体 $K$ で $R$ を部分環に
+ 持つものが存在することである.
+ \qed
+\end{question}
+
+\begin{question}[積閉集合が零元を含むことを許した場合, 簡単]
+ 永尾の教科書 \cite{nagao-1983} やこの演習では
+ 可換環 $R$ の積閉集合 $S$ は $0\not\in S$ を満たす
+ という流儀を採用している.
+ しかし $0\in S$ を許す流儀も存在する.
+ もしも $0\in S$ ならば $S^{-1}R=0$ となってしまうことを示せ.
+ \qed
+\end{question}
+
+\begin{rem}[自明な環]
+ 上の問題の ``$S^{-1}R=0$'' の右辺の $0$ は零元だけで
+ 構成された{\bf 自明な環}を意味している.  
+ ($0$ という記号は零元という意味と零元だけで構成された集
+ 合という二通りの意味で使われることに注意せよ.) 
+ 自明な環では $1=0$ が成立していると考える.
+
+ {\bf 整域や体は自明な環ではないとしておかなければいけない}ことに注意せよ.
+ 整域と体をそのように定義しておかないと, 
+ 剰余環が整域もしくは体になるという条件で
+ 素イデアルと極大イデアルを特徴付けできなくなってしまう.
+ \qed
+\end{rem}
+
+\begin{example}[積閉集合による局所化の最も簡単な例]
+ \quad
+ \begin{enumerate}
+  \item $R=\Z$, $S=\{1,2,2^2,2^3,\ldots\}$ のとき
+   \begin{equation*}
+    S^{-1}R=\Z[1/2]=\{\text{分母が $2$ のべきの有理数全体}\}.
+   \end{equation*}
+  \item $R=\C[x]$, $S=\{1,x,x^2,x^3,\ldots\}$ のとき %
+  \begin{equation*}
+    S^{-1}R=\C[x,x^{-1}]=\{\text{変数 $x$ の複素係数 Laurent 多項式全体}\}.
+    \qed
+  \end{equation*}
+ \end{enumerate}
+\end{example}
+
+\begin{question}[積閉集合による局所化の便利な特徴付け]
+\label{q:Rtilde=S^{-1}R}
+ $R$ は可換環であり, $S$ は $R$ の積閉集合であるとする.
+ 可換環 $\widetilde{R}$ と環の準同型 $i:R\to\widetilde{R}$ は
+ 以下の条件を満たしていると仮定する:
+ \begin{enumerate}
+ \item[(i)] 任意の $s\in S$ に対して $i(s)$ 
+  は $\widetilde{R}$ の単元(可逆元)である.
+ \item[(ii)] $\widetilde{R}=\{\, i(a)/i(s) \mid s\in S,\ a\in R \,\}$.
+ \item[(iii)] \(\Ker i = 
+  \{\,a\in R\mid\text{ある $s\in S$ で $sa=0$ を満たすものが存在する}\,\}\).
+ \end{enumerate}
+ 以上の仮定のもとで $i:R\to\widetilde{R}$ は以下を満たしている:
+ \begin{enumerate}
+ \item $a,a'\in R$, $s,s'\in S$ に対して
+  \begin{align*}
+   &
+   i(a)/i(s)=i(a')/i(s')
+   \\ &
+   \iff
+   \text{ある $t\in S$ で $t(s'a-sa')=0$ を満たすものが存在する}.
+  \end{align*}
+ \item 写像 $\Phi:\widetilde{R}\to S^{-1}R$ を $\Phi(i(a)/i(s))=a/s$
+  ($s\in S$, $a\in R$) と定めることができる. 
+  この写像は環の同型写像であり, $\Phi\circ i = i_S$ が成立している.
+  よって $\Phi$ を通して $\widetilde{R}$ と $S^{-1}R$ を同一視できる.
+ \item  $f:R\to R'$ は $R$ から可換環 $R'$ への環準同型であり, 
+  任意の $s\in S$ に対して $f(s)$ は $R'$ の単元(可逆元)であると仮定する.
+  このときある環準同型 $\phi:\widetilde{R}\to R'$ 
+  で $\phi\circ i=f$ をみたすものが唯一存在する. 
+  (この事実を (i), (ii), (iii) の条件を用いて直接証明せよ.
+  $S^{-1}R$ の普遍性を既知として証明してはいけない.)
+  したがって $i:R\to\widetilde{R}$ を $i_S:R\to S^{-1}R$ で
+  置き換えた同様の結果も成立している($S^{-1}R$ の普遍性).
+  \qed
+ \end{enumerate}
+\end{question}
+
+\begin{rem}
+ $i:R\to\widetilde{R}$ が具体的に与えられたとき, 
+ 上の問題の条件 (i), (ii), (iii) を確認することによって %
+ $\widetilde{R}\isom S^{-1}R$ (環の同型)を証明できる.
+ \qed
+\end{rem}
+
+\begin{question}[非整域の分数環の例]
+\label{q:Rtilde=S^{-1}R-1}
+ $R=\C[x]\times\C[y]$ (可換環の直積) とおく. 
+ \begin{enumerate}
+  \item $R$ は整域ではない.
+  \item $S_0=\{\,(x^n,0)\mid n=0,1,2,\ldots\,\}$ ならば %
+   $S_0^{-1}R \isom \C[x,x^{-1}]$.
+  \item $S_1=\{\,(x^n,1)\mid n=0,1,2,\ldots\,\}$ ならば %
+   $S_1^{-1}R \isom \C[x,x^{-1}]\times\C[y]$.
+  \qed
+ \end{enumerate}
+\end{question}
+
+\begin{proof}[ヒント]
+ 1. 容易.
+
+ 2. $i_0:R\to\C[x,x^{-1}]$ 
+ を $i_0(f(x),g(y))=f(x)$ ($(f(x),g(y))\in R$) と定め, 
+ これが \qref{q:Rtilde=S^{-1}R} の条件を満たしていることを示せ.
+
+ 3. $i_1:R\to\C[x,x^{-1}]\times\C[y]$ 
+ を $i_1(f(x),g(y))=(f(x),g(y))$ ($(f(x),g(y))\in R$) と定め, 
+ これが \qref{q:Rtilde=S^{-1}R} の条件を満たしていることを示せ.
+ \qed
+\end{proof}
+
+\begin{question}
+\label{q:Rtilde=S^{-1}R-2}
+ $R$ は可換環であり, $S$ はその積閉集合であるとする.
+ $i:R\to S^{-1}R$ は $R$ から分数環への自然な環準同型であるとする. 
+ $\overline{R}=R/{\Ker i_S}$ と置き, $S$ の $\overline{R}$ での像
+ を $\overline{S}$ と書くことにする.
+ このとき $\overline{S}$ は $\overline{R}$ の積閉集合である.
+ $\overline{i}:\overline{R}\to\overline{S}^{-1}\overline{R}$ は %
+ $\overline{R}$ から分数環への自然な環準同型であるとする.
+ 写像 $\Phi:\overline{S}^{-1}\overline{R}\to S^{-1}R$ 
+ を $\Phi(\overline{a}/\overline{s})=a/s$ ($a\in R$, $s\in S$, 
+ $\overline{\phantom{x}}$ は $R$ から $\overline{R}$ への自然な射影) と
+ 定めることができ, $\Phi$ は環の同型写像であり, 
+ $\Phi\circ\overline{i}=i$ を満たしている.
+ \qed
+\end{question}
+
+\begin{proof}[ヒント]
+ 問題 \qref{q:Rtilde=S^{-1}R} の結果を使う.
+ 問題 \qref{q:Rtilde=S^{-1}R-2} の 2 のヒントの議論の一般化.
+ \qed
+\end{proof}
+
+\begin{rem}
+ 一般に集合の集合 $\cA$, $\cB$ のあいだの
+ 写像 $f:\cA\to\cB$, $g:\cB\to\cA$ が $I\in\cA$, $J\in\cB$ に対して %
+ $g(f(I))\supset I$, $f(g(J))\subset J$ を満たしているならば %
+ $f(g(f(I)))=f(I)$, $g(f(g(J)))=g(J)$ が成立する.
+ よって $f(I)$ 全体の集合と $g(J)$ 全体の集合は $f$, $g$ に
+ よって一対一に対応する.
+\end{rem}
+
+\begin{question}[環準同型によるイデアルの対応, 簡単だが基本的]
+\label{q:Ideal(A)<->Ideal(B)}
+ $A,B$ は可換環であり, $\phi:A\to B$ は環準同型であるとする.
+ $A$, $B$ のイデアル全体の集合 $\Ideal(A)$, $\Ideal(B)$ の
+ あいだには自然に次の二つの写像を構成できる:
+ \begin{align*}
+  &
+  \Ideal(B)\to\Ideal(A), \quad
+  J \mapsto \phi^{-1}(J),
+  \\ &
+  \Ideal(A)\to\Ideal(B), \quad
+  I \mapsto B\phi(I)=(\text{$\phi(I)$ で生成される $B$ のイデアル}).
+ \end{align*}
+ これらの写像は次の二つの部分集合のあいだの一対一対応を定める:
+ \begin{enumerate}
+ \item[(a)] \( 
+  \{\, \phi^{-1}(J) \mid \text{$J$ は $B$ のイデアル} \} 
+   \subset \Ideal(A)
+  \),
+ \item[(b)] \( 
+   \{\, B\phi(I) \mid \text{$I$ は $A$ のイデアル} \,\} 
+   \subset \Ideal(B)
+  \).
+ \qed
+ \end{enumerate}
+\end{question}
+
+\begin{proof}[ヒント]
+ $I$ を $A$ のイデアル, $J$ を $B$ のイデアルとする.
+ (1) $\phi^{-1}(B\phi(I))\supset I$, (2) $B\phi(\phi^{-1}J)\subset J$ 
+ は容易に示される.
+ (1)より $B\phi(\phi^{-1}(B\phi(I)))\supset B\phi(I)$ であり, 
+ (2)より逆の包含関係が成立するので, 等号が成立する.
+ 同様に(2)より $\phi^{-1}(B\phi(\phi^{-1}J))\subset \phi^{-1}(J)$ であり, 
+ (1)より逆の包含関係が成立するので, 等号が成立する.
+ \qed
+\end{proof}
+
+\begin{rem}
+ 上の問題において $\phi$ が全射ならば
+ \begin{enumerate}
+ \item[(a')] \( 
+  \{\, \phi^{-1}(J) \mid \text{$J$ は $B$ のイデアル} \} 
+   = \{\, I\in\Ideal(A) \mid \Ker\phi\subset I \,\}
+  \),
+ \item[(b')] \( 
+   \{\, B\phi(I) \mid \text{$I$ は $A$ のイデアル} \,\} 
+   = \Ideal(B)
+  \).
+ \end{enumerate}
+ よって上の問題の結果は全射環準同型によるイデアルの対応の
+ 一般化になっている. 
+
+ 後で可換環 $R$ の分数環のイデアル全体の集合を $R$ のイデアルの集合
+ の一対一対応を構成するとき(\qref{q:Ideal(S^{-1}R)})に
+ 上の問題の結果が使われる.
+ \qed
+\end{rem}
+
+\begin{question}[分数環のイデアル, 20点]
+\label{q:Ideal(S^{-1}R)}
+ $R$ は可換環であり, $S$ はその積閉集合(で $0$ を含まないもの)であり, 
+ $i:R\to S^{-1}R$ は $R$ から分数環への自然な環準同型であるとする.
+ このとき以下が成立する:
+ \begin{enumerate}
+  \item $R$ のイデアル $I$ に対して $I_S$ を
+   \begin{equation*}
+    I_S =
+    \{\, a\in R \mid 
+    \text{ある $s\in S$ で $sa\in I$ を満たすものが存在する} \,\}.
+   \end{equation*}
+   と定めると $I_S$ も $R$ のイデアルであり, $(I_S)_S=I_S$.
+  \item $R$ の素イデアル $P$ に対して %
+   $P_S=P$ と $P\cap S=\emptyset$ は同値である.
+  \item $I$ が $R$ のイデアルならば, %
+   $i(I)$ から生成される $S^{-1}R$ のイデアルは
+   \begin{equation*}
+    S^{-1}I := S^{-1}R\,i(I) = \{\, a/s \mid a\in I,\ s\in S\,\}.
+   \end{equation*}
+   と表わされる.
+  \item $R$ のイデアル $I$ に対して $i^{-1}(S^{-1}I)=I_S$.
+  \item $S^{-1}R$ のイデアル $J$ に対して $S^{-1}\phi^{-1}(J)=J$.
+  \item $R$ が PID (単項イデアル整域)ならば $S^{-1}R$ もそうである.
+  \item $S^{-1}R$ のイデアル $J $全体の集合
+   と $R$ のイデアル $I$ で $I_S=I$ を満たすもの全体の集合は
+   対応 $J\mapsto i^{-1}(J)$ とその逆対応 $I\mapsto S^{-1}I$ によって
+   一対一に対応する.
+  \item この対応によって $S^{-1}R$ の素イデアル全体の集合
+   と $R$ の素イデアル $P$ で $S$ と交わりを持たないもの全体の
+   集合は一対一に対応している.
+  \qed
+ \end{enumerate}
+\end{question}
+
+\begin{proof}[ヒント]
+ たとえばリード \cite{reid-1995-2000} pp.98--99, 第6.3節
+ や松村 \cite{matsumura-1980-2000} pp.26--27 を見よ. 
+
+ 1, 2, 3. 容易.
+
+ 4. $I$ を $R$ のイデアルとする. 
+ $a\in I_S$ すなわちある $t\in S$ が存在して $ta\in I$ とすると %
+ $i(a)=a/1=(ta)/t\in S^{-1}I$ なので $a\in i^{-1}(S^{-1}I)$.
+ 逆に $a\in i^{-1}(S^{-1}I)$ すなわち $i(a)\in S^{-1}I$ とすると %
+ 3より $i(a)$ は $i(a)=b/s$, $b\in I$, $s\in S$ と表わされる.
+ そのとき $i(sa)=i(s)i(a)=i(b)$ なのである $s'\in S$ で $s'sa=b\in I$ を
+ 満たすものが存在する. よって $a\in I_S$.
+
+ 5. $J$ を $S^{-1}R$ のイデアルとする. 
+ $S^{-1}i^{-1}(J)\subset J$ は容易.
+ 逆に $b=a/s\in J$, $a\in R$, $s\in S$ とすると $i(a)=i(s)b\in J$ 
+ すなわち $a\in i^{-1}(J)$ なので %
+ $b=i(s)^{-1}i(a)\in S^{-1}Ri(i^{-1}(J))=S^{-1}i^{-1}(J)$.
+ これで逆の包含関係が示され,  $S^{-1}i^{-1}(J)=J$ が成立することがわかった.
+
+ 6. 5からただちに導かれる.
+
+ 7. 問題 \qref{q:Ideal(A)<->Ideal(B)} の結果に 4, 5 を適用せよ.
+
+ 8. 2と7からただちに導かれる.
+ \qed
+\end{proof}
+
+\begin{question}[20点]
+\label{q:K[[x1,...,xn]]-is-local}
+ 体 $K$ 上の $n$ 変数形式べき級数環 $K[[x_1,\ldots,x_n]]$ は局所環である.
+ \qed
+\end{question}
+
+\begin{proof}[ヒント]
+ \( \frakm=(x_1,\ldots,x_n)
+ =\{\, f\in K[[x_1,\ldots,x_n]] \mid f(0,\ldots,0)=0 \,\} \)
+ が唯一の極大イデアルになる.
+ \qed
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{二次体の整数環}
+
+\begin{question}
+ $m\in\Z$ かつ $\sqrt{m}$ は有理数ではないと仮定する.
+ 一般に $\Z$ と $\alpha\in\C$ を含む $\C$ の
+ 最小の部分環を $\Z[\alpha]$ と書く. 
+ 以下を証明せよ.
+ \begin{enumerate}
+  \item $\Z[\sqrt{m}] = \Z + \Z\sqrt{m}$,
+  \item $\Z[x]/(x^2-m)\cong \Z[\sqrt{m}]$.
+ \end{enumerate}
+\end{question}
+
+\begin{proof}[ヒント]
+ 1. $\Z$ と $\sqrt{m}$ を含む $\C$ の任意の部分環
+ が $\Z+\Z\sqrt{m}$ を含むことは容易に確かめられる.
+ $\Z+\Z\sqrt{m}$ は $\C$ の部分環であることも容易に確かめられる.
+
+ 2. 環準同型 $\phi:\Z[x]\to\Z[\sqrt{m}]$ を $\phi(f(x))=f(\sqrt{m})$ 
+ ($f\in\Z[x]$) と定めることができる. $\phi$ は全射であることが簡単にわかる. 
+ よって環の準同型定理より $\Z[x]/\!\Ker\phi\cong\Z[\sqrt{m}]$ である. 
+ したがって $\Ker\phi=(x^2-m)$ を示せばよい.
+ $\phi(x^2-m)=\sqrt{m}^2-m=0$ より $x^2-m\in\Ker\phi$ である
+ から $(x^2-m)\subset\Ker\phi$ である.
+ 任意に $f(x)\in\Ker\phi$ を取る. 
+ $x^2-m$ による割り算によって $f(x)$ を $f(x)=g(x)(x^2-m)+ax+b$ 
+ ($g(x)\in\Z[x]$, $a,b\in\Z$) と表わせる. 
+ その等式の両辺に $x=\sqrt{m}$ を代入すると
+\ifx\STUDENT\undefined
+ $a\sqrt{m}+b=0$ が得られる.
+ $\sqrt{m}$ は有理数ではないと仮定したので $a=b=0$ である.
+ したがって $f(x)=g(x)(x^2-m)\in(x^2-m)$ である.
+ これで示すべきことが示された.
+\else
+ ……
+\fi
+ \qed
+\end{proof}
+
+%\begin{rem}
+% 上の問題の結果より $\sqrt{m}$ のような数の研究
+% も $\Z$ 上有限生成な可換環の研究に含まれていることがわかる.
+% \qed
+%\end{rem}
+
+\begin{definition}[素元]
+ 可換環 $R$ の $0$ でない元 $p$ が{\bf 素元 (prime element)} であるとは, %
+ 単項イデアル $(p)=Rp$ が素イデアルになることである.
+ \qed
+\end{definition}
+
+\begin{definition}[既約元]
+ 可換環 $R$ の元 $p$ が{\bf 既約元 (irreducible element)} であるとは, %
+ $p$ が単元ではなく, 
+ $a,b\in R$, $p=ab$ ならば $a$ または $b$ が単元になることである.
+ たとえば $0$, $1$ は既約元ではない.
+ \qed
+\end{definition}
+
+\begin{rem}
+ 上の意味での既約元のことを素元と呼んでいる本もあるので注意せよ.
+ 例えば永尾 \cite{nagao-1983} はそういう流儀を採用している.
+ しかし素元と素イデアルを対応させたければ上の意味での素元を既約元と
+ 呼ぶ流儀を採用した方が良い.
+ \qed
+\end{rem}
+
+\begin{question}[任意の整域において素元は既約元, 簡単]
+ \label{q:prime=>irred'}
+ 任意の整域において素元は既約元である. \qed
+\end{question}
+
+\begin{proof}[ヒント]
+ $R$ は整域であるとし, $p$ はその素元であるとする. %
+ 素元の定義より単項イデアル $(p)$ は $0$ でない素イデアルである. 
+ $a,b\in R$, $p=ab$ と仮定する.
+ このとき $ab\in (p)$ なので $a\in(p)$ または $b\in(p)$ である.
+ $b\in (p)$ と仮定してよい.
+ そのとき $b$ は $b=a'p$, $a'\in R$ と表わされる. 
+ よって $p=ab=aa'p$ である. 
+ $R$ は整域なので $1=aa'$ となるので $a$ は $R$ の単元である.
+ \qed
+\end{proof}
+
+\begin{rem}
+ 上の問題の逆は PID や UFD では成立するが, 一般の整域では成立しない.
+ \qed
+\end{rem}
+
+\begin{guide}[二次体の整数環]
+ 上の問題の $\Z[\sqrt{m}]$ の商体 $\Q(\sqrt{m})$ は
+ {\bf 二次体 (quadratic field)} と呼ばれている.
+ 二次体 $K$ は平方因子を含まない $0$ でも $1$ でも有理整数 $m$ に
+ よって $K=\Q(\sqrt{m})$ と一意に表わされる.
+ $m>0$ のとき $\Q(\sqrt{m})$ は{\bf 実二次体 (real quadratic field)} 
+ と呼ばれ, %
+ $m<0$ のとき $\Q(\sqrt{m})$ は{\bf 虚二次体 (imaginary quadratic field)}
+ と呼ばれている.
+
+ $\alpha\in\C$ が{\bf 代数的整数 (algebraic integer)} 
+ であるとはあるモニックな $f\in\Z[x]$ で $f(\alpha)=0$ を満たすものが
+ 存在することである.  
+
+ $\omega\in\Q(\sqrt{m})$ を次のように定める:
+ \begin{equation*}
+  \omega = 
+  \begin{cases}
+   \sqrt{m}       & (m\equiv 2,3 \MOD 4) \\
+   (1+\sqrt{m})/2 & (m\equiv 1 \MOD 4).  \\
+  \end{cases}
+ \end{equation*}
+ このとき $\Z[\omega]=\Z+\Z\omega$ であり, 
+ $\Z[\omega]$ は非常に良い性質を持っていることが知られている:
+ \begin{enumerate}
+  \item $\Q(\sqrt{m})$ に含まれる代数的整数の全体は
+   $\Z[\omega]$ に一致する.
+   ($\Z[\omega]$ は二次体の整数環と呼ばれる.)
+  \item $\Z[\omega]$ は Dedekind 整域である.
+   特に $\Z[\omega]$ では任意の $0$ でないイデアルが素イデアルの積に
+   一意的に分解される(素イデアル分解の一意存在).
+ \end{enumerate}
+ 詳しくは代数的整数論の教科書を見よ. 
+ たとえば, 1の結果の証明は\cite{suron-1} p.119 問3の解答 (pp.146-147) 
+ に書いてあり, 
+ Dedekind 整域の一般論は \cite{kan-to-tai-1} 第5章にある.
+
+ さらに以下が成立していることに注意しなければいけない:
+ \begin{itemize}
+  \item  $m\equiv 1\MOD 4$ のとき $\Z[\sqrt{m}]$ では
+  「素イデアル分解の一意存在」が成立していない.
+  \item $\Z[\omega]$ で「既約元の積への分解の一意存在」
+   (後で整域において「素元分解の存在」と同値であることを示す) 
+   が成立しているとは限らない. 
+ \end{itemize}
+ たとえば $m=-1.-2.-3, 2$ のとき $\Z[\omega]$ で
+ 「既約元の積への分解の一意存在」が成立しているが, %
+ $m=-5,-26,10$ のとき $\Z[\omega]=\Z[\sqrt{m}]$ ではそうではない.
+
+ 有理整数環 $\Z$ の整数論では「素因数分解の一意存在」が基本的であった.
+ しかし二次体の整数環ではそれに対応する
+ 「既約元の積への分解の一意存在」が成立しないことがある. 
+ しかし「数」のレベルではなく「イデアル」のレベルでは
+ 素なモノへの分解の一意存在が成立しているのである.
+
+ これがイデアル＝理想数のアイデアの出発点である.
+ イデアルの概念は「イデアル＝理想数」という出発点の発想を
+ はるかに超えた有用性を持っていることがわかっている.
+
+ 以上のような込み入った事情の説明を読めば, 
+ 代数学の講義や演習でイデアルが歴史的に導入された動機の説明をすることが
+ 難しいことがわかると思う.  可換環 $R$ のイデアルとは $R$ 自身の
+ 部分 $R$ 加群のことであるという簡単な定義があることは非常にありがたい
+ ことである. 
+ \qed
+\end{guide}
+
+\begin{question}
+\label{q:Z[sqrt(-26)]}
+ $\Z[\sqrt{-26}]$ における数の計算に関して以下が成立していることを示せ:
+ \begin{enumerate}
+  \item $U(\Z[\sqrt{-26}])=\{\pm1\}$ である.
+  \item $3, 1\pm\sqrt{-26}$ は $\Z[\sqrt{-26}]$ の既約元である.
+  \item しかし $27=3^3=(1+\sqrt{-26})(1-\sqrt{-26})$ が成立している.
+   $\Z[\sqrt{-26}]$ では $27$ の既約元の積への分解の一意性が成立していない.
+   \qed
+ \end{enumerate}
+\end{question}
+
+\begin{proof}[ヒント]
+ $N:\Z[\sqrt{-26}]\to\Z$ 
+ を $N(m+n\sqrt{-26})=(m+n\sqrt{-26})(m-n\sqrt{-26})=m^2+26n^2$ と定める.
+ このとき $N(ab)=N(a)N(b)$ が成立する.
+
+ 1. $a=k+l\sqrt{-26},b=m+n\sqrt{-26}\in\Z[\sqrt{-26}]$, $1=ab$ 
+ のとき $1=N(a)N(b)=(k^2+26l^2)(m^2+26n^2)$ である.
+ これより $k=\pm 1$, $l=0$ であることがわかる.
+
+ 2. $3$ が $\Z[\sqrt{-26}]$ の既約元であるとは %
+ $a,b\in\Z[\sqrt{-26}]$, $3=ab$ ならば %
+ $a$ または $b$ が $\Z[\sqrt{-26}]$ の単元になることである.
+ $a=k+l\sqrt{-26},b=m+n\sqrt{-26}\in\Z[\sqrt{-26}]$. $3=ab$ 
+ のとき $9=N(a)N(b)=(k^2+26l^2)(m^2+26n^2)$ である.
+ よってもしも $a$ も $b$ も単元でないとすれば $k^2+26l^2=3$ でなければい
+ けない. しかしこれは不可能である. したがって $3$ は既約元である.
+ $1\pm\sqrt{-26}$ も同様の議論で既約元であることを示せる.
+
+ 3. 容易.
+ \qed
+\end{proof}
+
+\begin{question}[20点以上]
+ $\Z[\sqrt{-26}]$ におけるイデアルの計算に関して以下が成立していることを示せ:
+ \begin{enumerate}
+  \item $\Z[\sqrt{-26}]$ の
+   イデアル $I=(3,1+\sqrt{-26})$, $J=(3,1-\sqrt{-26})$ は %
+   $\Z[\sqrt{-26}]$ の素イデアルである.
+  \item $(3)=IJ$, $(1+\sqrt{-26})=I^3$, $(1-\sqrt{-26})=J^3$.
+  \item イデアル $(27)$ の2通りの素イデアル分解 %
+   $(27)=(3^3)=(3)^3=(IJ)^3=I^3J^3$, %
+   $(27)=((1+\sqrt{-26})(1+\sqrt{-26}))=(1+\sqrt{-26})(1+\sqrt{-26})=I^3J^3$ %
+   の結果は一致している.
+   (注意: 一般論によってこの一致は当然.)
+   \qed
+ \end{enumerate}
+\end{question}
+
+\begin{guide}
+ 数学的に深くて応用的にも有用な結果を出すためには
+ 扱う数学的対象に何らかの有限性の条件を課しておいた方が良い.
+ 可換環に関する体 $K$ 上有限生成や $\Z$ 上有限生成という条件は
+ その意味で非常に良い条件である.
+ \qed
+\end{guide}
+
+\begin{guide}
+ 以上においては主として可換環のイデアルのイメージについて説明した.
+ 非可換環のイデアルのイメージは可換環の場合とは異なる場合がある.
+ \qed
+\end{guide}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{素元分解整域と一意分解整域 (UFD)}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%ここで今までと用語法を変え, ここまでの演習で素元と呼んできたものを既約元
+%と呼ぶことにする. そして素元を新たに定義し直す. 次の定義を見よ.
+
+\begin{definition}[素元]
+ 可換環 $R$ の $0$ でない元 $p$ が{\bf 素元 (prime element)} であるとは, %
+ 単項イデアル $(p)=Rp$ が素イデアルになることである.
+ たとえば単元は素元ではない.
+ \qed
+\end{definition}
+
+\begin{question}[素元の定義の確認, 簡単]
+ 可換環 $R$ の $0$ でない元 $p$ について次の二つの条件は互いに同値である:
+ \begin{enumerate}
+ \item[(a)] $p$ は $R$ の素元である.
+ \item[(b)] $a,b\in R$, $p\mid ab$ ならば $p\mid a$ または $p\mid b$.
+ \end{enumerate}
+\end{question}
+
+\begin{definition}[既約元]
+ 可換環 $R$ の元 $p$ が{\bf 既約元 (irreducible element)} であるとは, %
+ $p$ が単元ではなく, 
+ $a,b\in R$, $p=ab$ ならば $a$ または $b$ が単元になることである.
+ たとえば $0$, $1$ は既約元ではない.
+ \qed
+\end{definition}
+
+\begin{question}[単項イデアルの言葉による既約元の特徴づけ, 簡単]
+ $R$ は整域であるとし, $0\ne p\in R$ であるとする.
+ このとき $p$ が $R$ の既約元であるための必要十分条件は %
+ $R$ と一致しない $R$ の単項イデアル全体の集合の中で $(p)$ が
+ 包含関係に関する極大元になっていることである.
+ \qed
+\end{question}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{definition}[素元分解整域]
+ 整域 $R$ が{\bf 素元分解整域 (factorial domain)} であるとは %
+ $R$ の $0$ でない任意の元が $R$ の素元の積で表わされることである.
+ (単元は $0$ 個の素元の積であるとみなす.)
+ つまり「素元分解の存在」で素元分解整域を定義する.
+ \qed
+\end{definition}
+
+\begin{definition}[一意分解整域]
+ 整域 $R$ が{\bf 一意分解整域 (UFD, unique factorization domain)} であるとは %
+ $R$ の $0$ でない任意の元が $R$ の既約元の積で表わされ, 
+ しかもその表示の仕方が積の順序と単元倍を除いて一意的であることである.
+ (単元は $0$ の既約元の積であるとみなす.)
+ つまり「既約元の積への分解の一意存在」で一意分解整域を定義する.
+ \qed
+\end{definition}
+
+\begin{rem}[用語法に関する注意]
+ 既約元のことを素元と呼ぶ流儀もあることを再度注意しておく. 
+ 上の定義の意味での素元分解整域をも一意分解整域(UFD)と呼ぶ流儀もある.
+ しかし結果的に
+ 上の意味での素元分解整域と一意分解整域は同じものになり, 
+ 素元分解整域＝一意分解整域において素元と既約元は同じものになるので
+ 論理的には問題が生じない.
+
+ 上の意味での一意分解整域の定義は
+ 永尾の教科書 \cite{nagao-1983} の定義と一致している.
+ \qed
+\end{rem}
+
+\begin{definition}[同値関係 $\approx$, 素元の完全代表系]
+ $R$ は整域であるとし, $K$ はその商体であるとする.
+
+ $K$ における同値関係 $\approx$ を次のように定める:
+ \begin{equation*}
+  a\approx b \iff 
+  \text{$R$ の単元 $u$ で $ua=b$ を満たすものが存在する.}
+ \end{equation*}
+ すなわち $K$ の元 $a,b$ が $R$ の
+ 単元倍の違いしかないとき $a\approx b$ と書く. 
+
+ $R$ の素元全体の集合の同値関係 $a\approx b$ に関する商集合の
+ 完全代表系を $R$ の{\bf 素元の完全代表系}と呼ぶ.
+ すなわち $R$ の素元の集合 $\cP$ が素元の完全代表系であるとは %
+ $R$ の任意の素元 $p$ に対してある $p'\in\cP$ で $p\approx p'$ を
+ 満たすものが一意に存在することである.
+ \qed
+\end{definition}
+
+\begin{question}[$\approx$ の特徴付け, 簡単]
+ $R$ は整域であるとし, $K$ はその商体であるとする.
+ $a,b\in K$ に対して $a\approx b$ と $Ra=Rb$ は同値である.
+ \qed
+\end{question}
+
+\begin{guide}
+ $R$ は整域であるとし, $K$ はその商体であるとする.
+
+ $a\in K$ に対する $Ra\subset K$ をも $(a)$ と書き, 
+ $R$ の{\bf 単項(分数)イデアル (principal (fractional) ideal)} 
+ と呼ぶことがある. 特に代数体の整数環ではそのように呼ぶ.
+ 一般に $K$ の $R$ 部分加群 $I$ で $sI\subset R$ を
+ 満たす $s\in R\setminus\{0\}$ を持つもの
+ を $R$ の{\bf 分数イデアル (fractional ideal)} と呼ぶ.
+ このとき $R$ のイデアルは{\bf 整イデアル (integranl ideal)} と呼ばれる.
+
+ 二つの分数イデアル $I$, $J$ の積 $IJ$ が整イデアルの積と同様に定義され, 
+ 結合律を満たし, 可換である. %
+ さらに $R=(1)$ はその積に関する単位元になり, 
+ $a,b\in K$ に対して $(a)(b)=(ab)$ が成立し, 
+ $a\ne 0$ ならば $(a)(a^{-1})=(1)$ であることがわかる.
+ よって $0$ でない単項(分数)イデアル全体の集合は自然にAbel群をなす.
+
+ 可逆な分数イデアル全体の集合も Abel 群をなす.
+ 可逆な分数イデアル全体のなす群を
+ 単項(分数)イデアル全体のなす群で割ってできる剰余群は
+ {\bf イデアル類群 (ideal class group)} と呼ばれている.
+
+ このような構成は数論的にも代数幾何的に重要な意味を持っている.
+ \qed
+\end{guide}
+
+\begin{question}[$R$ における $\approx$, 超簡単]
+ $R$ が整域で $a,b\in R$ であるとき, 
+ $a\approx b$ が成立すること
+ と $a\mid b$ かつ $b\mid a$ が成立することは同値である.
+ \qed
+\end{question}
+
+\begin{question}[素元分解の約数, 簡単]
+ $R$ は整域であるとし, $p_1,\ldots,p_n$ はその素元であるとする.
+ このとき $a\in R$ が $a\mid p_1\cdots p_n$ を満たしているならば
+ ある $1\leqq i_1<\cdots<i_r\leqq n$ で $a\approx p_{i_1}\cdots p_{i_r}$ 
+ を満たすものが存在する. \qed
+\end{question}
+
+\begin{proof}[ヒント]
+ $n$ に関する帰納法. $n=1$ の場合は明らか. 
+ $n-1$ まで成立していると仮定する(帰納法の仮定).
+ $a\mid p_1\cdots p_n$ ならばある $b\in R$ で $ab=p_1\cdots p_n$ を
+ 満たすものが存在する. 
+ $p_n$ は素元なので $p_n\mid ab$ より $p_n\mid a$ または $p_n\mid b$.
+ $p_n\mid a$ のとき $a'\in R$, $a=p_na'$, $b'=b$ とし, 
+ $p_n\mid b$ のとき $a'=a$, $b'\in R$, $b=p_nb'$ とする.
+ このとき $R$ は整域なので $a'b'=p_1\cdots p_{n-1}$.
+ 帰納法の仮定より $a'$ は $a'=p_{i_1}\cdots p_{i_s}$, 
+ $1\leqq i_1<\cdots<i_s\leqq n-1$ と表わされる.
+ これより $n$ の場合も成立することがわかる.
+ \qed
+\end{proof}
+
+次の問題は \qref{q:prime=>irred'} の再掲である.
+
+\begin{question}[任意の整域において素元は既約元, 簡単]
+ \label{q:prime=>irred}
+ 任意の整域において素元は既約元である. \qed
+\end{question}
+
+\begin{proof}[ヒント]
+ $R$ は整域であるとし, $p$ はその素元であるとする. %
+ 素元の定義より単項イデアル $(p)$ は $0$ でない素イデアルである. 
+ $a,b\in R$, $p=ab$ と仮定する.
+ このとき $ab\in (p)$ なので $a\in(p)$ または $b\in(p)$ である.
+ $b\in (p)$ と仮定してよい.
+ そのとき $b$ は $b=a'p$, $a'\in R$ と表わされる. 
+ よって $p=ab=aa'p$ である. 
+ $R$ は整域なので $1=aa'$ となるので $a$ は $R$ の単元である.
+ \qed
+\end{proof}
+
+\begin{rem}
+ UFDにおいては上の問題の逆が成立しているが
+ (\qref{q:FD,irred=>prime}, \qref{q:UFD,irred=>prime}), 
+ 一般には成立していない
+ (\qref{q:cusp-notUFD-irred-notprime}, 
+  \qref{q:C[x,y]/(y^2-x^3+1)}).
+%  \qref{q:C[x,y]/(y^2-x^3+1)},
+%  \qref{q:Z[sqrt(-5)]}). 
+ \qed
+\end{rem}
+
+\begin{question}[簡単]
+\label{q:FD,irred=>prime}
+ 素元分解整域において既約元は素元になる.
+ (任意の整域で素元は既約元になる (\qref{q:prime=>irred'}) ので,
+ 素元分解整域において素元と既約元は一致する.)
+ \qed
+\end{question}
+
+\begin{proof}[ヒント]
+ 既約元 $p$ の素元分解を $p=p_1\cdots p_r$ とする.
+ もしも $r>1$ ならば $p_2\cdots p_r$ が単元になり矛盾する.
+ \qed
+\end{proof}
+
+\begin{question}
+\label{q:UFD,irred=>prime}
+ 一意分解整域において既約元は素元になる. 
+ (任意の整域で素元は既約元になる (\qref{q:prime=>irred'}) ので,
+ 一意分解整域において素元と既約元は一致する.)
+ \qed
+\end{question}
+
+\begin{proof}[ヒント]
+ $p$ は $R$ の既約元であるとし, $(p)=Rp$ が素イデアルになることを示
+ せばよい. $a,b\in R$, $a,b\ne 0$, $ab\in(p)$ であるとする.
+ $R$ は一意分解整域なので $a$, $b$ は
+ $a\approx p_1\cdots p_r$, $b\approx q_1\cdots q_s$ 
+ ($u,v$ は $R$ の既約元, $p_i,q_j$ は $R$ の素元) 
+ の形に積の順序と単元倍の違いを除いて一意に分解される.
+ $ab\in(p)$ より $p\mid p_1\cdots p_rq_1\cdots q_s$.
+ 既約元の積への分解の一意性より $p$ は $p_i$, $q_j$ のどれかと
+ 単元倍の違いを除いて等しい. 必要があれば $a,b$ の立場を交換し, 
+ 積の順序を並び換えることによって $p\approx p_1$ であるとしてよい.
+ そのとき $a\in(p)$ である. これで $(p)$ が素イデアルになることがわかった.
+ \qed
+\end{proof}
+
+\begin{question}[整域における素元分解の一意性]
+\label{q:D=>unique}
+ 整域 $R$ において $0$ でない元の素元分解は
+ 積の順序と単元倍を除いて一意的である.
+ すなわち
+ \begin{equation*}
+  p_1\cdots p_r \approx q_1\cdots q_s, 
+  \quad
+  \text{$p_i,q_j$ は $R$ の素元}
+ \end{equation*}
+ とすると $r=s$ でかつ適当に番号を
+ 付け変えれば $p_i\approx q_i$ ($i=1,\ldots,r$) となる.
+ \qed
+\end{question}
+
+\begin{proof}[ヒント]
+ $r\leqq s$ と仮定してよい. $r$ に関する数学的帰納法.
+ $r=0$ のときすなわち $q_1\cdots q_s$ が単元のとき %
+ $s=0$ とならなければいけないことはすぐにわかる(なぜか?).
+ $r>0$ のとき $(p_1)$ は素イデアルなので
+ ある $i$ について $q_i\in(p_1)$ となる(なぜか?).
+ 番号を付け変えて $i=1$ と仮定し, $q_1\in(p_1)$ であるとしてよい.
+ 素元 $q_1$ は既約元 (\qref{q:prime=>irred'}) なので $p_1\approx q_1$ で
+ あることがわかる(なぜか?).
+ したがって $R$ のある単元 $u',v'$ が存在して %
+ $p_2\cdots p_r\approx q_2\cdots q_s$.
+ 帰納法の仮定より $r=s$ で $p_i\approx q_i$ ($i=2,\ldots,r$).
+ \qed
+\end{proof}
+
+\begin{question}
+\label{q:FD=UFD}
+ 可換環 $R$ が素元分解整域であることと一意分解整域であることは同値である.
+ \qed
+\end{question}
+
+\begin{proof}[ヒント]
+ 以上の問題の結果をまとめれば容易に証明される. 
+
+ $R$ は素元分解整域であるとする. 
+ 問題 \qref{q:prime=>irred}, \qref{q:FD,irred=>prime} の結果より %
+ $R$ において素元と既約元は一致している. よって, 
+ 素元分解の存在は既約元の積への分解の存在を意味し, 
+ 素元分解の一意性 (\qref{q:D=>unique}) は既約元の積への分解の一意性を
+ 意味している. よって $R$ は一意分解整域である.
+
+ $R$ は一意分解整域であるとする.
+ 問題 \qref{q:UFD,irred=>prime} の結果より $R$ において既約元は素元である.
+ よって既約元の積への分解の存在から素元分解の存在が導かれる.
+ よって $R$ は素元分解整域である.
+ \qed
+\end{proof}
+
+{\bf 問題 \qref{q:FD=UFD} の結果より素元分解整域と一意分解整域(UFD)は
+同じものである. これ以後, 素元分解整域と一意分解整域を明確に区別せずに 
+総称して UFDと呼ぶことにする.}
+
+\begin{question}[簡単]
+ $R$ は UFD であるとする.
+ $a_1,\ldots,a_n\in R$ の最大公約元と最小公倍元の定義を説明し, 
+ それらが互いに素であることの定義を述べよ.
+ \qed
+\end{question}
+
+\begin{question}[体は UFD, 超簡単]
+ 体は UFD である.
+ \qed
+\end{question}
+
+\begin{question}[PID ならば UFD]
+ PID は UFD である. 
+ したがって $\Z$ や体 $K$ 上の一変数多項式環 $K[x]$ は UFD である.
+ \qed
+\end{question}
+
+\begin{proof}[ヒント]
+ 教科書を見よ.
+ たとえば永尾 \cite{nagao-1983} p.103 や堀田 \cite{hotta-1987} pp.47-48. 
+ \qed
+\end{proof}
+
+\begin{question}[UFDの分数環もUFD]
+ $R$ が UFD であり, $K$ はその商環であるとし, 
+ $\cP$ は $R$ の素元の完全代表系であるとする.
+ 集合 $X$ に対して $\Z^{\oplus X}$, $\Z_{\geqq0}^{\oplus X}$ を
+ 次のように定める:
+ \begin{align*}
+  &
+  \Z^{\oplus X}
+  = \{\, (e_p)_{p\in X} 
+    \mid e_p\in\Z,\ \text{有限個を除いて $e_p=0$} \,\},
+  \\ &
+  \Z_{\geqq0}^{\oplus X}
+  = \{\, (e_p)_{p\in X} 
+    \mid e_p\in\Z_{\geqq 0},\ \text{有限個を除いて $e_p=0$} \,\}.
+ \end{align*}
+ このとき以下が成立する:
+ \begin{enumerate}
+  \item $K$ の $0$ でない元 $a$ は
+   \begin{equation*}
+    a = u\prod_{p\in\cP} p^{e_p}, 
+    \quad (e_p)_{p\in\cP}\in\Z^{\oplus\cP},
+    \quad u\in U(R)
+   \end{equation*}
+   と一意に表わされる($K$ における素元分解の一意存在).
+   有限個を除いて $e_p=0$ なので右辺の積は有限積になることに注意せよ.
+  \item 次の二つの集合は互いに等しい:
+   \begin{enumerate}
+   \item $\cP$ の部分集合 $\cF$ から生成された積閉集合 
+    (すなわち $\cF$ を含む最小の積閉集合) $S$ による $R$ の
+     局所化 $S^{-1}R$ 全体の集合,
+   \item $R$ の積閉集合 $S$ ($0$ を含まないもの)
+    による局所化 $S^{-1}R$ 全体の集合.
+    \end{enumerate}
+  \item $\cP$ の部分集合 $\cF$ から生成される積閉集合を $S$ と書き, 
+   $\cF$ の $\cP$ における補集合を $\cF^c$ と書くことにする.
+   このとき $S^{-1}R$ の単元 $v$ は
+   \begin{equation*}
+    v = u \prod_{p\in\cF} p^{e_p},
+    \quad (e_p)_{p\in\cF}\in\Z^{\oplus\cF},
+    \quad u\in U(R)
+   \end{equation*}
+   と一意に表わされ, $S^{-1}R$ の $0$ でない元 $a$ は
+   \begin{equation*}
+    a = v \prod_{p\in\cF^c} p^{e_p},
+    \quad (e_p)_{p\in\cF^c}\in\Z_{\geqq0}^{\oplus\cF^c},
+    \quad v\in U(S^{-1}R)
+   \end{equation*}
+   と一意に表わされる. 
+  \item このことから $S^{-1}R$ は UFD であり, 
+   $S^{-1}R$ の素元の完全代表系として %
+   $\cF$ の $\cP$ における補集合 $\cF^c$ が取れることがわかる.
+  \qed
+ \end{enumerate}
+\end{question}
+
+\begin{question}
+ $R$ は UFD であるとし, $p$ はその素元であるとする.
+ $R$ の $(p)$ における局所化 $R_{(p)}$ も UFD であり, 
+ その素元の完全代表系として $\{p\}$ が取れ, 
+ $pR_{(p)}$ は局所環 $R_{(p)}$ の唯一の極大イデアルである.
+ \qed
+\end{question}
+
+\begin{proof}[ヒント]
+ $p$ を含む $R$ の素元の完全代表系を $\cP$ とし, %
+ $S$ は $\cP\setminus\{p\}$ から生成される積閉集合であるとすると %
+ $R_{(p)}=S^{-1}R$.
+ \qed
+\end{proof}
+
+\begin{question}
+ $\Z[1/300]$ は UFD であり, 
+ その素元の完全代表系として $2,3,5$ 以外の素数全体の集合が取れる.
+ \qed
+\end{question}
+
+\begin{proof}[ヒント]
+ $S$ を $2,3,5$ から生成される $\Z$ の積閉集合とすると %
+ $\Z[1/300]=S^{-1}\Z$.
+ \qed
+\end{proof}
+
+\begin{question}
+ $\C[x,x^{-1},(x-1)^{-1}]$ は UFD であり, 
+ その素元の完全代表系として $0,1$ 以外の $\alpha\in\C$ に
+ 対する $x-\alpha$ 全体の集合が取れる.
+ \qed
+\end{question}
+
+\begin{proof}[ヒント]
+ $S$ を $x,x-1$ から生成される $\C[x]$ の積閉集合とすると %
+ $\C[x,x^{-1},(x-1)^{-1}]=S^{-1}\C[x]$.
+ \qed
+\end{proof}
+
+\begin{question}[カスプ]
+ \label{q:cusp-notUFD-irred-notprime}
+ $\C[x,y]/(y^2-x^3)$ は UFD ではなく, 素元ではない既約元を持つ. \qed
+\end{question}
+
+\begin{proof}[ヒント]
+ $R=\C[x,y]/(y^2-x^3)$ における $x,y$ の像 $\bar{x},\bar{y}$ 
+ は $R$ の既約元だが素元ではない. $U(R)=\C^\times$ である.
+ \qref{q:D=>unique} の結果と $\bar{y}^2=\bar{x}^3$ から, %
+ $R$ が UFD ではないことと $\bar{x},\bar{y}$ が素元ではないことがわかる.
+ \qed
+\end{proof}
+
+\begin{question}[楕円曲線]
+ \label{q:C[x,y]/(y^2-x^3+1)}
+ $R=\C[x,y]/(y^2-x^3+1)$ は UFD ではなく, 素元ではない既約元を持つ. 
+ \qed
+\end{question}
+
+\begin{proof}[ヒント]
+ $R=\C[x,y]/(y^2-x^3+1)$ における $x,y$ の像を $\bar{x},\bar{y}$ と書き, 
+ $\omega=\exp(2\pi i/3)$ とおくと, 
+ $\bar{y}$, $\bar{x}-1$, $\bar{x}-\omega$, $\bar{x}-\omega^2$ 
+ は $R$ の既約元である. 
+ 後は問題 \qref{q:cusp-notUFD-irred-notprime} と同じ.
+ \qed
+\end{proof}
+
+\begin{guide}[楕円曲線]
+ 方程式 $y^2=(\text{$x$ の3次式})$ で定義される曲線は楕円曲線と呼ばれる
+ (大雑把な説明).
+ 楕円 ($x^2/a^2+y^2/b^2=1$) と楕円曲線 ($y^2=(\text{$x$ の3次式})$) は
+ 異なる曲線なので区別しなければいけない.
+ 混同しないように注意して欲しい.
+ \qed
+\end{guide}
+
+\begin{question}[\protect{$\Z[\sqrt{-5}]$} は一意分解整域ではない]
+\label{q:Z[sqrt(-5)]-not-UFD}
+  $\Z$ と $\alpha\in\C$ に対して $\Z$ と $\alpha$ を含む $\C$ の最小の部分環
+  を $\Z[\alpha]$ と書く.  このとき以下が成立することを示せ:
+  \begin{enumerate}
+  \item $\Z[\sqrt{-5}] = \{\, m+n\sqrt{-5} \mid m,n\in\Z \,\}$.
+  \item $\Z[\sqrt{-5}]^\times = \{\pm1\}$.
+  \item $2$, $3$, $1\pm\sqrt{-5}$ は $\Z[\sqrt{-5}]$ の既約元である.
+  \item $6=2\cdot 3=(1+\sqrt{-5})(1-\sqrt{-5})$ 
+    より $\Z[\sqrt{-5}]$ は一意分解整域ではないことがわかる.
+  \item 複素平面上に $\Z[\sqrt{-5}]$ とその
+    イデアル $(2)$, $(3)$, $A=(2,1+\sqrt{-5})=(2,1-\sqrt{-5})$, 
+    $B=(3,1+\sqrt{-5})$, $C=(3,1-\sqrt{-5})$ が
+    どのような集合であるかをわかり易く図示せよ. 
+  \item $1\pm\sqrt{-5}$ は $\MOD 2$ でも $\MOD 3$ でも $0$ ではないが,
+    $(1+\sqrt{-5})(1-\sqrt{-5})=6$ は $\MOD 2$ でも $\MOD 3$ でも $0$ になる.
+    このことより $2$, $3$ は $\Z[\sqrt{-5}]$ の素元でないことがわかる.
+  \item $A$, $B$, $C$ は $\Z[\sqrt{-5}]$ の素イデアルである
+   (実際には極大イデアルになる).
+  \item $(2)=A^2$, $(3)=BC$ であるから, $(6)=A^2BC$ である.
+    \qed
+  \end{enumerate}
+\end{question}
+
+\begin{proof}[ヒント]
+1. $\Z[\alpha]$ は $\Z$ と $\sqrt{-5}$ を含み加法と乗法で閉じている
+ので $\Z[\alpha]$ は右辺を含まなければいけない.  その右辺は $\C$ の部分環を
+なすので等号が成立する. 
+
+2. $\Z[\sqrt{-5}]$ の絶対値が $1$ 未満の元は $0$ に限る.
+よって $\Z[\sqrt{-5}]$ の元が単元であるためにはその絶対値が $1$ であることが
+必要である.  複素平面上に $\Z[\sqrt{-5}]$ の図を描いてみれば明らかなようにそ
+のような元は $\pm1$ しかない.  よって $\Z[\sqrt{-5}] = \{\pm1\}$ である.
+
+3. $\Z[\sqrt{-5}]$ の $0,\pm1$ 以外の元の絶対値は $2$ 以上である. 
+よって $\Z[\sqrt{-5}]$ の $0$ でも単元でもない2個以上の元の積の絶対値
+は $4$ 以上になる.  
+このことから $2$, $3$, $1\pm\sqrt{-5}$ が $\Z[\sqrt{-5}]$ 
+の既約元であることがわかる.  
+
+4. $6=2\cdot 3=(1+\sqrt{-5})(1-\sqrt{-5})$ は $6$ の既約元の積への二種類の分
+解であり,  $1\pm\sqrt{-5}\not\sim 2,3$ である. 
+よって $\Z[\sqrt{-5}]$ は一意分解整域ではない.
+
+5. $A=\Z 2+\Z(1+\sqrt{-5})=\Z 2+\Z(1-\sqrt{-5})$, 
+$B=\Z 3+\Z(1+\sqrt{-5})$,
+$C=\Z 3+\Z(1-\sqrt{-5})=\Z 3+\Z(1+2\sqrt{-5})$.
+
+7. $\Z[\sqrt{-5}]/A\isom\F_2$,
+$\Z[\sqrt{-5}]/B\isom\Z[\sqrt{-5}]/C\isom\F_3$.
+
+8. $2=-2\cdot 2+(1+\sqrt{-5})(1-\sqrt{-5})\in A^2$ で
+あるから $(2)\subset A^2$ である.
+逆に $(1+\sqrt{-5})^2=-4+2\sqrt{-5}\in(2)$ で
+あるから $A^2\subset(2)$ であることもわかる.
+よって $(2)=A^2$ である.
+同様にして $(3)=BC$ も確かめられる.
+\qed
+\end{proof}
+
+\begin{guide}
+上の問題の結果は E.~Kummner (1810--1893) による理想数 (ideal number) 
+としてのイデアルのアイデアを説明するためによく使われる. 
+たとえば高木 \cite{takagi2} 第5章第41節273--274頁を見よ.
+$\Z[\sqrt{-5}]$ では数の既約元の積への分解の一意性も成立していないし, 
+数の素元の積への分解も存在するとは限らない. しかし, 
+イデアルの素イデアルの積への一意分解可能性は成立している.
+数の世界では成立していない素因数分解の一意存在が
+イデアル(理想数)の世界では成立しているのである.
+この事実を抽象化することによって {\bf Dedekind 整域 (Dedekind domain)} の
+理論が構築され, 代数的整数論の基礎になっている.
+\qed
+\end{guide}
+
+%\begin{question}
+%\label{q:Z[sqrt(-5)]}
+% $\C$ の部分環 $\Z[\sqrt{-5}]=\{\, a+b\sqrt{-5} \mid a,b\in Z \,\}$ は 
+% UFD ではなく, 素元ではない既約元を持つ.
+% \qed
+%\end{question}
+
+%\begin{proof}[ヒント]
+% $R=\Z[\sqrt{-5}]$ において $2,3,1\pm\sqrt{-5}$ は既約元であり, 
+% $U(R)=\{\pm 1\}$ であることを示せ. 
+% 問題 \qref{q:Z[sqrt(-26)]} のヒントを見よ.
+% \qref{q:D=>unique} の結果と %
+% $6=2\cdot 3=(1+\sqrt{-5})(1-\sqrt{-5})$ から $R$ が UFD でないこと
+% と $2,3,1\pm\sqrt{-5}$ が素元でないことがわかる.
+% 初等整数論の教科書を色々探せば詳しい解答が見付かるはず.
+% \qed
+%\end{proof}
+
+\begin{guide}
+ 実は一般に UFD でない Noether 整域は素元ではない既約元を持つ.
+ たとえば松村 $\cite{matsumura-1980-2000}$ p.199 の注1を見よ.
+ \qed
+\end{guide}
+
+\begin{definition}[原始多項式]
+ $R$ 上の一変数多項式環
+ \begin{equation*}
+  f(x) = a_nx^n + \cdots + a_1x + a_0 \in R[x]
+ \end{equation*}
+ について, 係数 $a_0,a_1,\ldots,a_n$ が互いに素なとき $f(x)$ を
+ {\bf 原始多項式 (\bf primitive polynomial)} と呼ぶ.
+ \qed
+\end{definition}
+
+\begin{question}[内容]
+ $R$ は UFD であり, $K$ はその商体であるとする.
+ \begin{enumerate}
+  \item  任意の $f(x)\in K[x]$ に対して
+   ある原始多項式 $f_0(x)\in R[x]$ と $c\in K$ で $f(x)=cf_0(x)$ を
+   満たすものが存在する. 
+   このような $f_0(x)$, $c$ は $R$ の単元倍を除いて一意に定まる.
+   $c$ を $I(f)$ と書き, $f(x)\in K[x]$ の{\bf 内容 (content)} と呼ぶ.
+  \item $f(x)\in R[x]$ となるための必要十分条件は %
+   $I(f)\in R$ が成立することである.
+  \item $f(x)$ が $R[x]$ の原始多項式であるための必要十分条件は %
+   $I(f)\approx 1$ が成立することである.
+  \item たとえば $R=\Z$ のとき \(
+    f(x) = \frac{1}{3}x^3 + \frac{1}{2}x^2 + \frac{3}{4}x + \frac{2}{3}
+   \) ならば $I(f)\approx\frac{1}{12}$ である.
+  \qed
+ \end{enumerate}
+\end{question}
+
+\begin{proof}[ヒント]
+ 教科書を見よ. \qed
+\end{proof}
+
+\begin{question}[Gaussの補題]
+ $R$ は UFD であり, $K$ はその商体であるとする.
+ \begin{enumerate}
+ \item $R[x]$ において原始多項式の積は原始多項式である.
+ \item $f,g\in K[x]$ に対して $I(fg)\approx I(f)I(g)$.
+ \qed
+ \end{enumerate}
+\end{question}
+
+\begin{proof}[ヒント]
+ 教科書を見よ. \qed
+\end{proof}
+
+\begin{question}
+ $R$ は UFD であり, $K$ はその商体であるとする.
+ $f(x),g(x)\in R[x]$ で $g(x)$ を原始多項式とするとき, %
+ $f(x)=g(x)h(x)$, $h(x)\in K[x]$ ならば $h(x)\in R[x]$.
+ \qed
+\end{question}
+
+\begin{proof}[ヒント]
+ $I(f)=I(gh)\approx I(g)I(h)$ などを使う. \qed
+\end{proof}
+
+\begin{question}[UFD係数の既約多項式は商体上でも既約]
+\label{q:irred/R=>irred/K}
+ $R$ は UFD であり, $K$ はその商体であるとする.
+ $R[x]$ の既約多項式は $K[x]$ においても既約多項式である.
+ \qed
+\end{question}
+
+\begin{proof}[ヒント]
+ 教科書を見よ. \qed
+\end{proof}
+
+\begin{question}[Eisenstein の判定法]
+\label{q:Eisenstein/UFD}
+ $R$ は UFD であるとし, $K$ はその商体であるとする.
+ $p$ は $R$ の素元であるとする. このとき
+ \begin{equation*}
+  f(x) = a_nx^n + \cdots + a_1x + a_0 \in R[x]
+ \end{equation*}
+ の係数 $a_i\in R$ が条件
+ \begin{equation*}
+  p\nmid a_n, \quad
+  p\mid a_{n-1},\ \ldots,\ p\mid a_1,\ p\mid a_0, \quad
+  p^2\nmid a_0.
+ \end{equation*}
+ を満たしているならば $f$ は $R[x]$ において既約である.
+ したがって問題 \qref{q:irred/R=>irred/K} の結果より %
+ $f$ は $K[x]$ においても既約である.
+ たとえば $k$ が体で $R=k[t]$ のとき, $K=k(t)$ であり, 
+ $x^2-t$, $x^3+tx+t\in R[x]$ は $K[x]$ の既約多項式である.
+ \qed
+\end{question}
+
+%\begin{proof}[ヒント]
+% 問題 \qref{q:Eisenstein/Z} と同じ議論で証明できる. \qed
+%\end{proof}
+
+\begin{question}
+ $p$ が素数のとき $x^p+x^{p-1}+\cdots+x+1$ が $\Q[x]$ の既約多項式になる
+ ことを示せ. \qed
+\end{question}
+
+\begin{proof}[ヒント]
+ $x$ に $x+1$ を代入して Eisenstein の判定法を使え.
+ $x$ に $x+1$ を代入する操作は多項式環の自己同型なので
+ 代入結果の既約性を判定すれば必要十分である.
+ \qed
+\end{proof}
+
+\begin{question}[UFD係数の一変数多項式環の既約元]
+ $R$ は UFD であるとする.
+ $R[x]$ の既約元は $R$ の既約元か $R[x]$ の既約原始多項式の
+ どちらかである.
+ \qed
+\end{question}
+
+\begin{proof}[ヒント]
+ たとえば永尾 \cite{nagao-1983}, p.106, 例題26.11. \qed
+\end{proof}
+
+\begin{question}[UFD上の多項式環もUFD]
+ UFD $R$ 上の $n$ 変数多項式環 $R[x_1,\ldots,x_n]$ もまた UFD である.
+ 特に体 $K$ 上の $n$ 変数多項式環 $K[x_1,\ldots,x_n]$ は UFD である.
+ \qed
+\end{question}
+
+\begin{proof}[ヒント]
+ 教科書を見よ. \qed
+\end{proof}
+
+\begin{question}[{$\Z[x]$} の素イデアルの分類]
+\label{q:Ideal(Z[x])}
+ $\Z$ 係数一変数多項式環 $\Z[x]$ の素イデアル $P$ は次のどれかに等しい:
+ \begin{equation*}
+  0, \quad (p), \quad (f(x)), \quad (p, f(x)).
+ \end{equation*}
+ ここで $p$ は $\Z$ の素数で $f(x)$ は $\Z[x]$ の既約原始多項式である.
+ \qed
+\end{question}
+
+\begin{proof}[ヒント]
+ $P\ne 0$, $P\cap\Z=0$ のとき.
+ $0$ でない $P$ の元を素元分解すると, 
+ $P$ は素イデアルなのでその素因子のどれかは $P$ に含まれる.
+ $P\cap\Z=0$ なのでその素因子は $\Z[x]$ のある既約原始多項式 $f(x)$ である. 
+ $f(x)$ で割り切れない $P$ の元が存在すると仮定して矛盾を導こう.
+ その元を素元分解することによって同様にしてある既約原始多項式 $g(x)\in P$ 
+ で $g(x)\not\approx f(x)$ となるものが存在することがわかる.
+ そのときある $\tilde{a}(x),\tilde{b}(x)\in\Q[x]$ で %
+ $\tilde{a}(x)f(x)+\tilde{b}(x)g(x)=1$ を満たすものが存在する.
+ 分母の整数 $d\ne 0$ をその両辺にかけることによって $a(x)f(x)+b(x)g(x)=d$, 
+ $a(x),b(x)\in\Z[x]$ を得る. このとき $0\ne d\in P\cap\Z$ となって矛盾.
+
+ $P\ne 0$, $P\cap\Z\ne 0$ のとき.
+ $P\cap\Z$ は $\Z$ の $0$ でない素イデアルなので
+ ある素数 $p$ が存在して $P\cap\Z=p\Z$.
+ よって $p\Z[x]\subset P$ である.
+ 自然な同型 $\Z[x]/p\Z[x]\isom (\Z/p\Z)[x]$ より, 
+ $P$ は $(\Z/p\Z)[x]$ の素イデアルに対応している.
+ $\Z/p\Z$ は有限体になるので $(\Z/p\Z)[x]$ の素イデアル
+ は $0$ または $(\Z/p\Z)[x]$ の既約多項式 $\bar{g}(x)$ から
+ 生成される単項イデアルである.
+ 前者の場合には $P=p\Z[x]=(p)$ となる.
+ 後者の場合にはある $0$ でない多項式 $g(x)\in P$ で $\bar{g}(x)$ を
+ 像に持つものが存在して $P=(p,g(x))$ となる.
+ $P$ は素イデアルなので $g(x)$ の素因子のどれかが $P$ に含まれる.
+ その素因子が素数 $p'$ ならば上の方の $g(x)$ に関する議論と
+ 同様にして $p'=p$ でなければいけないことがわかる.
+ しかしそのとき $\bar{g}(x)=0$ になってしまうので矛盾する. 
+ よって $g(x)$ の素因子で $P$ に含まれるもの
+ はある既約原始多項式 $f(x)$ でなければいけない. 
+ そのとき $P=(p,f(x))$ となる.
+ \qed
+\end{proof}
+
+\begin{question}[{$k[x,y]$} の素イデアルの分類]
+ 体 $k$ 上の二変数多項式環 $R=k[x,y]$ の素イデアル $P$ は次のどれかに等しい:
+ \begin{equation*}
+  0, \quad (f(x)), \quad (g(x,y)), \quad (f(x),g(x,y)).
+ \end{equation*}
+ ここで $f(x)$ は $k[x]$ の既約多項式
+ で $g(x,y)$ は $k[x]$ 係数の $y$ に関する既約原始多項式である.
+ \qed
+\end{question}
+
+\begin{proof}[ヒント]
+ \qref{q:Ideal(Z[x])} のヒントと同様.
+ \qed
+\end{proof}
+
+\begin{question}[UFDの別の特徴付け]
+\label{q:UFD-ideal-char}
+ $R$ は整域であるとする.
+ $R$ が UFD であるための必要十分条件は次の二つの条件が成立することである:
+ \begin{enumerate}
+ \item[(a)] $R$ において既約元は素元である.
+ \item[(b)] $R$ の単項イデアルで構成された空でない集合
+  は包含関係に関する極大元を持つ(単項イデアルに関する極大条件).
+  \qed
+ \end{enumerate}
+\end{question}
+
+\begin{proof}[ヒント]
+ 必要性. 
+ $R$ は UFD であるとする.
+ 問題 \qref{q:FD,irred=>prime} (または \qref{q:UFD,irred=>prime}) 
+ の結果より(a)が成立する. (b)を背理法で示そう.
+ (b)の否定を仮定する. すなわち $R$ の単項イデアルで構成された
+ 空でない集合で極大元を持たないものが存在すると仮定する. 
+ このとき $R$ の単項イデアルの無限列 $(a_0),(a_1),(a_2),\ldots$ で %
+ $(a_0)\subsetneqq(a_1)\subsetneqq(a_2)\subsetneqq\cdots$ を
+ 満たすものが存在する.
+ そのとき $a_0$ の素元分解を $a_0=p_1\cdots p_n$ と書くと %
+ $\{1,\ldots,n\}$ の部分集合の無限減少列 %
+ $Q_0\supsetneqq Q_1 \supsetneqq Q_2\supsetneqq\cdots$ で
+ $a_k\approx \prod_{i\in Q_k}p_i$ を満たすものが存在しなければいけない.
+ しかしこれは不可能である. よって(b)が成立しなければいけない.
+
+ 十分性.
+ (a)と(b)を仮定する.
+ $a_0\in R$, $a_0\ne 0$, $a_0\not\approx 1$ と仮定する.
+ このとき(b)より $(a)$ を含む $R$ でない単項イデアル全体の
+ 集合は極大元 $(p_1)$ を持つ.
+ $(p_1)$ の極大性より $p_1$ は $R$ の既約元になる. 
+ (a)より $p_1$ は素元である.
+ このとき $a=p_1a_1$, $a_1\in R$, $a_1\ne 0$ である.
+ もしも $a_1\approx 1$ ならば $a\approx p_1$ である.
+ もしも $a_1\not\approx 1$ ならば同様に続けて
+ $a_1=p_2a_2,\ a_2=p_3a_3,\ \ldots$ 
+ ($p_i$ は素元, $a_i\in R$, $a_i\ne 0$) とできる. 
+ もしもどこまで続けても $a_i\approx 1$ とならなければ %
+ 極大元を持たない単項イデアルの上昇列 %
+ $\{(a)\subsetneqq(a_1)\subsetneqq(a_2)\subsetneqq\cdots\}$ 
+ が得られるので(b)に矛盾する.
+ よってある $i=n$ で $a_n\approx 1$ となる. 
+ そのとき $a\approx p_1\cdots p_n$ と $a$ は素元分解されている.
+ したがって $R$ は UFD である.
+ \qed
+\end{proof}
+
+\begin{guide}
+ UFD に関するさらに進んだ結果については
+ たとえば松村 \cite{matsumura-1980-2000} 第7章 \S20 を参照せよ.
+ UFD は代数幾何学的にも重要な概念である
+ (Mumford \cite{Red-Book} III \S7 も参照せよ).
+
+ 代数体の整数環のように(一般に UFD ではないが)
+ イデアルの素イデアル分解の一意存在が成立する
+ 重要なクラスの整域 (Dedekind 整域) が存在する. 
+ Dedekind 整域については
+ たとえば松村 \cite{matsumura-1980-2000} 第4章 \S11 を参照せよ.
+ \qed
+\end{guide}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{thebibliography}{AB}
+
+%\bibitem{GM-1996}
+%Gelfand, S.~I.\ and Manin, Yu.~I.,
+%Methods of Homological Algebra,
+%Springer, 1996
+
+%\bibitem{Algebra-V}
+%Gelfand, S.~I.\ and Manin, Yu.~I.,
+%Homological Algebra, 
+%Algebra V, Encyclopaedia of Mathematical Sciences, Volume 38,
+%Springer-Verlag, 1994
+
+\bibitem{Red-Book}
+Mumford, D., The Red Book of Varieties abd Schemes, 
+Lecture Notes in Math., Vol.~1358, 1988
+
+%\bibitem{iversen-1986-1997}
+%イヴァセン, B., 層とコホモロジー, 前田博信訳, 
+%シュプリンガー・フェアラーク東京, 原書1986, 翻訳1997
+
+\bibitem{suron-1}
+加藤和也, 黒川信重, 斎藤毅, 数論1---Fermatの夢, 岩波講座現代数学の基礎 18,
+岩波書店 1996
+
+%\bibitem{tanisaki-1998}
+%谷崎俊之, 環と体3---非可換環論, 岩波講座 現代数学の基礎 17, 岩波書店, 1998
+
+%\bibitem{tanisaki-2002}
+%谷崎俊之, リー代数と量子群, 共立出版株式会社, 2002
+
+\bibitem{nagao-1983}
+永尾汎, 代数学, 新数学講座4, 朝倉書店, 1983
+
+\bibitem{hotta-1987}
+堀田良之, 代数入門---群と加群, 数学シリーズ, 裳華房, 1987
+
+%\bibitem{hotta-1988}
+%堀田良之, 加群十話---代数学入門, すうがくぶっくす3, 朝倉書店, 1988
+
+\bibitem{kan-to-tai-1}
+堀田良之, 環と体1---可換環論, 岩波講座 現代数学の基礎 15, 岩波書店, 1997
+
+\bibitem{matsumura-1980-2000}
+松村英之, 可換環論, 共立出版, 1980, 2000
+
+\bibitem{reid-1995-2000}
+リード, M., 可換環論入門, 伊藤由佳里訳, 岩波書店, 原書1995, 翻訳2000
+
+\bibitem{takagi2}
+高木貞治, 初等整数論講義, 第2版, 共立出版, 1971
+
+\end{thebibliography}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

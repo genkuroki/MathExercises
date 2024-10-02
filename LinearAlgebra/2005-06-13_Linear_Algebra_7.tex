@@ -1,0 +1,2023 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\def\STUDENT{} % \def すると計算問題の解答を印刷しなくなる.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% 線形代数学演習---行列の標準形
+% 
+% 黒木 玄 (東北大学理学部数学教室, kuroki@math.tohoku.ac.jp)
+%
+% この演習問題集は2005年度における東北大学理学部数学科2年生前期の
+% 代数学序論B演習のために作成されました. 
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[12pt,twoside]{jarticle}
+%\documentclass[12pt]{jarticle}
+\usepackage{amsmath,amssymb,amscd}
+\usepackage{eepic}
+\usepackage{enshu}
+%\usepackage{showkeys}
+\allowdisplaybreaks
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% grep -h newlabel 2005*_[1-6].aux > 2005-06-13_Linear_Algebra_7_aux.tex
+\input 2005-06-13_Linear_Algebra_7_aux.tex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setcounter{page}{61}      % この数から始まる
+\setcounter{section}{9}    % この数の次から始まる
+\setcounter{theorem}{0}    % この数の次から始まる
+\setcounter{question}{110} % この数の次から始まる
+\setcounter{footnote}{0}   % この数の次から始まる
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\ifx\STUDENT\undefined
+%
+% 教師専用
+%
+\newcommand\commentout[1]{#1}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\else
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% 生徒専用
+%
+\newcommand\commentout[1]{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\fi
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\title{\bf 線形代数学演習---行列の標準形
+%  \thanks{この演習問題集は2005年度における東北大学理学部数学科2年生前期の
+%    代数学序論B演習のために作成された.}
+%  \ifx\STUDENT\undefined\\{\normalsize 教師用\quad(計算問題の略解付き)}\fi}
+%  \ifx\STUDENT\undefined\\{\normalsize 計算問題の略解付き}\fi}
+%
+%\author{黒木 玄 \quad (東北大学大学院理学研究科数学専攻)}
+%
+%\date{最終更新2003年11月21日 \quad (作成2005年4月11日)}
+%\date{2004年4月25日}
+
+%\maketitle
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\noindent
+{\Large\bf 線形代数学演習}
+\hfill
+{\large 黒木玄}
+\qquad
+2005年6月13日
+\commentout{\quad (教師用)}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\tableofcontents
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{直和と補空間}
+
+有限次元とは限らないベクトル空間の基底の存在を用いて補空間の存在を証明しよう.
+
+\begin{question}[直和, 5点]
+  $K$ 上のベクトル空間 $V$ とその部分空間 $V_1,\ldots,V_N$ に関して以下の
+  2条件は互いに同値である:
+  \begin{enumerate}
+  \item[(a)] 任意の $v\in V$ は $v=v_1+\cdots+v_N$, $v_i\in V_i$ と一意に表
+    わされる.
+  \item[(b)] 任意の $v\in V$ は $v=v_1+\cdots+v_N$, $v_i\in V_i$ と表わされ,
+    任意の $v_i\in V_i$ ($i=1,\ldots,N$) に対して $v_1+\cdots+v_N=0$ な
+    らば $v_i=0$ ($i=1,\ldots,N$) である.
+  \end{enumerate}
+  この同値な条件のどちらかが成立するとき, $V=V_1\oplus\cdots\oplus V_N$ と
+  書き, $V$ は $V_1,\ldots,V_N$ の{\bf 直和 (direct sum)} であると言う.
+  さらに各 $V_i$ が有限次元でかつ $V=V_1\oplus\cdots\oplus V_N$ ならば
+  \begin{equation*}
+    \dim V = \dim V_1 + \cdots + \dim V_N
+  \end{equation*}
+  が成立する. \qed
+\end{question}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{question}[補空間の存在, 10点]
+  \label{q:complement}
+  体 $K$ 上のベクトル空間 $U$ とその部分空間 $V$ に対して, $V$ の基底を $U$ 
+  の基底に拡張できることを用いて, $U$ の部分空間 $W$ で $U=V\oplus W$ を満た
+  すものが存在することを示せ. 
+  そのような $W$ を $U$ における $V$ の
+  {\bf (線形)補空間 (linear complement)} と呼ぶ.
+  \qed
+\end{question}
+
+\begin{proof}[ヒント]
+  $V$ の基底 $\{v_i\}_{i\in I}$ を $U$ の
+  基底 $\{v_i\}_{i\in I}\cup\{w_j\}_{j\in J}$ に拡張して,
+  $W$ を $\{w_j\}_{j\in J}$ で張られる $U$ の部分空間とする
+  と $U=V\oplus W$ である.
+  \qed
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{線形写像の行列表示}
+\label{sec:matrix-rep}
+
+$K$ は体であるとし, $U$, $V$ は $K$ 上の有限次元ベクトル空間であると
+し, $f:U\to V$ は $K$ 上の任意の線形写像であるとする. 
+線形写像 $f$ 自身は極めて抽象的な数学的対象であるが, $U$ と $V$ に
+基底を定めることによって, $f$ を具体的に行列で表現することができる. 
+
+$u_1,\ldots,u_n$ は $U$ の基底であり, $v_1,\ldots,v_m$ は $V$ の基底であると
+する. このとき, 任意の $u\in U$, $v\in V$ は次のように一意に表わされる:
+\begin{align*}
+  &
+  u 
+  = \sum_{j=1}^n \alpha_j u_j 
+  = \sum_{j=1}^n u_j \alpha_j
+  =
+  [u_1,\ldots,u_n]
+  \begin{bmatrix}
+    \alpha_1 \\
+    \vdots \\
+    \alpha_n \\
+  \end{bmatrix}
+  \qquad (\alpha_j\in K),
+  \\ &
+  v
+  = \sum_{i=1}^m \beta_i v_i 
+  = \sum_{i=1}^m v_i \beta_i 
+  =
+  [v_1,\ldots,v_m]
+  \begin{bmatrix}
+    \beta_1 \\
+    \vdots \\
+    \beta_m \\
+  \end{bmatrix}
+  \qquad (\beta_i\in K).
+\end{align*}
+これによって $u\in U$ と $\alpha=\tp{[\alpha_1,\ldots,\alpha_n]}\in K^n$ が
+一対一に対応し, $v\in V$ と $\beta=\tp{[\beta_1,\ldots,\beta_m]}\in K^m$ が
+一対一に対応する.
+この対応を用いて, 線形写像 $f:U\to V$ と
+行列 $A=[a_{ij}]\in M_{m,n}(K)$ の一対一対応を構成可能であることを
+説明しよう.
+
+まず, 各 $f(u_j)\in V$ は
+\begin{equation*}
+  f(u_j)
+  = \sum_{i=1}^m a_{ij} v_i 
+  = \sum_{i=1}^m v_i a_{ij}
+  =
+  [v_1,\ldots,v_m]
+  \begin{bmatrix}
+    a_{1j} \\
+    \vdots \\
+    a_{mj} \\
+  \end{bmatrix}
+  \qquad (a_{ij}\in K)
+\end{equation*}
+と一意に表わされるので,
+\begin{equation*}
+  [f(u_1),\ldots,f(u_n)] 
+  =
+  [v_1,\ldots,v_m]
+  \begin{bmatrix}
+    a_{11} & \cdots & a_{1n} \\
+    \vdots &        & \vdots \\
+    a_{m1} & \cdots & a_{mn} \\
+  \end{bmatrix}.
+\end{equation*}
+よって
+\begin{align*}
+  f(u)
+  &
+  = \sum_{j=1}^n \alpha_j f(u_j)
+  = \sum_{j=1}^n f(u_j) \alpha_j
+  \\ &
+  =
+  [f(u_1),\ldots,f(u_n)]
+  \begin{bmatrix}
+    \alpha_1 \\
+    \vdots \\
+    \alpha_n \\
+  \end{bmatrix}
+  =
+  [v_1,\ldots,v_m]
+  \begin{bmatrix}
+    a_{11} & \cdots & a_{1n} \\
+    \vdots &        & \vdots \\
+    a_{m1} & \cdots & a_{mn} \\
+  \end{bmatrix}
+  \begin{bmatrix}
+    \alpha_1 \\
+    \vdots \\
+    \alpha_n \\
+  \end{bmatrix}.
+\end{align*}
+以上の記号のもとで線形写像 $f$ は
+\begin{equation*}
+  [u_1,\ldots,u_n]
+  \begin{bmatrix}
+    \alpha_1 \\
+    \vdots \\
+    \alpha_n \\
+  \end{bmatrix}
+  \in U
+  \ \text{を}\ %
+  [v_1,\ldots,v_m]
+  \begin{bmatrix}
+    a_{11} & \cdots & a_{1n} \\
+    \vdots &        & \vdots \\
+    a_{m1} & \cdots & a_{mn} \\
+  \end{bmatrix}
+  \begin{bmatrix}
+    \alpha_1 \\
+    \vdots \\
+    \alpha_n \\
+  \end{bmatrix}
+  \in V
+  \ \text{に}
+\end{equation*}
+対応させる写像に等しい.
+以上のようにして線形写像 $f$ に対応する行列 $A=[a_{ij}]$ が得られる.
+逆に行列 $A=[a_{ij}]$ が与えられれば上の対応によって
+線形写像 $f:U\to V$ が得られることもわかる.
+行列 $A=[a_{ij}]$ を線形写像 $f$ の基底 $u_j$, $v_i$ に
+関する{\bf 行列表示}と呼ぶことにする.
+
+\begin{summary}[線形写像の行列表示]
+  $U$ の基底 $u_1,\ldots,u_n$ と $V$ の基底 $v_1,\ldots,v_m$ に関する
+  線形写像 $f:U\to V$ の行列表示 $A=[a_{ij}]\in M_{m,n}(K)$ は次の条件に
+  よって一意に決定される%
+  \footnote{定義域の基底を横に並べたものに $f$ を左から作用
+    させて, 右側にポコッと出て来る行列 $A=[a_{ij}]$ を計算すれば
+    線形写像 $f$ の行列表示が得られる.}:
+  \begin{equation*}
+    [f(u_1),\ldots,f(u_n)]
+    = [v_1,\ldots,v_m]
+    \begin{bmatrix}
+    a_{11} & \cdots & a_{1n} \\
+    \vdots &        & \vdots \\
+    a_{m1} & \cdots & a_{mn} \\
+    \end{bmatrix}.
+  \end{equation*}
+  この条件は次と同値である:
+  \begin{equation*}
+    f(u_j)
+    = \sum_{i=1}^m a_{ij} v_i
+    = \sum_{i=1}^m v_i a_{ij}
+    \qquad (j=1,\ldots,n).
+  \qed
+  \end{equation*}
+\end{summary}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{question}[5点]
+  $U=\R^3$, $V=\R^2$ とし, 行列 
+  \begin{equation*}
+    A = 
+    \begin{bmatrix}
+      1 & 2 & 3 \\
+      2 & 3 & 4 \\
+    \end{bmatrix}
+  \end{equation*}
+  の積の定める $U$ から $V$ への線形写像を $f$ と書くことにする
+  (すなわち $f(u)=Au$ ($u\in U=\R^3$)).
+  $u_1,u_2,u_3\in U$ と $v_1,v_2\in V$ を次のように定める:
+  \begin{equation*}
+    u_1 =
+    \begin{bmatrix}
+      1 \\ 0 \\ 0 \\
+    \end{bmatrix},
+    \quad
+    u_2 =
+    \begin{bmatrix}
+      0 \\ 1 \\ 0 \\
+    \end{bmatrix},
+    \quad
+    u_3 =
+    \begin{bmatrix}
+      1 \\ -2 \\ 1 \\
+    \end{bmatrix},
+    \qquad
+    v_1 =
+    \begin{bmatrix}
+      1 \\ 2 \\
+    \end{bmatrix},
+    \quad
+    v_2 =
+    \begin{bmatrix}
+      2 \\ 3 \\
+    \end{bmatrix}.
+  \end{equation*}
+  このとき, $u_1,u_2,u_3$ は $U$ の基底であり, $v_1,v_2$ は $V$ の基底で
+  あり, それらに関する $f$ の行列表示を $B$ とすると, $B$ は
+  \begin{equation*}
+    B =
+    \begin{bmatrix}
+      1 & 0 & 0 \\
+      0 & 1 & 0 \\
+    \end{bmatrix}
+  \end{equation*}
+  と簡単な形になることを示せ. \qed
+\end{question}
+
+\begin{proof}[ヒント]
+  $[f(u_1),f(u_2),f(u_3)]=[v_1,v_2]B$ を示せ.
+  $[f(u_1),f(u_2),f(u_3)]=[Au_1,Au_2,Au_3]=A[u_1,u_2,u_3]$ 
+  なので $A[u_1,u_2,u_3]=[v_1,v_2]B$ が成立することを
+  直接的な計算で示せばよい.
+  というわけでこの問題は非常に簡単な問題である.
+  \qed
+\end{proof}
+
+%\begin{rem}[行列の基本変形との関係]
+%  上のような問題の作り方は問題 \qref{q:PAQ} を理解すればわかる. \qed
+%\end{rem}
+
+\begin{rem}[標準的な基底以外のより適切な基底を見付けることの重要性]
+  上の問題のように行列 $A$ 自身は複雑な形をしていても,
+  標準的な基底とは別の基底に関して行列表示し直すと
+  簡単な形になることがよくある.
+  与えられた線形写像の本質を見極めるためには
+  適切な基底を見付けて行列表示してみることが役に立つ.
+
+  実は行列の基本変形や(後で習うことになっている)行列の対角化
+  や Jordan 標準形の理論はどれも「行列もしくは線形写像の本質を見極める
+  ために役に立つ基底の見付け方に関する理論」とみなせる.
+  \qed
+\end{rem}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{question}[5点]
+  \label{q:A->A}
+  $K$ は体であるとし, $m\times n$ 行列 $A\in M_{m,n}(K)$ を任意に取る.
+  $K^l$ の標準的基底を $e^{(l)}_1,\ldots,e^{(l)}_l$ と書くことにする.
+  すなわち $e^{(l)}_i\in K^l$ は第 $i$ 成分のみが $1$ で
+  他の成分は $0$ であるとする.
+  基底 $e^{(n)}_j$, $e^{(m)}_i$ に関する $A$ の定める
+  線形写像 $A:K^n\to K^m$ の行列表示は $A$ 自身に等しい.
+  \qed
+\end{question}
+
+\begin{proof}[ヒント]
+  $[Ae^{(n)}_1,\ldots,Ae^{(n)}_n]=[e^{(m)}_1,\ldots,e^{(m)}_m]A$ を示せばよい
+  がほとんど自明である. \qed
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{question}[基底の変換, 5点]
+  \label{q:P^{-1}AQ}
+  $K$ は体であるとし, $U$, $V$ は $K$ 上の有限次元ベクトル空間で
+  あり, $u_1,\ldots,u_n$ は $U$ の基底であり, $v_1,\ldots,v_m$ は $V$ の基底
+  であるとする.  $f:U\to V$ は線形写像であり, $A\in M_{m,n}(K)$ は
+  基底 $u_j$, $v_i$ に関する $f$ の行列表示であるとする.
+  $u'_1,\ldots,u'_n$ と $v'_1,\ldots,v'_m$ はそれぞれ $U$, $V$ の
+  別の基底であるとする.  以下を示せ.
+  \begin{enumerate}
+  \item ある可逆な行列 $Q\in GL_n(K)$, $P\in GL_m(K)$ で%
+    \footnote{$GL_n(K)$ は $K$ の元を成分に持つ可逆な $n\times n$ 行列全体の
+      集合である.  $GL_n(K)$ は群をなし, 一般線形群と呼ばれる.}
+    \begin{equation*}
+      [u'_1,\ldots,u'_n]=[u_1,\ldots,u_n]Q,
+      \qquad
+      [v'_1,\ldots,v'_m] = [v_1,\ldots,v_m]P
+    \end{equation*}
+    をみたすものが一意に存在する.
+  \item 基底 $u'_j$, $v'_i$ に関する $f$ の行列表示は $P^{-1}AQ$ になる.
+    \qed
+  \end{enumerate}
+\end{question}
+
+\begin{proof}[ヒント]
+  2. $[f(u'_1),\ldots,f(u'_n)]=[v'_1,\ldots,v'_m]P^{-1}AQ$ を 1 を用いて示せ
+  ばよい. \qed
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{question}[5点]
+  $K$ は体であるとし, 
+  $u_1,\ldots,u_n\in K^n$ は $K^n$ の基底であり, 
+  $v_1,\ldots,v_m\in K^m$ は $K^m$ の基底であるとし,
+  $Q=[u_1,\ldots,u_n]\in M_n(K)$, $P=[v_1,\ldots,v_m]\in M_m(K)$ とおく.
+  このとき, $m\times n$ 行列 $A\in M_{m,n}(K)$ の定める
+  線形写像 $A:K^n\to K^m$ の
+  基底 $u_j$, $v_i$ に関する行列表示は $P^{-1}AQ$ になる.
+  \qed
+\end{question}
+
+\begin{proof}[ヒント]
+  問題 \qref{q:A->A}, \qref{q:P^{-1}AQ} からただちに得られる.
+  もしくは $[Au_1,\ldots,Au_n]=AQ=PP^{-1}AQ=[v_1,\ldots,v_m]P^{-1}AQ$. 
+  \qed
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{question}[5点]
+  \label{q:9,-2,-2,6}
+  $V=\R^2$ とし, 行列
+  \begin{equation*}
+    A = \frac{1}{5}
+    \begin{bmatrix}
+      9 & -2 \\
+      -2 & 6 \\
+    \end{bmatrix}
+  \end{equation*}
+  が定める $V$ からそれ自身への線形写像を $f$ と書くことにする.
+  $v_1,v_2\in V$ を
+  \begin{equation*}
+    v_1 = % \frac{1}{\sqrt{5}} 
+    \begin{bmatrix} 1 \\ 2 \\ \end{bmatrix},
+    \quad
+    v_2 = % \frac{1}{\sqrt{5}} 
+    \begin{bmatrix} -2 \\ 1 \\ \end{bmatrix}
+  \end{equation*}
+  と定めると, $v_1,v_2$ は $V$ の基底である
+  ($v_1$, $v_2$ を平面上の図示せよ).
+  基底 $v_i$ に関する $f$ の行列表示を求めよ.
+  \qed
+\end{question}
+
+\begin{proof}[ヒント]
+  $[f(v_1),f(v_2)]=[v_1,v_2]B$ を満たす行列 $B\in M_2(\R)$ が答である.
+  \qed
+\end{proof}
+
+\commentout{
+\begin{proof}[略解]
+  $Av_1=v_1$, $Av_2=2v_2$ なので $B=\diag(1,2)$. \qed
+\end{proof}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{question}[10点]
+  \label{q:9,-2,-2,6-ODE}
+  問題 \qref{q:9,-2,-2,6} の結果を用いて,
+  次の常微分方程式の初期値問題を解け:
+  \begin{equation*}
+    \od{t}u = Au, \qquad u(0) = u_0.
+  \end{equation*}
+  ここで $u$ は $t\in\R$ の $V=\R^2$ に値を持つ函数で
+  あり, $u_0 = e_2 = \tp{[0,1]}$.
+  \qed
+\end{question}
+
+\begin{proof}[ヒント]
+  まず今まで渡したプリントの「行列の指数函数」に関する説明を読め.
+  $P = [v_1,v_2]$ と置くと $A=PBP^{-1}$ であるから,
+  \begin{equation*}
+    e^{tA} = Pe^{tB}P^{-1}.
+  \end{equation*}
+  実は $B$ は対角行列になるので $e^{tB}$ は容易に計算される.
+  その結果を用いて $u(t) = e^{tA}u_0$ を整理したものが答になる.
+  \qed
+\end{proof}
+
+\commentout{
+\begin{proof}[略解]
+  $e^{tB}=\diag(e^t,e^{2t})$ であり, 
+  $P=
+  \begin{bmatrix}
+    1 & -2 \\
+    2 & 1 \\
+  \end{bmatrix}$, $P^{-1}=\dfrac{1}{5}
+  \begin{bmatrix}
+    1 & 2 \\
+    -2 & 1 \\
+  \end{bmatrix} = \dfrac{1}{5}\tp{P}$ なので
+  \begin{equation*}
+    e^{tA} 
+    = Pe^{tA}P^{-1}
+    = \frac{1}{5}
+  \begin{bmatrix}
+    1 & -2 \\
+    2 & 1 \\
+  \end{bmatrix}
+  \begin{bmatrix}
+    e^t & 0 \\
+    0 & e^{2t} \\
+  \end{bmatrix}
+  \begin{bmatrix}
+    1 & 2 \\
+    -2 & 1 \\
+  \end{bmatrix}
+  =
+  \frac{1}{5}
+  \begin{bmatrix}
+    e^t + 4e^{2t}  & 2e^t - 2e^{2t} \\
+    2e^t - 2e^{2t} & 4e^t + e^{2t} \\
+  \end{bmatrix}.
+  \end{equation*}
+  よって $u(t) = e^{tA}u_0 = e^{tA}e_2 = \dfrac{1}{5}
+  \begin{bmatrix}
+    2e^t - 2e^{2t} \\
+    4e^t + e^{2t} \\
+  \end{bmatrix}$. \qed
+\end{proof}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{question}[一次変換の対角化, 10点]
+  $V$ は体 $K$ 上のベクトル空間であり, $f$ は $V$ の一次変換 (すなわち $V$ 
+  からそれ自身への線形写像) であるとする. もしも $V$ の
+  基底 $v_1,\ldots,v_n$ が $f(v_i)=\alpha_i v_i$ ($\alpha_i\in K$) を
+  満たしているならば, 基底 $v_i$ に関する $f$ の行列表示
+  は対角行列 $D=\diag(\alpha_1,\ldots,\alpha_n)$ になる.
+  \qed
+\end{question}
+
+\begin{proof}[ヒント]
+  $[f(v_1),\ldots,f(v_n)]=[v_1,\ldots,v_n]D$ を示せばよいので簡単である.
+  \qed
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{question}[巡回行列とその行列式, 20点]
+  $n\times n$ 行列 $\Lambda$ を次のように定める:
+  \begin{equation*}
+    \Lambda = 
+    \begin{bmatrix}
+      0 & 1 &   & & \bigzerou \\
+        & 0 & 1 & & \\
+        &   & 0 & \ddots & \\
+        &   &   & \ddots & 1 \\
+      1 &   &   &        & 0 \\
+    \end{bmatrix}
+    =
+    E_{12} + E_{23} + \cdots + E_{n-1,n} + E_{n,1}
+    \in M_n(\C).
+  \end{equation*}
+  ここで $E_{ij}$ は行列単位 (第 $(i,j)$ 成分だけが $1$ で他の成分が
+  すべて $0$ であるような行列) である.
+  $\zeta = e^{2\pi i/n}$ ($1$ の原始 $n$ 乗根) とおき,
+  \begin{equation*}
+    v_k =
+    \begin{bmatrix}
+      1 \\ \zeta^k \\ \zeta^{2k} \\ \vdots \\ \zeta^{(n-1)k} \\
+    \end{bmatrix}
+    \in \C^n
+    \qquad (k\in\Z)
+  \end{equation*}
+  とおく.  このとき以下が成立する:
+  \begin{enumerate}
+  \item $\Lambda^k\ne E$ ($k=1,\ldots,n-1$), $\Lambda^n=E$.
+  \item $\Lambda v_k = \zeta^k v_k$ ($k\in\Z$).
+  \item $v_0,v_1,\ldots,v_{n-1}$ は $\C^n$ の基底である.
+  \item 基底 $v_0,v_1,\ldots,v_{n-1}$ に関する $\Lambda$ の
+    定める $\C^n$ の一次変換の行列表示は
+    対角行列 $D=\diag(1,\zeta,\zeta^2,\ldots,\zeta^{n-1})$ になる.
+  \item $P=[v_0,v_1,\ldots,v_{n-1}]\in M_n(\C)$ と
+    おくと, $P$ は可逆であり, $\Lambda = PDP^{-1}$.
+  \item $X=x_0 E+x_1\Lambda+x_2\Lambda^2+\cdots+x_{n-1}\Lambda^{n-1}$ とおく
+    と, 
+    \begin{equation*}
+      \det X = 
+      \prod_{k=0}^{n-1}
+      (x_0+x_1\zeta^k+x_2\zeta^{2k}+\cdots+x_{n-1}\zeta^{(n-1)k}).
+      \qed
+    \end{equation*}
+  \end{enumerate}
+\end{question}
+
+\begin{proof}[ヒント]
+%  実は上の問題は問題 \qref{q:cyclic-det} のヒント2の方針を
+%  より詳しくしたものである. 
+  3. $|P|\ne 0$ を Vandermonde の行列式の公式を用いて示せばよい.\\
+  4. $[\Lambda v_0,\Lambda v_1,\ldots,\Lambda v_{n-1}]
+  =[v_0,v_1,\ldots,v_{n-1}]D$ を示せばよい.\\
+  6. $X=P(x_0 E+x_1 D+x_2 D^2+\cdots+x_{n-1}D^{n-1})P^{-1} 
+  =P\diag(x_0+x_1\zeta^k+x_2\zeta^{2k}
+  +\cdots+x_{n-1}\zeta^{(n-1)k})_{k=0}^{n-1}P^{-1}$.
+  \qed
+\end{proof}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{question}[複素数の実行列表示, 5点]
+  \label{q:hatz}
+  複素数体 $\C$ は自然に実数体 $\R$ 上の $2$ 次元のベクトル空間とみなせ%
+  \footnote{「複素平面」という言葉は複素数全体の集合が
+    実数体上 $2$ 次元のベクトル空間をなすことを含意している.}, %
+  $1$, $i$ は $\C$ の $\R$ 上の基底である. $z=x+iy\in\C$ ($x,y\in\R$) に
+  対して, 写像 $\hat{z}:\C\to\C$ を
+  \begin{equation*}
+    \hat{z}(w) := zw \qquad (w\in\C)
+  \end{equation*}
+  と定めると, $\hat{z}$ は $\R$ 上の線形写像である.  基底 $1,i$ に
+  関する $\hat{z}$ の行列表示を $A(z)\in M_2(\R)$ と書くと,
+  \begin{equation*}
+    A(z) = A(x+iy) =
+    \begin{bmatrix}
+      x & -y \\
+      y & x \\
+    \end{bmatrix}.
+    \qed
+  \end{equation*}
+\end{question}
+
+\begin{proof}[ヒント]
+  $[z1,zi]=[1,i]A(z)$ を示せばよいだけなので非常に簡単である.
+  \qed
+\end{proof}
+
+%\begin{rem}
+%  上の問題 \qref{q:hatz} の $A(z)$ は問題 \qref{q:C->M2(R)} の $A(z)$ に等し
+%  い.  
+%  さらに $\theta\in\R$ のとき $A(e^{i\theta})$ は
+%  \secref{sec:rotation-matrix}の回転行列 $R(\theta)$ に等しい.
+%  このように, 今までに登場した特殊な行列の多くは
+%  自然に得られる線形写像の行列表示に等しくなる.
+%  \qed
+%\end{rem}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{question}[5点]
+  \label{q:C->M2(R)}
+  複素数 $z = x + iy\in\C$ ($x,y\in\R$) に対して実2次正方行列 $A(z)=A(x+iy)$ 
+  を次のように定める:
+  \begin{equation*}
+    A(z) = A(x+iy) :=
+    \begin{bmatrix}
+      x & -y \\
+      y &  x \\
+    \end{bmatrix}.
+  \end{equation*}
+  このとき $z,w\in\C$ に対して次が成立する:
+  \begin{align*}
+    &
+    A(z+w) = A(z) + A(w), \qquad
+    A(zw) = A(z)A(w), \qquad
+    A(1) = 1;
+    \\ &
+    \det A(z) = |z|^2, \qquad
+    \trace A(z) = 2\Repart z, \qquad
+    e^{A(z)} = A(e^z).
+    \qed
+  \end{align*}
+\end{question}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{question}[ベクトル積の定義, 15点]
+  \label{q:def-vp}
+  $\R^3$ の2つのベクトル $u=\tp{[u_1,u_2,u_3]}$, $v=\tp{[v_1,v_2,v_3]}$ 
+  の{\bf ベクトル積 (vector product)} $u\times v$ を次のように定義する:
+  \begin{equation*}
+    u\times v :=
+    \tp{[
+      u_2 v_3 - u_3 v_2,
+      u_3 v_1 - u_1 v_3,
+      u_1 v_2 - u_2 v_1
+    ]}.
+  \end{equation*}
+  このとき以下が成立する:
+  \begin{enumerate}
+  \item 第 $i$ 成分だけが $1$ で他の成分が $0$ であるような $3$ 次元縦ベクト
+  ルを $e_i$ と書くと,
+  \begin{align*}
+    &
+    e_i \times e_j = e_k, \quad  e_j \times e_i = -e_k
+    \qquad \bigl((i,j,k)=(1,2,3),(2,3,1),(3,1,2)\bigr),
+    \\ &
+    e_i\times e_i = 0 \qquad (i=1,2,3).
+  \end{align*}
+  \item ベクトル $u=\tp{[u_1,u_2,u_3]}$ に対して行列 $X(u)$ を次のように定める:
+    \begin{equation*}
+      X(u) =
+      \begin{bmatrix}
+         0   &  u_1 & u_3 \\
+        -u_1 &  0   & u_2 \\
+        -u_3 & -u_2 & 0   \\
+      \end{bmatrix}.
+    \end{equation*}
+    さらに行列 $A$, $B$ の{\bf 交換子 (commutator)} $[A,B]$ を
+    次のように定義する:
+    \begin{equation*}
+      [A,B] = AB - BA.
+    \end{equation*}
+    このとき $u,v\in\R^3$ に対して
+    \begin{equation*}
+      [X(u), X(v)] = X(u\times v).
+    \end{equation*}
+  \item ベクトル $u=\tp{[u_1,u_2,u_3]}$ に対して行列 $Y(u)$ を次のように定める:
+    \begin{equation*}
+      Y(u) = -\frac{i}{2}(u_1\sigma_1 + u_2\sigma_2 + u_3\sigma_3).
+    \end{equation*}
+    ここで $\sigma_1$, $\sigma_2$, $\sigma_3$ は次のように定義
+    される {\bf Pauli 行列}と呼ばれる行列である:
+    \begin{equation*}
+      \sigma_1=
+      \begin{bmatrix}
+        0 & 1 \\
+        1 & 0 \\
+      \end{bmatrix},
+      \quad
+      \sigma_2=
+      \begin{bmatrix}
+        0 & -i \\
+        i & 0 \\
+      \end{bmatrix},
+      \quad
+      \sigma_3=
+      \begin{bmatrix}
+        1 & 0 \\
+        0 & -1 \\
+      \end{bmatrix}.
+    \end{equation*}
+    このとき $u,v\in\R^3$ に対して
+    \begin{equation*}
+      [Y(u), Y(v)] = Y(u\times v).
+    \end{equation*}
+  \item $u,v,w\in\R^3$ に対して以下が成立している%
+    \footnote{ヒント: $n$ 次正方行列 $A,B,C$ に
+      対して $[[A,B],C]=[A,[B,C]]-[B,[A,C]]$ が成立している.
+      これを交換子の {\bf Jacobi 律}と呼ぶ.}:
+    \begin{equation*}
+      v\times u = - u\times v,
+      \qquad
+       (u\times v)\times w = u\times(v\times w) - v\times(u\times w).
+    \end{equation*}
+  \item ベクトル積は行列式を用いて形式的に次のように表わされる:
+    \begin{equation*}
+      u\times v =
+      \begin{vmatrix}
+        u_1 & v_1 & e_1 \\
+        u_2 & v_2 & e_2 \\
+        u_3 & v_3 & e_3 \\
+      \end{vmatrix}.
+    \end{equation*}
+    この等式は「右辺の形式的な行列式の第 $3$ 列に関する形式的な
+    余因子展開が左辺に等しい」と読む. \qed
+  \end{enumerate}
+\end{question}
+
+\begin{guide}
+  上の問題の 2 と 3 はもちろん偶然ではない.
+  実はベクトル積は3次元 Euclid 空間の(無限小)回転を表現しているのである.
+  実は上の問題は3次元 Euclid 空間の回転の表現の仕方には様々な方法があること
+  を示していることになっている.
+
+  力学の教科書で回転運動の章を見るとベクトル積が登場する.
+  それは回転運動を数学的に表現するためである.
+  また量子物理の教科書を読むと Pauli 行列がよく登場する.
+  それは我々が住んでいる物理的な3次元空間の回転対称性を表現するためである.
+
+  実は上の問題の 3 は {\bf Hamilton の四元数体 (quaternion)}と関係している.
+  四元数体とは複素数をさらに拡張した非可換体であり, 実数体に $i,j,k$ で
+  \begin{equation*}
+    i^2=j^2=k^2=-1, \qquad ij=-ji=k, \quad jk=-kj=i, \quad ki=-ik=j    
+  \end{equation*}
+  を満たすものを付け加えることによって構成される. 
+  $I=-i\sigma_1,J=-i\sigma,K=-i\sigma_3$ は $i,j,k$ の満たすべき公式と
+  同じ公式を満たしている.
+  したがって, 複素数が実 $2$ 次正方行列で表現できたように
+  (問題 \qref{q:C->M2(R)} を見よ), 四元数は複素 $2$ 次正方行列で表現できる.
+  \qed
+\end{guide}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{question}[ベクトル積と平行四辺形の面積, 15点]
+  \label{q:|det|=vecArea}
+  上の問題の続き. 
+  $\R^3$ 内で原点 $0$ と $u$ を結ぶ
+  線分, $u$ と $u+v$ を結ぶ線分, $u+v$ と $v$ を結ぶ線分 $v$ と $0$ を
+  結ぶ線分で囲まれた平行四辺形を考える.
+  このとき $u\times v$ はその平行四辺形に垂直に
+  なり, $u\times v$ の長さはその平行四辺形の面積に等しくなる.
+  \qed
+\end{question}
+
+\begin{proof}[ヒント]
+  $u\times v$ と $u$, $v$ の内積が $0$ になることが
+  問題 \qref{q:def-vp} におけるベクトル積の定義もしくは 5 の表示から導かれる.
+  平行四辺形の面積との関係については
+  平行四辺形の面積が $\norm{u}\,\norm{v}\,\sin\theta$ であることを使え.
+  ここで $\theta$ は $u$ と $v$ のあいだの角度である.
+  \qed
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{question}[Hamilton の四元数の行列表示, 10点]
+  $1,i,j,k$ を基底に持つ $\R$ 上のベクトル空間
+  \begin{equation*}
+    \bH = \{\, a1 + bi + cj + dj \mid a,b,c,d\in\R \,\}
+  \end{equation*}
+  に積を次の規則で定める:
+  \begin{align*}
+    &
+    1^2=1, \quad
+    1i=i1=i, \quad 1j=j1=j, \quad 1k=k1=k, \quad 
+    \\ &
+    i^2=j^2=k^2=-1, \quad
+    ij=-ji=k, \quad jk=-ki=i, \quad ki=-ik=j.
+  \end{align*}
+  このとき $\bH$ の元を {\bf Hamilton の四元数 (quaternion)} と呼ぶ.
+  $a,b\in\R$ のとき四元数 $a1+bi\in\bH$ と複素数 $a+bi\in\C$ を同一視する
+  ことにする.
+  $q = a1 + bi + cj + dj\in\bH$ ($a,b,c,d\in\R$) と置く.
+  写像 $\hat{q}:\bH\to\bH$ を
+  \begin{equation*}
+    \hat{q}(r) = qr \qquad (r\in\bH)
+  \end{equation*}
+  と定めると, $\hat{q}$ は $\R$ 上の一次変換である.  このとき以下が成立する.
+  \begin{enumerate}
+  \item $\R$ 上の基底 $1,i,j,k$ に関する $\hat{q}$ の
+    行列表示を $A(q)$ と書くと,
+    \begin{equation*}
+      A(q) = 
+      \left[
+      \begin{array}{rrrr}
+        a & -b & -c & -d \\
+        b &  a & -d &  c \\
+        c &  d &  a & -b \\
+        d & -c &  b &  a \\
+      \end{array}
+      \right].
+    \end{equation*}
+  \item $z=a+bi$, $w=c+di$, $a,b,c,d\in\R$ とすると, $q=z1+wj$ である
+    から,  $\bH$ は $1,j$ を基底に持つ $\C$ 上の $2$ 次元のベクトル空間と
+    みなされる.  $\C$ 上の基底 $1,j$ に関する $\hat{q}$ の行列表示を $B(q)$ 
+    と書くと,
+    \begin{equation*}
+      B(q) = 
+      \begin{bmatrix}
+        z       & -w \\
+        \bar{w} & \bar{z} \\
+      \end{bmatrix}.
+    \end{equation*}
+    ここで $\bar{z},\bar{w}$ はそれぞれ $z,w$ の複素共役である. \qed
+  \end{enumerate}
+\end{question}
+
+\begin{proof}[ヒント]
+  1. $[q1,qi,qj,qk]=[1,i,j,k]A(q)$ を示せばよい.
+  2. $[q1,qj]=[1,j]B(q)$ を示せばよい. $zj=j\bar{z}$ を用いよ.
+  \qed
+\end{proof}
+
+\begin{guide}
+  問題 \qref{q:def-vp} で定義された Pauli 行列 $\sigma_1,\sigma_2,\sigma_3$ 
+  と四元数の複素 $2\times 2$ 行列表現 $B(q)$ のあいだには %
+  $B(i)=i\sigma_3$, $B(j)=-i\sigma_2$, $B(k)=-i\sigma_1$ という関係がある.
+  したがって, $\pm i$ 倍と順序の違いを除けば Pauli 行列と四元数 $i,j,k$ の
+  複素 $2\times 2$ 行列表示は本質的に一致する.
+  \qed
+\end{guide}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{question}[15点]
+  \label{q:sl2-1}
+  問題 \qref{q:polyn-diff-op} の記号をそのまま用いる.
+  $v_i = x^i$ と置く.
+  任意に $\lambda\in\C$ を取り,
+  $\C[x]$ の一次変換 $e,f,h$ を
+  \begin{equation*}
+    e = \d, \quad
+    h = -2x\d+\lambda, \quad
+    f = -x^2\d+\lambda x
+  \end{equation*}
+  と定める. このとき以下が成立している:
+  \begin{enumerate}
+  \item   $hv_i = (\lambda - 2i)v_i$, 
+    \quad $ev_i = i v_{i-1}$, 
+    \quad $fv_i = (\lambda - i)v_{i+1}$.
+  \item 特に \quad $hv_0=\lambda v_0$, \quad $ev_0=0$.
+  \item $[h,e]=2e$, \quad $[h,f]=-2f$, \quad $[e,f]=h$.
+  \end{enumerate}
+  ここで $[A,B] = AB-BA$ (交換子)である. \qed
+\end{question}
+
+\begin{proof}[ヒント]
+  たとえば 
+  \begin{equation*}
+    fv_4 
+    = (-x^2\d+\lambda x)(x^4)
+    = -x^2(x^4)' + \lambda x\cdot x^4
+    = -4x^5+\lambda x^5 
+    = (\lambda - 4)x^5
+    = (\lambda - 4)v_5.
+  \end{equation*}
+  3の計算は
+  交換子に関する一般的な公式 
+  \begin{align*}
+    &
+    [A,A]=0, \quad [B,A]=-[A,B],
+    \\ &
+    [AB,C]=[A,C]B+A[B,C], \quad [A,BC]=[A,B]C+B[A,C]
+  \end{align*}
+  と $[\d,x^i]=ix^{i-1}$ を用いて実行せよ. たとえば
+  \begin{equation*}
+    [\d, -x^2\d] = -[\d,x^2]\d -x^2[\d,\d] = -2x\d -x^2 0 = -2x\d.
+    \qed
+  \end{equation*}
+\end{proof}
+
+\begin{guide}[$\lie{sl}_2$-triplet]
+  $2\times 2$ 行列 $E,F,H$ を
+  \begin{equation*}
+    E = 
+    \begin{bmatrix}
+      0 & 1 \\
+      0 & 0 \\
+    \end{bmatrix},
+    \quad
+    F = 
+    \begin{bmatrix}
+      0 & 0 \\
+      1 & 0 \\
+    \end{bmatrix},
+    \quad
+    H =
+    \begin{bmatrix}
+      1 & 0 \\
+      0 & -1 \\
+    \end{bmatrix}
+  \end{equation*}
+  と定めると
+  \begin{equation*}
+    [H,E]=2e, \quad [H,F]=-2F, \quad [E,F]=H
+  \end{equation*}
+  が成立している.  $E,F,H$ を $\lie{sl}_2$-triplet ($\lie{sl}_2$ の三つ組)
+  と呼ぶ.  上の問題 \qref{q:sl2-1} の $e,f,h$ は多項式係数の微分作用素に
+  よる $\lie{sl}_2$-triplet の表現になっている.
+  
+  Lie 代数 $\lie{sl}_2(\C)$ の有限次元表現論は $3$ 次元空間の回転を
+  司る Lie 群 $SU(2)$ の表現論と同値である.
+  Lie 群および Lie 代数の表現論に関する
+  入門的な解説は山内・杉浦 \cite{renzokugunron} にある.
+  \qed
+\end{guide}
+
+\begin{question}[15点]
+  \label{q:sl2-2}
+  問題 \qref{q:sl2-1} の続き.
+  $\lambda=\ell\in\Z_{\ge0}$ と仮定する. 以下を示せ:
+  \begin{enumerate}
+  \item $\ell$ 次以下の一変数多項式全体のなす $\C[x]$ の部分集合を $V_\ell$ 
+    と書くことにする:
+    \begin{equation*}
+      V_\ell 
+      = \{\, a_0 + a_1x + x_2x^2 + \cdots + a_\ell x^\ell
+      \mid a_0,a_1,\ldots,a_\ell\in\C \,\}.
+    \end{equation*}
+    このとき $V_\ell$ は $\C[x]$ の部分空間であり, 
+    \begin{equation*}
+      v_0 = 1, \quad
+      v_1 = x, \quad
+      v_2 = x^2, \quad
+      \ldots, \quad
+      v_\ell = x^\ell
+    \end{equation*}
+    は $V_\ell$ の基底をなす.
+  \item $e,f,h$ の $\C[x]$ への作用は $V_\ell$ を保つ.
+    すなわち, 任意の $v\in V_\ell$ に対して $ev,fv,hv\in V_\ell$.
+  \item $e,f,h$ の定める $V_\ell$ の一次変換の基底 $v_i$ に関する行列表示
+    をそれぞれ $E_\ell,F_\ell,H_\ell$ と書くと,
+    \begin{align*}
+      &
+      E_\ell =
+      \begin{bmatrix}
+        0 & 1 &   & & \bigzerou \\
+          & 0 & 2 & & \\
+          &   & 0 & \ddots & \\
+          &   &   & \ddots & \ell \\
+        \bigzerol & & &    & 0 \\
+      \end{bmatrix},
+      \qquad
+      F_\ell =
+      \begin{bmatrix}
+        0    & & & & \bigzerou \\
+        \ell &    0   & & & \\
+             & \ell-1 & 0      & & \\
+             &        & \ddots & \ddots & \\
+        \bigzerol & &          &    1   & 0 \\
+      \end{bmatrix},
+      \\ &
+      H_\ell =
+      \begin{bmatrix}
+        \ell & & & & \bigzerou \\
+             & \ell-2 & & & \\
+             &        & \ddots & & \\
+             &        &        & -\ell+2 & \\
+        \bigzerol  &  &        &         & -\ell \\
+      \end{bmatrix}
+      = \diag(\ell,\ell-2,\ell-4,\ldots,-\ell+4,-\ell+2,-\ell).
+    \end{align*}
+    たとえば $\ell=3$ のとき
+    \begin{equation*}
+      E_3 =
+      \begin{bmatrix}
+        0 & 1 &   &   \\
+          & 0 & 2 &   \\
+          &   & 0 & 3 \\
+          &   &   & 0 \\
+      \end{bmatrix},
+      \quad
+      F_\ell =
+      \begin{bmatrix}
+        0 & & & \\
+        3 & 0 & & \\
+          & 2 & 0 & \\
+          &   & 1 & 0 \\
+      \end{bmatrix},
+      \quad
+      H_3 =
+      \begin{bmatrix}
+        3 & & & \\
+          & 1 & & \\
+          &   & -1 & \\
+          &   &    & -3 \\
+      \end{bmatrix}.
+      \qed
+    \end{equation*}
+  \end{enumerate}
+\end{question}
+
+\begin{rem}
+  特に $\ell=1$ のとき $E_1=E$, $F_1=F$, $H_1=H$ である.  \qed
+\end{rem}
+
+\begin{guide}
+  実は Lie 代数 $\lie{sl}_2(\C)$ の (したがってコンパクト Lie 群 $SU(2)$ の)
+  有限次元既約表現の同型類の全体は表現 $V_\ell$ ($\ell=0,1,2,\ldots$) で
+  代表される%
+  \footnote{しかも $e,f,h$ が微分作用素で表わされたのも偶然ではない.
+    半単純 Lie 代数 (もしくは半単純 Lie 群) の表現に関する
+    幾何学的な理論 (Borel-Weil-Bott 理論) が存在し, 
+    それを用いれば半単純 Lie 代数の有限次元表現の
+    微分作用素による表示が自然に得られる.
+    この辺の問題は Lie 代数および Lie 群の表現論 (representation theory) 
+    という大きな理論の一部分を切り取ることによって作成された.}.
+  この事実は $3$ 次元空間の回転を量子論的に実現する方法が
+  非負の整数 $\ell$ で分類されることを意味している.
+
+  $H_\ell$ の固有値 $\ell,\ell-2,\ldots,-\ell+2,-\ell$ は表現 $V_\ell$ の
+  ウェイト (weight) と呼ばれており, その最高値の $\ell$ は表現 $V_\ell$ の
+  最高ウェイト (highest weight) と呼ばれている.
+
+  物理学では $\lie{sl}_2$ の三つ組 $E,F,H$ の
+  代わりに $\sigma_z=\frac{1}{2}H$, $\sigma_+=\frac{1}{\sqrt{2}}E$, %
+  $\sigma_-=\frac{1}{\sqrt{2}}F$ の三つ組を用いることが多い.
+  それらは次の交換関係を満たしている:
+  \begin{equation*}
+    [\sigma_z, \sigma_\pm] = \pm\sigma_\pm, \qquad
+    [\sigma_+, \sigma_-] = \sigma_z.
+  \end{equation*}
+  だから, $H$ の作用 $H_\ell$ の固有値のウェイトでは
+  なく, $\sigma_z$ の作用 $\frac{1}{2}H_\ell$ の固有値を用いることが多い.
+  $j=\ell/2$ の方を用を表現 $V_\ell$ のスピンと呼ぶ%
+  \footnote{電子や陽子のスピンは $1/2$ である.}.
+
+  以上のコメントに関する
+  詳しい解説については山内・杉浦 \cite{renzokugunron} を参照せよ.
+  \qed
+\end{guide}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{question}[15点]
+  \label{q:companion-jordan}
+  正の整数 $n\in\Z>0$ と複素数 $\alpha\in\C$ に
+  対して, $(t-\alpha)^k\ne 0$ ($k=1,\ldots,n-1$), $(t-\alpha)^n=0$ を
+  満たす文字 $t$ を用意し%
+  \footnote{厳密にはそのような文字 $t$ は多項式環 $\C[\lambda]$ の
+    剰余環 $\C[\lambda]/((\lambda-\alpha)^n)$ の $\lambda$ で代表
+    される元として構成される($t=\lambda\MOD(\lambda-\alpha)^n$).
+    剰余環 $\C[\lambda]/((\lambda-\alpha)^n)$ の構成に関しては
+    問題 \qref{q:K[x]/(f)-1}, \qref{q:K[x]/(f)-2} を参照せよ.},
+  $1,t,t^2,\ldots,t^{n-1}$ を基底に持つ $\C$ 上のベクトル空間 $V$ を
+  次のように定める:
+  \begin{equation*}
+    V := 
+    \{\, \beta_0+\beta_1t+\beta_2t^2+\cdots+\beta_{n-1}t^{n-1}
+    \mid \beta_0,\beta_1,\beta_2,\ldots,\beta_{n-1}\in\C \,\}.
+  \end{equation*}
+  写像 $f:V\to V$ を $f(v)=tv$ ($v\in V$) と定めると, $f$ は $V$ の $\C$ 上
+  の一次変換 ($V$ からそれ自身への線形写像) である. 
+  以下が成立することを示せ:
+  \begin{enumerate}
+  \item 基底 $1,t,t^2,\ldots,t^{n-1}$ に関する $f$ の行列表示を $A$ と書くと,
+    \begin{equation*}
+      A =
+      \begin{bmatrix}
+        0 & & & \bigzerou  & -a_{n-1} \\
+        1 & 0 &        &   & -a_{n-2} \\
+          & 1 & \ddots &   & \vdots \\
+          &   & \ddots & 0 & -a_1 \\
+        \bigzerol & &  & 1 & -a_0 \\
+      \end{bmatrix}.
+    \end{equation*}
+    ここで $a_0,a_1,\ldots,a_{n-2},a_{n-1}\in\C$ は $(\lambda-\alpha)^n$ の
+    展開
+    \begin{equation*}
+      (\lambda-\alpha)^n = 
+      \lambda^n + a_0\lambda^{n-1} + a_1\lambda^{n-2} + 
+      \cdots + a_{n-2}\lambda + a_{n-2}
+    \end{equation*}
+    によって定められたものである.  二項定理より,
+    \begin{equation*}
+      a_{i-1} = \binom{n}{i}(-\alpha)^i
+      \qquad (i=1,\ldots,n).
+    \end{equation*}
+    よって $a_0=-n\alpha$, $a_1=\frac{n(n-1)}{2}\alpha^2$, 
+    $\ldots,$ $a_{n-2}=n(-\alpha)^{n-1}$, $a_{n-1}=(-\alpha)^n$.
+  \item $V$ の $\C$ 上の基底として %
+    $1,t-\alpha,(t-\alpha)^2,\ldots,(t-\alpha)^{n-1}$ も取れる.
+  \item 基底 $1,t-\alpha,(t-\alpha)^2,\ldots,(t-\alpha)^{n-1}$ に
+    関する $f$ の行列表示を $B$ と書くと,
+    \begin{equation*}
+      B =
+      \begin{bmatrix}
+        \alpha &        &        &        & \bigzerou \\
+        1      & \alpha & & & \\
+               & 1      & \alpha & & \\
+               &        & \ddots & \ddots & \\
+        \bigzerol &     &        & 1      & \alpha \\
+      \end{bmatrix}
+      \qquad (\text{$n\times n$ 行列}).
+      \qed
+    \end{equation*}
+  \end{enumerate}
+\end{question}
+
+\begin{proof}[ヒンと]
+  1. $(t-\alpha)^n=0$ を用いて, 
+  $[t1,tt,tt^2,\ldots,tt^{n-1}]=[1,t,t^2,\ldots,t^{n-1}]A$ を示せばよい.
+
+  2. $k=0,1,\ldots,n-1$ とする.
+  $(t-\alpha)^k$ を展開することによって, $(t-\alpha)^k$ 
+  は $1,t,\ldots,t^k$ の一次結合で書けることがわかる.
+  逆に $t^k=((t-\alpha)+\alpha)^k$ を展開することによって, $t^k$ 
+  は $1,t-\alpha,\ldots,(t-\alpha)^k$ の一次結合で書けることがわかる.
+  このことより, $1,t-\alpha,\ldots,(t-\alpha)^{n-1}$ も $V$ の基底であるこ
+  とがわかる.
+  
+  3. $[t1,t(t-\alpha),t(t-\alpha)^2,\ldots,t(t-\alpha)^{n-1}]
+  = [1,t-\alpha,(t-\alpha)^2,\ldots,(t-\alpha)^{n-1}]B$ を示せばよい.
+  そのとき $t(t-\alpha)^k=(\alpha+(t-\alpha))(t-\alpha)^k
+  =\alpha(t-\alpha)^k+(t-\alpha)^{k+1}$ と $(t-\alpha)^n=0$ を用いよ.
+  \qed
+\end{proof}
+
+\begin{rem}[Jordan 標準形の理論との関係]
+  $\tp{A}$ は\guideref{guide:companion-matrix}のコンパニオン行列の形をしてい
+  る.  $\tp{B}$ は問題 \qref{q:exp-Jordan} の Jordan ブロックの形をしている.
+  実は上の問題 \qref{q:companion-jordan} は単因子論を経由する Jordan 標準形
+  の存在証明の一部分になっている.
+
+  その方針での Jordan 標準形の理論の解説に関しては堀田 \cite{10wa} が
+  おすすめである.
+  \qed
+\end{rem}
+
+\begin{guide}[コンパニオン行列]
+  \label{guide:companion-matrix}
+  次の形の $n$ 次正方行列のを {\bf コンパニオン行列 (同伴行列, 
+  companion matrix)} と呼ぶ:
+  \begin{equation*}
+    C(a_0,\dots,a_{n-1}) =
+    \begin{bmatrix}
+      0         &    1     &        &      & \bigzerou \\
+                &    0     & \ddots &      & \\
+                &          & \ddots &  1   & \\
+      \bigzerol &          &        &  0   &  1 \\
+      -a_{n-1}  & -a_{n-2} & \cdots & -a_1 & -a_0 \\
+    \end{bmatrix}.
+  \end{equation*}
+  コンパニオン行列 $C = C(a_0,\dots,a_{n-1})$ の特性多項式%
+  \footnote{一般に $n$ 次正方行列 $A$ の
+    {\bf 特性多項式 (characteristic polynomial)} $p_A(\lambda)$ 
+    は $p_A(\lambda)=\det(\lambda E - A)$ と定義される.
+    ここで $E$ は $n$ 次の単位行列である.}%
+  は
+  \begin{equation*}
+    p_C(\lambda)
+    = \det(\lambda E - C(a_0,\ldots,a_{n-1}))
+    = \lambda^n + a_0\lambda^{n-1} + a_1\lambda^{n-2}
+    + \cdots + a_{n-2}\lambda + a_{n-1}
+  \end{equation*}
+  となる. %上の問題の結果はこの公式の $n=4$ の場合になっている.
+  
+  コンパニオン行列の最小多項式は特性多項式に等しく,
+  しかもその固有値 $\alpha$ に属する Jordan 細胞は唯一になる
+  ことが知られている%
+  \footnote{「最小多項式」や「Jordan 細胞」などの用語の意味は
+    後で {\bf Jordan 標準形 (Jordan normal form, Jordan canonical form)} 
+    の理論を習うときに教わることになるだろう.
+    もちろん各自が自由に自習して構わない.
+    数学の得意な人の特徴は学校の授業の先の勉強を勝手にやってしまうことである.}.
+  \qed
+\end{guide}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{商ベクトル空間}
+\label{sec:quotient-vector-space}
+
+$K$ は体であるとし, $V$ は $K$ 上の任意のベクトル空間であるとし, 
+$W$ は $V$ の部分空間であるとする.  任意の $v\in V$ に対して
+\begin{equation*}
+  v + W = \{\, v+w \mid w\in W \,\}
+\end{equation*}
+とおき, 集合の集合 $V/W$ を次のように定める:
+\begin{equation*}
+  V/W = \{\, v+W \mid v \in V \,\}.
+\end{equation*}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{question}[5点]
+  \label{q:v+W}
+  $v,v'\in V$ に対して, $v+W=v'+W$ と $v'-v\in W$ は同値である. \qed
+\end{question}
+
+\begin{proof}[ヒント]
+  $v+W=v'+W$ ならば $v'\in v'+W$ に対してある $w\in W$ で $v'=v+w$ 
+  をみたすものが存在する.  そのとき $v'-v=w\in W$ である.
+  逆に $v'-v\in W$ ならば任意の $w\in W$ に対して %
+  $v'+w=v+(v'-v)+w\in v+W$ である. よって $v'+W\subset v+W$ である.
+  逆向きの包含関係も同様にして示されるので $v+W=v'+W$ である.
+  \qed
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{question}[5点]
+  写像 $+:(V/W)\times(V/W)\to(V/W)$ と $\cdot:K\times(V/W)\to(V/W)$ を
+  \begin{equation*}
+    (u+W)+(v+W) = (u+v)+W, \quad
+    \alpha(u+W) = (\alpha u)+W
+    \qquad (u,v\in V,\ \alpha\in K)
+  \end{equation*}
+  と定義することができることを示せ. \qed
+\end{question}
+
+\begin{proof}[ヒント]
+  これは well-definedness (うまく定義されること) を示す問題である.
+  写像がうまく定義されることを示すためには
+  同じものが同じものに移ることを示さなければいけない.
+  そのためには $u+W=u'+W$, $v+W=v'+W$, $u,u',v,v'\in V$, $\alpha\in K$ のとき,
+  \begin{equation*}
+    (u+v)+W = (u'+v')+W, \qquad (\alpha u)+W = (\alpha u')+W
+  \end{equation*}
+  となることを示せばよい.  \qed
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{question}[5点]
+  上の問題で定義された演算 $+$, $\cdot$ に関して $V/W$ は $K$ 上のベクトル空
+  間をなすことを示せ. 
+  \qed
+\end{question}
+
+\begin{proof}[ヒント]
+  写像 $-:V/W\to V/W$ を $-(u+W)=(-u)+W$ ($u\in V$) と定義することができる.
+  さらに, $0_{V/W}=0+W=W$ とおき, ベクトル空間の公理を機械的にチェックすれば
+  よい.
+  \qed
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{definition}[商ベクトル空間]
+  以上のようにして構成された $V/W$ を $V$ を $W$ で割ってできる $V$ の
+  {\bf 商ベクトル空間 (quotient vector space)} もしくは
+  {\bf 商空間 (quotient space)} と呼ぶ.
+  \qed
+\end{definition}
+
+\begin{guide}[商ベクトル空間の元の記号について]
+  $V/W$ の元 $v+W$ は 
+  \begin{equation*}
+    v+W = v\MOD W = [v] = \bar v
+  \end{equation*}
+  のように書かれることも多い.
+  $v\MOD W$ は「ベクトル $v$ の $W$ の元による平行移動方向の成分を無視した
+  もの」という意味を持ち, $[v]$ や $\bar v$ は $v$ で代表される{\bf 同値類 
+  (equivalence class)} によく使われる記号である.
+  \qed
+\end{guide}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{guide}
+  以上の商ベクトル空間の構成はそのまま一般の環 $R$ 上の加群の商加群の構成に
+  一般化される. \qed
+\end{guide}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{guide}[$M/N$ という記号法について]
+  代数学において加群 (ベクトル空間も加群の一種であることに注意) $M$ と
+  その部分加群 $N$ に対して, $M/N$ は分子の加群 $M$ の中で分母の
+  部分加群 $N$ をゼロにつぶしてできる商加群を意味している.
+  \qed
+\end{guide}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{rem}
+  商ベクトル空間は集合の集合として定義されたが,
+  {\bf $V/W$ が集合の集合であることにこだわりすぎると
+  商ベクトル空間の正しい理解に失敗する}.
+  商ベクトル空間 $V/W$ の元は通常のベクトルだと考えた方がよい.
+
+  それでは $V/W$ の元はどのようなベクトルだと考えればよいのだろうか.
+  問題 \qref{q:v+W} によれば, $v,v'\in V$ に対応する商ベクトル空間 $V/W$ の
+  元 $v+W$, $v'+W$ が互いに等しくなるための必要十分条件は $v'-v\in W$ 
+  すなわち $v'\in v+W$ である.
+  よって $V$ の中の $v$ を通り $W$ に平行な部分集合 $v+W$ 上のすべての
+  ベクトルが商ベクトル空間 $V/W$ の一点に対応している.
+  つまり, 直観的に $V/W$ は $V$ を $W$ 方向につぶして%
+  \footnote{「つぶす」という言葉を用いると, 紙屑などを「グシャッ」と潰す
+    様子を想像する人が結構いるようである.  
+    しかし, 商ベクトル空間 $V/W$ を作るために $V$ を $W$ 方向に
+    つぶす場合には「グシャッ」ではなく「スーッ」と滑らかに潰れる様子を
+    想像しなければいけない.}%
+  できるベクトル空間とみなせる.  
+  この点に関しては問題 \qref{q:R^3/Z}, \qref{q:R^3/W} を参考にせよ.
+  \qed
+\end{rem}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{question}[10点]
+  \label{q:R^3/Z}
+  $\R^3$ の部分空間 $Z$ を $Z=\{\,(0,0,z)\mid z\in\R\,\}$ と定める.
+  このとき, $\R^3/Z$ は $\R$ 上の2次元のベクトル空間になる.
+  \qed
+\end{question}
+
+\begin{proof}[ヒント]
+  $e_1+Z$, $e_2+Z$ が $\R^3/Z$ の基底をなすことを示せ. \qed
+\end{proof}
+
+\begin{rem}
+  $\R^3/Z$ は直観的に3次元空間 $\R^3$ を $z$ 軸方向に潰してできる2次元
+  空間だとみなせる. すなわち $\R^3$ の中の $z$ 軸 $Z$ に平行な直線を
+  一点に潰してできる2次元空間が $\R^3/Z$ である.
+  \qed
+\end{rem}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{question}[10点]
+  \label{q:R^3/W}
+  $\R^3$ の部分空間 $W$ を $W=\{\,(x,y,0)\mid x,y\in\R\,\}$ と定める.
+  このとき, $\R^3/W$ は $\R$ 上の1次元のベクトル空間になる.
+  \qed
+\end{question}
+
+\begin{proof}[ヒント]
+  $e_3+W$ が $\R^3/W$ の基底をなすことを示せ. \qed
+\end{proof}
+
+\begin{rem}
+  $\R^3/W$ は直観的に3次元空間 $\R^3$ を $xy$ 平面方向に潰してできる1次元
+  空間だとみなせる. すなわち $\R^3$ の中の $xy$ 平面 $W$ に平行な平面を
+  一点に潰してできる1次元空間が $\R^3/W$ である.
+  \qed
+\end{rem}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{question}[自然な射影, 5点]
+  写像 $p:V\to V/W$ を
+  \begin{equation*}
+    p(v) = v+W \qquad (v\in V)
+  \end{equation*}
+  と定めると, $p$ は $K$ 上の線形写像でかつ全射である.
+  $p$ は $V$ から商空間 $V/W$ への{\bf 自然な射影 (canonical projection)} 
+  もしくは{\bf 自然な写像 (canonical mapping)} と呼ばれる.
+  \qed
+\end{question}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{question}[準同型定理, 20点]
+  $U$, $V$ は体 $K$ 上のベクトル空間であり, $f:U\to V$ は線形写像であるとす
+  る.  $f$ の{\bf 核 (kernel)} $\Ker f$ と{\bf 像 (image)} $\Image f$ を
+  \begin{equation*}
+    \Ker f = \{\, u\in U\mid f(u) = 0 \,\},
+    \qquad
+    \Image f = \{\, f(u) \mid u\in U \,\}
+  \end{equation*}
+  と定めると, $\Ker f$ は $U$ の部分空間であり, $\Image f$ は $V$ の部分空間
+  である.  写像 $\phi:U/\Ker f\to \Image f$ を
+  \begin{equation*}
+    \phi(u+\Ker f) = f(u) \qquad (u\in U)
+  \end{equation*}
+  と定義することができ(すなわち $u,u'\in U$ に対して $u+\Ker f=u'+\Ker f$ な
+  らば $f(u)=f(u')$), $\phi$ は $K$ 上のベクトル空間の同型写像になる. 
+  \qed
+\end{question}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{figure}[htbp]
+  \begin{center}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setlength{\unitlength}{0.00083333in}
+%
+\begingroup\makeatletter\ifx\SetFigFont\undefined
+% extract first six characters in \fmtname
+\def\x#1#2#3#4#5#6#7\relax{\def\x{#1#2#3#4#5#6}}%
+\expandafter\x\fmtname xxxxxx\relax \def\y{splain}%
+\ifx\x\y   % LaTeX or SliTeX?
+\gdef\SetFigFont#1#2#3{%
+  \ifnum #1<17\tiny\else \ifnum #1<20\small\else
+  \ifnum #1<24\normalsize\else \ifnum #1<29\large\else
+  \ifnum #1<34\Large\else \ifnum #1<41\LARGE\else
+     \huge\fi\fi\fi\fi\fi\fi
+  \csname #3\endcsname}%
+\else
+\gdef\SetFigFont#1#2#3{\begingroup
+  \count@#1\relax \ifnum 25<\count@\count@25\fi
+  \def\x{\endgroup\@setsize\SetFigFont{#2pt}}%
+  \expandafter\x
+    \csname \romannumeral\the\count@ pt\expandafter\endcsname
+    \csname @\romannumeral\the\count@ pt\endcsname
+  \csname #3\endcsname}%
+\fi
+\fi\endgroup
+{%\renewcommand{\dashlinestretch}{30}
+\begin{picture}(3119,2700)(0,-10)
+\path(600,2250)(600,300)
+\path(2400,2400)(2400,300)
+\path(600,2250)(2400,1350)
+\thicklines
+\path(2279.252,1376.833)(2400.000,1350.000)(2306.085,1430.498)
+\thinlines
+\path(600,1200)(2400,300)
+\thicklines
+\path(2279.252,326.833)(2400.000,300.000)(2306.085,380.498)
+\thinlines
+\path(600,300)(2250,300)
+\thicklines
+\path(2130.000,270.000)(2250.000,300.000)(2130.000,330.000)
+\thinlines
+\path(525,1650)(675,1650)
+\path(525,1725)(675,1725)
+\path(2325,825)(2475,825)
+\path(2325,750)(2475,750)
+\put(525,2400){$U$}
+\put(2300,2550){$V$}
+\put(1350,0){$f$}
+\put(2550,1875){$\Coker f = V/\Image f$}
+\put(-1100,1650){$U/\Ker f = \Coimage f$}
+\put(75,675){$\Ker f$}
+\put(2550,750){$\Image f$}
+\end{picture}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \caption{準同型定理}
+    \label{fig:hom}
+  \end{center}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{proof}[ヒント]
+  記号の簡単のため $\overline{u}=u+\Ker f$ ($u\in U$) とおく.
+  
+  $\phi$ の well-definedness: $u,u'\in U$, 
+  $\overline{u}=\overline{u'}$ と仮定する.  
+  そのとき $u-u'\in\Ker f$ である.
+  よって $f(u)-f(u')=f(u-u')=0$ すなわち $f(u)=f(u')$ である.
+
+  $\phi$ の線形性: $u,u'\in U$, $\alpha\in K$ に対して, %
+  $\phi(\overline{u}+\overline{u'})
+  = \phi(\overline{u+u'})
+  = f(u+u') 
+  = f(u) + f(u') 
+  = \phi(\overline{u}) + \phi(\overline{u'})$,
+  $\phi(\alpha\overline{u}) 
+  = \phi(\overline{\alpha u})
+  = f(\alpha u)
+  = \alpha f(u)
+  = \alpha\phi(\overline{u})$. 
+  
+  $\phi$ の単射性: $u\in U$, $\phi(\overline{u})=0$ と仮定する.
+  $0 = \phi(\overline{u}) = f(u)$ より $u\in\Ker f$ である.
+  よって $\overline{u}=0$.
+  
+  $\phi$ の全射性: $\Image\phi =
+  \{\,\phi(\overline{u})\mid u\in U\,\} = \Image f$.
+  \qed
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{guide}
+  $f:U\to V$ の{\bf 余核 (cokernel)} $\Coker f$ と
+  {\bf 余像 (coimage)} $\Coimage f$ が
+  \begin{equation*}
+    \Coker f = V/\Image f, \qquad \Coimage = U/\Ker f
+  \end{equation*}
+  と定義される.  準同型定理は余像と像が自然に同型になることを意味している.
+  このことをよく\figureref{fig:hom}のように描く.
+  \qed
+\end{guide}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{guide}
+  準同型定理は一般の環 $R$ 上の加群にそのまま一般化される.
+  証明の仕方はベクトル空間の場合とまったく同じである.
+  \qed
+\end{guide}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{question}[10点]
+  \label{q:W=Imf}
+  $U$ は体 $K$ 上のベクトル空間であり, $V$ はその部分空間であるとし,
+  $W$ は $U$ における $V$ の補空間であるとする.
+  このとき自然な射影 $p:U\onto U/V$ の $W$ への制限 $p|_W:W\to U/V$ は
+  同型写像になる. よって $(W\oplus V)/V\isom W$ という自然な同型を得る.
+  \qed
+\end{question}
+
+\begin{proof}[ヒント]
+  $p|_W$ が単射であることと全射であることを補空間の定義に戻って地道に
+  証明せよ.
+  もしくは写像 $q:U/V\to W$ を $q((w+v)\MOD V) = w$ ($w\in W$, $v\in V$) 
+  と定めることができ(well-definedness のチェックが必要), $q$ が $p|_W$ の
+  逆写像になることを示せ. \qed
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{question}[image と kernel の次元の関係, 10点]
+  $U$, $V$ は体 $K$ 上のベクトル空間であり, $U$ は有限次元である
+  と仮定する. このとき任意の線形写像 $f:U\to V$ に対して %
+  $\dim\Ker f + \dim\Image f = \dim_K U$.
+  \qed
+\end{question}
+
+%\begin{proof}[ヒント]
+%  問題 \qref{q:nulity+rank=n} の一般化. 証明の方針はほとんど同じ
+%  でよい. もしくは準同型定理と問題 \qref{q:W=Imf} の結果を使えば
+%  より簡単に証明できる.
+%  \qed
+%\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{question}[15点]
+  \label{q:K[x]/(f)-1}
+  体 $K$ 上の一変数多項式環 $K[\lambda]$ を考え, 
+  任意にゼロでない多項式 $f\in K[\lambda]$ を取る.
+  このとき, $K[\lambda]$ の部分集合 $(f)$ を
+  \begin{equation*}
+    (f) = K[\lambda]f = \{\, af \mid a\in K[\lambda]\,\}
+  \end{equation*}
+  と定める%
+  \footnote{$(f)$ は $f$ から生成される $K[\lambda]$ の
+    {\bf 単項イデアル (principal ideal)}と呼ばれる.}.  
+  以下を示せ.
+  \begin{enumerate}
+  \item $(f)$ は $K[\lambda]$ の $K[\lambda]$ 部分加群である.
+    すなわち任意の $g,h\in (f)$ と $a\in K[\lambda]$ に
+    対して $g+h\in (f)$ かつ $af\in (f)$ である.
+    特に $(f)$ は $K[\lambda]$ の $K$ 上のベクトル部分空間である.
+  \item $R=K[\lambda]/(f)$ (商ベクトル空間) とおき,
+    $a\in K[\lambda]$ に対する $a+(f)\in R$ を $a\MOD f$ と書くことにする.
+    このとき, 積 $\cdot:R\times R\to R$ を
+    \begin{equation*}
+      (a\MOD f)\cdot(b\MOD f) = ab\MOD f
+      \qquad (a,b\in K[\lambda])
+    \end{equation*}
+    と定めることができる
+    (すなわち $a,b,c,d\in K[\lambda]$ に対して %
+    $a\MOD f=c\MOD f$, $b\MOD f=d\MOD f$ ならば $ab\MOD f=cd\MOD f$ が
+    成立する).
+  \item これによって $R$ は可換環をなす%
+    \footnote{$R=K[\lambda]/(f)$ は $K[\lambda]$ をイデアル $(f)$ で
+      割ってできる{\bf 剰余環 (residue ring, residue-class ring)} と呼ばれる.}.
+    \qed
+  \end{enumerate}
+\end{question}
+
+\begin{proof}[ヒント]
+  1. $a,b,c\in K[\lambda]$ に対して $af+bf=(a+b)f\in(f)$ で
+  あり, $a(bf) = (ab)f\in(f)$. 
+  2. $a\MOD f=c\MOD f$ と $a-c\in(f)$ は同値であり,
+  $b\MOD f=d\MOD f$ と $b-d\in(f)$ は同値であるから,
+  $ab-cd=ab-ad+ad-cd=a(b-d)+d(a-c)\in(f)$.
+  3. $1_R=1\MOD f$ と置き, 可換環の公理を機械的にチェックすればよい.
+  \qed
+\end{proof}
+
+\begin{guide}
+  $R=K[\lambda]/(f)$ は $K[\lambda]$ の中で $f$ をゼロとみなすことによって得
+  られる可換環である.  $f$ がゼロとみなされるならば任意の $a\in K[\lambda]$ 
+  に対する $af$ もゼロとみなされなければいけない.
+  $(f)$ はそのような $af$ 全体のなす集合である.
+
+  本当は上の問題は可換環とイデアルと剰余環の理論としてより一般的に
+  やるべき事柄である.
+  \qed
+\end{guide}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{question}[10点]
+  \label{q:K[x]/(f)-2}
+  上の問題 \qref{q:K[x]/(f)-1} のつづき.
+  $f$ の次数が $n$ ならば $\dim_K R=\dim_K(K[\lambda]/(f))=n$ であることを証
+  明せよ. \qed
+\end{question}
+
+\begin{proof}[ヒント1]
+  $t=\lambda\MOD f$ と置くと, $t^i=\lambda^i\MOD f$ である.
+  $1,t,t^2,\ldots,t^{n-1}$ が $R$ の $K$ 上の基底になることを示せばよい.
+
+  任意の $g\in K[\lambda]$ は $g$ を $f$ で割ることに
+  よって $g=qf+r$, $q,r\in K[\lambda]$, $\deg r<n$ と一意に表わされる%
+  \footnote{$\deg r$ は $r$ の次数である.
+    $r=0$ のとき $\deg r = -\infty$ と考える.}
+  (商が $q$ で余りが $r$).
+  そのとき $g\MOD f=r\MOD f$ であり, $r$ は
+  次数が $n$ 未満なので $1,\lambda,\ldots,\lambda^{n-1}$ の
+  一次結合で表わされるので, $g\MOD f$ は $1,t,\ldots,t^{n-1}$ の
+  一次結合で表わされる.
+
+  もしも $g\in K[\lambda]$, $\deg g<n$ かつ $g\MOD f=0_R=(f)$ な
+  らば $g=af$, $a\in K[\lambda]$ と表わされる.
+  $\deg g<n$ より $a=0$ でなければいけないので $g=0$ となる.  
+  これより $1,t,\ldots,t^{n-1}$ の一次独立性が出る.
+  \qed
+\end{proof}
+
+\begin{proof}[ヒント2]
+  次数が $n$ 未満の $\lambda$ の多項式全体のなす $n$ 次元のベクトル空間
+  を $V$ と書き, 線形写像 $\phi:V\to R$ を $\phi(v)=v\MOD f$ ($v\in V$) と定義
+  する.  $\phi$ が同型写像であることを示せば $R$ の次元も $n$ であることがわ
+  かる.
+
+  任意の $g\in K[\lambda]$ は $g$ を $f$ で割ることに
+  よって $g=qf+r$, $q,r\in K[\lambda]$, $\deg r<n$ と一意に表わされる
+  ので, $g\MOD f=r\MOD f=\phi(r)$ である.  よって $\phi$ は全射である.
+
+  もしも $g\in V$ かつ $\phi(g) = g\MOD f=0_R=(f)$ 
+  ならば $g=af$, $a\in K[\lambda]$ と表わされる.
+  $\deg g<n$ より $a=0$ でなければいけないので $g=0$ となる.  
+  よって $\phi$ は単射である.
+  \qed
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{双対空間}
+\label{sec:dual-space}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{question}[双対空間の定義, 5点]
+  体 $K$ 上のベクトル空間 $V$ に対して $V$ から $K$ への線形写像全体のなす集
+  合 $V^*$ は自然に体 $K$ 上のベクトル空間をなすことを示せ.
+  $V^*$ は $V$ の{\bf 双対ベクトル空間 (dual vector space)} もしくは
+  {\bf 双対空間 (dual space)} と呼ばれる.
+  $f\in V^*$ と $v\in V$ に対して $f(v)$ を $\bra f,v\ket$ と表わすことが
+  ある.
+  \qed
+\end{question}
+
+\begin{proof}[ヒント]
+  問題 \qref{q:Hom-set} の特別な場合. $V^*=\Hom_K(V,K)$. \qed
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{question}[横ベクトルの空間と縦ベクトルの空間の双対性, 5点]
+  $K$ は体であるとする. $K$ の元を成分に持つ $n$ 次元縦ベクトル全体のなすベ
+  クトル空間を $K^n$ と書き, $n$ 次元横ベクトル全体のなすベクトル空間を
+  仮に $\tp{(K^n)}$ と書くことにする.
+  写像 $\iota:\tp{(K^n)}\to(K^n)^*$ を横ベクトルと縦ベクトルの積によって
+  \begin{equation*}
+    \Bigl\bra
+    \iota([x_1,\ldots,x_n]), 
+    \begin{bmatrix}
+      y_1 \\ \vdots \\ y_n \\
+    \end{bmatrix}
+    \Bigr\ket
+    := 
+    [x_1,\ldots,x_n]
+    \begin{bmatrix}
+      y_1 \\ \vdots \\ y_n \\
+    \end{bmatrix}
+    = \sum_{i=1}^n x_iy_i
+    \qquad (x_i,y_i\in K)
+  \end{equation*}
+  と定義する. このとき $\iota$ は同型写像になることを示せ.
+  $\iota$ を通して横ベクトルの空間 $\tp{(K^n)}$ と縦ベクトルの空間 $K^n$ の
+  双対空間 $(K^n)^*$ は自然に同一視される.
+  \qed
+\end{question}
+
+\begin{guide}[ブラとケット]
+  \label{guide:bra-ket}
+  量子力学には, ブラベクトル (bra vector) $\bra v^*|$ や
+  ケットベクトル (ket vector) $|v\ket$ のような記号が登場し%
+  \footnote{Dirac \cite{Dirac} などの量子力学の教科書を参照せよ.},
+  ブラ $\bra v^*|$ とケット $|v\ket$ のあいだに
+  は $\bra v^*|v\ket\in\C$ と書かれる内積が定義されている.
+
+  実はブラベクトル全体のなすベクトル空間は
+  ケットベクトル全体のなすベクトル空間の双対空間と同一視できる.
+  直観的にブラベクトルは横ベクトルのようなものであり,
+  ケットベクトルは縦ベクトルのようなものだと考えればよい.
+  横ベクトルと縦ベクトルのあいだには上の問題のように
+  自然に内積が定義される.
+  \qed
+\end{guide}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{question}[基底の定める座標, 5点]
+  \label{q:x_i}
+  $V$ は体 $K$ 上の有限次元ベクトル空間であり, $v_1,\ldots,v_n$ は $V$ の
+  基底であるとする. 任意の $v\in V$ は $v=\alpha_1v_1+\cdots+\alpha_nv_n$ 
+  ($\alpha_i\in K$) と一意に表わされる.  よって $v$ に対して $\alpha_i$ を対
+  応させる写像 $x_i$ が定まる.  $x_i\in V^*$ であることを示せ. 
+  ($x_i$ を基底 $v_i$ の定める $V$ 上の座標と呼ぶことにする.)
+  \qed
+\end{question}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{question}[双対基底, 10点]
+  \label{q:dual-basis}
+  $V$ は体 $K$ 上の有限次元ベクトル空間であるとする.
+  $V$ の基底 $v_1,\ldots,v_n$ に対して,
+  $v^*_1,\ldots,v^*_n\in V^*$ を
+  \begin{equation*}
+    \bra v^*_i, v_j \ket = \delta_{ij}
+    \qquad (i,j=1,\ldots,n)
+  \end{equation*}
+  という条件によって一意に定めることができる.
+  このとき $v^*_1,\ldots,v^*_n$ は双対空間 $V^*$ の基底になる.
+  特に $\dim V^* = \dim V$ である.
+  $v^*_1,\ldots,v^*_n$ を $v_1,\ldots,v_n$ の{\bf 双対基底 (dual basis)} 
+  と呼ぶ.
+  \qed
+\end{question}
+
+\begin{proof}[ヒント]
+  任意の $f\in V^*$ に対して, $g=\sum_{j=i}^n\bra f,v_i\ket v^*_i\in V^*$ 
+  と置くと, $\bra g,v_j\ket = \bra f,v_j\ket$ ($j=1,\ldots,n$) である
+  から, $f=g$ であることがわかる.  
+  よって $V^*$ は $v^*_1,\dots,v^*_n$ で張られる.
+  $v^*:=\sum_{i=1}^n\alpha_i v^*_i=0$, $\alpha_i\in K$ 
+  と仮定する. このとき $0=\bra v^*,v_j\ket=\alpha_j$ ($j=1,\ldots,n$) である.
+  よって $v^*_1,\dots,v^*_n$ は一次独立である.
+  \qed
+\end{proof}
+
+\begin{rem}
+  問題 \qref{q:x_i} の $x_i$ と問題 \qref{q:dual-basis} の $v^*_i$ は等しい.
+  \qed
+\end{rem}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{question}[1の分解, 10点]
+  \label{q:1=sum-vv*}
+  $V$ は体 $K$ 上の有限次元ベクトル空間であるとする.
+  $V$ の基底 $v_1,\ldots,v_n$ と
+  その双対基底 $v^*_1,\ldots,v^*_n\in V^*$ を任意に取る.
+  $V$ の一次変換 $\sum_{i=1}^n v_iv_i^*$ を次のように定める:
+  \begin{equation*}
+    \left(\sum_{i=1}^n v_iv_i^*\right)(v)
+    = \sum_{i=1}^n v_i \bra v_i^*, v\ket
+    \qquad (v\in V).
+  \end{equation*}
+  この $\sum_{i=1}^n v_iv_i^*$ は $V$ の恒等写像 $\id_V$ に等しい.
+  $\id_V = \sum_{i=1}^n v_iv_i^*$ を {\bf $1$ の分割}と呼ぶ.
+  \qed
+\end{question}
+
+\begin{proof}[ヒント]
+  $v\in V$ を $v=\sum_{j=1}^n \alpha_j v_j$, $\alpha_j\in K$ と
+  表わし, $\sum_{i=1}^n v_i \bra v_i^*, v\ket$ を計算してみよ.
+  \qed
+\end{proof}
+
+\begin{rem}
+  $V=K^n$, $v_i=e_i$ ならば $v^*_i=\tp{e_i}$ である.
+  $\sum_{i=1}^n e_i\tp{e_i}$ が単位行列になることは容易に示される.
+  上の問題の結果はこれの一般化である.
+  \qed
+\end{rem}
+
+\begin{guide}
+  量子力学では\footnote{Dirac \cite{Dirac} などを見よ.}, 
+  $1$ の分割をブラとケットの記号を
+  用いて $1 = \sum_i |i\ket \bra i|$ のように書くことが多い. 
+  $|i\ket$ はケットベクトル全体の空間の基底であり, $\bra i|$ は
+  その双対基底である.
+  \qed
+\end{guide}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{question}[双対の双対, 10点]
+  $V$ は体 $K$ 上の有限次元ベクトル空間であるとする.
+  このとき, 写像 $\iota: V\to (V^*)^*$ を
+  \begin{equation*}
+    \bra \iota(v), f\ket = \iota(v)(f) := \bra f, v\ket = f(v)
+    \qquad (v\in V,\ f\in V^*)
+  \end{equation*}
+  と定めると, $\iota$ は同型写像である.
+  $\iota:V\isomto (V^*)^*$ を通して, $(V^*)^*$ は $V$ と自然に同一視される.
+  \qed
+\end{question}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{question}[転置写像, 10点]
+  $f:U\to V$ は体 $K$ 上のベクトル空間のあいだの線形写像であるとする.
+  このとき線形写像 $\tp{f}:V^*\to U^*$ を
+  \begin{equation*}
+    \bra \tp{f}(v^*), u \ket = \bra v^*, f(u)\ket
+    \qquad (v^*\in V^*,\ u\in U)
+  \end{equation*}
+  と定義できることを示せ.  $\tp{f}$ を $f$ の{\bf 転置写像}と呼ぶことにする.
+  \qed
+\end{question}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{question}[行列の転置との関係, 10点]
+  $K$ は体であるとし, 
+  $K$ の元を成分に持つ $n$ 次元縦ベクトル全体の空間を $K^n$ と表わし, 
+  写像 $\iota:K^n\to(K^n)^*$ を
+  \begin{equation*}
+    \bra \iota(x), y\ket = \iota(x)(y) := \tp{x}y = \sum_{i=1}^n x_iy_i
+    \qquad (x=[x_i], y=[y_i] \in K^n)
+  \end{equation*}
+  と定めると, $\iota$ は同型写像である. 
+  $\iota$ を用いて $(K^n)^*$ と $K^n$ 自身を同一視することにする.
+  そのとき, 任意に $A\in M_{m,n}(K)$ を取ると, 
+  $A$ の定める $K^n$ から $K^m$ への線形写像の転置写像
+  が $\tp{A}$ の定める $K^m$ から $K^n$ への線形写像になることを示せ.
+  \qed
+\end{question}
+
+\begin{proof}[ヒント]
+  $x,y\in K^n$ を任意に取る.
+  $\bra \iota(\tp{A}x), y\ket = \bra \iota(x),Ay\ket$ を示せばよい.
+  \qed
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{question}[商空間と部分空間の双対, 20点]
+  $U$ は体 $K$ 上のベクトル空間であり, $V$ はその部分空間であるとし,
+  \begin{equation*}
+    V^\bot = \{\, u^*\in U^* \mid \bra u^*,v\ket = 0 \ (v\in V) \,\}
+  \end{equation*}
+  とおく\footnote{$V^\bot$ は $V$ の $U^*$ における
+    {\bf 直交補空間 (orthogonal complement)} と呼ばれる.
+    この用語法は計量ベクトル空間における直交補空間の概念を
+    双対空間の場合に一般化したものである.}.
+  $V$ から $U$ への包含写像を $i$ と書き%
+  \footnote{$i$ は $v\in V$ を $v\in U$ に対応させる写像である.}, 
+  $U$ から $U/V$ への自然な射影を $p$ と書くことにする:
+  \begin{equation*}
+    \begin{CD}
+      V @>i>> U @>p>> U/V. \\
+    \end{CD}
+  \end{equation*}
+  双対空間の移ると次のような転置写像の列ができる:
+  \begin{equation*}
+    \begin{CD}
+      V^* @<\tp{i}<< U^* @<\tp{p}<< (U/V)^*.
+    \end{CD}
+  \end{equation*}
+  以下を示せ:
+  \begin{enumerate}
+  \item $\tp{p}:(U/V)^*\to U^*$ は単射である.
+  \item $\Ker\tp{i}=V^\bot$.
+  \item $\Ker\tp{i}=\Image\tp{p}$ である.
+  \item $\tp{p}$ は自然な同型 $(U/V)^*\isomto V^\bot$,
+    $x^*\mapsto \tp{p}(x^*)$ を誘導する.
+  \item $\tp{i}:U^*\to V^*$ は全射である.
+  \item $\tp{i}$ は自然な同型 $U^*/V^\bot \isomto V^*$,
+    $u^*\MOD V^\bot \mapsto \tp{i}(u^*)$ を誘導する.
+    \qed
+  \end{enumerate}
+\end{question}
+
+\begin{proof}[ヒント]
+  1. 任意の $u\in U$, $x^*\in (U/V)^*$ に対して, %
+  $\bra\tp{p}(x^*),u\ket = \bra x^*,u\MOD V\ket$ であるから, %
+  $\tp{p}(x^*)=0$ ならば $x^*=0$ である.
+  よって $\Ker\tp{p}=0$ である.
+  これで $\tp{p}$ は単射であることが示された.
+
+  2. 任意の $u^*\in U$, $v\in V$ に対して, %
+  $\bra \tp{i}(u^*),v\ket = \bra u^*,v\ket$ であるから, %
+  $\tp{i}(u^*)=0$ と $\bra u^*,v\ket=0$ ($v\in V$) は同値である.
+  これで $\Ker\tp{i}=V^\bot$ が示された.
+
+  3. 任意の $x^*\in(U/V)^*$, $v\in V$ に対して, %
+  $\bra\tp{i}(\tp{p}(x^*)),v\ket 
+  = \bra\tp{p}(x^*),i(v)\ket
+  = \bra\tp{p}(x^*),v\ket
+  = \bra x^*,p(v)\ket 
+  = \bra x^*,0\ket 
+  = 0$ であるから, $\Image\tp{p}\subset\Ker\tp{i}$ である.
+  任意の $u^*\in\Ker\tp{i}$, $v\in V$ に対して, %
+  $0 = \bra\tp{i}(u^*),v\ket
+  = \bra u^*,v\ket$ であるから, $x^*\in(U/V)^*$ を %
+  $\bra x^*,u\MOD V\ket = \bra u^*,u\ket$ ($u\in U$) と
+  定めることができる. そのとき $\tp{p}(x^*)=u^*$ である
+  から, $\Ker\tp{i}\subset\Image\tp{p}$ である.
+
+  4. $\tp{p}:(U/V)^*\to U^*$ は単射であるから, 
+  同型 $(U/V)^*\isomto\Image\tp{p}=\Ker\tp{i}=V^\bot$ を誘導する.
+
+  5. $V$ の $U$ における補空間 $W$ が存在する
+  (問題 \qref{q:complement} の結果).
+  $v^*\in V^*$ に対して $u^*\in U^*$ を $\bra u^*,v+w\ket=\bra v^*,v\ket$
+  ($v\in V$, $w\in W$) と定めると, $\tp{i}(u^*)=v^*$ である.
+  よって $\tp{i}$ は全射である.
+
+  6. 準同型定理を $\tp{i}$ に適用すると, 2, 5 より
+  同型 $U^*/V^\bot\isomto V^*$, $u^*\MOD V^\bot \mapsto \tp{i}(u^*)$ が
+  得られる.
+  \qed
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{thebibliography}{ABC}
+
+%\bibitem[I]{Infeld}
+%インフェルト,~L.,
+%ガロアの生涯—神々の愛でし人
+%市井三郎訳, 
+%日本評論社, 新版第3版, 1996
+
+%\bibitem[齋藤]{saito} 齋藤正彦: 線型代数入門, 東京大学出版会基礎数学 
+%1, 278頁.
+
+%\bibitem[佐武]{satake} 佐武一郎: 線型代数学, 裳華房数学選書 1, 324頁.
+
+%\bibitem[志賀]{shiga}
+%志賀浩二: 集合への30講, 朝倉書店 数学30講シリーズ 3, 187頁.
+
+%\bibitem[杉浦]{sugiura}
+%杉浦光夫, Jordan標準形と単因子論 I, II, 岩波講座基礎数学, 線型代数 iii, 1976
+
+\bibitem[D]{Dirac}
+ディラック,~P.~A.~M., 量子力学, %原書第4版, 
+朝永振一郎他訳, 岩波書店, 1968 (原書1958)
+
+%\bibitem[H1]{gun-kagun}
+%堀田良之, 代数入門——群と加群——, 数学シリーズ, 裳華房, 1987
+
+\bibitem[H2]{10wa}
+堀田良之, 加群十話——加群入門——, すうがくぶっくす 3, 朝倉書店, 1988
+
+%\bibitem[H3]{Ho}
+%堀田良之, 環と体 1 --- 可換環論, 岩波講座現代数学の基礎 15, 岩波書店, 1997
+
+\bibitem[YmS]{renzokugunron}
+山内恭彦, 杉浦光夫, 連続群論入門, 新数学シリーズ 18, 培風館, 1960
+
+% \bibitem[失業率]{unemp2004}
+% 労働力調査　長期時系列データ \\
+% {\tt http://www.stat.go.jp/howto/case1/01.htm} \\
+% から「第3表(3)年齢階級(5歳階級)，男女別完全失業者数及び完全失業率」 \\
+% {\tt http://www.stat.go.jp/data/roudou/longtime/zuhyou/lt03-03.xls} \\
+% をダウンロード
+
+% \bibitem[GDP]{SNA2003} 
+% 平成15年度国民経済計算 \\
+% {\tt http://www.esri.cao.go.jp/jp/sna/h17-nenpou/17annual-report-j.html} \\
+% から「4．主要系列表（3）経済活動別国内総生産　実質暦年」\\
+% {\tt http://www.esri.cao.go.jp/jp/sna/h17-nenpou/80fcm3r\verb,_,jp.xls} \\
+% をダウンロード
+
+\end{thebibliography}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

@@ -1,0 +1,916 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% 代数学概論III演習——体のガロア理論
+%
+% 黒木 玄 (東北大学理学部数学教室, kuroki@math.tohoku.ac.jp)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[12pt,twoside]{jarticle}
+\usepackage{amsmath,amssymb,amscd}
+\usepackage{enshu}
+%\usepackage{showkeys}
+
+\newlabel{q:ind-dihed}{{43}{17}}
+\newlabel{q:l-d-1}{{116}{32}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title{\bf 代数学概論III演習——体のガロア理論}
+
+\author{黒木 玄 \quad (東北大学大学院理学研究科数学専攻)}
+
+\date{2002年11月12日(火)}
+
+\maketitle
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\setcounter{page}{36}      % この数から始まる
+\setcounter{section}{2}    % この数の次から始まる
+\setcounter{theorem}{7}    % この数の次から始まる
+\setcounter{question}{128} % この数の次から始まる
+\setcounter{footnote}{30}  % この数の次から始まる
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\tableofcontents
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{分離性と被約性}
+
+二項係数は次のように定義される:
+\begin{equation*}
+  \binom{\alpha}{k} 
+  = \frac{\alpha(\alpha-1)\cdots(\alpha-n+1)}{k!}
+  \quad (k=0,1,2,\ldots).
+\end{equation*}
+ただし,  $0!=1$, $\binom{\alpha}{0}=1$. 
+$\alpha\in\Z_{\ge0}$ のとき $k>\alpha$ ならば $\binom{\alpha}{k}=0$.
+
+\begin{question}[一般化された二項定理]
+  \quad $\displaystyle
+  (1 + x)^\alpha = \sum_{k=0}^\infty \binom{\alpha}{k} x^k$ 
+  \quad ($|x|<1$, $\alpha\in\C$). \qed
+\end{question}
+
+\begin{question}\label{q:binom-1}
+  $p$ が素数で $k=1,\ldots,p-1$ ならば $\binom{p}{k}$ は $p$ で割り切れる.
+  \qed
+\end{question}
+
+\begin{question}\label{q:binom-2}
+  $p$ が素数で $e\in\Z_{\ge0}$ で, $a$ が $p$ と素な自然数であるとき,
+  \begin{equation*}
+    \binom{p^e a}{p^e} \equiv a \mod p.
+  \end{equation*}
+  (ヒント: $(1 + x)^{p^e a}=(1 + x^{p^e})^a) \mod p$ by \qref{q:binom-1}.) 
+  \qed
+\end{question}
+
+\begin{rem}
+  \qref{q:binom-2} の結果は Sylow の定理の証明の中で使われた
+  (cf.\ \cite{morita} p.~47).
+\end{rem}
+
+\begin{question}
+  $R$ は可換環であり, 素数 $p$ について $p$ 個の $1$ の $R$ における和
+  が $0$ になると仮定する. このとき, $R\to R$, $a\mapsto a^p$ は環の準同型で
+  ある. \qed
+\end{question}
+
+\begin{question}
+  $K$ は正標数 $p$ の体であるとし, $q=p^e$, $e\in\Z_{\ge0}$, $a\in K$ である
+  とする. $K$ の代数閉包 $\closure{K}$ の元 $\alpha$ で $\alpha^q=a$ となる
+  ものをとる.  このとき, $\closure{K}[x]$ の中で $x^q-a=(x-\alpha)^q$ が成立
+  する. \qed
+\end{question}
+
+\begin{question}\label{q:purely-inseparable-1}
+  $k$ は正標数 $p$ の体であるとし, $q=p^e$, $e\in\Z_{\ge0}$ であるとし,
+  $k$ 上の $1$ 変数有理函数体 $K=k(t)$ を考える.  このとき, $L=k(t^{1/q})$ 
+  は $x^q - t$ の根体でかつ最小分解体であり, $L/K$ は純非分離拡大である.
+  \qed
+\end{question}
+
+以下, 可換環 $R$ において $f_1,\ldots,f_n$ から生成されるイデアル
+を $(f_1,\ldots,f_n)_R$ と書くことにする. 
+
+\begin{question}
+  $K$ を体とし, $f\in K[x]$ とし, $L$ は $K$ の拡大体であるとする. 
+  このとき, 
+  \begin{equation*}
+    L\o_K \big(K[x]/(f)_{K[x]}\big) \isom L[x]/(f)_{L[x]}.
+  \end{equation*}
+  特に問題 \qref{q:purely-inseparable-1} の状況において,
+  \begin{equation*}
+    L\o_K L \isom L[x]/\big((x - t^{1/q})^q\big)_{L[x]}.
+    \qed
+  \end{equation*}
+\end{question}
+
+\begin{definition}[被約 (reduced)]
+  可換環 $R$ の元 $a$ が巾零 (nilpotent) であるとは,
+  ある $n=1,2,\ldots$ が存在して $a^n=0$ が成立することである.
+  $R$ の巾零元の全体を $\sqrt{0}=\{\,a\in R\mid\text{$a$ は巾零}\,\}$ と書き, 
+  $R$ の巾零根基 (nilpotent radical) と呼ぶ.  
+
+  $R$ が $0$ 以外の巾零元を持たない (すなわち $\sqrt{0}=0$) とき,
+  $R$ は被約 (reduced) であるという. \qed
+\end{definition}
+
+\begin{question}
+  可換環 $R$ の巾零根基は $R$ のイデアルであり, $R/\fraka$ が reduced になる
+  ような $R$ のイデアル $\fraka$ の中で最小である. \qed
+\end{question}
+
+\begin{question}
+  整域は reduced である.
+  $A$ と $B$ が reduced な可換環であるとき $A\times B$ もそうである. \qed
+\end{question}
+
+\begin{question}
+  $m=p_1^{e_1}\cdots p_n^{e_n}$ は自然数 $m$ の素因数分解であるとする.
+  すなわち, $p_i$ は互いに異なる素数で,
+  $e_1,\ldots,e_n$ は正の整数であるとする.
+  このとき, $\Z/(m)$ が reduced であるための必要十分条件
+  は $e_1=\cdots=e_n=1$ が成立していることである.  
+  (ヒント: $\Z/(m)\isom\Z/(p_1^{e_1})\times\cdots\times\Z/(p_n^{e_n})$.)
+  \qed
+\end{question}
+
+\begin{definition}[分離性 (separability)]\label{definition:separable}
+  $A$ は体 $K$ 上の可換代数 (すなわち $K$ を含む可換環) であるとする.
+  $A$ が $K$ 上分離的 (separable over $K$) であるとは,
+  $K$ の任意の拡大体 $K'$ に対して, $K'\o_K A$ が reduced になることである%
+  \footnote{$K'$ 上の可換代数 $K'\o_K A$ は次のようにして構成可能である.
+    $A$ の $K$ 基底 $\{a_i\}$ を任意に取る.
+    $\{a_i\}$ を基底に持つ $K'$ 上のベクトル空間を $K'\o_K A$ と書く.
+    $K'\o_K A$ の $K$ 上の可換代数は $K'$ 基底 $a_i$ たちの積が与えられれば
+    決まる. しかし, $a_i$ たちの積は $A$ における積として決まっている.
+    よって, $K'\o_K A$ には自然に $K'$ 上の可換代数の構造が入る.}.
+  \qed
+\end{definition}
+
+\begin{question}\label{q:sep-1}
+  以下を示せ:
+  \begin{itemize}
+  \item[(1)] $K$ 上の分離的可換代数の $K$ 部分代数も分離的である.
+  \item[(2)] $A$ は $K$ 上分離的 $\iff$
+    $K$ 上有限生成な $A$ の任意の部分代数が $K$ 上分離的.
+  \item[(3)] $A$ は $K$ 上分離的 $\iff$
+    $K$ の任意の有限生成拡大体 $K'$ に対して $K'\o_K A$ は reduced.
+  \item[(4)] $A$ が $K$ 上分離的ならば $K$ の任意の拡大体 $K'$ に
+    対して $K'\o_K A$ は $K'$ 上分離的である.
+    \qed
+  \end{itemize}
+\end{question}
+
+\begin{question}
+  $A$ が体 $K$ の代数拡大体であるとき, 次の2つの条件は互いに同値である:
+  \begin{itemize}
+  \item[(a)] $A$ は \definitionref{definition:separable} の意味で分離的であ
+    る.
+  \item[(b)] $A$ は体論の意味で分離的である.  すなわち, $A$ の全ての元が重根
+    を持たない $K$ 係数多項式の根になる. 
+  \end{itemize}
+  (ヒント:
+  (a) $\implies$ (b).  対偶を示す.  (b) でないならば, ある $a\in A$ と $a$ 
+  を根に持つ既約多項式 $f\in K[x]$ で重根を持つものが存在する.  $A$ の部分代
+  数 $K[a]$ は $K[x]/(f)_{K[x]}$ に同型である.  $f$ の最小分解体 $K'$ に対し
+  て, $K'\o_K K[a]\isom K'[x]/(f)_{K'[x]}$.  この右辺は reduced でない. 
+  よって,  \qref{q:sep-1} (2) より, 
+  $A$ は \definitionref{definition:separable} の意味で分離的ではない. \\
+  (b) $\implies$ (a).  \qref{q:sep-1} (2) より, $A$ は $K$ の有限次分離拡大
+  体であると仮定して良い.  有限次分離拡大体は単拡大であるという定理 (たとえ
+  ば \cite{morita} 第V章の定理4.9 (p.~201)) より, 重根を持たない既約多項
+  式 $f\in K[x]$ が存在して, $A\isom K[x]/(f)_{K[x]}$.  $K$ の拡大体 $K'$ に
+  対して, $K'\o_K A \isom K'[x]/(f)_{K'[x]}$.  $f$ は重根を持たないので, こ
+  の右辺は reduced である.)
+  \qed
+\end{question}
+
+\begin{question}
+  有限体の乗法群は巡回群である.  \qed
+\end{question}
+
+\begin{question}
+  体の有限次分離拡大体は単拡大である.  \qed
+\end{question}
+
+\begin{question}
+  $\Q(\sqrt{2},\sqrt{3})=\Q(\sqrt{2}+\sqrt{3})$ である.
+  (ヒント: $1/(\sqrt{2}+\sqrt{3})$ の分母を有理化してみよ.)
+  $\sqrt{2}+\sqrt{3}$ の $\Q$ 上での最小多項式を求めよ.
+  (ヒント: $\pm\sqrt{2}\pm\sqrt{3}$ ($\pm$ の組み合わせは4通りを考える) を根
+  に持つ多項式を考えてみよ.)
+  \qed
+\end{question}
+
+\begin{question}
+  $\Q(\sqrt{3},\sqrt{5})=\Q(\sqrt{3}-\sqrt{5})$ である.
+  $\sqrt{3}-\sqrt{5}$ の $\Q$ 上での最小多項式を求めよ. \qed
+\end{question}
+
+\begin{question}
+  $K=\C(t)$ のとき, $K(\sqrt{t}, \sqrt{t+1})=K(\sqrt{t}+\sqrt{t+1})$. \qed
+\end{question}
+
+\begin{question}
+  $K$ は体であるとし, $f\in K[x]$ とする.  $f$ が $1$ 次以上で重根を持たなけ
+  れば, $K[x]/(f)$ は reduced である.  \qed
+\end{question}
+
+\begin{definition}[完全体 (perfect field)]
+  体 $K$ が完全体 (perfect field) であるとは, $K$ の任意の代数拡大が $K$ 上
+  分離的になることである. \qed
+\end{definition}
+
+\begin{question}
+  $K$ が正標数 $p$ であるとき, 以下の条件は互いに同値である:
+  \begin{itemize}
+  \item[(a)] $K$ は完全体である.
+  \item[(b)] $K^{p^{-1}} = K$.
+  \item[(c)] $F_p:K\to K$, $a\mapsto a^p$ は全射である.
+  \end{itemize}
+  ここで, $K^{p^{-e}}=\{\theta\in\closure{K}\mid\theta^{p^e}\in K\,\}$.
+  \qed
+\end{question}
+
+\begin{question}
+  標数 $0$ の体は完全体である. \qed
+\end{question}
+
+\begin{question}
+  有限体は完全体である. \qed
+\end{question}
+
+\begin{question}
+  $k$ が正標数の体であるとき, $k$ 上の $1$ 変数有理函数体 $K=k(t)$ は完全体
+  ではない.  (ヒント: 問題 \qref{q:purely-inseparable-1}.) \qed
+\end{question}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Galois 対応}
+
+体 $L$ に対して, $L$ の体としての自己同型全体のなす群を $\Aut L$ と書く.
+$\Aut L$ の部分群 $G$ に対して,
+\begin{equation*}
+  L^G := \{\, x\in L \mid \sigma(x) = x \; \forall\sigma\in G\,\}
+\end{equation*}
+を $G$ の不変体 (invariant field) と呼ぶ. 体の拡大 $L/K$ に対して,
+\begin{equation*}
+  \Aut(L/K) := \{\,\sigma\in\Aut L\mid \sigma(x)=x\;\forall x\in K\,\}.
+\end{equation*}
+
+\begin{question}
+  体 $L$ の部分体 $M$, $N$ に対して,
+  \begin{equation*}
+    M\subset N \implies \Aut(L/M) \supset \Aut(L/N). \qed
+  \end{equation*}
+\end{question}
+
+\begin{question}
+  体 $L$ と $\Aut L$ の部分群 $G$ に対して, $\Aut(L/L^G)\supset G$. \qed
+\end{question}
+
+\begin{question}
+  体 $L$ と $L$ の部分体 $K$ に対して, $L^{\Aut(L/K)} \supset K$. \qed
+\end{question}
+
+\begin{question}[正規拡大]
+  $L/K$ は代数拡大であるとする. このとき, $\closure{L}=\closure{K}$ であり, 
+  以下の条件は互いに同値である:
+  \begin{itemize}
+  \item[(a)] $L$ の任意の拡大体 $M$ に対して,
+    $M$ の中間体で $L$ と $K$ 同型なものは $L$ に限る.
+  \item[(b)] 任意の $\sigma\in\Aut(\closure{K}/K)$ に対して $\sigma{L} = L$.
+  \item[(c)] $K$ 上既約な多項式 $f\in K[x]$ が $L$ において根を持てば,
+    $f$ は $L$ において $1$ 次式の積に分解される. 
+  \end{itemize}
+  以上の同値な条件のどれかが成立しているとき, 代数拡大 $L/K$ は正規拡大
+  (normal extension) であると言う.
+  \qed
+\end{question}
+
+\begin{question}
+  $K$ の代数拡大 $L$, $M$ が共に $K$ 上正規であるとき,
+  $L\cap M$ と $LM$ も $K$ 上正規になる.  \qed
+\end{question}
+
+\begin{question}
+  代数拡大 $L/K$ が正規であり, $M$ がその中間体であるとき,
+  $M$ から $\closure{K}$ の中への $K$ 同型%
+  \footnote{$K$ の任意の元を固定する $M$ から $\closure{K}$ への環準同型のこ
+    と. 常に単射になる.} %
+  $\sigma$ は, $\closure{\sigma}(L)=L$ を
+  満たす $\closure{\sigma}\in\Aut(\closure{K}/K)$ に拡張される. \qed
+\end{question}
+
+\begin{question}
+  有限次拡大 $L/K$ が正規拡大になるための必要十分条件は,
+  $L$ がある多項式 $f\in K[x]$ の最小分解体になることである. \qed
+\end{question}
+
+\begin{question}
+  任意の有限次拡大 $L/K$ に対してある有限次正規拡大 $M/K$ で $L\subset M$ を
+  みたすものが存在する. \qed
+\end{question}
+
+\begin{definition}[Galois 拡大]
+  代数拡大 $L/K$ が Galois 拡大であるとは正規かつ分離的であることである. 
+  $L/K$ が Galois 拡大のとき, $\Gal(L/K)=\Aut(L/K)$ と置き, 
+  それを $L/K$ の Galois 群と呼ぶ.
+  \qed
+\end{definition}
+
+\begin{question}[E.~Artin]
+  $L$ は体であるとし, $G$ は $\Aut L$ の有限部分群であるとし,
+  $K = L^G$ と置く.  このとき, $L/K$ は有限次 Galois 拡大であり,
+  $\Gal(L/K)=G$ かつ $[L:K]=|G|$ となる%
+  \footnote{$|G|$ は有限群 $G$ の位数 (元の個数) である.}. \qed
+\end{question}
+
+\begin{question}
+  $L/K$ が代数拡大であるとき,
+  \begin{equation*}
+    \text{$L/K$ は Galois 拡大}  \iff  L^{\Aut(L/K)} = K.
+    \qed
+  \end{equation*}
+\end{question}
+
+\begin{question}[Galois の基本定理]
+  $L/K$ が体の有限次 Galois 拡大であるとき,
+  $L/K$ の中間体 $M$ と $\Gal(L/K)$ の部分群 $H$ が %
+  $H=\Gal(L/M)$, $M=L^H$ によって一対一に対応する.
+  この対応を Galois 対応と呼ぶ. \qed
+\end{question}
+
+この節の以下の問題の解答において, この節の以上の問題の結果を自由に用いて構わ
+ない.
+
+\begin{question}
+  Galois 対応は包含関係を逆転させる.  \qed
+\end{question}
+
+\begin{question}
+  体 $L$ の部分体 $M$ と $\sigma\in\Aut L$ に対して,
+  \begin{equation*}
+    \Aut\big(L/\sigma(M)\big) = \sigma^{-1}\Aut(L/M)\sigma.
+  \end{equation*}
+  ここで, $\sigma(M)=\{\,\sigma(x)\mid x\in M\,\}$.  \qed
+\end{question}
+
+\begin{question}
+  $L/K$ が体の有限次 Galois 拡大であるとき, $L$ に含まれる $K$ の正規拡大 
+  (よって Galois 拡大) と $\Gal(L/K)$ の正規部分群が Galois 対応によって一対
+  一に対応する.  さらに, $L$ に含まれる $K$ の正規拡大 $M$ に対して, 制限写
+  像
+  \begin{equation*}
+    \Gal(L/K)\to\Gal(M/K), \quad \sigma\mapsto\sigma|_M
+  \end{equation*}
+  は次の同型を誘導する:
+  \begin{equation*}
+    \Gal(L/K)/\Gal(L/K) \isomto \Gal(M/K). 
+    \qed
+  \end{equation*}
+\end{question}
+
+\begin{definition}[Abel 拡大]
+  $L/K$ が Galois 拡大で $\Gal(L/K)$ が Abel 群であるとき,
+  $L/K$ は Abel 拡大であるという. \qed
+\end{definition}
+
+\begin{question}
+  $L/K$ が有限次 Abel 拡大であるとき, その任意の中間体は $K$ の有限次 Abel 
+  拡大になる. \qed
+\end{question}
+
+\begin{question}[E.~Artin]
+  $\chi_1,\ldots,\chi_m$ を半群 $S$ から体 $K$ の乗法群 $K^\times$ への相異
+  なる半群の準同型であるとする.  このとき, $\alpha_1,\ldots,\alpha_m\in K$ 
+  が
+  \begin{equation*}
+    \chi_1(s)\alpha_1 + \cdots + \chi_m(s)\alpha_m = 0
+    \quad (\forall s\in S)
+  \end{equation*}
+  をみたしているならば, $\alpha_1=\cdots=\alpha_m=0$. \qed
+\end{question}
+
+\begin{definition}[束 (lattice)]
+  順序集合 $(X,\le)$ が束 (lattice) であるとは, それが最小限と最大限を持ち, 
+  任意の $x,y\in X$ に対して, $x$ と $y$ の
+  上限 $x\vee y$ と下限 $x\wedge y$ が $X$ の中に存在することである. 
+  \qed
+\end{definition}
+
+\begin{question}
+  体の拡大 $L/K$ に対して, その中間体 (intermediate field) 
+  全体の集合を $\Int(L/K)$ と書くことにする. 
+  このとき, $(\Int(L/K),\subset)$ は束であり, $M,N\in\Int(L/K)$ に対して,
+  \begin{equation*}
+    M\vee N = MN, \qquad M\wedge N = M\cap N.  \qed
+  \end{equation*}
+\end{question}
+
+\begin{question}
+  群 $G$ に対して, その部分群全体の集合を $\Sub G$ と書くことにする.
+  このとき, $(\Sub G,\subset)$ は束であり, $H,F\in\Sub G$ に対して,
+  \begin{equation*}
+    H\vee F = \langle H,F \rangle, \qquad H\wedge F = H\cap F. 
+  \end{equation*}
+  ここで, $\langle H,F \rangle$ は $H$ と $F$ から生成される $G$ の部分群で
+  ある. 
+  \qed
+\end{question}
+
+\begin{question}
+  束のあいだ%
+  \footnote{「あいだ」を「間」と書くと「束の間」 (つかのま) になってしまう.}%
+  の写像 $\phi:X\to Y$ が順序を逆転させる全単射であるとき,
+  $x,x'\in X$ に対して, $\phi(x\vee x')=\phi(x)\wedge\phi(x')$ が成立する.
+  以上の結果を Galois 対応に適用すると, $L/K$ が有限次 Galois 拡大である
+  とき, $L/K$ の中間体 $M$, $N$ に対して,
+  \begin{align*}
+    &
+    \Gal(L/MN) = \Gal(L/M)\cap \Gal(L/N), 
+    \\ &
+    \Gal(L/M\cap N) = \langle\Gal(L/M),\Gal(L/N)\rangle
+  \end{align*}
+  であり, 
+  \begin{equation*}
+    L^{\langle H,F\rangle} = L^H\cap L^F, \quad
+    L^{H\cap F} = L^H L^F.
+    \qed
+  \end{equation*}
+\end{question}
+
+\begin{question}
+  $L/K$ が体の拡大であるとき,
+  \begin{equation*}
+    \text{$L/K$ は有限次 Galois 拡大}
+    \iff
+    \text{$L$ は $K$ 上のある分離的多項式の最小分解体}.
+    \qed
+  \end{equation*}
+\end{question}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{方程式の Galois 群}
+
+\begin{definition}[方程式の Galois 群]
+  体 $K$ 上の分離的多項式 $f\in K[x]$ の最小分解体を $L$ とするとき,
+  $\Gal(L/K)$ を方程式 $f(x)=0$ の Galois 群と呼ぶ. \qed
+\end{definition}
+
+\begin{question}\label{q:Gal-subset-Perm}
+  $L$ は体 $K$ 上の分離的多項式 $f$ の最小分解体であるとする.
+  このとき, $\Gal(L/K)$ は $f$ の根全体の集合の置換群の部分群とみなせる.
+  \qed
+\end{question}
+
+この節の以下の問題の解答において \qref{q:Gal-subset-Perm} の結果を自由に用
+いて良い.
+
+\begin{question}
+  $L$ は $f(x)=x^3-5$ の $\Q$ 上での最小分解体であるとする.
+  このとき, $L=\Q(\sqrt{-3},\sqrt[3]{5})$ であり, 
+  $\Gal(L/\Q)\isom S_3$, 
+  $\Gal\big(L/\Q(\sqrt{-3})\big)$, 
+  $\Gal\big(\Q(\sqrt{-3})/\Q\big)\isom\Z/2\Z$. \qed
+\end{question}
+
+\begin{question}
+  $L$ は $K=\C(t)$ のとき, $f(x)=x^3-t\in K[x]$ の $K$ 上での最小分解体であ
+  るとする.
+  このとき, $L=K(\sqrt[3]{t})$ であり, $\Gal(L/K)\isom\Z/3\Z$. \qed
+\end{question}
+
+\begin{question}
+  体 $k$ 上の $n$ 変数有理函数体を $L=k(t_1,\ldots,t_n)$ と書き,
+  $t_1,\ldots,t_n$ の基本対称式 $s_1,\ldots,s_n$ を
+  \begin{align*}
+    f(x) &:= (x-t_1)\cdots(x-t_n)
+    \\ 
+    &= x^n - s_1 x^{n-1} + s_2 x^{n-2} - 
+    \cdots + (-1)^{n-1}s_{n-1}x + (-1)^n s_n
+  \end{align*}
+  によって定める.  すなわち, 
+  \begin{equation*}
+    s_k = \sum_{1\le i_1<\cdots<i_k\le n} t_{i_1}\cdots t_{i_k}.
+  \end{equation*}
+  $L$ の部分体 $K$ を $K=k(s_1,\ldots,s_n)$ と定める.
+  このとき, $L$ は $f(x)\in K[x]$ の最小分解体となり,
+  $\Gal(L/K)\isom S_n$ が成立する. \qed
+\end{question}
+
+\begin{question}
+  $\C$ が代数閉体であることを, 中間値の定理と純代数的な議論だけを用いて証明
+  せよ. 複素函数論を用いてはいけない.
+  (ヒント: \cite{morita} p.~211 の定理5.9の証明.)
+  \qed
+\end{question}
+
+\begin{question}\label{q:GalxGal}
+  $K$ は体であるとし, $f\in K[x]$ は $K$ 上分離的であり, $L$ は $f$ の最小分
+  解体であるとする. $f=gh$, $g,h\in K[x]$ であり, $M$, $N$ はそれぞれ $L$ に
+  含まれる $g$, $h$ の分解体であるとする.  このとき, $M\cap  N=K$ であれば, 
+  同型
+  \begin{equation*}
+    \Gal(L/K) \isom \Gal(M/K)\times\Gal(N/K)
+  \end{equation*}
+  が成立する. \qed
+\end{question}
+
+\begin{rem}
+  \qref{q:GalxGal} の状況のもとで, $[MN:M]=[N:K]$ が成立することがすぐにわか
+  るので, \qref{q:l-d-1} より $M$ と $N$ は $K$ 上線形無関連である. \qed
+\end{rem}
+
+\begin{question}
+  $g(x)=x^2+3$, $h(x)=x^3-1$ と定める.  このとき, $\C$ に含まれる $g$ の分解
+  体と $h$ の最小分解体は等しい.  \qed
+\end{question}
+
+\begin{question}\label{q:Gal:GalcapGal}
+  $L/K$ が有限次 Galois 拡大であるとき, $L/K$ の中間体 $M$, $N$ に対して,
+  \begin{equation*}
+    [MN:L] = [\Gal(L/K):\Gal(L/M)\cap\Gal(L/N)]. \qed
+  \end{equation*}
+\end{question}
+
+\begin{question}
+  $L/K$ は有限次 Galois 拡大であり, $M$, $N$ はその中間体で,
+  $[M:N]=2^a$, $[N:K]=2^b$ であっても, $[MN:K]$ が$2$ の巾になるとは限らない
+  ことを示せ. 
+  (\qref{q:Gal:GalcapGal} を使う. $S_4$ の部分群 $H$, $H'$ を %
+  $H = \{\,\sigma\in S_4\mid\sigma(4)=4\,\}$,
+  $H' = \{\,\sigma\in S_4\mid\sigma(1)=1\,\}$ と定めると,
+  $[S_4:H]=[S_4:H']=4$ であるが, $[S_4:H\cap H']=12$ である.
+  よって, $\Gal(L/K)=S_4$ であれば \qref{q:Gal:GalcapGal} を用いて
+  反例を構成できる.)
+  \qed
+\end{question}
+
+\begin{question}[判別式 (discriminant)]
+  $K$ は体であるとし, $f\in K[x]$ の最小分解体を $L$ と書く.
+  このとき, $f$ は $L[x]$ において,
+  \begin{equation*}
+    f(x) = a (x - \alpha_1)\cdots(x - \alpha_n)
+    \quad
+    (\alpha_i\in L,\; a\in K^\times)
+  \end{equation*}
+  と分解する.  $f$ の判別式 $D(f)$ を次のように定義する:
+  \begin{equation*}
+    D(f) := \prod_{1\le i<j\le n} (\alpha_i - \alpha_j)^2.
+  \end{equation*}
+  このとき, $D(f)\in K[x]$.  \qed
+\end{question}
+
+\begin{rem}
+  $D(f)$ は $\alpha_1,\ldots,\alpha_n$ の差積 (difference product) 
+  の $2$ 乗に等しい. \qed
+\end{rem}
+
+\begin{question}
+  $f(x)=ax^2+bx+c$ ($a\ne0$) のとき,
+  $\displaystyle D(f)=\frac{b^2-4ac}{a^2}$. \qed
+\end{question}
+
+\begin{question}
+  $f(x)=x^3+ax+b$ のとき,
+  $D(f)=-4a^3-27b^2$. \qed
+\end{question}
+
+\begin{question}
+  $f(x)=x^4+ax^2+bx+c$ のとき,
+  \begin{equation*}
+    D(f) = 16a^4c - 4a^3b^2 - 128a^2c^2 + 144ab^2c - 27b^4 + 256c^3.
+    \qed
+  \end{equation*}
+\end{question}
+
+\begin{question}
+  $K$ は体であるとし, $f\in K[x]$ は分離的であり, $L$ はその最小分解体である
+  とすると以下の2つの条件は互いに同値である:
+  \begin{itemize}
+  \item[(a)] $f$ は $K$ 上の既約多項式である.
+  \item[(b)] $\Gal(L/K)$ は $f$ の根全体に推移的に作用する.
+  \end{itemize}
+  (ヒント: (a) $\implies$ (b). $f$ が $K$ 上既約であるとき, 
+  $f$ の任意の根 $\alpha$, $\beta$ に対して, 
+  $K$ 同型 $K(\alpha)\isom K(\beta)$ が存在する.  この同型は $L$ の同型に拡
+  張可能である. \\
+  (b) $\implies$ (a). $f$ が $K$ 上既約でないとき, $f=gh$,
+  ($g,h\in K[x]$, $\deg g, \deg h \ge 1$) と分解する.  
+  任意の $\sigma\in\Gal(L/K)$ は $g$ の根を $g$ の根に, $h$ の根を $h$ の根
+  にうつす.  $f$ は分離的なので $g$ と $h$ は共通根を持たないので,
+  $\Gal(L/K)$ の $f$ の根全体への作用は推移的ではない.)
+  \qed
+\end{question}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Galois 理論の演習問題}
+
+\begin{question}
+  $\R$ の代数拡大は $\R$ と $\C$ 以外に存在しない.
+  $\Gal(\C/\R)\isom\Z/2\Z$ である. 
+  \qed
+\end{question}
+
+\begin{question}[有限体の性質のまとめ]
+  $p$ は素数であるとし, $e=1,2,\ldots$, $q=p^e$ とする.
+  \begin{itemize}
+  \item[(1)] 位数 $q$ の有限体 $\F_q$ が同型を除いて唯一存在する. 
+  \item[(2)] $\{\,a\in\closure{\F_q}\mid a^{q^m}=a\,\}$ は位数 $q^m$ の有限
+    体である. それを $\F_{q^m}$ と書く.
+  \item[(3)] $\F_{q^m}$ は分離多項式 $x^q - x\in\F_q[x]$ の最小分解体である.
+  \item[(4)] $\F_{q^m}/\F_q$ は $m$ 次の Galois 拡大であり,
+    $\Gal(\F_{q^m}/\F_q)=\langle F\rangle\isom\Z/m\Z$.
+    ここで, $F:\F_{q^m}\to\F_{q^m}$ は $F(a)=a^q$ と定義された Frobenius 写
+    像である.
+  \item[(5)] $\closure{\F_q}$ に含まれる $\F_q$ の $m$ 次拡大は $\F_{q^m}$ 
+    に等しい.
+  \item[(6)] $k$ は $m$ の約数であるとする.
+    $F^k$ で固定される $\F_{q^m}$ の元の全体を $(\F_{q^m})^{F^k}$ と
+    書くと, $(\F_{q^m})^{F^k}=\F_{q^k}$.
+  \end{itemize}
+  以上のように有限体の有限次拡大の様子は非常によくわかる.
+  \qed
+\end{question}
+
+\begin{guide}
+  $\R$ や $\F_q$ の有限次拡大の様子は完全によくわかる.
+  しかし, $\Q$ に関する同じ問題は数論におけるおそるべき難問である.
+  \qed
+\end{guide}
+
+\begin{question}
+  $\Q(\sqrt{2}+\sqrt{3})/\Q$ が Galois 拡大であることを示し,
+  $\Gal(\Q(\sqrt{2}+\sqrt{3})/\Q)\isom (\Z/2\Z)^2$ を証明し,
+  その非自明な中間体の全体は $\Q(\sqrt{2})$, $\Q(\sqrt{3})$, $\Q(\sqrt{6})$
+  である. 
+  \qed
+\end{question}
+
+\begin{question}
+  $\Q(\sqrt[3]{2},\sqrt{-3})/\Q$ は $6$ 次の Galois 拡大であり,
+  で $\Gal(\Q(\sqrt[3]{2},\sqrt{-3})/\Q)\isom S_3$.
+  (ヒント: $\omega=\exp(2\pi\sqrt{-1}/3)$ と置くと %
+  $\Q(\omega)=\Q(\sqrt{-3})$.) 
+  \qed
+\end{question}
+
+\begin{question}
+  $4$ 次の対称群 $S_4$ の $(1234)$, $(24)$ から生成される部分群を $D_4$ と書
+  くと, $D_4$ の位数が $8$ になることを示せ%
+  \footnote{$D_4$ は \qref{q:ind-dihed} で定義した $n=4$ の場合の
+    二面体群 (dihedral group) と $a=(1234)$, $b=(24)$ によって同一視できる.
+    一般に, $a=(12\cdots n)$ とし, $b$ を $1$ を固定し $2,\ldots,n$ に関して
+    は $k$ と $n+2-k$ を交換する置換とみなすことによって, $D_n$ は $S_n$ の
+    部分群とみなせる.}.
+  $K=\Q(\sqrt[4]{2},\sqrt{-1})$ が $\Q$ 上の既約多項式 $x^4 - 2\in\Q[x]$ の
+  最小分解体であることを示し, $\Gal(K/\Q)\isom D_4$ であることを示せ.
+  \qed
+\end{question}
+
+\begin{question}
+  $K$ は $1$ の原始 $n$ 乗根 $\zeta$ を含む体とする.
+  このとき, $n$ は $K$ の標数 $p$ で割り切れない. \qed
+\end{question}
+
+\begin{question}[Kummer 拡大の特殊な場合]
+  $K$ は $1$ の原始 $n$ 乗根 $\zeta$ を含む体とする.
+  $1\ne a\in K$ とし, $r$ は $a^r$ が $K$ の元の $n$ になるような最小の正の
+  整数であるとする. このとき, $x^n - a$ の根の1つを $\alpha$ とすると,
+  $K(\alpha)$ は $x^n - a$ の最小分解体であり, 
+  $\Gal(K(\alpha)/K)\isom\Z/r\Z$ が成立する. \qed
+\end{question}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{お話: 数と函数の世界}
+
+「数や函数にはどのようなものがあるだろうか?」という問題は, 
+皆によって基本的な数学の問題であったはずである.
+
+小学生のときに $1,2,3,\ldots$ という自然数について習い, 
+さらに $0$ やマイナスの数 $-1,-2,-3,\ldots$ についても習うことになる.
+分数や小数について習い (有理数の存在を知る), 
+ついには円周率 $\pi=3.141592653{\cdots}$ のような
+おそろしい数についても習うことになる.  
+そして, $\sqrt{2}$ が無理数であることを
+中学か高校あたりで習い, 有理数と実数の世界の違いについて知ったはずである.  
+そして, 複素数についても習うことになる.  実係数の2次方程式は実数の範囲内では
+必ずしも解けないが, 数の体系を複素数まで拡張すればいつでも解けるのである.
+この事実は一般の $n$ 次方程式まで拡張される(代数学の基本定理). 
+我々は今現在, 有理数係数の一般の $n$ 次方程式の根を $\Q$ に付け加えた数の体
+系を体の Galois 理論の題材として扱っているのである.
+
+これと同様のストーリーを函数についても述べることができる.
+小学校の高学年のときに, 二つの数が互いに関係していることの重要性を習ったはず
+である.  そして, そのグラフを描くことの重要性を知ったはず.
+そして, 中学校では文字式について習うことになる. 
+一番簡単なのは $ax+b$ の型の一次函数である.
+そして, $ax^2+bx+c$ という二次函数についても習うことになる.
+一般に多項式分の多項式の形の函数は有理函数と呼ばれている.
+有理函数は函数の世界における有理数の類似物である. 
+有理函数でない函数 (すなわち無理函数) の例として, $\sqrt{x}$ のような函
+数が存在する. これは $\sqrt{2}$ のような無理数の函数の世界における類似物である.
+高校に入ると, $\cos x$ や $\sin x$ のような三角函数についても習うことになる.
+三角函数は $e^x$ や $\log x$ と同じく超越函数である.
+超越函数は函数の世界における超越数 (たとえば $\pi$, $e$ など) の類似物である.
+そして, 大学ではさらに難しい函数を習うことになる.
+
+「数や函数の世界がどのような様子をしているか?」という問題,
+もしくは「数や函数の世界ではどのような面白いことが起こっているか?」という問
+題は現代の数学研究においても基本的な問題である.
+
+基本的な数の世界は, 有理整数 $0,\pm1,\pm2,\ldots$ の世界から出発して, 
+商体を作る操作と代数方程式の根を付け加える操作と完備化する操作の繰り返しに
+よって構成される数の世界である.
+
+たとえば, $\Z$ の商体 $\Q$ を考え, その絶対値 $|\;\;|$ に関する完備化を構
+成すると実数体 $\R$ ができる. $\R$ の非自明な代数拡大体は $\C$ しか存在しな
+い. これが $\Z \to \Q \to \R \to \C$ という経路である.
+
+$\Q$ の完備化は $\R$ 以外にも存在する. 
+$\Q$ の $\R$ 以外の完備化は各素数 $p$ ごとに存在し, 
+$\Q_p$ と表わされ, $p$ 進数体と呼ばれている.
+集合として, $\Q_p$ を次のように表わすことができる:
+\begin{equation*}
+  \Q_p 
+  = \{\, a_N p^N + a_{N+1} p^{N+1} + a_{N+2} p^{N+2} \mid
+         N \in \Z,\; a_i = 0,1,\ldots,p-1 \,\}.
+\end{equation*}
+$N$ は負の整数でも良いことに注意せよ. すなわち, $\Q_p$ は $0,1,\ldots,p-1$ 
+を係数に持つ $p$ の Laurent 級数 ($p$ 進級数) 全体の集合であるとみなせる.
+任意の有理函数が局所的に Laurent 級数展開できるのと同じように,
+任意の有理数も $p$ 進級数に展開できる. たとえば,
+\begin{equation*}
+  1 + p + p^2 + p^3 + \cdots = \frac{1}{1-p}
+  \qquad \text{in $\Q_p$}.
+\end{equation*}
+素数 $p$ の絶対値は必ず $1$ より大きいという先入観を捨てなければいけない.
+$\Q_p$ の中で $p$ は絶対値が $1$ より小さな数とみなされるのである.
+$\Q_p$ では実数体 $\R$ の世界と同じようなことがかなりできる.
+たとえば, $\R$ と同様に $\Q_p$ は局所コンパクトになり,
+$\R$ 上の Lebesgue 積分論と同様の積分論が $\Q_p$ 上でも可能である.
+
+さらに, $\Q$ に有理数係数の代数方程式の根 $\alpha$ を
+付け加えれば $K=\Q(\alpha)$ という $\Q$ の有限次代数拡大体が得られる. 
+$\Q$ に有理数係数の全ての代数方程式の根を付け加えれば $\closure\Q$ という代
+数閉体が得られる.  $\closure\Q$ に含まれる数は代数的数と呼ばれ, 
+$\closure\Q$ に含まれない数は超越数と呼ばれている.
+
+上で用いた操作に, さらに素イデアルによる剰余環を構成する操作と文字を付け加え
+る操作を追加すれば, 数の世界が函数の世界に拡張されることになる.
+
+たとえば, 素数 $p$ から生成される $\Z$ の素イデアル $\Z p$ で割った $\Z$ の
+剰余環 $\F_p$ は位数 $p$ の有限体である. 
+有限体の $n$ 次代数拡大は位数 $p^n$ の有限体 $\F_{p^n}$ である.
+標数 $p$ の有限体はこのようなもので尽きている.
+
+位数 $q$ の有限体 $k=\F_q$ に文字 $t$ を付け加えた多項式環 $k[t]$ を考え,
+その商体を考えると, 有限体上の ($1$ 変数) 有理函数体 $k(t)$ である.  
+この時点で数の世界から函数の世界に突入することになるのだが, 
+有限体上の有理函数体は有限体から出発したのでかなり離散的な性質を持っており,
+有理数体と非常に似た性質を持っている.
+
+有理数体を実数体や $p$ 進数体に完備化するのと同じよう
+に $K=k(t)$ を $c\in k$ と $\infty$ において完備化することができる:
+\begin{align*}
+  &
+  K_c = \{\, a_N(t-c)^N + a_{N+1}(t-c)^{N+1} + a_{N+2}(t-c)^{N+2} \mid
+             N\in\Z,\; a_i\in k \,\},
+  \\ &
+  K_∞ = \{\, a_N t^{-N} + a_{N+1}t^{-N-1} + a_{N+2}t^{-N-2} \mid
+           N\in\Z,\; a_i\in k \,\}.
+\end{align*}
+$\Q_p$ と $K_c$ は非常に似ている.
+
+有理数体 $\Q$ の有限次拡大体を代数体と呼ぶのと同じように, 
+体 $k$ 上の有理函数体 $k(t)$ の有限次拡大体を体 $k$ 上の代数函数体と呼ぶ.
+もしも体 $k$ が有限体ならば体 $k$ 上の代数函数体は代数体と非常に似た性質を持
+つことが知られている.
+
+複素函数論と密接に関係しているのは $k=\C$ の場合である. 
+$\C$ 上の有理函数体 $\C(t)$ は複素射影直線上の有理型函数全体のなす体と同一視
+できる.
+さらに, $t^3+at+b$ が重根を持たないような $a,b\in\C$ に対して, 
+楕円函数体 $\C(t,\sqrt{t^3+at+b})$ は楕円曲線上の有理型函数全体のなす体と同
+一視できる(\cite{takeuchi}, \cite{umemura}).
+一般に, $\C$ 上の代数函数体はあるコンパクト Riemann 面上の有理型函数全体のな
+す体と同一視でき, 逆にコンパクト Riemann 面上の有理型函数全体のなす体はある
+代数函数体と同一視できる. 
+これによって, 複素代数函数体の理論とコンパクト Riemann 面の理論は完全に同値
+になることがわかる(\cite{iwasawa}).
+数学全体においてこの地点は, 
+函数の理論と多様体の理論が完壁に接しているポイントとして極めて重要である.
+他の理論もこの地点で生まれたアイデアの何らかの意味での一般化になっていること
+が多い.
+この地点では体の Galois 理論 (代数) と
+分岐被覆の Galois 理論 (位相幾何) が完全に対応している.
+三角函数や楕円函数のような函数はこの世界に自然に現われる.
+
+我々はまだ数と函数の世界のほんの入口しか覗いてないのだが, 
+そのほんの入口ですでにかなり難しい世界に突入してしまっている.
+入口付近がおそろしく難解だというのが数の世界の特徴である.
+たとえば, 「素数がどれだけたくさんあるか?」という古くからある問題について立
+てられた皆が正しいと信じている予想 (Riemann 予想) はまだ解けていない.
+しかし, その有限体上の代数函数体上での類似物は Grothrndieck と Deligne によ
+って高次元の場合に拡張された予想 (Weil 予想) がすでに解けている.  
+そして, 非常に非自明なことを考えれば, 複素数体上でも Weil 予想の類似を考える
+ことができ, それも解けている(斉藤盛彦の混合 Hodge 加群の理論).
+元来の有理整数の世界に関する Riemann 予想はおそるべき難問である.
+
+上においては函数の世界を $1$ 変数函数の場合に限って説明したのであるが,
+一般に $n$ 変数函数の世界を考えることもできる.
+$1$ 変数函数は幾何的には $1$ 次元の多様体上の函数とみなすことができるのだが,
+$n$ 変数函数は $n$ 次元多様体上の函数とみなすことができる.
+
+さらに, 代数方程式を解くという操作以外にも, 微分方程式を解くという操作を世界
+を拡大するために考えることもできる.  初等函数の世界から出発して, 既知の函数
+を係数として持つ線形微分方程式の解もまた既知と考えることによって到達できない
+函数で性質がよくわかるものにはどのようなものがあるのか, のような問題を考える
+こともできる.  Pailev\'e 方程式の解はそのような函数の実例である.
+
+以上においては, あえて「数と函数」という見方に沿って話を進めたが, 
+そのような見方は数学的見方のほんの一部に過ぎない.
+他にも様々な視点が存在し, 色々面白いことがわかっており,
+わかっていること以上に謎が残されているのである.
+
+しかし, この節の最初に述べたように, $0,\pm1,\pm2,\ldots$ に関する算数で習っ
+たときの経験を忘れてはいけないと思う.  
+我々は子どものときにたくさんの計算によって, 
+整数の算数の世界で何が起こっているかを感覚的に非常によく知っている.
+たとえば, あとで倍数や約数と言葉を習ったとき, 
+それが大体どのようなものであるかについて
+割り算の経験によってよく知っていたはずである.
+より抽象的な数学を理解するときにも, 
+そのような経験が重要だという経験は役に立つ.
+たとえば, 「体の拡大」という言葉を習ったときに,
+簡単な体の拡大にはどのようなものがあるかをよく知ってないと
+結局のところ「体の拡大」が何であるかをまったく理解できずに終わってしまうのだ.
+そして, どんなにたくさん計算しても, その結果を単なる計算のバラバラの集積だと
+感じているうちは, その世界を理解したという感覚にはなれないだろう.
+たくさんの計算例と抽象的な理論をすべて統合的に理解するところに到達するように
+努力すべきなのである.
+
+\bigskip\bigskip\noindent{\bf\Large つづく予定であるが果たしてどうなるか?}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{thebibliography}{AB}
+
+%\bibitem[Hi]{hirai}
+%平井武: 線形代数と群の表現 I, II, すうがくぶっくす 20, 21, 朝倉書店, 2001
+
+%\bibitem[Ho]{hotta}
+%堀田良之: 代数入門—群と加群—, 数学シリーズ, 裳華房, 1987
+
+\bibitem[I]{iwasawa}
+岩澤健吉: 代数函数論, 岩波書店, 1952, 1989
+
+%\bibitem[Ma]{matsumura}
+%松村英之: 可換環論, 共立出版, 1980, 2000 (英語版: Matsumura, Hideyuki:
+%Commutative ring theory, Cambridge studies in advanced mathematics 8, 
+%Cambridge University Press, 1986)
+
+\bibitem[Mo]{morita}
+森田康夫: 代数概論, 数学選書 9, 裳華房, 1987
+
+%\bibitem[Mu]{mumford}
+%Mumford, David: The Red Book of Varieties and Schemes, 
+%Lecture Notes in Mathematics 1358, Springer-Verlag, 1980, 1988
+
+%\bibitem[R]{reid}
+%リード, M. (Reid, Miles): 可換環論入門, 伊藤由佳理訳, 岩波書店, 2000
+
+%\bibitem[S]{satake}
+%佐武一郎: 線型代数学, 数学選書 1, 裳華房, 1974
+
+%\bibitem[Taka1]{takagi1}
+%高木貞治: 初等整数論講義, 共立出版, 第2版 1971, 2000
+
+%\bibitem[Taka2]{takagi2}
+%高木貞治: 代数学講義, 共立出版, 改定新版 1965, 1999
+
+\bibitem[Take]{takeuchi}
+竹内端三: 楕圓凾數論, 岩波全書, 1936, 1996
+
+%%\bibitem[Tan]{tanisaki}
+%%谷崎俊之: リー代数と量子群, 共立出版, 2002
+
+\bibitem[U]{umemura}
+梅村浩: 楕円函数論——楕円曲線の解析学, 東京大学出版会, 2000
+
+\end{thebibliography}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

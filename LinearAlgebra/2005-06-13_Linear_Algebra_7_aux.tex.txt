@@ -1,0 +1,2 @@
+grep -h newlabel 2005*_[1-6].aux > 2005-06-13_Linear_Algebra_7_aux.tex
+

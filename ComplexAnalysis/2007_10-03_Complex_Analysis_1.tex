@@ -1,0 +1,1901 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\def\STUDENT{} % \def すると計算問題の解答を印刷しなくなる.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[12pt,twoside]{jarticle}
+%\documentclass[12pt]{jarticle}
+\usepackage{amsmath,amssymb,amscd}
+\usepackage{eepic}
+\usepackage{enshu}
+%\usepackage{showkeys}
+\allowdisplaybreaks
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setcounter{page}{1}       % この数から始まる
+\setcounter{section}{-1}   % この数の次から始まる
+\setcounter{theorem}{0}    % この数の次から始まる
+\setcounter{question}{0}   % この数の次から始まる
+\setcounter{footnote}{0}   % この数の次から始まる
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\ifx\STUDENT\undefined
+%
+% 教師専用
+%
+\newcommand\commentout[1]{#1}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\else
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% 生徒専用
+%
+\newcommand\commentout[1]{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\fi
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{\bf 解析学概論A1演習
+}
+%  \ifx\STUDENT\undefined\\{\normalsize 教師用\quad(計算問題の略解付き)}\fi}
+\author{黒木 玄 \quad (東北大学大学院理学研究科数学専攻)}
+\date{2007年10月3日(水)}
+\maketitle
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\noindent
+%{\Large\bf 解析学概論A1演習}
+%\hfill
+%{\large 黒木玄}
+%\qquad
+%2007年10月3日(水)
+%\commentout{\quad (教師用)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\tableofcontents
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setcounter{section}{-1}
+
+\section{この演習のルール}
+
+%この演習では今までのルールを大幅に変える.
+%ルールの変更点の重要なポイントは太字の大きな文字で書いておいた.
+
+私が渡した文書に誤りを見つけた場合には気軽に指摘して欲しい.
+
+\subsection{各演習時間の基本スケジュール}
+
+\begin{description}
+ \item[個人学習時間]
+  渡された演習問題を解いて黒板の前で発表する準備をする. \\
+  もしくは自主レポートの準備をする.
+ \item[午後1時〜1時半] 
+  黒板の前で発表したい人はこのあいだに解答を黒板に書く. \\
+  この時間にレポートの内容を黒板で説明して欲しい人を指名するかもしれない.
+ \item[午後1時半]
+  自主レポートの提出を受け付け, それが終了したら黒板の前での発表開始.
+ \item[演習終了後]
+  個人的に数学の質問に答える. 
+  数学の勉強の仕方に関する相談にものる.
+\end{description}
+
+\subsection{数学をマスターするために必要な勉強法}
+
+さて, ある程度以上のレベルの数学をマスターするためには
+{\bf しっかり書かれた数学の本を丸ごと読む}
+という勉強が必要になる. そのとき必要なことは
+\begin{itemize}
+ \item 証明の理解に論理的ギャップがあってはいけない,
+ \item 数学的な具体例にはどのようなものがあるかをよく調べる,
+ \item 本では説明が省略されている部分を完璧に埋める,
+ \item 本よりも詳しい説明が書かれているノートを作る,
+ \item 最終的には自家製の教科書を完成することを目指す,
+ \item 何よりも重要なのは「数学的本質は何か」について考え続けること
+\end{itemize}
+などである. 
+一冊の本を丸ごと読めない場合には
+少なくとも章単位で丸ごと読むように努力するのが良い.
+ノートの作成も重要である.
+「教科書を読むよりも君のノートを読んだ方がわかりやすい」
+と他人に言ってもらえるようなノートを書くことを目指して欲しい.
+
+高校までの数学では問題単位で解き方を習得するような勉強の仕方をしていた人
+が多いと思う. しかし現在勉強しているような数学を習得するためには
+「数学の世界がどんな様子をしているか, その本質は何か」を理解するように
+努力しなければいけない. 
+
+私がたくさんの演習問題を渡すのはそれらの問題をすべて解いて欲しいからでは
+ない. 演習問題を解く過程でまとまった知識の重要性に気付き, 
+上に書いたような勉強に進むきっかけを作りたいからである.
+演習の時間に「余計なこと」を話そうと努力しているのも同様の理由からである.
+
+以上のような考え方に基づき, 
+この演習では自主レポートとして
+\begin{center}
+ \large\bf 私が渡した問題を順番に大量に解いて提出することは禁止
+\end{center}
+する. 私が渡した問題を大量に解き続ける時間があるなら, 
+上に書いたような勉強の仕方をした方が良い.
+逆に, 上で説明した方法で解析学を勉強しながら, 
+\begin{center}
+ \large\bf 疑問を質問にまとめてレポートとして提出することは推奨
+\end{center}
+される.
+場合によっては問題を解いたレポートよりも質問のレポートの方を高く評価する
+こともありえる.  自分が理解できていないことを論理的に説明することは
+自分が理解していることをまとめるよりも圧倒的に難しい.
+個人的に数学科の卒業生には「自分の疑問を論理的にまとめる能力」
+が要求されると思う.
+
+\subsection{論理的に口頭で説明できる能力も身に付けよう}
+
+ここの数学科の卒業生が身に付けることができる能力は
+\begin{itemize}
+ \item 現代の進んだ数学の知識を身に付けること
+ \item 英語で書かれた数学の文献を読めるようになること
+ \item 単に日本語や英語の数学文献を読めるだけではなく, \\
+  その内容を他人に対して口頭で論理的に説明できること
+\end{itemize}
+の3つだと思う.  4年生のときのセミナーで英語の文献を読むことになるので,
+卒業までにしっかり勉強すれば英語で書かれた数学の文献も読めるようになる.
+この演習では「数学の知識」だけではなく, 
+「論理的に説明できること」をも身に付けてもらいたいと考えている.
+
+以上の考え方に基づき, 
+この演習では単位取得の必要条件として
+一回以上黒板の前で発表することを義務として課すことにする. 
+\begin{center}
+ \large\bf 単位が欲しければ最低でも一回以上黒板の前で発表すること!
+\end{center}
+(自主)レポートも成績の参考にするが, 
+単位を取得するためにはそれだけでは足りない. 
+最終的に救済措置を設ける可能性もあるが, 
+最初からそう期待しないこと.
+
+しかし, 残念ながら演習の時間は限られているので話す練習を十分にできない
+だろう. 一人当たり1〜3回程度黒板の前に立つだけで終わってしまうと思う.
+しかし各自が問題の解答をノートにまとめるときに
+他人に説明するために使えるような書き方を心がけるようにすれば
+「話す準備の練習」は十分にできるように思われる.
+数学の文章(問題の解答を含む)を書くときには
+常に口頭での説明を要求されることを前提に書くべきである.
+自分が説明するためにさえ使えないようでは書く意味がない.
+
+問題の解答を書いたレポートや質問を書いたレポートを提出した場合には, 
+レポートを見た後(提出の次週以降になる)に適当に見繕って
+\begin{center}
+ \large\bf
+ レポートの内容を黒板の前で説明することを要求するかもしれない.
+\end{center}
+特に黒板に書かれた解答が少ない場合はそうするだろう.
+主としてレポートを提出していても黒板の前で発表していない人
+の中から選ぶ予定である.
+
+黒板の前での発表を強制すると嫌われる場合があるのだが, 
+数学について口頭での発表ができる能力は数学科の卒業生として
+当然要求されるべき能力だと思うので以上のような方針を採用することにした.
+
+黒板の前で発表したときに
+「説明にけちを付けられること」を嫌う人が多い.
+誰でも説明にけちを付けられることは嫌なものだ.
+しかし, 卒業のために必要なセミナーの単位を取るためには
+1年を通して黒板の前で発表することが必要になる.
+大学院ではさらに厳しいセミナーが課されることになる.
+数学科の卒業生には地道に一歩一歩論理を正確に丁寧に説明する
+能力が要求される.
+そのための訓練を大学4年のセミナーでいきなり始めることは
+教育方針として誤りだろう.
+
+\subsection{成績評価の方針}
+
+{\small
+\begin{itemize}
+ \item 黒板の前での発表と自主レポートの内容で成績を評価する.
+ \item 各問題の基本点は10点であるが, 
+       易しい問題にはそれ未満の点数が付けられ, 
+       難しい問題には20点〜∞点の点数が付けられる.
+       黒板の前で発表するとその基本点が5倍以上になり, 
+       自主レポートで提出した場合には基本点がそのまま付けられる.
+ \item {\bf 単位が欲しければ最低でも一回以上黒板の前で発表すること.}
+ \item 救済措置があるかもしれないが, 最初からそう期待しないこと.
+ \item 黒板の前で一回以上発表して最後まで
+       論理的ギャップを埋めれば C 以上で単位を出す.
+ \item 自力で解いた場合には他の人が黒板ですでに
+       解いてしまったのと同じ問題の解答を黒板で発表してよい.
+ \item 黒板の前での自主的な発表には自主レポート提出の5倍以上の点数を付ける.
+ \item {\bf 自主レポートの内容を黒板の前で発表することを要求するかもしれない.}
+ \item こちらが指名してレポートの内容を黒板の前で説明してもらった場合には
+       「黒板の前での説明一回分」とはみなさない.
+       しかし説明の内容が特別に良ければ例外的に
+       「黒板の前での説明一回分」とみなされ, 
+       5倍以上の点数が付けられることになる.
+ \item 内容に論理的にギャップがある場合には減点する.
+ \item {\bf 自主レポートで問題を大量に解いて提出することは禁止.\\
+       1回のレポート提出あたり2問以下にして欲しい.}\\
+       ただし不正解のやりなおしは例外とする.
+ \item 一つのテーマについて同じような問題を複数解いて
+       レポートとして提出するのではなく, 
+       複数のテーマに関して複数のレポートを提出するように努力して欲しい.
+ \item 解析学の本を読みながら感じた疑問を質問にまとめて
+       レポートとして提出しても良い.
+       そのようなレポートは高く評価し, 
+       最低でも30点以上の点数を付ける.
+       質問の内容が高度なものであれば
+       100点以上の点数を付けてしまうかもしれない.
+       ただし疑問の内容を私が理解できない場合は
+       黒板の前での説明をお願いするかもしれない.
+ \item 現在習っていることよりも進んだ数学について勉強した結果を
+       自主レポートとして提出しても構わない.
+ \item 問題に誤りを見つけた場合には適切に訂正して解こうとすること.
+\end{itemize}
+}
+
+黒板の前で一回以上発表しているという条件を満たしており, 
+40点以上ならC, 70点以上ならB, 100点以上ならA, 130点以上ならAAの
+成績を付ける予定である.
+
+\bigskip
+{\bf\large 問題に誤りがある場合には訂正してから解くこと.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{実数論と実数列の収束}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{数列の極限}
+
+\begin{definition}[数列の極限]
+  実数列 $a_n$ が $\alpha$ に収束するとは, 
+  任意の $\varepsilon > 0$ に対して十分大きな $N$ を取って, $n \geqq N$ 
+  ならば $|a_n - \alpha| < \varepsilon$ が成立するようにできることであ
+  る. このような $\alpha$ は(存在するとすれば)数列 $a_n$ から一意的に定まり, 
+  数列 $a_n$ の極限と呼ばれ, 
+  $\displaystyle\lim_{n\to\infty}a_n=\alpha$ と表わされる.
+  \qed
+\end{definition}
+
+以下の問題は上で説明した数列の収束の定義に基づいて解かなければいけない.
+
+\begin{question}[簡単]
+ 収束しない実数列と収束する実数列の例をひとつずつ挙げよ. \qed
+\end{question}
+
+\begin{question}
+ 収束する実数列の収束先は一意的であることを示せ. \qed
+\end{question}
+
+\begin{proof}[限りなく答に近いヒント]
+ 実数列 $a_n$ と実数 $\alpha,\beta$ について
+ 次の2つの条件を仮定して $\alpha=\beta$ となることを示せばよい:
+ \begin{enumerate}
+  \item[(a)] 任意の $\eps>0$ に対してある $M$ が
+   存在して $n\geqq M$ ならば $|a_n-\alpha| <     \eps$.
+  \item[(b)] 任意の $\eps>0$ に対してある $N$ が
+   存在して $n\geqq N$ ならば $|a_n-\beta|  <     \eps$.
+ \end{enumerate}
+ この2つの条件を仮定し, 任意に $\eps>0$ を取る.
+ このときある $M$, $N$ が
+ 存在して $n\geqq\max\{M,N\}$ 
+ ならば $|a_n-\alpha|<\eps$ かつ $|a_n-\beta|<\eps$ となる.
+ よって $|\alpha-\beta|=|\alpha-a_n+a_n-\beta|\leqq|\alpha-a_n|+|a_n-\beta|<2\eps$.
+ もしも $\alpha\ne\beta$ ならば $|\alpha-\beta|>0$ なので $\eps=|\alpha-\beta|/4$ 
+ と置くと…(以下略).
+ \qed
+\end{proof}
+
+\begin{question}
+ 収束する実数列は有界であることを示せ.
+ すなわち任意の収束する実数列 $a_n$ に対してある正の実数 $M$ が存在して
+ 任意の $n$ について $|a_n|\leqq M$ となることを示せ.
+ \qed
+\end{question}
+
+\begin{proof}[限りなく答に近いヒント]
+ 任意の $\eps>0$ に対してある $N$ が存在して $n\geqq N$ 
+ ならば $|a_n-\alpha|<\eps$ となる.
+ よって $M'=\max\{|a_1-\alpha|,\ldots,|a_{N-1}-\alpha|,\eps\}$ と置くと
+ 任意の $n$ に対して $|a_n-\alpha|\leqq M'$ となる.
+ このとき $|a_n|=|a_n-\alpha+\alpha|\leqq|a_n-\alpha+|\alpha|\leqq M'+|\alpha|$.
+ …(以下略).
+ \qed
+\end{proof}
+
+\begin{question}
+\label{q:less->leqq(1)}
+  上の数列の極限の定義の条件における $|a_n - \alpha| < \varepsilon$ 
+  を $|a_n - \alpha| \leqq \varepsilon$ に置き換えても, 
+  もとの収束の定義と同値であることを示せ. \qed
+\end{question}
+
+\begin{question}
+\label{q:less->leqq(2)}
+  $M$ は任意の正の実数であるとする.
+  上の数列の極限の定義の条件における $|a_n - \alpha| < \varepsilon$ 
+  を $|a_n - \alpha| \leqq M\varepsilon$ に置き換えても, 
+  もとの収束の定義と同値であることを示せ. \qed
+\end{question}
+
+\begin{proof}[上の2つの問題の限りなく答に近いヒント]
+ 実数列 $a_n$ と実数 $\alpha$ と正の実数 $M$ について
+ 次の3つの条件が互いに同値なことを示せば上の2つの問題の結果が証明される:
+ \begin{enumerate}
+  \item[(a)] 任意の $\eps>0$ に対してある $N$ が
+   存在して $n\geqq N$ ならば $|a_n-\alpha| <     \eps$.
+  \item[(b)] 任意の $\eps>0$ に対してある $N$ が
+   存在して $n\geqq N$ ならば $|a_n-\alpha| \leqq \eps$.
+  \item[(c)] 任意の $\eps>0$ に対してある $N$ が
+   存在して $n\geqq N$ ならば $|a_n-\alpha| \leqq M\eps$.
+ \end{enumerate}
+ これらの同値性は以下のように証明される.
+
+ (a)$\implies$(b).
+ $|a_n-\alpha|\leqq\eps$ ならば $|a_n-\alpha|\leqq\eps$ であるから明らか.
+
+ (b)$\implies$(a).
+ 条件(b)を仮定し, 任意に $\eps>0$ を取る.
+ 条件(b)の $\eps$ として $\eps/2$ を取るとある $N$ が
+ 存在して $n\geqq N$ ならば $|a_n-\alpha|\leqq\eps/2<\eps$.
+
+ (b)$\implies(c)$.
+ 条件(b)を仮定し, 任意に $\eps>0$ を取る.
+ 条件(b)の $\eps$ として $M\eps$ を取ると…(以下略).
+
+ (c)$\implies(b)$.
+ 条件(c)を仮定し, 任意に $\eps>0$ を取る.
+ 条件(c)の $\eps$ として $\eps/M$ を取ると…(以下略).
+ \qed
+\end{proof}
+
+\begin{rem}
+ 数列の極限の定義において, $\varepsilon$ の前の不等号は $<$ 
+ および $\leqq$ のどちらでもよい. さらに, $\varepsilon$ の前に $3$ のよう
+ な任意の正の定数が挿入されてもよい. ちなみに, $<$ と $\leqq$ のどちらを
+ でもよい場合は, $\leqq$ の方を使った方が便利なことが多い.  なぜなら, 収
+ 束する数列 $a_n$ が $a_n < A$ ($n=1,2,3,\ldots$) を満たしていても, 
+ $\lim a_n < A$ が成立するとは限らないからである. ($a_n\leqq A$
+ ($n=1,2,3,\ldots$) ならば $\lim a_n \leqq A$ が成立する.) 始めに $<$ を
+ 使って出発しても, 極限操作をすることによって結局 $\leqq$ が出てくること
+ を避けられない場合が多い.
+ (注意: ``$\varepsilon > 0$'' の $>$ を $\geqq$ にしてはいけない.)
+ \qed
+\end{rem}
+
+\begin{question}[収束数列の部分数列の極限]
+ 実数列 $a_n$ に対して $a_{i_n}$ ($i_1<i_2<i_3<\cdots$) を部分(数)列と呼ぶ.
+ もしも $a_n$ が $\alpha$ に収束するならば部分数列 $a_{i_n}$ も $\alpha$ に
+ 収束する. \qed
+\end{question}
+
+\begin{proof}[ヒント]
+ 『解析概論』\cite{takagi} p.6, 定理3. \qed
+\end{proof}
+
+\begin{question}[極限と加法の可換性]
+ 収束する2つの実数列 $a_n$, $b_n$ が任意に与えられたとき, 
+ 数列 $a_n+b_n$ も収束し, 
+ $\lim_{n\to\infty}(a_n+b_n)=\lim_{n\to\infty}a_n+\lim_{n\to\infty}b_n$
+ が成立することを示せ.
+ \qed
+\end{question}
+
+\begin{question}[極限と乗法の可換性]
+ 収束する2つの実数列 $a_n$, $b_n$ が任意に与えられたとき, 
+ 数列 $a_nb_n$ も収束し, %
+ \(\lim_{n\to\infty} a_nb_n=
+ \left(\lim_{n\to\infty}a_n\right)\left(\lim_{n\to\infty}b_n\right)\)
+ が成立することを示せ.
+ \qed
+\end{question}
+
+\begin{question}[極限と逆数を取る操作の可換性]
+  $0$ 以外の実数からなる数列 $a_n$ が $0$ でない実数に収束していると
+  仮定する. このとき, 数列 $\displaystyle\frac{1}{a_n}$ も収束し,
+  \(\displaystyle
+    \lim_{n\to\infty}\frac{1}{a_n}
+    = \frac{1}{\lim\limits_{n\to\infty}a_n}
+  \)
+  が成立することを示せ.
+  \qed
+\end{question}
+
+\begin{proof}[以上の3つの問題のヒント]
+ 『解析概論』\cite{takagi} p.7, 定理5. \qed
+\end{proof}
+
+\begin{question}
+  $a>0$ ならば $\displaystyle\lim_{n\to\infty}\sqrt[n]{a}=1$.
+  \qed
+\end{question}
+
+\begin{proof}[ヒント]
+ 『解析概論』\cite{takagi} p.8, 例1. \qed
+\end{proof}
+
+\begin{question}
+  $a>1$, $k>0$ ならば $\displaystyle\lim_{n\to\infty}\frac{n^k}{a^n}=0$.
+  \qed
+\end{question}
+
+\begin{proof}[ヒント]
+ 『解析概論』\cite{takagi} p.8, 例2. \qed
+\end{proof}
+
+\begin{question}
+  $a>0$ ならば $\displaystyle\lim_{n\to\infty}\frac{a^n}{n!}=0$.
+  \qed
+\end{question}
+
+\begin{proof}[ヒント]
+ 『解析概論』\cite{takagi} p.9, 例3. \qed
+\end{proof}
+
+\begin{question}\qstar{*}
+  $\displaystyle\lim_{n\to\infty}a_n=\alpha$ ならば
+  $\displaystyle\lim_{n\to\infty}\frac{a_1+a_2+\dots+a_n}{n}=\alpha$.
+  \qed
+\end{question}
+
+\begin{proof}[ヒント]
+ 『解析概論』\cite{takagi} p.9, 例4. \qed
+\end{proof}
+
+\begin{rem}
+ 逆は成立しない. 例えば, $a_n = (-1)^{n-1}$ のとき,
+ $\displaystyle\lim_{n\to\infty}\frac{a_1+a_2+\dots+a_n}{n}=0$ だが, 
+ もとの $a_n$ 自身は収束しない. 
+ \qed
+\end{rem}
+
+\begin{question}[簡単]
+ 実数列 $a_n$ の上限 $\sup a_n$, 下限 $\inf a_n$, 
+ 上極限 $\limsup a_n$, 下極限 $\liminf a_n$ の定義を述べよ.
+ \qed
+\end{question}
+
+次の4つの問題は『解析概論』\cite{takagi} p.13 の例1--4からの引き写しである.
+しかしそちらにも解答は書いていないので自力で考えて欲しい.
+
+\begin{question}
+ $a_n=\dfrac{(-1)^n n+1}{n}$ のとき $\limsup a_n=1$, $\liminf a_n=-1$.
+ \qed
+\end{question}
+
+\begin{question}
+ $a_{2n}=1+\dfrac{(-1)^n}{n}$, $a_{2n+1}=\dfrac{(-1)^n}{n}$ のとき %
+ $\limsup a_n=1$, $\liminf a_n=0$.
+ \qed
+\end{question}
+
+\begin{question}
+ $a_n=(-1)^n n$ のとき $\limsup a_n=\infty$, $\liminf a_n=-\infty$.
+\end{question}
+
+\begin{question}
+ $a_n=\cos n\alpha$, $\pi/\alpha$ は無理数のとき %
+ $\limsup a_n=1$, $\liminf a_n=-1$.
+ \qed
+\end{question}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{実数の連続性}
+
+\begin{theorem}[実数の連続性]
+  互いに同値な以下の条件のどれかによって, 実数の連続性が特徴付けられる:
+  \begin{enumerate}
+  \item 実数の切断は, 下組と上組との境界として, 一つの実数を確定する
+    (Dedekindの定理)\footnote{『解析概論』\cite{takagi}定理1 (p.3)}.
+  \item 数の集合 $S$ が上方[または下方]に有界ならば $S$ の上限[または
+    下限]が存在する(Weierstrassの定理)\footnote{『解析概論』\cite{takagi}定理2 (p.5)}.
+  \item 有界なる単調数列は収束する\footnote{『解析概論』\cite{takagi}定理6 (p.8)}.
+  \item 閉区間 $I_n=[a_n,b_n]$ $(n=1,2,\ldots)$ において, 各区間 $I_n$ 
+    がその前の区間 $I_{n-1}$ に含まれ,
+    $\displaystyle\lim_{n\to\infty}|b_n-a_n|=0$ が成立するとき, これら
+    の各区間には共通なる唯一の点が存在する(区間縮小法)%
+    \footnote{『解析概論』\cite{takagi}定理7 (p.10)}.
+  \item 実数列 $a_n$ が収束するためには次の条件が成立すれば十分である
+    (Cauchy列の収束, 実数全体の集合の距離空間としての完備性)\footnote
+    {『解析概論』\cite{takagi}定理8 (p.11)}:
+    \begin{description}
+    \item[($\ast$)] 任意の $\varepsilon > 0$ に対して番号 $N$ をうまく
+      定めると, $m \geqq N$ かつ $n \geqq N$ の
+      とき $|a_n - a_m| < \varepsilon$ が成立する.
+    \end{description}
+    (この条件を満たす数列を
+    {\bf Cauchy列}もしくは{\bf 基本列}と呼ぶ.)
+    \qed
+  \end{enumerate}
+\end{theorem}
+
+\begin{rem}
+%初学者はたくさんの同値な条件を挙げられて困惑をおぼえるであろう. 特に大
+%学に入ったばかりの学生の方々は, その論理的な複雑さについてゆけないもの
+%を感じ, 自信を失なってしまうかもしれない. しかし, そのような心配は無用
+%である. なぜなら, 実数の連続性の概念が上のような形で確定するまでには, 
+%多くの偉人達が膨大な時間をかけることが必要だったのである. その大変な努
+%力の結果だけを示され, すぐに理解しろと言われても, 困ってしまうのは当然
+%のことである. すぐに理解する必要はない. すぐに理解しようと無理をし, 理
+%解ができるまで先には絶対に進まないという精神で数学の勉強を続けることは
+%おそらく不可能であろうし, 可能であったとしても大変効率の悪いものになる
+%であろう. 「数学の本は後から読め!」という先人の言葉もあるように, 前か
+%ら順番に直線的に論理を追うだけの勉強法は止めた方が良い. 先に進みながら,
+%何度でも基本的なところに立ち戻って考えることが肝腎である. 
+%
+%実数の連続性の話に戻ろう. 
+同値な条件をいくつか挙げたが, それらは
+前半の3つ(Dedekindの定理, Weierstrassの定理, 単調な実数列の収束)と後半
+の2つ(区間縮小法, Cauchy列の収束)に分類される. 前者の条件3つは主に不等
+号 $<$ に関して実数全体の集合がどのような性質を持っているかに関係して
+いる. 一方, 後者の2つは主に実数 $a$, $b$ の間の距離 $|b - a|$ に関して
+実数全体の集合がどのような性質を持っているかに関係している. 前者は「全
+順序集合」としての「完備性」の条件であり, 後者は「距離空間」としての
+「完備性」を表現している. (ここで「」内に出た言葉の定義はこれからの勉強に
+よって学んで欲しい.)
+\qed
+\end{rem}
+
+\begin{question}
+ 収束する実数列はCauchy列であることを示せ. \qed
+\end{question}
+
+\begin{proof}[ヒント]
+ $|a_n-a_m|=|a_n-\alpha+\alpha-a_m|\leqq|a_n-\alpha|+|a_m-\alpha|$.
+ \qed
+\end{proof}
+
+\begin{question}
+  Dedekindの定理からWeierstrassの定理を導け.  \qed
+\end{question}
+
+\begin{question}
+  Weierstrassの定理から有界で単調な実数列の収束を導け. \qed
+\end{question}
+
+\begin{question}\qstar{*}
+  有界で単調な実数列の収束から区間縮小法を導け. \qed
+\end{question}
+
+\begin{question}\qstar{*}
+  区間縮小法からDedekindの定理を導け. \qed
+\end{question}
+
+\begin{question}\qstar{*}
+  区間縮小法からCauchy列の収束を導け. \qed
+\end{question}
+
+\begin{question}\qstar{*}
+  Cauchy列の収束から区間縮小法を導け. \qed
+\end{question}
+
+\begin{proof}[以上の6つの問題のヒント]
+ 『解析概論』\cite{takagi}の第1章を見よ. \qed
+\end{proof}
+
+\bigskip
+{\large\bf 以下においては, 実数の連続性に関する上の結果を自由に用いて良い.}
+
+\begin{question}[絶対収束, absolute convergence]
+  実数列 $a_n$ に対して, $\displaystyle\sum_{n=1}^\infty|a_n|$ が有限
+  な値に収束しているならば, $\displaystyle\sum_{n=1}^\infty a_n$ も
+  収束することを示せ. このとき, 級数 $\displaystyle\sum_{n=1}^\infty a_n$ は
+  {\bf 絶対収束 (absolutely converge)}すると言う.  \qed
+\end{question}
+
+\begin{proof}[ヒント]
+ 『解析概論』\cite{takagi} 第43節の最初の段落(p.144). \qed
+\end{proof}
+
+\begin{question}
+ 級数 $\sum_{n=1}^\infty (-1)^n/n$ は収束するが絶対収束しないことを示せ. \qed
+\end{question}
+
+\begin{proof}[ヒント]
+ 『解析概論』\cite{takagi} p.153 の例. 
+  実はこの問題の級数は $\log 2$ に収束する.
+  \qed
+\end{proof}
+
+\begin{question}
+ 級数 $\sum_{k=0}^\infty (-1)^k/(2k+1)$ は収束するが絶対収束しないことを示せ. \qed
+\end{question}
+
+\begin{proof}[ヒント]
+ 上の問題とまったく同様.
+ 実はこの問題の級数は $\pi/4$ に収束する.
+ \qed
+\end{proof}
+
+\begin{question}[30点]
+ 以下の議論が解析学的に正しいことを確かめ, 
+ より詳しい厳密な証明を書き下せ.
+ $\log(1+z)$ は $|z|<1$ で次の Taylor 展開を持つ:
+ \begin{equation*}
+  \log(1+z) = x - \frac{x^2}{2} + \frac{x^3}{3} - \frac{x^4}{4} + \cdots.
+ \end{equation*}
+ $1+i=\sqrt{2}e^{\pi i/4}$ より $\log(1+i)=\frac{1}{2}\log 2 + \frac{\pi}{4}i$ 
+ であるから, 上の Taylor 展開の $z\to i$ での極限の両辺を比較することに
+ よって次が導かれる:
+ \begin{align*}
+  &
+  \frac{1}{2}\log 2 = \frac{1}{2} - \frac{1}{4} + \frac{1}{6} - \frac{1}{8} + \cdots,
+  \\ &
+  \frac{\pi}{4} = 1 - \frac{1}{3} + \frac{1}{5} - \frac{1}{7} + \cdots.
+ \end{align*}
+ 上のような Taylor 展開の極限を考えてもよいことを示すことが問題である.
+ \qed
+\end{question}
+
+\begin{question}
+\label{q:abs-conv-1}
+ 絶対収束する実級数は和の順序をどのように入れ替えても同じ値に絶対収束する
+ ことを示せ. \qed
+\end{question}
+
+\begin{proof}[限りなく答に近いヒント]
+ 級数 $\sum_{n=1}^\infty a_n$ は $\alpha$ に絶対収束すると仮定する.
+ 正の整数全体の集合からそれ自身への全単射 $n\mapsto i_n$ を任意に取る.
+ このとき $\sum_{n=1}^\infty a_{i_n}$ も $\alpha$ に絶対収束することを
+ 示せばよい.
+
+ 正の整数 $n$ に対して $N_n:=\max\{i_1,i_2,\ldots,i_n\}$ とおく.
+ このとき $\{i_1,i_2,\ldots,i_n\}\subset\{1,2,\ldots,N_n\}$ となる.
+ $n\mapsto i_n$ の逆写像に同様の議論を適用することに
+ よって $\{1,2,\ldots,N_n\}\subset\{i_1,i_2,\ldots,i_{M_n}\}$ を
+ 満たす $M_n$ を取れる. $M_n\geqq N_n\geqq n$ である.
+
+ 級数 $\sum_{n=1}^\infty a_{i_n}$ の絶対収束性.
+ 数列 $T_n:=\sum_{k=1}^n|a_{i_n}|$ が(有限な値に)収束することを示せばよい.
+ $T_n$ は単調増加数列なのでそれが上に有界であることを示せば十分である(なぜか?).
+ 仮定より級数 $\sum_{n=1}^\infty|a_n|$ は有限な値 $S$ に収束する.
+ 任意の $n$ に対して $T_n\leqq\sum_{k=1}^{N_n}|a_k|\leqq S$ となる.
+ これで級数 $\sum_{n=1}^\infty a_{i_n}$ が絶対収束することが示された.
+ 
+ $\sum_{n=1}^\infty a_{i_n}=\alpha$ であること.
+ $\{i_1,i_2,\ldots,i_n\}\subset\{1,2,\ldots,N_n\}
+ \subset\{i_1,i_2,\ldots,i_{M_n}\}$ より
+ \begin{align*}
+  \left|\sum_{k=1}^n a_{i_k}-\alpha\right|
+  & =
+  \left|\sum_{k=1}^n a_{i_k}-\sum_{k=1}^{N_n}a_k
+       +\sum_{k=1}^{N_n}a_k-\alpha\right|
+%  \\ &
+  \leqq
+  \left|\sum_{k=1}^{N_n}a_k - \sum_{k=1}^n a_{i_k}\right|
+  + \left|\sum_{k=1}^{N_n}a_k-\alpha\right|
+  \\ &
+  \leqq
+  \sum_{k=n+1}^{M_n} |a_{i_k}|
+  + \left|\sum_{k=1}^{N_n}a_k-\alpha\right|
+%  \\ &
+  =
+  T_{M_n} - T_n
+  + \left|\sum_{k=1}^{N_n} a_k-\alpha\right|.
+ \end{align*}
+ $T_n$ は収束するので Cauchy 列である.
+ よって $n\to\infty$ のとき $T_{M_n}-T_n\to 0$ となる. 
+ $\sum_{n=1}^\infty a_n=\alpha$ なので $n\to\infty$ 
+ のとき $\left|\sum_{k=1}^{N_n}a_k-\alpha\right|\to 0$ となる.
+ これで $\sum_{n=1}^\infty a_{i_n}=\alpha$ であることが示された.
+ \qed
+\end{proof}
+
+\begin{rem}
+ 実は上のヒントの議論は実級数ではなく複素級数でも成立している.
+ (次の節の問題も見よ.)
+ 他の問題についてもできる限りそのような議論で証明をつけるように
+ しておくと後で楽になる.
+ \qed
+\end{rem}
+
+\begin{question}[絶対収束級数に関する無限分配律]
+ $\sum_{n=0}^\infty a_n$ と $\sum_{n=0}^\infty b_n$ はともに絶対収束する
+ 級数であるとする(和が $0$ から始まっていることに注意). 
+ このとき $\sum_{n=0}^\infty \sum_{k=0}^n a_k b_{n-k}$ も絶対収束し, 
+ 次が成立する:
+ \begin{equation*}
+  \left(\sum_{n=0}^\infty a_n\right)
+  \left(\sum_{n=0}^\infty b_n\right)
+  =
+  \sum_{n=0}^\infty \sum_{k=0}^n a_k b_{n-k}.
+  \qed
+ \end{equation*}
+\end{question}
+
+\begin{proof}[ヒント]
+ 『解析概論』の p.146 の中ほどからの説明. \qed
+\end{proof}
+
+\begin{question}
+ 次の事実を認めて $e^{x+y}=e^xe^y$ ($x,y\in\R$) を証明せよ:
+ \begin{quote}
+  任意の実数 $x$ に対して級数 $\sum_{n=0}^\infty\frac{x^n}{n!}$ 
+  は絶対収束し, $e^x$ に収束する.
+  \qed
+ \end{quote}
+\end{question}
+
+\begin{proof}[限りなく答に近いヒント]
+ 二項定理より $(x+y)^n=\sum_{k=0}^n\frac{n!}{k!(n-k)!}x^ky^{n-k}$ である.
+ (二項定理は $n$ に関する帰納法で証明される.
+ 証明を知らなければ実際に帰納法を実行してみよ.
+ 帰納法において Pascal の三角形が本質的な役割を果たす.)
+ したがって絶対収束級数に関する無限分配率より, 
+ \begin{equation*}
+  e^{x+y} 
+  = \sum_{n=0}^\infty\frac{(x+y)^n}{n!}
+  = \sum_{n=0}^\infty\sum_{k=0}^n\frac{x^k}{k!}\frac{y^{n-k}}{(n-k)!}
+  = \left(\sum_{n=0}^\infty\frac{x^n}{n!}\right)
+    \left(\sum_{n=0}^\infty\frac{y^n}{n!}\right)
+  = e^xe^y.
+  \qed
+ \end{equation*}
+\end{proof}
+
+\begin{question}
+ 任意の実数に対して級数 $\sum_{n=0}^\infty\frac{x^n}{n!}$ が絶対収束
+ することを示せ.
+ \qed
+\end{question}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{複素数体の完備性}
+
+複素数列 $a_n$ の収束が実数列の場合と同様に定義される.
+実数の絶対値を複素数の絶対値に置き換えるだけでよい.
+
+\begin{question}
+ 収束する複素数列 $a_n,b_n$ についても以下が成立することを示せ:
+ \begin{enumerate}
+  \item $\lim(a_n+b_n) = \lim a_n + \lim b_n$.
+  \item $\lim a_n b_n = (\lim a_n)(\lim b_n)$.
+  \item $\lim a_n \ne 0$ ならば $\lim(1/a_n)=1/(\lim a_n)$.
+  \qed
+ \end{enumerate}
+\end{question}
+
+\begin{proof}[ヒント]
+ 実数列の場合とまったく同様. \qed
+\end{proof}
+
+\begin{question}[$\C$ の完備性]
+ 複素数列 $a_n$ に関しても $a_n$ が収束列であることと $a_n$ が Cauchy 列で
+ あることは同値である. \qed
+\end{question}
+
+\begin{proof}[限りなく答に近いヒント]
+ 複素数列 $a_n$ に関する次の2条件が同値であることを示せばよい:
+ \begin{enumerate}
+  \item[(a)] ある複素数 $\alpha$ が存在して, 
+   任意の $\eps>0$ に対してある $N$ で $n\geqq N$ ならば $|a_n-\alpha|<\eps$ 
+   となるものが存在する.
+  \item[(b)] 任意の $\eps>0$ に対して
+   ある $N$ で $m,n\geqq N$ ならば $|a_n-a_m|<\eps$ となるものが存在する.
+ \end{enumerate}
+ (a)$\implies$(b)の証明は実数列の場合とまったく同様である.
+ その逆は次のようにして証明される.
+ 条件(b)を仮定する. $a_n$ を実数列 $b_n,c_n$ を用いて $a_n=b_n+ic_n$ と
+ 表しておく. このとき $|a_n-a_m|=\sqrt{(b_n-b_m)^2+(c_n-c_m)^2}$ であるから
+ 条件(b)より $b_n,c_n$ も Cauchy 列になることがわかる.
+ よって $b_n,c_n$ はともに収束する. 
+ それらの収束先をそれぞれ $\beta$, $\gamma$ 
+ と書き, $\alpha=\beta+i\gamma$ とおくと %
+ $|a_n-\alpha|\leqq|b_n-\beta|+|c_n-\gamma|\to 0$ ($n\to\infty$).
+ …(以下略).
+ \qed
+\end{proof}
+
+\begin{question}[複素級数の絶対収束]
+ 複素級数 $\sum_{n=1}^\infty a_n$ は $\sum_{n=1}^\infty|a_n|$ が(有限な値に)
+ 収束するとき収束することを示せ. このとき複素級数 $\sum_{n=1}^\infty a_n$ は
+ {\bf 絶対収束}すると言う.
+ \qed
+\end{question}
+
+\begin{proof}[ヒント]
+ 実級数の場合とまったく同様. \qed
+\end{proof}
+
+\begin{question}
+ 絶対収束する複素級数は和の順序をどのように入れ替えても同じ値に絶対収束する
+ ことを示せ. \qed
+\end{question}
+
+\begin{proof}[ヒント]
+ 問題 \qref{q:abs-conv-1} のヒントとまったく同様. \qed
+\end{proof}
+
+\begin{guide}
+ 実は絶対収束の概念は実級数や複素級数だけではなく, 
+ 「Cauchy 列が常に収束する」という意味で完備な空間 (Banach 空間) では
+ 常に使用できる. そのような議論は函数解析の授業で教わることになるだろう.
+ \qed
+\end{guide}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{複素数に慣れよう}
+
+この節の問題はおまけの問題である.
+したがってこの節の問題を全く解かなくても後の方で困らない.
+(こちらが出した問題をすべて解こうなどと決して考えないように!)
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{複素数と複素平面}
+
+複素数 $\alpha$ に対して, $z^2 = \alpha$ をみたす複素数 $z$ を %
+$\alpha$ の平方根と呼び, $z^3 = \alpha$ をみたす複素数 $z$ を $\alpha$ %
+の立方根と呼ぶ. 一般に $z^n = \alpha$ ($n$ は自然数) をみたす複素数 %
+$z$ を $\alpha$ の $n$ 乗根と呼ぶ.
+
+\begin{question}
+  $i$, $1 + i$, $1 - \sqrt{3}\,i$ の平方根を求めよ. \qed
+\end{question}
+
+\begin{question}
+  複素数 $a + ib$ ($a$, $b$ は実数)の平方根 $z$ をすべて求めよ. 
+  $z$ を $a,b$ で表わせ. \qed
+\end{question}
+
+\begin{proof}[ヒント]
+ $z=\pm\frac{1}{\sqrt{2}}\left((\sqrt{a^2+b^2}+a)^{1/2}+i(\sqrt{a^2+b^2}-a)^{1/2}\right)$
+ とおくと $z^2=a+|b|i$ となる.  平方根を構成するためには微修正が必要になる.
+ \qed
+\end{proof}
+
+%複素数全体の集合を $\C$ と表わす.
+
+\begin{question}\label{q:fukusosu-gyoretsu-hyogen}
+  \(
+    \mathcal{C} =
+    \left\{\,
+    \left.
+      \begin{bmatrix} x & - y \\ y & x \end{bmatrix}
+    \,\right|\,
+      x, y \in \R
+    \,\right\}
+  \)%
+  と置く. 複素数 $x + iy$ ($x$, $y$ は実数)に対して行列
+  \( \begin{bmatrix} x & - y \\ y & x \end{bmatrix} \)%
+  を対応させることによって, 写像 $\phi : \C \to \cal{C}$ を定める.
+  このとき, $\phi$ は全単射でかつ次をみたす: 任意の複素数 $z$, $y$ 
+  に対して,
+  \begin{align*}
+    & \phi(z + w) = \phi(z) + \phi(w),
+      \qquad
+      \phi(zw) = \phi(z)\phi(w), 
+      \qquad
+      \phi(1) = \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix}, \\
+    & \phi(z^{-1}) = \phi(z)^{-1} \qquad\text{if}\quad z \ne 0, \\
+    & \phi(\bar z) = \transpose{\phi(z)}.
+  \end{align*}
+  ここで, $\transpose{\phi(z)}$ は行列 $\phi(z)$ の転置を表わしている. 
+  (この問題は複素数が実2次正方行列で表現できることを意味している.) \qed
+\end{question}
+
+函数の理論を複素数の世界に広げると指数函数と三角函数の統一理論が得られ
+る%
+%\footnote{複素数まで世界を広げて考えると, 函数の理論が幾何学化される. 
+%  その目的のためには Riemann 面の理論が基本的である. }%
+. %
+%
+複素数 $z = x + iy$ ($x$, $y$ は実数)に対して,
+\[
+  e^z = e^{x + iy} = e^x e^{iy} = e^x (\cos y + i \sin y)
+\]%
+が成立している. ひとまず, この公式は $e^z$ の定義と考えても良いし, 別
+の定義から導かれる定理であると考えても良い. 厳密な理論の演習は複素函数
+の基礎理論を学んでから行なわれるであろう.
+
+複素数全体の集合 $\C$ は実平面 $\R^2$ と自然に同一視でき, そのとき 
+$\C$ は複素平面と呼ばれる.
+
+\begin{question}\label{q:1-no-bekikon}
+  実数 $\theta$ に対する行列
+  \(
+    \begin{bmatrix}
+      \cos\theta & - \sin\theta \\
+      \sin\theta &   \cos\theta
+    \end{bmatrix}
+  \) %
+  は原点を中心に平面を角度 $\theta$ 回転させる一次変換を表現している.
+  \qref{q:fukusosu-gyoretsu-hyogen}における対応 $\phi$ によって, この
+  回転行列に対して複素数 $e^{i\theta}$ が対応していることを示せ. また, 
+  複素数 $e^{i\theta}$ をかけることによって, 複素平面上の点 $z$ の位置
+  は原点を中心に角度 $\theta$ 回転した位置に移動することを示せ. \qed
+\end{question}
+
+\begin{question}
+  任意の複素数 $z$ に対して $z = r e^{i\theta}$, $r\ge0$,
+  $0\le\theta<2\pi$ をみたす実数 $r$, $\theta$ が存在することを示せ. \qed
+\end{question}
+
+\noindent $0$ でない複素数 $z$ が $re^{i\theta}$ ($r>0$,
+$\theta\in\R$) に等しいとき, $\theta$ を $z$ の偏角と呼ぶ. すなわち,
+$z$ の偏角とは複素平面上における実軸の正の部分と線分 $\overline{0z}$ 
+のなす角度のことである.
+
+\begin{question}
+  自然数 $n$ に対して, 複素数の範囲で $1$ の $n$ 乗根の集合 $\mu_n$ は
+  次のように表わされる:
+  \[
+    \mathbf{\mu}_n
+    =
+    \{\, z\in\C \mid z^n = 1 \,\}
+    =
+    \{\, e^{2\pi ik/n} \mid k = 0,1,2,\dots,n-1 \,\}.
+  \]%
+  (ヒント: $n$次方程式の解は高々$n$個であることを使う.) また, $n=6$ の
+  場合に $1$ の $n$ 乗根の複素平面上における位置を図示せよ. \qed
+\end{question}
+
+\begin{question}
+  複素数内の $1$ の $n$ 乗根全体の集合を $\mathbf{\mu}_n$ と書くと, 次が成立す
+  る:
+  \[
+    \prod_{\omega\in\bold{\mu}_n - \{1\}} |1 - \omega| = n. \qed
+  \]%
+\end{question}
+
+\begin{proof}[ヒント]
+ $\prod_{\omega\in\mathbf{\mu}_n - \{1\}}(z-\omega)=1+z+z^2+\cdots+z^{n-1}$
+ をまず示せ.
+ \qed
+\end{proof}
+
+\begin{question}[容易, 5点]
+  $0<r<1$ とし, $(\theta_n)_{n=0}^\infty$ は任意の実数列であるとする. 
+  このとき, 級数
+  \[
+    \sum_{n=0}^{\infty}r^n(\cos\theta_n+i\sin\theta_n)
+  \] 
+  が収束することを示せ. \qed
+\end{question}
+
+\begin{question}
+  複素数 $\alpha$, $\beta$, $a$, $b$ に対する次の漸化式を解け:
+  \[
+    z_{n+2} - (\alpha + \beta)z_{n+1} + \alpha\beta z_n = 0 
+    \quad (n=0,1,2,\dots),
+    \qquad z_0 = a, 
+    \quad z_1 = b.
+  \]%
+  さらに, $|\alpha|<1$, $\beta=1$ のとき, 極限 $\lim_{n\to\infty}z_n$ 
+  を $a$, $b$ の式で表わせ. \qed
+\end{question}
+
+\begin{proof}[ヒント]
+ $\alpha\ne\beta$ のとき, 
+ $z_n=A\alpha^2+B\beta^n$ とおくと $z_0=a$ かつ $z_1=b$ が成立することと %
+ $A=(b-a\beta)/(\alpha-\beta)$ かつ $B=(b-a\alpha)/(\beta-\alpha)$ が成立する
+ ことは同値になる.
+ $\alpha=\beta$ のとき $z_n=A\alpha^n+Bn\alpha^{n-1}$ とおくと…….
+ \qed
+\end{proof}
+
+平面上の初等幾何を複素数の言葉を使って行なうこともできる. 例えば, 次が
+成立している.
+
+\begin{question}
+  複素平面上の互いに異なる3点 $\alpha$, $\beta$, $\gamma$ に対して,  
+  $\bigtriangleup\alpha\beta\gamma$ が正三角形であるための必要十分条件
+  は 
+  \[
+    \alpha^2 + \beta^2 + \gamma^2 %
+    - \alpha\beta - \beta\gamma - \gamma\alpha = 0
+  \]%
+  が成立することである. \qed
+\end{question}
+
+\begin{question}\label{q:hukuhi-chokusen}
+  複素平面上の互いに異なる点 $z$, $\alpha$, $\beta$, $\gamma$ に対して, 
+  それら4点を同時に通る円が存在するための必要十分条件は
+  \[
+    \frac{(z - \alpha)(\beta - \gamma)}{(z - \gamma)(\beta - \alpha)}
+    \in \R
+  \]%
+  が成立することである. (左辺の式を $z$, $\alpha$, $\beta$, $\gamma$ 
+  の復比と呼ぶ.) \qed
+\end{question}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{一次分数変換}
+
+3次元空間 $\R^3$ の中の平面 $\{\,(x,y,h)\in\R^3\mid h=0\,\}$ と複素平
+面 $\C$ を $(x,y,0)\leftrightarrow x+iy$ なる対応によって同一視する. 
+$\R^3$ 内の原点を中心とする半径1の球面を $S^2$ と表わす. $S^2$上の点 
+$(0,0,1)$ を $N$ と書き, 北極と呼ぶことにする. 複素平面上の点 $z\in\C$
+と北極 $N$ を結ぶ直線が球面 $S^2$ と交わる点を $\phi(z)$ と表わす.  こ
+れによって, $\C$ から $S^2$ への写像 $\phi$ が定まった.
+
+\begin{question}
+  $\phi$ を具体的な式で表わせ. 
+  また, $\phi$ は $\C$ と $S^2-\{N\}$ (球面から北極を除いたもの)
+  の間の全単射を与えることを示せ. 逆写像を具体的な式で表わせ.
+  簡単な図も描くこと. \qed
+\end{question}
+
+\commentout{
+\begin{proof}[略解]
+ $z=x+iy$ ($x,y\in\R$) に対して %
+ $\phi(z)=\left(\frac{2x}{1+x^2+y^2},\frac{2y}{1+x^2+y^2},1-\frac{2}{1+x^2+y^2}\right)$.
+ $X^2+Y^2+Z^2=1$, $Z\ne 0$, $X,Y,Z\in\R$ のとき %
+ $\phi^{-1}(X,Y,Z)=\frac{X}{1-Z}+i\frac{Y}{1-Z}$.
+ \qed
+\end{proof}
+}
+
+\noindent $\phi$ の逆によって与えられる $S^2-\{N\}$ から $\C$ への写像
+を立体射影(stereographic projection)と呼ぶ. 球面上の点を北極 $N$ に近
+付けると対応する複素平面上の点の絶対値は無限に大きくなる. そこで, $N$ 
+に対応する点 $\infty$ (無限遠点)を仮想的に考え, 複素平面 $\C$ に一点 
+$\infty$ を付け加えたものを $\widehat\C$ と書く. 立体射影を拡張して, 
+球面 $S^2$ と $\widehat\C$ を同一視することができる. この同一視のもと
+で $\widehat\C$ を Riemann 球面と呼ぶ.
+
+%%%%%
+
+正則な複素2次正方行列 %
+\( \gamma = \begin{bmatrix} a & b \\ c & d \end{bmatrix} \) と 
+複素数 $z$ に対して, 
+\[%
+  f(z) = \frac{az + b}{cz + d},
+  \qquad
+  f(\infty) = \frac{a}{c}
+\]%
+と置く. ただし, $cz+d=0$ のときは $f(z)=\infty$ と置き, $c=0$ のときは
+$f(\infty)=\infty$ と置く. 
+
+\begin{question}
+  $f$ は $\widehat\C$ から $\widehat\C$ への全単射である. \qed
+\end{question}
+
+\noindent 上のように表わされる写像 $f$ を $\gamma$ に対する一次分数変
+換と呼ぶ.
+
+$\UH = \{\,z\in\C \mid \Impart z > 0\,\}$ (ここで, $\Impart z$ は $z$ 
+の虚部)と置く. これを複素上半平面と呼ぶ. 
+
+\begin{question}
+  $a$, $b$, $c$, $d$ がすべて実数であるとき, 対応する一次分数変換が 
+  $\UH$ をそれ自身に移すための必要十分条件は $ad-bc>0$ が成立すること
+  である. $ad-bc<0$ の場合はどうなるか? \qed
+\end{question}
+
+%%%%%
+
+$\C^2-\{(0,0)\}$ 内の2点 $u$, $v$ に対して, ある $0$ でない複素数 $a$ 
+で $u=av$ を満たすものが存在するとき $u\sim v$ と書く. 
+
+\begin{question}[容易, 5点]
+  関係 $\sim$ は $\C^2-\{(0,0)\}$ 上の同値関係である. \qed
+\end{question}
+
+\noindent $\C^2-\{(0,0)\}$ の $\sim$ による商集合を $\P^1(\C)$ と書き, 
+複素射影直線と呼ぶ. $u=(z,w)\in\C^2-\{(0,0)\}$ で代表される $\P^1(\C)$ 
+上の点を $(z:w)$ と表わす. 
+
+\begin{question}
+  写像 $j:\C\to\P^1(\C)$ を $j(z)=(z:1)$ と定めると以下が成立する:
+  \begin{enumerate}
+  \item $j(\C) = \{\,(z:w)\in\P^1(\C)\mid w\ne0\,\}$; 
+  \item $j$ は単射である; 
+  \item $j$ の定める全単射 $\C\to j(\C)$ の逆写像は %
+    $(z:w)\mapsto z/w$ によって与えられる;
+  \item $\P^1(\C)=j(\C)\cup\{(1:0)\}$. 
+    \qed
+  \end{enumerate}
+\end{question}
+
+\noindent よって, さらに, $\infty$ と $(1:0)$ を対応させることによって,
+Riemann球面 $\widehat\C$ と複素射影直線 $\P^1(\C)$ の間の一対一対応が
+得られる. 以下, この対応によって, $\widehat\C$ と $\P^1(\C)$
+を同一視する%
+%
+\footnote{Riemann {\bf 球面}という呼び方は $\widehat\C$ を{\bf 実} 2
+  次元の対象とみなすときに使われる. %
+  一方, $\P^1(\C)$ は記号中の $1$ という数字および複素射影{\bf 直線}
+  という呼び名に表われている通り, {\bf 複素} 1次元とみなされるべき対象
+  である. %
+  このように, 複素数体上の多様体の次元の数え方は実次元・複素次元の
+  2 通りが存在する. 複素次元は実次元の半分になる. }.  
+%
+
+\begin{question}
+  $\P^1(\C)$ からそれ自身への写像が
+  \[
+    (z:w) \mapsto (az + bw : cz + dw).
+  \]
+  によって定義される. この変換は一次分数変換を $\P^1(\C)$ の変換と見なし
+  たものと一致することを示せ. \qed
+\end{question}
+
+\noindent この結果と, 行列の積 
+\(
+  \begin{bmatrix} a & b \\ c & d \end{bmatrix}
+  \begin{bmatrix} z \\ w \end{bmatrix}
+  =
+  \begin{bmatrix} az + bw \\ cz + dw \end{bmatrix}
+\)
+の関係に注意せよ. 一次分数変換は $\P^1(\C)$ の立場で見た方がわかり易
+く, 本質もつかみ易い. 
+
+\begin{question}
+  一次分数変換は複素射影直線からそれ自身への全単射である. (ヒント: 上
+  記の行列の積との関係. ) \qed
+\end{question}
+
+%%%%%
+
+\begin{question}
+  複素平面上の互いに異なる3点 $\alpha$, $\beta$, $\gamma$ に対して, 
+  \[
+    z \mapsto
+    \frac{(z - \alpha)(\beta - \gamma)}{(z - \gamma)(\beta - \alpha)}
+  \]
+  で定義される一次分数変換を考える%
+%
+\footnote{少々雑な言い方である. 各自, 数学的に厳密な言い方に直してから, 
+  解答すること. }. %
+%
+この一次分数変換は $\alpha$, $\beta$, $\gamma$ のそれぞれを $0$, $1$,
+$\infty$ に移す.  \qed
+\end{question}
+
+\begin{question}
+  行列 $\gamma$ に対する一次分数変換は $0$, $1$, $\infty$ の3点すべて
+  を固定する%
+  \footnote{写像 $f$ が $z$ を固定するとは $f(z)=z$ が成立することで
+    ある.}%
+  %
+  と仮定する. このとき, $\gamma$ はスカラー行列%
+  \footnote{対角行列でかつ対角成分が互いにすべて等しいような行列をスカ
+    ラー行列と呼ぶ. }%
+  である. \qed
+\end{question}
+
+\begin{question}
+  複素平面上の互いに異なる3点 $\alpha$, $\beta$, $\gamma$ のそれぞれを 
+  $0$, $1$, $\infty$ に移すような一次分数変換が一意的であることを示せ. 
+  \qed
+\end{question}
+
+%%%%%%%%%%%%%%%%%% [23]の問題
+%\begin{question}%
+%     欠番.      %
+%\end{question}  %
+%%%%%%%%%%%%%%%%%%
+
+% 代わりの問題
+%
+\begin{question}
+  複素平面上の互いに異なる3点 $\alpha$, $\beta$, $\gamma$ および 
+  $\alpha'$, $\beta'$, $\gamma'$ に対して, 2つの三角形 
+  $\bigtriangleup\alpha\beta\gamma$, 
+  $\bigtriangleup\alpha'\beta'\gamma'$ 
+  が相似であるための必要十分条件は 
+  \[
+    \frac{\beta - \alpha}{\gamma - \alpha} 
+    =
+    \frac{\beta' - \alpha'}{\gamma' - \alpha'} 
+  \]%
+  が成立することである. \qed
+\end{question}
+
+\begin{question}
+  $\C\cup\{\infty\}$ 上の円とは複素平面内の円のことであり,
+  $\C\cup\{\infty\}$ 上の直線とは複素平面内の直線に $\infty$ を付け加
+  えたもののことであるとする. 任意の一次分数変換は $\C\cup\{\infty\}$
+  上の円と直線をそれ自身の上の円または直線に移す. (ヒント:
+  \qref{q:hukuhi-chokusen} の結果をこの問題に合わせてほんの少しの拡
+  張し, すぐ上の問題における一意性の結果を用いれば簡単である.)
+  \qed
+\end{question}
+
+%%%%%
+
+$\UD=\{\,z\in\C\mid |z|<1\,\}$ を複素単位円板と呼ぶ. 
+
+\begin{question}
+  上半平面 $\UH$ から複素単位円板 $\UD$ への全単射を与えるような一次分
+  数変換が存在する. \qed
+\end{question}
+
+%%%%%
+
+\begin{guide}
+以上の出てきた複素平面 $\C$, Riemann球面 $\widehat\C$, 複素射影直線 
+$\P^1(\C)$, 複素上半平面 $\UH$, 複素単位円板 $\UD$ および一次分数変換
+は基本的で非常に面白い対象であり, ほとんどあらゆる分野の数学と関係して
+いる. 複素平面が通常の平面ユークリッド幾何と関係していたように,
+Riemann球面は正定曲率の非ユークリッド幾何, 複素単位円板は負定曲率の非
+ユークリッド幾何と関係している. それらはより一般の理論への良いプロト
+タイプとして重要であるだけでなく, それら自身に関しても非常に深い数学が
+存在している%
+\footnote{例えば, 保型函数論. }. % 
+\qed
+\end{guide}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{函数の連続性と函数列の収束}
+
+この節で「函数の一様連続性」と「函数列と函数項級数の一様収束性」
+に関する定義をまとめておこう.
+念のために定義や一般的定理について詳しく説明してあるが, 
+この演習において重要なのは具体的な計算が必要な問題の方である.
+具体的な計算が必要な問題の方を優先して解いてもらいたい.
+一般論に関する理論的な問題は後の方の問題(たとえばべき級数の収束
+に関する問題)を解くときに参照すればこの演習の目的のためには十分である.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{函数の連続性と一様連続性}
+
+\begin{definition}[連続函数]
+ $X$ は $\C$ の部分集合であり, $f$ は $X$ 上の複素数値函数であるとする.
+ このとき $f$ が{\bf 連続 (continuous)}であるとは, 
+ 任意の $a\in X$ と任意の $\eps>0$ に対して
+ ある $\delta>0$ が存在して $|x-a|<\delta$ なる任意の $x\in X$ に
+ ついて $|f(x)-f(a)|<\eps$ が成立することである.
+ \qed
+\end{definition}
+
+\begin{rem}[位相空間について知っている人へ]
+ 連続性の定義は任意の位相空間から位相空間への写像に関して一般化される.
+ 以下このような注意を常にするとは限らないので
+ 新たに定義が登場するたびに自分で考えて欲しい.
+ (膨大な時間が取られるはず.)
+ \qed
+\end{rem}
+
+\begin{question}[連続函数は定義域を制限しても連続, 易しい]
+ $U\subset X\subset \C$ であり, $f$ は $X$ 上の複素数値連続函数であると
+ する. このとき $f$ の $U$ 上への制限も連続であることを示せ.
+ \qed
+\end{question}
+
+\begin{question}[連続函数たちが層をなすこと]
+ $X$ は $\C$ の部分集合であり, $\{U_i\}_{i\in I}$ は $X$ の開部分集合の
+ 族であるとし, それらの和集合を $U=\bigcup_{i\in I} U_i$ と書くこと
+ にし, $f$ は $U$ 上の複素数値函数であるとする.
+ このとき次の二条件は互いに同値である:
+ \begin{enumerate}
+ \item[(a)] $f$ は連続である.
+ \item[(b)] 任意の $i\in I$ について $f$ の $U_i$ 上への制限 $f|_{U_i}$ 
+  は連続である. \qed
+ \end{enumerate}
+\end{question}
+
+集合 $X$ 上の複素数値函数 $f$, $g$ に対して $X$ 上の
+複素数値函数 $f\pm g$, $fg$ を次のように定める:
+\begin{equation*}
+ (f\pm g)(x)=f(x)\pm g(x), \quad
+ (fg)(x) = f(x)g(x) \quad
+ (x\in X).
+\end{equation*}
+さらに $f(x)\ne 0$ ($x\in X$) であるとき $X$ 上の
+複素数値函数 $1/f=\dfrac{1}{f}$ を次のように定める:
+\begin{equation*}
+ (1/f)(x) = \left(\frac{1}{f}\right)(x) = \frac{1}{f(x)}
+ \quad (x\in X).
+\end{equation*}
+
+\begin{question}[連続函数の加減乗除]
+ $\C$ の部分集合 $X$ 上の複素数値函数 $f$, $g$ がともに連続で
+ あれば $f\pm g$, $fg$ も連続であることを示せ. 
+ さらにもしも $f(x)\ne 0$ ($x\in X$) ならば $1/f$ も連続であることを示せ.
+ \qed
+\end{question}
+
+\begin{definition}[一様連続函数]
+ $X$ は $\C$ の部分集合であり, $f$ は $X$ 上の複素数値函数であるとする.
+ このとき $f$ が{\bf 一様連続}であるとは, 任意の $\eps>0$ に対して
+ ある $\delta>0$ が存在して $|x-y|<\delta$ なる任意の $x,y\in X$ に
+ ついて $|f(x)-f(y)|<\eps$ が成立することである.
+ \qed
+\end{definition}
+
+\begin{rem}[距離空間論について知っている人へ]
+ 一様連続性の定義は任意の距離空間から距離空間への写像に関して一般化される.
+ しかし一般の位相空間から位相空間への写像について一様連続性を
+ 定義することはできない.
+ \qed
+\end{rem}
+
+\begin{question}[易しい]
+ 一様連続ならば連続であることを示せ. \qed
+\end{question}
+
+\begin{question}[易しい]
+ $U\subset X\subset \C$ であり, $f$ は $X$ 上の複素数値一様連続函数であると
+ する. このとき $f$ の $U$ 上への制限も一様連続であることを示せ.
+ \qed
+\end{question}
+
+\begin{question}[易しい]
+ \label{q:less->leqq(3)}
+ 任意に $M>0$ が与えられたとき, 
+ 連続性と一様連続性の定義における
+ ``$<\delta$'' と ``$<\eps$'' を
+ それぞれ ``$\leqq\delta$'' と ``$\leqq M\eps$'' に
+ 置き換えても元の定義と同値になることを示せ.
+ \qed
+\end{question}
+
+\begin{proof}[ヒント]
+ 問題 \qref{q:less->leqq(1)}, \qref{q:less->leqq(2)} のヒント.
+ \qed
+\end{proof}
+
+\begin{question}
+ $\C$ の部分集合 $X$ 上の複素数値函数 $f$, $g$ がともに一様連続で
+ あれば $f\pm g$ も一様連続であることを示せ. 
+ \qed
+\end{question}
+
+集合 $X$ 上の複素数値函数 $f$ が有界であるとは
+ある $M>0$ で $|f(x)|\leqq M$ ($x\in X$) を満たすものが存在することである.
+
+\begin{question}
+ $\C$ の部分集合 $X$ 上の複素数値函数 $f$, $g$ がともに一様連続で
+ かつ有界であるならば $fg$ も一様連続であることを示せ. 
+ \qed
+\end{question}
+
+\begin{question}
+ $f(z)=z$ ($z\in \C$) で定義される $\C$ 上の函数 $f$ は一様連続であるが, 
+ $g(z)=z^2$ ($z\in \C$) で定義される $\C$ 上の函数 $g$ は一様連続でない
+ ことを示せ.
+ \qed
+\end{question}
+
+\begin{question}
+ $f(z)=z$ ($z\in\C$) で定義される $\C$ 上の函数 $f$ は一様連続であるが, 
+ $g(z)=1/z$ ($z\in\C\setminus\{0\}$) で定義
+ される $\C\setminus\{0\}$ 上の函数 $g$ は一様連続ではないことを示せ. 
+ \qed
+\end{question}
+
+\begin{question}[コンパクト集合上の連続函数は一様連続]
+ $X$ は $\C$ のコンパクト部分集合であるとする. 
+ このとき $X$ 上の複素数値連続函数 $f$ は一様連続である.
+ \qed
+\end{question}
+
+\begin{proof}[ほとんど答に近いヒント]
+ 任意に $\eps>0$ を取る.
+ $f$ は連続なので任意の $a\in X$ に対してある $\delta_a>0$ が
+ 存在して $|x-a|<\delta_a$ を満たす任意の $x\in X$
+ について $|f(x)-f(a)|<\eps/2$ となる.
+ $a\in X$ に対して $U_a=\{\,x\in X\mid |x-a|<\delta_a/2\,\}$ と
+ 置くと $\{U_a\}_{a\in X}$ は $X$ の開被覆になる.
+ $X$ はコンパクトなので有限個のある $a_1,\ldots,a_n\in X$ が
+ 存在して $X=U_{a_1}\cup\cdots\cup U_{a_n}$ となる.
+ $\delta=\min\{\delta_{a_1}/2,\ldots,\delta_{a_n}/2\}>0$ とおき, 
+ $x,y\in X$, $|x-y|<\delta$ であるとする.
+ ある $i=1,\ldots,n$ が存在して $y\in U_{a_i}$ 
+ すなわち $|y-a_i|<\delta_{a_i}/2<\delta_{a_i}$ となる.
+ このとき $|x-a_i|\leqq|x-y|+|y-a_i|<\delta+\delta_{a_i}/2<\delta_{a_i}$
+ となる. 
+ よって $|f(x)-f(a_i)|<\eps/2$ かつ $|f(y)-f(a_i)|<\eps/2$ となる. 
+ したがって $|f(x)-f(y)|\leqq|f(x)-a_i|+|f(y)-f(a_i)|<\cdots$(以下略).
+ \qed
+\end{proof}
+
+次の問題は位相空間論の復習.
+
+\begin{question}[$\R^n$ のコンパクト部分集合の特徴付け]
+ $X$ は $\R^n$ の部分集合であるとする.
+ $X$ がコンパクトであるための必要十分条件は $X$ が $\R^n$ の有界閉部分集
+ 合であることである. 
+ \qed
+\end{question}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{函数列の一様収束}
+
+\begin{definition}[函数列の各点収束]
+ $X$ は $\C$ の部分集合であり, $f_n$ は $X$ 上の複素数値函数の列であり, 
+ $f$ は $X$ 上の複素数値函数であるとする.
+ このとき $f_n$ が $f$ に $X$ 上で{\bf 各点収束}するとは
+ 任意の $x\in X$ において複素数列 $f_n(x)$ が $f(x)$ に収束することである.
+ \qed
+\end{definition}
+
+\begin{definition}[函数列の一様収束]
+ $X$ は $\C$ の部分集合であり, $f_n$ は $X$ 上の複素数値函数の列であり, 
+ $f$ は $X$ 上の複素数値函数であるとする.
+ このとき $f_n$ が $f$ に $X$ 上で{\bf 一様収束}するとは
+ 任意の $\eps>0$ に対してある $N$ が存在して $n\geqq N$ ならば
+ 任意の $x\in X$ について $|f_n(x)-f(x)|<\eps$ が成立することである.
+ \qed
+\end{definition}
+
+\begin{rem}[位相空間について知っている人へ]
+ 一様収束性の定義は $X$ が任意の位相空間である場合に拡張される. \qed
+\end{rem}
+
+\begin{question}[易しい]
+ 一様収束すれば各点収束することを示せ. \qed
+\end{question}
+
+\begin{definition}[函数列の広義一様収束]
+ $X$ は $\C$ の開部分集合であり, $f_n$ は $X$ 上の複素数値函数の列であり, 
+ $f$ は $X$ 上の複素数値函数であるとする.
+ このとき $f_n$ が $f$ に $X$ 上で{\bf 広義一様収束}すると
+ は $X$ の任意のコンパクト部分集合 $K$ 上で $f_n$ が $f$ に一様収束
+ することである.
+ \qed
+\end{definition}
+
+\begin{question}[易しい]
+ 一様収束すれば広義一様収束することを示せ.
+ 広義一様収束すれば各点収束することを示せ.
+ \qed
+\end{question}
+
+\begin{question}
+ $R>0$ であるとし, %
+ $f_n$ は $|z|<R$ で定義された複素数値函数列であるとする.
+ 任意の $r<R$ に対して $f_n$ が $|z|\leqq r$ で一様収束する
+ ならば $f_n$ は $|z|<R$ において広義一様収束することを示せ.
+ \qed
+\end{question}
+
+{\large 次の問題は定義を確認するために是非とも解いてもらいたい!}
+
+\begin{question}[三種類の収束の定義の確認, 20点]
+ $f_n(z)=z^n$ ($z\in\C$) によって $\C$ 上の複素函数列を定める.
+ 以下を示せ:
+ \begin{enumerate}
+  \item $|z|>1$ ならば複素数列 $f_n(z)$ は収束しない.
+  \item $|z|<1$ において函数列 $f_n$ は各点収束する.
+  \item $|z|<1$ において函数列 $f_n$ は一様収束しない.
+  \item $r<1$ ならば $|z|\leqq r$ において函数列 $f_n$ は一様収束する.
+  \item $|z|<1$ において函数列 $f_n$ は広義一様収束する.
+  \qed
+ \end{enumerate}
+\end{question}
+
+\begin{proof}[ヒント]
+ 『解析議論』\cite{takagi} p.155, [例1]を参考にせよ.
+ \qed
+\end{proof}
+
+{\large 次の問題もおすすめ! 具体例の計算は非常に重要!}
+
+\begin{question}[一様収束しない函数列の例]
+ $X=[0,\infty)$ と置く($X$ は半直線).
+ $X$ 上の連続函数列 $f_n$ を $f_n(x)=n^2xe^{-nx}$ と定める.
+ このとき $f_n$ は $0$ に各点収束するが, 一様収束はしないことを示せ.
+ (説明するときには函数 $f_n$ の簡単なグラフも描くこと.)
+ \qed
+\end{question}
+
+\begin{proof}[ヒント]
+ 『解析議論』\cite{takagi} p.157, [例3].
+ \qed
+\end{proof}
+
+\begin{question}[連続函数の全体が一様収束で閉じていること]
+ $X$ は $\C$ の部分集合であるとし, 
+ $f_n$ は $X$ 上の複素数値連続函数列であるとする.
+ もしも $f_n$ が $X$ 上の複素数値函数 $f$ に一様収束する
+ ならば $f$ もまた連続函数になることを示せ.
+ \qed
+\end{question}
+
+\begin{proof}[ヒント]
+ 任意に $a\in X$ と $\eps>0$ を取る.
+ $f_n$ が $f$ に一様収束することより, 
+ ある $N$ が存在して $n\geqq N$ ならば
+ 任意の $x\in X$ について $|f_n(x)-f(x)|<\eps$ となる.
+ $n\geqq N$ なる $n$ を一つ取り固定する.
+ $f_n$ は連続なのである $\delta>0$ が存在して %
+ $|x-a|<\delta$ なる任意の $x\in X$ に対して $|f_n(x)-f_n(a)|<\eps$ となる. 
+ よって  $|x-a|<\delta$ なる任意の $x\in X$ に対して %
+ $|f(x)-f(a)|\geqq|f(x)-f_n(x)|+|f_n(x)-f_n(a)|+|f_n(a)-f(a)|<3\eps$ となる.
+ \qed
+\end{proof}
+
+\begin{definition}[函数の一様 Cauchy 列]
+ $X$ は $\C$ の部分集合であるとし,
+ $f_n$ は $X$ 上の複素数値函数列であるとする.
+ $f_n$ が $X$ 上の{\bf 一様 Cauchy 列}であるとは
+ 任意の $\eps>0$ に対してある $N$ が存在して
+ $m,n\geqq N$ ならば任意の $x\in X$ について $|f_n(x)-f_m(x)|<\eps$
+ が成立することである.
+ \qed
+\end{definition}
+
+\begin{rem}
+ 問題 \qref{q:less->leqq(1)}, \qref{q:less->leqq(2)} と同様にして
+ 任意に $M>0$ が与えられたとき, 
+ 上の一様 Cauchy 列の定義における ``$<\eps$'' を ``$\leqq M\eps$''
+ に置き換えても同値である.
+ \qed
+\end{rem}
+
+\begin{question}[連続函数列の一様収束に関する完備性]
+ $X$ は $\C$ の部分集合であるとし,
+ $f_n$ は $X$ 上の複素数値連続函数列であるとする.
+ $f_n$ が一様 Cauchy 列ならば $f_n$ は $X$ 上のある複素数値連続函数
+ に収束する.
+ \qed
+\end{question}
+
+\begin{proof}[ヒント]
+ $\eps>0$ を任意に取る.
+ $f_n$ は一様 Cauchy 列なのである $N$ が存在して 
+ \begin{equation*}
+  m,n\geqq N,\ x\in X \implies |f_n(x)-f_m(x)|<\eps.
+  \tag{$*$}
+ \end{equation*}
+ これより各 $x\in X$ において複素数列 $f_n(x)$ は Cauchy 列である
+ ことがわかる. よって各 $x\in X$ において $f_n(x)$ は収束する.
+ その収束先を $f(x)$ と書くことにする.
+ よって上の($*$)の $m\to\infty$ における極限を考えることができ, 
+ \begin{equation*}
+  n\geqq N,\ x\in X \implies |f_n(x)-f(x)|\leqq\eps
+ \end{equation*}
+ が成立することがわかる. これより $f_n$ は $f$ に一様収束することが
+ わかる. 連続函数の一様収束先もまた連続なので $f$ も連続である.
+ \qed
+\end{proof}
+
+コンパクト集合上の連続函数列の一様収束の取り扱い
+には $\sup$ ノルムを使う方が普通である.  
+一般のノルム空間に関する考え方は後で函数解析の
+広義で教わることになる. 
+
+\begin{definition}[$\sup$ ノルム]
+ $K$ は $\C$ のコンパクト部分集合であるとし, 
+ $f$ は $K$ 上の複素数値連続函数であるとする.
+ このとき $f$ の $\sup$ ノルム $||f||_K$ を次のように定める:
+ \begin{equation*}
+  ||f||_K = \sup_{x\in K} |f(x)|.
+ \end{equation*}
+ $|f(x)|$ は $K$ 上の実数値連続函数であり, 
+ コンパクト空間上の実数値連続函数は最大値を持つので, %
+ $f$ の $\sup$ ノルムはうまく定義されている(well-defined).
+ \qed
+\end{definition}
+
+\begin{rem}[位相空間について知っている人へ]
+ 上の $\sup$ ノルムの定義は $K$ が任意のコンパクト
+ 位相空間である場合に拡張される. \qed
+\end{rem}
+
+\begin{question}[$\sup$ ノルムがノルムの公理を満たしていること]
+ $K$ は $\C$ のコンパクト部分集合であるとし, 
+ $f$, $g$ は $K$ 上の複素数値連続関数であるとし, 
+ $\alpha\in\C$ とする. このとき以下が成立することを示せ:
+ \begin{enumerate}
+  \item $||f+g||_K\leqq ||f||_K+||g||_K$.
+  \item $||\alpha f||_K = |\alpha|\, ||f||_K$.
+  \item $||f||_K=0$ ならば $f=0$.
+  \qed
+ \end{enumerate}
+\end{question}
+
+\begin{question}
+ $K$ は $\C$ のコンパクト部分集合であるとし, 
+ $f_n$ は $K$ 上の複素数値連続函数列であるとし, 
+ $f$ は $K$ 上の複素数値連続函数であるとする.
+ このとき $f_n$ が $f$ に $\sup$ ノルムの意味で収束すると
+ は $||f_n - f||\to 0$ ($n\to\infty$) が成立することであると定める.
+ $f_n$ が $f$ に一様収束することと $f_n$ が $f$ に $\sup$ ノルム
+ の意味で収束することは同値であることを示せ.
+ \qed
+\end{question}
+
+\begin{question}
+ $K$ は $\C$ のコンパクト部分集合であるとし, 
+ $f_n$ は $K$ 上の複素数値連続函数列であるとする.
+ このとき $f_n$ が $\sup$ ノルムに関する Cauchy 列であるとは
+ 任意の $\eps>0$ に対してある $N$ が存在して $n\geqq N$
+ ならば $||f_n-f||_K<\eps$ が成立することであると定める.
+ $f_n$ が一様 Cauchy 列であることと $f_n$ が $\sup$ ノルム
+ に関する Cauchy 列であることは同値であることを示せ.
+ \qed
+\end{question}
+
+\begin{guide}
+ 以上の問題の結果を合わせると, $\C$ のコンパクト部分集合 $K$ 上の
+ 連続函数全体の空間 $C^0(K)$ は $\sup$ ノルムに関して完備であることがわかる. 
+ \qed
+\end{guide}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{函数項級数の一様収束}
+
+\begin{definition}[函数項級数の収束]
+ $X$ は $\C$ の部分集合であり, $f_n$ は $X$ 上の複素数値函数列であると
+ し, $f$ は $X$ 上の複素数値函数であるとする.
+ 函数列 $s_n=\sum_{k=1}^n f_k$ が $f$ に各点収束, 一様収束, 
+ 広義一様収束するとき, それぞれの場合に応じて
+ 函数項級数 $\sum_{n=1}^\infty f_n$ は{\bf 各点収束}, {\bf 一様収束}, 
+ {\bf 広義一様収束}すると言う.
+ \qed
+\end{definition}
+
+\begin{question}[一様絶対収束の定義]
+ $X$ は $\C$ の部分集合であり, $f_n$ は $X$ 上の複素数値函数列であると
+ する. $X$ 上の実数値函数列 $|f_n|$ が $|f_n|(x)=|f_n(x)|$ ($x\in X$) 
+ によって定まる.  もしも $\sum_{n=1}^\infty|f_n|$ が一様収束
+ するならば $\sum_{n=1}^\infty f_n$ も一様収束することを示せ.
+ (このとき $\sum_{n=1}^\infty f_n$ は{\bf 一様絶対収束}すると言う.)
+ \qed
+\end{question}
+
+\begin{definition}[広義一様絶対収束]
+ $X$ は $\C$ の開部分集合であり, $f_n$ は $X$ 上の複素数値函数列であると
+ する. $\sum_{n=1}^\infty f_n$ が $X$ 上{\bf 広義一様絶対収束}するとは
+ それが $X$ の任意のコンパクト部分集合上一様絶対収束することである.
+ \qed
+\end{definition}
+
+\begin{question}[函数項級数の一様絶対収束の十分条件]
+ $X$ は $\C$ の部分集合であり, $f_n$ は $X$ 上の複素数値函数列であるとす
+ る.  $\sum_{n=1}^\infty c_n$ が(有限な値に)収束するような
+ 非負の定数列 $c_n$ で $|f_n(x)|\leqq c_n$ ($x\in X$) を満たすものが
+ 存在するならば $\sum_{n=1}^\infty f_n$ は一様絶対収束することを示せ.
+ \qed
+\end{question}
+
+\begin{proof}[上の2つの問題のヒント]
+ 『解析議論』\cite{takagi} 定理39 (p.155) と同じ議論. 
+ \qed
+\end{proof}
+
+\begin{question}
+ $\C$ 上の函数列 $f_n$ を $f_n(z)=\dfrac{|z|^2}{(1+|z|^2)^n}$ と
+ 定める. このとき函数項級数 $\sum_{n=1}^\infty f_n$ は $\C$ 上で
+ 各点収束するが, 一様収束しないことを示せ.
+ \qed
+\end{question}
+
+\begin{proof}[ヒント]
+ 『解析議論』\cite{takagi} p.156, [例2]を参考にせよ.
+ \qed
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{べき級数と解析函数}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{べき級数の収束}
+
+複素係数のべき級数 $f(z)=\sum_{m=0}^{\infty}a_mz^m$ に対して, %
+\[%
+  R = 
+  \sup \bigl\{\, 
+    r \in[0,\infty] 
+    \bigm |
+    \text{$|z|<r$ においてべき級数 $f(z)$ が絶対収束する} 
+  \,\bigr\}
+\]%
+をべき級数 $f(z)$ の{\bf 収束半径}と呼ぶ.
+
+\begin{question}
+  べき級数 $f(z)=\sum_{m=0}^{\infty}a_mz^m$ の収束半径を $R$ と書くとき, 
+  任意の $S<R$ に対してべき級数 $f(z)$ は $|z|\le S$ において
+  一様絶対収束する. \qed
+\end{question}
+
+\begin{rem}
+ この問題の結果より $|z|<R$ で $f(z)$ は広義一様絶対収束することがわかる.
+ \qed
+\end{rem}
+
+\begin{question}[Cauchy-Hadamard]
+  収束半径が $R$であるようなべき級数 $\sum_{m=0}^{\infty}a_mz^m$ に対し
+  て,
+  \[
+    R = \left( \limsup_{m\to\infty} |a_m|^{1/m} \right)^{-1}.
+    \qed
+  \]
+\end{question}
+
+\begin{question}
+  $\sum\limits_{n=0}^\infty n!\,z^n$ の収束半径が $0$ であることを示せ.
+  \qed
+\end{question}
+
+\begin{question}
+  $\sum\limits_{n=0}^\infty \frac{1}{n!} z^n$ の収束半径が $\infty$ で
+  あることを示せ. すなわち, $\sum\limits_{n=0}^\infty\frac{1}{n!}z^n$ 
+  は複素平面全体で収束する. \qed
+\end{question}
+
+\begin{guide}
+ 上の級数の定める $\C$ 上の函数は $e^z$ である. 
+ 実は逆に $e^z$ を上の級数が定める函数と定義することによって, 
+ 指数函数の理論が再構築される.
+\qed
+\end{guide}
+
+\begin{question}
+  $\C$ 上の函数 $f$ を %
+  $f(z)= \sum\limits_{n=0}^\infty \frac{1}{n!} z^n$ と定義する. このと
+  き, 任意の $z,w\in\C$ に対して, $f(z+w)$ = $f(z)f(w)$ が成立すること
+  を示せ. (ただし, $f(z)=e^z$ を使ってはいけない.) \qed
+\end{question}
+
+\begin{proof}[ヒント]
+ 二項定理. \qed
+\end{proof}
+
+\begin{question}
+  $p(n)$ は $n$ の多項式函数であるとする. このとき, べき級数 %
+  $\sum_{n=0}^{\infty} a_n p(n) z^n$ の収束半径は %
+  $\sum_{n=0}^{\infty} a_n z^n$ の収束半径より小さくないことを示せ. %
+  すなわち係数に $a_n$ に $n$ の多項式をかけたくらいでべき級数の収束半径
+  は全く減らない. \qed
+\end{question}
+
+\begin{question}
+  $N$ は正の整数とし, $f(z)=(1-z)^{-N}$ と置く. $f$ の $0$ におけるべき
+  級数展開を求め, その収束半径が $1$ であることを証明せよ. \qed
+\end{question}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{解析函数}
+
+$f$ は $\C$ の開集合 $\Omega$ 上の複素数値函数であるとする. $f$ が 
+$\Omega$ 上で複素微分可能であるとは, 任意の $z\in\Omega$ に対して, 極
+限
+\[
+  \lim_{h\to 0} \frac{f(z+h) - f(z)}{h}
+\]%
+が存在することである. このとき, この極限値を $f'(z)$ と表わし, $f'$ を 
+$f$ の複素導函数と呼ぶ.
+
+\begin{question}
+  べき級数 $\sum_{m=0}^{\infty} a_m z^m$ の収束半径が $R$ であるとき, そ
+  れが定める複素数値函数 $f$ は $|z|<R$ において複素微分可能であり, そ
+  の導函数はべき級数の各項を形式的に微分することによって得られる:
+  \[
+    f'(z) = \sum_{m=1}^{\infty} m a_m z^{m-1}. \qed
+  \]%
+\end{question}
+
+\begin{definition}[複素解析函数]
+$f$ は $\C$ の開集合 $\Omega$ 上の複素数値函数であるとする. 任意の 
+$a\in\Omega$ に対して, 十分小さな $r>0$ を取ると, $|z-a|<r$ において絶
+対収束する中心 $a$ のべき級数で $\{\,z\in\Omega\mid |z-a|<r\,\}$ 上 $f$ 
+と一致するものが存在するとき, $f$ は $\Omega$ で(複素){\bf 解析的 (analytic)}
+であると言う. つまり, 局所的に絶対収束するべき級数に一致しているような函
+数を{\bf 解析函数 (analytic function)} と呼ぶのである.
+\qed
+\end{definition}
+
+\begin{question}
+  べき級数で定義される
+  函数 $f(z) = \sum\limits_{n=0}^\infty \frac{1}{n!} z^n$ が $\C$ 上の
+  解析函数であることを示せ. \qed
+\end{question}
+
+\begin{question}
+  べき級数 $\sum_{m=0}^{\infty} a_m z^m$ の収束半径が $R$ であるとき, そ
+  れの定める函数 $f$ は $|z|<R$ において解析的である. さらに, $|b|<R$ 
+  かつ $|z-b|<R-|b|$ ならば,
+  \[
+    f(z)
+    = \sum_{p=0}^{\infty} \sum_{m=p}^{\infty}\,
+      \frac{1}{p!}\, m(m-1)(m-2)\dots(m-p-1)\, a_m b^{m-p} (z - b)^p
+  \]%
+  が成立する. ここで, 右辺の級数は絶対収束している. \qed
+\end{question}
+
+\begin{question}
+  $U$, $V$ は $\C$ の開集合であり, $f$, $g$ はそれぞれ $U$, $V$ 上の解
+  析函数であり, $f(U)\subseteq V$ が成立しているとする. このとき, その
+  函数の合成 $g\circ f$ は $U$ 上の解析函数であることを示せ. 
+  \qed
+\end{question}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{一致の定理}
+
+\begin{question}
+  $r>0$ であり, べき級数 $\sum_{m=0}^{\infty} a_m z^m$ は $|z|<r$ で絶対
+  収束していると仮定し, このべき級数の定める函数を $f$ と表わす. $0$ に収
+  束する点列 $(z_n)_{n=1}^{\infty}$ で, 
+  \[
+    0 < |z_n| < r,
+    \qquad  f(z_n)=0
+    \qquad \text{for all $n=0,1,2,\dots$}
+  \]%
+  をみたすものが存在すると仮定する. このとき, すべての $a_n$ は $0$ に
+  なる. \qed
+\end{question}
+
+\begin{question}[一致の定理]
+  $\Omega$ は $\C$ の連結開集合であり, $f$ は $\Omega$ 上の解析函数で
+  あるとする. ある点 $a\in\Omega$ に収束する $\Omega$ 内の点列 
+  $(z_n)_{n=1}^{\infty}$ で,
+  \[
+    0 < |z_n - a| < r,
+    \qquad  f(z_n)=0
+    \qquad \text{for all $n=0,1,2,\dots$}
+  \]%
+  をみたすものが存在すると仮定する. このとき, $f$ は $\Omega$ 上で恒等
+  的に $0$ である. \qed
+\end{question}
+
+\begin{definition}[実解析函数]
+$\R$ の開集合 $U$ 上の複素数値函数 $f$ が{\bf 実解析的}であるとは, 
+任意の $a\in U$ に対して, 十分小さな $r>0$ を取ると, $|x-a|<r$ におい
+て絶対収束する中心 $a$ の(複素係数の)べき級数で %
+$\{\,x\in U \mid |x-a|<r\,\}$ 上で $f$ と一致するものが存在することである. 
+\qed
+\end{definition}
+
+\begin{rem}
+一致の定理は実解析函数に対しても全く同様に成立する. 一致の定理が成
+立するためには, 局所的に絶対収束するべき級数に等しいという条件のみが本質
+的であり, 複素数を用いたことは本質的ではない.
+\qed
+\end{rem}
+
+\begin{question}
+  $\R$ 上の多項式函数 $f$ は $\C$ 上の解析函数に一意的に拡張されること
+  を示せ. (ヒント: 一意性の証明は一致の定理よりすぐ出る.) \qed
+\end{question}
+
+\begin{question}
+  $\R$ 上の函数 $\sin x$ は $\C$ 上の解析函数に一意的に拡張されること
+  を示せ. \qed
+\end{question}
+
+\noindent $e^x$, $\cos x$ についても同様である. $\R$ 上の函数の $\C$ 
+上の函数に拡張は無限に違ったやり方が考えられるのだが, $\R$ 上の多項式
+函数, 指数函数, 三角函数は解析的という条件のもとで, 複素平面全体に一意
+的に拡張されるのである.
+
+\begin{question}
+  以下の事実が既知であると仮定する:
+  \begin{enumerate}
+  \item 三角函数は全複素平面に解析的に拡張可能である. %
+    (それらを $\cos z$, $\sin z$ のように書くことにする.)
+  \item すべての実数 $x$ に対して $\sin^2 x + \cos^2 x = 1$.
+  \end{enumerate}
+  これらと一致の定理を用いて, すべての{\bf 複素数} $z$ に対して 
+  $\sin^2 z + \cos^2 z = 1$ が成立することを示せ. \qed
+\end{question}
+
+\noindent より一般に次が成立する.
+
+\begin{question}
+  $U$ は $\C$ の連結開集合であり, $U\cap\R\ne\emptyset$ であると仮定す
+  る.  $f$, $g$ は $U$ 上の解析函数であり, $R(X,Y)$ は $X$, $Y$ に関す
+  る多項式函数であるとする. 任意の $x\in U\cap\R$ に対して,
+  $R(f(x),g(x))=0$ が成立していると仮定する. このとき, 任意の $z\in U$ 
+  に対して, $R(f(z),g(z))=0$ が成立する. \qed
+\end{question}
+
+\begin{question}
+  $f$ は $a\in\C$ を中心とする半径 $R>0$ の開円板 $D$ 上の正則函数であ
+  るとする. このとき, $f$ の $a$ を中心とするべき級数展開は $D$ 上で絶対
+  収束する. 特に, その収束半径は $R$ 以上である. \qed
+\end{question}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{thebibliography}{AB}
+
+\bibitem{takagi}
+高木貞治, 解析概論, 岩波書店, 1983
+
+\end{thebibliography}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

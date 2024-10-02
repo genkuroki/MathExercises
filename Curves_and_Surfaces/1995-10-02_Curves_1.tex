@@ -1,0 +1,361 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% 幾何学概論 I 演習
+%
+% 黒木 玄 (東北大学理学部数学教室, kuroki@math.tohoku.ac.jp)
+%
+% 曲線・曲面論
+%
+% 日本語 AMS LaTeX でコンパイルしてください.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\ifx\gtfam\undefined
+% \documentstyle[amstex,amssymb,12pt,enshu]{j-article} % NTT
+%%\documentstyle[amstex,amssymb,showkeys,12pt,enshu]{j-article}  % NTT
+%\else
+% \documentstyle[amstex,amssymb,12pt,enshu]{jarticle}  % ASCII
+%%\documentstyle[amstex,amssymb,showkeys,12pt,enshu]{jarticle}  % ASCII
+%\fi
+
+\documentclass[12pt,twoside]{jarticle}
+\usepackage{amsmath,amssymb,amscd}
+\usepackage{enshu}
+%\usepackage{mathrsfs}
+%\newcommand\scr{\mathscr}
+
+\def\qstar#1{$\!\!\!$#1$\;$}
+\def\transposed#1{\,\vphantom{#1}^t\mskip-1.5mu{#1}} % transpose
+%\def\transposed#1{{#1}^t} % transpose
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\setcounter{page}{1}       % この数から始まる
+\setcounter{section}{-1}   % この数の次から始まる
+\setcounter{theorem}{0}    % この数の次から始まる
+\setcounter{question}{0}   % この数の次から始まる
+\setcounter{footnote}{0}   % この数の次から始まる
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title{\bf 幾何学概論 I 演習}
+
+\author{黒木 玄 \quad (東北大学理学部数学教室)}
+
+\date{1995年10月2日(月)}
+
+\maketitle
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 10-02.tex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% §. 演習の進め方
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{演習の進め方}
+
+この時間は, 幾何の演習を行なう. ただし, 講義の内容がそのまま演習に反映
+されるとは限らないことを注意しておく. また, 以下のような思い込みはすべ
+て間違いである可能性が大きいので注意して欲しい:
+
+\begin{enumerate}
+\item 授業は教科書に沿って進められるのが当然であり, 教科書に書いてある
+  ことはすべて正しいと思っている. 
+\item 数学の演習とは, 練習問題を解きその答合わせをすることだと思ってい
+  る. 答合わせをしないと心配で問題を解いた気にならない. 
+\item 大学で習う数学は高校までに習った数学とスタイルが全然違うので, 自
+  分は大学の数学に向いてないと思ってしまいやる気を無くしてしまった. 
+\end{enumerate}
+
+演習は以下のような方針で行なう:
+
+\begin{itemize}
+\item 問題が解けた人もしくは指名された人は黒板に解答を書きそれを発表す
+  ること.  (発表の順番は私が黒板を見て決めます. ) そのとき, 問題の番号
+  と自分の氏名・学籍番号を書くのを忘れないこと.
+\item 数式だけの説明不足の解答は, 正式な解答とは認めない. 言葉を正確に
+  用いて内容を詳しく説明した解答を書くこと. 
+\item 問題が解けたと思って発表しても解答が完全でない場合は次の時間に再
+  発表すること.  (すぐに修正できた場合はその時間中に再発表してもよい.)
+\item すでに解かれてしまった問題でも, 別の方法で解けた場合はそれを発表
+  してもよい. 
+\item 演習問題を改良してから解いても良い. その改良が非常に良いものの場
+  合は高く評価されるであろう.
+\item なお, 演習問題自体が間違っている場合が多々あると思う. その場合は, 
+  問題を適切に修正してから解くこと. 適切に訂正不可能な場合は, 反例など
+  を挙げ, その理由を説明すること.
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Section. 曲線論
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{曲線論}
+
+\begin{question}[弧長パラメーター]\label{q:alp}
+  $U$ は $\R$ 内の開区間であるとし, $q : U \to \R^n$ は $C^\infty$ 写
+  像であるとし, 任意の $t\in U$ に対して $\dot{q}(t) \ne 0$ が成立して
+  いると仮定する. ここで, $\dot{q}(t)$ は $q(t)$ の $t$ による導函数を
+  意味する. このとき, 任意の $t_0\in U$ に対して, $0$ を含む $\R$ 内の
+  開区間 $V$ と $C^\infty$ 写像 $\tau : V \to U$ の組 $(V, \tau)$ で次
+  の2つの条件を満たすものが唯一存在する:
+  \begin{enumerate}
+  \item 任意の $s \in V$ に対して $\tau'(s) > 0$ であり, $\tau$ は逆写
+    像を持ち, $\tau(0) = t_0$ を満たす.
+  \item 任意の $s \in V$ に対して 
+    $\displaystyle \left| \frac{d}{ds}q(\tau(s)) \right| = 1$.
+  \end{enumerate}
+  (ここで, $|\cdot|$ は $\R^n$ における通常の Euclid ノルムを表わす.) 
+  さらに, これらの条件が成立するとき, 次が成立する:
+  \[
+    \int_{t_0}^{\tau(s)} |\dot{q}(t)| \,dt = s
+    \qquad\text{for}\quad s \in V.
+    \qed
+  \]
+\end{question}
+
+\begin{question}
+  $\R$ から $\R^2$ への $C^\infty$ 写像で, その像が
+  \(
+    \{\, (x, 0) \mid x \ge 0 \}
+    \cup
+    \{\, (0, y) \mid y \ge 0 \}
+  \)
+  と一致するものを構成せよ. \qed
+\end{question}
+
+\begin{question}
+  $\R$ から $\R^2$ への $C^\infty$ 写像 $q$ で, その像が
+  \(
+    \{\, (x, 0) \mid x \ge 0 \}
+    \cup
+    \{\, (0, y) \mid y \ge 0 \}
+  \)%
+  と一致し, さらに, 任意の $t \in \R$ に対して $\dot{q}(t) \ne 0$ をみ
+  たすものが存在しないことを示せ. \qed
+\end{question}
+
+\begin{question}
+  $C^\infty$ 函数 $a : \R \to \R^n$ および %
+  $q_0 \in \R^n$, $v_0 \in \R^n$ が任意に与えられていると仮定する. こ
+  のとき, 以下の条件を満たす $C^\infty$ 写像 $q : \R \to \R^n$ が唯一
+  存在することを示せ:
+  \[
+    \ddot{q}(t) = a(t) \quad\text{for $t\in \R$},
+    \qquad
+    q(0) = q_0,
+    \qquad
+    \dot{q}(0) = v_0.
+  \qed
+  \]
+\end{question}
+
+\begin{question}[微分のLeibnitz則]
+  $U$ は $\R$ 内の開区間であるとし, $A$, $B$ はそれぞれ $U$ 上の行列値
+  微分可能函数であるとする. $A(t)$ と $B(t)$ の積 $A(t)B(t)$ が定義さ
+  れるとき, 次が成立することを示せ:
+  \[
+    \frac{d}{dt}\left[A(t)B(t)\right]
+    = \dot{A}(t) B(t) + A(t) \dot{B}(t).
+  \]
+  これを用いて, $u$, $v$ が $\R^n$ 値微分可能函数であるとき, 次が成立
+  することを示せ:
+  \[
+    \frac{d}{dt}\left[u(t)\cdot v(t)\right]
+    = \dot{u}(t) \cdot v(t) + u(t) \cdot \dot{v}(t).
+  \]
+  ここで, $\cdot$ は通常の Euclid 内積を表わす. \qed
+\end{question}
+
+\begin{question}
+  $U$ は $\R$ 内の開区間であるとし, $q : U \to \R^n$ は恒等的に 
+  $|\dot{q}| = 1$ をみたす $C^\infty$ 写像であるとする. このとき, 恒等
+  的に $\dot{q} \cdot \ddot{q} = 0$ が成立することを示せ. (すなわち, 
+  速度ベクトル $\dot{q}$ と加速度ベクトル $\ddot{q}$ は直交する.) ここ
+  で, $\cdot$ は $\R^n$ における通常の Euclid 内積である. \qed
+\end{question}
+
+\begin{question}
+  $\R^2$ 内の $0$ でないベクトル $a$ を任意に取る. ただし, ベクトルは
+  縦ベクトルであると考える. %
+  このとき, 以下をみたすベクトル $b \in \R^2$ が唯一存在する:
+  \begin{enumerate}
+  \item $b$ は $a$ と直交し, $b$ の長さは $a$ の長さに等しい.
+  \item 2つの縦ベクトル $a$, $b$ を並べてできる行列の行列式 $|a\, b|$ %
+    は正である.  \qed
+  \end{enumerate}
+\end{question}
+
+\begin{question}[ベクトル積]\label{q:vector-prod}
+  $\R^3$ 内の一次独立な2つのベクトル $a$, $b$ を任意に取る. ただし, ベ
+  クトルは縦ベクトルであると考えることにする. このとき, 以下をみたすベ
+  クトル $c \in \R^3$ が唯一存在する:
+  \begin{enumerate}
+  \item $c$ は $a$ および $b$ と直交する.
+  \item $c$ の長さは $a$ および $b$ から構成される平行四辺形の面積に等
+    しい.
+  \item 3つの縦ベクトル $a$, $b$, $c$ を並べてできる行列の行列式 %
+    $|a\, b\, c|$ は正である.
+  \end{enumerate}
+  さらに, $c$ の成分を $a$, $b$ の成分によって具体的に表示せよ. (このと
+  き, $a \times b = c$ と書き, $c$ を $a$ と $b$ の{\bf ベクトル積}と呼ぶ.)
+  \qed
+\end{question}
+
+\begin{question}[ベクトル積の高次元への拡張]\qstar{*}
+  $\R^n$ 内の一次独立な $n-1$ 本のベクトル $a_1,\dots,a_{n-1}$ を任意
+  に取る. ただし, ベクトルは縦ベクトルであると考える. このとき, 以下を
+  みたすベクトル $b \in \R^n$ が唯一存在することを示せ:
+  \begin{enumerate}
+  \item $b$ は $a_1,\dots,a_{n-1}$ の全てと直交する.
+  \item $b$ の長さは $a_1,\dots,a_{n-1}$ から作られる $n-1$ 次元平行体
+    の体積(面積と言うべきか?)に等しい.
+  \item $a_1,\dots,a_{n-1}, b$ を並べてできる行列の行列式について,
+    $|a_1 \, \dots \, a_{n-1} \, b| > 0$ が成立する. \qed
+  \end{enumerate}
+\end{question}
+
+\noindent ヒント: ベクトル $a_j$ の成分を $a_j^{i}$ 表わすとき, 形式的
+には, 
+\[
+  b
+  =
+  \begin{vmatrix}
+    a_1^1  & a_2^1  & \cdots & a_{n-1}^1 & \bold{e}_1 \\
+    a_1^2  & a_2^2  & \cdots & a_{n-1}^2 & \bold{e}_2 \\
+    \vdots & \vdots &        & \vdots    & \vdots     \\
+    a_1^n  & a_2^n  & \cdots & a_{n-1}^n & \bold{e}_n \\
+  \end{vmatrix}.
+\]
+ここで, $\bold{e}_i$ は第 $i$ 成分のみが $1$ で他が $0$ であるような単
+位ベクトルを表わし, 右辺は最後の列に関して形式的に余因子展開することに
+よって意味付ける.
+
+\begin{question}\label{q:FS1}
+  この問題中においてベクトルは縦ベクトルであるとみなす. $U$ は $\R$ 内
+  の開区間であるとし, $q : U \to \R^3$ は $U$ 上 $|\dot{q}| = 1$ およ
+  び $|\ddot{q}| > 0$ をみたす任意の $C^\infty$ 写像であるとする. さら
+  に, 
+  \[
+    e_1(t) = \dot{q}(t),
+    \qquad
+    e_2(t) = \frac{\ddot{q}(t)}{|\ddot{q}(t)|},
+    \qquad
+    e_3(t) = e_1(t) \times e_2(t)
+  \]%
+  と置き, $3\times 3$ 行列値函数 $E(t)$ を %
+  $E(t) = (e_1(t)\ e_2(t)\ e_3(t))$ によって定める. このとき, $E(t)$ %
+  は直交行列でかつ $\det E(t) = 1$ が成立している. \qed
+\end{question}
+
+\begin{question}[Frenet-Serretの公式]\label{q:FS2}
+  すぐ上の問題の記号のもとで, $U$ 上の $3 \times 3$ 行列値函数 $A(t)$ 
+  が存在して, $\dot{E}(t) = E(t) A(t)$ が成立し, さらに, 行列 $A(t)$ 
+  は次のような形で表わされる:
+  \[
+    A(t)
+    =
+    \begin{pmatrix}
+          0     &  - \kappa(t) &    0      \\
+       \kappa(t) &       0      & - \tau(t) \\
+          0     &     \tau(t)  &    0      \\
+    \end{pmatrix}.
+  \]%
+   ここで, $\kappa(t) = |\ddot{q}(t)| > 0$. \qed
+\end{question}
+
+\noindent ヒント: $E(t)$ が直交行列であるという条件 %
+$\transposed{E(t)} E(t) = 1$ の両辺を微分して見よ. 
+
+\noindent 上の問題における, $\kappa(t)$ は{\bf 曲率}, %
+$\tau(t)$ は{\bf 捩率}(れいりつ, torsion)と呼ばれている. %
+条件 $|\dot{q}| = 1$ が成立しない場合でも, 問題 \qref{q:alp}\ の結果を
+用いて, パラメーター $t$ を変換することによって, $|\dot{q}| = 1$ が成
+立するようにできるので, それを利用して曲率と捩率を定義することができる.
+
+\begin{question}[常螺旋]\label{q:helix}
+  写像 $q : \R \to \R^3$ を %
+  $q(t) = (x(t), y(t), z(t)) = (a \cos t, a \sin t, b t)$ %
+  なる式によって定義する. $q(t)$ によって表現される曲線は{\bf 常螺旋}
+  (helix)と呼ばれている. 常螺旋の曲率と捩率を求めよ. \qed
+\end{question}
+
+\begin{question}[行列の指数函数]\label{q:mat-exp}\qstar{*}
+  $n \times n$ 行列 $A$ に対して, 次の行列級数は収束して $t$ の %
+  微分可能函数になることを示せ:
+  \[
+    \exp(tA) = \sum_{k=0}^\infty \frac{1}{k!} (tA)^k.
+  \]
+  さらに, 次の公式が成立する:
+  \[
+    \frac{d}{dt} \exp(tA) = A \exp(tA) = \exp(tA) A,
+    \qquad
+    \det(\exp A) = \exp(\trace A).
+  \qed
+  \]
+\end{question}
+
+\begin{question}[曲線論の基本定理]\qstar{*}
+  常微分方程式の初期値問題の解の存在と一意性に関する結果を認めた上で以
+  下を示せ. %
+  $U$ は $\R$ 内の開区間であるとし, $\kappa(t)$, $\tau(t)$ は $U$ 上の
+  $C^\infty$ 函数であり, $U$ 上で $\kappa(t) > 0$ が成立していると仮定
+  する. $t_0 \in U$, $q_0 \in \R^3$ および $3 \times 3$ の直交行列 %
+  $E_0$ で $\det E_0 = 1$ をみたすものを任意に与える. このとき, 
+  $C^\infty$ 写像 $q : U \to \R^3$ で以下を満足
+  するものが唯一存在する:
+  \begin{enumerate}
+  \item $U$ 上 $|\dot{q}(t)| = 1$ が成立している.
+  \item $q(t)$ の曲率と捩率はそれぞれ $\kappa(t)$ および $\tau(t)$ に
+    等しい.
+  \item $q(t_0) = q_0$.
+  \item 問題 \qref{q:FS1}, \qref{q:FS2}\ の記号のもとで, $E(t_0) = E_0$.
+  \qed
+  \end{enumerate}
+\end{question}
+
+\begin{question}
+  \(
+    SO(n)
+    =
+    \{\, X \mid \text{$X$ は実 $n$ 次直交行列でかつ $\det X = 1$} \,\}
+  \) %
+  と置く. このとき, $SO(n)$ は行列の積について群をなすことを示せ. (群
+  の定義は代数学の教科書を見よ.) $SO(n)$ は{\bf 特殊直交群}(special
+  orthogonal group)と呼ばれている. \qed
+\end{question}
+
+\noindent 参考: 
+\(
+  O(n)
+  =
+  \{\, X \mid \text{$X$ は実 $n$ 次直交行列である} \,\}
+\) %
+も群をなす. こちらは{\bf 直交群}(orthogonal group)と呼ばれている. 位相
+幾何的には, $O(n)$ は2つの連結成分に分かれていて, その片方は $SO(n)$ 
+であり, もう片方は $\det X = - 1$ という条件によって特徴付けられる. こ
+れによって, 右手系・左手系(空間の向き)という概念が正当化される. 
+
+\noindent 参考: $SO(n)$ は幾何的には $n$ 次元空間の回転全体のなす群で
+あると解釈でき, $O(n)$ は回転と鏡映から生成される群であると解釈できる.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{thebibliography}{ABC}
+
+\bibitem[小林]{Kobayashi}
+小林 昭七: 曲線と曲面の微分幾何, 裳華房
+
+\bibitem[佐武]{Satake}
+佐武 一郎: 線型代数学, 裳華房
+
+\bibitem[高木]{Takagi}
+  高木 貞治: 解析概論, 改訂第三版, 岩波書店
+
+\end{thebibliography}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

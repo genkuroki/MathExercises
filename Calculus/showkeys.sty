@@ -1,0 +1,431 @@
+%%% ====================================================================
+%%%  @LaTeX-style-file{
+%%%     filename        = "showkeys.sty",
+%%%     version         = "1.01",
+%%%     date            = "25 August 1992",
+%%%     time            = "11:32:08 BST",
+%%%     author          = "David Carlisle",
+%%%     address         = "Computer Science Department
+%%%                        Manchester University
+%%%                        Oxford Road
+%%%                        Manchester
+%%%                        England
+%%%                        M13 9PL",
+%%%     telephone       = "+44 61 275 6139",
+%%%     FAX             = "+44 61 275 6236",
+%%%     checksum        = "61501 431 1786 14304",
+%%%     email           = "carlisle@cs.man.ac.uk (Internet)",
+%%%     codetable       = "ISO/ASCII",
+%%%     keywords        = "LaTeX, label, ref, citation, keys",
+%%%     supported       = "yes",
+%%%     docstring       = "
+%%%
+%%%     showkeys.sty
+%%%
+%%%     A LaTeX style option which causes
+%%%     \label, \ref, \pageref, \cite and \bibitem
+%%%     to print their argument for proof reading purposes. The main
+%%%     feature of this style is that these labels are printed in such a
+%%%     way as to minimise the changes caused to the formatting of the
+%%%     rest of the document text.
+%%%
+%%%     Documentation requires Mittelbach's doc.sty.
+%%%
+%%%     The checksum field above was produced by
+%%%     Robert Solovay's checksum utility.",
+%%%  }
+%%% ====================================================================
+%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%<*x>
+% This file may be used without modification as a style (.sty) file.
+%
+% If you have Mittelbach's doc.sty, this file may be formatted with a
+% command like:
+%                latex showkeys.sty
+%
+% If you have the Mittelbach/Duchier/Braams docstrip utility, you may
+% produce a faster loading .sty file. Rename this file to: showkeys.doc
+% Then run this file through *plain* TeX:
+%                tex showkeys.doc
+% This should produce the file showkeys.sty.
+% If you do not have plain TeX on your system, you can trick LaTeX into
+% doing the work as follows:
+%                latex \def\fmtname{plain} \input showkeys.doc
+% Note that you may need to quote the arguments here to stop your
+% operating system treating the \ characters incorrectly.
+%
+%                latex showkeys.doc
+% Will produce a typeset version of the documentation, as above.
+%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\plain{plain}\ifx\fmtname\plain\csname fi\endcsname
+     \def\batchfile{showkeys.doc}
+     \input docstrip
+     \preamble
+
+     Do not distribute the stripped version of this file.
+     The checksum in the header refers to the documented version.
+
+     \endpreamble
+     \generateFile{showkeys.sty}{t}{\from{showkeys.doc}{}}
+     \endinput
+\fi
+%
+\ifcat a\noexpand @\let\next\relax\else\def\next{%
+    \documentstyle[showkeys,doc]{article}\MakePercentIgnore}\fi\next
+%
+%\def\eatmodule<#1>{}\eatmodule
+%</x>
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% \textwidth=355pt   ^^A Allow macrocode text with 72 columns.
+% \CodelineIndex     ^^A Code lines numbered.
+% \DisableCrossrefs  ^^A No Cross references.
+% \MakeShortVerb{\"} ^^A "\foo" works like \verb+\foo+
+%
+% \title{showkeys.sty}
+% \author{D. P. Carlisle}
+% \date{21 August 1992}
+% \begin{document}
+% \showboxdepth=100
+% \showboxbreadth=100
+% \maketitle
+%
+% \section{Introduction}\label{sec:intro}
+% "showkeys.sty" modifies the "\label", "\ref", "\pageref", "\cite", and
+% "\bibitem" commands so that the `internal' key is printed. The style
+% tries hard to position these labels so that the formatting of the rest
+% of the document is unchanged. "\label" and "\bibitem" cause the
+% key to appear in a box either in the margin, or in a \TeX\ box of zero
+% width, which may possibly over-print other text. The "\ref",
+% "\pageref" and "\cite" commands print their arguments in small type,
+% raised just above the line, like this: \ref{sec:intro}.
+% Works with "fleqn.sty". If used with "leqno.sty", or the AMS\LaTeX\
+% options, "showkeys" must come later in the option list of the
+% "\documentstyle" command.
+%
+% The only other similar style that I could find in the macro index,
+% \cite{DMJ:mi}, was "showlabels.sty", \cite{GN:sl}. After the first
+% draft of this style was written, I found \cite{anon:sk} on my local
+% installation! I think the current style is more robust than
+% \cite{anon:sk}, but I thought that "showkeys" was rather a good name,
+% so I have stolen it for this style.
+%
+% \begin{enumerate}
+% \item \label{e^1}This has "\label" immediately after "\item".
+% \item This has the "\label" at the end.\label{e^2}
+% \end{enumerate}
+%
+% \[
+% \mbox{A "minipage" :- }\left\{
+% \begin{minipage}{3in}
+% Within environments like this "minipage", We can not use "\marginpar",
+% so the appearance is slightly different. Here is that "enumerate"
+% environment again:
+%
+% \begin{enumerate}
+% \item \label{m&e^1}This has "\label" immediately after "\item".
+% \item This has the "\label" at the end.\label{m&e^2}
+% \end{enumerate}
+% \end{minipage}
+% \right.
+% \]
+%
+% Displayed math (without "equation" counter).
+% \[0=0\label{disp}\]
+%
+% Some text refering to the maths on page~\pageref{disp},  and the
+% item~\ref{e^1}.
+%
+% If "showkeys" thinks that the current environment is going to produce
+% an ``equation number'', then it does not show the label where the
+% "\label" command occurs, but tries to put it in the margin, as shown
+% with equation~\ref{eq:xx}.
+% The style `knows' about the standard "equation" and "eqnarray"
+% environments, and also all the numbered alignment environments offered
+% by the AMS\LaTeX\ option, "amstex". ("amstex.sty" must be loaded
+% before "showkeys.sty" for this to work.)
+% \begin{equation}
+% 1=1\label{eq:xx}
+% \end{equation}
+%
+% \begin{eqnarray}
+% 2&=&2\label{eqnar:a}\\
+% 3&=&3\nonumber\\
+% 4&=&4\label{eqnar:b}
+% \end{eqnarray}
+%
+% \begin{figure}[h]
+% Within a "figure" environment, the "\label" must not come  before the
+% "\caption" command. If you place "\label" inside the argument of
+% "\caption" the label will be shown like this:
+%
+% \caption{Within the caption argument.\label{cap:a}}
+%
+% If you place "\label" immediately after the "\caption" command it will
+% be shown like this:
+%
+% \caption{Immediately after the caption argument.}\label{cap:b}
+%
+% If you place the "\label" command at some random point after the
+% "\caption" command, it may be shown like:
+%
+% \caption{In vertical mode not immediately after a box.}
+% \vspace{2pt}
+%
+% \label{cap:c}
+% \end{figure}
+%
+%
+% \begin{thebibliography}{9}
+%
+% \bibitem{GN:sl}
+% Gil Neiger, {\em showlabels.sty},
+% Undated style option, similar to this one, but shows labels
+% inline, affecting the formating of the document.
+%
+% \bibitem{anon:sk}
+% Annonymous, {\em showkeys.sty},
+% Style option, dated 14 May 1988. Very similar to this one,
+% also uses "\marginpar" in outer vertical mode.
+%
+% \bibitem{DMJ:mi}
+% David M. Jones, {\em \TeX\ Macro Index},
+% A catalogue of \TeX\ macros, including \LaTeX\ style files,
+% available from all good \TeX\ archives.
+%
+% \end{thebibliography}
+%
+% \typeout{End of the Introduction and Examples.}
+% \typein[\answer]
+%   {Do you want an annotated listing of the macro definitions (y/n) ?}
+% \def\next{y}\ifx\answer\next\else\expandafter\enddocument\fi
+%
+% \section{The Macros}
+% As usual, prevent this file being read twice.
+%    \begin{macrocode}
+\@ifundefined{SK@label}{}{\endinput}
+%    \end{macrocode}
+%
+% Again my usual hack to stop "\reset@font" generating an error when
+% this style is used with old versions of \LaTeX.
+%    \begin{macrocode}
+\@ifundefined{reset@font}{}{}
+%    \end{macrocode}
+%
+% \begin{macro}{\SK@label}
+% \begin{macro}{\SK@bibitem}
+% \begin{macro}{\SK@lbibitem}
+% \begin{macro}{\SK@ref}
+% \begin{macro}{\SK@pageref}
+% \begin{macro}{\SK@citex}
+% The saved original definitions
+%    \begin{macrocode}
+\let\SK@label\label
+\let\SK@bibitem\@bibitem
+\let\SK@lbibitem\@lbibitem
+\let\SK@ref\ref
+\let\SK@pageref\pageref
+\let\SK@citex\@citex
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+%
+% \begin{macro}{\SK@tag@form@}
+% \begin{macro}{\SK@eqnnum}
+% Saved original definitions of macros that print equation numbers.
+%    \begin{macrocode}
+\let\SK@tagform@\tagform@
+\let\SK@eqnnum\@eqnnum
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+% \begin{macro}{\label}
+% \begin{macro}{\@bibitem}
+% \begin{macro}{\@lbibitem}
+% The new definition, print the argument, and then do the old
+% definition.
+%    \begin{macrocode}
+\def\label#1{\@bsphack\SK@\SK@@label{#1}\SK@label{#1}\@esphack}
+\def\@bibitem#1{\SK@\SK@@label{#1}\SK@bibitem{#1}\ignorespaces}
+\def\@lbibitem[#1]#2{%
+  \SK@\SK@@label{#2}\SK@lbibitem[#1]{#2}\ignorespaces}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+%
+% \begin{macro}{\SK@}
+% Grab hold of "#2" via "\meaning" so characters like "&" and
+% "^" do not cause problems later, and pass the result on to the command
+% "#1".
+%    \begin{macrocode}
+\def\SK@#1#2{\def\@tempa{#2}\expandafter#1\meaning\@tempa\SK@}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\SK@@label}
+% Strip off the initial segment of the "\meaning" output, and then put
+% the rest either in a "\marginpar" or in a box of size 0pt,
+% hopefully not disturbing the surrounding text.
+%    \begin{macrocode}
+\def\SK@@label#1>#2\SK@{%
+%    \end{macrocode}
+% Need to work globally as in some cases like alignments, and "fleqn",
+% the counter will be printed in a different group to the "\label"
+% command.
+%    \begin{macrocode}
+  \gdef\SK@lab{\smash{\fbox{\reset@font\small\tt#2}}}%
+  \ifvmode
+    \ifinner
+%    \end{macrocode}
+% Because of the contortions of the "list" environment, we might be in
+% inner vertical mode if the "\label" immediately follows an "\item".
+% The code for inner vertical mode is mainly optimised for the
+% "\caption" command, and would fail miserably here, so use "\mbox" to
+% get into horizontal mode, and to give a \meta{box} for "\lastbox" to
+% get hold of. Did any one say `kludge'?
+%    \begin{macrocode}
+      \if@inlabel
+        \mbox{}\let\@tempa\SK@lab
+                \def\SK@lab{\llap{\@tempa\kern\leftmargin}}%
+      \fi
+%    \end{macrocode}
+% In inner vertical mode, attach the label to the right of the
+% immediately preceding box, if it is a box before the current point.
+% Otherwise just put it in a box of zero dimensions, with no interline
+% skip. (This may slightly move the surrounding text.)
+%    \begin{macrocode}
+      \setbox\z@=\lastbox
+      \ifvoid\z@
+        \nointerlineskip\SK@labx
+      \else
+        \hbox{\box\z@\SK@labx}%
+      \fi
+    \else
+%    \end{macrocode}
+% In outer vertical mode, use a "\marginpar".
+%    \begin{macrocode}
+      \marginpar{\SK@lab}\SK@lab@relax
+    \fi
+  \else
+%    \end{macrocode}
+% If we are in an numbered equation-style environment, do nothing as the
+% code to print the number will also print the label, otherwise just
+% stick the label at the current point, in a box of zero dimensions.
+%    \begin{macrocode}
+    \csname SK@\@currenvir\endcsname
+    \ifSK@equation\else\SK@labx\fi
+  \fi}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\iftagsleft@}
+% Make sure that this AMS\LaTeX\ command really is an "\if.."
+%    \begin{macrocode}
+\def\@tempa{\let\iftagsleft@\iffalse}
+\ifx\iftagsleft@\undefined\@tempa\fi
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\tag@form@}
+% \begin{macro}{\eqnnum}
+% Perhaps if "leqno" is operative, I should define "\@eqnnum" with the
+% `left' version, but it does not really matter.
+%    \begin{macrocode}
+\iftagsleft@
+  \def\tagform@#1{\llap{\SK@lab\kern\marginparsep}%
+                   \SK@lab@relax\SK@tagform@{#1}}
+  \def\@eqnnum{\llap{\SK@lab\kern\displaywidth\kern\marginparsep}%
+                   \SK@lab@relax\SK@eqnnum}
+\else
+  \def\tagform@#1{\SK@tagform@{#1}%
+                   \rlap{\kern\marginparsep\SK@lab}\SK@lab@relax}
+  \def\@eqnnum{\SK@eqnnum\rlap{\kern\marginparsep\SK@lab}\SK@lab@relax}
+\fi
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+% \begin{macro}{\SK@labx}
+% Print the label, and then globally reset the print command to
+% "\relax".
+%    \begin{macrocode}
+\def\SK@labx{\rlap\SK@lab\global\let\SK@lab\relax}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\SK@lab@relax}
+% Clear the label.
+%    \begin{macrocode}
+\def\SK@lab@relax{\global\let\SK@lab\relax}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\SK@equation}
+% \begin{macro}{\SK@eqnaray}
+% \begin{macro}{\SK@align}
+% \begin{macro}{\SK@alignat}
+% \begin{macro}{\SK@xalignat}
+% \begin{macro}{\SK@xxalignat}
+% \begin{macro}{\SK@gather}
+% \begin{macro}{\SK@multline}
+% The following environments print an equation number, so "\label"
+% should not print its argument at the point where it appears.
+% Note this will fail to show the label if you are in an "eqnarray"
+% environment, and use "\label" together with "\nonumber" This might
+% just about make sense if you are going to use "\pageref", but that is
+% too bad\ldots
+%    \begin{macrocode}
+\newif\ifSK@equation
+\let\SK@equation\SK@equationtrue
+\let\SK@eqnarray\SK@equationtrue
+\let\SK@align\SK@equationtrue
+\let\SK@alignat\SK@equationtrue
+\let\SK@xalignat\SK@equationtrue
+\let\SK@xxalignat\SK@equationtrue
+\let\SK@gather\SK@equationtrue
+\let\SK@multline\SK@equationtrue
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+%
+% \begin{macro}{\ref}
+% \begin{macro}{\pageref}
+% \begin{macro}{\@citex}
+% Print the argument with "\SK@@ref", and then call the original
+% definition. then call the original macro.
+%    \begin{macrocode}
+\def\ref#1{\SK@\SK@@ref{#1}\SK@ref{#1}}
+\def\pageref#1{\SK@\SK@@ref{#1}\SK@pageref{#1}}
+\def\@citex[#1]#2{\SK@\SK@@ref{#2}\SK@citex[#1]{#2}}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+%
+% \begin{macro}{\SK@@ref}
+% This is much simpler than the printing of the label, as we know that
+% we can be in horizontal mode.
+%    \begin{macrocode}
+\def\SK@@ref#1>#2\SK@{%
+  \leavevmode\vbox to \z@{\vss
+    \rlap{\vrule\raise .75em
+       \hbox{\underbar{\reset@font\footnotesize\tt#2}}}}}
+%    \end{macrocode}
+% \end{macro}
+%
+% \end{document}
+\endinput

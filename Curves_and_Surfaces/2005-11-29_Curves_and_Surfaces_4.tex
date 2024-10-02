@@ -1,0 +1,135 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\def\STUDENT{} % \def すると計算問題の解答を印刷しなくなる.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[12pt,twoside]{jarticle}
+%\documentclass[12pt]{jarticle}
+\usepackage{amsmath,amssymb,amscd}
+\usepackage{eepic}
+\usepackage{enshu}
+\newcommand\qstar[1]{}
+%\usepackage{showkeys}
+\allowdisplaybreaks
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newlabel{q:kappa(t)-tau(t)}{{26}{10}}
+\newlabel{q:Fourier-coeff}{{65}{23}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setcounter{page}{25}      % この数から始まる
+\setcounter{section}{4}    % この数の次から始まる
+\setcounter{theorem}{0}    % この数の次から始まる
+\setcounter{question}{67}  % この数の次から始まる
+\setcounter{footnote}{0}   % この数の次から始まる
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\ifx\STUDENT\undefined
+%
+% 教師専用
+%
+\newcommand\commentout[1]{#1}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\else
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% 生徒専用
+%
+\newcommand\commentout[1]{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\fi
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\title{\bf 幾何学序論B演習
+%  \ifx\STUDENT\undefined\\{\normalsize 教師用\quad(計算問題の略解付き)}\fi}
+%\author{黒木 玄 \quad (東北大学大学院理学研究科数学専攻)}
+%\date{2005年10月4日(火)}
+%\maketitle
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\noindent
+{\Large\bf 幾何学序論B演習}
+\hfill
+{\large 黒木玄}
+\qquad
+2005年11月29日(火)
+\commentout{\quad (教師用)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\tableofcontents
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section*{先週渡したプリントの訂正}
+
+\qref{q:Fourier-coeff} の $\d ta_{m,n}$ は正しくは $\delta_{m,n}$ である.
+最後のヒントの $\int_0^\infty$ は正しくは $\int_0^{2\pi}$ である.
+
+\section*{問題 \qref{q:kappa(t)-tau(t)} の略解}
+
+\begin{proof}[略解]
+ 弧長パラメータを $s$ と書き, $t$ の函数 $f$ を $s$ の函数ともみなし, 
+ $s$ による微分を $f'$ と書くことにする. 
+ 弧長パラメータの定義より $f' = \dot f/|\dot q|$ である.
+
+ 方針: $e_1,q'',\kappa,e_2,e_3$ を順次 $\dot q$, $\ddot q$ で
+ 表わし, $\tau = e_3\cdot e_2'$ を計算する. 
+ そのとき $\dot q$, $\ddot q$ が $e_3$ と直交することを用いて
+ 計算を簡略化する.
+
+ まず最初に $e_1=q'$, $d|\dot q|/dt$, $e_1'=q''$ を $\dot q$, $\ddot q$ 
+ で表わそう:
+ \begin{align*}
+  &
+  e_1 = q' = \frac{\dot q}{|\dot q|},
+  \\ &
+  \frac{d|\dot q|}{dt}
+  = \frac{d}{dt}\sqrt{\dot q\cdot \dot q}
+  = \frac{2\dot q\cdot\ddot q}{2\sqrt{\dot q\cdot \dot q}}
+  = \frac{\dot q\cdot\ddot q}{|\dot q|},
+  \\ &
+  e_1'=q''=\frac{1}{|\dot q|}\frac{d}{dt}\frac{\dot q}{|\dot q|}
+  = \frac{\ddot q}{|\dot q|^2} 
+  - \frac{(\dot q\cdot\ddot q)\dot q}{|\dot q|^4}
+  = \frac{|\dot q|^2\ddot q - (\dot q\cdot\ddot q)\dot q}{|\dot q|^4}.
+ \end{align*}
+ よって $\kappa^2 = |q''|^2$ は次の形になる:
+ \begin{align*}
+  \kappa^2=|q''|^2
+  &
+  = \frac{|\dot q|^4|\ddot q|^2 
+  - 2|\dot q|^2(\dot q\cdot \ddot q)^2 
+  + |\dot q|^2(\dot q\cdot \ddot q)^2}{|\dot q|^8}
+%  \\ &
+  = \frac{|\dot q|^2|\ddot q|^2-(\dot q\cdot \ddot q)^2}{|\dot q|^6}
+  = \frac{|\dot q\times \ddot q|^2}{|\dot q|^6}.
+ \end{align*}
+ ここで公式 $|a\times b|^2=|a|^2|b|^2\sin^2\theta=|a|^2|b|^2-(a\cdot b)^2$
+ ($a,b\in\R^3$, $\theta$ は $a$ と $b$ のあいだの角度) を使った. よって
+ \begin{align*}
+  &
+  \kappa = |q''| = \frac{|\dot q\times \ddot q|}{|\dot q|^3},
+  \qquad
+%  \\ &
+  e_2 = \frac{q''}{|q''|} 
+  = \frac{\ddot q}{\kappa|\dot q|^2} 
+  - \frac{(\dot q\cdot\ddot q)\dot q}{\kappa|\dot q|^4},
+  \qquad
+%  \\ &
+  e_3=e_1\times e_2
+  = \frac{\dot q\times \ddot q}{\kappa|\dot q|^3}.
+ \end{align*}
+ 最後に $\tau=e_3\cdot e_2'$ を求めよう:
+ \begin{align*}
+  &
+  \tau = e_3\cdot e_2' = \frac{1}{|\dot q|}e_3\cdot\dot e_2
+  = 
+  \frac{1}{|\dot q|} 
+  \frac{\dot q\times \ddot q}{\kappa|\dot q|^3}
+  \cdot
+  \frac{\dddot q}{\kappa|\dot q|^2}
+  = \frac{(\dot q\times \ddot q)\cdot \dddot q}{|\dot q\times \ddot q|^2}
+  = \frac{\det[\dot q,\ddot q,\dddot q]}{|\dot q\times \ddot q|^2}.
+ \end{align*}
+ ここで3番目の等号で $\dot q$, $\ddot q$ と $e_3$ が直交することを使い, 
+ 最後の等号でベクトル解析の
+ 公式 $(a\times b)\cdot c=\det[a,b,c]$ ($a,b,c\in\R^3$) を使った.
+ \qed
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

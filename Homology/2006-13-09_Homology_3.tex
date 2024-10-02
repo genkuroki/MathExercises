@@ -1,0 +1,812 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\def\STUDENT{} % \def すると計算問題の解答を印刷しなくなる.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[12pt,twoside]{jarticle}
+%\documentclass[12pt]{jarticle}
+\usepackage{amsmath,amssymb,amscd}
+\usepackage{eepic}
+\usepackage{enshu}
+%\usepackage{showkeys}
+\allowdisplaybreaks
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newlabel{sec:kagun}{{1.2}{7}}
+\newlabel{q:T^2-Delta}{{14}{11}}
+\newlabel{q:Delta(n,n-2)}{{53}{26}}
+\newlabel{sec:relative-homology}{{4.4}{26}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setcounter{page}{35}      % この数から始まる
+\setcounter{section}{5}    % この数の次から始まる
+\setcounter{theorem}{0}    % この数の次から始まる
+\setcounter{question}{66}  % この数の次から始まる
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\ifx\STUDENT\undefined
+%
+% 教師専用
+%
+\newcommand\commentout[1]{#1}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\else
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% 生徒専用
+%
+\newcommand\commentout[1]{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\fi
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\title{\bf 幾何学概論B演習
+%  \ifx\STUDENT\undefined\\{\normalsize 教師用\quad(計算問題の略解付き)}\fi}
+%\author{黒木 玄 \quad (東北大学大学院理学研究科数学専攻)}
+%\date{2005年10月6日(木)}
+%\maketitle
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\noindent
+{\Large\bf 幾何学概論B演習}
+\hfill
+{\large 黒木玄}
+\qquad
+2007年1月9日(火)
+\commentout{\quad (教師用)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\tableofcontents
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{ホモトピー同値性の復習}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{ホモとピー同値}
+
+$I := [0,1]$ ($0$ から $1$ への閉区間)と置く. 位相空間のあいだの2つの連続写
+像 $f,g : X \to Y$ が互いに{\bf ホモトピー同値}(homotopy equivalent)で
+あるとは, ある連続写像 $F : X\times I \to Y$ で $F(x,0)=f(x)$,
+$F(x,1)=g(x)$ ($x\in X$)を満たすものが存在することであると定義する. 
+このとき, $F$ は $f$ から $g$ への{\bf ホモトピー}(homotopy)であると言
+い, $f\simeq g$ と書くことにする.
+
+位相空間のあいだの連続写像 $f:X\to Y$ が{\bf ホモトピー同値写像}(homotopy
+equivalence)であるとは, ある連続写像 $g:Y\to X$ で %
+$f\circ g \simeq \id_Y$, $g\circ f \simeq \id_X$ を満たすものが存在す
+ることであると定義する. このとき, 2つの位相空間 $X$, $Y$ は%
+{\bf ホモトピー同値}(homotopy equivalent)であると言う. 
+
+\begin{question}[可縮な位相空間]
+ 位相空間 $X$ に関する以下の条件は互いに同値である:
+ \begin{enumerate}
+  \item[(a)] $X$ は一点(だけで構成される位相空間)とホモトピー同値である.
+  \item[(b)] ある点 $x_0\in X$ とある連続写像 $F:X\times I\to X$ 
+   で $F(x,0)=x$, $F(x,1)=x_0$ ($x\in X$) を満たすものが存在する.
+  \item[(c)] 任意の点 $x_0\in X$ に対してある連続写像 $F:X\times I\to X$ 
+   で $F(x,0)=x$, $F(x,1)=x_0$ ($x\in X$) を満たすものが存在する.
+ \end{enumerate}
+ 以上の同値な条件のどれかを満たす位相空間は{\bf 可縮 (contractible)}であると言う.
+ \qed
+\end{question}
+
+位相空間のあいだの連続写像 $f : X \to Y$ が定値写像にホモトピー同値である
+とき, $f$ は{\bf 零ホモトピック}(nullhomotopic)もしくは%
+{\bf 零にホモトピック}(homotopic to zero)であると言い, $f\simeq 0$ と
+書く.
+
+\begin{question}
+  $X$, $Y$, $Z$ は任意の位相空間であるとする.  $X$ から $Y$ への連続写
+  像全体の集合を $C(X,Y)$ と書くことにする. 以下を示せ:
+  \begin{enumerate}
+  \item[(1)] 連続写像のホモトピー同値 $\simeq$ は $C(X,Y)$ におけ
+    る同値関係を定める. 
+  \item[(2)] 任意の $f,f'\in C(X,Y)$, $g,g'\in C(Y,Z)$ に対して, %
+    $f\simeq f'$ かつ $g\simeq g'$ ならば % 
+    $g\circ f \simeq g'\circ f'$ が成立する. 
+  \item[(3)] $X\simeq Y$ かつ $Y\simeq Z$ ならば $X\simeq Z$.
+    \qed
+  \end{enumerate}
+\end{question}
+
+%\noindent 圏の定義を知っている人は次の問題もついでに解いて欲しい.
+%
+%\begin{question}
+%  上の問題の続き. 
+$X$ から $Y$ への連続写像のホモトピー同値類全体の集
+合を $[X,Y]$ と書くことにする:
+\[
+  [X,Y] := C(X,Y)/{\simeq}.
+\]
+$f\in C(X,Y)$ を含む同値類 $[f]\in[X,Y]$ を $f$ の{\bf ホモトピー類}
+(homotopy class)と呼ぶ. 
+%  以下を示せ:
+%  \begin{enumerate}
+%  \item[(1)] 位相空間の全体と
+%    それらのあいだの連続写像の全体は連続写像の合成に関して圏をなす.
+%  \item[(2)] 連続写像の合成は写像 $[Y,Z]\times[X,Y]\to[X,Z]$,
+%    $([g],[f])\mapsto[g\circ f]$ を誘導する. 
+%  \item[(3)] これによって, 位相空間の全体とそれらのあいだの
+%    連続写像のホモトピー類の全体は圏をなす. \qed
+%  \end{enumerate}
+%\end{question}
+%
+%\noindent 参考: 位相空間と連続写像の圏を単に位相空間の圏と呼び, $\Top$
+%と書くことにする. 位相空間と連続写像のホモトピー類の圏を(位相空間の)ホ
+%モトピー圏(homotopy category (of topological spaces))と呼び, $\Htp$ と
+%書くことにする. 位相空間のホモトピー同値は圏 $\Htp$ における同型という
+%概念に等しい. 連続写像に対してそのホモトピー類を対応させる写像は %
+%函手 $\Top \to \Htp$ を定める. 代数的位相幾何学の基本的な考え方は,
+%$\Top$ もしくは $\Htp$ (のある部分圏もしくはそれらの変種)からなんらか
+%の代数系(例えば群, 環, etc)のなす圏への函手を構成し, その函手の性質を
+%詳しく調べることによって, 位相幾何的な定理を証明することである.
+%
+%\bigskip
+
+\begin{question}[容易]
+  2つの位相空間 $X$ と $Y$ が互いにホモトピー同値であるとする. このと
+  き, $X$ が可縮であることと $Y$ が可縮であることは同値である. \qed
+\end{question}
+
+\begin{question}
+  $\R^n$ の凸部分集合は可縮である.
+%  特に $p$ 次元単体は可縮である. 
+  \qed
+\end{question}
+
+\begin{proof}[ヒント]
+$X$ は $\R^n$ の凸部分集合であるとし, 任意に一点 $a\in X$ を取る.
+写像 $F:X\times I\to X$ を次のように定める:
+\begin{equation*}
+  F(t,x) = (1-t)x + ta \qquad (t\in I=[0,1],\ x\in X).
+\end{equation*}
+このとき $F$ は連続写像である.  $F$ は直観的にどのような写像であると
+説明できるか? \qed
+\end{proof}
+
+\begin{question}
+  $C$ が可縮な位相空間であるとき, 
+  任意の位相空間 $X$ に対して, $X\times C$ は $X$ 自身とホモトピー同値で
+  ある. 例えば, $X\times I$ は $X$ とホモトピー同値である. 
+  \qed
+\end{question}
+
+\noindent
+注意: 上の問題は, 可縮な $C$ の分だけ位相空間 $X$ に ``厚み'' を付けて
+も, もとの $X$ とホモトピー同値になることを意味している. \qed
+
+\begin{question}
+  $X$ は位相空間であるとし, 任意に一点 $a\in X$ を取る.
+  $X$ と $I=[0,1]$ の disjoint unioin 
+  を $a\in X$ と $1\in I$ を同一視する同値関係で割ってできる
+  商位相空間を $X'$ と書くことにする.
+  $X'$ は $X$ にホモトピー同値である.
+  \qed
+\end{question}
+
+\noindent
+注意: 上の問題は, 位相空間 $X$ に ``ひげ'' を付けても, 
+もとの $X$ とホモトピー同値になることを意味している. \qed
+
+\begin{question}
+  $f:X\to Y$ は位相空間のあいだの連続写像であるとする. 
+  $X\times I$ の中の $X\times\{1\}$ を $f$ を通じて $Y$ に接着して
+  できる位相空間を $Y'$ と書くことにする%
+  \footnote{この $Y'$ を $f:X\to Y$ の mapping cylinder と呼ぶ.}. 
+  より正確に言えば $X\times I$ と $Y$ の disjoint unioin を %
+  $(x,1)\in X\times I$ と $f(x)\in Y$ を貼り合わせる同値関係で
+  割ってできる商位相空間を $Y'$ と書くことにする.
+  このとき $Y'$ は $Y$ とホモトピー同値である.
+  \qed
+\end{question}
+
+\begin{question}
+  $[0,1)$ と $(0,1)$ はホモトピー同値である. \qed
+\end{question}
+
+\begin{question}\qstar{*}
+  \label{q:he-[0,1]}
+  区間 $I=[0,1]$ の $0$ と $1/2$ を同一視して得られる商空間を $X$ と書
+  くと, $X$ は $S^1$ とホモトピー同値である. \qed
+\end{question}
+
+\begin{question}\qstar{*}
+  \label{q:he-[0,3]}
+  $[0,3]$ における $0$ と $1$ を同一視し, $2$ と $3$ を同一視してでき
+  る商位相空間を $X$ と書き, $[0,3]$ における $0$ と $2$ を同一視し,
+  $1$ と $3$ を同一視してできる商空間を $Y$ と書く. $X$ と $Y$ はホモ
+  トピー同値である. \qed
+\end{question}
+
+\begin{question}
+  開円環 $A=\{\,(x,y)\in\R^2\mid 1/2<x^2+y^2<1\,\}$ とそれに
+  一点を付け加えてできる $A\cup\{(1,0)\}$ はホモトピー同値である. \qed
+\end{question}
+
+\begin{question}
+  上の問題の開円環 $A$ 
+  と $B=\{\,(x,y)\in[0,\infty)\times\R\mid (x-2)^2+y^2\ge 1\,\}$ は
+  ホモトピー同値である. 
+  \qed
+\end{question}
+
+\begin{question}\qstar{*}
+  $I\times I$ における全ての $t\in I$ に
+  対する点 $(0,t)$ と点 $(1,t)$ を
+  同一視して得られる商空間(円筒)を $X$ と書き, 
+  $I\times I$ における全ての $t\in I$ に
+  対する点 $(0,t)$ と点 $(1,1-t)$ を
+  同一視して得られる商空間(メビウスの帯)を $Y$ と書くことにする. 
+  $X$ と $Y$ は $S^1$ にホモトピー同値である. \qed
+\end{question}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{錐, 懸垂, 写像柱, 写像錐}
+
+
+位相空間 $X$ に対して, $X\times I$ における $X\times\{0\}$ を1点に潰し
+て得られる位相空間を $X$ の{\bf 錐 (cone)}と呼び, $\Cone(X)$ と書くこと
+にする. 以下, $X\times\{1\}$ の $\Cone(X)$ における像と $X$ を同一視し,
+$X\subset \Cone(X)$ とみなすことが多い.
+
+\begin{question}
+  位相空間のあいだの連続写像 $f:X\to Y$ に対して, %
+  $f\times \id_I : X\times I \to Y\times I$, $(x,t)\mapsto(f(x),t)$ %
+  は $\Cone(X)$ から $\Cone(Y)$ への連続写像を誘導することを示せ. その
+  写像を $\Cone(f)$ と書くことにする. 
+%  これによって, 錐を取る操作 %
+%  $\Cone(\bcdot)$ は位相空間の圏からそれ自身への函手をなすことを示せ. 
+  \qed
+\end{question}
+
+\begin{question}
+  位相空間のあいだの連続写像 $f,g:X\to Y$ に対して, %
+  $f$ と $g$ がホモトピー同値ならば $\Cone(f)$ と $\Cone(g)$ もホモト
+  ピー同値である. \qed
+\end{question}
+
+\noindent よって錐を取る操作は写像 %
+$\Cone:[X,Y]\to[\Cone(X),\Cone(Y)]$ を誘導する. %
+%ので, 錐を取る操作ははホモトピー圏からそれ自身への函手を定めることがわかる.
+
+\begin{question}\qstar{*}
+  任意の位相空間の錐は連結でかつ可縮である. \qed
+\end{question}
+
+\begin{question}\qstar{*}
+  $n$ 次元球面の錐は $n+1$ 次元閉円板(閉球体)に同相である. \qed
+\end{question}
+
+\begin{question}\label{q:cone-nullhomotopic}\qstar{*}
+  位相空間のあいだの連続写像 $f:X\to Y$ に対して, $f$ が homotopic to zero
+  であるための必要十分条件は $f$ が連続写像 $\Cone(X)\to Y$ に拡張可能
+  なことである. \qed
+\end{question}
+
+\begin{proof}[ヒント]
+定値写像から $f$ へのホモトピー $G:X\times I\to Y$ 
+と $f$ の拡張 $F:\Cone(X)\to Y$ を誘導する. この対応によって, 定値写像
+から$f$ へのホモトピーと $f$ の $\Cone(X)$ 上への連続的な拡張は一対一
+対応する.
+\qed 
+\end{proof}
+
+$X\times I$ における$X\times\{0\}$, $X\times\{1\}$ のそれぞれを1点に潰
+してできる位相空間を $X$ の{\bf 懸垂 (suspension)} と呼び, $S(X)$ と書く
+ことにする. $X$ に対して $n$ 回懸垂を取ることによって得られた位相空間
+を $S^n(X)$ と書くことにする.
+
+\begin{question}
+  位相空間のあいだの連続写像 $f:X\to Y$ に対して, %
+  $f\times \id_I : X\times I \to Y\times I$, $(x,t)\mapsto(f(x),t)$ は %
+  $S(X)$ から $S(Y)$ への連続写像を誘導することを示せ. その写像を %
+  $S(f)$ と書き, $f$ の懸垂と呼ぶことにする. 
+%  これによって, 懸垂を取る
+%  操作 $S(\bcdot)$ は位相空間の圏からそれ自身への函手をなすことを示せ. 
+  \qed
+\end{question}
+
+\begin{question}
+  位相空間のあいだの連続写像 $f,g:X\to Y$ に対して, %
+  $f$ と $g$ がホモトピー同値ならば $S(f)$ と $S(g)$ もホモトピー同値
+  である. \qed
+\end{question}
+
+\noindent よって懸垂を取る操作は写像 %
+$S:[X,Y]\to[S(X),S(Y)]$ を誘導する.
+%ので, 懸垂を取る操作ははホモトピー圏からそれ自身への函手を定めることがわかる.
+
+\begin{question}
+  任意の位相空間の懸垂は連結である. \qed
+\end{question}
+
+\begin{question}\qstar{*}
+  $n$ 次元球面の懸垂 $S(S^n)$ は $S^{n+1}$ に同相である.
+  よって, $n$ 次元球面 $m$ 回懸垂 $S^m(S^n)$ は $m+n$ 次元球面 %
+  $S^{m+n}$ に同相である%
+  \footnote{懸垂の $S$ は suspension の略であり, 球面の $S$ は 
+    sphere の略であるから, $S^m(S^n)\simeq S^{m+n}$ という記号的に
+    記憶し易い公式が生じたのは偶然であろう.}. %
+  \qed
+\end{question}
+
+\begin{guide}
+  以下で述べる内容はおそろしく先走っている.
+  今の段階では無視して通り過ぎた方が良い.
+%  後で問題に出すことになると思うが, 
+  ホモロジー群の Mayer-Vietoris の完全列より, $p\ge 2$ のとき, %
+  $H_p(S(X))\isom H_{p-1}(X)$ が成立することを示すことができる. 
+  その概略は以下の通り. $X\times[0,1/2]$ と $X\times[1/2,1]$ の懸垂 %
+  $S(X)$ における像をそれぞれ $C^{-}$, $C^{+}$ と書くことにする. %
+  $C^{-}\cap C^{+}=X\times\{1/2\}$ は $X$ に同相であり, %
+  $C^{-}\cup C^{+}=S(X)$ が成立する. $C^{\pm}$ は共に $X$ の錐に同相
+  なので連結かつ可縮である. よって, $H^0(C^\pm)\isom\Z$ かつ %
+  $H^p(C^\pm)=0$ ($p>0$). よって, Mayer-Vietoris の完全列は次のようにな
+  る:
+  \begin{equation*}
+    0 \leftarrow H_0(S(X)) 
+    \leftarrow \Z^2 
+    \leftarrow H_0(X) 
+    \leftarrow H_1(S(X)) 
+    \leftarrow 0 
+    \leftarrow H_1(X) 
+    \leftarrow H_2(S(X) 
+    \leftarrow 0 
+    \leftarrow \cdots.
+  \end{equation*}
+  よって, $p\ge 2$ のとき $H_p(S(X))\isom H_{p-1}(X)$. $S(X)$ は連結な
+  ので $H_0(S(X))\isom\Z$ となる. $H_0(X)$ は $X$ の連結成分から生成さ
+  れる自由群に同型であり, 上の完全列中の $H_0(X)\to\Z^2$ は $X$ の各連結
+  成分を $(1,1)$ に移す写像になる. その kernel を $\widetilde{H}_0(X)$ 
+  と書くことにすると, $H_1(S(X))\isom \widetilde{H}_0(X)$ が成立する. %
+  $H_0(X)\isom\Z^M$ と $\widetilde{H}_0(X)\isom\Z^{M-1}$ は同値である. %
+  $p>0$ では $\widetilde{H}_p(X)=H_p(X)$ であるとし, $p<0$ では %
+  $\widetilde{H}_p(X)=0$ と約束しておく. $\widetilde{H}_p(X)$ を $X$ の
+  {\bf 被約ホモロジー群(reduced homology group)} と呼ぶ. 
+  被約ホモロジーの記号を使えば, 
+  懸垂のホモロジー群に関する以上の結果は次の形にまとめられる:
+  \[
+    \widetilde{H}_p(S(X)) \isom \widetilde{H}_{p-1}(X)
+    \qquad
+    (p\in\Z).
+  \] %
+  すなわち, 懸垂を取る操作は, 被約ホモロジー群の方で見ると, 次数を1つず
+  らすという操作に対応しているのである.
+
+  ホモロジー群は代数の世界の対象であり, 代数の世界には代数の世界の自然な
+  操作が存在する. たとえば次数を1つずらす操作は代数の世界における自然な
+  操作のひとつであると考えられる.
+  一方, 位相空間は幾何の世界の対象である. 位相空間の世界はホモロジーを
+  取る操作によって代数の世界と繋がっている. その繋がりを通して, 
+  代数の世界における自然な操作に対応する位相空間の幾何的な操作を
+  探すのは基本的な問題である.
+  \qed
+\end{guide}
+
+\begin{question}[mapping cylinder]
+  \label{q:mapping-cylinder}
+  $X$, $Y$ は位相空間であるとし, $f : X \to Y$ は連続写像であるとする.
+  任意の $a,b\in(X\times I)\sqcup Y$ に対して,
+  \begin{itemize}
+  \item[(a)] $a=b$,
+  \item[(b)] ある $x\in X$ が存在して, $a=(x,1)$ かつ $f(x)=b$,
+  \item[(c)] ある $x\in X$ が存在して, $b=(x,1)$ かつ $f(x)=a$,
+  \item[(d)] ある $x,x'\in X$ が存在して, $a=(x,1)$, $b=(x',1)$
+   かつ $f(x)=f(x')$.
+  \end{itemize}
+  のどれかが成立するとき, $a\sim b$ と書くことにする. %
+  $\sim$ は $(X\times I)\sqcup Y$ における同値関係になる. 商空間 %
+  $((X\times I)\sqcup Y)/{\sim}$ を $f$ の{\bf 写像柱}(mapping
+  cylinder)と呼び, 仮に $Y'$ と書くことにする.  %
+  以下を示せ:
+  \begin{enumerate}
+  \item[(1)] 写像 $X \to X \times I$, $x \mapsto (x,0)$ が誘導する $X$ から
+    $Y'$ への自然な写像 $f'$ は $X$ から $f'(X)$ への同相写像を定める.
+  \item[(2)] $Y$ から $(X\times I)\sqcup Y$ への自然な写像が誘導する $Y$ か
+    ら $Y'$ への自然な写像 $j'$ は $Y$ から $j'(Y)$ への同相写像を定め
+    る. 
+  \item[(3)] $f$ と $\id_Y$ が誘導する $Y'$ から $Y$ への自然な写像 $p'$ は
+    全射連続写像であり, $f = p' \circ f'$ を満たしている.
+  \item[(4)] $p'\circ j' = \id_Y$ および $j'\circ p' \simeq \id_{Y'}$ なる
+    ホモトピー同値が成立している. 特に $Y$ と $Y'$ はホモトピー同値で
+    ある. 
+  \end{enumerate}
+  さらに, 以上の事実を簡単な図を描いて直観的に説明せよ. \qed
+\end{question}
+
+\begin{guide}
+$f : X \to Y$ の写像柱(mapping cylinder)とは, %
+$X\times I$ の ``片側の面'' $X\times\{1\}$ を写像 $f$ によって $Y$ に
+接着してできる位相空間のことである. 写像柱の構成は, $Y$ とホモトピー同
+値な $Y'$ を用意し, ホモトピー同値の違いを無視したとき $f$ と区別する
+必要のない単射連続写像 $f' : X\to Y'$ を自然に構成できることを意味して
+いる.
+\qed 
+\end{guide}
+
+\begin{question}[mapping cone]
+  上の問題の続き. $f : X \to Y$ の写像柱 $Y'$ における $X\times\{0\}$ 
+  の像を1点に潰して得られる商位相空間を $f$ の{\bf 写像錐}(mapping
+  cone)と呼び, $C(f)$ と書くことにする. 以下を示せ:
+  \begin{enumerate}
+  \item[(1)] $Y$ の $(X\times I)\sqcup Y$ への自然な写像が誘導する $Y$ から
+    $C(f)$ への自然な写像 $j$ は $Y$ から $j(Y)$ への同相写像を定める.
+  \item[(2)] 写像錐 $C(f)$ における $Y$ の像を1点に潰して得られる商位相空間
+    を仮に $Z$ と書く. $X\times I$ から $C(f)$ への自然な写像は, $X$の
+    懸垂 $S(X)$ から $Z$ への同相写像を誘導する. その同相写像と $C(f)$ 
+    から $Z$への自然な写像の合成 $q$ は $C(f)$ から $S(X)$ への全射連
+    続写像である.
+  \item[(3)] $q$ と $j$ で構成される
+    写像の列 $Y \to C(f) \to S(X)$ の合成は定値写像になる. 
+    その定値写像の像の一点を $s$ と書くとき, $q^{-1}(s)=j(Y)$ が成立している. 
+  \end{enumerate}
+  さらに, 以上の事実を簡単な図を描いて直観的に説明せよ. \qed
+\end{question}
+
+\begin{guide}
+$f : X \to Y$ の mapping cone とは, $X\times I$ の 
+片側の面 $X\times\{0\}$ を1点に潰し, 反対側の面 $X\times\{1\}$ を写像 %
+$f$ によって $Y$ に接着してできる位相空間のことである. $j$ を通して %
+$Y$ と $j(Y)$ を同一視することが多い.
+\qed
+\end{guide}
+
+\begin{guide}
+  以下で述べる内容はおそろしく先走っている.
+  今の段階では無視して通り過ぎた方が良い.
+  写像錐より得られる連続写像の列 %
+  $Y \to  C(f) \to S(X)$ より, 自然に鎖複体の単完全列が得られ, 
+  次のホモロジー長完全列が得られることが知られている:
+  \begin{equation*}
+  \begin{CD}
+    \cdots @>>>
+    \widetilde{H}_p(Y) @>>>
+    \widetilde{H}_p(C(f)) @>>> 
+    \widetilde{H}_p(S(X)) @>>>
+    \widetilde{H}_{p-1}(Y) @>>> \cdots.
+  \end{CD}
+  \end{equation*}
+  これを {\bf Puppe の完全列}と呼ぶ. ここで, %
+  $\widetilde{H}_p(S(X))\isom \widetilde{H}_{p-1}(X)$ となることに注意
+  すれば, この完全列は $X$, $Y$, $C(f)$ のホモロジー群のあいだの関係を記述し
+  ていることがわかる.
+  \qed
+\end{guide}
+
+\begin{guide}
+  以下で述べる内容はおそろしく先走っている.
+  今の段階では無視して通り過ぎた方が良い.
+  懸垂と写像錐のアイデアを純代数的に(余)鎖複体のレベルで
+  定義することもできる%
+  \footnote{後で触れるように鎖写像に関するホモトピー作用素は位相空間のあいだ
+    の連続写像のあいだのホモトピーのアイデアを(余)鎖複体のレベルで定義したも
+    のである.}. %
+  その概略は以下の通り.  鎖複体 $X_\bcdot$ と整数 $n$ に対して, 鎖複体 
+  $X[n]_\bcdot$ を次にように定義する:
+  \[
+    X[n]_p := X_{p-n},
+    \qquad
+    \bdr[n]_p := (-1)^n \bdr_p.
+  \] %
+  このとき, $H_p(X[n]_\bcdot)=H_{p-n}(X_\bcdot)$ が成立する. これは,
+  $\widetilde{H}_p(S^n(X))\isom\widetilde{H}_{p-n}(X)$ と類似している. 
+  鎖複体のあいだの鎖写像 $f : X_\bcdot \to Y_\bcdot$ に対して, 鎖複体 
+  $C_\bcdot$ を次の式によって定義することができる:
+  \[
+    C_p := X[1]_p\oplus Y_p = X_{p-1}\oplus Y_p,
+    \qquad
+    \bdr_p(x,y)=(-\bdr x, f(x)+\bdr y)
+    \quad (x\in X_{p-1}, y\in Y_p).
+  \]
+  このとき, $j_p : Y_p \to C_p$, $y\mapsto (0,y)$, %
+  $q_p : C_p \to X[1]_p$, $(x,0)\mapsto x$ なる写像を考えることにより, 
+  鎖複体の単完全列
+  \begin{equation*}
+  \begin{CD}
+    0 @>>> Y_\bcdot @>j>> C_\bcdot @>q>> X[1]_\bcdot @>>> 0
+  \end{CD}
+  \end{equation*}
+  が得られる. 鎖複体 $C_\bcdot$ を鎖写像 $f$ の写像錐と呼ぶ. このような
+  構成はホモロジー代数学において基本的である. 
+  %(より詳しいことを知りたい人は\cite{KS}の第I章を参照せよ.)
+  \qed
+\end{guide}
+
+位相空間 $X$ とその部分空間 $A$ を考え, $A$ から $X$ への包含写像を %
+$i$ と書くことにする. 連続写像 $r : X \to A$ が $r\circ i = \id_A$ を
+満たしているとき, $r$ は $X$ の $A$ への{\bf 引き込み}(retraction)であ
+ると言う. $A$ の retraction が存在するとき, $A$ は $X$ の%
+{\bf レトラクト} (retract)であると言う. $A$ の retraction $r$ で 
+$i\circ r\simeq\id_X$ を満たすものが存在するとき, $A$ は $X$ の%
+{\bf 変位レトラクト}もしくは{\bf 変形レトラクト}(deformation retract)
+であると言う.
+
+\begin{question}\qstar{*}
+  位相空間 $X$ の変位レトラクトは $X$ とホモトピー同値であることを示せ. 
+  \qed
+\end{question}
+
+\begin{question}\qstar{*}
+  $I\times I$ における点 $(0,t)$ と $(1,1-t)$ ($t\in I=[0,1]$) を同一
+  視することによって得られる商位相空間 $M$ をメビウスの帯(M\"obius
+  band)と呼ぶ. $I\times\{1/2\}$ の $M$ における像は, $S^1$ に同相であ
+  り, $M$ の変位レトラクトであることを示せ. \qed
+\end{question}
+
+\begin{question}
+  $f: X\to Y$ は位相空間のあいだの連続写像であり, $C(f)$ はその写像錐であ
+  るとする. (以下では $Y\subset C(f)$ とみなす.) このとき, $f$ が 
+  homotopic to zero であることと $Y$ が $C(f)$ のレトラクトであること
+  は同値である. \qed
+\end{question}
+
+\begin{proof}[ヒント]
+点 $(x,t)\in X\times I$ の $C(f)$ における像を 
+$[x,t]$ と書くことにする.  $j : Y \to C(f)$ の retraction と %
+$r : C(f)\to Y$ と $X$ から $Y$ へのある定値写像から $f$ へ%
+のホモトピー $F : X\times I \to Y$ が, %
+$r([x,t])=F(x,t)$ ($(x,t)\in X\times I$) なる条件によって, 一対一対応
+することを示せ. \qed
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{ホモロジー群の基本性質}
+
+ホモロジー群の基本性質を列挙しておこう.
+この節で列挙する性質はホモロジー群の概念を応用するときに
+自由に利用されることになる.
+
+\begin{guide}[実用的なホモロジー論の理解の仕方]
+ 初学者は数学的能力を鍛えるためにできるだけ多くの証明を書き下す訓練を
+ した方が良い. それでは自分を鍛えるためではなく, 
+ 理解して応用するためにホモロジー論を学ぶ場合にはどうすれば効率的だろうか? 
+ 実は以下で説明しておいたホモロジー論の基本性質から出発して, 
+ 各性質がどのような幾何的な意味を持っており, 
+ どうして成立しなければいけないかを
+ できるだけ早く理解するように努力すると効率が良い.
+ そして応用上の都合に応じて
+ ホモロジー群が $\Delta$ 複体のホモロジー群や
+ 特異ホモロジー群によって表現されていると考える.
+ \qed
+\end{guide}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{ホモロジー}
+
+$\Delta$ 複体構造を入れることができる位相空間 $X$ ごとに $\Delta$ 複体構造
+を一つ固定し, その $\Delta$ 複体構造に関する $X$ の $p$ 次元ホモロジー群
+を $H_p(X)=H_p(X,\Z)$ と書くことにする. 
+$H_p(X)$ は $X$ の $\Delta$ 複体構造によらずに定まることを証明できる.
+
+$\Delta$ 複体構造を入れることができる位相空間のあいだの
+任意の連続写像 $f:X\to Y$ に対して, 
+加群の準同型写像 $H_p(f):H_p(X)\to H_p(Y)$ が定義される.
+
+ただし, $H_p(X)$ が $X$ の $\Delta$ 複体構造の取り方によらずに定まること
+の証明および $H_p(f)$ の構成はかなり非自明である.  
+そのためには{\bf 単体近似定理}を用いた混み入った議論や
+{\bf 特異ホモロジー群}の導入と同型の証明のための長い議論が必要になる.
+
+途中の議論はかなり複雑になるが, 結果的に証明される基本的結果 
+(幾何的に証明されるべき基本的結果) は明僚で簡単である.
+
+せっかくホモロジー群について勉強するのであれば
+次の定理の結果はおぼえておくべきである.
+
+\begin{theorem}[ホモロジー群の基本性質]
+  \label{theorem:homology-MV}
+  いつものように $I=[0,1]$ ($0$ から $1$ のあいだの閉区間) と書き,
+  一点で構成された位相空間を $\pt$ と書くことにする.
+  位相空間のあいだの二つの連続写像 $f,g:X\to Y$ がホモトピー同値である
+  ことを $f\simeq g$ と書くことにする.
+  \begin{enumerate}
+  \item[(1)] {\bf ホモロジー群の函手性:} 
+    $X$, $Y$, $Z$ は $\Delta$ 複体構造が入る位相空間であり,
+    $f:X\to Y$, $g:Y\to Z$ は連続写像であるとする. このとき
+    \begin{equation*}
+      H_p(g\circ f) = H_p(g)\circ H_p(f),
+      \qquad
+      H_p(\id_X) = \id_{H_p(X)}.
+    \end{equation*}
+  \item[(2)] {\bf ホモロジー群のホモトピー不変性:} 
+    $X$, $Y$ は $\Delta$ 複体構造が入る位相空間であり,
+    $f,g:X\to Y$ は連続写像であるとする. このとき
+    \begin{equation*}
+      f\simeq g \quad\text{(ホモトピー同値)}
+      \implies H_p(f)=H_p(g).
+    \end{equation*}
+    特に $f:X\to Y$ がホモトピー同値写像ならば $H_p(f):H_p(X)\to H_p(Y)$ は
+    加群の同型写像になる.
+  \item[(3)] {\bf 一点のホモロジー群:} 
+    \begin{equation*}
+      H_p(\pt) \cong
+      \begin{cases}
+        \Z & \quad (p=0), \\
+        0  & \quad (p\ne 0). \\
+      \end{cases}
+    \end{equation*}
+    性質(2)より $X$ が可縮であれば $H_p(X)\cong H_p(\pt)$ となること
+    に注意せよ.
+  \item[(4)] {\bf 連結性の判定法:} 
+    $\Delta$ 複体構造が入る任意の位相空間 $X$ について
+    \begin{equation*}
+      \text{$X$ は連結である} \iff H_0(X)\cong\Z.
+    \end{equation*}
+  \item[(5)] {\bf 直和との可換性:} 
+    $\Delta$ 複体構造が入る位相空間 $X_1$, $X_2$ に対して
+    それらの非連結和への
+    包含写像 $i_1:X_1\injto X_1\sqcup X_2$, %
+    $i_2:X_2\injto X_1\sqcup X_2$ は
+    次の同型写像を誘導する:
+    \begin{equation*}
+      H_p(X_1)\oplus H_p(X_2) \isomto H_p(X_1\sqcup X_2),
+      \quad
+      ([c_1], [c_2]) \mapsto H_p(i_1)[c_1] + H_p(i_2)[c_2].
+    \end{equation*}
+  \item[(6)] {\bf Mayer-Vietoris の完全列:}
+    $X$ は $\Delta$ 複体構造が入る位相空間であり, 
+    その $X_1, X_2\subset X$ は $X$ のある $\Delta$ 複体構造に
+    関して部分複体になっていると仮定する. 
+    このとき $(X,X_1,X_2)$ のみによって定まる準同型写像
+    \begin{equation*}
+      \delta_p=\delta_p(X,X_1,X_2) : H_p(X) \to H_{p-1}(X_1\cap X_2)
+    \end{equation*}
+    がうまく定義され, 次の準同型写像の列は完全列になる:
+    \begin{equation*}
+      \cdots
+      \leftarrow H_{p-1}(X_1\cap X_2)
+      \leftarrow H_p(X)
+      \leftarrow H_p(X_1)\oplus H_1(X_2)
+      \leftarrow H_p(X_1\cap X_2)
+      \leftarrow \cdots
+    \end{equation*}
+    ここで
+    \begin{itemize}
+    \item $H_{p-1}(X_1\cap X_2)\leftarrow H_p(X)$ は $\delta_p$ である.
+    \item $H_p(X)\leftarrow H_p(X_1)\oplus H_1(X_2)$ 
+      は (5) の同型写像と自然な射影 $\pi:X_1\sqcup X_2\onto X$ に
+      が定める準同型写像 $H_p(\pi):H_p(X_1\sqcup X_2)\to H_p(X)$ の合成である.
+    \item $H_p(X_1)\oplus H_1(X_2)\leftarrow H_p(X_1\cap X_2)$  
+      は自然な包含写像 $\iota_1:X_1\cap X_2\injto X_1$, %
+      $\iota_2:X_1\cap X_2\injto X_2$ が定める次の準同型写像である:
+      \begin{equation*}
+        H_p(X_1\cap X_2) \to H_p(X_1)\oplus H_1(X_2),
+        \quad
+        [c] \mapsto (H_p(\iota_1)[c],\; - H_p(\iota_2)[c])
+      \end{equation*}
+    \end{itemize}
+  \item[(7)] {\bf $\delta_p$ の自然性:}
+    $(X,X_1,X_2)$ は上の(6)の条件を満たしており, $(Y,Y_1,Y_2)$ も同様の
+    条件を満たしているとし, 連続写像 $f:X\to Y$ は $f(X_1)\subset Y_1$, %
+    $f(X_2)\subset Y_2$ を満たしていると仮定する. 
+    このとき次の図式は可換になる:
+    \begin{equation*}
+    \begin{CD}
+      H_{p-1}(X_1\cap X_2) @<\delta_p<< H_p(X) \\
+      @V{H_{p-1}(f|_{X_1\cap X_2})}VV  @VV{H_p(f)}V \\
+      H_{p-1}(Y_1\cap Y_2) @<<\delta'_p< H_p(Y). \\
+    \end{CD}
+    \end{equation*}
+    ここで $\delta_p=\delta_p(X,X_1,X_2)$, $\delta'_p=\delta_p(Y,Y_1,Y_2)$ で
+    ある.
+    \qed
+  \end{enumerate}
+\end{theorem}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{相対ホモロジー}
+
+$\Delta$ 複体 $X$ とその $\Delta$ 部分複体 $A$ の
+対 $(X,A)$ を空間対と呼ぶことにする.
+空間対 $(X,A)$ に対して\secref{sec:relative-homology}の方法によって
+相対ホモロジー群 $H^p(X,A)$ が定義される.
+$H_p(X,A)$ は $\Delta$ 複体構造によらずに定まることを示せる.
+
+$H_p(X)=H_p(X,\emptyset)$ なので $X$ と空集合の空間対 $(X,\emptyset)$ 
+と $X$ 自身を同一視して考える.
+
+空間対 $(X,A)$, $(Y,B)$ のあいだの連続写像 $f:(X,A)\to(Y,B)$ 
+とは連続写像 $f:X\to Y$ で $f(A)\subset B$ を満たすもののことである.
+空間対のあいだの連続写像 $f:(X,A)\to(Y,B)$ に対して, 
+準同型写像 $H_p(f):H_p(X,A)\to H_p(Y,B)$ が定まることも証明できる.
+まじめに証明を書き下すのはかなり面倒である.
+
+いつものように $I=[0,1]$ ($0$ から $1$ のあいだの閉区間) と書き,
+一点で構成された位相空間を $\pt$ と書くことにする.
+
+空間対のあいだの2つの連続写像 $f,g:(X,A)\to(Y,B)$ がホモトピー同値である
+とは連続写像 $F:X\times I\to Y$ で $F(x,0)=f(x)$, $F(x,1)=g(x)$ ($x\in X$)
+および $F(I\times A)\subset B$ を満たすものが存在することである.
+そのとき $f\simeq g$ と書くことにする.
+
+空間対の相対ホモロジー群の言葉でホモロジー群の基本性質を述べよう.
+
+\begin{theorem}[相対ホモロジー群の基本性質]
+ \label{theorem:homology-axioms}
+ 相対ホモロジー群は以下の性質を持っている:
+ \begin{enumerate}
+ \item[(1)] {\bf 函手性:}
+  $(X,A)$, $(Y,B)$, $(Z,C)$ は空間対であり, 
+  $f:(X,A)\to (Y,B)$, $g:(Y,B)\to (Z,C)$ は連続写像であるとする. このとき
+  \begin{equation*}
+   H_p(g\circ f) = H_p(g)\circ H_p(f),
+   \qquad
+   H_p(\id_{(X,A)}) = \id_{H_p(X,A)}.
+  \end{equation*}
+  ここで $\id_{(X,A)}$ は空間対の恒等写像である.
+  \item[(2)] {\bf ホモトピー公理:}
+   空間対のあいだの連続写像 $f,g:(X,A)\to(Y,B)$ に対して
+   \begin{equation*}
+    f\simeq g \quad\text{(ホモトピー同値)}
+     \implies H_p(f)=H_p(g).
+   \end{equation*}
+ \item[(3)] {\bf 完全性公理:}
+  空間対 $(X,A)$ のみによって決まる準同型写像
+  \begin{equation*}
+   \delta_p = \delta_p(X,A) : H_p(X,A) \to H_{p-1}(A)
+  \end{equation*}
+  がうまく定義され, 次の長完全列が得られる:
+  \begin{equation*}
+      \cdots
+      \leftarrow H_{p-1}(A)
+      \leftarrow H_p(X,A)
+      \leftarrow H_p(X)
+      \leftarrow H_p(A)
+      \leftarrow H_{p+1}(X,A)
+      \leftarrow \cdots
+  \end{equation*}
+  ここで $H_{p-1}(A)\leftarrow H_p(X,A)$, $H_p(A)\leftarrow H_{p+1}(X,A)$ 
+  はそれぞれ $\delta_p$, $\delta_{p+1}$ であり, 
+  $H_p(X,A) \leftarrow H_p(X)$ は自然な写像 $j:(X,\emptyset)\to(X,A)$ に
+  対する $H_p(j)$ であり, $H_p(X)\leftarrow H_p(A)$ は
+  包含写像 $i:A\to X$ に対する $H_p(i)$ である.
+ \item[(4)] {\bf $\delta_p$ の自然性:}
+  空間対のあいだの連続写像 $f:(X,A)\to(Y,B)$ に対して次の図式は可換になる:
+  \begin{equation*}
+  \begin{CD}
+    H_{p-1}(A) @<\delta_p(X,A)<< H_p(X,A) \\
+    @V{H_{p-1}(f|_A)}VV  @VV{H_p(f)}V \\
+    H_{p-1}(B) @<<\delta_p(Y,B)< H_p(Y,B). \\
+  \end{CD}
+  \end{equation*}
+ \item[(5)] {\bf 切除公理:}
+  $(X,A)$ は空間対であり, $U$ は $A$ の開集合であり, $(X-U,A-U)$ もまた
+  空間対になっていると仮定する. このとき自然な写像 $i:(X-U,A-U)\to(X,A)$ 
+  に対する $H_p(i)$ は同型写像になる:
+  \begin{equation*}
+   H_p(i): H_p(X-U, A-U) \isomto H_p(X,A).
+  \end{equation*}
+ \item[(6)] {\bf 次元公理:}
+  $p\ne 0$ のとき $H_p(\pt)=0$.
+ \item[(7)] {\bf $\Z$ 係数:}
+  $H_0(\pt)\isom\Z$
+  \qed
+ \end{enumerate}
+ 実は以上の性質だけで $\Z$ 係数のホモロジー論が一意に特徴付けられること
+ が知られている.
+ 以上の性質の (1) から (6) までは
+ {\bf Eilenberg-Steenrod の公理}と呼ばれている.
+ \qed
+\end{theorem}
+
+\begin{rem}[切除公理の書き直し]
+ 上の定理の(5)において $B=X-U$ と置くと, $X=A\cup B$, $A-U=A\cap B$ で
+ あるから次のように書き直せる:
+  \begin{equation*}
+   H_p(i): H_p(A\cup B, A) \isomto H_p(B,A\cap B).
+   \qed
+ \end{equation*}
+\end{rem}
+
+\begin{rem}
+ 以上の説明では登場した位相空間はすべて $\Delta$ 複体構造が入るものであ
+ ったが, よく使われるのは {\bf CW 複体 (CW-complex)} の方である.
+ \qed
+\end{rem}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

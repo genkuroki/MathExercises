@@ -1,0 +1,584 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\def\STUDENT{} % \def すると計算問題の解答を印刷しなくなる.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% 線形代数学演習---行列の標準形
+% 
+% 黒木 玄 (東北大学理学部数学教室, kuroki@math.tohoku.ac.jp)
+%
+% この演習問題集は2005年度における東北大学理学部数学科2年生前期の
+% 代数学序論B演習のために作成されました. 
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[12pt,twoside]{jarticle}
+%\documentclass[12pt]{jarticle}
+\usepackage{amsmath,amssymb,amscd}
+\usepackage{eepic}
+\usepackage{enshu}
+%\usepackage{showkeys}
+\allowdisplaybreaks
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setcounter{page}{55}      % この数から始まる
+\setcounter{section}{8}    % この数の次から始まる
+\setcounter{theorem}{0}    % この数の次から始まる
+\setcounter{question}{104} % この数の次から始まる
+\setcounter{footnote}{0}   % この数の次から始まる
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\ifx\STUDENT\undefined
+%
+% 教師専用
+%
+\newcommand\commentout[1]{#1}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\else
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% 生徒専用
+%
+\newcommand\commentout[1]{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\fi
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\title{\bf 線形代数学演習---行列の標準形
+%  \thanks{この演習問題集は2005年度における東北大学理学部数学科2年生前期の
+%    代数学序論B演習のために作成された.}
+%  \ifx\STUDENT\undefined\\{\normalsize 教師用\quad(計算問題の略解付き)}\fi}
+%  \ifx\STUDENT\undefined\\{\normalsize 計算問題の略解付き}\fi}
+%
+%\author{黒木 玄 \quad (東北大学大学院理学研究科数学専攻)}
+%
+%\date{最終更新2003年11月21日 \quad (作成2005年4月11日)}
+%\date{2004年4月25日}
+
+%\maketitle
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\noindent
+{\Large\bf 線形代数学演習}
+\hfill
+{\large 黒木玄}
+\qquad
+2005年6月6日
+\commentout{\quad (教師用)}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\tableofcontents
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{選択公理とZornの補題}
+
+%「任意のベクトル空間に基底が存在する」もしくはより強い「任意のベクトル
+%空間の一次独立な部分集合を基底に拡張できる」という定理は{\bf Zornの補題
+%(ツォルンの補題)}を用いて証明される.
+
+%しかし, Zornの補題についてまだ十分に習っていないようなので, 
+%この節では選択公理からZornの補題を導く方法について詳しく説明する.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{選択公理}
+
+{\bf 選択公理 (axiom of choice)} とは次の命題のことである:
+\begin{itemize}
+\item[(AC)] 任意の $x\in X$ に対してある $y\in Y$ で条件 $P(x,y)$ を
+  満たすものが存在するならば, 
+  ある写像 $f:X\to Y$ が存在して
+  任意の $x\in X$ に対して条件 $P(x,f(x))$ が成立する.
+\end{itemize}
+このような写像 $f$ は{\bf 選択函数 (choice function)} と呼ばれる.
+選択公理を論理式で書くと次のようになる:
+\begin{equation*}
+  \forall x\in X\, \exists y\in Y\, P(x,y)
+  \implies
+  \exists f:X\to Y\, \forall x\in X\, P(x,f(x)).
+\end{equation*}
+形式的に選択公理は $\forall$ と $\exists$ の順序を引っくり返す形をしている.
+
+選択公理の直観的な説明. もしも任意の $x\in X$ に対して条件 $P(x,y)$ を
+満たす $y\in Y$ が存在するならば各 $x\in X$ ごとにそのような $y\in Y$ を
+一つずつ選んで $f(x)=y$ と定めることによって選択函数 $f:X\to Y$ を作る
+ことができる. そのとき $f$ の作り方より任意の $x\in X$ に対して
+条件 $P(x,f(x))$ が成立している.
+
+非常に疑い深い人の考え方. もしも $X$ が無限集合ならば全ての $x\in X$ に対して
+条件 $P(x,y)$ を満たす $y\in Y$ を一つずつ選び出すことができないかもしれない.
+
+このように疑う自由はあるが, 選択公理は自然であり(実際選択公理を意識せずに
+使ってしまう人が大部分だろう), 非常に便利なので数学の公理として
+仮定されることになる.
+
+選択公理は上に述べた形とは異なる形で述べられることも多い. たとえば
+\begin{itemize}
+\item[(AC')] $\{Y_x\}_{x\in X}$ が空でない集合の集合族ならば
+  ある写像 $f:X\to \bigcup_{x\in X}Y_x$ が存在して任意の $x\in X$ に
+  対して $f(x)\in Y_x$ が成立する.
+\end{itemize}
+直観的な説明. 各 $x\in X$ ごとに空でない集合 $Y_x$ から一つずつ元を選び,
+その元を $f(x)$ と定めることによって写像 $f:X\to \bigcup_{x\in X}Y_x$ を
+作ることができる. このとき $f$ の作り方より
+任意の $x\in X$ に対して $f(x)\in Y_x$ が成立している.
+
+\begin{question}[5点]
+  (AC)と(AC')が同値であることを証明せよ. \qed
+\end{question}
+
+\begin{proof}[ヒント]
+  (AC)$\implies$(AC').\enspace (AC)を仮定し, 
+  $\{Y_x\}_{x\in X}$ は空でない集合で構成された集合族であると仮定する.
+  $Y=\bigcup_{x\in X} Y_x$ と置き, 
+  $x\in X$, $y\in Y$ に対して条件 $P(x,y)$ が成立するとは
+  $y\in Y_x$ が成立することであると定める.
+
+  (AC')$\implies$(AC).\enspace (AC')を仮定し, 
+  任意の $x\in X$ に対してある $y\in Y$ で条件 $P(x,y)$ を
+  満たすものが存在すると仮定する.
+  $x\in X$ に対して $Y_x=\{\,y\in Y\mid P(x,y)\,\}$ と置く.
+  \qed
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{順序集合に関する言葉の準備}
+
+\begin{definition}[順序集合]
+  集合と二項関係の組 $(X,\leqq)$ が{\bf 順序集合 (ordered set)} であるとは
+  以下の条件が成立していることである:
+  \begin{itemize}
+  \item 任意の $x\in X$ に対して $x\leqq x$.
+  \item 任意の $x,y,z\in X$ に対して $x\leqq y$ かつ $y\leqq z$ 
+    ならば $x\leqq z$.
+  \item 任意の $x,y\in X$ に対して $x\leqq y$ かつ $y\leqq x$ 
+    ならば $x = y$.
+  \end{itemize}
+  このとき $\leqq$ は{\bf 順序 (order)} と呼ばれる. さらに
+  \begin{itemize}
+  \item 任意の $x,y\in X$ に対して $x\leqq y$ または $y\leqq x$
+    \enspace ($x$ と $y$ は比較可能)
+  \end{itemize}
+  が成立しているとき $(X,\leqq)$ は{\bf 全順序集合 (totally ordered set)} 
+  と呼ばれ, $\leqq$ は{\bf 全順序 (total order)} であると言う.
+  $x\leqq y$ を $y\geqq x$ と書くこともある.
+  また $x\leqq y$ かつ $x\ne y$ のとき $x<y$ と書くことにする.
+  \qed
+\end{definition}
+
+\begin{example}[順序集合の例]
+  順序集合には以下のような例がある:
+  \begin{enumerate}
+  \item 実数全体の集合 $\R$ は通常の大小関係に関する全順序集合である.
+  \item 正の整数全体の集合を $\Z_{>0}=\{\,n\in\Z\mid n>0\,\}$ と書く.
+    整数 $a$ が整数 $b$ の約数であるとき $a\mid b$ と書く.
+    このとき $(\Z_{>0},\,\mid\,)$ は順序集合であるが, 全順序集合ではない.
+  \item 集合の集合は包含関係に関する順序集合とみなされる.
+  \item 任意の順序集合の部分集合は自然に順序集合とみなされる.
+    \qed
+  \end{enumerate}
+\end{example}
+
+\begin{definition}[上界, 最小元, 上限, 極大元]
+  $(X,\leqq)$ は順序集合であるとし, $A\subset X$ であるとする.
+  \begin{itemize}
+  \item  $x\in X$ が $A$ の{\bf 上界 (upper bound)} であるとは, 
+    任意の $a\in A$ に対して $a\leqq x$ が成立することである.
+    $A$ の上界は存在するとは限らないし, 存在しても唯一とは限らない.
+  \item $a_0\in A$ が $A$ の{\bf 最小元 (minimum)} であるとは,
+    任意の $a\in A$ に対して $a_0\leqq a$ が成立することである.
+    $A$ の最小元は存在すれば唯一であり, そのとき $\min A$ と表わされる.
+  \item $s\in X$ が $A$ の{\bf 上限 (supremum)} であるとは
+    $s$ が $A$ の{\bf 最小上界 (minimum upper bound)} 
+    すなわち $A$ の上界全体の集合の最小元であることである.
+    $A$ の上限は存在すれば唯一であり, そのとき $\sup A$ と表わされる.
+  \item $m\in A$ が $X$ の{\bf 極大元 (maximal element)} であるとは
+    任意の $x\in A$ に対して $x\geqq m$ ならば $x=m$ となることである.
+    (すなわち $x\in A$ で $x>m$ を満たすものが存在しないことである.)
+    $A$ の極大元は存在するとは限らないし, 存在しても唯一とは限らない.
+  \end{itemize}
+  順序関係を逆転させることによって, 
+  {\bf 下界 (lower bound)}, {\bf 最大元 (maximum)}, $\max A$, 
+  {\bf 下限 (infimum)}, $\inf A$, {\bf 極小元 (mimimal element)} 
+  が同様に定義される.
+  \qed
+\end{definition}
+
+\begin{definition}[帰納的順序集合]
+  順序集合 $(X,\leqq)$ が{\bf 帰納的 (inductive)} であるとは %
+  $X$ の任意の全順序部分集合が上界を持つことである.
+  \qed
+\end{definition}
+
+\begin{example}[帰納的順序集合およびそうでない順序集合の例]
+  \quad
+  \begin{itemize}
+  \item 最大元を持つ順序集合は帰納的順序集合である.
+  \item 有限順序集合は帰納的順序集合である.
+  \item 帰納的順序集合 $(X,\leqq)$ と $x_0\in X$ に対して, % 
+    $X_{\geqq x_0} = \{\,x\in X \mid x \geqq x_0 \,\}$ も帰納的順序集合になる.
+  \item $(\Z_{>0},\,\mid\,)$ は順序集合だが, 帰納的ではない.
+  \item $(\R, \leqq)$ は全順序集合だが, 帰納的ではない.
+  \item $K$ は任意の体であるとし, $V$ は $K$ 上の任意のベクトル空間
+    であるとする. $V$ の一次独立な部分集合全体の集合 $\cL$ は包含関係
+    に関して帰納的順序集合である.
+    \qed
+  \end{itemize}
+\end{example}
+
+\begin{question}[5点]
+  順序集合 $(\Z_{>0},\,\mid\,)$, $(\R, \leqq)$ が帰納的でないことを示せ.
+  \qed
+\end{question}
+
+\begin{question}[5点]
+  \label{q:indord-subset}
+  帰納的順序集合 $(X,\leqq)$ と $x_0\in X$ に対して, % 
+  $X_{\geqq x_0} = \{\,x\in X \mid x \geqq x_0 \,\}$ も帰納的順序集合になる
+  ことを示せ. 
+  \qed
+\end{question}
+
+\begin{question}[10点, 任意のベクトル空間の基底の存在定理]
+  \label{q:existence-basis-1}
+  $K$ は任意の体であるとし, $V$ は $K$ 上の任意のベクトル空間
+  であるとする. $V$ の一次独立な部分集合全体の集合 $\cL$ は包含関係
+  に関する帰納的順序集合であることを示せ.
+  次節で解説するZornの補題を用いて, 
+  $V$ の一次独立な任意の部分集合を基底に拡張できることを証明せよ.
+  \qed
+\end{question}
+
+\begin{proof}[ヒント]
+  $\cA\subset \cL$ は包含関係に関して $\cL$ の全順序部分集合であるとする.
+  $B=\bigcup_{A\in\cA} A$ と置く.
+  そのとき任意の $A\in\cA$ に対して $A\subset B$ である.
+  $B$ も一次独立な $V$ の部分集合になること (すなわち $B\in\cL$) を示せ. 
+  \qed
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Zornの補題}
+
+{\bf Zornの補題 (Zorn's lemma)} とは次の命題のことである:
+\begin{itemize}
+\item[(ZL)] 空でない任意の帰納的順序集合 $(X,\leqq)$ と
+  その任意の元 $x_0\in X$ に対して $X$ の極大元 $m$ で $m\geqq x_0$ を
+  満たすもの ($x_0$ 以上の極大元 $m$) が存在する.
+\end{itemize}
+次のように見かけ上弱い形で Zorn の補題が述べられることもある:
+\begin{itemize}
+\item[(ZL')] 空でない任意の帰納的順序集合 $(X,\leqq)$ は極大元を持つ.
+\end{itemize}
+これらは同値である.
+
+\begin{question}[5点]
+  (ZL)と(ZL')の同値性を証明せよ. \qed
+\end{question}
+
+\begin{proof}[ヒント]
+  問題 \qref{q:indord-subset} の結果を使えば簡単である. \qed
+\end{proof}
+
+さて目標は選択公理 (AC) から Zorn の補題 (ZL) を導くことである. 
+
+まず証明の概略を説明しよう.
+
+\begin{proof}[証明の概略]
+  選択公理を仮定する.
+  $(X,\leqq)$ は帰納的順序集合であり, $x_0\in X$ であると仮定する.
+  $X$ には $x_0$ 以上の極大元が存在しないと仮定して矛盾を導けばよい.
+  
+  $x_0$ を含む $X$ の全順序部分集合全体の集合を $\cC$ と書くことにする. 
+  (全順序部分集合は chain と呼ばれることがあるのでその頭文字を取って $\cC$ 
+  と書くことにした.)
+  
+  $X$ が帰納的であるという仮定より, 任意の $C\in \cC$ に対して $C$ の
+  上界 $y\in X$ が存在する. このとき特に $y\geqq x_0$ である.
+  
+  $X$ には $x_0$ 以上の極大元が存在しないという仮定より, %
+  $y$ は $X$ の極大元ではない. よってある $z\in X$ で $z>y$ を
+  満たすものが存在する.
+  
+  選択公理を仮定したので, 各 $C\in\cC$ に対して上のような $z\in X$ を
+  対応させる選択函数 $f:\cC\to X$ が存在して, 任意の $C\in\cC$, $x\in C$ に
+  対して $f(C)>x$ が成立する (特に $f(C)\not\in C$ である).
+  
+  $C_0=\{x_0\}\in\cC$, 
+  $C_1=C_0\cup\{f(C_0)\}\in\cC$, 
+  $C_2=C_1\cup\{f(C_1)\}\in\cC$, $\ldots$ が成立する.
+  この構成を{\bf ``限りなく最大限続けることによって''} $C_{\max}\in \cC$ 
+  を構成する. 
+  もしも $f(C_{\max})\not\in C_{\max}$ ならば
+  さらに $C_{\max+1} = C_{\max}\cup\{f(C_{\max})\}$ によって次のステップ
+  に進むことができるので, {\bf ``限りなく最大限続けることによって''}
+  の「最大限」という言葉に矛盾してしまう.
+  よって $f(C_{\max})\in C_{\max}$ でなければいけない.
+  {\bf (この段落だけは曖昧過ぎるので数学的に不完全である.)}
+  
+  しかし $C_{\max}\in\cC$ より $f(C_{\max})\not\in C_{\max}$ で
+  なければいけない.
+  
+  これで矛盾が導かれた.
+  \qed  
+\end{proof}
+
+以上の証明の概略は一つの段落を除けば完全である. 
+残された問題は「$C_0,C_1,C_2,\ldots$ の構成を
+{\bf ``限りなく最大限続けることによって''} $C_{\max}$ を構成する」
+の部分をどのように数学的に正当化するかである.
+
+\begin{rem}
+  目標である $C_{\max}$ の構成のためには, 
+  自然数 $n$ に対する $C_n$ を構成するだけでは不十分である.
+  なぜならば自然数 $n$ に対して $f(C_n)\not\in C_n$ だからである.
+  よってこの証明を完結させるためには数学的帰納法だけでは不十分である.
+  すべての自然数 $n$ に対して $C_n$ が構成された後
+  は $C_\omega = \bigcup_{n=0}^\infty C_n$ によって
+  次のステップに進むことになる. 
+  しかし, 以下ではこういう方針を取らずに集合の演算を
+  巧妙に使って $C_{\max}$ を構成することにする.
+  \qed
+\end{rem}
+
+\begin{proof}[上の証明の概略の曖昧な部分の数学的正当化]
+  \quad
+
+  \medskip\noindent
+  {\bf Step 1.} $\cT_{\min}\subset\cC$ の構成
+  \medskip
+
+  $\cT\subset\cC$ が塔 (tower) であるとは
+  次の3つの条件を満たすことであると定める:
+  \begin{itemize}
+  \item[(a)] $\{x_0\}\in \cT$.
+  \item[(b)] $T\in\cT$ ならば $T\cup\{f(T)\}\in\cT$.
+  \item[(c)] $\cS$ が $\cT$ の包含関係に関する全順序部分集合になっている
+    ならば $\bigcup_{S\in\cS}S\in\cT$.
+  \end{itemize}
+  たとえば $\cC$ 自身は塔である(容易なので自分で証明してみよ).
+
+  塔全体の共通部分を %
+  $\cT_{\min} = \bigcap_{\text{$\cT$ は塔}}\cT$ と書くことにする.
+  (少なくとも一つ塔が存在するので $\cT_{\min}$ は well-defined である.)
+
+  \medskip\noindent
+  (解説: この $\cT_{\min}$ は上の証明の概略中
+  で{\bf ``限りなく最大限続けることによって''}
+  構成された $C_0,C_1,C_2,\ldots$ 全体の集合である.
+  証明の概略中では構成の仕方は非常に曖昧だったが
+  上の構成法は論理的に明確である.
+  $C_{\max}$ は $\cT_{\min}$ の包含関係に関する最大元として構成される.
+  アイデアが必要な本質的なステップはこの Step 1 だけであり, 
+  $\cT_{\min}$ の明確な構成の仕方さえわかっていれば残りの部分は
+  機械的な作業 (routine) に過ぎない.
+  機械的に論理的な作業をこなす能力が身に付けば
+  直観的で曖昧な議論をどのように
+  論理的に明確にするかに意識を集中できるようになる.
+  直観的な議論を自由に進めながら, 曖昧な細部を徐々に論理的に
+  明確にして行くのは非常に楽しい.)
+
+  \medskip\noindent
+  {\bf Step 2.} $\cT_{\min}$ が最小の塔になることの証明 (容易)
+  \medskip
+
+  (a) すべての塔は $\{x_0\}$ を
+  含むので $\{x_0\}\in\cT_{\min}$ である.
+
+  (b) $T\in\cT_{\min}$ ならば任意の塔 $\cT$ に対して $T\in\cT$ で
+  あるから $T\cup\{f(T)\}\in\cT$ である. よって $T\in\cT_{\min}$ である.
+
+  (c) $\cS$ が $\cT_{\min}$ の全順序部分集合ならば %
+  $\cS$ は任意の塔 $\cT$ の全順序部分集合でもあるので %
+  $\bigcup_{S\in\cS}S\in\cT$ である.
+  よって $\bigcup_{S\in\cS}S\in\cT_{\min}$ である.
+
+  これで $\cT_{\min}$ が塔であることがわかった.
+  $\cT_{\min}$ は任意の塔に含まれるので最小の塔である.
+
+  \medskip\noindent
+  {\bf Step 3.} $\cT_{\min}$ が包含関係に関する全順序集合であることの証明
+  (少し面倒)
+  \medskip
+
+  $\cT_{\min}$ の部分集合 $\cT_0$ を次のように定める:
+  \begin{equation*}
+    \cT_0 = 
+    \{\, S\in\cT_{\min} 
+    \mid \text{任意の $T\in\cT_{\min}$ に
+      対して $S\subset T$ または $T\subset S$} \,\}.
+  \end{equation*}
+  ($\cT_0$ は $\cT_{\min}$ の任意の元と比較可能な $\cT_{\min}$ の
+  元全体のなす集合である.)
+  
+  $\cT_0$ は包含関係に関して全順序集合になる.
+  実際任意に $S,T\in\cT_0$ 取ると $T\in\cT_{\min}$ 
+  なので $S\subset T$ または $T\subset S$ が成立する.
+
+  よって $\cT_0=\cT_{\min}$ を証明すればよい.
+  $\cT_{\min}$ が最小の塔であることより, 
+  そのためには $\cT_0$ も塔であることを示せば十分である.
+
+  (a) 任意の $T\in\cT_{\min}\subset\cC$ に対して $\{x_0\}\subset T$ 
+  であるから $\{x_0\}\in\cT_0$ である.
+
+  (b) $\cT_0$ が(b)を満たすことの証明は長くなるので次のステップで証明する.
+
+  (c) $\cS$ は $\cT_0$ の包含関係に関する全順序部分集合であると仮定する.
+  $\cS$ は $\cT_{\min}$ の包含関係に関する全順序部分集合でも
+  あるので $\bigcup_{S\in\cS}S\in\cT_{\min}$ である.
+  任意に $T\in\cT_{\min}$ を取る.
+  任意の $S\in\cS$ に対して $S\subset T$ または $T\subset S$ である.
+  もしも $T\subset S$ を満たす $S\in\cS$ が存在する
+  ならば $T\subset\bigcup_{S\in\cS}S$ となる.
+  もしもそのような $S$ が存在しなければ 
+  任意の $S\in\cS$ に対して $S\subset T$ となる
+  ので $\bigcup_{S\in\cS}S\subset T$ となる.
+  したがって $\bigcup_{S\in\cS}S\subset T$ 
+  または $T\subset\bigcup_{S\in\cS}S$ が成立する.
+  よって $\bigcup_{S\in\cS}S\in\cT_0$ である.
+
+  \medskip\noindent
+  {\bf Step 4.} $\cT_0$ が(b)を満たすことの証明 (再度同じ方法を使う)
+  \medskip
+
+  $C\in\cT_0$ を任意に取る. 
+  $C\in\cT_{\min}$ でもあるので $C\cup\{f(C)\}\in\cT_{\min}$ である.
+  $\cT_{\min}$ の部分集合 $\cT_C$ を次のように定める:
+  \begin{equation*}
+    \cT_C = 
+    \{\, T\in\cT_{\min} \mid 
+    \text{$T\subset C$ または $C\cup\{f(C)\}\subset T$} \,\}.
+  \end{equation*}
+  $\cT_0$ が(b)を満たすことを示すためには $\cT_C=\cT_{\min}$ であること
+  を示せば十分である.
+  $\cT_{\min}$ が最小の塔であることから, そのためには $\cT_C$ が塔で
+  あることを示せば十分である.
+
+  (a) $\{x_0\}\subset C$ なので $\{x_0\}\in\cT_C$ である.
+
+  (b) $T\in\cT_C$ を任意に取る. 
+  このとき $T\subset C$ または $C\cup\{f(C)\}\subset T$ である.
+  $C\cup\{f(C)\}\subset T$ のとき $C\cup\{f(C)\}\subset T\cup\{f(T)\}$ で
+  あるから $T\cup\{f(T)\}\in\cT_C$ である.
+  そこで $T\subset C$ と仮定する.
+  $C\in\cT_0$ より $T\cup\{f(T)\}\subset C$ 
+  または $C\subset T\cup\{f(T)\}$ である. 
+  $T\cup\{f(T)\}\subset C$ のとき $T\in\cT_C$ である.
+  そこで $C\subset T\cup\{f(T)\}$ と仮定する.
+  $T\subset C$ より $C=T$ または $C=T\cup\{f(T)\}$ である.
+  $C=T$ のとき $C\cup\{f(C)\}=T\cup\{f(T)\}$ 
+  (特に $C\cup\{f(C)\}\subset T\cup\{f(T)\}$)
+  なので $T\cup\{f(T)\}\in\cT_C$ である.
+  $C=T\cup\{f(T)\}$ のとき特に $T\cup\{f(T)\}\subset C$ 
+  なので $T\cup\{f(T)\}\in\cT_C$ である.
+  これで $T\in\cT_C$ ならば常に $T\cup\{f(T)\}\in\cT_C$ となることがわかった.
+
+  (c) $\cS$ は $\cT_C$ の包含関係に関する全順序部分集合であるとする.
+  $\cS$ は $\cT_{\min}$ の包含関係に関する全部分集合でもある
+  ので $\bigcup_{S\in\cS}S\in\cT_{\min}$ である.
+  任意に $S\in\cS$ を取る. $S\subset C$ または $C\cup\{f(C)\}\subset S$ である.
+  もしもある $S\in\cS$ で $C\cup\{f(C)\}\subset S$ を満たすものが存在する
+  ならば $C\cup\{f(C)\}\subset \bigcup_{S\in\cS}S$ である.
+  もしもそのような $S$ が存在しなければ任意の $S\in\cS$ に対して $S\subset C$
+  となるので $\bigcup_{S\in\cS}S\subset C$ となる.
+  したがって $\bigcup_{S\in\cS}S\in\cT_C$ である.
+
+  \medskip\noindent
+  {\bf Step 5.}  $\cT_{\min}$ の包含関係に関する最大元 $C_{\max}$ の構成 (容易)
+  \medskip
+
+  $C_{\max}=\bigcup_{C\in\cT_{\min}}C$ と置く. 
+  任意の $C\in\cT_{\min}$ に対して $C\subset C_{\max}$ である.
+  $\cT_{\min}$ は塔でかつ包含関係に関する全順序集合
+  なので $\cT_{\min}$ に関する条件(c)より $C_{\max}\in\cT_{\min}$ である.
+  これで $C_{\max}$ は $\cT_{\min}$ の包含関係に関する
+  最大元であることが示された.
+
+  \medskip\noindent
+  {\bf Step 6.} $f(C_{\max})\in C_{\max}$ の証明 (容易)
+  \medskip
+
+  $C_{\max}$ に関する
+  条件(b)より $C_{\max}\cup\{f(C_{\max})\}\in\cT_{\min}$ である.
+  しかし $C_{\max}$ は包含関係に関する $\cT_{\min}$ の最大元
+  なので $C_{\max}\cup\{f(C_{\max})\}=C_{\max}$ でなければいけない. 
+  よって $f(C_{\max})\in C_{\max}$ である.
+
+  \medskip\noindent
+  {\bf Step 7.} Zornの補題の証明の完了 (容易)
+  \medskip
+  
+  $f(C_{\max})\in C_{\max}$ であることが証明されてしまったが, 
+  $C_{\max}\in\cC$ なので $f$ の定義より $f(C_{\max})\not\in C_{\max}$ である.
+  これは矛盾である. 
+  したがって帰納的順序集合 $X$ とその元 $x_0$ に対して $x_0$ 以上の $X$ の
+  極大元が存在しなければいけない.
+  \qed
+\end{proof}
+
+\begin{question}[10点]
+  Zornの補題から選択公理を導け. \qed
+\end{question}
+
+\begin{proof}[ヒント]
+  $\cF=\{\,(A,f)\mid \text{$A\subset X$, $f:A\to Y$, 任意の 
+    $x\in A$ に対して $P(x,f(x))$ が成立する}\,\}$ と置く.
+  $(A,f),(B,g)\in\cF$ に対して $(A,f)\leqq (B,g)$ である
+  とは $A\subset B$ かつ $g$ が $f$ の拡張になっていることであると定める.
+  このとき $\cF$ は帰納的順序集合である.  
+  \qed
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\begin{thebibliography}{ABC}
+
+%\bibitem[I]{Infeld}
+%インフェルト,~L.,
+%ガロアの生涯—神々の愛でし人
+%市井三郎訳, 
+%日本評論社, 新版第3版, 1996
+
+%\bibitem[佐武]{satake} 佐武一郎: 線型代数学, 裳華房数学選書 1, 324頁.
+
+%\bibitem[杉浦]{sugiura}
+%杉浦光夫, Jordan標準形と単因子論 I, II, 岩波講座基礎数学, 線型代数 iii, 1976
+
+%\bibitem[齋藤]{saito} 齋藤正彦: 線型代数入門, 東京大学出版会基礎数学 
+%1, 278頁.
+
+%\bibitem[H1]{gun-kagun}
+%堀田良之, 代数入門——群と加群——, 数学シリーズ, 裳華房, 1987
+
+%\bibitem[H2]{10wa}
+%堀田良之, 加群十話——加群入門——, すうがくぶっくす 3, 朝倉書店, 1988
+
+%\bibitem[H3]{Ho}
+%堀田良之, 環と体 1 --- 可換環論, 岩波講座現代数学の基礎 15, 岩波書店, 1997
+
+%\bibitem[志賀]{shiga}
+%志賀浩二: 集合への30講, 朝倉書店 数学30講シリーズ 3, 187頁.
+
+% \bibitem[失業率]{unemp2004}
+% 労働力調査　長期時系列データ \\
+% {\tt http://www.stat.go.jp/howto/case1/01.htm} \\
+% から「第3表(3)年齢階級(5歳階級)，男女別完全失業者数及び完全失業率」 \\
+% {\tt http://www.stat.go.jp/data/roudou/longtime/zuhyou/lt03-03.xls} \\
+% をダウンロード
+
+% \bibitem[GDP]{SNA2003} 
+% 平成15年度国民経済計算 \\
+% {\tt http://www.esri.cao.go.jp/jp/sna/h17-nenpou/17annual-report-j.html} \\
+% から「4．主要系列表（3）経済活動別国内総生産　実質暦年」\\
+% {\tt http://www.esri.cao.go.jp/jp/sna/h17-nenpou/80fcm3r\verb,_,jp.xls} \\
+% をダウンロード
+
+%\end{thebibliography}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

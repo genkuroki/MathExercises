@@ -1,0 +1,963 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% 代数学概論III演習——体のガロア理論
+%
+% 黒木 玄 (東北大学理学部数学教室, kuroki@math.tohoku.ac.jp)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[12pt,twoside]{jarticle}
+\usepackage{amsmath,amssymb,amscd}
+\usepackage{enshu}
+%\usepackage{showkeys}
+
+\newlabel{q:ind-dihed}{{43}{17}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title{\bf 代数学概論III演習——体のガロア理論}
+
+\author{黒木 玄 \quad (東北大学大学院理学研究科数学専攻)}
+
+\date{2002年10月8日(火)}
+
+\maketitle
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\setcounter{page}{23}      % この数から始まる
+\setcounter{section}{2}    % この数の次から始まる
+\setcounter{theorem}{0}    % この数の次から始まる
+\setcounter{question}{56}  % この数の次から始まる
+\setcounter{footnote}{18}  % この数の次から始まる
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\tableofcontents
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{体の拡大}
+
+\begin{question}[体のイデアルによる特徴付け]
+  可換環 $R$ について, $R$ が体であることと, $R$ のイデアルが $0$ と $R$ し
+  か存在しないことは同値である. \qed
+\end{question}
+
+\begin{question}[極大イデアルと体]
+  可換環 $R$ とそのイデアル $\fraka$ に対して, $R/\fraka$ が体であることと,
+  $\fraka$ が $R$ の極大イデアルであることは同値である. \qed
+\end{question}
+
+\begin{question}
+  $R$ は可換環であり, $S$ はその部分環であるとする.  
+  $R$ の素イデアル $P$ に対して, $S\cap P$ は $S$ の素イデアルになる.
+  しかし, $R$ の極大イデアル$\frakm$ に対して, $S\cap\frakm$ は $S$ の極大イ
+  デアルになるとは限らない. 
+  (ヒント: $R=\C(x)[y]$, $\frakm=Ry$, $S=\C[x,y]$ が反例になっている.) \qed
+\end{question}
+
+\begin{question}
+  体 $k$ 上の1変数多項式環 $k[x]$ は単項イデアル整域 (PID) である. \qed
+\end{question}
+
+\begin{question}
+  $R$ が PID のとき, $0\ne p\in R$ に対して以下の条件は互いに同値である:
+  \begin{itemize}
+  \item[(a)] $p$ は $R$ の素元である. 
+  \item[(b)] 単項イデアル $(p)$ は $R$ の素イデアルである.
+  \item[(c)] 単項イデアル $(p)$ は $R$ の極大イデアルである. \qed
+  \end{itemize}
+\end{question}
+
+可換環 $R$ 上の多項式環 $R[x_1,\ldots,x_n]$ の $R$ に含まれない素元を $R$ 上
+の既約多項式と呼ぶ.
+
+\begin{question}[根体]
+  $K$ は体であり, $f\in K[x]$ は $K$ 上の既約多項式であるとする.
+  このとき, $L=K[x]/(f)$ は体になり, 
+  自然な写像 $K\to L$, $a\mapsto a (1\bmod~f)$ による埋め込みによって,
+  $K$ は $L$ の部分体とみなせる.
+  さらに, ある $\theta\in L$ と $c\in K^\times$ が存在して,
+  $f(\theta)=0$, $L=K(\theta)$, $[K(\theta):K]=\deg f$ が成立する.
+  このような $L$ を既約多項式 $f$ の{\bf 根体}と呼ぶ.
+  ($K(\theta)=\{\,f(\theta)/g(\theta)\mid f,g\in K[x],\;g(\theta)\ne 0\,\}$.)
+  \qed
+\end{question}
+
+\begin{question}[単拡大]
+  $L/K$ を体の拡大として, $0\ne\theta\in L$ に対して, 環準同型
+  \begin{equation*}
+    \phi: K[x]\to K(\theta), \quad f(x)\mapsto f(\theta)
+  \end{equation*}
+  を考える. このとき, 以下が成立する:
+  \begin{itemize}
+  \item[(1)] $\Ker\phi=0$ のとき, 
+    同型 $K(x)\isomto K(\theta)$, $f(x)\mapsto f(\theta)$ が存在する.
+    このとき, $\theta$ は $K$ 上{\bf 超越的 (transcendental)} であるという.
+  \item[(2)] $\Ker\phi\ne 0$ のとき, モニックな%
+    \footnote{「モニックな」とは「最高次の係数が $1$ の」という意味}%
+    既約多項式
+    \begin{equation*}
+      f(x) = \Irr(\theta,K;x)
+      = x^n + a_{n-1}x^{n-1} + \cdots + a_1 x + a_0
+      \in K[x]
+    \end{equation*}
+    で $\Ker\phi=(f)$ をみたすものが一意に存在し, 
+    \begin{equation*}
+      K[x]/(f) \to K(\theta), \quad g(x)\bmod~f(x) \mapsto g(\theta)
+    \end{equation*}
+    は同型写像であり, $[K(\theta):K]=\deg f=n$ が成立している.
+    このとき, $\theta$ は $K$ 上{\bf 代数的 (algebraic)} であるといい,
+    $n$ をその{\bf 次数 (degree)} と呼ぶ. 
+    \qed
+  \end{itemize}
+\end{question}
+
+\begin{question}[分母の有理化]
+  $L/K$ を体の拡大とし, $\theta\in L$ は $K$ 上次数 $n$ の代数的な元であると
+  する.  このとき, $K(\theta)$ の任意の元 $a$ は,
+  \begin{equation*}
+    a = c_0 + c_1 \theta + \cdots + c_{n-1}\theta^{n-1},
+    \quad
+    c_0,c_1,\ldots,c_{n-1}\in K
+  \end{equation*}
+  の形で一意に表わされる. \qed
+\end{question}
+
+上の問題がなぜ「分母の有理化」なのかについて考えてみよ.
+
+\begin{question}
+  $\Q$ は標数 $0$ の任意の体の部分体とみなせる. \qed
+\end{question}
+
+\begin{question}
+  $p$ は素数であるとし, $\F_p=\Z/p\Z$ と置く. 
+  $\F_p$ は標数 $p$ で位数 $p$ の有限体であり, 標数 $p$ の任意の体の部分体と
+  みなせる. \qed
+\end{question}
+
+$\Q$, $\F_p$ を素体と呼ぶ. 任意の体は素体の拡大体である.
+
+\begin{question}
+  $\C$ は $\R$ の2次拡大であり, $\C=\R(\sqrt{-1})$.  \qed
+\end{question}
+
+\begin{question}
+  $\R$ は $\Q$ の代数拡大ではない. \qed
+\end{question}
+
+\begin{question}[代数学の基本定理]
+  $\C$ は代数閉体である. 
+  (ヒント: 複素函数論やトポロジーを自由に用いて良い.)\qed
+\end{question}
+
+\begin{question}
+  $\closure\Q = \{\,\theta\in\C\mid\text{$\theta$ は $\Q$ 上代数的}\,\}$ と
+  おくと, $\closure\Q$ は $\Q$ を含む $\C$ 内の最小の代数閉体である. 
+  (ヒント: \cite{morita} 第V章の系2.3 (p.~186).) \qed
+\end{question}
+
+$\Q$ の有限次拡大体を{\bf 代数体 (algebraic number field)} もしくは
+{\bf 数体 (number field)} と呼ぶ.
+
+\begin{definition}[$A$ 上整]
+  $L$ は可換環であり, $A$ はその部分環であるとする. 
+  $\alpha\in L$ が $A$ 上{\bf 整 (integral)} であるとは, 
+  $0$ でない $A$ 上のモニックな多項式 $f(x)\in A[x]$ で $f(\alpha)=0$ を満た
+  すものが存在することである%
+  \footnote{モニックな多項式 (最高次の係数が $1$ の多項式) に取るところが重
+    要である.  $A$ が整域であり, $K$ がその商体で, $L$ が $K$ の拡大体である
+    とき, $\alpha\in L$ が $K$ 上代数的 (algebraic) であるための必要十分条件
+    は $0$ でないモニックとは限らない多項式 $f(x)\in A[x]$ で $f(\alpha)=0$ 
+    を満たすものが存在することである. モニックであることを仮定するかしないか
+    で integral と algebraic という概念が区別されることになる.}.
+  \qed
+\end{definition}
+
+\begin{question}
+  $L$ は可換環であり, $A$ はその部分環であるとする.
+  $\alpha\in L$ に対して, $\alpha$ から $A$ 上生成される $R$ の部分環
+  を $A[\alpha]$ と書く. このとき, $\alpha$ が $A$ 上整であるための必要十分
+  条件は $A[\alpha]$ が $A$ 上の有限生成加群をなすことである%
+  \footnote{$L$ が体であり, $K$ がその部分体のとき, $\alpha\in L$ に対して,
+    $\alpha$ が $K$ 上代数的であるための必要十分条件は $K(\alpha)$ が $K$ 上
+    の有限次元ベクトル空間をなすことである.} . \qed
+\end{question}
+
+\begin{question}[整閉包]
+  $L$ は可換環であり, $A$ はその部分環であるとする.
+  このとき, $A$ 上整であるような $L$ の元全体は $L$ の部分環をなす.
+  その部分環を $A$ の $L$ における整閉包 (integranl closure) と呼ぶ.
+  (ヒント: 体の代数拡大に関する議論の類似.) \qed
+\end{question}
+
+$\Z$ 上整な複素数を{\bf 代数的整数 (algebraic integer)} と呼ぶ.
+一般の代数的整数と $\Z$ の元を区別したい場合には $\Z$ の元を{\bf 有理整数 
+(rational integer)} と呼び, $\Z$ を有理整数環と呼ぶことがある. 
+代数体 $K$ における $\Z$ の整閉包を $\O_K$ と書き, 
+代数体 $K$ の{\bf 整数環 (integer ring)} と呼ぶ.
+
+$\Z$ の素元としての素数と代数体 $K$ の整数環 $\O_K$ の素元としての素数を区別
+するために, $\Z$ の素数を{\bf 有理素数 (rational prime number)} と呼ぶことが
+ある. おそらく, 有理素数という言葉をこの演習で多用することはないだろう. 何の
+断わりも無しに素数と言う場合には有理素数を意味するものとする.
+
+\begin{question}
+  $\Z$ 上整な有理数は有理整数である. \qed
+\end{question}
+
+\begin{question}
+  $m$ は平方因子を含まない $0$ 以外の整数であるとする%
+  \footnote{$m$ は $2$ 以上の整数の二乗の形の約数を含まない整数であると
+    いうこと.}. %
+  $K=\Q(\sqrt{m})$ の整数環は以下のようになる:
+  \begin{itemize}
+  \item[(1)] $m\equiv 2,3 \pmod{4}$ ならば %
+    $\O_K = \{\,a+b\sqrt{m}\mid a,b\in\Z\,\}.$
+  \item[(2)] $m\equiv 1 \pmod{4}$ ならば %
+    $\O_K = \{\,a+b\sqrt{m}\mid\text{$a,b\in\Z$ または $a,b\in\Z+1/2$}\,\}$.
+  \end{itemize}
+  ここで, $\Z+1/2$ は整数に $1/2$ を足したもの全体の集合すなわち奇数を $2$ 
+  で割ってできる数全体の集合である.
+  たとえば, $(1+\sqrt{5})/2\in\O_{\Q(\sqrt{5})}$ 
+  だが, $(1+\sqrt{-5})/2\not\in\O_{\Q(\sqrt{-5})}$. 
+  (ヒント: \cite{takagi1} 定理5.1.)) \qed
+\end{question}
+
+\begin{question}
+  $\omega = \exp(2\pi\sqrt{-1}/3) = (-1+\sqrt{-3})/3$ と置き,
+  $K=\Q(\sqrt[3]{2})$, $L=\Q(\omega\sqrt[3]{2})$, $M=\Q(\omega,\sqrt[3]{2})$ 
+  と置く. このとき,
+  \begin{itemize}
+  \item[(1)] $K$ と $L$ は $x^3-2$ の $\Q$ 上での根体である.
+  \item[(2)] $KL=M$.
+  \item[(3)] $M$ は $x^3-2$ の最小分解体である. \qed
+  \end{itemize}
+\end{question}
+
+\begin{question}
+  $x^3 - 7$ の $\Q$ 上での最小分解体は $\Q(\sqrt[3]{7},\omega)$ である.
+  ここで, $\omega=\exp(2\pi\sqrt{-1}/3)=(-1+\sqrt{3})/2$. \qed
+\end{question}
+
+\begin{question}
+  順次以下を示せ:
+  \begin{itemize}
+  \item[(1)] $K=\Q(\sqrt[3]{5})$ と置くと $K$ は $\Q$ の $3$ 次拡大である.
+  \item[(2)] $\sqrt{-3}$ の $K$ 上の最小多項式は $x^2+3$ である.
+  \item[(3)] $K(\sqrt{-3})=\Q(\sqrt[3]{5},\sqrt{-3})$ は $K$ の $2$ 次拡大で
+    かつ $\Q$ の $6$ 次拡大である.
+  \item[(4)]   $\sqrt[3]{5}+\sqrt{-3}$ の $\Q$ 上での最小多項式
+    は $x^6+9x^4-10x^3+27x^2+90x+52$ である.
+    (ヒント: $\omega=\exp(2\pi\sqrt{-1}/3)$ と置く.
+    $\{\sqrt[3]{5},\omega\sqrt[3]{5},\omega^2\sqrt[3]{5}\}$ の元
+    と $\{\pm\sqrt{-3}\}$ の元の6通りの和を全て根に持つ多項式.) 
+  \item[(5)] $\Q(\sqrt[3]{5},\sqrt{-3})=\Q(\sqrt[3]{5}+\sqrt{-3}$).
+    \qed
+  \end{itemize}
+\end{question}
+
+\begin{question}
+  $p$ は素数であるとし, $\alpha=\sqrt[4]{p}$, $i=\sqrt{-1}$ と置く.
+  このとき,
+  \begin{itemize}
+  \item[(1)] $\Q(\alpha)$, $\Q(i\alpha)$ は $x^4-p$ の $\Q$ 上での根体である.
+  \item[(2)] $\Q(\alpha, i)$ は $x^4-p$ の最小分解体である. 
+    \qed
+  \end{itemize}
+\end{question}
+
+\begin{question}
+  $L=\C(t)$, $K=\Q(t^3)$ と置く. このとき $L$ は $K$ の $3$ 次拡大である.
+  $x^3-t^3$ は $K$ 上既約であり, $L$ の中で $x$ の $1$ 次式の積に分解する.
+  $x^3-t^3$ の $K$ 上での最小分解体を求めよ. \qed
+\end{question}
+
+\begin{question}
+  $p$ は素数であるとし, $f(x)=x^{p-1}+x^{p-2}+\cdots+1$, 
+  $\zeta=\exp(2\pi\sqrt{-1}/p)$ と置く.
+  このとき, $\Q(\zeta)$ は $f(x)$ の $\Q$ 上での根体でかつ最小分解体である.
+  \qed
+\end{question}
+
+\begin{question}
+  $\Q(\sqrt{5})\Q(\sqrt[3]{5})=\Q(\sqrt[6]{5})$. \qed
+\end{question}
+
+\begin{question}
+  $\C$ 上の $1$ 変数有理函数体 $N=\C(t)$ の部分体 $K=\C(t^6)$, 
+  $L=\C(t^3)$, $M=\C(t^2)$ を考える. 
+  このとき, $L\cap M=K$, $LM=N$.\qed
+\end{question}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{一意分解整域}
+
+\begin{definition}[Euclid 整域]
+  $R$ は整域であるとし,
+  写像 $N:R\to W=\{-\infty,0,1,2,3,\ldots\}$ で以下を満たすものが存在すると
+  き, $R$ は {\bf Euclid 整域 (Euclidean domain, Euclid 環)} であるという: 
+  \begin{itemize}
+  \item[(a)] 任意の $a\in R$ に対して, $\phi(a)=-\infty\iff a=0$.
+  \item[(b)] 任意の $a,b\in R-\{0\}$ に対して $\phi(ab)\ge \phi(a)$.
+  \item[(c)] 任意の $a,b\in R$ に対して, $a\ne 0$ ならば, ある $q,r\in R$ 
+    で $b=qa+r$, $\phi(r) < \phi(b)$ をみたすものが存在する. 
+  \end{itemize}
+  直観的に言えば Euclid 整域とは算数の割り算ができる環のことである. \qed
+\end{definition}
+
+\begin{example}
+  $a\in\Z-\{0\}$ に対して $\phi(a)=|a|$ と定めれば $\Z$ は Euclid 整域である
+  ことがわかる.  $K$ が体であるとき, $f\in K[x]-\{0\}$ に対して, 
+  $\phi(f)=\deg f$ と定めれば $K[x]$ が Euclid 整域であることがわかる. \qed
+\end{example}
+
+\begin{question}
+  Euclid 整域が PID であることを示せ. \qed
+\end{question}
+
+\begin{question}
+  Gauss の整数環 $\Z[\sqrt{-1}]$ は Euclid 整域であり,
+  その単数の全体は $\{\pm 1,\pm\sqrt{-1}\}$ である.
+  (ヒント: $\alpha\in\Z[\sqrt{-1}]-\{0\}$ に対して $\phi(\alpha)=|\alpha|^2$ 
+  と置けば良い. \cite{morita} 第III章の問題4.7 (p.~88) により詳しいヒントが
+  ある.  詳しい解答は \cite{takagi1} の定理4.1 (p.~244) の証明にある.)
+  \qed
+\end{question}
+
+\begin{question}
+  $\omega=\exp(2\pi\sqrt{-1}/3)=(-1+\sqrt{-3})/2$ に対して,
+  $\Z[\omega]$ は Euclid 整域であり,
+  その単数の全体は $\{\pm 1,\pm\omega, \pm\omega^2\}$ である.
+  (ヒント: Gauss の整数環の場合と同様に $\phi(\alpha)=|\alpha|^2$ と置けば
+  良い. \cite{takagi1} 第4章第39節の p.~257.) \qed
+\end{question}
+
+\begin{question}[非可換な Euclid 整域の例]\label{q:D-is-noncomm-PID}
+  $K$ は $\C$ 上の有理型函数全体のなす体であるとする. $\C$ の座標を $x$ と書
+  くことにする. $f\in K$ の $x$ に関する導函数を $f'$ と書き, $f$ の $k$ 階
+  の導函数を $f^{(k)}$ と書くことにする. 
+  函数 $a\in K$ を $K$ の元に乗じる写像 $a:K\to K$, $f\mapsto af$ 
+  と $x$ に関する微分 $\d:K\to K$,  $f\mapsto f'$ から
+  生成される $\End_\C(K)$ の部分環を $\D$ と表わす. 
+  $\D$ を $K$ 係数の{\bf 線形上微分作用素環} と呼ぶ. 
+  このとき, 以下が成立している:
+  \begin{itemize}
+  \item[(1)] $\D$ は両側 $(K,K)$ 加群である.
+  \item[(2)] $\D$ は左 $K$ 加群として $1,\d,\d^2,\ldots$ を基底に持つ.
+    (ヒント: それらの $K$ 一次結合を $x^n$ に作用させてみれば一次独立性がわ
+    かる.)
+  \item[(3)] $\D$ の $0$ でない元
+    は $A=a_n\d^n+a_{n-1}\d^{n-1}+\cdots+a_0\in\D$ ($a_i\in K$), $a_n\ne0$ 
+    の形に一意に表わされる. このとき, $A$ は $n$ 階であると
+    言い, $\ord A = n$ と書く. $A=0$ のときは $\ord A = -\infty$ であると約
+    束しておく.
+  \item[(4)] $\D$ の積に関して次が成立している (Leibnitz 則):
+    \begin{equation*}
+      \d^n f = \sum_{k=0}^n \binom{n}{k} f^{(k)} \d^{n-k}
+      \quad (f\in K,\; n=0,1,2,\ldots).
+    \end{equation*}
+  \item[(5)] 任意の $A,B\in\D$ に対して, $A\ne 0$ ならば,
+    $Q,R\in\D$ で $B=QA+R$, $\ord R < \ord A$ となるものが一意に存在する.
+  \item[(6)] 任意の $A,B\in\D$ に対して, $A\ne 0$ ならば,
+    $Q,R\in\D$ で $B=AQ+R$, $\ord R < \ord A$ となるものが一意に存在する.
+  \item[(7)] $A=\d + a$, $B=\d^2 + b\d + c$ のとき, 
+    $B = (\d + b - a)A + c-a'-(b-a)a = A(\d + b - a) + c-(b'-a')-a(b-a)$.
+    \qed
+  \end{itemize}
+\end{question}
+
+\begin{guide}
+  \qref{q:D-is-noncomm-PID} の線形上微分作用環 $\D$ は非可換な Euclid 整域と
+  呼ぶべき性質を持っている. 左 $\D$ 加群は複素平面上の線形常微分方程式の抽象
+  化である. たとえば, $P\in\D$ に対して, $M=\D/\D P$ は $Pu=0$ という微分方
+  程式に対応している. 実際, $u=1\bmod~\D P\in M$ と置けば $Pu=0$. そして, そ
+  の方程式の函数空間 $\cF$ (そこには $\D$ が作用しているとする) における解全
+  体の空間は $\Hom_\D(M,\cF)$ と同一視できる. 実際, $\phi\in\Hom_\D(M,\cF)$ 
+  に対して, $f=\phi(u)\in \cF$ と置けば $Pf=$ であり, 
+  逆に $f\in\cF$ が $Pf=0$ を満たしていれば $\phi(Pu)=Pf$ に
+  よって $\phi\in\Hom_\D(M,\cF)$ を定めることができる. 
+
+  現代においては線形微分方程式 (偏微分方程式を含む) を代数的に扱う方法が十分
+  発達しており, $\D$ 加群の理論と呼ばれている. 非線形の場合を含む微分方程式
+  一般を代数的に扱うべきだという哲学は佐藤哲学%
+  \footnote{佐藤幹夫の哲学. 英語では Sato philosophy. $\D$ 加群のアイデアも
+    佐藤幹夫が提唱した.}% 
+  と呼ばれている.
+  \qed
+\end{guide}
+
+\begin{question}[一意分解整域の定義]
+  一意分解整域 (unique factorization domain, UFD) の定義を説明し, 証明抜きで
+  UFD の例を3つ挙げよ.  \qed
+\end{question}
+
+\begin{question}\label{q:PID-is-UFD}
+  PID が UFD であることを示せ%
+  \footnote{$\text{Euclid 整域}\implies\text{PID}\implies\text{UFD}$ である.
+    特に有理整数環 $\Z$, Gauss の整数環 $\Z[\sqrt{-1}]$ や体 $K$ 上の $1$ 変
+    数多項式環 $K[x]$ は UFD である.}. 
+  \qed 
+\end{question}
+
+\begin{question}
+  $R$ が整域ならば $R$ 上の $1$ 変数多項式環 $R[x]$ も整域であり,
+  $R[x]$ の単元の全体は $R$ の単数%
+  \footnote{$R$ は数で構成された環であるとは限らないので, 「単元倍」と言うべ
+    きかもしれないが, 気持ちの上では数なので単数倍と呼ぶことにした.
+    英語ではどちらも unit である.} %
+  の全体に一致することを示せ.
+  それでは, $R$ が整域とは限らない可換環でも同様の結果が成立するか?
+  (ヒント: 成立しない. $a^2=0$ ならば $(1+ax)(1-ax)=1$.) \qed
+\end{question}
+
+\begin{question}[$0$ を含む最大公約数と最小公倍数]
+  $\Z$ における ${0,9,12}$ の最大公約数と最小公倍数は何であるか? 
+  (ヒント: どんな数も $0$ をかければ $0$ になるので, $0$ はあらゆる数の倍数
+  であり, あらゆる数は $0$ の約数である. 
+  逆に, 単数%
+  \footnote{$\Z$ の単数は $\pm1$ である.} %
+  (たとえば $1$) はあらゆる数の約数であり, あらゆる数は単数の倍数である.
+  よって, 倍数関係で定義される前順序に関して, $0$ は最大であり, 単数は最小で
+  ある.)
+  \qed
+\end{question}
+
+\begin{definition}[原始多項式]
+  $R$ が UFD であるとき, 多項式
+  \begin{equation*}
+    f = \sum a_{i_1,\ldots,i_n} x_1^{i_1}\cdots x_n^{i_n}
+    \in R[x_1,\ldots,x_n]
+  \end{equation*}
+  の係数 $a_{i_1,\ldots,i_n}\in R$ の最大公約数が $1$ になる
+  とき, $f$ は $R$ 上の{\bf 原始多項式 (primitive polynomial)} であるという.
+  \qed
+\end{definition}
+
+\begin{question}[多項式の内容]\label{q:content-of-polynomial}
+  $R$ は UFD であり, $K$ はその商体であるとする.
+  $K$ 係数の任意の多項式 $f\in K[x_1,\ldots,x_n]$ は %
+  $f = c\cdot f_0$ ($c\in K$, $f_0$ は $R$ 上の原始多項式) と書け,
+  $c$ と $f_0$ は $f$ に対して $R$ の単数倍の違いを除いて一意に定まる.
+  $f\in R[x_1,\ldots,x_n]$ ならば $I(f)\in R$ となる.
+  このような $c$ の1つを選び $I(f)$ と書いて $f$ の内容 (content) と呼ぶ.
+  (ヒント: \cite{morita} 第III章の補題4.9 (p.~89) に1変数多項式の場合の証明
+  がある.  我々は多変数の多項式を扱っているが全く同様である.) 
+  \qed
+\end{question}
+
+\begin{question}\label{q:pre-Gauss-lemma}
+  $R$ は可換環であり, $I$ はそのイデアルとし,
+  $\pi:R\to R/I$ は自然な全射環準同型であるとする.
+  このとき, 写像 $\phi:R[x_1,\ldots,x_n]\to R/I[x_1,\ldots,x_n]$ を
+  \begin{equation*}
+    \phi : \sum a_{i_1,\ldots,i_n} x_1^{i_1}\cdots x_n^{i_n}
+    \mapsto \sum \pi(a_{i_1,\ldots,i_n}) x_1^{i_1}\cdots x_n^{i_n}
+  \end{equation*}
+  と定める. $\phi$ が全射環準同型であることを示せ. 
+  さらに, $\phi$ が自然な同型
+  \begin{equation*}
+    R[x_1,\ldots,x_n]/IR[x_1,\ldots,x_n] \isomto R/I[x_1,\ldots,x_n]
+  \end{equation*}
+  を誘導することを示せ.  \qed
+\end{question}
+
+\begin{question}[Gauss の補題]\label{q:Gauss-lemma}
+  $R$ は UFD であり, $K$ はその商体であるとすると以下が成立する:
+  \begin{itemize}
+  \item[(1)] $R$ 上の原始多項式の積もまた原始多項式である.
+  \item[(2)] $f,g\in K[x_1,\ldots,x_n]$ に対して, 
+    $I(fg)$ と $I(f)I(g)$ は $R$ の単数倍を除いて等しい. 
+  \end{itemize}
+  (ヒント: 問題 \qref{q:content-of-polynomial} より, (1) を示せば十分である.
+  以下 $A=R[x_1,\ldots,x_n]$ と置く.
+  $f,g\in A$ について, $fg$ が原始的でないと仮定して, $f$ または $g$ が原始
+  的でないことを示せば良い.  $fg$ は原始的でないので $R$ のある素元 $p$ が存
+  在して, $fg$ の全ての係数は $p$ で割り切れる.
+  問題 \qref{q:pre-Gauss-lemma} を $I=(p)$ の場合に適用して,
+  全射環準同型 $\phi:A\to R/(p)[x_1,\ldots,x_n]$ を構成する.
+  $h\in A$ の $\phi$ の像が $0$ になることと, $h$ の全ての係数が $p$ で割り
+  切れることは同値である.
+  $0 = \phi(fg) = \phi(f)\phi(g)$ である. 
+  $p$ は素元であることより $R/(p)$ は整域なので, $R/(p)[x_1,\ldots,x_n]$ も
+  整域になる.
+  よって, $\phi(f)$ または $\phi(g)$ のどちらかが $0$ になる. 
+  すなわち, $f$ または $g$ は原始的ではない.)  
+  \qed
+\end{question}
+
+\begin{question}
+  $R$ は UFD であり, $K$ はその商体であるとする. 
+  このとき, $f\in R[x_1,\ldots,x_n]$ が $R$ 上の既約多項式ならば %
+  $f$ は $K$ 上の既約多項式である. 
+  (ヒント: $f=gh\in R[x_1,\ldots,x_n]$, $g,h\in K[x_1,\ldots,x_n]$, 
+  $g,h\not\in K$ という仮定のとで $f$ が $R$ 上既約でないことを示せば良い.
+  \qref{q:Gauss-lemma} より, 
+  \qref{q:content-of-polynomial} の記号法のもとで必要ならば $R$ の単数倍をう
+  まく調整すれば, $1=I(f)=I(g)I(h)$, $f=f_0=g_0 h_0$ が成立している. 
+  $g_0,h_0\in R[x_1,\ldots,x_n]$, $g_0,h_0\not\in R$ なので $f$ は $R$ 上既
+  約でないことがわかった.) \qed
+\end{question}
+
+\begin{question}
+  $R$ が UFD ならば $R$ 上の $n$ 変数多項式環 $R[x_1,\ldots,x_n]$ も UFD で
+  ある.  (ヒント: $n$ に関する帰納法より, $1$ 変数多項式環 $R[x]$ が UFD で
+  あることを示せば良い. \qref{q:content-of-polynomial} より, $R$ 係数の原始
+  多項式が一意的に素元分解できることを示せば良い. 素元分解の
+  一意性は \qref{q:PID-is-UFD} より $K[x]$ が UFD であることを使えばわかる.) 
+\end{question}
+
+\begin{question}
+  $t^2$ と $t^3$ から $\C$ 上生成される $\C[t]$ の部分環を $\C[t^2,t^3]$ と
+  表わす. $\C[t^2,t^3]$ は $1,t^2,t^3,t^4,\ldots$ を $\C$ 基底として持つ.
+  $\C[t^2,t^3]$ は UFD ではない%
+  \footnote{$\C[t]$ は PID なので UFD である.  
+    $C[t^2,t^3]$ は $x=t^2$, $y=t^3$ という対応によって $\C[x,y]/(y^2-x^3)$ 
+    に同型である.  $y^2=x^3$ のグラフは原点でとがっている.  その形状をカスプ 
+    (cusp) と呼ぶ. 実は可換環の UFD 性と可換環に対応する「図形」の非特異性の
+    あいだには微妙な関係がある. 
+    たとえば, David Mumford の ``The Red Book'' cite{mumford} の第III章の第
+    7節, 特に p.~276 にある図を参照せよ.}.  
+  (ヒント: $t^6=(t^2)^3=(t^3)^2$ でかつ $t\not\in\C[t^2,t^3]$.) \qed
+\end{question}
+
+\begin{question}
+  $R = \C[x,y,z]/(z^2 - xy)$ は整域だが UFD ではない%
+  \footnote{$\R^3$ の中で $z^2 = xy$ のグラフはどのような形をしているか?}. \qed
+\end{question}
+
+\begin{question}
+  $\Z[\sqrt{-5}] = \{\,a+b\sqrt{-5}\mid a,b\in\Z\,\}$ は UFD ではない.
+  (ヒント: $6=2\cdot 3=(1+\sqrt{-5})(1-\sqrt{-5})$.)
+  \qed
+\end{question}
+
+\begin{guide}
+  以上に続けて勉強するべきなのは Dedekind 整域 (Dedekind domain, Dedekind 環)
+  の理論である. UFD は $0$ でない各元が一意的に素元分解できるような整域のこ
+  とであった. Dedekind 整域は $0$ でないイデアルが素イデアルの積に一意的に分
+  解できるような整域のことである. Dedekind 整域の最重要例は代数体の整数環で
+  ある.
+  
+  たとえば $\Q(\sqrt{-5})$ の整数環 $\Z[\sqrt{-5}]$ は UFD ではないが 
+  Dedekind 整域である (\cite{morita} 第III章の例6.11, p.~102 でもその事実が
+  注意されている).
+  $\Z[\sqrt{-5}]$ のような環を詳しく研究するためには Dedekind 整域の理論が必
+  要になる. そこまでたどりついた方は代数的整数論の入口に立っていることになる.
+  体の Galois 理論の最も重要な応用先は代数的整数論である.
+  \qed
+\end{guide}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Eisenstein の判定法と既約多項式の例}
+
+体 $K$ 上の既約多項式 $f\in K[x]$ を与えるごとに, 
+$K$ の有限次元拡大 $L=K[x]/(f)$ が得られる.
+それでは $f$ の既約性を判定するためにはどうすれば良いのだろうか.
+次の Eisenstein の判定法が有名である.
+
+\begin{question}[Eisenstein の判定法]
+  $R$ は UFD であり, $K$ はその商体であるとする.  
+  $R$ 上の原始多項式
+  \begin{equation*}
+    f(x)= a_n x^n + a_{n-1}x^{n-1} + \cdots + a_1 x + a_0 \in R[x]
+  \end{equation*}
+  がある素元 $p\in R$ について
+  \begin{equation*}
+    p\nmid a_n, \quad
+    p\mid a_i \quad(i=0,\ldots,n-1), \quad
+    p\nmid a_0
+  \end{equation*}
+  をみたしていれば $f$ は $R$ 上したがって $K$ 上既約である. \qed
+\end{question}
+
+以下の問題を解くときに, Eisenstein の判定法を自由に用いて良い.
+
+\begin{question}
+  $x^4+1$ は $\Q$ 上既約である. 
+  (ヒント: $x$ に $x+1$ を代入して Eisenstein の判定法を適用せよ.) \qed
+\end{question}
+
+\begin{question}
+  素数 $p$ に対して, $f(x) = (x^p-1)/(x-1) = x^{p-1} + x^{p-2} + \cdots + 1$ 
+  は $\Q$ 上既約である. 
+  (ヒント: $x$ に $x+1$ を代入して Eisenstein の判定法を適用せよ.) \qed
+\end{question}
+
+\begin{question}
+  $x^n + px + p$ ($n\ge 2$, $p$ は素数) は $\Q$ 上既約である. \qed
+\end{question}
+
+\begin{question}
+  $p$ は素数であるとし, $a\in\Z$ は $p\mid a$, $p^2\nmid a$ をみたしていると
+  する. このとき, $x^n - a$ は $\Q$ 上既約である.
+\end{question}
+
+\begin{question}
+  $a$ が $3$ 上因子を含まない $2$ 以上の有理整数ならば $x^3-a$ は $\Q$ 上既
+  約である. \qed
+\end{question}
+
+\begin{question}
+  $k$ は任意の体であるとし, $K=k(t)$ と置く.  
+  $x^n + tx + x, x^n - t \in K[x]$ は $K$ 上既約である.
+  (ヒント: $k(t)$ は $k[t]$ の商体であり, $t$ は $k[t]$ の素元である.)
+  \qed
+\end{question}
+
+Eisenstein の判定法を使わない例も示しておこう.
+
+\begin{question}
+  $f(x)=x^5-x^3-2x^2-2x-1$ は $\Q$ 上既約であることを示せ.
+  (ヒント: \cite{takagi2} 第4章第24節問題2 (p.~130).  $f(x)$ が既約でないと
+  すると, $2$ 次式以下の整数係数の因子を持つ. 
+  その因子を $\phi(x)=ax^2+bx+c$ と置き, $f(1)=5$, $f(-1)=-1$ などの情報から
+  有限個可能性に狭め, そのどれでも $f(x)$ が割り切れないことを示す.
+  $f(x)$ が整数係数多項式の範囲内でこれ以上因数分解されないことを示すのは高
+  校数学の範囲内の問題である.)
+  \qed
+\end{question}
+
+\begin{question}
+  $K=\F_5=\Z/5\Z$ のとき, $f(x)=x^3-x-2\in K[x]$ は $K$ 上既約である. 
+  (ヒント: $f$ は $3$ 次式なので既約でなければ $1$ 次式の因子を持つ.
+  そのとき, ある $K$ の元 $a$ において $f(a)=0$ となる. しかし, 実際に計算し
+  てみるとそうはならない.) \qed
+\end{question}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{線形無関連性}
+
+以下, $K$ は体であるとする.
+
+\begin{definition}[$K$ 代数]
+  $A$ は $K$ 上のベクトル空間であり, $K$ 上の双線形写像 $A\times A\to A$,
+  $(a,b)\mapsto ab$ が与えられているとき, $A$ を $K$ 代数もしくは $K$ 上の代
+  数 ($K$-algebra, algebra over $K$, $K$ 多元環) と呼び, $(a,b)\mapsto ab$ 
+  を積と呼ぶ.
+
+  $A$ は $K$ 代数であるとする. 
+
+  $A$ の $K$ 部分空間 $B$ が積について閉じているとき, $B$ は $A$ の $K$ 部分
+  代数 ($K$-subalgebra) であるという. 
+
+  $A$ は $K$ 代数であるとする. $A$ の積が結合律 (associativity) をみたしてい
+  るとき, すなわち $(ab)c=a(bc)$ ($a,b,c\in A$) をみたしているとき, $A$ は結
+  合的 (associative) であるという. 
+  $A$ の元 $1$ で $1a=a1=a$ ($a\in A$) をみたすものが存在するとき, 
+  $A$ は単位元を持つ (with unit) という.
+  結合的で $1$ を持つ代数を単に $K$ 代数と呼ぶことも多い.
+  \qed
+\end{definition}
+
+\begin{question}
+  上の定義のもとで, $L$ が体 $K$ の拡大体であれば, 
+  $L$ は結合的で $1$ を持つ $K$ 代数であり,
+  $K$ と $L$ の中間体は $L$ の $K$ 部分代数である.  \qed
+\end{question}
+
+\begin{question}
+  $C_0(\R)=
+  \{\,f:\R\to\C\mid\text{$f$ は連続でかつ $x\to\pm\infty$ で $f(x)\to 0$}\,\}$ 
+  と定めると, $\C_0(\R)$ は $\C$ 上の結合的代数だが, $1$ を持たない. \qed
+\end{question}
+
+\begin{question}[テンソル代数]
+  $K$ 上のベクトル空間 $V$ に対して, 
+  テンソル代数 $T(V)=\bigoplus_{i=0}^\infty V^{\o i}$ は結合的で $1$ を
+  持つ $K$ 代数である. \qed
+\end{question}
+
+\begin{question}[Lie 代数]
+  $K$ 代数 $A$ の積を $[a,b]$ と書くことにする. このとき,
+  $[a,a]=0$, $[[a,b],c]=[a,[b,c]]-[b,[a,c]]$ (Jacobi 律) が成立しているなら
+  ば, $A$ は Lie 代数であるといい, $[\;,\;]$ を Lie bracket と呼ぶ.
+  例えば, $M_n(K)$ に Lie bracket を $[A,B]=AB-BA$ と定めると $M_n(K)$ は 
+  Lie 代数をなす. \qed
+\end{question}
+
+\begin{definition}[線形無関連性]\label{definition:l-d}
+  体 $K$ 上の可換な代数 $\Omega$ の $K$ 部分代数 $A$, $B$ が $K$ 上線形無関
+  連 (linearly disjoint) であるとは自然な $K$ 線形写像 $A\o_K B\to\Omega$,
+  $\sum a_i\o b_i\mapsto \sum a_i b_i$ が単射になることである. \qed
+\end{definition}
+
+\begin{question}\label{q:l-d-alg}
+  体 $K$ 上の可換な代数 $\Omega$ の $K$ 部分代数 $A$, $B$ に関して以下の条件
+  は互いに同値である:
+  \begin{itemize}
+  \item[(a)] $A$ と $B$ は $K$ 上線形無関連である.
+  \item[(b)] $b_1,\ldots,b_n\in B$ が $K$ 上一次独立ならば
+    それらは $A$ 上でも一次独立である%
+    \footnote{$b_1,\ldots,b_n\in B$ が $A$ 上一次独立であるとは, 
+      任意の $a_1,\ldots,a_n\in A$ に対して,
+      $a_1 b_1 + \cdots + a_n b_n = 0$ ならば $b_1=\cdots=b_n=0$ となること.}.
+  \item[(c)] $a_1,\ldots,a_n\in A$ が $K$ 上一次独立ならば
+    それらは $B$ 上でも一次独立である. 
+    \qed
+  \end{itemize}
+\end{question}
+
+\begin{question}\label{q:l-d-field}
+  体の拡大 $\Omega/K$ の中間体 $L$, $M$ について以下の2つの条件は互いに同値
+  である%
+  \footnote{$\Omega/K$ の典型例としては $\C/\Q$ を考えよ.}:
+  \begin{itemize}
+  \item[(b)] $b_1,\ldots,b_n\in M$ が $K$ 上一次独立ならば
+    それらは $L$ 上でも一次独立である.
+  \item[(c)] $a_1,\ldots,a_n\in L$ が $K$ 上一次独立ならば
+    それらは $M$ 上でも一次独立である.
+  \end{itemize}
+  (ヒント: 逆も同様なので $\text{(b)}\implies\text{(c)}$ のみを示せばよい.
+  (b) を仮定し, $a_1,\ldots,a_n\in L$ は $K$ 上一次独立であり,
+  $b_1,\ldots,b_n\in M$, $a_1 b_1 + \cdots + a_n b_n = 0$ と仮定する.
+  適当に順序を変更して, $\{b_1,\ldots,b_k\}$ 
+  は $K$ 上一次独立な $\{b_1,\ldots,b_n\}$ の極大部分集合にできる.
+  そのとき, $b_i = \sum_{j=1}^k c_{ij}b_j$ ($c_{ij}\in K$, $i=1,\ldots,n$) 
+  と書ける. $0=\sum_i a_i b_i = \sum_j (\sum_i a_i c_{ij}) b_j$.
+  (b) を仮定したので $\sum_i a_i c_{ij} = 0$ ($j=1,\ldots,k$).
+  $a_1,\ldots,a_n$ は $K$ 上一次独立と仮定したのですべての $c_{ij}$ は $0$ 
+  になる. よって, $b_i = \sum_j c_{ij}b_j = 0$ ($i=1,\ldots,n$).
+  \qed
+\end{question}
+
+\begin{guide}
+  \qref{q:l-d-alg} の結果より, \qref{q:l-d-field} の条件 (b), (c) は 
+  \definitionref{definition:l-d} の意味で $L$, $M$ が $K$ 上線形無関連である
+  ことと同値である.  代数学の入門的な教科書の多くは $L$, $M$ が $K$ 上線形無
+  関連であることの定義として \qref{q:l-d-field} の条件 (b), (c) を採用してい
+  る. \qed
+\end{guide}
+
+\begin{question}\label{q:l-d-0}
+  体の拡大 $\Omega/K$ を考える. このとき, 以下が成立する:
+  \begin{itemize}
+  \item[(1)] $\Omega$ の $K$ 部分代数は整域であり, 
+    その商体は自然に $\Omega/K$ の中間体とみなせる.
+  \item[(2)] $\Omega$ の $K$ 部分代数 $A$, $B$ を取り, それらの商体をそれぞ
+    れ $L$, $M$ と書く. このとき, $A$ と $B$ が $K$ 上線形無関連
+    ならば $L$ と $M$ もそうである.
+    \qed
+  \end{itemize}
+\end{question}
+
+\begin{question}
+  $L$, $M$, $N$ は体の拡大 $\Omega/K$ の中間体であり, $M\subset N$ であると
+  する. このとき, 次の2つの条件は互いに同値である:
+  \begin{itemize}
+  \item[(a)] $L$ と $N$ は $K$ 上線形無関連である.
+  \item[(b)] $L$ と $M$ は $K$ 上線形無関連であり, 
+    合成体 $LM$ と $N$ は $M$ 上線形無関連である.
+  \end{itemize}
+  (ヒント: まず問題の意味を理解するために \cite{morita} の p.~181, p.~184, 
+  などにあるような図を描いてみよ. \qref{q:l-d-alg} を見よ.  \qref{q:l-d-0} 
+  を使う.) 
+  \qed
+\end{question}
+
+\begin{question}\label{q:l-d-1}
+  体の拡大 $\Omega/K$ の中間体 $L$, $M$ について, $[L:K]<\infty$ ならば次の2
+  つの条件は互いに同値である:
+  \begin{itemize}
+  \item[(a)] $L$ と $M$ は $K$ 上線形無関連である.
+  \item[(b)] $[LM:M]=[L:K]$.
+    \qed
+  \end{itemize}
+\end{question}
+
+\begin{question}\label{q:l-d-2}
+  体の有限次拡大 $M/K$ の中間体 $L$ について $[M:K]=[M:L][L:K]$. \qed
+\end{question}
+
+\begin{question}
+  体の拡大 $\Omega/K$ の中間体 $L$, $M$ について以下が成立する:
+  \begin{itemize}
+  \item[(1)] $[LM:K]<\infty$ $\iff$ $[L:K]<\infty$ かつ $[M:K]<\infty$.
+  \item[(2)] $[LM:K]<\infty$ のとき,
+    $[LM:K]$ は $[L:K]$ と $[M:K]$ の倍数であり,
+    $[LM:K]\le[L:K][M:K]$.
+  \item[(3)] $[LM:K]<\infty$ のとき,
+    $[L:K]$ と $[M:K]$ が互いに素ならば,
+    $[LM:K]=[L:K][M:K]$ かつ $L$ と $M$ は $K$ 上線形無関連である.
+    \qed
+  \end{itemize}
+\end{question}
+
+\begin{question}\label{q:l-d-3}
+  体の拡大 $\Omega/K$ の中間体 $L$, $M$ が $K$ 上線形無関連
+  ならば $L\cap M=K$. \qed
+\end{question}
+
+\begin{question}
+  体の拡大 $\C/\Q$ の中間体 $L=\Q(\sqrt[3]{5})$, $M=\Q(\omega\sqrt[3]{5})$
+  ($\omega=\exp(2\pi\sqrt{-1}/3)$), $N=\Q(\sqrt{-3})$ とおく. 以下が成立する
+  ことを示せ:
+  \begin{itemize}
+  \item[(1)] $L$ と $N$ は $\Q$ 上線形無関連である.
+  \item[(2)] $LM=LN$ でかつ, $L$ と $M$ は $\Q$ 上線形無関連ではない.
+  \item[(3)] $L\cap M=\Q$.
+  \end{itemize}
+  (ヒント: (1) は \qref{q:l-d-3} の (3) を使う.
+  (2) は \qref{q:l-d-1} を使う.
+  (3) は \qref{q:l-d-2} を使う.)
+  \qed
+\end{question}
+
+\begin{question}\label{q:l-d-sqrt2-sqrt3}
+  体の拡大 $\C/\Q$ の中間体 $\Q(\sqrt{2})$, $\Q(\sqrt{3})$ は $\Q$ 上線形無
+  関連である.  (ヒント: $1$, $\sqrt{2}$ が $\Q(\sqrt{3})$ 上一次独立であるこ
+  とを示せば良い.) \qed
+\end{question}
+
+\begin{question}
+  $m,n\in\Z-\{0,1\}$ とし, $K=\Q(\sqrt{m})$, $L=\Q(\sqrt{n})$ と置く.
+  もしも $K\ne L$ ならば $K$ と $L$ は $\Q$ 上線形無関連である. \qed
+\end{question}
+
+\begin{question}
+  体の拡大 $L/K$ と $K$ 上の $1$ 変数有理函数体 $L(x)$ を考える.
+  このとき, $L(x)/K$ の中間体 $L$, $K(x)$ は $K$ 上線形無関連である. \qed
+\end{question}
+
+\begin{question}
+  $\C$ 上の $1$ 変数有理函数体 $K = \C(t)$ の代数的閉包
+  を $\Omega=\closure{K}$ と書
+  く. $\Omega/K$ の中間体 $K(\sqrt{t})$, $K(\sqrt{t-1})$ は $K$ 上線形無関連
+  である.  (ヒント: \qref{q:l-d-sqrt2-sqrt3} とこの問題は似ている.) \qed
+\end{question}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{楕円函数体}
+
+\begin{question}
+  $X$ は $\C$ の連結開部分集合であるとする.
+  $X$ 上の有理型函数の定義を説明し,
+  $X$ 上の有理型函数全体が自然に体をなすことを証明せよ. \qed
+\end{question}
+
+\begin{question}
+  $\P^1(\C)=\C\cap\{\infty\}$ (複素射影直線) 上の有理型函数とは $C$ 上の有理
+  型函数 $f(z)$ で $g(w)=f(1/w)$ が $w=0$ の近傍で有理型になるもののことであ
+  る.  
+  $\P^1(\C)$ 上の有理型函数の全体は $\C$ 上の $1$ 変数有理函数体 $\C(z)$ に
+  一致することを示せ.
+  \qed
+\end{question}
+
+\begin{question}[複素有理函数体]
+  $\omega_1,\omega_2\in\C$ は $\R$ 上一次独立であるとする.
+  このとき, $\C$ 上の有理型函数 $f(u)$ が周期 $\omega_1$, $\omega_2$ を持つ
+  楕円函数 (elliptic function) であるとは, $f(u+\omega_i)=f(u)$ ($i=1,2$) が
+  成立することである.  固定された周期を持つ楕円函数の全体が体をなすことを証
+  明せよ.  楕円函数の全体のなす体を楕円函数体と呼ぶ. \qed
+\end{question}
+
+\begin{question}[Weierstrass の $\wp$ 函数]
+  $\omega_1,\omega_2\in\C$ は $\R$ 上一次独立であるとし,
+  $\Gamma = \Z\omega_1 + \Z\omega_2$, $\Gamma'=\Gamma - \{0\}$ と置く.
+  次の式によって周期 $\omega_1$, $\omega_2$ を持つ楕円函数 $\wp(u)$ を構成可
+  能なことを示せ: 
+  \begin{equation*}
+    \wp(u) 
+    = \frac{1}{u^2} 
+    + \sum_{\omega\in\Gamma'}
+    \left( \frac{1}{(u-\omega)^2} - \frac{1}{\omega^2} \right).
+  \end{equation*}
+  これを Weierstrass の $\wp$ 函数と呼ぶ. \qed
+\end{question}
+
+\begin{guide}
+  $K$ を周期 $\omega_1$, $\omega_2$ を持つ楕円函数全体のなす体とすると,
+  $K$ は $\wp$ とその導函数 $\wp'$ から $\C$ 上生成されることが知られている.
+  すなわち $K=\C(\wp,\wp')$.  さらに, Weierstrass の $\wp$ 函数は次の形の微
+  分方程式を満たしている:
+  \begin{equation*}
+    \wp'(u)^2 = 4\wp(u)^3 - g_2\wp(u) - g_3.
+  \end{equation*}
+  ここで, $g_2$, $g_3$ は周期 $\omega_1$, $\omega_2$ で決まるある定数である.
+  よって, $(x,y)=(\wp(u),\wp'(u))$ は $\C-\Gamma$ による複素曲線
+  \begin{equation*}
+    \{\, (x,y)\in\C^2 \mid y^2 = 4x^3 - g_2 x - g_3 \,\}
+  \end{equation*}
+  の parametrization を与える.  この曲線を複素楕円曲線 (elliptic curve) と呼
+  ぶ.  楕円函数体 $K$ は $\C(x)$ に $y=\sqrt{x^3 - g_2 x - g_3}$ を添加して
+  得らえる $\C(x)$ の $2$ 次拡大体に一致する.
+  楕円函数と楕円曲線の理論は基本的でかつ重要である.
+  楕円函数論の教科書には \cite{takeuchi}, \cite{umemura} などがある.
+
+  さらに難しい複素曲線と複素函数を扱う理論に代数函数論がある.
+  その別の名はコンパクト Riemann 面の理論である.
+  代数函数論は19世紀数学の花形の1つである.
+  興味のある方は岩澤健吉著『代数函数論』 \cite{iwasawa} を読んで欲しい.
+  代数函数論では代数的な Galois 理論 (代数函数体の有限次拡大の理論) と 
+  幾何学的な Galois 理論 (コンパクト Riemann 面の分岐被覆の理論) が統一され
+  ることになる.
+
+  代数函数体 (algebraic function field) と代数体 (algebraic number field) の
+  理論はよく似ている. 楕円函数体は有理函数体の次に簡単な代数函数体である.
+  上の記号における $\sqrt{x^3 - g_2 x - g_3}$ という無理函数
+  は $\sqrt{2}$ のような無理数の類似物である.
+  体の Galois 理論を理解するとき, 純代数的な議論が納得できな人は代数函数体の
+  場合について考えると納得できる場合が増えるかもしれない.
+  \qed
+\end{guide}
+
+\bigskip\bigskip\noindent{\bf\Large つづく.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{thebibliography}{AB}
+
+%\bibitem[Hi]{hirai}
+%平井武: 線形代数と群の表現 I, II, すうがくぶっくす 20, 21, 朝倉書店, 2001
+
+%\bibitem[Ho]{hotta}
+%堀田良之: 代数入門—群と加群—, 数学シリーズ, 裳華房, 1987
+
+\bibitem[I]{iwasawa}
+岩澤健吉: 代数函数論, 岩波書店, 1952, 1989
+
+%%\bibitem[Ma]{matsumura}
+%%松村英之: 可換環論, 共立出版, 1980, 2000 (英語版: Matsumura, Hideyuki:
+%%Commutative ring theory, Cambridge studies in advanced mathematics 8, 
+%%Cambridge University Press, 1986)
+
+\bibitem[Mo]{morita}
+森田康夫: 代数概論, 数学選書 9, 裳華房, 1987
+
+%%\bibitem[Mu]{mumford}
+%%Mumford, David: The Red Book of Varieties and Schemes, 
+%%Lecture Notes in Mathematics 1358, Springer-Verlag, 1980, 1988
+
+%%\bibitem[R]{reid}
+%%リード, M. (Reid, Miles): 可換環論入門, 伊藤由佳理訳, 岩波書店, 2000
+
+%%\bibitem[S]{satake}
+%%佐武一郎: 線型代数学, 数学選書 1, 裳華房, 1974
+
+\bibitem[Taka1]{takagi1}
+高木貞治: 初等整数論講義, 共立出版, 第2版 1971, 2000
+
+\bibitem[Taka2]{takagi2}
+高木貞治: 代数学講義, 共立出版, 改定新版 1965, 1999
+
+\bibitem[Take]{takeuchi}
+竹内端三: 楕圓凾數論, 岩波全書, 1936, 1996
+
+%%\bibitem[Tan]{tanisaki}
+%%谷崎俊之: リー代数と量子群, 共立出版, 2002
+
+\bibitem[U]{umemura}
+梅村浩: 楕円函数論——楕円曲線の解析学, 東京大学出版会, 2000
+
+\end{thebibliography}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

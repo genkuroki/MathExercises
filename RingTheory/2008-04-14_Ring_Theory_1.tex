@@ -1,0 +1,2769 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\def\STUDENT{} % \def すると計算問題の解答を印刷しなくなる.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[12pt,twoside]{jarticle}
+%\documentclass[12pt]{jarticle}
+\usepackage{amsmath,amssymb,amscd}
+\usepackage{eepic}
+\usepackage{enshu}
+%\usepackage{showkeys}
+\allowdisplaybreaks
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setcounter{page}{1}       % この数から始まる
+\setcounter{section}{-1}   % この数の次から始まる
+\setcounter{theorem}{0}    % この数の次から始まる
+\setcounter{question}{0}   % この数の次から始まる
+\setcounter{footnote}{0}   % この数の次から始まる
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\ifx\STUDENT\undefined
+%
+% 教師専用
+%
+\newcommand\commentout[1]{#1}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\else
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% 生徒専用
+%
+\newcommand\commentout[1]{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\fi
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{\bf 代数学概論B演習
+  \ifx\STUDENT\undefined\\{\normalsize 教師用\quad(計算問題の略解付き)}\fi}
+\author{黒木 玄 \quad (東北大学大学院理学研究科数学専攻)}
+\date{2008年4月14日(月)}
+\maketitle
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\noindent
+%{\Large\bf 代数学概論B演習}
+%\hfill
+%{\large 黒木玄}
+%\qquad
+%2008年4月14日(月)
+%\commentout{\quad (教師用)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\tableofcontents
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setcounter{section}{-1}
+
+\section{この演習のルール}
+
+この演習では今までのルールを大幅に変える.
+ルールの変更点の重要なポイントは太字の大きな文字で書いておいた.
+
+私が渡した文書に誤りを見つけた場合には気軽に指摘して欲しい.
+
+\subsection{各演習時間の基本スケジュール}
+
+\begin{description}
+ \item[午後1時〜1時半] 
+  黒板の前で発表した人はこのあいだに解答を黒板に書く. \\
+  この時間にレポートの内容を黒板で説明して欲しい人を指名するかもしれない.
+ \item[午後1時半]
+  自主レポートの提出を受け付け, それが終了したら黒板の前での発表開始.
+ \item[演習終了後]
+  個人的に数学の質問に答える. 
+  数学の勉強の仕方に関する相談にものる.
+\end{description}
+
+\subsection{数学をマスターするために必要な勉強法}
+
+さて, ある程度以上のレベルの数学をマスターするためには
+{\bf しっかり書かれた数学の本を丸ごと読む}
+という勉強が必要になる. そのとき必要なことは
+\begin{itemize}
+ \item 証明の理解に論理的ギャップがあってはいけない,
+ \item 数学的な具体例にはどのようなものがあるかをよく調べる,
+ \item 本では説明が省略されている部分を完璧に埋める,
+ \item 本よりも詳しい説明が書かれているノートを作る,
+ \item 最終的には自家製の教科書を完成することを目指す,
+ \item 何よりも重要なのは「数学的本質は何か」について考え続けること
+\end{itemize}
+などである. 
+一冊の本を丸ごと読めない場合には
+少なくとも章単位で丸ごと読むように努力するのが良い.
+ノートの作成も重要である.
+「教科書を読むよりも君のノートを読んだ方がわかりやすい」
+と他人に言ってもらえるようなノートを書くことを目指して欲しい.
+
+高校までの数学では問題単位で解き方を習得するような勉強の仕方をしていた人
+が多いと思う. しかし現在勉強しているような数学を習得するためには
+「数学の世界がどんな様子をしているか, その本質は何か」を理解するように
+努力しなければいけない. 
+
+私がたくさんの演習問題を渡すのはそれらの問題をすべて解いて欲しいからでは
+ない. 演習問題を解く過程でまとまった知識の重要性に気付き, 
+上に書いたような勉強に進むきっかけを作りたいからである.
+演習の時間に「余計なこと」を話そうと努力しているのも同様の理由からである.
+
+以上のような考え方に基づき, 
+この演習では自主レポートとして
+\begin{center}
+ \large\bf 私が渡した問題を順番に大量に解いて提出することは禁止
+\end{center}
+する. 私が渡した問題を大量に解き続ける時間があるなら, 
+上に書いたような勉強の仕方をした方が良い.
+逆に, 上で説明した方法で代数学を勉強しながら, 
+\begin{center}
+ \large\bf 疑問を質問にまとめてレポートとして提出することは推奨
+\end{center}
+される.
+場合によっては問題を解いたレポートよりも質問のレポートの方を高く評価する
+こともありえる.  自分が理解できていないことを論理的に説明することは
+自分が理解していることをまとめるよりも圧倒的に難しい.
+個人的に数学科の卒業生には「自分の疑問を論理的にまとめる能力」
+が要求されると思う.
+
+\subsection{論理的に口頭で説明できる能力も身に付けよう}
+
+ここの数学科の卒業生が身に付けることができる能力は
+\begin{itemize}
+ \item 現代の進んだ数学の知識を身に付けること
+ \item 英語で書かれた数学の文献を読めるようになること
+ \item 単に日本語や英語の数学文献を読めるだけではなく, \\
+  その内容を他人に対して口頭で論理的に説明できること
+\end{itemize}
+の3つだと思う.  4年生のときのセミナーで英語の文献を読むことになるので,
+卒業までにしっかり勉強すれば英語で書かれた数学の文献も読めるようになる.
+この演習では「数学の知識」だけではなく, 
+「論理的に説明できること」をも身に付けてもらいたいと考えている.
+
+以上の考え方に基づき, 
+この演習では単位取得の必要条件として
+一回以上黒板の前で発表することを義務として課すことにする. 
+\begin{center}
+ \large\bf 単位が欲しければ最低でも一回以上黒板の前で発表すること!
+\end{center}
+(自主)レポートも成績の参考にするが, 
+単位を取得するためにはそれだけでは足りない. 
+最終的に救済措置を設ける可能性もあるが, 
+最初からそう期待しないこと.
+
+しかし, 残念ながら演習の時間は限られているので話す練習を十分にできない
+だろう. 一人当たり1〜3回程度黒板の前に立つだけで終わってしまうと思う.
+しかし各自が問題の解答をノートにまとめるときに
+他人に説明するために使えるような書き方を心がけるようにすれば
+「話す準備の練習」は十分にできるように思われる.
+数学の文章(問題の解答を含む)を書くときには
+常に口頭での説明を要求されることを前提に書くべきである.
+自分が説明するためにさえ使えないようでは書く意味がない.
+
+問題の解答を書いたレポートや質問を書いたレポートを提出した場合には, 
+レポートを見た後(提出の次週以降になる)に適当に見繕って
+\begin{center}
+ \large\bf
+ レポートの内容を黒板の前で説明することを要求するかもしれない.
+\end{center}
+特に黒板に書かれた解答が少ない場合はそうするだろう.
+主としてレポートを提出していても黒板の前で発表していない人
+の中から選ぶ予定である.
+
+黒板の前での発表を強制すると嫌われる場合があるのだが, 
+数学について口頭での発表ができる能力は数学科の卒業生として
+当然要求されるべき能力だと思うので以上のような方針を採用することにした.
+
+\subsection{成績評価の方針}
+
+{\small
+\begin{itemize}
+ \item 黒板の前での発表と自主レポートの内容で成績を評価する.
+ \item 各問題の基本点は10点であるが, 
+       易しい問題にはそれ未満の点数が付けられ, 
+       難しい問題には20点〜∞点の点数が付けられる.
+       黒板の前で発表するとその基本点が5倍以上になり, 
+       自主レポートで提出した場合には基本点がそのまま付けられる.
+ \item {\bf 単位が欲しければ最低でも一回以上黒板の前で発表すること.}
+ \item 救済措置があるかもしれないが, 最初からそう期待しないこと.
+ \item 黒板の前で一回以上発表して最後まで
+       論理的ギャップを埋めれば C 以上で単位を出す.
+ \item 自力で解いた場合には他の人が黒板ですでに
+       解いてしまったのと同じ問題の解答を黒板で発表してよい.
+ \item 黒板の前での自主的な発表には自主レポート提出の5倍以上の点数を付ける.
+ \item {\bf 自主レポートの内容を黒板の前で発表することを要求するかもしれない.}
+ \item こちらが指名してレポートの内容を黒板の前で説明してもらった場合には
+       「黒板の前での説明一回分」とはみなさない.
+       しかし説明の内容が特別に良ければ例外的に
+       「黒板の前での説明一回分」とみなされ, 
+       5倍以上の点数が付けられることになる.
+ \item 内容に論理的にギャップがある場合には減点する.
+ \item {\bf 自主レポートで問題を大量に解いて提出することは禁止.\\
+       1回のレポート提出あたり2問以下にして欲しい.}
+ \item 一つのテーマについて同じような問題を複数解いて
+       レポートとして提出するのではなく, 
+       複数のテーマに関して複数のレポートを提出するように努力して欲しい.
+ \item 代数学の本を読みながら感じた疑問を質問にまとめて
+       レポートとして提出しても良い.
+       そのようなレポートは高く評価し, 
+       最低でも30点以上の点数を付ける.
+       質問の内容が高度なものであれば
+       100点以上の点数を付けてしまうかもしれない.
+       ただし疑問の内容を私が理解できない場合は
+       黒板の前での説明をお願いするかもしれない.
+ \item 現在習っていることよりも進んだ数学について勉強した結果を
+       自主レポートとして提出しても構わない.
+ \item 問題に誤りを見つけた場合には適切に訂正して解こうとすること.
+\end{itemize}
+}
+
+黒板の前で一回以上発表しているという条件を満たしており, 
+40点以上ならC, 70点以上ならB, 100点以上ならA, 130点以上ならAAの
+成績を付ける予定である.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section*{この文書の作成に使ったソフト}
+
+数式を含む文書は \TeX (テック, テフ)を使って作成することが現在では
+標準的になっている. 特にマクロセットとして \LaTeX を使うことが多い.
+この文書は日本語 \LaTeX を使って作成されている.
+
+\TeX のシステム全体のすべてのソースコードは公開されており, 
+インターネットでバイナリも無料で配布されている.
+具体的に \TeX を使うにはどうすれば良いのだろうか.
+
+東北大学数学教室の次の場所は非常に役に立つはずである:
+\begin{itemize}
+ \item \verb,http://www.math.tohoku.ac.jp/tex/index.html,
+\end{itemize}
+他にも以下の場所は参考になる:
+\begin{itemize}
+ \item \verb,http://www.ms.u-tokyo.ac.jp/~abenori/tex/, \\
+  $\to$ \verb,http://www.ms.u-tokyo.ac.jp/~abenori/tex/tex0.html, \\
+  $\to$ \verb,http://www.ms.u-tokyo.ac.jp/~abenori/mycreate/#kakuto3, \\
+  最新版の「TeXインストーラ」を使うことができれば一番簡単. \\
+  それでダメなら次の場所にアクセスする.
+ \item \verb,http://cise.edu.mie-u.ac.jp/~okumura/texwiki/, \\
+  $\to$ インストール Windows
+\end{itemize}
+\TeX システム全体と ghostscript と ghostview と dviout がインストール
+されれば後はメモ帳などで tex ファイルを編集すればすぐにでも
+日本語 \LaTeX で文書を作ることができる.　しかしメモ帳は使い難い.  
+より優れたエディタをインストールして利用した方が便利である.
+Linux などの UNIX 系 OS 環境で使える emacs 系エディタに
+慣れている人 (もしくは慣れたい人) におすすめなのは次の二つである.
+\begin{itemize}
+ \item xyzzy と KaTeX を使いたい人は次の場所を見る \\
+  $\to$ \verb,http://www12.plala.or.jp/ksp/tex/katex/,
+ \item Meadow を使いたい人はまず次の場所にアクセスする \\
+  $\to$ \verb,http://www.meadowy.org/meadow/, \\
+  $\to$ ダウンロード \\
+  $\to$ リリース版の Netinstall packages をダウンロードして実行する \\
+  $\to$ 各種設定を行なう.
+\end{itemize}
+最近の私は前者の xyzzy と KaTeX を愛用している.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{復習}
+\label{sec:fukushu}
+
+この節では環の基礎概念や有限Abel群の基本定理の復習を行なう.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{環の定義}
+
+\begin{definition}[環, 可換環]
+ 集合 $R$ とその元 $0,1\in R$ と
+ 演算 $-:R\to R$, $+,\,\cdot:R\times R\to R$ の組 $(R,\,\cdot\,,1,+,0,-)$ が
+ {\bf 環 (ring)} であるとは以下が成立していることである:
+ \begin{enumerate}
+  \item $(R,\,\cdot\,,1)$ はモノイド (単位元付き半群) である.
+  すなわち任意の $a,b,c\in R$ について
+  \begin{enumerate}
+   \item $(ab)c=a(bc)$,
+   \item $1a=a1=a$.
+  \end{enumerate}
+  \item $(R,+,0,-)$ は可換群である. 
+  すなわち任意の $a,b,c\in R$ について
+  \begin{enumerate}
+   \item $(a+b)+c = a+(b+c)$,
+   \item $a+0 = 0+a = a$,
+   \item $a + (-a) = (-a) + a = 0$,
+   \item $a+b = b+a$.
+  \end{enumerate}
+  \item 加法と乗法のあいだに分配法則が成立している. 
+  すなわち $a,b,c\in R$ について
+  \begin{enumerate}
+   \item $a(b+c)=ab+ac$,
+   \item $(a+b)c=ac+bc$.
+  \end{enumerate}
+ \end{enumerate}
+ 環 $R$ がさらに次を満たしているとき %
+ $R$ は{\bf 可換環 (commutative ring)} であるという:
+ \begin{itemize}
+  \item 乗法は可換である. すなわち $a,b\in R$ に対して $ab=ba$. 
+ \qed
+ \end{itemize}
+\end{definition}
+
+\begin{definition}[自明な環]
+ 零元 $0$ だけで構成された集合は $1=0$ とみなすことによって自然に環をなす. 
+ その環を $0$ と書き, 
+ {\bf 自明な環 (trivial ring)}もしくは{\bf 零環 (zero ring)} と呼ぶ. 
+ 記号 $0$ が自明な環と零元の二通りの意味で使われることに注意せよ. 
+ \qed
+\end{definition}
+
+環 $R$ で $1=0$ が成立しているならば
+任意の $a\in R$ に対して $a=1a=0a=0$ より $R$ は自明な環である.
+したがって環 $R$ が自明であるための必要十分条件は $1=0$ が成立することである.
+
+\begin{definition}[斜体, 体]
+ 可換とは限らない自明でない環 $R$ がさらに次を満たしているとき %
+ $R$ は{\bf 斜体 (skew field)} であるという:
+ \begin{itemize}
+  \item 任意の $0$ でない $R$ の元 $a$ が %
+   $R$ の中に乗法に関する逆元 $a^{-1}$ を持つ.
+ \end{itemize}
+ 可換な斜体を単に{\bf 体 (field)}と呼んだり, 
+ 可換性を強調するために{\bf 可換体 (commutative field)} と呼んだりする.
+ \qed
+\end{definition}
+
+\begin{definition}[環準同型]
+ $R$, $R'$ は環であるとする. 
+ このとき写像 $f:R\to R'$ が{\bf 環準同型 (ring homomorphism)} であるとは
+ 任意の $a,b\in R$ に対して
+ \begin{equation*}
+  f(a+b)=f(a)+f(b), \quad f(ab)=f(a)f(b), \quad f(1)=1
+ \end{equation*}
+ が成立していることである. 環準同型は
+ \begin{equation*}
+  f(0) = 0, \quad f(-a)=-f(a).
+ \end{equation*}
+ も満たしている.
+ 環準同型は逆写像を持てばその逆写像も環準同型になる.
+ 2つの環のあいだに全単射環準同型が存在するとき, 
+ それら2つの環は環として互いに{\bf 同型 (isomorphic)}であるという.
+ \qed
+\end{definition}
+
+\begin{definition}[単数, 単元]
+ 環 $R$ の元 $a$ が $R$ の{\bf 単数 (単元, unit)} であるとは %
+ $R$ の中に乗法に関する逆元 $a^{-1}$ を持つことである.
+ 環 $R$ の単数全体の集合を $U(R)$ もしくは $R^\times$ と書く.
+ $U(R)=R^\times$ は乗法に関して群をなすので, 
+ それを $R$ の{\bf 単数群 (単元群, unit group)} と呼ぶ.
+ \qed
+\end{definition}
+
+環 $R$ が斜体であるための必要十分条件は $U(R)=R\setminus\{0\}$ が成立す
+ることである.
+
+\begin{definition}[零因子, 整域]
+ 環 $R$ の元 $a$ が{\bf 左零因子 (left zero-divisor)} であるとは
+ ある $b\in R$ で $b\ne 0$ かつ $ab=0$ を満たすものが存在することである.
+ {\bf 右零因子 (right zero-divisor)} も同様に定義される.
+ 可換環では左零因子と右零因子の区別を付ける必要はないので単に零因子と呼ぶ.
+ $0$ 以外の左右零因子を持たない自明でない環
+ を{\bf 整域 (domain, integral domain)} と呼ぶ.  
+ すなわち2つの $0$ でない元の積が決して $0$ にならないような
+ 自明でない環を整域と呼ぶ.
+ \qed
+\end{definition}
+
+{\bf 非可換な場合も含むことを断らない場合は可換な整域のみを考えることにする.}
+
+可換環だけを主に扱う場合には可換環, 可換整域, 可換体を単に環, 整域, 体と
+呼ぶことが多い. 可換環の理論は非可換な場合も含む環の一般論とは違う動機
+(特に{代数幾何 (algebraic geometry)} の基礎付け)に基づいて展開されているので, 
+非可換環の理論は可換環の理論の一般化だとは考えない方が良い.
+
+\begin{example}
+ $\Z$ は可換環であり, 整域でかつ $U(\Z)=\Z^{\times}=\{\pm 1\}$ である.
+ \qed
+\end{example}
+
+\begin{example}
+ $\Q$, $\R$, $\C$ は(可換)体である.
+ \qed
+\end{example}
+
+\begin{example}[行列環]
+ $n$ は $2$ 以上の自然数であるとする.
+ 実 $n$ 次正方行列全体の集合 $M_n(\R)$ は自然に非可換環をなす.
+ $M_n(\R)$ の単数群 $U(M_n(\R))=M_n(\R)^\times$ は
+ {\bf 実一般線形群 (real general linear group)} と呼ばれ, 
+ $GL_n(\R)$ と書かれる:
+ \begin{equation*}
+  U(M_n(\R))=M_n(\R)^\times=
+  GL_n(\R) = \{\,A\in M_n(\R)\mid \text{$A$ は逆行列を持つ}\,\}.
+ \end{equation*}
+ $M_n(\R)$ は整域ではない. 実際 $(i,j)$ 成分だけが $1$ で他の成分が $0$ 
+ であるような行列を $E_{ij}$ と書くと $j\ne k$ のとき $E_{ij}E_{kl}=0$.
+ \qed
+\end{example}
+
+\begin{example}
+ 写像 $f:\R\to M_2(\R)$ 
+ を $f(a)=\begin{bmatrix} a & 0 \\ 0 & 0 \\\end{bmatrix}$ ($a\in\R$) と定める.
+ このとき $f$ は加法群の準同型でかつ $f(ab)=f(a)f(b)$ を満たしているが, 
+ $f(1)$ は単位行列に等しくない. 
+ 上の環準同型の定義はこのような写像を排除していることに注意せよ.
+ \qed
+\end{example}
+
+\begin{example}
+ $n$ は $2$ 以上の自然数であるとする.
+ $R$ は $n$ 次の実対角行列全体集合であるとする.
+ このとき $R$ は可換環であるが整域ではない.
+ \qed
+\end{example}
+
+斜体の最も有名な例は次の問題の Hamilton の四元数体だと思う.
+Hamilton の四元数体は複素数体をさらに拡張したものである.
+Hamilton は最初複素数に虚数単位 $i$ とは別の「数」をひとつだけ
+付け加えることによって「良い環」を構成しようとしたらしい.
+しかしある日 Hamilton はひとつだけではなく $j$ と $k$ のふたつを
+付け加えると「非常に良い環」ができることに気付いた。
+それが Hamilton の四元数体である.
+
+\begin{question}[Hamilton の四元数体]
+ \label{q:quarternion-1}
+ Hamiton の四元数体 $\bH$ を定義しよう.
+ 複素数体 $\C$ を拡張して %
+ $\bH$ を $\R$ 上のベクトル空間として次のように定める:
+ \begin{equation*}
+  \bH = \{\, a1 + bi + cj + dk \mid a,b,c,d\in\R \,\}.
+ \end{equation*}
+ $1$, $i$, $j$, $k$ は $\bH$ の $\R$ 上の基底になっているとする.
+ $a1$ を以下では単に $a$ と書くことにする.
+ さらに複素数体の虚数単位の計算規則を拡張し, 
+ 次のように $i,j,k$ のあいだの積を定める:
+ \begin{equation*}
+  i^2=j^2=k^2=-1, \quad ij=-ji=k, \quad jk=-kj=i, \quad ki=-ik=j.
+ \end{equation*}
+ 以下を示せ:
+ \begin{enumerate}
+  \item $\bH$ には自然に環構造が入る.
+  \item 任意の $0$ でない $\bH$ の元は乗法に関する逆元を持つ.
+ \end{enumerate}
+ よって $\bH$ は斜体をなす.
+ $\bH$ を {\bf Hamilton の四元数体 (Hamiltonian quaternion field)} と呼
+ び, $\bH$ の元を{\bf 四元数 (quaternion)} と呼ぶ.
+ さらに次を示せ:
+ \begin{enumerate}
+  \setcounter{enumi}{2}
+  \item $p,q,r\in\R$, $p^2+q^2+r^2=1$ に対して $I=pi+qj+rk$ と
+   置く. このとき $I^2=-1$ である. 
+  よって $\C_I=\{\,a+bI\mid a,b\in\R\,\}\subset\bH$ は
+  複素数体と同型な体をなす.
+ \end{enumerate}
+ このように Hamilton の四元数体の中には連続的に無限個の複素数体 $\C_I$ が
+ 含まれているとみなせる.
+ \qed
+\end{question}
+
+\begin{proof}[ヒント]
+ 1. 問題は結合律の証明. 直接証明することは少し面倒だが易しい.
+ このヒントでは四元数を行列で表現することによる証明法を紹介しよう.
+ 線形写像 $A:\bH\to M_4(\R)$ を $\alpha=a+bi+cj+dk\in\bH$ に対して
+ \begin{equation*}
+  A(\alpha) = 
+  \left[
+  \begin{array}{rrrr}
+   a & -b & -c & -d \\
+   b &  a & -d &  c \\
+   c &  d &  a & -b \\
+   d & -c &  b &  a \\
+  \end{array}
+  \right].
+ \end{equation*}
+ と定める.  たとえば $A(1)$ は単位行列になり, 
+ \begin{small}
+ \begin{equation*}
+  A(i)=
+  \left[
+  \begin{array}{rrrr}
+   0 & -1 &  0 &  0 \\
+   1 &  0 &  0 &  0 \\
+   0 &  0 &  0 & -1 \\
+   0 &  0 &  1 &  0 \\
+  \end{array}
+  \right],
+  \quad
+  A(j) = 
+  \left[
+  \begin{array}{rrrr}
+   0 &  0 & -1 &  0 \\
+   0 &  0 &  0 &  1 \\
+   1 &  0 &  0 &  0 \\
+   0 & -1 &  0 &  0 \\
+  \end{array}
+  \right],
+  \quad
+  A(k) = 
+  \left[
+  \begin{array}{rrrr}
+   0 &  0 &  0 & -1 \\
+   0 &  0 & -1 &  0 \\
+   0 &  1 &  0 &  0 \\
+   1 &  0 &  0 &  0 \\
+  \end{array}
+  \right].
+ \end{equation*}
+ \end{small}%
+ このとき $\alpha,\beta\in\bH$ に対して $A(\alpha\beta)=A(\alpha)A(\beta)$ が
+ 成立する. ($\alpha,\beta=i,j,k$ のすべての組み合わせについて確認せよ.)
+ このことと行列の積が結合律を満たすことと $A:\bH\to M_4(\R)$
+ が単射であることより, $\bH$ の乗法も結合律を満たしていることがわかる.
+
+ 2と3は次の公式を使えば簡単である. 
+ $\alpha = a + bi + cj + dk\in\bH$ に対して
+ \begin{equation*}
+  \cc\alpha = a - bi - cj - dk, \quad
+  |\alpha| = \sqrt{a^2+b^2+c^2+d^2}
+ \end{equation*}
+ と置くと $\alpha\cc\alpha=\cc\alpha\alpha=|\alpha|^2$.
+ \qed
+\end{proof}
+
+\begin{example}
+ $R=\{\,a+bi+cj+dk\in\bH\mid a,b,c,d\in\Z\,\}$ は
+ 自然に $\bH$ の部分環をなす.
+ $R$ は非可換な整域である.
+ \qed
+\end{example}
+
+\begin{question}
+ 有限整域は体である. \qed
+\end{question}
+
+\begin{proof}[ヒント]
+ $R$ が整域ならば任意の $a\in R$ に対して
+ 写像 $f:R\to R$, $b\mapsto ab$ は単射である.
+ 有限集合からそれ自身への単射は全単射になる.
+ \qed
+\end{proof}
+
+\begin{definition}[環の直積]
+ $R_1,\ldots,R_n$ が環であるとき直積集合 $R_1\times\cdots\times R_n$ 
+ に次によって自然に環の構造を入れることができる:
+ $a_i,b_i\in R_i$ のとき
+ \begin{align*}
+  &
+  (a_1,\ldots,a_n)+(b_1,\ldots,b_n)=(a_1+b_1,\ldots,a_n+b_n), 
+  \\ &
+  (a_1,\ldots,a_n)(b_1,\ldots,b_n)=(a_1b_1,\ldots,a_nb_n).
+ \end{align*}
+ $R_1\times\cdots\times R_n$ の零元と単位元は
+ それぞれ $(0,\ldots,0)$, $(1,\ldots,1)$ になる.
+ これを環 $R_1,\ldots,R_n$ の{\bf 直積 (direct product)} と呼ぶ.
+ \qed
+\end{definition}
+
+\begin{question}
+ 環 $R$, $R'$ に対して $U(R\times R')=U(R)\times U(R')$. \qed
+\end{question}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{多項式環の定義}
+
+$R$ は環であるとする. (さしあたって可換であると仮定する必要はない.)
+
+\begin{definition}[多項式環]
+ {\bf 不定元 (indeterminate)} もしくは {\bf 変数 (variable)} と
+ 呼ばれる文字 $x$ から生成される {\bf $R$ 係数の多項式環 
+ (polynomial ring with coefficient in $R$)} を $R[x]$ と書くことにする.
+ $R[x]$ の元は
+ \begin{equation*}
+  f(x) = \sum_{i=0}^m a_i x^i
+  = a_0 + a_1 x + a_2 x^2 + \cdots + a_m x^m, 
+  \quad
+  a_i \in R
+ \end{equation*}
+ の形で一意に表わせ, 乗法は次のように定義される:
+ \begin{equation*}
+  \left(\sum_{i=0}^m a_i x^i\right)
+  \left(\sum_{j=0}^n b_j x^j\right)
+  = \sum_{k=0}^{m+n} 
+  \left(\sum_{i+j=k,\ 0\leqq i\leqq m,\ 0\leqq j\leqq n} a_ib_j\right) x^k,
+  \quad
+  a_i,b_j\in R.
+ \end{equation*}
+ たとえば, $a\in R$ に対して
+ \begin{equation*}
+  x^i a = a x^i, \quad x^i x^j = x^{i+j}.
+ \end{equation*}
+ 実際にはこの2つの計算規則さえ知っていれば多項式の積を計算できる.
+ $R[x]$ のことを{\bf 一変数多項式環}と呼ぶこともある.
+ 多変数の多項式環 $R[x_1,x_2,\ldots,x_n]$ は 
+ \begin{equation*}
+  R[x_1,x_2,\ldots,x_n] = R[x_1][x_2]\cdots[x_n]
+ \end{equation*}
+ と定義することもできるし, 直接に乗法を定義することによっても定義できる.
+ \qed
+\end{definition}
+
+\begin{guide}[環の典型的な例]
+ 抽象的な環論を理解するためには
+ 前もって環の典型的な例が何であるかについて知識を仕入れておいた方が良い.
+
+ 可換環の典型的な例はすでに知られている可換環 $R$ を
+ 係数とする $n$ 変数多項式環 $R[x_1,\ldots,x_n]$ および
+ その剰余環, 局所化, 完備化である.
+ (剰余環と局所化については講義の方ですぐに説明されるはずである.)
+ 可換環 $R$ 上有限生成な可換環は $R$ 係数の $n$ 変数多項式環の剰余環に
+ 同型になっているので, $n$ 変数多項式環の剰余環はそう特殊な環ではない.
+
+ それでは非可換環の典型的な例にはどのようなものがあるのだろうか?
+ まず行列環や四元数環は非可換環の典型的な例である.
+ 他にも{\bf 群環 (group algebra)} $k[G]$ や 
+ {\bf Lie 代数の普遍展開環 
+ (universal enveloping algebra of a Lie  algebra)} $U(\frakg)$ や
+ {\bf Weyl 代数} (多項式係数の微分作用素環) %
+ $\C[x_1,\ldots,x_n,\d/\d x_1,\ldots,\d/\d x_n]$ も
+ 非可換環の典型的な例である.
+ $U(\frakg)$ や $\C[x_1,\ldots,x_n,\d/\d x_1,\ldots,\d/\d x_n]$ は
+ 非可換な整域の典型例にもなっている.
+ 20年くらい前からは{\bf 量子群 (quantum group)} およびそこから
+ 派生する非可換環も重要な例になっている.
+ (これらの非可換環の典型例に関しては
+ 谷崎 \cite{tanisaki-1998}, \cite{tanisaki-2002} を参照せよ.)
+ \qed
+\end{guide}
+
+\begin{definition}[多項式の次数]
+ $f(x)=a_0+a_1x+\cdots+a_mx^m\in R[x]$, $a_m\ne 0$ のとき $f(x)$ の
+ {\bf 次数 (degree)} を $\deg f(x)=m$ と定める.
+ $f(x)=0$ の場合は $\deg f(x)=-\infty$ と定める.
+ \qed
+\end{definition}
+
+\begin{question}[整域係数の多項式環も整域1]
+ 以下を示せ:
+ \begin{enumerate}
+  \item 任意の $f,g\in R[x]$ に対して
+  \begin{itemize}
+   \item $\deg(f+g) \leqq \max(\deg f, \deg g)$,
+   \item $\deg(fg)  \leqq \deg f + \deg g$,
+   \item $\deg f = -\infty \iff f = 0$.
+  \end{itemize}
+  さらに $R$ が整域ならば二つ目の不等式で等号が成立する:
+  \begin{itemize}
+   \item $\text{$R$ が整域} \implies \deg(fg)=\deg f+\deg g$.
+  \end{itemize}
+  \item 上の結果を用いて $R$ が整域ならば $R[x]$ も整域であることを示せ. \qed
+ \end{enumerate}
+\end{question}
+
+\begin{guide}[``絶対値''との関係1]
+ 以下 $R$ は整域であるとする.
+
+ 実数の絶対値はその実数が「どれだけ $0$ から離れているか」
+ を測っているとみなせる.
+ 同じように整域 $R$ を係数とする多項式 $f\in R[x]$ の次数 $\deg f$ 
+ は $f$ が「どれだけ $0$ から離れているか」を測っているとみなせる.
+ (多項式の次数は $x\to \infty$ で $f(x)$ がどれだけ速く発散するかを
+ 測っている.)
+
+ この類似は次の定義によってより明瞭になる.
+ $f\in R[x]$ に対して $|f|_\infty=e^{\deg f}$ と置く. 
+ ただし自然に $e^{-\infty}=0$ であると約束しておく.
+ これで写像 $|\cdot|_\infty:R[x]\to\R_{\geqq0}$ が定まる.
+ このとき $R$ が整域であることより, 任意の $f,g\in R[x]$ に対して
+ \begin{itemize}
+  \item $|f+g|_\infty \leqq \max(|f|_\infty, |g|_\infty)$,
+  \item $|fg|_\infty = |f|_\infty |g|_\infty$,
+  \item $|f|_\infty=0 \iff f=0$
+ \end{itemize}
+ が成立していることがわかる(上の問題の1の結果を使う).
+ 最初の不等式から三角不等式 $|f+g|_\infty\leqq |f|_\infty+|g|_\infty$ が
+ 導かれることに注意せよ.
+
+ このような $|\cdot|_\infty$ は{\bf 乗法付値 (multiplicative valuation)}
+ と呼ばれており, 絶対値の概念の直接的一般化になっている.  
+
+ この $|\cdot|_\infty$ の値域は $\{0,1,e,e^2,e^3,\ldots\}$ であり, %
+ $\R_{\geqq0}$ の離散部分集合である.
+ このことより $|\cdot|_\infty$ が自然に定める $R[x]$ の位相は
+ 離散位相になることがわかる.
+ \qed
+\end{guide}
+
+\begin{definition}[零点の位数]
+ $f(x)=a_m x^m + a_{m+1}x^{m+1}+a_{m+2}x^{m+2}+\cdots$ (有限和), 
+ $a_m\ne 0$ のとき $f(x)$ の原点における零点の{\bf 位数 (order)}
+ を $\ord_0 f(x)=m$ と定める.
+ すなわち $f(x)$ を割り切る $x^m$ の最大の次数を $\ord_0 f(x)$ 
+ と定める.  $f(x)=0$ の場合は $\deg f(x)=\infty$ と定める.
+ \qed
+\end{definition}
+
+\begin{question}[整域係数の多項式環も整域2]
+ 以下を示せ:
+ \begin{enumerate}
+  \item 任意の $f,g\in R[x]$ に対して
+  \begin{itemize}
+   \item $\ord_0(f+g) \geqq \min(\ord_0 f, \ord_0 g)$,
+   \item $\ord_0(fg) \geqq \ord_0 f + \ord_0 g$,
+   \item $\ord_0 f = \infty \iff f = 0$.
+  \end{itemize}
+  さらに $R$ が整域ならば二つ目の不等式で等号が成立する:
+  \begin{itemize}
+   \item $\text{$R$ が整域} \implies \ord_0(fg)=\ord_0 f+\ord_0 g$.
+  \end{itemize}
+  \item 上の結果を用いて $R$ が整域ならば $R[x]$ も整域であることを示せ. \qed
+ \end{enumerate}
+\end{question}
+
+\begin{guide}[``絶対値''との関係1]
+ 以下 $R$ は整域であるとする.
+
+ $f\in R[x]$ に対して $|f|_0=e^{-\ord_0 f}$ と置く. 
+ ただし自然に $e^{-\infty}=0$ であると約束しておく.
+ これで写像 $|\cdot|_0:R[x]\to\R_{\geqq0}$ が定まる.
+ このとき $R$ が整域であることより, 任意の $f,g\in R[x]$ に対して
+ \begin{itemize}
+  \item $|f+g|_0 \leqq \max(|f|_0, |g|_0)$,
+  \item $|fg|_0 = |f|_0|g|_0$,
+  \item $|f|_0=0 \iff f=0$
+ \end{itemize}
+ が成立していることがわかる(上の問題の1の結果を使う).
+ 最初の不等式から三角不等式 $|f+g|_0\leqq |f|_0+|g|_0$ が導かれる.
+
+ この $|\cdot|_0$ の値域は $\{0\}\cup\{\ldots,e^{-2},e^{-1},1\}$ である.
+ このことより $|\cdot|_0$ が自然に定める $R[x]$ の位相について
+ $R[x]$ は完備ではない. 
+ $|\cdot|_0$ に関する $R[x]$ の完備化は形式べき級数環 $R[[x]]$ になる.
+ \qed
+\end{guide}
+
+\begin{summary}
+ 多項式の次数や零点の位数によってその多項式が「どれだけ $0$ から離れてい
+ るか」を測ることができる. 次数と零点の位数による「距離」の測り方は異な
+ る.  \qed
+\end{summary}
+
+以上で説明した概念や結果はどれも易しい.
+しかしそれらの「数学世界における調和」を
+認識せずに先に進んでしまいがちである.
+「どれだけ $0$ から離れているか」を様々な方法で測ることができる
+ということを初めてしったときに, 私は感動したおぼえがある.
+数学の世界には他にも感動しなければいけないことはたくさんあるように
+思われる.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{有限Abel群の基本定理}
+
+永尾汎著の教科書 \cite{nagao-1983} では Abel 群を乗法群として扱っている
+が, この演習では加法群として扱うことにする.
+その理由は環論との記号の整合性を得るためである.
+
+$\Z/m\Z$ は集合として $\{0,1,\ldots,m-1\}$ と同一視でき, 
+$a,b=0,1,\ldots,m-1$ に対して群の演算の結果としての $a+b\in\Z/m\Z$ は %
+整数としての $a$ と $b$ の和を $m$ で割った余りとして定義される.
+$\Z/m\Z$ は $1$ から生成される位数 $m$ の巡回群になる.
+
+\begin{theorem}[有限Abel群の基本定理1]
+ 任意の有限 Abel 群 $M$ に対して, %
+ $2$ 以上のある整数たち $d_1,d_2,\cdots,d_s$ で
+ 群の同型
+ \begin{equation*}
+  M \isom 
+  (\Z/d_1\Z)\times(\Z/d_2\Z)\times\cdots\times(\Z/d_s\Z),
+  \quad
+  d_1\mid d_2\mid\cdots\mid d_s
+ \end{equation*}
+ を満たしているものが一意に存在する.
+ \qed
+\end{theorem}
+
+\begin{theorem}[有限Abel群の基本定理2]
+ 任意の有限 Abel 群 $M$ に対して, %
+ 素数の正の整数べき $p_1^{f_1}, p_2^{f_2},\ldots, p_N^{f_N}$ で
+ 群の同型
+ \begin{equation*}
+  M \isom 
+  (\Z/p_1^{f_1}\Z)\times(\Z/p_2^{f_2}\Z)\times\cdots\times(\Z/p_N^{f_N}\Z)
+ \end{equation*}
+ を満たしているもの
+ がそれらを並べる順序の違いを除いて一意に存在する.
+ \qed
+\end{theorem}
+
+\begin{question}
+ 位数 $720$ の有限 Abel 群(の同型類)をすべて列挙せよ.
+ \qed
+\end{question}
+
+\begin{proof}[ヒント]
+ $720=2^4\cdot 3^2\cdot 5^1$ であり, 
+ 指数の $4$, $2$, $1$ の分割の仕方は次のように分類される:
+ \begin{equation*}
+  4 \to 1+1+1+1 = 1+1+2 = 2+2 = 1+3 = 4, \quad
+  2 \to 1+1 = 2, \quad 
+  1 \to 1.
+ \end{equation*}
+ よって位数 $720$ の有限 Abel 群の同型類の個数
+ は $5\times 2\times 1 = 10$ である.
+ \qed
+\end{proof}
+
+以上の見かけ上異なるふたつの有限Abel群の基本定理の同値性は
+本質的に次の{\bf 中国式剰余定理 (Chinese Remainder Theorem)} の
+特殊な場合から導かれる.
+
+\begin{lemma}[中国式剰余定理の特殊な場合]
+ \label{lemma:CRT1}
+ $p_1,\ldots,p_n$ が互いに異なる素数であり, %
+ $f_1,\ldots,f_n$ が正の整数であるとき, 
+ $m=p_1^{f_1}\cdots p_n^{f_n}$ と置くと
+ 次の群同型が成立している:
+ \begin{equation*}
+  \Z/m\Z \isom
+  (\Z/p_1^{f_1}\Z)\times\cdots\times(\Z/p_n^{f_n}\Z).
+  \qed
+ \end{equation*}
+\end{lemma}
+この補題は非常によく使われる. 同型写像は $a\MOD m$ 
+に $(a\MOD p_1^{f_1},\ldots,a\MOD p_n^{f_n})$ を対応させることに
+よって得られる. この結果は後で環論の枠組みの中で一般化される.
+
+\begin{proof}[\lemmaref{lemma:CRT1}の証明]
+ 群の準同型 $\phi:\Z\to(\Z/p_1^{f_1}\Z)\times\cdots\times(\Z/p_n^{f_n}\Z)$
+ を次のように定める:
+\begin{equation*}
+ \phi(a)=(a\MOD p_1^{f_1},\ldots,a\MOD p_n^{f_n}) \qquad(a\in\Z).
+\end{equation*}
+
+ $\phi(a)=0$ という条件は $a$ が $p_1^{f_1},\ldots,p_n^{f_n}$ の
+ すべてで割り切れることと同値であり, 
+ その条件は $a$ が $m$ で割り切れることと同値である.
+ よって $\Ker\phi=m\Z$ である.
+
+ $m_i=m/p_i^{f_i}$ ($i=1,\ldots,n$) と置くと
+ それらの最大公約数は $1$ なので
+ ある整数 $k_1,\ldots,k_n$ で $k_1m_1+\cdots+k_nm_n=1$ を満たすものが存
+ 在する. このとき $k_im_i\equiv \delta_{ij}\MOD p_j^{f_j}$ である.
+ 整数 $a_1,\ldots,a_n$ に対して $a=k_1m_1a_1+\cdots+k_nm_na_n$ と置くと
+ $a\equiv a_i \MOD p_i^{f_i}$ となる.
+ よって $\phi$ は全射である.
+ 
+ したがって準同型定理より補題の同型が得られる.
+ \qed
+\end{proof}
+
+\begin{question}
+ \lemmaref{lemma:CRT1}を認めて, 
+ 上のふたつの有限Abel群の基本定理が互いに同値であることを証明せよ.
+ \qed
+\end{question}
+
+\begin{proof}[ヒント]
+ まず次の例について考えてから一般的な場合について考えてみよ:
+ \begin{equation*}
+  (d_1,d_2,d_3,d_4)=(2, 2^2,\, 2^2\cdot 3,\, 2^2\cdot 3^2\cdot 5)
+  \leftrightarrow
+  \begin{bmatrix}
+   p_1^{f_1} & p_2^{f_2} & p_3^{f_3} & p_4^{f_4}\\
+             &           & p_5^{f_5} & p_6^{f_6} \\
+             &           &           & p_7^{f_7} \\
+  \end{bmatrix}
+  =
+  \begin{bmatrix}
+   2 & 2^2 & 2^2 & 2^2 \\
+     &     & 3   & 3^2 \\
+     &     &     & 5 \\
+  \end{bmatrix}.
+ \end{equation*}
+ 有限Abel群の基本定理1における $e_i$ たちの存在から 
+ 有限Abel群の基本定理2における $p_j^{f_j}$ たちの存在を出すためには
+ 各 $e_i$ を素因数分解し, \lemmaref{lemma:CRT1}を使えばよい.
+ 逆に有限Abel群の基本定理2における $p_j^{f_j}$ たちの存在から 
+ 有限Abel群の基本定理1における $e_i$ たちの存在を出すためには
+ その逆の操作が可能であることを示せばよい(この部分が本質的).
+ 一意性の同値性に関しても同様の議論で証明可能である.
+
+ 可能ならば, 上で例示した対応の左辺と右辺の集合を適切に定義し, 
+ それらのあいだの自然な一対一対応を構成することによって, 
+ 二つの基本定理の同値性を証明せよ.
+ \qed
+\end{proof}
+
+次の問題の結果は基本的であり, よく使われる.
+
+\begin{question}
+ 体 $K$ の乗法群 $K^\times$ の有限部分群は巡回群である. \qed
+\end{question}
+
+\begin{proof}[ヒント]
+ まず一般に次が成立することを示せ:
+ \begin{enumerate}
+  \item 任意の正の整数 $n$ に対して体 $K$ における方程式 $x^n=1$ の解の個数は $n$ 以下である.
+  \item 有限Abel群 $G$ が任意の正の整数 $n$ に
+    対して $\sharp\{\,x\in G\mid x^n=1\,\}\leqq n$ を満たして
+    いるならば $G$ は巡回群である.
+    (ここで $\sharp$ は集合の元の個数を意味している.)
+ \end{enumerate}
+ 2の証明は有限Abel群の基本定理を使えば易しい.
+ 実際 $G$ が有限Abel群であれば有限Abel群の基本定理より, 
+ $2$ 以上の整数 $m_1,\ldots,m_s$ で
+ \begin{equation*}
+  G \cong (\Z/m_1\Z)\times(\Z/m_2\Z)\times\cdots\times(\Z/m_s\Z),
+  \quad
+  m_1|m_2|\cdots|m_s
+ \end{equation*}
+ をみたすものが一意に存在する. 
+ 特に $s=1$ であることと $G$ が巡回群であることは同値である.
+ $m_1|m_2|\cdots|m_s$ より $\{\,x\in G\mid x^{m_s}=1\,\}=G$ となる.
+ (群の演算を乗法で書いたり, 加法で書いたりしていることに注意せよ.)
+
+ 上の二つの結果を $K^\times$ の有限部分群 $G$ に適用すれば %
+ $G$ が巡回群であることがただちにわかる.
+ \qed
+\end{proof}
+
+Abel 群 $M$ が有限個の元 $v_1,\ldots,v_n\in M$から生成されるとは %
+$M$ の任意の元が $a_1v_1+\cdots+a_nv_n$ ($a_i\in\Z$) と表わせること
+である(表現の一意性は必要ない).
+有限Abel群の基本定理は有限生成Abel群に対して次のように一般化される.
+
+\begin{theorem}[有限生成Abel群の基本定理1]
+ 任意の有限生成 Abel 群 $M$ に対して, %
+ $0$ 以上の整数 $r$ と %
+ $2$ 以上のある整数たち $d_1,d_2,\ldots,d_s$ で
+ 群の同型
+ \begin{equation*}
+  M \isom 
+  (\Z/d_1\Z)\times(\Z/d_2\Z)\times\cdots\times(\Z/d_s\Z)\times\Z^r,
+  \quad
+  d_1\mid d_2\mid \cdots\mid d_s
+ \end{equation*}
+ を満たしているものが一意に存在する.
+ \qed
+\end{theorem}
+
+\begin{theorem}[有限生成Abel群の基本定理2]
+ 任意の有限 Abel 群 $M$ に対して, %
+ $0$ 以上の整数 $r$ と %
+ 素数の正の整数べき $p_1^{f_1}, p_2^{f_2},\ldots, p_N^{f_N}$ で
+ 群の同型
+ \begin{equation*}
+  M \isom 
+  (\Z/p_1^{f_1}\Z)\times(\Z/p_2^{f_2}\Z)\times\cdots\times(\Z/p_N^{f_N}\Z)
+  \times\Z^r
+ \end{equation*}
+ を満たしているもの
+ が $p_j^{f_j}$ たちを並べる順序の違いを除いて一意に存在する.
+ \qed
+\end{theorem}
+
+これらの同値性も有限Abel群の場合と同様に証明される.
+
+有限生成 Abel 群の基本定理には複数の証明法があり, 
+環論を積極的に用いた綺麗な証明法がある.
+有限生成 Abel 群の基本定理は
+単項イデアル整域 (PID) 上の有限生成加群の構造論
+(単因子論)の特殊な場合になっている.
+PID 上の有限生成加群の構造論は有限生成 Abel 群の基本定理だけではなく, 
+行列の Jordan 標準形の理論も含んでいる.
+PID 上の有限生成加群の理論は環と加群の理論の中では初等的な部分に属する
+にもかかわらず, かなり強力である.
+環と加群の理論がどれだけ強力な理論であるかを納得したければ
+まず最初に PID 上の有限生成加群の理論の理解を目標にするのが良いと思う.
+(堀田 \cite{hotta-1988} はおすすめできる副読本である.)
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{環と加群の理論}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{イデアル}
+
+\begin{question}
+ $\Z/8\Z$, $\Z/15\Z$ の単数全体の集合とイデアル全体の集合を求めよ. \qed
+\end{question}
+
+環論のひとつの考え方はイデアルたちの性質によって環の様々な性質を特徴付け
+ることである.
+
+\begin{question}[斜体のイデアルを用いた特徴付け]
+ (可換とは限らない)環 $R$ が斜体であるための必要十分条件
+ は $R$ が自明でない左イデアルを持たないことである.
+ \qed
+\end{question}
+
+\begin{proof}[ヒント]
+ $R$ が環であるとき, 
+ $R$ が斜体であることと $R$ の $0$ でない左イデアルが常に $R$ に等しいこと
+ が同値であることを示せばよい.
+ 前者から後者が導かれることの証明は易しい.
+ 問題は後者から後者を導くことである.
+ そのとき以下の事実を証明して利用せよ.
+ \begin{itemize}
+  \item $R$ の左イデアル $I$ について $I=R$ と $1\in I$ は同値である.
+  \item $0\ne a\in R$ のとき $Ra=\{\,ra\mid r\in R\,\}$ 
+   は $R$ の $0$ でない左イデアルである.
+  \item $a,a',a''\in R$ のとき %
+   $a'a=1$ かつ $a''a'=1$ ならば $a''=a$ と
+   なるので $a'$ は $a$ の逆元である.
+ \qed
+ \end{itemize}
+\end{proof}
+
+\commentout{
+\begin{proof}[解]
+ $R$ が斜体であることと $R$ の $0$ でない左イデアルが常に $R$ に等しいこと
+ が同値であることを示せばよい.
+
+ $R$ は斜体であり, $I$ は $R$ の $0$ でない左イデアルであるとする.
+ $I\ne 0$ なので $I$ は $0$ でない元 $a$ を含む. 
+ $R$ は斜体なので $a$ の逆元 $a^{-1}\in R$ が存在する.
+ $I$ は左イデアルなので $1=a^{-1}a\in I$ である.
+ よって $I=R$.
+
+ $R$ の $0$ でない左イデアルは常に $R$ に等しいと仮定し, 
+ $0$ でない $R$ の元 $a$ を任意に取る.
+ $R$ の左イデアル $Ra$ は $0$ でないので $R$ に等しい.
+ よって $1\in Ra$ である. 
+ すなわちある $a'\in R$ が存在して $a'a=1$ となる.  
+ $a'\ne 0$ なので同様にしてある $a''\in R$ が存在して $a''a'=1$ となる.
+ 乗法の結合律より $a''=a''1=a''(a'a)=(a''a')a=1a=a$ である.
+ よって $aa'=a''a'=1$ となり, $a'$ は $a$ の逆元であることがわかる.
+ したがって $R$ は斜体である.
+ \qed
+\end{proof}
+}
+
+\begin{question}
+ $R$ は(可換とは限らない)環であり, $I,J$ はその両側イデアルであるとし, %
+ $I+J=\{\,a+b\mid a\in I,\; b\in J\,\}$ と置く.
+ $I+J$ と $I\cap J$ も $R$ の両側イデアルである.
+ \qed
+\end{question}
+
+一般の可換環のイデアルは「数」の類似物だとみなせる.
+実際次のように $\Z$ のイデアルは非負の整数と一対一に対応している.
+
+\begin{question}[$\Z$ のイデアル]
+ 有理整数環 $\Z$ について以下を示せ.
+ \begin{enumerate}
+  \item $\Z$ は PID である.
+  \item $\Z$ のイデアルは $(0),(1),(2),\ldots$ のどれかに等しい.
+  \item $0$ 以上の整数 $a$, $b$ について %
+   $(a)\supset (b)$ と $a\mid b$ は同値である.
+  \item $0$ 以上の整数 $a$, $b$ の
+   最大公約数 (greatest common divisor) と最小公倍数 (least common multiple)
+   をそれぞれ $g$, $l$ と書くと, $(a)+(b)=(g)$, $(a)\cap(b)=(l)$.
+ \end{enumerate}
+ ($0$ は任意の数で割り切れる.
+ $0$ と $a$ の最大公約数は $a$ であり, 
+ $0$ と $a$ の最小公倍数は $0$ とみなす.)
+ \qed
+\end{question}
+
+$\Z$ は単項イデアル整域 (principal ideal domain, PID) なので
+イデアルと数の対応は直接的である.
+PID 以外の可換環であってもイデアルを「数」の類似物をみなすという
+発想はイデアル＝理想数のアイデアの源泉であった.
+
+低次元の整域を扱う場合にはイデアルを「数」の類似物とみなす発想は
+非常にうまく行く(Dedekind 整域＝次元 $1$ の正規 Noether 整域の理論).
+後で説明するように, 
+体 $k$ 上の多項式環のイデアルは「代数方程式」であるとみなせる.
+イデアルの理論は「数」や「代数方程式」の理論の一般化になっている.
+
+\begin{question}[Euclid 環の例]
+ 有理整数環 $\Z$, 体 $K$ 上の一変数多項式環 $K[x]$, 
+ Gauss の整数環 $\Z[\sqrt{-1}]$ が Euclid 環であることを示せ.
+ \qed
+\end{question}
+
+\begin{question}[PID ではない整域の例]
+ 有理整数環上の一変数多項式環 $\Z[x]$ と
+ 体 $K$ 上の二変数多項式環 $K[x,y]$ が PID ではないことを示せ.
+ \qed
+\end{question}
+
+\begin{proof}[ヒント]
+ $2$ 以上の整数 $m$ に対して $(m,x)\subset\Z[x]$ が単項イデアルでないこ
+ とと, $(x,y)\subset K[x,y]$ が単項イデアルではないことを示せ. \qed
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{剰余環}
+
+正の整数 $n$ の Euler の函数 $\varphi(n)$ を次のように定義する:
+\begin{equation*}
+ \varphi(n) = 
+ (\text{$1,2,\ldots,n-1$ に含まれる $n$ と互いに素な数の個数}).
+\end{equation*}
+たとえば $\varphi(1)=0$, $\varphi(2)=1$, $\varphi(3)=2$, $\varphi(4)=2$,
+$\varphi(5)=4$, $\varphi(6)=2$, $\varphi(7)=6$, $\varphi(8)=4$,
+$\varphi(9)=6$ である.
+素数のべき $p^f$ に対して $\varphi(p^f)=p^f-p^{f-1}$ が成立する.
+
+\begin{question}[$\Z$ の剰余環の単数群の位数]
+ 正の整数 $n$ に関して以下を示せ.
+ \begin{enumerate}
+  \item $\Z/(n)$ の単数群 $U(\Z/(n))$ の位数は $\varphi(n)$ に等しい.
+  \item {\bf(Fermat の小定理)} %
+    $n$ と互いに素な $a\in\Z$ に対して $a^{\varphi(n)}\equiv 1\MOD n$.
+  \item $n$ の素因数分解を $n=p_1^{f_1}\cdots p_s^{f_s}$ と表わすと, 
+   可換環としての同型
+   \begin{equation*}
+    \Z/(n) \isom \Z/(p_1^{f_1})\times\cdots\times\Z/(p_s^{f_s}).
+   \end{equation*}
+  が成立しているので, 次の群の同型が成立している:
+  \begin{equation*}
+   U(\Z/(n)) \isom U(\Z/(p_1^{f_1}))\times\cdots\times U(\Z/(p_s^{f_s})).
+  \end{equation*}
+  \item Euler の函数は次の表示を持つ:
+   \begin{equation*}
+    \varphi(n) 
+    = \prod_{i=1}^s(p_i^{f_i}-p_i^{f_i-1})
+    = n\prod_{i=1}^s\left(1-\frac{1}{p_i}\right).
+   \end{equation*}
+  \item $\Z/(n)$ が体になるための必要十分条件は $n$ が素数であることである.
+   \qed
+ \end{enumerate}
+\end{question}
+
+上の問題の結果より $U(\Z/(n))$ の構造の決定
+は $n$ が素数べき $p^f$ に等しい場合に帰着する.
+
+\begin{question}[$U(\Z/(p^f))$ の構造の決定, 20点]
+ 次を示せ:
+ \begin{enumerate}
+  \item $p$ が奇素数のとき $U(\Z/(p^f))$ は位数
+   が $\varphi(p^f)=p^f-p^{f-1}=(p-1)p^{f-1}$ の巡回群である.
+  \item $p=2$ のとき
+  \begin{enumerate}
+   \item $U(\Z/(2))=1$ (単位元しか持たない群).
+   \item $U(\Z/(2^2))=\bra-\bar{1}\ket$ (位数 $2$ の巡回群).
+   \item $f\geqq 3$ ならば $U(\Z/(p^f))=\bra-\bar{1}\ket\times\bra\bar{5}\ket$
+    である. \\
+    ここで $\bra-\bar{1}\ket$ の位数は $2$ であり, 
+    $\bra\bar{5}\ket$ の位数は $2^{f-2}$ である.
+    \qed
+  \end{enumerate}
+ \end{enumerate}
+\end{question}
+
+\begin{guide}
+ 上の問題の結果の証明は実質的
+ に $p$ 進整数環 $\Z_p=\projlim_{f\to\infty} \Z/(p^f)$ の
+ 単数群 $U(\Z_p)$ の構造を求めたことになっている.
+ 数論に興味のある人は解いておいた方が良いだろう.
+ 結果だけを \cite{suron-1} の pp.77-79 から抜き出しおこう:
+\begin{enumerate}
+ \item $p$ が奇素数のとき $U(\Z_p) \isom \Z/(p-1)\Z\times\Z_p$.
+ \item $p=2$ のとき $U(\Z_2) \isom \Z/2\Z\times\Z_2$.
+\end{enumerate}
+
+ なお永尾 \cite{nagao-1983} では $\Z/(n)$ を $\Z_n$ と書いてしまっている
+ が, $\Z_p$ という記号は $p$ 進整数環の意味で用いることが多い. 
+ そこでこの演習では $\Z/(n)$ のことを $\Z_n$ とは書かないことにした.
+ \qed
+\end{guide}
+
+\begin{question}[Wilson の定理]
+\label{q:Wilson-theorem}
+ $p$ が素数ならば $(p-1)!\equiv -1 \pmod p$ である. \qed
+\end{question}
+
+\begin{proof}[ヒント]
+ $\F_p=\Z/p\Z$ は体でかつ $\F_p^\times$ は位数 $p-1$ の巡回群になる.
+ よって $\F_p[x]$ に
+ おいて $x^{p-1}-1=(x-\overline{1})\dots(x-(\overline{p-1}))$.
+
+ $\F_p[x]$ において公式 $x^{p-1}-1=(x-\overline{1})\dots(x-(\overline{p-1}))$ が
+ 成立することさえ示せれば後は容易である. その公式は $\F_p^\times$ が位数 $p-1$ の
+ 有限群であることさえ知っていれば示せる(どうやって示すかについては自分で考えよ). 
+ 一般に位数 $N$ の有限群 $G$ の任意の元 $a\in G$ は $a^n=1$ を満たしている
+ (たとえば \cite{nagao-1983} p.24 系8.5).
+ これより $\F_p^\times$ の任意の元 $a$ は $a^{p-1}=1$ を満たしている.
+ この事実と高校のときに習った剰余定理を使えば上の公式を容易に示せるはずである.
+ \qed
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{環の準同型定理}
+
+\begin{question}[環の準同型定理]
+ \label{q:ring-hom-th-1}
+ $R$, $R'$ は(可換とは限らない)環であるとし, 
+ $f:R\to R'$ は環の準同型であるとする.
+ このとき $\Image f$ は $R'$ の部分環になり, 
+ $\Ker f$ は $R$ の両側イデアルになり, 
+ $f$ は環同型 $R/\!\Ker f\isomto \Image f$ を誘導する.
+ 特に $f$ が全射ならば $R/\!\Ker f\isom R'$ である.
+ \qed
+\end{question}
+
+\begin{example}
+ 問題 \qref{q:quarternion-1} のヒントの $A:\bH\to M_4(\R)$ は
+ 環の単射準同型写像である. よって環として $\bH\isom\Image A$.
+ \qed
+\end{example}
+
+\begin{question}[両側イデアルの対応]
+ \label{q:ring-hom-th-2}
+ $R$, $R'$ は(可換とは限らない)環であるとし, 
+ $f:R\to R'$ は環の全射準同型であるとする.
+ 以下を示せ:
+ \begin{enumerate}
+  \item  $R'$ の両側イデアル $I'$ に対して, 
+   $I=f^{-1}(I')$ は $\Ker f$ を含む $R$ の両側イデアルであり,
+   $f(I)=I'$ が成立する.
+  \item $R$ の両側イデアル $I$ に対して, 
+   $I'=f(I)$ は $R'$ の両側イデアルであり, 
+   $f^{-1}(I')=I+\Ker f$ が成立する.
+  \item 以上の対応によって $R'$ の両側イデアルと $\Ker f$ を
+   含む $R$ の両側イデアルは一対一に対応する.
+  \item 互いに対応する $R'$ の両側イデアル $I'$ と $\Ker f$ を
+   含む $R$ の両側イデアル $I'$ が与えられたとき, 
+   $f$ は自然な環同型 $R/I\isomto R'/I'$ を誘導する.
+   \qed
+ \end{enumerate}
+\end{question}
+
+\begin{question}[カスプ, 20点]
+ 体 $K$ 係数の一変数多項式環 $K[t]$ の部分環 $R'$ を
+ \begin{equation*}
+  R' = \{\,a_0 + a_2 t^2 + a_3t^3 + \cdots (\text{有限和}) \mid a_i\in K \,\}
+ \end{equation*}
+ と定める. $R'$ は $t$ を含まないので $K[t]$ よりも真に小さい.
+ これとは別に二変数多項式環 $K[x,y]$ を考える.
+ 環の準同型定理を用いて $K[x,y]/(y^2-x^3)\isom R'$ を証明せよ.
+ \qed
+\end{question}
+
+\begin{proof}[ヒント]
+ $K$ 上の環準同型 $\phi:K[x,y]\to R'$ を $\phi(x)=t^2$, $\phi(y)=t^3$ と
+ いう条件で定める. このとき $\phi$ が全射で
+ かつ $(y^2-x^3)\subset\Ker\phi$ であることは易しい.
+ $(y^2-x^3)\supset\Ker\phi$ を示すためには %
+ $y$ の多項式とみなした $y^2-x^3$ による割り算(商と余りを求める計算)を考えよ.
+ \qed
+\end{proof}
+
+\begin{guide}
+$x=t^2$, $y=t^3$ は曲線 $y^2=x^3$ のパラメーター表示になっている.
+曲線 $y^2=x^3$ のグラフを描くと点 $(x,y)=(0,0)$ でとがっている.
+曲線 $y^2=x^3$ における $(x,y)=(0,0)$ のような特異点
+を{\bf カスプ (cusp)} と呼ぶ%
+\footnote{cusp は「とがった先端」という意味の名詞である.}.
+$K[x,y]/(y^2-x^3)=K[t^2,t^3]$ はカスプを持つ曲線 $y^2=x^3$ の上の
+多項式函数のなす環である.  
+それに $t$ を加えて $K[t]$ という特異点のない直線上
+の函数環を構成する操作は特異点解消 (resolution of singularities) の
+最も簡単な場合である. 
+(ただしこの場合は1次元なので{\bf 正規化 (normalization)} という操作で
+特異点が解消されてしまう. 特異点解消が難しいのは高次元の場合である.)
+広中平祐 (1931--) は標数が $0$ の場合には任意の次元において
+特異点が常に解消可能であることを証明し, 
+1970年に Fields 賞 (Fields medal prize) を受賞している.
+広中の特異点解消定理は代数幾何学だけに限らず
+様々な分野に応用を持つ大定理である.
+\qed
+\end{guide}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{素イデアルと極大イデアル}
+
+この節では環はすべて可換であると仮定する。
+
+\begin{question}[極大イデアルと剰余体]
+ 可換環 $R$ のイデアル $I$ が極大イデアルであるための必要十分条件
+ は $R/I$ が体になることである. 
+ 特に可換環の極大イデアルは素イデアルである.
+ $I$ が極大イデアルのとき $R/I$ を{\bf 剰余体 (residue field)}と呼ぶ.
+ $\Z$ のイデアル $(n)=n\Z$ ($n$ は $0$ 以上の整数) が
+ 極大イデアルになるための必要十分条件は $n$ が素数であることを示せ.
+ \qed
+\end{question}
+
+\begin{definition}[素元]
+ 可換環 $R$ の $0$ でない元 $p$ が{\bf 素元 (prime element)} であるとは, %
+ 単項イデアル $(p)=Rp$ が素イデアルになることである.
+ \qed
+\end{definition}
+
+\begin{definition}[既約元]
+ 可換環 $R$ の元 $p$ が{\bf 既約元 (irreducible element)} であるとは, %
+ $p$ が単元ではなく, 
+ $a,b\in R$, $p=ab$ ならば $a$ または $b$ が単元になることである.
+ たとえば $0$, $1$ は既約元ではない.
+ \qed
+\end{definition}
+
+\begin{rem}
+ 上の意味での既約元のことを素元と呼んでいる本もあるので注意せよ.
+ 例えば永尾 \cite{nagao-1983} はそういう流儀を採用している.
+ しかし素元と素イデアルを対応させたければ上の意味での素元を既約元と
+ 呼ぶ流儀を採用した方が良い.
+ \qed
+\end{rem}
+
+\begin{question}[任意の整域において素元は既約元, 簡単]
+ \label{q:prime=>irred'}
+ 任意の整域において素元は既約元である. \qed
+\end{question}
+
+\begin{proof}[ヒント]
+ $R$ は整域であるとし, $p$ はその素元であるとする. %
+ 素元の定義より単項イデアル $(p)$ は $0$ でない素イデアルである. 
+ $a,b\in R$, $p=ab$ と仮定する.
+ このとき $ab\in (p)$ なので $a\in(p)$ または $b\in(p)$ である.
+ $b\in (p)$ と仮定してよい.
+ そのとき $b$ は $b=a'p$, $a'\in R$ と表わされる. 
+ よって $p=ab=aa'p$ である. 
+ $R$ は整域なので $1=aa'$ となるので $a$ は $R$ の単元である.
+ \qed
+\end{proof}
+
+\begin{rem}
+ 上の問題の逆は PID や UFD ではが成立するが, 一般の整域では成立しない.
+ \qed
+\end{rem}
+
+\begin{question}[PID の既約元]
+ $R$ が PID ならば $0$ でない $p\in R$ に対して以下の条件は互いに同値になる:
+ \begin{enumerate}
+ \item[(a)] $(p)$ は $R$ の極大イデアルである.
+ \item[(b)] $(p)$ は $R$ の素イデアルである. すなわち $p$ は $R$ の素元である.
+ \item[(c)] $p$ は $R$ の既約元である.
+ \qed
+ \end{enumerate}
+\end{question}
+
+\begin{question}[極大ではない素イデアルの例]
+ $K$ は体であるとする. 以下を示せ:
+ \begin{enumerate}
+ \item $\Z$ のイデアル $(0)$ は素イデアルだが極大イデアルではない.
+ \item $\Z[x]$ のイデアル $(x)$ は $0$ でない素イデアルだが
+  極大イデアルではない.
+ \item 素数 $p$ に対して $\Z[x]$ のイデアル $(p,x)$ は極大イデアルである.
+ \item $K[x]$ のイデアル $(0)$ は素イデアルだが極大イデアルではない.
+ \item $K[x,y]$ のイデアル $(y)$ は $0$ でない素イデアルだが
+  極大イデアルではない.
+ \item $K[x,y]$ のイデアル $(x,y)$ は極大であるである.
+ \qed
+ \end{enumerate}
+\end{question}
+
+\begin{definition}[既約多項式]
+ 整域 $R$ 上の一変数多項式環 $R[x]$ について考える.
+ $f\in R[x]$ が $R[x]$ において{\bf 既約 (irreducible)}であるとは, 
+ $f\not\in R$ であり, 
+ $g,h\in R[x]$, $f=gh$ ならば $g$ または $h$ が $R$ の元になることである.
+ 
+ 特に $K$ が体ならば $K[x]$ の既約多項式の全体の集合
+ は $K[x]$ の既約元の集合に等しい. 
+ \qed
+\end{definition}
+
+\begin{question}[Eisenstein の判定法]
+\label{q:Eisenstein/Z}
+ $p$ は素数であるとする. このとき
+ \begin{equation*}
+  f(x) = a_nx^n + \cdots + a_1x + a_0 \in \Z[x]
+ \end{equation*}
+ の係数 $a_i\in\Z$ が条件
+ \begin{equation*}
+  p\nmid a_n, \quad
+  p\mid a_{n-1},\ \ldots,\ p\mid a_1,\ p\mid a_0, \quad
+  p^2\nmid a_0.
+ \end{equation*}
+ を満たしているならば $f$ は $\Z[x]$ において既約である.
+ たとえば $x^n + p$ や $x^n + px + p$ は $\Z[x]$ において既約である.
+ \qed
+\end{question}
+
+\begin{rem}
+ 実は $\Z[x]$ において既約ならば $\Q[x]$ においても既約である.
+ このことは UFD に関する Gauss の定理の証明のところで
+ ずっと一般的に証明されることになる.
+ \qed
+\end{rem}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{環と加群の理論}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setcounter{subsection}{4}
+
+\subsection{イデアルとは何か}
+
+「イデアルとは何か」を理解するためには「環をイデアルで割ること」を理解し
+なければいけない. 「環をイデアルで割ること」は「加法群を加法部分群で割る
+こと」の特殊な場合なので最初に後者について説明することにする.
+
+\subsubsection{加法群を加法部分群で割ること (商加法群)}
+
+加法群 $M$ とその加法部分加群 $N$ が与えられたとする.
+(たとえば環は加法群とみなせるし, 
+体上のベクトル空間や環上の加群も加法群とみなせる.)
+そのとき「$M$ の中で $N$ の元をすべて $0$ とみなしてできる加法群」を $M/N$ と
+書く習慣になっている:
+\begin{equation*}
+ M/N = (\text{$M$ の中で $N$ の元をすべて $0$ とみなしてできる加法群}).
+\end{equation*}
+たとえば $M=\Z$, $N=3\Z$ のとき $M/N=\Z/3\Z$ は $\Z$ の中で $3$ の倍数を
+すべて $0$ とみなしてできる加法群である. 
+$\Z/3\Z$ の中では $3$ は $0$ とみなされるので %
+$\overline{5}=\overline{2}+\overline{3}=\overline{2}$ という計算が
+成立していなければいけない.
+
+上の説明の仕方は直観的過ぎて論理的厳密性の観点からは不十分である.
+商加法群 $M/N$ の論理的に厳密な構成法は次の通り:
+\begin{equation*}
+ M/N = \{\, a+N \mid a\in M \,\}, \quad
+ (a+N)+(b+N) = (a+b)+N \;\;(a,b\in M).
+\end{equation*}
+$M$ の部分集合 $a+N=\{\,a+n\mid n\in N\,\}$ を $M/N$ の元とみなすとき, 
+それを次のように書くことがある:
+\begin{equation*}
+ a+N = a\MOD N = [a] = \overline{a} \in M/N.
+\end{equation*}
+
+論理的に厳密な商加法群 $M/N$ の構成法が実際に
+「$M$ の中で $N$ の元をすべて $0$ とみなしてできる加法群」を
+与えていることを確認しよう.
+
+\begin{lemma}
+\label{lemma:a+N=b+N}
+ $a,b\in M$ に対して以下の条件は互いに同値である:
+ \begin{enumerate}
+  \item[(a)] $a+N=b+N$,
+  \item[(b)] $b\in a+N$,
+  \item[(c)] $a\in b+N$,
+  \item[(d)] $b-a\in N$.
+   \qed
+ \end{enumerate} 
+\end{lemma}
+
+\begin{proof}
+ (a)から(b)が出ること.
+ $a+N=b+N$ ならば $b\in b+N=a+N$ である.
+
+ (b)と(c)が同値であること.
+ $b\in a+N$ のとき, ある $n\in N$ で $b=a+n$ となるものが存在するので %
+ $a=b-n=b+(-n)\in b+N$ である.
+ 逆に $a\in b+N$ のとき, ある $n\in N$ で $a=b+n$ となるものが存在するので %
+ $b=a-n=a+(-n)\in a+N$ である.
+
+ (b)と(d)が同値であること.
+ $b\in a+N$ のとき, ある $n\in N$ で $b=a+n$ となるものが存在するので %
+ $b-a=n\in N$ である.
+ 逆に $n:=b-a\in N$ のとき $b=a+n\in a+N$ である.
+
+ (d)から(a)が出ること.
+ $n:=b-a\in N$ と仮定する.
+ そのとき $a=b-n$ かつ $b=a+n$ である.
+ よって任意に $a+n'\in a+N$ ($n'\in N$) を
+ 取ると $a+n'=b+(n'-n)\in m'+N$ で
+ あるから $a+N\subset b+N$ であり, 
+ 任意に $b+n''\in b+N$ ($n''\in N$) を
+ 取ると $b+n''=a+(n+n'')\in a+N$ で
+ あるから $b+N\subset a+N$ である.
+ したがって $a+N=b+N$ である.
+ \qed
+\end{proof}
+
+\begin{question}
+ 以下の数学的対象の図を描け:
+ \begin{enumerate}
+  \item $M=\R$ の中
+   の $N=\Z$, $0.3+N$, $-0.3+N$, $-1.7+N$.
+  \item $M=\Z^2$ の中
+   の $N=\{\,(a,-a)\mid a\in\Z\,\}$, $(1,2)+N$, $(2,-2)+N$.
+  \item $M=\Z$ の中
+   の $N=6\Z$, $1+N$, $2+N$, $3+N$, $4+N$, $5+N$, $6+N$.
+  \qed
+ \end{enumerate}
+\end{question}
+
+上の補題より $M/N$ の元たちは $M$ の元たちを $N$ の差を無視して同一視
+することによって得られたと考えることができる.
+$M/N$ が $M$ の部分集合の集合であるという考え方にこだわる限り, 
+このような考え方はできないので注意して欲しい.
+
+\begin{lemma}
+ $a_1,a_2,b_1,b_2\in M$ のとき %
+ $a_1+N=a_2+N$ かつ $b_1+N=b_2+N$ ならば $(a_1+b_1)+N=(a_2+b_2)+N$ 
+ である. \qed
+\end{lemma}
+
+\begin{proof}
+ \lemmaref{lemma:a+N=b+N}より
+ ある $n,n'\in N$ で $a_1=a_2+n$, $b_1=b_2+n'$ となるものが存在する. 
+ そのとき $(a_1+b_1) - (a_2+b_2) = (a_1-a_2)+(b_1-b_2) = n+n'\in N$ である. 
+ よって\lemmaref{lemma:a+N=b+N}より $(a_1+b_1)+N=(a_2+b_2)+N$ である.
+ \qed
+\end{proof}
+
+この補題より $M/N$ における加法が well-defined であること
+(矛盾なくうまく定義されていること)がわかる.
+
+\begin{lemma}
+ $(M/N,+)$ は加法群である. \qed
+\end{lemma}
+
+\begin{proof}
+ 記号の簡単のため $a+N$ を $[a]$ と書くことにする.
+ $M/N$ における加法の定義は $[a]+[b]=[a+b]$ である.
+ 以下を示せばよい: 任意の $[a],[b],[c]\in M\N$ に対して
+ \begin{enumerate}
+  \item $([a]+[b])+[c]=[a]+([b]+[c])$,
+  \item $[a]+[0]=[0]+[a]=[a]$,
+  \item $[a]+[-a]=[-a]+[a]=[0]$.
+ \end{enumerate}
+ 2番目と3番目が成立することは $M/N$ の加法の定義より明らかである.
+ 1番目の $M/N$ における加法の結合律は $M$ における加法の結合律から
+ 導かれる. 実際
+ \begin{align*}
+  &
+  ([a]+[b])+[c]
+  =[a+b]+[c]
+  =[(a+b)+c]
+  \\ &
+  =[a+(b+c)]
+  =[a]+[b+c]
+  =[a]+([b]+[c]).
+  \qed
+ \end{align*}
+\end{proof}
+
+このように $M/N$ が加法群になることの証明は簡単である.
+加法群になることそのものの証明よりも加法の定義が well-defined であること
+の証明の方が面倒である. こういうことはよくある. 
+こういう議論に慣れないうちは
+必要な well-definedness の証明を省略してはいけない.
+
+\subsubsection{両側イデアルの導入}
+
+$R$ は(可換とは限らない)環であり, $I$ は $R$ の加法部分群であるとする.
+商加法群
+\begin{equation*}
+ R/I=\{\,[a]=a+I\mid a\in R\,\}, \quad
+ [a]+[b] = [a+b] \;\; (a,b\in R)
+\end{equation*}
+に乗法を
+\begin{equation*}
+ [a][b]=[ab] \quad (a,b\in R)
+\end{equation*}
+によって定めることができるためには, 
+任意の $a\in R$, $f\in I$ に対して $af, fa\in I$ が
+成立していることが必要である. 
+
+実際 $f\in I$ と $f\MOD I=0\MOD I$ は同値であり, 
+上の式によって乗法がうまく定義されているとすれば $f\in I$ のとき
+\begin{equation*}
+ [af] = [a][f] = [a][0] = [a0] = [0] = I
+\end{equation*}
+より $af\in I$ でなければいけない. 
+同様にして $fa\in I$ でなければいけないこともわかる.
+
+このような性質を持つ $R$ の加法部分群に名前を付けておこう.
+
+\begin{definition}[両側イデアル, イデアル]
+ 環 $R$ の加法部分群 $I$ が $R$ の元による左右からの積で閉じている
+ とき(すなわち $a\in R$, $f\in I$ に対して $af, fa\in I$ であるとき), 
+ $I$ を $R$ の{\bf 両側イデアル (two-sided ideal)} と呼ぶ.
+ 環 $R$ が可換な場合には単に{\bf イデアル (ideal)} と呼ぶことにする.
+ \qed
+\end{definition}
+
+逆に $I$ が環 $R$ の両側イデアルであれば %
+$R/I$ に自然に環の構造が入ることを示せる.
+もしもこれを示せなければ上の定義は失敗に終わったということになる.
+論理的にはどのような定義も許されるが, 
+「数学的にうまい仕組みに名前を付けること」という意味での定義は
+その「うまい仕組み」が証明されるまで正しい定義であるかどうかわからない. 
+
+\begin{theorem}[剰余環]
+ $I$ が環 $R$ の両側イデアルであるとき商加法群 $R/I$ には
+ \begin{equation*}
+  [a][b]=[ab] \quad (a,b\in R)
+ \end{equation*}
+ によって環構造を入れることができる.
+ このとき環 $R/I$ を{\bf 剰余環 (residue ring)} もしくは
+ {\bf 剰余類環 (residue-class ring)} もしくは
+ {\bf 商環 (factor ring, quotient ring)}と呼ぶ.
+\end{theorem}
+
+\begin{proof}
+ 乗法の well-definedness を示すためには次を示さなければいけない:
+ \begin{quote}
+  $a_1,a_2,b_1,b_2\in R$ のとき %
+  $[a_1]=[a_2]$ かつ $[b_1]=[b_2]$ ならば $[a_1b_1]=[a_2b_2]$.
+ \end{quote}
+ $a_1,a_2,b_1,b_2\in R$, $[a_1]=[a_2]$, $[b_1]=[b_2]$ と仮定する.
+ \lemmaref{lemma:a+N=b+N}より, 
+ ある $f,g\in I$ で $a_1=a_2+f$, $b_1=b_2+g$ を満たすものが存在する.
+ そのとき
+ \begin{equation*}
+  a_1b_1 = (a_2+f)(b_2+g) = a_2b_2 + a_2g + fb_2 + fg.
+ \end{equation*}
+ $I$ は両側イデアルなので $a_2g, fb_2, fg \in I$ である.
+ よって $a_1b_1\in a_2b_2+I=[a_2b_2]$ であることがわかる.
+ \lemmaref{lemma:a+N=b+N}より $[a_1b_1]=[a_2b_2]$ である.
+
+ あとは以下を示せば十分である: $a,b,c\in R$ に対して
+ \begin{enumerate}
+  \item $([a][b])[c]=[a]([b][c])$,
+  \item $[1][a]=[a][1]=[a]$,
+  \item $[a]([b]+[c])=[a][b]+[a][c]$,
+  \item $([a]+[b])[c]=[a][c]+[b][c]$.
+ \end{enumerate}
+ これらが成立していることは $R/I$ の加法と乗法の定義と $R$ が環であるこ
+ とから容易に確かめられる. しかし読者は自分のノートに実際にその証明
+ を一生に一度以上は省略せずに書いてみなければいけない.
+ \qed
+\end{proof}
+
+\subsubsection{代数方程式のイデアルによる表現}
+
+現代の代数学では代数方程式の代わりに
+対応するイデアルや剰余環を扱うことがある.
+
+$K$ は任意の体であるとする
+(たとえば $\Q, \R, \C$ や有限体など).
+
+簡単のため二つの多項式 $F,G\in K[x,y]$ を
+用いて書き下された連立方程式
+\begin{equation*}
+  F(x,y) = 0, \quad G(x,y) = 0
+  \tag{$*$}
+\end{equation*}
+を多項式環 $K[x]$ のイデアルとして表現する方法を説明しよう.
+
+連立方程式 ($*$) に対応するイデアルは $F,G$ から
+生成される $K[x,y]$ のイデアル 
+\begin{equation*}
+ (F,G)=K[x,y]F(x,y)+K[x,y]G(x,y)
+\end{equation*}
+である.  たとえば有理数係数の連立代数方程式
+\begin{equation*}
+ x^2+y^2=1, \quad  x = y
+ \tag{1}
+\end{equation*}
+に対応する $\Q[x,y]$ のイデアルは $(x^2+y^2-1, x-y)$ になる.
+
+体 $K$ を含む可換環 $R$ が任意に与えられたとき, 
+連立代数方程式 ($*$) の $R$ における解とは %
+$R$ の元の組 $(\alpha,\beta)\in R^2$ で
+\begin{equation*}
+  F(\alpha,\beta) = 0, \quad G(\alpha,\beta) = 0
+  \tag{$**$}
+\end{equation*}
+をみたすもののことである. たとえば有理数係数の連立方程式 (1) の
+有理数解は存在しないが, 実数解 $(\pm 1/\sqrt{2},\pm 1/\sqrt{2})$ は存在する.
+
+\begin{question}
+ 以下を示せ:
+ \begin{enumerate}
+  \item  $\Q[x,y]$ のイデアル $(x^2+y^2-1,x-y)$, $(2x^2-1,x-y)$ 
+   は互いに等しい.
+  \item $\Q[x]$ のイデアル $(x^6-1,x^4-1)$ , $(x^2-1)$ は互いに等しい.
+  \item $\Q[x]$ のイデアル $(x)$, $(x^2)$ は互いに等しくない.
+  \qed
+ \end{enumerate}
+\end{question}
+
+\begin{proof}[ヒント]
+ 1. $x^2+y^2-1+(x+y)(x-y)=2x^2-1$. 
+ (注意: 1の結果は有理数係数の連立方程式 (1) と次の連立方程式
+ \begin{equation*}
+  2x^2=1, \quad  x = y.
+   \tag{2}
+ \end{equation*}
+ が同値であることのイデアル版である.)
+
+ 2. $x^6-1,x^4-1\in(x^2-1)$ でかつ $x^6-1-x^2(x^4-1)=x^2-1$.
+ (注意: 2の結果は $x^6=1$ と $x^4=1$ の共通解
+ は $x^2=1$ の解に等しいという結果のイデアル版である.)
+
+ 3. $x\not\in(x^2)$ を示せ.
+ (注意： $x=0$ は方程式 $x=0$ の単根だが, 方程式 $x^2=0$ の重根である. 
+ イデアルによる代数方程式の表現によっても単根と重根が区別される.)
+ \qed
+\end{proof}
+
+方程式の解をイデアルの言葉を用いて特徴付けられることを説明しよう.
+
+$R$ は体 $K$ を含む任意の可換環であるとする.
+
+任意に $(\alpha,\beta)\in R^2$ を取ると
+環準同型 $\phi_{\alpha,\beta}:K[x,y]\to R$ を
+\begin{equation*}
+ \phi_{\alpha,\beta}(f(x,y)) = f(\alpha,\beta) \quad (f\in K[x,y])
+\end{equation*}
+によって定めることができる. このとき次が成立している:
+\begin{equation*}
+ \text{$(\alpha,\beta)$ は方程式 ($*$) の解である}
+ \iff 
+ (F,G) \subset \Ker\phi_{\alpha,\beta}.
+\end{equation*}
+実際, $(\alpha,\beta)$ が方程式 ($*$) の解であることの定義
+は $F(\alpha,\beta)=G(\alpha,\beta)=0$ が成立することであり, 
+$\phi_{\alpha,\beta}$ の定義より $F(\alpha,\beta)=G(\alpha,\beta)=0$ 
+と $F,G\in\Ker\phi_{\alpha,\beta}$ は同値であり, 
+$(F,G)$ は $F,G$ を含む $K[x,y]$ の最小のイデアル
+なので $F,G\in\Ker\phi_{\alpha,\beta}$ 
+と $(F,G)\subset \Ker\phi_{\alpha,\beta}$ は同値である.
+
+さらに剰余環 $K[x,y]/(F,G)$ を使えば可換環 $R$ における方程式 ($*$) の
+解全体の集合を環の準同型写像の集合で表現できる.
+
+$K$ を含む二つの可換環 $R_1$ から $R_2$ への環準同型 $\phi$ 
+が $K$ 上の環準同型であるとは任意の $a\in K$ に対して $\phi(a)=a$ が
+成立することである. $R_1$ から $R_2$ への $K$ 上の環準同型全体の
+集合を次のように書くことにする:
+\begin{equation*}
+ \Hom_{\text{$K$-ring}}(R_1,R_2)
+ =
+ \{\,\phi:R_1\to R_2 \mid \text{$\phi$ は $K$ 上の環準同型}\,\}.
+\end{equation*}
+
+\begin{theorem}
+ 次の自然な一対一対応が存在する:
+ \begin{equation*}
+  \Hom_{\text{$K$-ring}}\left(K[x,y]/(F,G),R\right)
+  \cong
+  \{\,(\alpha,\beta)\in R^2 \mid F(\alpha,\beta)=G(\alpha,\beta)=0 \,\}.
+  \qed
+ \end{equation*}
+\end{theorem}
+
+\begin{proof}[略証]
+ $K$ 上の環準同型 $\phi:K[x,y]/(F,G)\to R$ に対して %
+ $(\alpha,\beta)=(\phi([x]),\phi([y]))\in R^2$ と
+ 置くと $F(\alpha,\beta)=G(\alpha,\beta)=0$ である.
+
+ 逆に $(\alpha,\beta)\in R^2$ が $F(\alpha,\beta)=G(\alpha,\beta)=0$ 
+ を満たしていれば, $K$ 上の環準同型 $\phi:K[x,y]/(F,G)\to R$ 
+ を $\phi([f(x,y)])=f(\alpha,\beta)$ ($f\in K[x,y]$) によって
+ 定めることができる(well-definedness の証明が必要).
+
+ これらの対応は互いに逆写像になっている. \qed
+\end{proof}
+
+\begin{question}[20点]
+ すぐ上の略証で省略されている部分を完全に埋めよ. \qed
+\end{question}
+
+後で次の定理を学ぶことになる.
+
+\begin{theorem}[体上のHilbertの基定理]
+ \label{theorem:Hilbert-basis-theorem/K}
+ 体 $K$ 上の $n$ 変数多項式環 $K[x_1,\ldots,x_n]$ の任意の
+ イデアル $I$ はある $F_1,\ldots,F_r\in K[x_1,\ldots,x_n]$ に
+ よって $I=(F_1,\ldots,F_r)$ と表現できる.
+ \qed
+\end{theorem}
+実際には {\bf Hilbert 基定理 (Hilbert's basis theorem)}
+は $K$ が体よりもずっと一般な Noether 環の場合にも成立している.
+証明については永尾 \cite{nagao-1983} pp.121--122 
+や堀田 \cite{hotta-1987} p.145 などを見よ.
+ほとんどの代数学の教科書に証明が書いてある.
+
+上の方の議論から
+体 $K$ 係数の連立代数方程式には $K[x_1,\ldots,x_n]$ 
+のイデアルを対応させることができる.
+逆に Hilbertの基定理は $K[x_1,\ldots,x_n]$ の
+任意のイデアル $I$ はある連立代数方程式
+\begin{equation*}
+ F_i(x_1,\ldots,x_n) = 0 \quad (i=1,\ldots,r)
+\end{equation*}
+に対応していることを主張している. 
+
+以上によって $K[x_1,\ldots,x_n]$ のイデアルは $K$ 係数の
+連立代数方程式の抽象化になっていることがわかった.
+
+\subsubsection{体上有限生成な可換環}
+
+前節では体 $K$ 上の多項式環のイデアルが代数方程式に対応していることを
+説明した.  
+それではもっと一般的な可換環のイデアルはどのように解釈可能なのだろうか？
+
+体 $K$ 上有限生成な可換環のイデアルであれば前節と同様に代数方程式に
+対応していると解釈できる.
+
+\begin{definition}[体 $K$ 上有限生成]
+ 体 $K$ を含む可換環 $R$ が{\bf $K$ 上有限生成 (finitely generated over $K$)}
+ であるとは, ある有限個の元 $a_1,\ldots,a_n\in R$ が存在して, 
+ $R$ の任意の元が $a_1,\ldots,a_n$ の $K$ 係数多項式で表わされることである.
+ このとき $a_1,\ldots,a_n$ は $R$ 
+ の {\bf $K$ 上での生成元 (generators over $K$)} であるという.
+ \qed
+\end{definition}
+
+\begin{lemma}
+ \label{lemma:R=K[x1,..,xn]/I}
+ 体 $K$ 上有限生成な可換環は
+ 体 $K$ 上の $n$ 変数多項式環の剰余環に
+ 環として同型である. \qed
+\end{lemma}
+
+\begin{proof}
+ $R$ は体 $K$ 上有限生成な可換環であるとし, 
+ $a_1,\ldots,a_n\in R$ は $R$ の $K$ 上での生成元であるとする.
+ このとき環準同型 $\phi:K[x_1,\ldots,x_n]\to R$ を
+ \begin{equation*}
+  \phi(f(x_1,\ldots,x_n)) = f(a_1,\ldots,a_n) 
+  \quad (f\in K[x_1,\ldots,x_n])
+ \end{equation*}
+ と定めることができる.  $R$ のすべての元は $a_1,\ldots, a_n$ の $K$ 係数
+ 多項式 $f(a_1,\ldots,a_n)$ で表わされるので $\phi$ は全射である.
+ したがって環の準同型定理より, 環の同型
+ \begin{equation*}
+  K[x_1,\ldots,x_n]/\!\Ker\phi \cong R, 
+  \quad [f(x_1,\ldots,x_n)]\mapsto f(a_1,\ldots,a_n).
+ \end{equation*}
+ が成立する. \qed
+\end{proof}
+
+したがって体 $K$ 上有限生成な可換環 $R$ の構造について調べるときには
+\begin{equation*}
+ R = K[x_1,\ldots,x_n]/I, 
+ \quad \text{$I$ は $K[x_1,\ldots,x_n]$ のあるイデアル}
+\end{equation*}
+であると仮定してよい.  
+問題 \qref{q:ring-hom-th-2} の結果より, %
+$R$ のイデアル $J$ 
+と $K[x_1,\ldots,x_n]$ の $I$ を含むイデアル $J'$ は
+自然に一対一に対応しており, 剰余環のあいだにも自然な同型
+\begin{equation*}
+ R/J \cong K[x_1,\ldots,x_n]/J'
+\end{equation*}
+が成立している.  このことより $R$ のイデアルによる剰余環の構造
+を調べるためには, 
+$K[x_1,\ldots,x_n]$ の $I$ を含むイデアルによる剰余環の構造
+を調べればよいことがわかる.
+さらに Hilbert の基定理より $K[x_1,\ldots,x_n]$ の任意のイデアルは
+ある連立代数方程式に対応しているのであった.
+以上を合わせれば, 
+体 $K$ 上有限生成な可換環およびその剰余環の理論も
+またある連立代数方程式に対応していると考えることができる.
+
+以上によって体 $K$ 上有限生成な可換環の理論は %
+$K$ 係数の連立代数方程式の理論の抽象化であると考えて構わないことがわかった.
+
+\subsubsection{$\Z$ 上有限生成な可換環}
+
+応用上重要な可換環の中には体上有限生成な可換環ではないものが存在する.
+それは有理整数環 $\Z$ 上有限生成な可換環である.
+たとえば $\Z$ 自身は体上有限生成ではないが, $\Z$ 上有限生成である.
+$\Z$ は可換環として明らかに基本的でかつ重要である.
+同様に $\Z$ 上の $n$ 変数多項式環 $\Z[x_1,\ldots,x_n]$ も
+体上有限生成ではないが, $\Z$ 上有限生成である.
+
+$\Z$ 上有限生成な可換環は{\bf 数論における基本的な研究対象}である.
+
+\begin{definition}[体 $K$ 上有限生成]
+ 可換環 $R$ が{\bf $\Z$ 上有限生成 (finitely generated over $\Z$)}
+ であるとは, ある有限個の元 $a_1,\ldots,a_n\in R$ が存在して, 
+ $R$ の任意の元が $a_1,\ldots,a_n$ の有理整数係数多項式で表わされることである.
+ \qed
+\end{definition}
+
+\begin{rem}
+ 可換環の任意の元の有理整数倍が自然に定義される.
+ しかし有限体のように標数が正の場合には有理整数倍の結果が $0$
+ になるかもしれない. \qed
+\end{rem}
+
+Hilbert の基定理は一般の Noether 環上で成立しているので
+当然 $\Z$ 上でも成立しており, 次の結果が得られる.
+
+\begin{theorem}[$\Z$ 上の Hilbert の基定理]
+ \label{theorem:Hilbert-basis-theorem/Z}
+ 有理整数環 $\Z$ 上の $n$ 変数多項式環 $\Z[x_1,\ldots,x_n]$ の任意の
+ イデアル $I$ はある $F_1,\ldots,F_r\in\Z[x_1,\ldots,x_n]$ に
+ よって $I=(F_1,\ldots,F_r)$ と表現できる.
+ \qed
+\end{theorem}
+
+\lemmaref{lemma:R=K[x1,..,xn]/I}と完全に同様の議論によって次を証明できる.
+
+\begin{lemma}
+ \label{lemma:R=Z[x1,..,xn]/I}
+ $\Z$ 上有限生成な可換環は %
+ $\Z$ 上の $n$ 変数多項式環のある剰余環に
+ 環として同型である. \qed
+\end{lemma}
+
+\begin{question}
+ 実際に\lemmaref{lemma:R=Z[x1,..,xn]/I}の証明を書き下せ. \qed
+\end{question}
+
+以上の \theoremref{theorem:Hilbert-basis-theorem/Z}, 
+\lemmaref{lemma:R=Z[x1,..,xn]/I}の結果より, %
+$\Z$ 上有限生成な可換環もまた連立代数方程式に対応しているとみなせる.
+ただし $\Z[x_1,\ldots,x_n]$ には $(24)$ のような数で生成されるイデアルが
+存在し, $\Z[x_1,\ldots,x_n]/(24)$ の中で数 $24$ は $0$ とみなされる.
+このように $\Z$ 上有限生成な可換環の場合には %
+$1$ 次以上の多項式を $0$ と置くような代数方程式を考えるだけではなく, %
+$24$ のような数をも $0$ とみなすことがある点が
+体上有限生成な可換環を扱った場合とは違っている.
+
+\begin{question}
+ $m\in\Z$ かつ $\sqrt{m}$ は有理数ではないと仮定する.
+ 一般に $\Z$ と $\alpha\in\C$ を含む $\C$ の
+ 最小の部分環を $\Z[\alpha]$ と書く. 
+ 以下を証明せよ.
+ \begin{enumerate}
+  \item $\Z[\sqrt{m}] = \Z + \Z\sqrt{m}$,
+  \item $\Z[x]/(x^2-m)\cong \Z[\sqrt{m}]$.
+ \end{enumerate}
+\end{question}
+
+\begin{proof}[ヒント]
+ 1. $\Z$ と $\sqrt{m}$ を含む $\C$ の任意の部分環
+ が $\Z+\Z\sqrt{m}$ を含むことは容易に確かめられる.
+ $\Z+\Z\sqrt{m}$ は $\C$ の部分環であることも容易に確かめられる.
+
+ 2. 環準同型 $\phi:\Z[x]\to\Z[\sqrt{m}]$ を $\phi(f(x))=f(\sqrt{m})$ 
+ ($f\in\Z[x]$) と定めることができる. $\phi$ は全射であることが簡単にわかる. 
+ よって環の準同型定理より $\Z[x]/\!\Ker\phi\cong\Z[\sqrt{m}]$ である. 
+ したがって $\Ker\phi=(x^2-m)$ を示せばよい.
+ $\phi(x^2-m)=\sqrt{m}^2-m=0$ より $x^2-m\in\Ker\phi$ である
+ から $(x^2-m)\subset\Ker\phi$ である.
+ 任意に $f(x)\in\Ker\phi$ を取る. 
+ $x^2-m$ による割り算によって $f(x)$ を $f(x)=g(x)(x^2-m)+ax+b$ 
+ ($g(x)\in\Z[x]$, $a,b\in\Z$) と表わせる. 
+ その等式の両辺に $x=\sqrt{m}$ を代入すると
+\ifx\STUDENT\undefined
+ $a\sqrt{m}+b=0$ が得られる.
+ $\sqrt{m}$ は有理数ではないと仮定したので $a=b=0$ である.
+ したがって $f(x)=g(x)(x^2-m)\in(x^2-m)$ である.
+ これで示すべきことが示された.
+\else
+ ……
+\fi
+ \qed
+\end{proof}
+
+\begin{rem}
+ 上の問題の結果より $\sqrt{m}$ のような数の研究
+ も $\Z$ 上有限生成な可換環の研究に含まれていることがわかる.
+ \qed
+\end{rem}
+
+\begin{guide}[二次体の整数環]
+ 上の問題の $\Z[\sqrt{m}]$ の商体 $\Q(\sqrt{m})$ は
+ {\bf 二次体 (quadratic field)} と呼ばれている.
+ 二次体 $K$ は平方因子を含まない $0$ でも $1$ でも有理整数 $m$ に
+ よって $K=\Q(\sqrt{m})$ と一意に表わされる.
+ $m>0$ のとき $\Q(\sqrt{m})$ は{\bf 実二次体 (real quadratic field)} 
+ と呼ばれ, %
+ $m<0$ のとき $\Q(\sqrt{m})$ は{\bf 虚二次体 (imaginary quadratic field)}
+ と呼ばれている.
+
+ $\alpha\in\C$ が{\bf 代数的整数 (algebraic integer)} 
+ であるとはあるモニックな $f\in\Z[x]$ で $f(\alpha)=0$ を満たすものが
+ 存在することである.  
+
+ $\omega\in\Q(\sqrt{m})$ を次のように定める:
+ \begin{equation*}
+  \omega = 
+  \begin{cases}
+   \sqrt{m}       & (m\equiv 2,3 \MOD 4) \\
+   (1+\sqrt{m})/2 & (m\equiv 1 \MOD 4).  \\
+  \end{cases}
+ \end{equation*}
+ このとき $\Z[\omega]=\Z+\Z\omega$ であり, 
+ $\Z[\omega]$ は非常に良い性質を持っていることが知られている:
+ \begin{enumerate}
+  \item $\Q(\sqrt{m})$ に含まれる代数的整数の全体は
+   $\Z[\omega]$ に一致する.
+   ($\Z[\omega]$ は二次体の整数環と呼ばれる.)
+  \item $\Z[\omega]$ は Dedekind 整域である.
+   特に $\Z[\omega]$ では任意の $0$ でないイデアルが素イデアルの積に
+   一意的に分解される(素イデアル分解の一意存在).
+ \end{enumerate}
+ 詳しくは代数的整数論の教科書を見よ. 
+ たとえば, 1の結果の証明は\cite{suron-1} p.119 問3の解答 (pp.146-147) 
+ に書いてあり, 
+ Dedekind 整域の一般論は \cite{kan-to-tai-1} 第5章にある.
+
+ さらに以下が成立していることに注意しなければいけない:
+ \begin{itemize}
+  \item  $m\equiv 1\MOD 4$ のとき $\Z[\sqrt{m}]$ では
+  「素イデアル分解の一意存在」が成立していない.
+  \item $\Z[\omega]$ で「既約元の積への分解の一意存在」
+   (後で整域において「素元分解の存在」と同値であることを示す) 
+   が成立しているとは限らない. 
+ \end{itemize}
+ たとえば $m=-1.-2.-3, 2$ のとき $\Z[\omega]$ で
+ 「既約元の積への分解の一意存在」が成立しているが, %
+ $m=-5,-26,10$ のとき $\Z[\omega]=\Z[\sqrt{m}]$ ではそうではない.
+
+ 有理整数環 $\Z$ の整数論では「素因数分解の一意存在」が基本的であった.
+ しかし二次体の整数環ではそれに対応する
+ 「既約元の積への分解の一意存在」が成立しないことがある. 
+ しかし「数」のレベルではなく「イデアル」のレベルでは
+ 素なモノへの分解の一意存在が成立しているのである.
+
+ これがイデアル＝理想数のアイデアの出発点である.
+ イデアルの概念は「イデアル＝理想数」という出発点の発想を
+ はるかに超えた有用性を持っていることがわかっている.
+
+ 以上のような込み入った事情の説明を読めば, 
+ 代数学の講義や演習でイデアルが歴史的に導入された動機の説明をすることが
+ 難しいことがわかると思う.  可換環 $R$ のイデアルとは $R$ 自身の
+ 部分 $R$ 加群のことであるという簡単な定義があることは非常にありがたい
+ ことである. 
+ \qed
+\end{guide}
+
+\begin{question}
+\label{q:Z[sqrt(-26)]}
+ $\Z[\sqrt{-26}]$ における数の計算に関して以下が成立していることを示せ:
+ \begin{enumerate}
+  \item $U(\Z[\sqrt{-26}])=\{\pm1\}$ である.
+  \item $3, 1\pm\sqrt{-26}$ は $\Z[\sqrt{-26}]$ の既約元である.
+  \item しかし $27=3^3=(1+\sqrt{-26})(1-\sqrt{-26})$ が成立している.
+   $\Z[\sqrt{-26}]$ では $27$ の既約元の積への分解の一意性が成立していない.
+   \qed
+ \end{enumerate}
+\end{question}
+
+\begin{proof}[ヒント]
+ $N:\Z[\sqrt{-26}]\to\Z$ 
+ を $N(m+n\sqrt{-26})=(m+n\sqrt{-26})(m-n\sqrt{-26})=m^2+26n^2$ と定める.
+ このとき $N(ab)=N(a)N(b)$ が成立する.
+
+ 1. $a=k+l\sqrt{-26},b=m+n\sqrt{-26}\in\Z[\sqrt{-26}]$, $1=ab$ 
+ のとき $1=N(a)N(b)=(k^2+26l^2)(m^2+26n^2)$ である.
+ これより $k=\pm 1$, $l=0$ であることがわかる.
+
+ 2. $3$ が $\Z[\sqrt{-26}]$ の既約元であるとは %
+ $a,b\in\Z[\sqrt{-26}]$, $3=ab$ ならば %
+ $a$ または $b$ が $\Z[\sqrt{-26}]$ の単元になることである.
+ $a=k+l\sqrt{-26},b=m+n\sqrt{-26}\in\Z[\sqrt{-26}]$. $3=ab$ 
+ のとき $9=N(a)N(b)=(k^2+26l^2)(m^2+26n^2)$ である.
+ よってもしも $a$ も $b$ も単元でないとすれば $k^2+26l^2=3$ でなければい
+ けない. しかしこれは不可能である. したがって $3$ は既約元である.
+ $1\pm\sqrt{-26}$ も同様の議論で既約元であることを示せる.
+
+ 3. 容易.
+ \qed
+\end{proof}
+
+\begin{question}[20点以上]
+ $\Z[\sqrt{-26}]$ におけるイデアルの計算に関して以下が成立していることを示せ:
+ \begin{enumerate}
+  \item $\Z[\sqrt{-26}]$ の
+   イデアル $I=(3,1+\sqrt{-26})$, $J=(3,1-\sqrt{-26})$ は %
+   $\Z[\sqrt{-26}]$ の素イデアルである.
+  \item $(3)=IJ$, $(1+\sqrt{-26})=I^3$, $(1-\sqrt{-26})=J^3$.
+  \item イデアル $(27)$ の2通りの素イデアル分解 %
+   $(27)=(3^3)=(3)^3=(IJ)^3=I^3J^3$, %
+   $(27)=((1+\sqrt{-26})(1+\sqrt{-26}))=(1+\sqrt{-26})(1+\sqrt{-26})=I^3J^3$ %
+   の結果は一致している.
+   (注意: 一般論によってこの一致は当然.)
+   \qed
+ \end{enumerate}
+\end{question}
+
+\begin{guide}
+ 数学的に深くて応用的にも有用な結果を出すためには
+ 扱う数学的対象に何らかの有限性の条件を課しておいた方が良い.
+ 可換環に関する体 $K$ 上有限生成や $\Z$ 上有限生成という条件は
+ その意味で非常に良い条件である.
+ \qed
+\end{guide}
+
+\begin{guide}
+ 以上においては主として可換環のイデアルのイメージについて説明した.
+ 非可換環のイデアルのイメージは可換環の場合とは異なる場合がある.
+ \qed
+\end{guide}
+
+\subsection{素イデアルと極大イデアル}
+
+\begin{question}[素イデアルと極大イデアルの定義]
+ $R$ は可換環であり, 
+ $I$ はそのイデアルであり, $I\ne R$ であるとする. 
+ 以下を示せ.
+ \begin{enumerate}
+ \item 以下の条件は互いに同値である:
+  \begin{enumerate}
+   \item 剰余環 $R/I$ は整域である.
+   \item $a,b\in R$ のとき $a\not\in I$ かつ $b\not\in I$ ならば $ab\not\in I$.
+   \item $a,b\in R$ のとき $ab\in I$ ならば $a\in I$ または $b\in I$.
+   \item $a,b\in R$ のとき $a\not\in I$ かつ $ab\in I$ ならば $b\in I$.
+  \end{enumerate}
+  これらの条件が成立するとき $I$ は $R$ の{\bf 素イデアル (prime ideal)} 
+  であると言う.
+ \item 次の二つの条件は互いに同値である:
+  \begin{enumerate}
+   \item 剰余環 $R/I$ は体である.
+   \item $R$ の $I$ を真に含むイデアルは $R$ 以外に存在しない.
+  \end{enumerate}
+  これらの条件が成立するとき $I$ は $R$ の{\bf 極大イデアル (maximal ideal)} 
+  であると言い, 
+  剰余環 $R/I$ は体になるので{\bf 剰余体 (residue field)}と呼ばれる.
+  \qed
+ \end{enumerate}
+\end{question}
+
+\begin{question}[極大イデアルの存在定理]
+ $R$ は可換環であるとし, $I$ は $R$ のイデアルであり, 
+ $I\ne R$ であるとする. このとき $I$ を含む $R$ の極大イデアルが存在する.
+ \qed
+\end{question}
+
+\begin{proof}[ヒント]
+ Zorn の補題の決まり切った使い方で証明できる.
+ ほとんどの代数学の教科書の証明が書いてある.
+ \qed
+\end{proof}
+
+\begin{question}[{$\C[x]$} の極大イデアル]
+ \label{q:maximal-ideal-of-C[x]}
+ 以下を示せ.
+ \begin{enumerate}
+ \item $\alpha\in\C$ に対して環の準同型写像 $\phi_\alpha:\C[x]\to\C$ 
+  を $\phi_\alpha(f(x))=f(\alpha)$ と定める.
+  このとき $\phi_\alpha$ は環の
+  同型 $\bar\phi_\alpha:\C[x]/(x-\alpha)\isomto\C$, 
+  $f(x)\MOD(x-\alpha) \mapsto f(\alpha)$ を誘導する.
+ \item $\C[x]$ の極大イデアルはどれも $(x-\alpha)$ ($\alpha\in\C$) 
+  の形をしている.
+ \item $f(x)\in\C[x]$ について $f(x)\not\in (x-\alpha)$ 
+  と $f(\alpha)\ne 0$ は同値である.
+ \item $f(x)\in\C[x]$ が $\C[x]$ の単元であるための必要十分条件は
+  任意の $\alpha\in\C$ に対して $f(\alpha)\ne 0$ が成立することである.
+  \qed
+ \end{enumerate}
+\end{question}
+
+\begin{proof}[ヒント]
+ 1. 環の準同型定理を使う. 
+
+ 2. $\C[x]$ は単項イデアル整域なので $\C[x]$ の極大イデアル
+ は $\C[x]$ のあるモニックな既約多項式 $f(x)$ で生成される単項イデアルに等しい.
+ $\C$ の代数閉体なので $\C[x]$ の多項式は一次式の積に分解される.
+
+ 3. 剰余定理を使う.
+
+ 4. $\C[x]$ の多項式は一次式の積に分解される.
+ \qed
+\end{proof}
+
+\begin{rem}
+ 上の問題 \qref{q:maximal-ideal-of-C[x]} 
+ について以下を注意しておく.
+ \begin{enumerate}
+ \item $\C[x]$ の極大イデアル全体の集合は $\C$ と同一視できる.
+ \item $\alpha\in\C$ に対応する極大イデアル $(x-\alpha)$ で
+  割った $\C[x]$ の剰余環 $\C[x]/(x-\alpha)$ を考えるということ
+  は $\C[x]$ の多項式 $f(x)$ の $x=\alpha$ での値を考えることに等しい.
+ \item $\C[x]$ の単元はどこでも $0$ にならない多項式と一致するいう結果は
+  極大イデアルによる単元の特徴付けだとみなすことができる.
+  \qed
+ \end{enumerate}
+\end{rem}
+
+\begin{question}[極大イデアルによる単元の特徴付け]
+ $R$ は可換環であるとし, $f\in R$ を任意に取る.
+ 以下の条件が互いに同値であることを示せ:
+ \begin{enumerate}
+  \item[(a)] $f$ は $R$ の単元である.
+  \item[(b)] $R$ の任意の極大イデアル $I$ に対して $f\not\in I$.
+  \qed
+ \end{enumerate}
+\end{question}
+
+\begin{proof}[ヒント]
+ $f$ が $R$ の単元であることと $(f)=R$ は同値である.
+
+ $R$ のイデアル $I$ が $f$ を含むことと $(f)$ を含むことは同値である.
+
+ $f$ が $R$ の単元ならば $(f)=R$ であり, 
+ 極大イデアルは定義より $R$ に等しくないので $(f)$ を含む極大イデアルは
+ 存在しない.
+
+ $f$ が $R$ の単元でないならば $(f)\ne R$ なので, 
+ 極大イデアルの存在定理より $(f)$ を含む極大イデアル $I$ が存在する.
+ \qed
+\end{proof}
+
+\begin{question}[素イデアルの引き戻し]
+ $R$, $R'$ は可換環であり, $\phi:R\to R'$ は環の準同型であるとする.
+ このとき以下が成立していることを示せ:
+ \begin{enumerate}
+  \item $I'$ が $R'$ の素イデアルならば %
+   $\phi^{-1}(I')$ も $R$ の素イデアルである.
+  \item $\phi$ が全射のとき, $I'$ が $R'$ の極大イデアルならば %
+   $\phi^{-1}(I')$ も $R$ の極大イデアルである.
+  \item しかし一般の場合には $I'$ が $R'$ の極大イデアルでも %
+   $\phi^{-1}(I')$ は $R$ の極大イデアルになるとは限らない.
+   (反例を具体的に示せ.)
+  \qed
+ \end{enumerate}
+\end{question}
+
+\begin{proof}[ヒント]
+ 1, 2. まず環の準同型定理を用いて $\phi$ が環の単射準同型 
+ $\tilde\phi:R/\phi^{-1}(I') \injto R'/I'$ を誘導することを示せ.
+ 整域の部分環は整域である.
+ $\phi$ が全射ならば $\tilde\phi$ は同型になる.
+
+ 3. 体の部分環は体とは限らない. たとえば $R=\Z$, $R'=\Q$, $I'=0$. 
+ (他にも面白い例を見つけてみよ.)
+ \qed
+\end{proof}
+
+\begin{guide}[$\Spec R$]
+ 上の問題の結果は Grothendieck が発展させた{\bf 概型 (scheme)} の理論の
+ 出発点になる.  空間があればその上の体に値を持つ函数たちは自然に可換環をなす.
+ 逆に概型の理論を使えば任意の可換環があたかも函数の環であるかのように
+ 考えることができる. 
+
+ そのとき任意の可換環に対応する空間(多様体)を構成しなければいけない.
+ 極大イデアルはまさに直観的な意味での点に対応しているので, 
+ 可換環の極大イデアル全体の集合に適当に位相を入れて幾何学を建設できないか
+ と考えることもできる.  しかし可換環のあいだの環準同型に空間のあいだの写像を
+ 自然に対応させるためには極大イデアルだけではなく, 素イデアルをも「点」と
+ みなした方が自然である. 
+
+ 実際上の問題より,  可換環 $R$ の素イデアル全体の集合を
+ \begin{equation*}
+  \Spec R = \{\, I\subset R \mid \text{$I$ は $R$ の素イデアル} \,\}
+ \end{equation*}
+ と書くと, 可換環のあいだの任意の環準同型 $\phi:R\to R'$ に対して写像
+ \begin{equation*}
+  \Spec R' \leftarrow \Spec R, \quad I' \leftarrow \phi^{-1}(I')
+ \end{equation*}
+ が得られることがわかる. 
+ 可換環のあいだの準同型の向きと, それらの $\Spec$ のあいだの対応する
+ 写像の向きは互いに逆になる.  この結果を次の問題と比較せよ.
+ \qed
+\end{guide}
+
+\begin{question}[$C^\infty$ 多様体]
+ 以下を示せ:
+ \begin{enumerate}
+  \item $M$ が $C^\infty$ 多様体のとき, %
+   $M$ 上の実数値函数全体の集合を $C^\infty(M)$ と書くと, %
+   $C^\infty(M)$ は自然に可換環をなす.
+  \item $\psi:M\to N$ は $C^\infty$ 多様体のあいだの $C^\infty$ 写像で
+   あるとする. このとき次の環準同型が自然に得られる:
+   \begin{equation*}
+    \psi^*:C^\infty(N)\to C^\infty(M), \quad f \mapsto \psi^*(f)=f\circ\psi.
+   \end{equation*}
+   多様体のあいだの写像の向きと
+   それに対応する可換環のあいだの写像の向きは互いに逆になる.
+   \qed
+ \end{enumerate}
+\end{question}
+
+\begin{question}
+ $K$ は体であるとする.
+ $K[x]\times K[y]$ の部分環 $R$ を次のように定める:
+ \begin{equation*}
+  R = \{\, (f(x),g(y))\in K[x]\times K[y] \mid f(0)=g(0) \,\}.
+ \end{equation*}
+ このとき次の環同型が存在する:
+ \begin{equation*}
+  K[x,y]/(xy)\isomto R, \quad F(x,y) \MOD (xy) \mapsto (F(x,0), F(0,y)).
+ \end{equation*}
+ $K[x,y]/(xy)\isom R$ は整域ではないので $(xy)$ は素イデアルではない.
+ \qed
+\end{question}
+
+\begin{proof}[ヒント]
+ $\phi:K[x,y]\to R$, $F(x,y)\mapsto (F(x,0),F(0,y))$ に環の準同型定理を
+ 適用せよ. \qed
+\end{proof}
+
+\begin{guide}[上の問題の幾何学的意味]
+ 一変数多項式環 $K[x]$ は $x$ 直線上の函数のなす環であり, 
+ 一変数多項式環 $K[y]$ は $y$ 直線上の函数のなす環であるとみなせる.
+ 直積環 $K[x]\times K[y]$ は $x$ 直線と $y$ 直線の非連結和の上の函数のなす
+ 環とみなせる.
+ したがって $R= \{\, (f(x),g(y))\in K[x]\times K[y] \mid f(0)=g(0) \,\}$ は
+ $x$ 直線の原点と $y$ 直線の原点を貼り合わせて作った空間上の函数のなす環と
+ みなせる. ($x$ 直線上の函数 $f(x)$ と $y$ 直線上の函数 $g(y)$ の原点に
+ おける値が一致していなければ $x$ 直線と $y$ 直線の原点を貼り合わせて作った
+ 空間上の函数とはみなせない.)
+
+ 二変数多項式環 $K[x,y]$ は $xy$ 平面上の函数のなす環とみなせる.
+ 剰余環 $K[x,y]/(xy)$ は二変数多項式環 $K[x,y]$ の中で $xy$ を $0$ と
+ みなしてできる環である. したがって $K[x,y]/(xy)$ は方程式 $xy=0$ の解空間
+ すなわち原点で交わる $x$ 軸と $y$ 軸の和集合の上の函数のなす環とみなせる.
+
+ 以上のように考えると $R$ と $K[x,y]/(xy)$ は本質的に同じ空間上の函数のなす環
+ であることがわかる. 実際にそれらの環が同型であることが証明できるという
+ ことが上の問題の内容である.
+
+ このように可換環に関する操作は幾何学的な意味を持っていることが多い.
+ 曖昧に感じられる幾何学的直観が可換環の議論によって明確になる
+ ことも少なくない. 
+ \qed
+\end{guide}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setcounter{section}{1}
+
+\section{環と加群の理論}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setcounter{subsection}{5}
+
+\subsection{中国式剰余定理 (Chinese remainder theorem)}
+
+\begin{question}
+ $R$ は(可換とは限らない)環であるとし, $I$ は $R$ の左イデアルであり, 
+ $J$ は $R$ の空でない部分集合であるとする. $IJ$ を次のように定める:
+ \begin{equation*}
+  IJ = 
+  \left\{\,\left. \sum_{i=1}^s f_ig_i 
+  \,\right|\, f_i\in I,\ g_i\in J \,\right\}.
+ \end{equation*}
+ このとき $IJ$ は $R$ の左イデアルである. \qed
+\end{question}
+
+\begin{question}[易しい]
+ 可換環 $R$ の単項イデアル $(a)$, $(b)$ に対して $(a)(b)=(ab)$ である.
+ \qed
+\end{question}
+
+\begin{question}[可換とは限らない環に関する中国式剰余定理]
+ $R$ は可換とは限らない環であるとし, 
+ $I_1,\ldots,I_n$ はその両側イデアルであるとする.
+ このときもしも $I_i+\bigcap_{j(\ne i)}I_j=R$ ($i=1,\ldots,n$) 
+ ならば次の環同型が得られる:
+ \begin{equation*}
+  R/(I_1\cap\cdots\cap I_n) \isomto R/I_1\times\cdots\times R/I_n,
+  \quad
+  a\MOD I \mapsto (a\MOD I_1,\ldots,a\MOD I_n).
+  \qed
+ \end{equation*}
+\end{question}
+
+\begin{proof}[ヒント]
+ 環の準同型 $\phi:R\to R/I_1\times\cdots\times R/I_n$ 
+ を $\phi(a)=(a\MOD I_1,\ldots,a\MOD I_n)$ ($a\in R$) と定める.
+ $\Ker\phi=I_1\cap\cdots\cap I_n$ であることは容易にわかる.
+ 仮定よりある $f_i\in I_i$ と $g_i\in \bigcap_{j(\ne i)}I_j$ 
+ で $f_i+g_i=1$ を満たすものが存在する. 
+ そのとき $a_1,\ldots,a_n\in R$ に対して %
+ $\phi(a_1g_1+\cdots+a_ng_n)=(a_1\MOD I_1,\ldots,a_n\MOD I_n)$ で
+ ある. よって $\phi$ は全射である.
+ したがって環の準同型定理より目的の環同型が得られる.
+ \qed
+\end{proof}
+
+\begin{question}
+ $R$ は(可換とは限らない)環であるとし, $J_1,\ldots,J_n$ は $R$ のイデアル
+ であり, $R=J_1\oplus\cdots\oplus J_n$ (加法群としての直和) になっている
+ とする. このとき $I_i = J_1\oplus\cdots\oplus\widehat{J_i}\oplus\cdots\oplus J_n$
+ ($\widehat{\ }$ は取り除くという意味) と置くと, 次の環同型が得られる:
+ \begin{equation*}
+  R/\bigcap_{i=1}^n I_i \isomto R/I_1\times\cdots\times R/I_n,
+  \quad
+  a\MOD I \mapsto (a\MOD I_1,\ldots,a\MOD I_n).
+  \qed
+ \end{equation*}
+\end{question}
+
+\begin{definition}[互いに素]
+ 可換環 $R$ のイデアル $I$, $J$ が $I+J=R$ を満たしているとき, 
+ $I$ と $J$ は{\bf 互いに素 (coprime)} であると言う.
+ \qed
+\end{definition}
+
+\begin{question}[易しい]
+ $\Z$ のイデアル $(a)$, $(b)$ が互いに素であるための必要十分条件
+ は $a,b$ の最大公約数が $1$ に等しいことである. 
+ したがってイデアルが互いに素であることの定義は
+ 整数が互いに素であることの定義の一般化になっている.
+ \qed
+\end{question}
+
+\begin{question}[易しい]
+ 可換環 $R$ の相異なる2つの極大イデアル $I$, $J$ は互いに素である. \qed
+\end{question}
+
+\begin{question}[中国式剰余定理, Chinese remainder theorem]
+ $R$ は可換環であるとし, 
+ $I_1,\ldots,I_n$ はその両側イデアルであるとする.
+ このときもしも $I_1,\ldots,I_n$ の任意の二つの組み合わせが
+ 互いに素であるならば次の環同型が得られる:
+ \begin{equation*}
+  R/(I_1\cap\cdots\cap I_n) \isomto R/I_1\times\cdots\times R/I_n,
+  \quad
+  a\MOD I \mapsto (a\MOD I_1,\ldots,a\MOD I_n).
+  \qed
+ \end{equation*}
+\end{question}
+
+\begin{proof}[ヒント]
+ 可換とは限らない環の中国式剰余定理より, 
+ $R$ が可換環のとき, %
+ $I_1,\ldots,I_n$ の中の任意の二つの組み合わせが互いに素であるならば %
+ 任意の $i=1,\ldots,n$ に対して $I_i$ と $\bigcap_{j(\ne i)}I_j$ が
+ 互いに素になることを示せば十分である. 
+ 実際には $I_1$ と $I_2\cap\cdots\cap I_n$ が互いに素であることだけを
+ 示せば十分である. (他の場合は番号の付け替えで証明される.)
+ そのことは以下のような方針で示される:
+ \begin{enumerate}
+  \item 一般に可換環 $R$ のイデアル $I$, $J$ が互いに素ならば $I\cap J=IJ$.
+   ($\supset$ は明らかなので $\subset$ のみを示せば良い. 
+    $I+J=R$ よりある $f\in I$, $g\in J$ で $f+g=1$ となるものが存在する.
+    このとき $a\in I\cap J$ ならば $a=af+ag$ で $af,ag\in IJ$ なので $a\in IJ$.)
+  \item $i=2,\ldots,n$ に対して $I_1$ と $I_i$ が互いに素ならば %
+   $I_1$ と $I_2\cdots I_n$ は互いに素である. 
+   (一般の $n$ で直接示せる. $i=2,\dots,n$ のとき $I_1+I_i=R$ なので
+   ある $a_i\in I_1$ と $b_i\in I_i$ で $a_i+b_i=1$ となるものが存在する. 
+   このとき $1=(a_2+b_2)\cdots(a_n+b_n)$ は $a_2\cdots a_n\in I_2\cdots I_n$ 
+   と $I_1$ の元の和の形になっている. よって $I_1+I_2\cdots I_n=R$ である.)
+  \item $I_2,\ldots,I_n$ のどの二つの組み合わせも互いに素であるならば %
+   $I_2\cap\cdots\cap I_n=I_2\cdots I_n$ となる. 
+   (上の二つの事実を使えば $n$ に関する帰納法で示せる.
+   $n=2$ の場合は明らかであり, $n=3$ の場合は実質的に上の1の結果そのものである.
+   上の2の結果より $I_2\cdots I_{n-1}$ と $I_n$ は互いに素になるので, 
+   $I_2\cap\cdots\cap I_{n-1}=I_2\cdots I_{n-1}$ ならば
+   上の1の結果より $I_2\cap\cdots\cap I_{n-1}\cap I_n 
+   = I_2\cdots I_{n-1}\cap I_n = I_2\cdots I_{n-1}I_n$ となる.)
+  \item 以上の2と3より $I_1$ と $I_2\cap\cdots\cap I_n=I_2\cdots I_n$ が
+   互いに素であることがわかる. 
+  \qed
+ \end{enumerate} 
+\end{proof}
+
+\begin{rem}
+ 可換環の中国式剰余定理について.
+ \begin{enumerate}
+  \item 上のヒントの3より, 
+   可換環 $R$ のイデアル $I_1,\ldots,I_n$ のどの
+   二つの組み合わせも互いに素ならば, %
+   $I_1\cap\cdots\cap I_n=I_1\cdots I_n$ となることもわかる.
+   したがって上の問題の環同型を次のように書くこともできる:
+   \begin{equation*}
+    R/(I_1\cap\cdots\cap I_n) 
+    = R/I_1\cdots I_n 
+    \isomto R/I_1\times\cdots\times R/I_n.
+   \end{equation*}
+   問題 \qref{q:CRT-Z,K[x]} も見よ.
+  \item 可換とは限らない一般の環でも %
+   $I_i+\bigcap_{j(\ne i)}I_j=R$ ($i=1,\ldots,n$) と
+   仮定すれば中国式剰余定理が成立する. その条件は各 $i$ ごとに %
+   $n$ 個のイデアルのすべてが登場する条件になっているので使いにくい.
+   しかし, 可換環では $I_1,\ldots,I_n$ の
+   どの二つの組み合わせも互いに素であればその条件が成立していることがわかる.
+   これが可換環での中国式剰余定理である.
+ \qed
+ \end{enumerate}
+\end{rem}
+
+\begin{question}
+\label{q:CRT-Z,K[x]}
+ 以下の環同型の存在を中国式剰余定理の応用として証明せよ:
+ \begin{enumerate}
+  \item $n$ は正の整数であり, その素因数分解を $n=p_1^{e_1}\cdots p_s^{e_s}$ 
+   と書くと
+   \begin{equation*}
+    \Z/(n)\isom \Z/(p^{e_1})\times\cdots\times\Z/(p_s^{e_s}).
+   \end{equation*}
+  \item $\alpha_1,\ldots,\alpha_s\in\C$ は互いに異なるとし, %
+   $e_1,\ldots,e_s$ は正の整数であるとし, 
+   \begin{equation*}
+    f(x)=(x-\alpha_1)^{e_1}\cdots(x-\alpha_s)^{e_s}
+   \end{equation*}
+   と置く. このとき
+   \begin{equation*}
+    \C[x]/(f(x)) \cong 
+    \C[x]/((x-\alpha_1)^{e_1})\times\cdots\times\C[x]/((x-\alpha_s)^{e_s}).
+   \qed
+   \end{equation*}
+ \end{enumerate}
+\end{question}
+
+\begin{rem}
+ 上の問題の小問1は有限生成Abel群の基本定理と関係が深く, 
+ 小問2は線形代数における Jordan 標準形の理論と関係が深い.
+ \qed
+\end{rem}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{積閉集合によって定義される分数環と素イデアルによる局所化}
+
+\begin{definition}[積閉集合]
+ 可換環 $R$ の部分集合 $S$ が
+ {\bf 積閉(部分)集合 (multiplicatively closed (sub-)set)} であるとは, 
+ $1\in S$ かつ $0\not\in S$ で $S$ が積で閉じていることである.
+ \qed
+\end{definition}
+
+\begin{question}
+ 以下の集合 $S$ が積閉集合であることを示せ:
+ \begin{enumerate}
+ \item $R$ が可換環のとき %
+  $S=\{\, a\in R \mid\text{$a$ は $R$ の零因子ではない}\,\}$.
+ \item $R$ が整域のとき $S=R\setminus\{0\}$. 
+ \item $R$ が可換環で $P$ がその素イデアルのとき $S=R\setminus P$.
+ \qed
+ \end{enumerate}
+\end{question}
+
+\begin{definition}[分数環, 全分数環環, 商体, 素イデアルにおける局所化]
+ $R$ は可換環であり, $S$ はその積閉集合であるとする.
+ 直積集合 $R\times S$ に次のように同値関係を入れる:
+ \begin{equation*}
+  (a,s)\sim (a',s')
+  \iff
+  \text{ある $t\in S$ で $t(s'a-sa')=0$ を満たすものが存在する}.
+ \end{equation*}
+ $S^{-1}R=R\times S/{\sim}$ と置き, %
+ $(a,s)$ で代表される $S^{-1}R$ の元を $\dfrac{a}{s}$ と書く.
+ $S^{-1}R$ の和と積を $a/s, a'/s'\in S^{-1}R$ に対して
+ \begin{equation*}
+  \frac{a}{s}+\frac{a'}{s'}=
+  \frac{s'a+sa'}{ss'},
+  \quad
+  \frac{a}{s}\frac{a'}{s'}=
+  \frac{aa'}{ss'}
+ \end{equation*}
+ と定めることができる. これによって $S^{-1}R$ は可換環をなす.
+ $S^{-1}R$ を %
+ $S$ によって定義された{\bf 分数環 (fractional ring)} 
+ もしくは{\bf 商環 (quotient ring)} 
+ もしくは{\bf 分数の環 (ring of fractions)} 
+ もしくは $S$ による{\bf 局所化 (localization)} と呼ぶ.
+ 環準同型 
+ \begin{equation*}
+  i_S:R\to S^{-1}R, \quad i_S(a)=\dfrac{a}{1} \quad (a\in R) 
+ \end{equation*}
+ を{\bf 自然な環準同型}と呼ぶ.
+ 特に $S$ が $R$ の非零因子全体の集合のとき $S^{-1}R$ 
+ を $R$ の{\bf 全分数環 (total fractional ring)} 
+ もしくは{\bf 全商環 (total quotient ring)} と呼ぶ.
+ $R$ が整域で $S=R\setminus\{0\}$ のとき $S^{-1}R$ は体になるの
+ で $S^{-1}R$ を $R$ の{\bf 商体 (quotient field)} と呼ぶ.
+ $R$ が可換環で $P$ がその素イデアルで $S=R\setminus P$ の
+ とき $S^{-1}R$ を $R_P$ と書き, $R$ の $P$ における
+ {\bf 局所化 (localization)} と呼ぶ.
+ \qed
+\end{definition}
+
+\begin{rem}
+  上の定義において $S$ が零因子を含まなければ同値関係 $\sim$ は次に等しい:
+ \begin{equation*}\
+  (a,s)\approx (a',s') \iff s'a=sa'.
+ \end{equation*}
+ $R$ が整域ならば $R$ の任意の積閉集合は零因子を含まないことに注意せよ.
+ \qed
+\end{rem}
+
+\begin{question}[定義の確認]
+\label{q:def-frac-ring}
+ 以下を示せ:
+ \begin{enumerate}
+  \item 上の定義において $S^{-1}R$ の和と積がうまく定義されている
+   (well-defined である).
+  \item 写像 $i_S$ は実際に環準同型になっている.
+  \item \(\Ker i_S = 
+   \{\,a\in R\mid \text{ある $s\in S$ で $sa=0$ となるものが存在する}\,\}\).
+  \item $S$ が零因子を含まなければ $i_S$ は単射なので, %
+   $a\in R$ と $a/1\in S^{-1}R$ を同一視して, $R$ を $S^{-1}R$ の
+   部分環とみなせる.
+  \qed
+ \end{enumerate}
+\end{question}
+
+\begin{question}[分数環の普遍性]
+ $R$ は可換環であり, $S$ はその積閉集合であるとする.
+ $f:R\to R'$ は $R$ から可換環 $R'$ への環準同型であり, 
+ 任意の $s\in S$ に対して $f(s)$ は $R'$ の単元であると仮定する.
+ このとき, ある環準同型 $\phi:S^{-1}R\to R'$ で $\phi\circ i_S=f$ を
+ みたすものが唯一存在する.
+ \qed
+\end{question}
+
+\begin{definition}[局所環]
+ 可換環 $R$ が唯一の極大イデアル $\frakm$ しか持たないとき $(R,\frakm)$ 
+ もしくは $R$ を{\bf 局所環 (local ring)} と呼ぶ.
+ 局所環 $(R,\frakm)$ に対して体 $R/\frakm$ を
+ 局所環 $R$ の{\bf 剰余体 (residue field)} と呼ぶ.
+ \qed
+\end{definition}
+
+\begin{question}
+ 可換環 $R$ が局所環ための必要十分条件は $R$ の非単元全体の
+ 集合 $\frakm=R\setminus U(R)$ が $R$ のイデアルをなすことである.
+ そのとき $\frakm$ は $R$ の唯一の極大イデアルになる.
+ \qed
+\end{question}
+
+\begin{question}[$R_P$ は局所環]
+ 可換環 $R$ の素イデアル $P$ における局所化 $R_P$ が局所環であり, 
+ その唯一の極大イデアルは $\frakm_P=\{\,p/s\mid p\in P,\ s\in R\setminus P\,\}$
+ であることを示せ.
+ \qed
+\end{question}
+
+\begin{question}
+ $p$ が素数ならば $\Z$ の単項イデアル $(p)$ は素イデアル
+ (実際には極大イデアル) になる.
+ このとき $\Z$ の $(p)$ における局所化 $\Z_{(p)}$ は %
+ 分母が $p$ で割り切れない有理数全体の集合に一致している:
+ \begin{equation*}
+  \Z_{(p)} = 
+  \left\{\,\left. \frac{a}{b} \,\right|\, a,b\in\Z,\ p\nmid b \,\right\}.
+ \end{equation*}
+ $\Z_{(p)}$ の唯一の極大イデアルは
+ \begin{equation*}
+  p\Z_{(p)} =
+  \left\{\,\left. \frac{a}{b} 
+  \,\right|\, a,b\in\Z,\ p\mid a,\ p\nmid b \,\right\}
+ \end{equation*}
+ であり, 剰余体は位数 $p$ の有限体 $\F_p$ に等しい.
+ \qed
+\end{question}
+
+\begin{question}
+ $\alpha\in\C$ に対して $\C[x]$ の単項イデアル $(x-\alpha)$ は素イデアル
+ (実際には極大イデアル) になる. 
+ このとき $\C[x]$ の $(x-\alpha)$ における局所化 $\C[x]_{(x-\alpha)}$ は %
+ $x=\alpha$ に極を持たない複素有理函数全体の集合に一致している:
+ \begin{equation*}
+  \C[x]_{(x-\alpha)} =
+   \left\{\,\left. \frac{f(x)}{g(x)} 
+   \,\right|\, f(x),g(x)\in\C[x],\ g(\alpha)\ne 0 \,\right\}.
+ \end{equation*}
+ $\C[x]_{(x-\alpha)}$ の唯一の極大イデアルは
+ \begin{equation*}
+  \frakm = (x-\alpha)\C[x]_{(x-\alpha)} =
+   \left\{\,\left. \frac{f(x)}{g(x)} 
+   \,\right|\, f(x),g(x)\in\C[x],\ f(\alpha)=0,\ g(\alpha)\ne 0 \,\right\}
+ \end{equation*}
+ であり, 剰余体は $\C$ に同型である:
+ \begin{equation*}
+  \C[x]_{(x-\alpha)}/\frakm \isomto \C, \quad
+  \frac{f(x)}{g(x)}\MOD\frakm \mapsto \frac{f(\alpha)}{g(\alpha)}.
+  \qed
+ \end{equation*}
+\end{question}
+
+\begin{guide}
+ すぐ上の問題はどうして $R_P$ を局所化と呼ぶかを理解するために参考になる.
+ 基本的に $R$ の元が函数とみなせるとき, 
+ 函数たちに共通する定義域を縮小する操作が局所化になっている.
+ すぐ上の問題の場合は $\C[x]$ の任意の元は $\C$ 上の函数とみなせるが, 
+ 局所化 $\C[x]_{(x-\alpha)}$ の元が定義されている領域の共通部分
+ は $\alpha$ の一点になってしまう.
+ \qed
+\end{guide}
+
+\begin{question}
+ $\alpha,\beta\in\C$ に対して %
+ $\C[x,y]$ のイデアル $(x-\alpha,y-\beta)$ は極大イデアルである.
+ $\C[x,y]$ の $(x-\alpha,y-\beta)$ による
+ 局所化は $x,y$ の複素有理函数で $(x,y)=(\alpha,\beta)$ でも
+ 値が定義されているもの全体の集合に一致している:
+ \begin{equation*}
+  \C[x,y]_{(x-\alpha,y-\beta)}
+   \left\{\,\left. \frac{f(x,y)}{g(x,y)} 
+   \,\right|\, f(x,y),g(x,y)\in\C[x,y],\ g(\alpha,\beta)\ne 0 \,\right\}.
+ \end{equation*}
+ $\C[x,y]_{(x-\alpha,y-\beta)}$ の唯一の極大イデアルは
+ \begin{equation*}
+  \frakm =
+   \left\{\,\left. \frac{f(x,y)}{g(x,y)} 
+   \,\right|\, f(x,y),g(x,y)\in\C[x,y],\ %
+   f(\alpha,\beta)=0,\ g(\alpha,\beta)\ne 0 \,\right\}
+ \end{equation*}
+ であり, 剰余体は $\C$ に同型である:
+ \begin{equation*}
+  \C[x,y]_{(x-\alpha)}/\frakm \isomto \C, \quad
+  \frac{f(x,y)}{g(x,y)}\MOD\frakm
+  \mapsto \frac{f(\alpha,\beta)}{g(\alpha,\beta)}.
+  \qed
+ \end{equation*}
+\end{question}
+
+\begin{question}
+ $\alpha\in\C$ に対して %
+ $\C[x,y]$ の単項イデアル $(x-\alpha)$ は $\C[x,y]$ の
+ 極大ではない素イデアルである.
+ $\C[x,y]$ の $(x-\alpha)$ による局所化は $x,y$ の複素有理函数体 $\C(x,y)$ の
+ 部分集合として具体的に次のように表わされる:
+ \begin{equation*}
+  \C[x,y]_{(x-\alpha)} =
+   \left\{\,\left. \frac{f(x,y)}{g(x,y)} 
+   \,\right|\, f(x,y),g(x,y)\in\C[x,y],\ g(\alpha,y)\ne 0 \,\right\}.
+ \end{equation*}
+ $\C[x,y]_{(x-\alpha)}$ の唯一の極大イデアルは
+ \begin{equation*}
+  \frakm =
+   \left\{\,\left. \frac{f(x,y)}{g(x,y)} 
+   \,\right|\, f(x,y),g(x,y)\in\C[x,y],\ %
+   f(\alpha,y)=0,\ g(\alpha,y)\ne 0 \,\right\}
+ \end{equation*}
+ であり, 剰余体は $\C(y)$ に同型である:
+ \begin{equation*}
+  \C[x,y]_{(x-\alpha)}/\frakm \isomto \C(x),
+  \quad
+  \frac{f(x,y)}{g(x,y)} \MOD \frakm \mapsto \frac{f(\alpha,y)}{g(\alpha,y)}.
+  \qed
+ \end{equation*}
+\end{question}
+
+\begin{guide}
+ 上の問題の $\C[x,y]$ の素イデアル $(x-\alpha)$ は $y$ 軸に
+ 平行な直線 $x=\alpha$ に対応している. 
+ 直線 $x=\alpha$ 上の有理函数体は $\C(y)$ に同型である.
+ この $\C(y)$ が剰余体になっている.
+
+ 実は一般の場合も極大でない素イデアルによる局所化の剰余体も
+ 同じような感じになっている.
+ この事実を正確に説明するためには
+ 代数幾何の初歩の話をしなければいけないのでここでは無理である.
+ 興味のある人は図書室などで代数幾何 (algebraic geometry) の教科書を
+ 探して読んで欲しい.
+ \qed
+\end{guide}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{thebibliography}{AB}
+
+\bibitem{suron-1}
+加藤和也, 黒川信重, 斎藤毅, 数論1---Fermatの夢, 岩波講座現代数学の基礎 18,
+岩波書店 1996
+
+\bibitem{tanisaki-1998}
+谷崎俊之, 環と体3---非可換環論, 岩波講座 現代数学の基礎 17, 岩波書店, 1998
+
+\bibitem{tanisaki-2002}
+谷崎俊之, リー代数と量子群, 共立出版株式会社, 2002
+
+\bibitem{nagao-1983}
+永尾汎, 代数学, 新数学講座4, 朝倉書店, 1983
+
+\bibitem{hotta-1987}
+堀田良之, 代数入門---群と加群, 数学シリーズ, 裳華房, 1987
+
+\bibitem{hotta-1988}
+堀田良之, 加群十話---代数学入門, すうがくぶっくす3, 朝倉書店, 1988
+
+\bibitem{kan-to-tai-1}
+堀田良之, 環と体1---可換環論, 岩波講座 現代数学の基礎 15, 岩波書店, 1997
+
+\end{thebibliography}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

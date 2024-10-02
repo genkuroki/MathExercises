@@ -1,0 +1,2159 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% 幾何学概論 I 演習
+%
+% 黒木 玄 (東北大学理学部数学教室, kuroki@math.tohoku.ac.jp)
+%
+% 曲線・曲面論
+%
+% 日本語 AMS LaTeX でコンパイルしてください.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\ifx\gtfam\undefined
+% \documentstyle[amstex,amssymb,12pt,enshu]{j-article} % NTT
+%%\documentstyle[amstex,amssymb,showkeys,12pt,enshu]{j-article}  % NTT
+%\else
+% \documentstyle[amstex,amssymb,12pt,enshu]{jarticle}  % ASCII
+%%\documentstyle[amstex,amssymb,showkeys,12pt,enshu]{jarticle}  % ASCII
+%\fi
+
+\documentclass[12pt,twoside]{jarticle}
+\usepackage{amsmath,amssymb,amscd}
+\usepackage{enshu}
+%\usepackage{mathrsfs}
+%\newcommand\scr{\mathscr}
+
+\def\qstar#1{$\!\!\!$#1$\;$}
+
+%%% misc
+\def\O{\cal{O}}
+%\def\Sch{\mathop{\cal{S}}\nolimits}  % Schwartz space
+\def\Sch{\mathop{\scr{S}}\nolimits}  % Schwartz space
+\def\Area{\mathop{\text{\rm Area}}\nolimits}
+\def\Length{\mathop{\text{\rm Length}}\nolimits}
+\def\Vol{\mathop{\text{\rm Vol}}\nolimits}
+\def\Top{\mathop{\text{\rm Top}}\nolimits}
+\def\rank{\mathop{\text{\rm rank}}\nolimits}
+\def\id{\text{\rm id}}
+\def\II{I\!I}
+
+%%%
+\def\cosec{\mathop{\mbox{\rm cosec}}\nolimits}
+\def\sec{\mathop{\mbox{\rm sec}}\nolimits}
+
+%%% E-mail address
+\def\atmark{\char'100}
+\def\emailaddress{{\tt kuroki{\atmark}math.tohoku.ac.jp}}
+
+%%% C^n function
+\def\Class#1{\text{$\text{\rm C}^{#1}$}}
+
+%%% N, Z, Q, R, C, P, F
+\def\N{{\Bbb N}} % the set of natural numbers
+\def\Z{{\Bbb Z}} % the set of rational integers
+\def\Q{{\Bbb Q}} % the set of rational numbers
+\def\R{{\Bbb R}} % the set of real numbers
+\def\C{{\Bbb C}} % the set of complex numbers
+\def\P{{\Bbb P}}
+\def\F{{\Bbb F}}
+
+%%% real part, imaginary part
+\def\Repart{\mathop{\text{\rm Re}}\nolimits} % real part
+\def\Impart{\mathop{\text{\rm Im}}\nolimits} % imaginary part
+
+%%% Log
+\def\Log{\mathop{\text{\rm Log}}\nolimits}
+
+%%% upper half plane, unit disk
+\def\UH{{\frak H}} % Upper Half plane
+\def\UD{D}         % Unit Disk
+
+%%% operators acting complex functions
+\def\del{\partial}  % del
+\def\delbar{\overline{\partial}}  % del bar
+\def\Res{\mathop{\text{\rm Res}}} % residue
+\def\ord{\mathop{\text{\rm ord}}\nolimits} % order
+\def\arg{\mathop{\text{\rm arg}}\nolimits} % arg
+
+%%% operators acting on matrices
+%\def\trace{\mathop{\text{\rm Tr}}\nolimits}          % trace
+\def\trace{\mathop{\text{\rm tr}}\nolimits}          % trace
+\def\transposed#1{\,\vphantom{#1}^t\mskip-1.5mu{#1}} % transpose
+%\def\transposed#1{{#1}^t} % transpose
+\def\det{\mathop{\text{\rm det}}\nolimits}          % determinant
+
+%%% Ker, Coker, Im, Coim
+\def\Ker{\mathop{\text{\rm Ker}}\nolimits}   % kernel
+\def\Coker{\mathop{\text{\rm Ker}}\nolimits} % cokernel
+\def\Im{\mathop{\text{\rm Im}}\nolimits}     % image
+\def\Coim{\mathop{\text{\rm Coim}}\nolimits} % coimage
+
+%%% injection, surjection, isomorphism
+\def\injto{\hookrightarrow}
+\def\onto{\twoheadrightarrow}
+\def\isoto{\overset\sim\longrightarrow}
+
+%%% derivative
+\def\od#1#2{\frac{d #1}{d #2}}
+\def\pd#1#2{\frac{\partial #1}{\partial #2}}
+\def\rd{\partial}
+
+%%% vector analysis
+\def\grad{\mathop{\text{\rm grad}}\nolimits}
+\def\rot{\mathop{\text{\rm rot}}\nolimits}
+\def\div{\mathop{\text{\rm div}}\nolimits}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\setcounter{page}{19}      % この数から始まる
+\setcounter{section}{3}    % この数の次から始まる
+\setcounter{theorem}{0}    % この数の次から始まる
+\setcounter{question}{49}  % この数の次から始まる
+\setcounter{footnote}{0}   % この数の次から始まる
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newlabel{q:alp}{{1}{2}}
+\newlabel{q:vector-prod}{{8}{3}}
+\newlabel{q:FS1}{{10}{3}}
+\newlabel{q:FS2}{{11}{3}}
+\newlabel{q:helix}{{12}{4}}
+\newlabel{q:mat-exp}{{13}{4}}
+
+\newlabel{q:Schmidt}{{19}{6}}
+\newlabel{q:Iwasawa1}{{20}{7}}
+\newlabel{q:Iwasawa2}{{21}{7}}
+\newlabel{q:Iwasawa3}{{23}{7}}
+\newlabel{q:DS1}{{32}{10}}
+\newlabel{q:DS2}{{33}{10}}
+\newlabel{q:DS3}{{34}{10}}
+\newlabel{q:DS4}{{35}{10}}
+
+\newlabel{q:Green1}{{36}{11}}
+\newlabel{q:Green2}{{37}{12}}
+\newlabel{q:Green3}{{38}{12}}
+\newlabel{q:Green4}{{39}{12}}
+\newlabel{q:area}{{44}{15}}
+\newlabel{q:length-area}{{45}{15}}
+\newlabel{q:Fourier1}{{48}{17}}
+\newlabel{q:Fourier2}{{49}{17}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title{\bf 幾何学概論 I 演習}
+
+\author{黒木 玄 \quad (東北大学理学研究科)}
+
+\date{1995年11月6日(月)}
+
+\maketitle
+
+%\makeatletter
+%\noindent
+%{\LARGE \bf \@title} \hfill \@author \quad \@date
+%\bigskip\bigskip
+%\makeatother
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 11-06.tex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\noindent 注意: たくさん問題を出すが全てを解く必要はもちろんない. ただ
+し, 問題を解くときに図を描くことが可能ならば必ずそうすること!
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Section. Fourier 級数 (つづき)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Fourier 級数 (つづき)}
+
+Fourier 級数の応用に触れずにすますと面白さが半減すると思われるので, 以
+下の問題を出しておく.
+
+歴史的には Fourier 級数の理論は弦の振動や熱の拡散の現象を記述する偏微
+分方程式の解法において重要であった. Fourier 自身は彼の著書 %
+{\it Th\'eorie de la Chaleur} (『熱の理論』) の中で多くの三角級数を扱っ
+た(\cite{WW} p.160). Fourier 級数という名前の由来はそこにあるのであろ
+う.
+
+曲線の弧長パラメーターを $x$ と書き, 時刻を $t$ と書くとき, その曲線上
+の各時刻における温度の分布 $u = u(t,x)$ は, %
+単位系を適当に調節すれば次の{\bf 熱方程式}を満たす:
+\[
+  \pd{}{t} u = \left( \pd{}{x} \right)^2 u.
+\]%
+ただし, 何らかの境界条件も合わせて考える必要がある. 以下においては, 円
+周 $S^1$ 上の熱方程式を扱う. 簡単のため $S^1$ 上の函数と直線 $\R$ 上の
+周期 $2\pi$ を持つ周期函数を同一視することにする.
+
+\begin{question}[円周上の Laplacian のスペクトル問題]\label{q:heat1}
+  $R$ は正の実数であるとする. %
+  $\R$ 上の複素数値 $C^2$ 函数 $\phi = \phi(x)$ と複素数 $E$ の組 %
+  $(\phi, E)$ が
+  \[
+    - \left( \od{}{x} \right)^2 \phi = E \phi,
+    \qquad
+    \phi(x + 2 \pi R) = \phi(x)
+  \]%
+  をみたすための必要十分条件は, $(\phi, \lambda)$ が次のような形になる
+  ことである:
+  \[
+    E = k^2/R^2
+    \quad
+    (k \in \Z),
+    \qquad
+    \phi(x)
+    =
+    c_k    e^{ikx/R} + c_{-k} e^{-ikx/R}
+    \quad
+    (c_k, c_{-k} \in \C).
+    \qed
+  \]
+\end{question}
+
+\noindent ヒント: まず, $\phi$ が周期函数とは限らないとし, 
+固定された任意の $E\in\C$ に対して, %
+微分方程式 $- \phi'' = E \phi$ を解け. 
+
+\noindent 参考: 上の問題における $E$ は物理的には半径 $R$ の円周上に束
+縛された粒子が持ちうるエネルギーを表わしている. (もちろん, 単位系は適
+当に調節しなければいけない.) 上の結果より, $M$ 以下のエネルギー固有値
+の重複度も込めた個数が大体 $R\sqrt{M}$ に比例することがわかる. この事
+実はより一般の場合に拡張されて, $d$ 次元の場合は, $M$ 以下のエネルギー
+固有値の個数が大体 $\text{(体積)} \times M^{d/2}$ に比例することが知ら
+れている(Weylの定理). (比例定数は $d$ のみによる.) 半径 $R$ の円周の場
+合は $\text{(体積)} = 2\pi R$, $d=1$ と考える. この結果は Plank による
+量子論の発見のもとになった空洞輻射の理論において基本的である
+(\cite{Tomonaga}の第1章).
+
+\begin{question}[円周上の熱方程式の解法]\label{q:heat2}
+  収束や極限の交換などについて{\bf おおらかな}仮定のもとで以下を示せ. 
+  函数 $u(t,x)$ ($t\ge 0$, $x \in\R$)は次のように表わされていると仮定
+  する:
+  \[
+    u(t,x) = \sum_{k\in\Z} c_k(t) e^{ikx}.
+  \]
+  このとき, 次が成立する:
+  \[
+    u(t,x+2\pi) = u(t,x),
+    \qquad
+    c_k(t) = \frac{1}{2\pi} \int_0^{2\pi} e^{-ikx} u(t,x) \,dx.
+  \]%
+  さらに, $u = u(t,x)$ が熱方程式 $u_t = u_{xx}$ を満たしていると仮定
+  する. このとき, $u(t,x)$ は次のように表わされる:
+  \[
+    u(t,x) = \sum_{k\in\Z} c_k(0) \exp(- k^2 t + ikx).
+  \]
+  特に, $t\to\infty$ のとき, $u(t,x)$ は定数函数に近付く. \qed
+\end{question}
+
+\begin{question}[円周上の Laplacian の離散類似]\label{q:disc-heat1}
+  $N$ は任意の自然数であるとする. %
+  このとき, $\Z$ 上の周期 $N$ を持つ複素数値函数全体の集合を $V$ と表
+  わす. $V$ は $N$ 次元の複素ベクトル空間をなす. $V$ に Hermite 内積を
+  次の式によって定めることができる:
+  \[
+    (f|g)
+    := \frac{1}{N} \sum_{n=0}^{N-1} \overline{f(n)}\, g(n)
+    \qquad
+    (f, g \in V).
+  \]
+  $k \in \Z$ に対して $\phi_k\in V$ を次の式によって定める:
+  \[
+    \phi_k(n) := \exp\left( \frac{2\pi i k}{N} n \right).
+  \]%
+  このとき, $\phi_0, \phi_1, \dots, \phi_{N-1}$ は $V$ の正規直交基底
+  をなす.  $V$ から $V$ への線型写像 $L$ を
+  \[
+    (Lf)(n) := f(n+1) - 2 f(n) + f(n-1)
+    \qquad
+    (f \in V, n \in \Z)
+  \]
+  と定める. このとき, 次が成立する:
+  \[
+    - L \phi_k = 4 \left( \sin \frac{\pi k}{N} \right)^2 \phi_k
+    \qquad
+    (k \in \Z).
+  \qed
+  \]
+\end{question}
+
+\begin{question}[空間方向を離散化した熱方程式]\label{q:disc-heat2}
+  $N$ は任意の自然数であるとし, %
+  $u(t,n)$ は $\R \times \Z$ 上の複素数値函数($t$ に関しては微分可能で
+  あるとする)であり,
+  \[%
+    \pd{}{t} u(t,n) = u(t,n+1) - 2 u(t,n) + u(t,n-1),
+    \quad
+    u(t,n+N) = u(t,n)
+    \qquad
+    (t \in \R, n \in \Z)
+  \]%
+  を満たしていると仮定する. このとき, $u(t,n)$ は次のような形で書ける:
+  \[
+    u(t,n)
+    = 
+    \sum_{k=0}^{N-1}
+    c_k
+    \exp\left(
+      - 4\left( \sin\frac{\pi k}{N} \right)^2 t + \frac{2\pi ik}{N} n
+    \right).
+  \]
+  ここで, $c_k$ は次によって定まる複素数である:
+  \[
+    c_k
+    =
+    \frac{1}{N}
+    \sum_{n=0}^{N-1}
+    \exp\left( - \frac{2\pi ik}{N} n \right) u(0,n).
+  \qed
+  \]
+\end{question}
+
+\begin{question}\qstar{*}
+  問題 \qref{q:heat1}{}, \qref{q:heat2}{} と%
+  問題 \qref{q:disc-heat1}{}, \qref{q:disc-heat2}{} の類似点について述
+  べよ. 離散から連続への極限移行によって, %
+  問題 \qref{q:disc-heat1}{}, \qref{q:disc-heat2}{} の結果から, %
+  問題 \qref{q:heat1}{}, \qref{q:heat2}{} の結果を形式的に導けることを
+  説明せよ. (数学的に厳密な議論をする必要はない.) 
+  \qed
+\end{question}
+
+\noindent ヒント: 行列の対角化(もしくは Jordan 標準形の計算)は定数係数
+の線型常微分方程式を解くために役に立つのであった.  %
+Taylor の定理を使うと, $C^2$ 函数 $f(x)$ に対して, %
+\[
+  f(x+h) - 2 f(x) + f(x-h) = f''(x) h^2 + o(h^2)
+\]%
+が成立することがわかる. 離散から連続への極限移行はこの公式を使えばよい.
+
+Fourier 級数の別の応用についても触れておこう.
+
+\begin{question}[Weylの原理]\label{q:ergodicity1}
+  $\R$ 上の周期 $2\pi$ をもつ複素数値連続函数全体の空間を $C^0(S^1)$ %
+  と表わすことにする($S^1$ と $\R/2\pi\Z$ を同一視). %
+  任意の $f\in C^0(S^1)$ に対して, 
+  \[
+    ||f||_{C^0(S^1)} := \sup_{0 \le x \le 2\pi} |f(x)|
+  \]%
+  と置く. これは, sup ノルムと呼ばれている. %
+  このとき, 任意の $f\in C^0(S^1)$ と任意の $\epsilon > 0$ に対して, 
+  ある $K > 0$ と $c_k \in \C$ ($k\in\Z$, $|k| \le K$) が存在して,
+  \[
+    \left|\left|
+      f - \sum_{k\in\Z, |k|\le K} c_k e^{ikx}
+    \right|\right|_{C^0(S^1)}
+    \le 
+    \epsilon
+  \]%
+  が成立する. このことを認めた上で, 任意の無理数 $\alpha$ に対して,
+  \[
+    \lim_{N \to \infty} \frac{1}{N} \sum_{n=0}^{N-1} f(2\pi n \alpha)
+    =
+    \frac{1}{2\pi} \int_0^{2\pi} f(x) \,dx
+    \qquad
+    (f \in C^0(S^1))
+  \]
+  が成立することを示せ. \qed
+\end{question}
+
+\noindent ヒント: まず, $f(x) = e^{ikx}$ ($k\in\Z$) の場合を考えよ. 一
+般の $f$ に関する結果は $f$ を $e^{ikx}$ の有限一次結合によって一様近
+似することによって示される.
+
+\noindent 解説: 無理数 $\alpha$ に対して, %
+集合 $A = \{\, e^{2\pi i n \alpha} \mid n = 0,1,2,\ldots \,\}$ %
+は $S^1 = \{\, z\in\C \mid |z|=1 \,\}$ の中で稠密になる. (初等的な証明
+を考えてみよ. まず, $1$ のいくらでも近くに $1$ と異なる $A$ の元が存在
+することを示せ.) 上の問題の結果は, %
+さらに $X$ が $S^1$ の中で{\bf 一様に}分布していることを主張している. 
+(それはなぜか? その意味をよく考えてみよ.)
+
+\noindent 参考: 一般に空間上の任意の連続函数に対して %
+$(\text{長時間平均}) = (\text{空間平均})$ の形の結果が成立するとき, %
+{\bf エルゴード性} (ergodicity) が成立すると言う. エルゴード性が成立し
+ているとき, 長時間平均の計算(これを直接行なうのは一般に極めて難しい)は
+静的な空間平均の計算に帰着される. これがエルゴード性の御利益であり, 統
+計力学の基礎になっている. 
+時刻が離散的に, $n = 0,1,2,\ldots$ と進むとき, %
+$S^1$ 上の点が $1, e^{2\pi i \alpha}, e^{4\pi i \alpha}, \ldots$ と移
+動するものと考える. このとき, 上の問題の結果は, $\alpha$ が無理数のと
+きにエルゴード性が成立することを意味していると考えることができる. %
+もちろん, $\alpha$ が有理数のとき, $A$ は有限集合になってしまうのでエ
+ルゴード性は成立しない.
+
+\begin{question}\qstar{*}\label{q:ergodicity2}
+  $\R^2$ 上の複素数値連続函数 $f$ で二重周期性 %
+  $f(x+m,y+n)=f(x,y)$ ($m,n\in\Z$) をみたすものの全体を $C^0(T^2)$ と
+  表わす. (2次元トーラス $T^2$ と $\R^2/\Z^2$ を同一視した.) %
+  $\alpha\in\R$ と $t_0\in\R$ を任意に固定する. %
+  このとき, 任意の $f \in C^0(T^2)$ に対して 
+  \[
+    \lim_{T\to\infty}
+    \left(
+      \frac{1}{T}
+      \int_{t_0}^{t_0+T} f(t, \alpha t) \,dt
+    \right)
+    =
+    \int_0^1 \int_0^1 f(x,y) \,dx\,dy.
+  \]
+  が成立するための必要十分条件は, $\alpha$ が無理数であることである.
+  \qed
+\end{question}
+
+\noindent ヒント: 問題 \qref{q:ergodicity1}{} と同様に, この問題におけ
+る $f$ が $e^{2\pi i(kx + ly)}$ ($k,l\in\Z$) の有限一次結合で一様に近
+似できることを用いて良い.
+
+\noindent 解説: 平面上の曲線 $(t, \alpha t)$ ($t > t_0$) の像はトーラ
+スに巻き付く曲線になる.  $\alpha$ が無理数のとき, その軌跡はトーラス上
+で稠密になり, エルゴード性が成立する. しかし, $\alpha$ が有理数のとき
+その軌跡は周期的になりエルゴード性は成立しない. これが, 上の問題の結果
+の意味するところである.
+
+\begin{question}
+  問題 \qref{q:ergodicity1}{} と類似の結果を離散の場合に定式化し, それ
+  を証明せよ. \qed
+\end{question}
+
+\noindent ヒント: 例えば, 次のような定式化が考えられる. %
+$N$ と $a$ は自然数であるとし, $\Z$ 上の周期 $N$ を持つ複素数値函数全
+体の空間を $V_N$ と書くことにする. $N$ と $a$ が互いに素であることは, 
+任意の $f \in V_N$ に対して
+\[
+  \lim_{L \to \infty} \frac{1}{L} \sum_{l=0}^{L-1} f(la)
+  =
+  \frac{1}{N} \sum_{n=0}^{N-1} f(n)
+\]%
+が成立するための必要十分条件である. このことを Euclid の互除法を用いて
+示せ. もしくは, 問題 \qref{q:ergodicity1}{} と同じ手法を用いて示せ. 
+その場合は, 問題 \qref{q:disc-heat1}{} の前半も参照せよ.
+
+\noindent 参考: 数学の面白いところの一つは, ある場所で成立することと似
+たようなことが別の場所でも成立することが頻繁に見られることである. 例え
+ば, 低次元空間で成立することが適切な定式化のもとで高次元空間でも成立し
+たり, 連続と離散の両方で似たような命題が成立したりすることなどは, 数学
+科の学生にとってはすでに常識の範囲であろう. この演習ではそのような場面
+のそばを通るときには, 面白そうなことにできるだけ触れるように心掛けてい
+る.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Section. 閉曲面の位相
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{閉曲面の位相}
+
+これ以後は, 基本的に「曲面の世界」に関係した数学の演習を行なうことにな
+ります. 曲面に関係した色々な数学を演習を通して紹介して行けたら嬉しいと
+考えています. 色々工夫すれば, ほとんどあらゆる数学のプロトタイプを曲面
+の世界を通して紹介できそうな感じがしています. しかし, 私の非力のために
+うまく紹介できないことも多いと思いますが, その場合はお許し下さい.
+
+\noindent 参考: 「曲面」とみなせるものには色々なものがある:
+\begin{itemize}
+\item topological manifold
+  \quad
+  (位相構造のみ),
+\item differentiable manifold
+  \quad
+  (その上の微分可能函数が定義できる),
+\item Riemannian manifold
+  \quad
+  (その上の曲線の長さが測れる),
+\item symplectic manifold
+  \quad
+  (その上でHamilton形式の解析力学を展開できる),
+\item complex manifold
+  \quad
+  (その上の正則函数が定義できる),
+\item K\"ahlarian manifold
+  \quad
+  (Riemannian, symplectic, complex の統合),
+\item algebraic variety
+  \quad
+  (代数方程式論の幾何学化),
+\item scheme
+  \quad
+  (可換環論の幾何学化),
+\item arithmetic scheme
+  \quad
+  (数論と幾何学の統合).
+\end{itemize}
+ただし, 曲面とみなせるためには, $2$ 次元の場合を考えなければいけない. 
+ただし, その次元は, 位相的な次元を数える場合と, 定義体上の次元を数える
+場合がある. 例えば, $\C$ 上の曲線は $\C$ 上 $1$ 次元の対象だが, $\C$ 
+自身が位相的には $2$ 次元なので, $\C$ 上の曲線は位相的には $2$ 次元の
+対象になる.
+
+さて, ここからが本論である. まず, 一般の位相多様体を定義しよう.
+
+\begin{Definition}[位相多様体]
+  以下の2つの条件が成立しているとき, $M$ は位相多様体(topologocal
+  manifold)であると言う:
+  \begin{enumerate}
+  \item $M$ は位相空間であり, $M$ の各点が $\R^n$ の開集合と同相な開近
+    傍を持つ.
+  \item $M$ は Hausdorff 空間である.
+  \end{enumerate}
+  $\R^n$ の $n$ が一つの値のみを取るとき, $M$ は $n$ 次元位相多様体で
+  あると言う. \qed
+\end{Definition}
+
+\noindent 例: $\R^n$ の開集合は位相多様体の最も簡単な例である.
+
+「多様体」という新しい言葉に恐れをなして思考を停止させてはならない. こ
+の程度でびびりまくってはいけない.  位相多様体とは要するに, 部分部分
+を見れば普通の $\R^n$ の開集合と同じような様子をしているような位相空間
+のことである.
+
+\begin{question}
+  任意の位相多様体は局所コンパクト Hausdorff 空間である. \qed
+\end{question}
+
+\noindent 用語の解説: $X$ は位相空間であるとし, $x \in X$ とする. %
+$X$ の部分集合 $N$ が点 $x$ の近傍であるとは, $x \in N$ でかつ $N$ に
+含まれ $x$ を含むような $X$ の開集合が存在することである. 点 $x$ の近
+傍からなる $X$ の部分集合の族 $\cal{N}$ が $x$ の基本近傍系であるとは,
+$x$ を含む任意の開集合 $U$ に対して, $U$ に含まれるような %
+$N \in \cal{N}$ が存在することである. $X$ が局所コンパクトであるとは,
+$X$ の各点がコンパクト集合のみから構成される基本近傍系を持つことである.
+(一般に, $X$ が局所○○であるとは, $X$ の各点が○○集合のみから構成さ
+れる基本近傍系を持つことである.)
+
+\begin{question}
+  球面 $S^2 = \{\, (x,y,z) \in \R^3 \mid x^2 + y^2 + z^2 = 1 \,\}$ は
+  コンパクト位相多様体である. \qed
+\end{question}
+
+\begin{question}
+  連結位相多様体は弧状連結であることを示せ. \qed
+\end{question}
+
+\noindent ヒント: 位相多様体 $M$ と $x_0 \in M$ に対して, %
+\[
+  A
+  =
+  \{\,
+    q(1) 
+  \mid
+    \text{$q$ は $[0,1]$ から $M$ への連続写像であり $q(0)=x_0$}
+  \,\}
+\] %
+と置く. このとき, $A \ne \emptyset$ かつ $A$ は $M$ の開集合かつ閉集
+合であることを示せ.
+
+\begin{Definition}
+  $H^n = \{\, (x_1,\dots,x_n) \in \R^n \mid x_1 \ge 0 \,\}$ と置く. 以
+  下の2つの条件が成立しているとき, $M$ は境界付き位相多様体
+  (topologocal manifold with boundary)であると言う:
+  \begin{enumerate}
+  \item $M$ は位相空間であり, $M$ の各点が $H^n$ の開集合と同相な開近
+    傍を持つ.
+  \item $M$ は Hausdorff 空間である.
+    \qed
+  \end{enumerate}
+\end{Definition}
+
+\begin{question}
+  $M = \{ \, (x,y,z) \in \R^3 \mid x^2 + y^2 = 1,\quad z \ge 0 \,\}$ %
+  と置くと, $M$ は位相多様体ではないが, 境界付き位相多様体である. \qed
+\end{question}
+
+同値関係, 誘導位相, 商空間などについて復習しよう.
+
+任意の $X$ に対して, $X \times X$ の部分集合 $R$ のことを $X$ における
+関係(relation)と呼ぶのであった. $X$ における関係 $R$ と $x,y\in X$ に
+対して, $(x,y) \in R$ が成立しているとき, $x\,R\,y$ と書くことにする.
+任意の $x,y,z\in X$ に対して,
+\begin{description}
+\item[(推移律)] $x\,R\,y$ かつ $y\,R\,z$ ならば $x\,R\,z$,
+\item[(対称律)] $x\,R\,y$ ならば $y\,R\,x$,
+\item[(反射律)] $x\,R\,x$
+\end{description}
+が成立しているとき, $R$ は $X$ 上の{\bf 同値関係}(equivalence
+relation)であると言う. 同値関係は $\sim$, $\approx$ などの記号で表現す
+ることが多い. 
+
+一般に集合 $X$ が %
+$\{X_\lambda\}_{\lambda\in\Lambda}$ の非連結和(disjoint union)であると
+は, 任意の $\lambda,\lambda'\in\Lambda$ に対して%
+$\lambda \ne \lambda'$ ならば %
+$X_\lambda \cap X_{\lambda'} = \emptyset$ であり, しかも  %
+$X = \bigcup\limits_{\lambda\in\Lambda} X_\lambda$ が成立することであ
+る.
+
+$X$ に同値関係 $\sim$ が与えられているとき, %
+$x\in X$ の同値類 $[x]_{\sim}$ を次のように定義する:
+\[
+  [x]_{\sim} = \{\, y \in X \mid y \sim x \,\}.
+\] %
+$X$ は同値類の非連結和に分割される. %
+$X$ の $\sim$ による商集合 $X/{\sim}$ が次のように定義される:
+\[
+  X/{\sim} = \{\, [x]_{\sim} \mid x \in X \,\}.
+\]
+$X$ の要素に対してその同値類を対応させる写像を $X$ から $X/{\sim}$ への
+自然な写像(もしくは自然な射影)と呼ぶことにする. 
+
+\begin{question}\label{q:gen-equi}
+  $R$ は $X$ における任意の関係であるとする. $X$ における関係 $S$ を
+  \[
+    x\,S\,y 
+    \qquad\Longleftrightarrow\qquad
+    x\,R\,y \quad\text{または}\quad y\,R\,x
+  \] %
+  によって定める. この $S$ を $R$ の対称化と呼ぶ. $X$ における関係 %
+  $\sim$ を, 任意の $x,y\in X$ に対して, $X$ の要素の有限個の列 %
+  $x_0,x_1,\dots,x_n$ が存在して,
+  \[
+    x = x_0, \quad
+    x_0\,S\,x_1, \quad
+    \ldots, \quad
+    x_{n-1}\,S\,x_n, \quad
+    x_n = y
+  \] %
+  が成立するとき $x \sim y$ であると定める. この $\sim$ は $X$ におけ
+  る同値関係である. しかも, $\sim$ は $R$ を含む同値関係の中で最小のも
+  のである. \qed
+\end{question}
+
+\begin{question}[誘導位相1]\label{q:ind-top1}
+  $\{X_\lambda\}_{\lambda\in\Lambda}$ は位相空間の族であるとし,
+  $X_\lambda$ の開集合全体の集合を $\Top(X_\lambda)$ と書くことにする. 
+  $Y$ は集合であるとし, %
+  写像の族 $\{f_\lambda \colon X_\lambda \to Y\}_{\lambda\in\Lambda}$ %
+  を任意に与えておく. このとき, $\Top(Y)$ を
+  \[
+    \Top(Y)
+    =
+    \{\,
+      V \subseteq Y
+    \mid
+      f_\lambda^{-1}(V) \in \Top(X_\lambda)
+      \quad\text{for every $\lambda\in\Lambda$}
+    \,\}
+  \] %
+  と定めると, $\Top(Y)$ は開集合系の公理をみたし, $Y$ に位相を定める. 
+  さらに, 各 $f_\lambda$ はこの位相のもとで連続であり, %
+  $\Top(Y)$ は全ての $f_\lambda$ を連続にするような $Y$ の位相の中で最
+  強のものである. $\Top(Y)$ を写像の族 $\{f_\lambda\}$ から誘導された
+  位相と呼ぶ. \qed
+\end{question}
+
+\noindent ヒント: 開集合が多ければ多いほど, その位相は強いと言う.
+
+$X$ が位相空間であり, $\sim$ はその上の同値関係であるとする. %
+$X$ から商集合 $X/{\sim}$ への自然な写像を $\pi$ と書く. %
+$\pi$ は $x\in X$ に対して $x$ を含む同値類を対応させる写像である. %
+$\pi$ が誘導する位相を付加することによって, $X/{\sim}$ を位相空間とみ
+なす. $X/{\sim}$ を $X$ の $\sim$ による{\bf 商位相空間}もしくはより簡
+単に{\bf 商空間}と呼ぶことにする.
+
+定義の字面だけを追うと商空間は集合の集合である. しかし, 集合の集合とい
+う表向きの定義にこだわり過ぎて, 商空間の要素を点とイメージできないので
+は困る. 
+
+\begin{question}
+  $\R$ 上の同値関係 $\sim$ を次のように定める. $x, y \in \R$ に対して,
+  \[
+    x \sim y
+    \qquad\Longleftrightarrow\qquad
+    x - y \in \Z.
+  \]%
+  $\R$ の $\sim$ による商位相空間を $\R/\Z$ と表わす. %
+  $\R/\Z$ は円周 $S^1 = \{ (x,y) \in \R^2 \mid x^2 + y^2 = 1 \,\}$ に
+  同相なコンパクト位相多様体になる. \qed
+\end{question}
+
+\begin{question}[誘導位相2]
+  $\{Y_\lambda\}_{\lambda\in\Lambda}$ は位相空間の族であるとし,
+  $Y_\lambda$ の開集合全体の集合を $\Top(Y_\lambda)$ と書くことにする. 
+  $X$ は集合であるとし, %
+  写像の族 $\{f_\lambda \colon X \to Y_\lambda\}_{\lambda\in\Lambda}$ %
+  を任意に与えておく. $\Top(X)$ は
+  \[
+    \bigcup_{\lambda\in\Lambda}
+    \{\,
+      f_\lambda^{-1}(V_\lambda)
+    \mid
+      V_\lambda \in \Top(Y_\lambda)
+    \,\}
+  \] %
+  を含む $X$ における最小の位相であるとする. $\Top(X)$ の任意の元は 
+  $f_\lambda^{-1}(V_\lambda)$ ($V_\lambda \in \Top(Y_\lambda)$) のの有
+  限個の共通部分によって表現される部分集合の和集合(有限和とは限らない)
+  の形で書ける. この位相のもとで各 $f_\lambda$ は連続であり, %
+  $\Top(X)$ は全ての $f_\lambda$ が連続になるような $X$ における位相の
+  中で最弱なものである. $\Top(X)$ を写像の族 $\{f_\lambda\}$ から誘導
+  された位相と呼ぶ. \qed
+\end{question}
+
+\noindent 参考: この問題と \qref{q:ind-top1}{} では写像の向きが逆になっ
+ていることに注意せよ. 写像の向きを逆にしても似たような議論が展開できる
+ことはよくある. これは, いわゆる{\bf 双対性}の一種である. この類の双対
+性は圏論(category theory)の言葉で整理される. 触れておくべき大事なこと
+がもう一つある. 誘導位相は与えられた写像の族が連続になるように無駄なく
+作られた位相である. 位相がすでに与えられているときにはそれを利用して連
+続写像が定義されたが, 誘導位相の考え方はその逆に写像(の族)を利用して位
+相を定義したのである.
+
+$\{X_\lambda\}_{\lambda\in\Lambda}$ は位相空間の族であるとする. その直
+積集合 $X = \prod\limits_{\lambda\in\Lambda}X_\lambda$ から %
+$X_\lambda$ への自然な射影を $\pi_\lambda$ と書くことにする. %
+$\{\pi_\lambda\}_{\lambda\in\Lambda}$ が誘導する位相を付加することによっ
+て, $X$ を位相空間とみなせる. %
+この $X$ を $\{X_\lambda\}_{\lambda\in\Lambda}$ の直積位相空間(もしく
+は直積空間)と呼ぶ. 
+
+\begin{question}
+  $M$, $N$ が共にコンパクト位相多様体であるとき, %
+  直積位相空間 $M \times N$ もコンパクト位相多様体になる. \qed
+\end{question}
+
+\begin{question}
+  $\R^2$ 上の同値関係 $\sim$ を次のように定める: $u, v \in \R^2$ に対
+  して,
+  \[
+    u \sim v
+    \qquad\Longleftrightarrow\qquad
+    u - v \in \Z^2.
+  \] %
+  $\R^2$ の $\sim$ による商位相空間を $\R^2/\Z^2$ と表わす. %
+  このとき, $\R^2/\Z^2$ は直積位相空間 $S^1 \times S^1$ に同相な 
+  コンパクト位相多様体である. \qed
+\end{question}
+
+$X$ は位相空間であるとし, $X$ における関係 $R$ を考える. %
+このとき, 問題 \qref{q:gen-equi}{} の結果によって, %
+任意の $x,y\in X$ に対して, 条件
+$$
+  x \sim y
+  \qquad\text{if}\quad
+  x\,R\,y
+  \leqno{(\ast)}
+$$
+を満たす最小の同値関係 $\sim$ が存在する. %
+$X$ の $\sim$ による商空間 $X/{\sim}$ を貼り合わせの条件 $(\ast)$ によっ
+て得られた商空間と呼ぶことにする.
+
+\begin{question}
+  $\R^2$ の部分空間 $X = \R \times \{1,2\}$ を考える. %
+  貼り合わせの条件
+  \[
+    (x,1) \sim (x,2)
+    \qquad\text{if}\quad x \in \R \setminus \{0\}.
+  \]%
+  によって得られる商空間 $X/{\sim}$ を考える. このとき, 以下が成立
+  している.
+  \begin{enumerate}
+  \item $X/{\sim}$ の各点は $\R$ の開集合と同相な開近傍を持つ.
+  \item $X$ は位相多様体であるが, $X/{\sim}$ は Hausdorff 空間ではない
+    ので位相多様体ではない.
+    \qed
+  \end{enumerate}
+\end{question}
+
+\noindent ヒント: $X$ は交わらない2本の直線である. $X/{\sim}$ はその2
+本の直線を $x = 0$ を除いて全て同一視してできる空間である. %
+$(0,1), (0,2) \in X$ の $X/{\sim}$ における像は異なる 2 点になる. しか
+し, それらの近傍は必ず交わる. 
+
+\begin{question}[実射影平面]\label{q:proj-plane}
+  $\R^3 \setminus \{(0,0,0)\}$ における同値関係 $\sim$ を次のように定
+  める: $u,v \in \R^3 \setminus \{(0,0,0)\}$ に対して,
+  \[
+    u \sim v
+    \qquad\Longleftrightarrow\qquad
+    u \in \R^{\times} v.
+  \]%
+  商空間 $(\R^3 \setminus \{(0,0,0)\})/{\sim}$ は実射影平面と呼ばれている. %
+  実射影平面は $\R P^2$ (もしくは単に $P^2$) または $\P^2(\R)$ のよう
+  に表わされる.  $\sim$ を球面 $S^2$ の上に制限することによって得られ
+  る $S^2$ 上の同値関係を $\approx$ と表わす. このとき, 以下が成立して
+  いる: 
+  \begin{enumerate}
+  \item $\R^3$ の中の原点を通る直線全体の集合(直線を要素として持つ集合
+    であると考える)から実射影平面への自然な全単射が存在する.
+  \item $S^2$ から $P^2$ への写像 $p$ を $p(x,y,z)=(x:y:z)$ と定めると, %
+    $p$ は $S^2/{\approx}$ から $P^2$ への同相写像を誘導する.
+  \item 実射影平面はコンパクト位相多様体である.
+    \qed
+  \end{enumerate}
+\end{question}
+
+\begin{question}\label{q:P2cell}
+  実射影平面を $P^2$ と書く. %
+  $(x,y,z)\in\R^2\setminus\{(0,0)\}$ で代表される $P^2$ 上の点
+  を $(x:y:z)$ と表わす. $P^2$ の部分集合 $X_i$ ($i=0,1,2$) を次のよう
+  に定義する:
+  \[
+    X_0 = \{\, (1:0:0) \,\},
+    \qquad
+    X_1 = \{\, (x:1:0) \mid x \in \R\,\},
+    \qquad
+    X_2 = \{\, (x:y:1) \mid x, y \in \R \,\}.
+  \]
+  このとき, 各 $X_i$ は $\R^i$ に同相であり, %
+  $P^2$ は $X_0$, $X_1$, $X_2$ の非連結和になる. \qed
+\end{question}
+
+\begin{question}[有限体上の射影平面]
+  素数 $p$ に対して $\F_p = \Z/p\Z$ と置くと $\F_p$ は自然に体をなす.
+  $\F_p^3 \setminus \{(0,0,0)\}$ における同値関係 $\sim$ を次のように
+  定める: $u,v \in \F_p^3 \setminus \{(0,0,0)\}$ に対して,
+  \[
+    u \sim v
+    \qquad\Longleftrightarrow\qquad
+    u \in \F_p^{\times} v.
+  \]%
+  商集合 $(\F_p^3 \setminus \{(0,0,0)\})/{\sim}$ を $\P^2(\F_p)$ と表わ
+  す. このとき, 集合 $\P^2(\F_p)$ の元の個数は $1 + p + p^2$ に等しい. 
+  \qed
+\end{question}
+
+\noindent ヒント: 問題 \qref{q:P2cell}{} と同様の結果が $\R$ の代わり
+に $\F_p$ を考えても成立している. (実は任意の体を考えても成立している.)
+
+\noindent 参考: この問題のような有限的な世界では, 位相幾何学的な直観が
+通用しないように思われる人もいるかもしれない. しかし, 今世紀の代数幾何
+学の発展のおかげで, その先入観は誤りであることがわかっている. キーワー
+ド: Weil 予想, Grothendieck 位相, 特に \'etale topology, $\ldots$. %
+Deligne による Weil 予想の最終解決に関する面白い記事が \cite{Kuga}{} 
+の中に収録されているので参照されたい.
+
+\begin{question}[一点コンパクト化]
+  $X$ は任意の位相空間であるとし, その開集合全体の集合を $\Top(X)$ と
+  表わす. $X$ のコンパクト閉部分集合全体の集合を ${\cal K}$ と表わす. 
+  $X$ に含まれない点 $x_0$ を用意し, $X^! = X \cup \{x_0\}$ と置き, 
+  $\Top(X^!)$ を次のように定める:
+  \[
+    \Top(X^!)
+    =
+    \Top(X)
+    \cup
+    \{\, X^! \setminus K \mid K \in {\cal K} \,\}.
+  \] %
+  このとき, $\Top(X^!)$ は開集合系の公理を満たし, $X^!$ に位相を定める. 
+  その位相に関して $X^!$ はコンパクトである. \qed
+\end{question}
+
+\noindent 解説: この問題における $X^!$ を $X$ の{\bf 一点コンパクト化}
+(one-point compactification)と呼ぶ.  
+
+\begin{question}
+  円周 $S^1 = \{\, (x,y) \mid x^2 + y^2 = 1 \,\}$ を考える. %
+  $S^1$ 上の点 $(0,1)$ と $x$ 軸上の点 $(t,0)$ を
+  結ぶ直線と $S^1$ の交わる点を $(x(t), y(t))$ と表わす. %
+  $t\in\R$ に対して $(x(t), y(t))$ を対応させる写像を $f$ と書く. 
+  このとき, 以下が成立することを示せ:
+  \begin{enumerate}
+  \item $f$ は $\R$ から $S^1 \setminus \{(0,1)\}$ の上への同相写像で
+    ある.
+  \item $S^1$ は $\R$ の一点コンパクト化に同相である.
+  \item 
+    \(
+      \{\,(x,y)\in\Q^2 \mid x^2 + y^2 = 1\,\}
+      =
+      \{\,(x(t),y(t)) \mid t \in \Q\,\} \cup \{(0,1)\}
+    \).
+  \qed
+  \end{enumerate}
+\end{question}
+
+\noindent 参考: この問題は, $X^2 + Y^2 = Z^2$ を満たす自然数 $X$, $Y$,
+$Z$ を全て求めよという初等整数論の問題の解答を与えていることに注意せよ.
+$x = X/Z$, $y = Y/Z$ と置くことによって, 問題は $x^2 + y^2 = 1$ を満た
+す有理数 $x$, $y$ を全て求めるという問題に変形される. この形での問題の
+解答は上のように幾何的なアイデアで得られるのである. 整数論と代数幾何の
+関係についての面白い解説記事が \cite{Kuga}{} の中にあるので参照された
+い.
+
+\begin{question}[複素射影直線]\label{q:cpx-proj-line}
+  $\C^2 \setminus \{(0,0)\}$ における同値関係 $\sim$ を次のように定める: %
+  $u, v \in \C^2 \setminus\{(0,0)\}$ に対して,
+  \[
+    u \sim v
+    \qquad\Longleftrightarrow\qquad
+    u \in \C^{\times} v.
+  \]
+  商位相空間 $(\C^2 \setminus \{(0,0)\})/{\sim}$ を複素射影直線と呼び, %
+  $\C P^1$ または $\P^1(\C)$ と表わす. %
+  $(z,w)\in\C^2\setminus\{(0,0)\}$ が代表する複素射影直線上の点を %
+  $(z:w)$ と表わす. このとき, 以下が成立している: %
+  \begin{enumerate}
+  \item 複素射影直線は球面 $S^2$ と同相である. 
+  \item $X_0 = \{(1:0)\}$, $X_1 = \{\,(z:1) \mid z \in \C \,\}$ と置く
+    と, $\P^1(\C)$ は $X_0$ と $X_1$ の非連結和になる.
+  \item $X_1$ は $\C$ に同相であり, $\P^1(\C)$ は自然に $X_1$ の一点コ
+    ンパクト化に同相である.  \qed
+  \end{enumerate}
+\end{question}
+
+\noindent ヒント: 立体射影.
+
+\begin{question}
+  $\R^n$ の一点コンパクト化は $n$ 次元球面 $S^n$ に同相であることを示
+  せ. \qed
+\end{question}
+
+さて, 閉曲面に関する問題を並べておこう. 以下の問題を解くときには, 必ず
+図を描かなければいけない. 幾何を理解するためには, 論理的に厳密な側面だ
+けにこだわるだけでは駄目であり, 直観的な理解と論理的に厳密な理解が限り
+なく近付くように努力しなければいけない.
+
+\begin{question}
+  閉円板 $D = \{\, z \in \C \mid |z| \le 1 \,\}$ の貼り合わせの条件
+  \[
+    e^{\pi i t} \sim e^{\pi i (t + 1)}
+    \qquad\text{for}\quad
+    t \in [0,1].
+  \] %
+  による商空間 $D/{\sim}$ を考える. %
+  $D/{\sim}$ は問題 \qref{q:proj-plane}{} で定義した実射影平面
+  に同相である. このことを図を書いてわかり易く説明せよ. \qed
+\end{question}
+
+\begin{question}
+  $I = [0,1]$ と置く. $\sim$ は次の条件をみたす $I \times I$ の貼り合
+  わせの条件
+  \[
+    (0,1-t) \sim (1,t)
+    \qquad\text{for}\quad
+    t \in I.
+  \]
+  による商空間 $X = (I \times I)/{\sim}$ をメビウスの帯(M\"obius band)
+  と呼ぶ. %
+  $(x,y)\in I \times I$ で代表される $X$ 上の点を $(x,y)_X$ と表わすこ
+  とにする. 閉円板 $D = \{\, z \in \C \mid |z| \le 1 \,\}$ %
+  と $X$ の非連結和 $D \sqcup X$ の貼り合わせの条件
+  \[
+    e^{\pi i t}     \approx (1-t,0)_X,
+    \qquad
+    e^{\pi i (t+1)} \approx (1-t,1)_X
+    \qquad\text{for}\quad
+    t \in I.
+  \] %
+  による商空間 $(D \sqcup X)/{\approx}$ は実射影平面に同相である. この
+  ことを図を書いてわかり易く説明せよ.  \qed
+\end{question}
+
+\begin{question}
+  2人乗りの浮輪をチョキチョキはさみで切り開いて8角形を作ることができる.
+  その様子を図示せよ. (浮輪はいくらでも伸び縮みするゴムでできていると
+  みなす.) \qed
+\end{question}
+
+\begin{question}\label{q:M_g}
+  正の整数 $g$ に対して, $D = \{\, z \in \C \mid |z| \le 1 \,\}$ の貼
+  り合わせの条件
+  \begin{align*}
+    &
+    e^{\pi i(4k-4+t  )/(2g)} \sim e^{\pi i(4k-1-t)/(2g)},
+    \qquad
+    e^{\pi i(4k-3+t)  /(2g)} \sim e^{\pi i(4k-t)  /(2g)}
+    \\
+    &
+    \qquad\qquad\qquad\qquad
+    \text{for}\quad
+    t \in [0,1],\quad k = 1,2,\dots,g.
+  \end{align*}
+  による商空間を $M_g = D/{\sim}$ と書くことにする. このとき, 以下が成
+  立する:
+  \begin{enumerate}
+  \item $M_g$ はコンパクト位相多様体である. 
+  \item $M_g$ は 1点と開区間に同相な $2g$ 個の曲線と開円板に同相な開部
+    分集合の非連結和に分解可能である. \qed
+  \end{enumerate}
+\end{question}
+
+\noindent $g = 0$ のとき $M_0 = S^2$ (球面)と置く.
+
+\begin{question}
+  上の問題における $M_g$ が $g$ 人乗りの浮輪であることを, $g=3$ の場合
+  を例に図を描いてわかりやすく説明せよ. \qed
+\end{question}
+
+\begin{question}
+  $z \in D$ で代表される $M_g$ 上の点を $[z]_g$ と表わす. 
+  $A = \{\, z \in \C \mid 1/2 \le |z| \le 1 \,\}$ の $M_g$ における像%
+  を $M'_g$ と表わす. $M'_g$ と $M'_{g'}$ の非連結和の貼り合わせの条件
+  \[
+    [e^{2\pi i t}/2]_g \sim [e^{2\pi i t}/2]_h
+    \qquad\text{for}\quad
+    t \in [0,1]
+  \]
+  による商空間を $M_g\,\sharp\,M_{g'} = (M'_g \sqcup M'_{g'})/{\sim}$ %
+  と書くことにする. %
+  このとき, $M_g\,\sharp\,M_{g'}$ は $M_{g+g'}$ に同相であることを示せ.
+  さらに, 直観的には何をやっているのかについて, 図を描いて説明せよ. 
+  \qed
+\end{question}
+
+\begin{question}\label{q:N_h}
+  正の整数 $h$ に対して, $D = \{\, z \in \C \mid |z| \le 1 \,\}$ の貼
+  り合わせの条件
+  \[
+    e^{\pi i(2k-2+t)/h} \approx e^{\pi i (2k-1+t)/h}
+    \qquad\text{for}\quad
+    t \in [0,1],\quad k = 1,2,\dots,h.
+  \]%
+  による商空間を $N_h = D/{\approx}$ と書くことにする. このとき, 以下
+  が成立する: 
+  \begin{enumerate}
+  \item $N_h$ はコンパクト位相多様体である. 
+  \item $N_h$ は 1点と開区間に同相な $h$ 個の曲線と開円板に同相な開部
+    分集合の非連結和に分解可能である. \qed
+  \end{enumerate}
+\end{question}
+
+\noindent 参考: 後半は \qref{q:P2cell}{} の一般化である. $N_1$ は実射
+影平面と同相であり, $N_2$ はクラインの壷(Klein bottle)と呼ばれている.
+
+\begin{question}
+  $z \in D$ で代表される $N_h$ 上の点を $[z]_h$ と表わす. 
+  $A = \{\, z \in \C \mid 1/2 \le |z| \le 1 \,\}$ の $N_h$ における像%
+  を $N'_h$ と表わす. 
+  $N'_h$ と $N'_{h'}$ の非連結和の貼り合わせの条件
+  \[
+    [e^{2\pi i t}/2]_h \sim [e^{2\pi i t}/2]_{h'}
+    \qquad\text{for}\quad
+    t \in [0,1]
+  \]%
+  による商空間を $N_h\,\sharp\,N_{h'} = (N'_h\sqcup N'_{h'})/{\sim}$ と
+  書くことにする. %
+  このとき, $N_h\,\sharp\,N_{h'}$ は $N_{h+h'}$ に同相である. \qed
+\end{question}
+
+\begin{question}\qstar{*}
+  $M_g\,\sharp\,N_h$ も上記の問題と同様に定義すると, %
+  $M_g\,\sharp\,N_h$ は $N_{2g+h}$ に同相である. \qed
+\end{question}
+
+\begin{question}[パンツ分解]
+  球面 $S^2$ から互いに交わらない $3$ 個の閉円板の内側を取り去ってでき
+  る位相空間をパンツと呼ぶことにする. なぜパンツと呼ぶか? その理由とし
+  て想像したことを述べよ. $g$ は $2$ 以上の整数であるとする. %
+  このとき $2g-2$ 個のパンツの境界を適切に貼り合わせることによって, %
+  $M_g$ と同相な位相多様体を構成できることを示せ. これを, $M_g$ のパン
+  ツ分解と呼ぶ. \qed
+\end{question}
+
+\medskip
+
+\noindent 参考: $M_g$ は向き付け可能(orientable)であり, $N_h$ は向き付
+け不可能である. 直観的に言えば, $M_g$ は裏表の区別が可能な曲面であり, %
+$N_h$ はそうではない. 2次元連結コンパクト位相多様体のこと閉曲面と呼ぶ
+ことにする. $M_g$ は向き付け可能なジーナス(genus) $g$ の閉曲面と呼ばれ
+ている.
+
+次の定理は有名である.
+
+\begin{Theorem}[閉曲面の分類]
+  閉曲面は $M_g$ ($g\ge0$), $N_h$ ($h\ge1$) のどれかに同相である. \qed
+\end{Theorem}
+
+\noindent 証明は例えば \cite{Tamura}{} の第26節に書いてある.
+
+\begin{question}
+  $M_g$ は問題 \qref{q:M_g}{} によって得られた閉曲面であるとし, %
+  問題  \qref{q:M_g}{} の記号のもとで $D$ から $M_g$ への自然な写像を %
+  $p$ と表わす. $x_0 = p(1)$ と置く. %
+  $k = 1,2,\dots,g$ に対して, $I = [0,1]$ から $D$ への連続写像 %
+  $f_k$, $g_k$ を次のように定める:
+  \[
+    f_k(t) = e^{\pi i(4k-4+t  )/(2g)},
+    \qquad
+    g_k(t) = e^{\pi i(4k-3+t)  /(2g)}
+    \qquad\text{for}\quad
+    t \in I.    
+  \] %
+  $f_k$, $g_k$ と $p$ の合成をそれぞれ $\alpha_k$, $\beta_k$ と表わし,
+  $\alpha_k$, $\beta_k$ が代表する基本群 $\pi_1(M_g,x_0)$ の要素をそれ
+  ぞれ $[\alpha_k]$, $[\beta_k]$ と表わす. %
+  $F_{2g}$ は $2g$ 個の文字 $a_1,b_1,\dots,a_g,b_g$ から生成され
+  る自由群であるとし, %
+  $a_1b_1a_1^{-1}b_1^{-1}\cdots a_g b_g a_g^{-1}b_g^{-1}$ から生成され
+  る $F_{2g}$ の正規部分群を $R_g$ と書くことにする. %
+  $a_k$, $b_k$ のそれぞれに対して $[\alpha_k]$, $[\beta_k]$ を対応させ
+  ることによって定まる %
+  $F_{2g}$ から $\pi_1(M_g,x_0)$ への群の準同型
+  写像を $\tilde\phi$ と書くことにする. %
+  このとき, $R_g \subseteq \Ker\tilde\phi$ である. %
+  よって, $\tilde\phi$ は $F_{2g}/R_g$ から $\pi_1(M_g,x_0)$ への
+  準同型写像 $\phi$ を誘導する. \qed
+\end{question}
+
+\noindent 参考: 実は, $\tilde\phi$ は全射でかつ $\Ker\tilde\phi = R_g$ %
+であることが知られている. よって, $\phi$ は同型写像になる:
+\[
+  \pi_1(M_g,x_0)
+  \simeq
+  F_{2g}/R_g
+  =
+  \langle
+    a_1,b_1, \dots, a_g, b_g
+  \mid
+    a_1 b_1 a_1^{-1} b_1^{-1} \cdots a_g b_g a_g^{-1} b_g^{-1} = 1
+  \rangle.
+\]
+
+\begin{question}
+  $N_h$ は問題 \qref{q:N_h}{} によって得られた閉曲面であるとし, %
+  問題  \qref{q:N_h}{} の記号のもとで $D$ から $N_h$ への自然な写像を %
+  $p$ と表わす. $x_0 = p(1)$ と置く. %
+  $k = 1,2,\dots,h$ に対して, $I = [0,1]$ から $D$ への連続写像 %
+  $f_k$ を次のように定める:
+  \[
+    f_k(t) = e^{\pi i(2k-2+t)/h}
+    \qquad\text{for}\quad
+    t \in I.    
+  \] %
+  $f_k$ と $p$ の合成を $\alpha_k$ と表わし,
+  $\alpha_k$ が代表する基本群 $\pi_1(N_h,x_0)$ の要素を $[\alpha_k]$ と
+  表わす. %
+  $F_h$ は $h$ 個の文字 $a_1,\dots,a_h$ から生成され
+  る自由群であるとし, %
+  $a_1 a_1\cdots a_h a_h$ から生成され
+  る $F_h$ の正規部分群を $R_h$ と書くことにする. %
+  $a_k$ に対して $[\alpha_k]$ を対応させ
+  ることによって定まる %
+  $F_h$ から $\pi_1(N_h,x_0)$ への群の準同型
+  写像を $\tilde\phi$ と書くことにする. %
+  このとき, $R_h \subseteq \Ker\tilde\phi$ である. %
+  よって, $\tilde\phi$ は $F_h/R_h$ から $\pi_1(N_h,x_0)$ への
+  準同型写像 $\phi$ を誘導する. \qed
+\end{question}
+
+\noindent 参考: 実は, $\tilde\phi$ は全射でかつ $\Ker\tilde\phi = R_h$ %
+であることが知られている. よって, $\phi$ は同型写像になる:
+\[
+  \pi_1(N_h,x_0)
+  \simeq
+  F_h/R_h
+  =
+  \langle
+    a_1, \dots, a_h
+  \mid
+    a_1 a_1 \cdots a_h a_h = 1
+  \rangle.
+\]
+
+\smallskip
+
+\noindent 参考: $M_g$, $N_h$ の基本群の構造については \cite{Tamura}{} 
+の第34節を見よ. そこでは van Kampen の定理の応用として, $M_g$, $N_h$ 
+の基本群が計算されている. van Kampen の定理を認めて使えば, $M_g$,
+$N_h$ の基本群を求めることはそれほど難しくない. 各自試みられたい.
+
+\smallskip
+
+\noindent 参考: 複数の簡単な空間を貼り合わせて, より複雑な空間を構成す
+るという考え方は基本的である. van Kampen の定理は, もとの簡単な空間と
+その貼り合わせの仕方の情報から, 貼り合わせによって得られた空間の基本群
+を計算するための方法として非常に重要である. もしも, 基本群は知っている
+が van Kampen の定理は知らないという場合は, 是非とも van Kampen の定理
+を勉強するべきである.
+
+\smallskip
+
+\noindent 参考: ホモロジー群の場合に, これと同様の役目を果たすのが 
+Mayer-Vietoris の exact sequence である.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Section. 微分可能多様体としての曲面
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{微分可能多様体としての曲面}
+
+$M$ が位相多様体であるとき, $M$ における座標近傍(coordinate
+neighborhood)とは, $M$ の開集合 $U$ と $U$ から $\R^n$ の開集合の上へ
+の同相写像 $\phi$ の組 $(U, \phi)$ のことである. 座標近傍はチャート
+(chart (地図))と呼ばれることもある. $M$ の座標近傍系とは $M$ をおおう
+座標近傍の族 %
+$\{(U_\lambda,\phi_\lambda)\}_{\lambda\in\Lambda}$ のことである. 座標
+近傍系はアトラス(atlas(地図書))と呼ばれることもある. 
+
+$n$ 次元位相多様体 $M$ のアトラス %
+$\{(U_\lambda,\phi_\lambda)\}_{\lambda\in\Lambda}$ %
+が $C^l$ 級であるとは, 任意の $\lambda, \mu \in \Lambda$ に対して, 
+\[
+  \phi_\lambda(U_\lambda\cap U_\mu)
+  \overset{\phi_\lambda^{-1}}\longrightarrow
+  U_\lambda\cap U_\mu
+  \overset{\phi_\mu}\longrightarrow
+  \phi_\mu(U_\lambda\cap U_\mu)
+\] %
+の合成が定める $\R^n$ の開集合間の写像が $C^l$ 級であることである.  %
+位相多様体の $C^l$ 級アトラスのことをその多様体の $C^l$ 級微分可能構造
+(もしくは単に $C^l$ 構造)と呼ぶこともある.
+
+\begin{Definition}
+  位相多様体 $M$ に $C^l$ 級微分可能構造が与えられているとき, %
+  $M$ と $C^l$ 級微分可能構造の組を{\bf $C^l$ 級微分可能多様体}もしく
+  は簡単に{\bf $C^l$ 多様体}と呼ぶ. \qed
+\end{Definition}
+
+\noindent 例: $\R^n$ の開集合 $U$ は $\{(U, \id_U)\}$ を $C^\infty$ 構
+造とすることによって $C^\infty$ 多様体であると自然にみなせる.
+
+\medskip
+
+\noindent 解説: $\R^n$ の開集合の上では微分積分学が展開されていたので
+あった. 多様体の上に微分積分学を拡張するにはどうすれば良いのであろうか? 
+一つの考え方は, 位相多様体は局所的に $\R^n$ の開集合に同相だったのだか
+ら, 局所的には座標近傍 $(U, \phi)$ を取って考え, $U$ 上の話は全て %
+$\R^n$ の開集合である $\phi(U)$ 上の話であると思って微分積分学を展開す
+れば良いというものである. しかし, 座標近傍の取り方によって結果が違って
+は困る. 例えば, 片方の座標近傍で見ると微分可能な函数が他方ではそうでな
+いというようなことがあっては困る. したがって, 座標近傍を変えても微分可
+能性などの情報が変化しないように, 許される座標近傍を一部のものに制限し
+て考えなければいけないことがわかる. 上の微分可能多様体の定義はこの考え
+を忠実に実現したものである. $C^l$ 多様体の上では $C^l$ 級函数という用
+語が意味を持つ.
+
+\medskip
+
+$(M,\ \{(U_\lambda,\phi_\lambda)\}_{\lambda\in\Lambda})$, %
+が $C^l$ 多様体であるとき, $M$ 上の座標近傍 $(U,\phi)$ が %
+$C^l$ 級であるとは,%
+任意の $\lambda\in\Lambda$ に対して,
+\[
+  \phi_\lambda(U_\lambda\cap U_\mu)
+  \overset{\phi_\lambda^{-1}}\longrightarrow
+  U_\lambda\cap U
+  \overset{\phi}\longrightarrow
+  \phi_\mu(U_\lambda\cap U)
+\]%
+の合成写像およびその逆写像が $C^l$ 級になることである.
+
+\begin{Definition}
+  $M$, $N$ は共に $C^l$ 多様体であるとし, $k \le l$ であるとする. %
+  連続写像 $f \colon M \to N$ が$C^k$ 級であるとは, %
+  任意の $x\in M$ に対して, %
+  $f(x)$ を含む $N$ 上の $C^l$ 級座標近傍 $(V, \psi)$ および %
+  $x$ を含み $f^{-1}(V)$ に含まれる $M$ 上の %
+  $C^l$ 級座標近傍 $(U, \phi)$ が存在して,
+  \[
+    \phi(U)
+    \overset{\phi^{-1}}\longrightarrow
+    U
+    \overset{f}\longrightarrow
+    V
+    \overset{\psi}\longrightarrow
+    \psi(V)
+  \]
+  の合成が $C^k$ 級になることである. \qed
+\end{Definition}
+
+\begin{question}
+  上の定義の状況のもとで $f$ が $C^k$ 級であると仮定する. このとき, %
+  $N$ 上の任意の $C^l$ 級座標近傍 $(V,\psi)$ と %
+  $M$ 上の $f^{-1}(V)$ に含まれる任意の $C^l$ 級座標近傍 $(U,\phi)$ に
+  対して,
+  \[
+    \phi(U)
+    \overset{\phi^{-1}}\longrightarrow
+    U
+    \overset{f}\longrightarrow
+    V
+    \overset{\psi}\longrightarrow
+    \psi(V)
+  \]
+  の合成が $C^k$ 級になることを示せ. \qed
+\end{question}
+
+\begin{question}
+  $L$, $M$, $N$ は $\C^\infty$ 多様体であるとし, %
+  $f\colon L \to M$ と $g \colon M \to N$ は $C^\infty$ 写像であるとす
+  る. このとき, それらの合成 $g\circ f \colon L \to N$ も $C^\infty$ 
+  写像である. \qed
+\end{question}
+
+以下では主に2次元以下の $C^\infty$ 多様体(滑らかな曲線と曲面)を扱う.
+
+\begin{question}
+  円周 $S^1 = \{\, (x,y)\in\R^2 \mid x^2 + y^2 = 1 \,\}$ の %
+  $\R^2$ への包含写像を $f$ と書くことにする.  $S^1$ には $C^\infty$ %
+  多様体の構造が自然に入り, $f$ は $C^\infty$ 級になる.
+  \qed
+\end{question}
+
+\noindent ヒント: $q \colon \R \to S^1$ を $q(t) = (\cos t, \sin t)$ 
+と定めると, $q$ は任意の開区間 $(t_0,t_0+2\pi)$ からその $q$ による像
+への同相写像である.
+
+\begin{question}
+  球面 $S^2 = \{\, (x,y,z)\in\R^3 \mid x^2 + y^2 + z^2 = 1 \,\}$ の %
+  $\R^3$ への包含写像を $f$ と書くことにする.  $S^2$ には $C^\infty$ %
+  多様体の構造が自然に入り, $f$ は $C^\infty$ 級になる.
+  \qed
+\end{question}
+
+\noindent ヒント: $S^2$ を有限個の座標近傍で覆ってみよ. 
+
+\begin{question}
+  $S^2$ から実射影平面 $P^2$ への自然な射影 $p$ を考える. %
+  (問題 \qref{q:proj-plane}{} を参照せよ.) %
+  実射影平面 $P^2$ に $C^\infty$ 多様体の構造が自然に入り, %
+  $p$ は $C^\infty$ 級になる. 
+  \qed
+\end{question}
+
+\noindent ヒント: 問題そのものが $C^\infty$ 級座標近傍系の一つの作り方
+のヒントになっている. %
+他にも, 問題 \qref{q:P2cell}{} の $X_2$ のようなもので $P^2$ を覆うと
+いう方法もある. 両方試してみよ.
+
+\begin{question}
+  トーラス $T^2 = \R^2/\Z^2$ には, %
+  自然な射影 $\pi\colon\R^2\onto T^2$ が $C^\infty$ 級になるような %
+  $C^\infty$ 級多様体の構造が自然に入る. 
+  \qed
+\end{question}
+
+\begin{question}
+  ジーナス $2$ の向き付け可能な閉曲面 $M_2$ に $C^\infty$ 構造を入れる
+  ことができることを示せ. 
+  \qed
+\end{question}
+
+\begin{question}\qstar{*}
+  問題 \qref{q:M_g}{} における閉曲面 $M_g$ に $C^\infty$ 構造を入れる
+  ことができることを示せ. \qed
+\end{question}
+
+\begin{question}
+  クラインの壷に $C^\infty$ 構造を入れることができることを示せ. \qed
+\end{question}
+
+\begin{question}\qstar{*}
+  問題 \qref{q:N_h}{} における閉曲面 $N_h$ に $C^\infty$ 構造を入れる
+  ことができることを示せ. \qed
+\end{question}
+
+\medskip
+
+多様体の向き(orientation)の概念を厳密に定義してなかったので, ここで定
+義しておこう. 簡単のため $C^1$ 多様体の場合だけを考える. %
+$M$ は $n$ 次元 $C^1$ 多様体であるとする. %
+$M$ 上の2つの $C^1$ 座標近傍 $(U,\phi)$, $(V,\psi)$ に対して, 写像の列
+\[
+  \phi(U \cap V)
+  \overset{\phi^{-1}}\longrightarrow
+  U \cap V
+  \overset{\psi}\longrightarrow
+  \psi(U \cap V)
+\]
+の合成を $f$ と書くことにする. $\phi(U \cap V)$ と $\psi(U \cap V)$ は %
+$\R^n$ の開集合である. % 
+$\R^n$ 上の座標系を $x = (x^1,\dots,x^n)$ と書くことにする. この座標系
+のもとで $f: \phi(U \cap V) \isoto \psi(U \cap V)$ を %
+$x = (x^1,\dots,x^n) \mapsto (f^1(x),\dots,f^n(x))$ と書くことにする. 
+$\phi(U \cap V)$ 上の行列値函数 $f'$ を次のように定める:
+\[
+  f'
+  =
+  \begin{bmatrix}
+    \pd{f^1}{x^1} & \cdots & \pd{f^1}{x^n} \\
+    \vdots        &        & \vdots        \\
+    \pd{f^n}{x^1} & \cdots & \pd{f^n}{x^n} \\
+  \end{bmatrix}.
+\] %
+このとき, 任意の $x \in \phi(U \cap V)$ に対して $\det f'(x) > 0$ が成
+立するとき, $(U,\phi)$ と $(V,\psi)$ の向きは等しいと言う. %
+(特に $U \cap V = \emptyset$ のとき, $(U,\phi)$ と $(V,\psi)$ の向きは
+等しい.)
+
+\begin{Definition}
+  $M$ は $n$ 次元 $C^1$ 多様体であるとする. $M$ を覆う $C^1$ 座標近傍
+  の族でその族に含まれる座標近傍の向きが互いに全て等しいものが与えられ
+  ているとき, $M$ には向き(orientation)が入っていると言う. 向きを入れ
+  ることのできる多様体を向き付け可能多様体(orientable manifold)と呼ぶ.
+\end{Definition}
+
+\begin{question}
+  球面 $S^2$ は向き付け可能である. \qed
+\end{question}
+
+\begin{question}
+  トーラス $T^2$ は向き付け可能である. \qed
+\end{question}
+
+\begin{question}
+  問題 \qref{q:M_g}{} における閉曲面 $M_g$ は向き付け可能である. \qed
+\end{question}
+
+\begin{question}
+  M\"obius の帯は向き付け不可能である. \qed
+\end{question}
+
+\noindent ヒント: 向き付け可能であると仮定すると, M\"obius の帯を一周
+する曲線を考え, それを互いに向きの等しい有限個の座標近傍で覆うことがで
+きる. しかし, 少し考えるとそのようなことは不可能であることがわかる.
+
+\begin{question}
+  実射影平面は向き付け不可能である. \qed
+\end{question}
+
+\begin{question}\qstar{*}
+  問題 \qref{q:N_h}{} における閉曲面 $N_h$ は向き付け不可能である. \qed
+\end{question}
+
+せっかくなので Riemann 面も定義してしまおう. $M$ は 2 次元位相多様体で
+あるとする. 以下では $\C$ と $\R^2$ を自然に同一視することにする. する
+と, $M$ 上の座標近傍は $M$ の開集合から $\C$ の開集合への同相写像を与
+えていると考えることができる. $M$ のアトラス %
+$\{(U_\lambda,\phi_\lambda)\}_{\lambda\in\Lambda}$ %
+が{\bf 複素構造}であるとは, 任意の $\lambda, \mu \in \Lambda$ に対して,
+\[
+  \phi_\lambda(U_\lambda\cap U_\mu)
+  \overset{\phi_\lambda^{-1}}\longrightarrow
+  U_\lambda\cap U_\mu
+  \overset{\phi_\mu}\longrightarrow
+  \phi_\mu(U_\lambda\cap U_\mu)
+\] %
+の合成が定める $\C$ の開集合間の写像が正則(holomorphic)であることであ
+る.
+
+\begin{Definition}
+  2次元位相多様体 $M$ に複素構造が与えられているとき, $M$ と複素構造の
+  組を {\bf Riemann 面}と呼ぶ. \qed
+\end{Definition}
+
+\noindent 例: $\C$ の開部分集合 $U$ は $\{(U,\id_U)\}$ を複素構造とす
+ることによって自然に Riemann 面とみなされる.
+
+$(M,\ \{(U_\lambda,\phi_\lambda)\}_{\lambda\in\Lambda})$, %
+が Riemann 面であるとき, $M$ 上の座標近傍 $(U,\phi)$ が正則座標近傍
+であるとは,%
+任意の $\lambda\in\Lambda$ に対して,
+\[
+  \phi_\lambda(U_\lambda\cap U_\mu)
+  \overset{\phi_\lambda^{-1}}\longrightarrow
+  U_\lambda\cap U
+  \overset{\phi}\longrightarrow
+  \phi(U_\lambda\cap U)
+\]%
+の合成写像およびその逆写像が正則になることである.
+
+\begin{Definition}
+  $M$, $N$ は共に Riemann 面であるとする. %
+  連続写像 $f \colon M \to N$ が正則(holomorphic)であるとは, %
+  任意の $z\in M$ に対して, %
+  $f(z)$ を含む $N$ 上の正則座標近傍 $(V, \psi)$ および %
+  $z$ を含み $f^{-1}(V)$ に含まれる $M$ 上の %
+  正則座標近傍 $(U, \phi)$ が存在して,
+  \[
+    \phi(U)
+    \overset{\phi^{-1}}\longrightarrow
+    U
+    \overset{f}\longrightarrow
+    V
+    \overset{\psi}\longrightarrow
+    \psi(V)
+  \]
+  の合成が正則になることである. \qed
+\end{Definition}
+
+\begin{question}
+  上の定義の状況のもとで $f$ が正則であると仮定する. このとき, %
+  $N$ 上の任意の $C^l$ 級座標近傍 $(V,\psi)$ と %
+  $M$ 上の $f^{-1}(V)$ に含まれる任意の $C^l$ 級座標近傍 $(U,\phi)$ に
+  対して,
+  \[
+    \phi(U)
+    \overset{\phi^{-1}}\longrightarrow
+    U
+    \overset{f}\longrightarrow
+    V
+    \overset{\psi}\longrightarrow
+    \psi(V)
+  \]
+  の合成が正則になることを示せ. \qed
+\end{question}
+
+\begin{question}
+  Riemann 面の複素構造はその Riemann 面に向きを与える. よって, 任意の 
+  Riemann 面は向き付け可能である. \qed
+\end{question}
+
+\noindent ヒント: 複素数 $z$ を $z = x + iy$ ($x,y\in\R$) と表わしてお
+く. $\C$ の開集合上の正則函数 $f(z) = u(x,y) + i v(x,y)$ ($u$, $v$ は
+実数値)に対して, Cauchy-Riemann の方程式より,
+\[
+  \begin{bmatrix}
+    u_x & u_y \\
+    v_x & v_y \\
+  \end{bmatrix}
+  =
+  \begin{bmatrix}
+    u_x & - v_x \\
+    v_x & u_x \\
+  \end{bmatrix}.
+\]
+右辺の行列式は ${u_x}^2 + {v_x}^2 \ge 0$.
+
+\begin{question}
+  $\C^2 \setminus\{(0,0)\}$ から複素射影直線 $\P^1(\C)$ への自然な射影
+  の定める写像を $\pi$ と書くことにする. $\pi$ の定める %
+  $\{\,(z,1)\mid z\in\C\,\}$, $\{\,(1,w)\mid w\in\C\,\}$ %
+  から $\P^1(\C)$ への写像をそれぞれ $f$, $g$ と表わす.  %
+  (問題 \qref{q:cpx-proj-line}{} を見よ.) $\P^1(\C)$ には $f$, $g$ が
+  共に正則になるような複素構造を入れることができることを示せ. \qed
+\end{question}
+
+\noindent ヒント: $z \mapsto 1/z$ は %
+$\C^\ast = \C \setminus \{0\}$ からそれ自身への正則写像である. 
+
+\begin{question}
+  $\tau$ はその虚部が正の複素数であるとする. $\C$ における同値関係 %
+  $\sim$ を次のように定める: $z,w\in\C$ に対して,
+  \[
+    z \sim w
+    \qquad\Longleftrightarrow\qquad
+    z - w \in \Z + \tau \Z.
+  \] %
+  $\C$ の $\sim$ による商空間を $E_\tau = \Z/(\Z + \tau\Z)$ と書くこと
+  にする. $\C$ から $E_\tau$ への自然な射影が正則になるような複素構造が %
+  $E_\tau$ に入ることを示せ. \qed
+\end{question}
+
+\begin{question}\qstar{*}
+  $a$, $b$, $c$ は互いに異なる任意の複素数であるとし, 
+  \[
+    X = \{\, (x,y) \in \C^2 \mid y^2 = (x - a)(x - b)(x - c) \,\}
+  \] %
+  と置く. $X$ から $\C^2$ への包含写像が正則になるような複素構造が $X$ %
+  に入ることを示せ. さらに, $X$ はトーラス $T^2$ から 1 点を除いたもの
+  に同相であることを示せ.  \qed
+\end{question}
+
+\noindent 参考: この問題の $X$ は楕円曲線(elliptic curve)と呼ばれてい
+る. $X$ に 1 点を付け加えたものは, ある $E_\tau$ と Riemann 面として同
+型になる(双正則になる)ことが知られている. この演習において, このような
+面白い数学的対象に深入りすることができないのは非常に残念である.
+
+\begin{question}\qstar{*}
+  問題 \qref{q:M_g}{} における閉曲面 $M_g$ に複素構造を入れられること
+  を示せ. \qed
+\end{question}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Section. $\R^3$ の中の曲面
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{$\R^3$ の中の曲面}
+
+$U$ は $\R^2$ の開集合であるとし, 写像 $\xi\colon U \to \R^3$ は %
+$C^\infty$ 級であるとする. $U$ の座標を $x = (x^1, x^2)$ と書き, 
+$\xi(x) = (\xi^1(x), \xi^2(x), \xi^3(x))$ と書く. $x$, $\xi$ をベクト
+ルとみなしたい場合は縦ベクトルとみなす. $U$ 上の函数 $f$ の $x^i$ に関
+する偏導函数を
+\[
+  \rd_i f = \pd{}{x^i} f
+\]
+と書くことにする. 
+
+\begin{question}\label{q:subsurf1}
+  任意の $x \in U$ に対して, 2つのベクトル $\rd_1\xi(x)$,
+  $\rd_2\xi(x)$ は一次独立であると仮定する. $U \times \R$ の座標を %
+  $(x^1, x^2, x^3)$ と書くことにする. このとき, 任意の $x_0\in U$に対
+  して, $(x_0,0)$ を含む $U\times\R$ の開集合 $\Omega$ と %
+  $C^\infty$ 写像 $f \colon \Omega \to \R^3$ の組で以下の条件をみたす
+  ものが存在する:
+  \begin{enumerate}
+  \item $(x,0)\in (U\times\{0\})\cap\Omega$ に対して,
+    $f(x,0) = \xi(x)$.
+  \item 任意の $x'\in V$ に対して, 3つのベクトル %
+    $\rd_1 f(x')$, $\rd_2 f(x')$, $\rd_2 f(x')$ は一次独立である.
+  \item $f$ は $V$ から $f(V)$ への同相写像であり, %
+    その逆写像も $C^\infty$ 級である.
+  \qed
+  \end{enumerate}
+\end{question}
+
+\noindent ヒント: $v_i = \rd_i \xi(x_0)$ ($i = 1,2$) と置き, %
+$v_3\in\R^3$ を $v_1,v_2,v_3$ が $\R^3$ の基底をなすように取る. %
+$f$ を $f(x^1,x^2,x^3) = \xi(x^1,x^2) + x^3 v_3$ と定める. この $f$ に
+逆写像定理を適用せよ.
+
+\begin{Definition}
+  $M$ が $\R^3$ 内の $C^\infty$ 曲面であるとは, $M$ が $\R^3$ の部分集
+  合であり, 任意の点 $P\in M$ に対して, $\R^2$ の開集合 $U$ と %
+  $C^\infty$ 写像 $\xi\colon U \to \R^3$ で以下をみたすものが存在する
+  ことである:
+  \begin{enumerate}
+  \item $\xi(U)$ は $P$ を含む $M$ の開集合である.
+  \item $\xi$ は $U$ から $\xi(U)$ の上への同相写像である.
+  \item 任意の $x\in U$ に対して, $\rd_1\xi(x)$, $\rd_2\xi(x)$ は一次
+    独立である.
+  \end{enumerate}
+  このような $(U,\xi)$ を曲面 $M$ の local parametrization と呼ぶ.
+  \qed
+\end{Definition}
+
+\begin{question}
+  行列の rank の定義を説明し, 以下の条件が互いに同値なことを示せ:
+  \begin{enumerate}
+  \item 行列 %
+    \( \displaystyle
+    \begin{bmatrix}
+      a^1{}_1 & a^1{}_2 \\
+      a^2{}_1 & a^2{}_2 \\
+      a^3{}_1 & a^3{}_2 \\
+    \end{bmatrix}
+    \) の rank は 2 である.
+  \item 2つのベクトル %
+    \(
+    \begin{bmatrix}
+      a^1{}_1 \\
+      a^2{}_1 \\
+      a^3{}_1 \\
+    \end{bmatrix}
+    \), %
+    \(
+    \begin{bmatrix}
+      a^1{}_2 \\
+      a^2{}_2 \\
+      a^3{}_2 \\
+    \end{bmatrix}
+    \) %
+    は一次独立である.
+  \item 3つの行列式 %
+    \(
+    \begin{vmatrix}
+      a^2{}_1 & a^2{}_2 \\
+      a^3{}_1 & a^3{}_2 \\
+    \end{vmatrix}
+    \), %
+    \(
+    \begin{vmatrix}
+      a^1{}_1 & a^1{}_2 \\
+      a^3{}_1 & a^3{}_2 \\
+    \end{vmatrix}
+    \), %
+    \(
+    \begin{vmatrix}
+      a^1{}_1 & a^1{}_2 \\
+      a^2{}_1 & a^2{}_2 \\
+    \end{vmatrix}
+    \) %
+    の少なくともどれか1つは0でない.
+  \qed
+  \end{enumerate}
+\end{question}
+
+\begin{question}
+  $M$ は $\R^3$ 内の $C^\infty$ 曲面であるとする. %
+  $(U,\xi)$, $(V,\eta)$ は $M$ の local parametrization であるとする. 
+  このとき, 
+  \[
+    \xi^{-1}(\xi(U)\cap\eta(V))
+    \overset{\xi}\longrightarrow
+    \xi(U)\cap\xi(V)
+    \overset{\eta^{-1}}\longrightarrow
+    \eta^{-1}(\xi(U)\cap\eta(V))
+  \]
+  の合成は $C^\infty$ 写像になる. よって, $M$ は
+  \[
+    \{\,
+      (\xi(U), \xi^{-1})
+    \mid
+      \text{$(U,\xi)$ は $M$ の local parametrization}
+    \,\}
+  \]
+  を $C^\infty$ 構造として持つ $C^\infty$ 多様体であるとみなせる.
+  \qed
+\end{question}
+
+\noindent ヒント: 問題 \qref{q:subsurf1}{} を使う.
+
+\medskip
+
+$M$ は $\R^3$ 内の $C^\infty$ 曲面であるとし, %
+$(U,\xi)$, $(V,\eta)$ は $M$ の local parametrizations であるとする. %
+$U$, $V$ の座標をそれぞれ $x = (x^1, x^2)$, $y = (y^1, y^2)$ と書くこ
+とにする. $\xi$, $\eta$ およびその逆写像を通して, $x^i$ と $y^i$ は %
+共に $\xi(U)\cap\eta(V)$ や $\xi^{-1}(\xi(U)\cap\eta(V))$ や %
+$\eta^{-1}(\xi(U)\cap\eta(V))$ の上の函数であるとみなせる.
+
+\begin{question}
+  点 $P = \xi(x_0) = \eta(y_0) \in \xi(U)\cap\eta(V)$ における %
+  $M$ の接平面 $T_P \subseteq \R^3$ に 2 つの座標 $X^i$, $Y^i$ %
+  ($i = 1,2$) を次のようにして入れることができる: $Q\in T_P$ に対して,
+  \[
+    Q
+    = P + \sum_{i=1}^2 X^i(Q) \pd{}{x^i}\xi(x_0)
+    = P + \sum_{j=1}^2 Y^j(Q) \pd{}{y^i}\eta(y_0).
+  \] %
+  このとき, 次が成立している:
+  \[
+    Y^j(Q) = \sum_{i=1}^2 X^i(Q) \left.\pd{y^j}{x^i}\right|_{x=x_0}
+    \qquad\text{for}\quad
+    j = 1,2.    
+  \qed
+  \] %
+\end{question}
+
+\noindent 参考: 最後の式に $\xi$ や $\eta$ が含まれてないことに注意せ
+よ. この問題の結果を抽象化すると一般の多様体の接空間の一つの定義の仕方
+が得られる. つまり, 最後の式を天下りに利用して, %
+座標 $x^i$ における接空間 $\R^n = \{(X^1,\dots,X^n)\}$ と座標 $y^i$ に
+おける接空間 $\R^n = \{(Y^1,\dots,Y^n)\}$ を同一視するのである. その同
+一視によって一つの接空間が決まると考えれば良い. 
+(上で扱った場合では $n = 2$.)
+
+\smallskip
+
+\noindent 参考: 一般の多様体の場合は上の問題における状況とは違って, 曲
+面の入れものである $\R^3$ のようなものが最初から与えられていない. しか
+し, 接空間のような幾何的に明らかな重要性を持つ概念を多様体に対しても定
+義できないのは不便である. 一つの考え方は上に述べたように, 多様体とは座
+標近傍で覆われた位相空間であるから, 座標変換によって接ベクトルがどのよ
+うに変換されるべきかを上の問題の経験に基いて天下りに決めてやり, それを
+利用して接空間を定義してしまうというものである. この考え方を一歩進める
+と, 同じ座標変換則をみたすものなら何でも接ベクトルと思うことが可能だと
+いうことになる. 実際, 次のような作用素を点 $P$ における接ベクトルとみ
+なすという定義の仕方もある:
+\[
+  X = \sum_{i=1}^n X^i(Q) \left.\pd{}{x^i}\right|_{x=x_0}
+  \;\colon\;\;
+  f
+  \;\mapsto\;
+  Xf = \sum_{i=1}^n X^i(Q) \left.\pd{}{x^i}f\right|_{x=x_0}.
+\]
+座標の変換則は chain rule
+\[
+  \pd{}{x^i} = \sum_{j=1}^n \pd{y^j}{x^i}\pd{}{y^j}
+\]
+より, 自然に得られる.
+
+\smallskip
+
+\noindent 参考: さらに抽象化を進めて, 全く座標を使わずに接空間を定義す
+る方法もある. (むしろ, そちらの方が普通のやり方である.) 任意の多様体論
+の教科書を参照せよ. (例えば, \cite{Matsushima}.)
+
+\begin{question}
+  球座標 %
+  \(
+    (x,y,z)
+    =
+    (r\cos\phi\,\cos\theta,\; 
+     r\cos\phi\,\sin\theta,\; 
+     r\sin\phi)
+  \) %
+  を用いて, 半径 $R$ の球体の体積と半径 $R$ の球面の面積がそれぞれ %
+  $\displaystyle \frac{4}{3}\pi R^3$, %
+  $\displaystyle 4 \pi R^2$ %
+  になることを証明せよ. \qed
+\end{question}
+
+ついでに, $n$ 次元球体の体積も求めてしまおう. $\Repart s > 0$ のとき, 
+積分
+\[
+  \Gamma(s) = \int_0^\infty e^{-x} x^{s-1} dx
+\]
+は絶対収束する. $\Gamma(s)$ をガンマ函数と呼ぶ. 
+
+\begin{question}
+  \(
+    \Delta(n)
+    =
+    \{\, (x_1,\dots,x_n)\in\R^n 
+    \mid  x_1 \ge 0, \dots, x_n \ge 0,\ x_1 + \dots + x_n \le 1
+    \,\}
+  \) と置く. %
+  ($\Delta(n)$ は $n$ 次元単体と呼ばれている.) %
+  $s$, $l_i$ は正の実数であるとする. 以下の公式を証明せよ:
+  \begin{align*}
+    & 
+    \int_0^\infty e^{-x^2}\,dx = \frac{\sqrt{\pi}}{2},
+    \qquad
+    \Gamma(1/2) = \sqrt{\pi}, 
+    \qquad
+    \Gamma(s+1) = s \Gamma(s),
+    \\
+    &
+    \int_{\Delta(n)}
+    x_1{}^{l_1-1} \cdots x_n{}^{l_n-1} \,dx_1\cdots dx_n
+    =
+    \frac{\Gamma(l_1)\cdots\Gamma(l_n)}
+         {\Gamma(l_1 + \dots + l_n + 1)}.
+  \qed
+  \end{align*}
+\end{question}
+
+\begin{question}
+  半径 $R$ の $n$ 次元球体の体積は次に等しい:
+  \[
+    \frac{\Gamma(\frac{1}{2})^n}{\Gamma(\frac{n}{2}+1)} R^n
+    =
+    \begin{cases}
+      \displaystyle
+      \frac{\pi^k}{k!} R^{2k},
+      & \text{if $n = 2k$ ($k=1,2,\ldots$)},
+      \\
+      \displaystyle
+      \frac{2^{k+1}\pi^k }{\prod_{i=1}^k(2i+1)}R^{2k+1}, 
+      & \text{if $n = 2k+1$ ($k=0,1,2,\ldots$)}.
+    \qed
+    \end{cases}
+  \]
+\end{question}
+
+\noindent ヒント: %
+\(
+  B(n,R)
+  =
+  \{\, (x_1,\dots,x_n)\in\R^n 
+  \mid  x_1 \ge 0, \dots, x_n \ge 0,\ x_1^2 + \dots + x_n^2 \le R^2
+  \,\}
+\) と置くと, 半径 $R$ の $n$ 次元球体の体積は %
+$2^n \int_{B(n,R)} dx_1\cdots dx_n$ に等しい. %
+これの計算は, 積分変数を $y_i = x_i^2/R^2$ と置換すると, 上のガンマ函
+数の公式の場合に帰着される. (球面座標を使った全く別の方法で証明するこ
+ともできる.)
+
+\smallskip
+
+\noindent 参考: 半径 $R$ の $n-1$ 次元球面の面積は上の体積の公式%
+を $R$ で微分すれば得られる.
+
+\medskip
+
+曲面論では局所座標を $(u,v)$ と書くことが多い. 以上の問題ではそのよう
+な記号法を採用しなかったし, 以下の問題においてもその記号法はあまり使わ
+ない. 以下では, 局所座標を $u = (u^1, u^2)$ と書くことが多い. 
+
+$M$ は $\R^3$ 内の $C^\infty$ 曲面であるとする. 以下では, $M$ の local
+parametrization $(U,\xi)$ を1つ固定し, もっぱらその上での議論を行なう.
+$U$ の座標を $u = (u^1, u^2)$ と書き, $u^i$ に関する偏微分を $\rd_i$ %
+と書くことにする.
+
+$\rd_1 \xi$, $\rd_2 \xi$ は任意の $u \in U$ において, $\xi(u)$ におけ
+る曲面 $M$ の接平面の基底をなす. 接平面に垂直で長さが $1$ のベクトル %
+$\nu$ が次のように定義される:
+\[
+  \nu
+  := \frac{\rd_1\xi \times \rd_2\xi}{|\rd_1\xi \times \rd_2\xi|}.
+\]
+$\rd_1 \xi$, $\rd_2 \xi$, $\nu$ は $U$ 上の $\R^3$ 値 $C^\infty$ 函数
+である. $\xi$ の全微分は次のように書ける:
+\[
+  d\xi = \sum_{i=1}^2  \rd_i\xi \, du^i.
+\]
+図を描いてこれらの定義を憶えよ.
+
+\begin{Definition}
+  {\bf 第1基本形式} $I$ と{\bf 第2基本形式} $\II$ を以下のように定義す
+  る:
+  \begin{align*}
+    &
+    I  = \sum_{i,j=1}^2 g_{ij}(u) \, du^i du^j
+    := d\xi \cdot d\xi,
+    \\
+    &
+    \II = \sum_{i,j=1}^2 h_{ij}(u) \, du^i du^j
+    := - d\xi \cdot d\nu.
+  \end{align*}
+  より具体的に書くと, 
+  \[
+    g_{ij} = \rd_i \xi \cdot \rd_j \xi,
+    \qquad
+    h_{ij} = - \rd_i \xi \cdot \rd_j \nu.
+  \qed
+  \]
+\end{Definition}
+
+\begin{question}\label{q:Gauss-Chris}
+  $\rd_i\rd_j\xi \cdot \nu = - \rd_i\xi \cdot \rd_j\nu$ が成立する. 
+  行列 $\big[g_{ij}\big]$, $\big[h_{ij}\big]$ は対称行列になる. 
+  また, 常に $\det\big[g_{ij}\big] > 0$ である. 
+  $\rd_i\rd_j\xi$ は次のような形で表示可能である:
+  \[
+    \rd_i\rd_j\xi
+    = \sum_k \Gamma^k_{ij} \rd_k\xi + h_{ij} \nu.
+  \] %
+  この公式を {\bf Gauss の公式}と呼ぶ.  %
+  $\Gamma^k_{ij}$ を{\bf Christoffel の記号}(Christofell's symbols) と
+  呼ぶ.  \qed
+\end{question}
+
+\noindent ヒント: $\rd_i\xi \cdot \nu = 0$ を $u^j$ で偏微分せよ.
+
+\medskip
+
+行列 $\big[g_{ij}\big]$ の逆行列を $\big[g^{ij}\big]$ と表わす:
+\[
+  \sum_j g_{ij} g^{jk} = \delta_i^k.
+\]
+右辺は Kronecker のデルタである. $h^i_k$ を次の式によって定義する:
+\[
+  h^i_k := \sum_{j} g^{ij} h_{jk}.
+\]
+行列 $\big[h^i_j\big]$ の固有値を $\kappa_i$ ($i=1,2$) と表わす.
+
+\begin{question}
+  $u_0 = (u_0^1, u_0^2) \in U$ を任意に固定し, $U$ 上の実数値函数 $f$ 
+  を次のように定める: %
+  \[
+    f(u) = (\xi(u) - \xi(u_0)) \cdot \nu(u_0).
+  \]
+  このとき, 次が成立する:
+  \[
+    f(u_0) = 0,
+    \qquad
+    \rd_i f(u_0) = 0,
+    \qquad
+    \rd_i \rd_j f(u_0) = h_{ij}(u_0).
+  \]
+  よって, $f$ を $u_0$ の近くで Taylor 展開すると,
+  \[
+    f(u)
+    =
+    \frac{1}{2}
+    \sum_{i,j} h_{ij}(u_0) (u^i - u^i_0)(u^j - u^j_0)
+    + o(|u - u_0|^2)
+  \]
+  という形になる. \qed
+\end{question}
+
+\begin{question}
+  $\kappa_i$ の幾何学的意味について説明し, $\kappa_i$ が実数になること
+  を示せ. \qed
+\end{question}
+
+\begin{question}
+  Christoffel の記号は $g_{ij}$ のみを使って次のように表わされる:
+  \[
+    \Gamma^k_{ij}
+    =
+    \frac{1}{2}
+    \sum_l g^{kl}(\rd_i g_{lj} + \rd_j g_{li} - \rd_l g_{ij}).
+  \qed
+  \]
+\end{question}
+
+\noindent ヒント:  $e_i = \rd_i \xi$, $e^i = \sum_j g^{ij}e_j$ と置く
+と, $e^i \cdot e_j = \delta^i_j$ であるから,
+\[ 
+  \Gamma^k_{ij} = e^k \cdot \rd_i\rd_j\xi 
+  = \sum_l g^{kl} \rd_l\xi \cdot \rd_i\rd_j\xi.
+\]
+$g_{ij} = \rd_i\xi \cdot \rd_j\xi$ の両辺を $u_k$ で偏微分することに
+よって, $\rd_l\xi \cdot \rd_i\rd_j\xi$ を $g_{ij}$ で表示する式が得らえる.
+
+\begin{Definition}
+  {\bf Gauss 曲率} $K$ と{\bf 平均曲率} $H$ を次のように定義する:
+  \[
+    K = \det\big[h^i_j\big]
+      = \det\big[h_{ij}\big] \big/ \det\big[g_{ij}\big],
+    \qquad
+    H = \frac{1}{2}\trace\big[h^i_j\big]
+      = \frac{1}{2}\sum_i h^i_i.
+  \qed
+  \]
+\end{Definition}
+
+\begin{question}
+  $h^i_j$, $H$ を $g_{ij}$, $h_{ij}$ の式で具体的に表示せよ. %
+  $K = \kappa_1 \kappa_2$, $H = (\kappa_1 + \kappa_2)/2$ が成立するこ
+  とを示せ.  \qed
+\end{question}
+
+\begin{question}
+  $i = 1,2$ に対して,
+  \[
+    \rd_i \nu = - \sum_k h^k_i \rd_k\xi.
+    \qed
+  \]    
+\end{question}
+
+\smallskip
+
+\noindent {\bf まとめ:}\enspace $e_i = \rd_i\xi$ と置き, %
+問題 \qref{q:Gauss-Chris}{} の結果と合わせると次の公式を得る:
+\[
+  \pd{}{u^i} 
+  \begin{bmatrix}
+    e_1 & e_2 & \nu \\
+  \end{bmatrix}
+  =
+  \begin{bmatrix}
+    e_1 & e_2 & \nu \\
+  \end{bmatrix}
+  \begin{bmatrix}
+    \Gamma^1_{i1} & \Gamma^1_{i2} & - h^1_i \\
+    \Gamma^2_{i1} & \Gamma^2_{i2} & - h^1_i \\
+    h_{i1}        & h_{i2}        &   0     \\
+  \end{bmatrix}.
+\]
+これを{\bf 曲面論の基本方程式}と呼ぶ.
+
+\begin{question}
+  $A_i$ ($i=1,\dots,n)$ は $x = (x^1,\dots,x^n)$ の $M(k,\R)$ に値を持
+  つ $C^1$ 函数であり, $U$ は $GL(k,\R)$ に値を持つ $C^1$ 函数であり, 
+  $$
+    \pd{}{x^i}U = U A_i
+    \qquad
+    (i = 1,\dots,n)
+  \leqno{(\ast)}
+  $$
+  が成立していると仮定する. このとき,
+  \[
+    \pd{A_j}{x^i} - \pd{A_i}{x^j} + A_i A_j - A_j A_i = 0
+    \qquad
+    (i,j = 1,\dots,n)
+  \]
+  が成立する. これを, 微分方程式 $(\ast)$ の完全可積分条件と呼ぶ.
+  \qed
+\end{question}
+
+\noindent この結果を利用して以下を導け.
+
+\begin{question}[Gauss-Codazzi の方程式 ]
+  以下の方程式が成立している. Gauss の方程式:
+  \[
+    \rd_k\Gamma^l_{ij} - \rd_{j}\Gamma^l_{ik}
+    +
+    \sum_m (\Gamma^m_{ij}\Gamma^l_{mk} - \Gamma^m_{ik}\Gamma^l_{mj})
+    =
+    h_{ij}h^l_k - h_{ik}h^l_j.
+  \]
+  Codazzi の方程式:
+  \[
+    \rd_k h_{ij} - \rd_j h_{ik}
+    =
+    - \sum_l (\Gamma^l_{ij}h_{lk} - \Gamma^l_{ik}h_{lj}).
+  \qed
+  \]
+\end{question}
+
+\noindent ヒント: 次の公式が成立することに注意せよ:
+\[
+  \rd_k g^{ij}
+  =
+  - \sum_{l,m} g^{il}g^{jm}\rd_k g_{lm}
+  =
+  - \sum_l g^{il}\Gamma^j_{kl} - \sum_m g^{jm}\Gamma^i_{km}.
+\]
+
+\begin{question}
+  $\xi$ が $\xi(u) = (u, f(u)) = (u^1, u^2, f(u^1, u^2))$ の形をしてい
+  るとき, $I$, $\II$, $K$, $H$, $\Gamma^k_{ij}$ を $f$ の式で表わせ. \qed
+\end{question}
+
+\begin{question}
+  $(x,y) = (u^1, u^2)$ の場合を考える. 
+  $a,b>0$ のとき, 以下の曲面の概形を描け:
+  \begin{enumerate}
+  \item $\{\,(x,y, a x^2 + b y^2) \mid x,y \in \R \,\}$,
+  \item $\{\,(x,y, a x^2  )       \mid x,y \in \R \,\}$,
+  \item $\{\,(x,y, a x^2 - b y^2) \mid x,y \in \R \,\}$.
+  \end{enumerate}
+  さらに, $I$, $\II$, $K$, $H$, $\Gamma^k_{ij}$ を求めよ. 
+  \qed
+\end{question}
+
+\begin{question}
+  $(t,\theta)=(u^1, u^2)$ と置く. %
+  $\xi$ が %
+  \(
+    \xi(u)
+    = \xi(t,\theta)
+    = (f(t), g(t)\cos\theta, g(t)\sin\theta)
+  \) ($g > 0$) %
+  の形をしていると仮定する. このとき, $\xi$ は回転面の上を動く. このこ
+  とを図を書いて説明せよ. $I$, $\II$, $K$, $H$, $\Gamma^k_{ij}$ を $f$ %
+  と $g$ の式で表わせ.  \qed
+\end{question}
+
+\begin{question}
+  半径 $R$ の球面の $I$, $\II$, $K$, $H$, $\Gamma^k_{ij}$ を球座標のも
+  とで計算せよ. \qed
+\end{question}
+
+\begin{question}
+  $0 < r < R$ であるとし, $(\theta, \phi) = (u^1, u^2)$ の場合を考える.
+  $\xi$ は次の形をしていると仮定する:
+  \[
+    \xi(\theta,\phi)
+    =
+    (R + r \cos\theta)\cos\phi,\;
+    (R + r \cos\theta)\sin\phi,\;
+         r \sin\theta          ).
+  \] %
+  これがトーラスを描くことを図を描いて説明せよ. %
+  さらに, $I$, $\II$, $K$, $H$, $\Gamma^k_{ij}$ を計算せよ. $K = 0$ と
+  なる点はトーラスのどの部分になるのかを図示せよ. \qed
+\end{question}
+
+\noindent{\Large\bf つづく.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% References.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{thebibliography}{ABC}
+
+%\bibitem[Gardner]{Gardner}
+%Martin~Gardner: 自然界における左と右, 紀伊国屋書店
+
+%\bibitem[今井]{Imai}
+%今井 功: 流体力学と複素解析, 日本評論社
+
+%\bibitem[小林]{Kobayashi}
+%小林 昭七: 曲線と曲面の微分幾何, 裳華房
+
+\bibitem[久賀]{Kuga}
+久賀 道郎: ドクトル クーガー の数学講座 1, 2, 日本評論社
+
+\bibitem[松島]{Matsushima}
+松島 与三: 多様体入門, 数学選書 5, 裳華房
+
+%\bibitem[溝畑]{Mizohata}
+%溝畑 茂: ルベーグ積分, 岩波全書 265, 岩波書店
+
+%\bibitem[Polyakov]{Polyakov}
+%A.~M.~Polyakov: Gauge fields and strings, harwood academic publishers,
+%Contemporary concepts in physics, Volume 3, 1987
+
+%\bibitem[佐武]{Satake}
+%佐武 一郎: 線型代数学, 裳華房
+
+\bibitem[数学辞典]{jiten}
+岩波数学辞典, 第三版, 岩波書店
+
+%\bibitem[高木]{Takagi}
+%高木 貞治: 解析概論, 改訂第三版, 岩波書店
+
+\bibitem[田村]{Tamura}
+田村 一朗: トポロジー, 岩波全書 276, 岩波書店
+
+\bibitem[朝永]{Tomonaga}
+朝永 振一郎: 量子力学 I, 第2版, 物理学大系, 基礎物理学篇 VIII, みすず書房
+
+%\bibitem[浦川]{Urakawa}
+%浦川 肇: 等周不等式, 数理科学 1995-8, 特集/現代の不等式, 20--24
+
+\bibitem[WW]{WW}
+E.~T.~Whittaker and G.~N.~Watson: A course of modern analysis,
+Cambridge University Press, Fourth Edition, 1927, Reprinted 1992
+
+%\bibitem[山内・杉浦]{YS}
+%山内恭彦, 杉浦光雄: 連続群論入門, 新数学シリーズ 18, 培風館
+
+%\bibitem[横田]{Yokota}
+%横田一郎: 群と位相, 基礎数学選書 5, 裳華房
+
+\end{thebibliography}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

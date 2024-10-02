@@ -1,0 +1,581 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% enshu.sty  (for japanese AMS LaTeX)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Example: Load this file by
+%
+% \ifx\gtfam\undefined
+%  \documentstyle[amstex,amssymb,12pt,enshu]{j-article} % NTT
+% \else
+%  \documentstyle[amstex,amssymb,12pt,enshu]{jarticle}  % ASCII
+% \fi
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\makeatletter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% private macros
+%
+
+\def\nsub{\triangleleft}
+\def\nsup{\triangleright}
+
+\def\suchthat{\mathop{\text{\rm s.t.}}}
+\def\AND{\mathop{\text{\rm and}}}
+\def\OR{\mathop{\text{\rm or}}}
+\def\UNDEFINED{\mathop{\text{\rm\bf undefined}}}
+\def\eval{\mathop{\text{\rm\bf eval}}}
+\def\Power{{\cal P}}
+
+%\def\Sym{\mathop{\frak S}\nolimits}
+%\def\Alt{\mathop{\frak A}\nolimits}
+\def\Sym{S}
+\def\Alt{A}
+
+
+\def\Lie#1{{\frak #1}}
+\def\su{\Lie{su}}
+\def\g{\Lie{g}}
+
+\def\Ad{\mathop{\text{\rm Ad}}\nolimits}
+\def\ad{\mathop{\text{\rm ad}}\nolimits}
+
+\def\Ext{\mathop{\text{\rm Ext}}\nolimits}
+\def\Sol{\mathop{\text{\rm Sol}}\nolimits}
+\def\End{\mathop{\text{\rm End}}\nolimits}
+\def\Aut{\mathop{\text{\rm Aut}}\nolimits}
+\def\Int{\mathop{\text{\rm Int}}\nolimits}
+\def\Out{\mathop{\text{\rm Out}}\nolimits}
+\def\Func{\mathop{\text{\rm Func}}\nolimits}
+\def\pt{{\text{\rm pt}}}
+\def\Cone{\mathop{\text{\rm Cone}}\nolimits}
+\def\diag{\mathop{\text{\rm diag}}\nolimits}
+\def\gr{\mathop{\text{\rm gr}}\nolimits}
+
+\def\eps{\varepsilon}
+\def\Lk{\mathop{\text{\rm Lk}}\nolimits}
+\def\Tw{\mathop{\text{\rm Tw}}\nolimits}
+\def\Span{\mathop{\text{\rm Span}}\nolimits}
+\def\Sigmatilde{{\tilde\Sigma}}
+\def\Gammatilde{{\tilde\Gamma}}
+\def\Ctilde{{\tilde C}}
+\def\Ktilde{{\tilde K}}
+\def\sign{\mathop{\text{\rm sgn}}\nolimits}
+\def\lgl{\langle}
+\def\rgl{\rangle}
+
+\def\Cech{\v Cech}
+\def\Poincare{Poincar\'e}
+\def\Moebius{M\"obius}
+
+\def\cA{{\cal A}}
+\def\cB{{\cal B}}
+\def\cC{{\cal C}}
+\def\cD{{\cal D}}
+\def\cK{{\cal K}}
+\def\Sd{\mathop{\text{\rm Sd}}\nolimits}
+\def\Sdtilde{\mathop{\widetilde{\text{\rm Sd}}}\nolimits}
+\def\Int{\mathop{\text{\rm Int}}\nolimits}
+\def\Cyl{\mathop{\text{\rm Cyl}}\nolimits}
+\def\curl{\mathop{\text{\rm curl}}\nolimits}
+\def\I{{\bold I}}
+\def\lowa{\underline{a}}
+\def\upa{\overline{a}}
+\def\pt{{\text{\rm pt}}}
+\def\Cone{\mathop{\text{\rm Cone}}\nolimits}
+
+%%% categories
+\def\Sets{{\cal{S}\text{\it ets}}}
+\def\Mod{{\cal{M}\text{\it od}}}
+\def\Alg{{\cal{A}\text{\it lg}}}
+\def\Top{{\cal{T}\!\text{\it op}}}
+\def\Htp{{\cal{H}\text{\it tp}}}
+\def\Rings{{\cal{R}\text{\it ings}}}
+\def\Ob{\mathop{\text{\rm Ob}}\nolimits}
+\def\op{{\text{\rm op}}}
+
+%%% setminus
+\def\setminus{-}
+
+%%% misc
+\def\O{\cal{O}}
+%\def\Sch{\mathop{\cal{S}}\nolimits}  % Schwartz space
+\def\Sch{\mathop{\scr{S}}\nolimits}  % Schwartz space
+\def\Area{\mathop{\text{\rm Area}}\nolimits}
+\def\Length{\mathop{\text{\rm Length}}\nolimits}
+\def\Vol{\mathop{\text{\rm Vol}}\nolimits}
+%\def\Top{\mathop{\text{\rm Top}}\nolimits}
+\def\rank{\mathop{\text{\rm rank}}\nolimits}
+\def\id{\text{\rm id}}
+\def\II{I\!I}
+\def\Mellin{{\cal M}}
+\def\e{{\text{\rm e}}}
+\def\Per{\mathop{\text{\rm Per}}\nolimits}
+\def\Hdr{H_{\text{\rm DR}}}
+\def\pe{\wp}
+\def\Div{{\text{\rm Div}}}
+\def\deg{{\text{\rm deg}}}
+\def\bdr{\partial}
+\def\sn{\mathop{\text{\rm sn}}\nolimits}
+\def\cn{\mathop{\text{\rm cn}}\nolimits}
+\def\dn{\mathop{\text{\rm dn}}\nolimits}
+\def\bcdot{{\raise0.2ex \hbox{\bf.}}}
+\def\bdot{{\raise0.4ex \hbox{\bf.}}}
+\def\Hdr{H_{\text{\tiny DR}}}
+\def\zbar{{\bar z}}
+\def\wbar{{\overline w}}
+\def\Zero{{\text{\Large 0}}}
+\def\vt{\vartheta}
+\def\Omegahat{\widehat\Omega}
+\def\Hom{\mathop{\text{\rm Hom}}\nolimits}
+\def\H{{\frak H}}
+
+%%%
+\def\cosec{\mathop{\mbox{\rm cosec}}\nolimits}
+\def\sec{\mathop{\mbox{\rm sec}}\nolimits}
+
+%%% E-mail address
+\def\atmark{\char'100}
+\def\emailaddress{{\tt kuroki{\atmark}math.tohoku.ac.jp}}
+
+%%% C^n function
+%\def\Class#1{\text{$\text{\rm C}^{#1}$}}
+\def\Class#1{\text{$C^{#1}$}}
+
+%%% N, Z, Q, R, C, P, F
+\def\N{{\Bbb N}} % the set of natural numbers
+\def\Z{{\Bbb Z}} % the set of rational integers
+\def\Q{{\Bbb Q}} % the set of rational numbers
+\def\R{{\Bbb R}} % the set of real numbers
+\def\C{{\Bbb C}} % the set of complex numbers
+\def\P{{\Bbb P}}
+\def\F{{\Bbb F}}
+
+%%% real part, imaginary part
+\def\Repart{\mathop{\text{\rm Re}}\nolimits} % real part
+\def\Impart{\mathop{\text{\rm Im}}\nolimits} % imaginary part
+
+%%% Log
+\def\Log{\mathop{\text{\rm Log}}\nolimits}
+
+%%% upper half plane, unit disk
+\def\UH{{\frak H}} % Upper Half plane
+\def\UD{D}         % Unit Disk
+
+%%% operators acting complex functions
+\def\del{\partial}  % del
+\def\delbar{\overline{\partial}}  % del bar
+\def\Res{\mathop{\text{\rm Res}}} % residue
+\def\ord{\mathop{\text{\rm ord}}\nolimits} % order
+\def\arg{\mathop{\text{\rm arg}}\nolimits} % arg
+
+%%% operators acting on matrices
+%\def\trace{\mathop{\text{\rm Tr}}\nolimits}          % trace
+\def\trace{\mathop{\text{\rm tr}}\nolimits}          % trace
+\def\transposed#1{\,\vphantom{#1}^t\mskip-1.5mu{#1}} % transpose
+%\def\transposed#1{{#1}^t} % transpose
+\def\det{\mathop{\text{\rm det}}\nolimits}          % determinant
+\def\bg#1{\text{\Large #1}}
+\newcommand{\bigzerol}{\smash{\hbox{\bg 0}}}
+\newcommand{\bigzerou}{\smash{\lower1ex\hbox{\bg 0}}}
+\newcommand{\bigstarl}{\smash{\hbox{\bg {*}}}}
+\newcommand{\bigstaru}{\smash{\lower1.5ex\hbox{\bg {*}}}}
+
+%%% Ker, Coker, Im, Coim
+\def\Ker{\mathop{\text{\rm Ker}}\nolimits}   % kernel
+\def\Coker{\mathop{\text{\rm Coker}}\nolimits} % cokernel
+\def\Im{\mathop{\text{\rm Im}}\nolimits}     % image
+\def\Coim{\mathop{\text{\rm Coim}}\nolimits} % coimage
+
+%%% injection, surjection, isomorphism
+\def\injto{\hookrightarrow}
+\def\onto{\twoheadrightarrow}
+\def\isoto{\overset\sim\longrightarrow}
+\def\isom{\cong}
+
+%%% derivative
+\def\od#1#2{\frac{d #1}{d #2}}
+\def\pd#1#2{\frac{\partial #1}{\partial #2}}
+\def\rd{\partial}
+
+%%% vector analysis
+\def\grad{\mathop{\text{\rm grad}}\nolimits}
+\def\rot{\mathop{\text{\rm rot}}\nolimits}
+\def\div{\mathop{\text{\rm div}}\nolimits}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% my favorite styles
+%
+
+%%% page style
+\pagestyle{plain}
+
+% A4 page style
+\oddsidemargin -0.54truecm \evensidemargin -0.54truecm
+\topmargin -2truecm \headheight 1truepc \headsep 2truepc
+\footheight 1truepc \footskip 2truepc
+\textheight 60truepc \textwidth 40truepc
+\columnsep 2truepc \columnseprule 0truept
+
+% B5 page style
+%\oddsidemargin 0truecm \evensidemargin 0truecm
+%\topmargin -2truecm \headheight 1truepc \headsep 2truepc
+%\footheight 1truepc \footskip 2truepc
+%\textheight 22truecm \textwidth 13.5truecm
+%\columnsep 2truepc \columnseprule 0truept
+
+% Susemi A4 page style
+%\oddsidemargin 0cm \evensidemargin 0cm
+%\topmargin  -0.5cm \headheight 1pc \headsep 2pc
+%\footheight 1pc \footskip 2pc
+%\columnsep 2pc \columnseprule 0pt
+%\textheight 22cm
+%\ifx\gtfam\undefined % NTT JTeX
+%  \textwidth 15.5cm
+%\else                % ASCII JTeX
+%  \textwidth 21.1zw
+%\fi
+
+%%% table of contents
+%\def\@pnumwidth{1.55em}  % width of page number
+%\def\@tocrmarg {2.55em}  % toc right margin
+%\def\@dotsep{4.5}        % dots separation
+%\setcounter{tocdepth}{3} % 3 = subsubsection
+%
+%%\def\tableofcontents{\section*{Contents\@mkboth{CONTENTS}{CONTENTS}}
+%\def\tableofcontents{\section*{目次\@mkboth{CONTENTS}{CONTENTS}}
+% \@starttoc{toc}}
+%\def\l@part#1#2{\addpenalty{\@secpenalty}
+% \addvspace{2.25em plus 1pt} \begingroup
+% \addvspace{1.25em plus 1pt} \begingroup
+%% \@tempdima 3em \parindent \z@ \rightskip \@pnumwidth \parfillskip
+% \@tempdima 4.5em \parindent \z@ \rightskip \@pnumwidth \parfillskip
+%-\@pnumwidth 
+% {\large \bf \leavevmode #1\hfil \hbox to\@pnumwidth{\hss #2}}\par
+% \nobreak \endgroup}
+%%\def\l@section#1#2{\addpenalty{\@secpenalty} \addvspace{1.0em plus 1pt}
+%\def\l@section#1#2{\addpenalty{\@secpenalty} \addvspace{0.5em plus 1pt}
+%%\@tempdima 1.5em \begingroup
+%\@tempdima 2.5em \begingroup
+% \parindent \z@ \rightskip \@pnumwidth 
+% \parfillskip -\@pnumwidth 
+% \bf \leavevmode \advance\leftskip\@tempdima \hskip -\leftskip #1\nobreak\hfil
+%\nobreak\hbox to\@pnumwidth{\hss #2}\par
+% \endgroup}
+%
+%%\def\l@subsection{\@dottedtocline{2}{1.5em}{2.3em}}
+%\def\l@subsection{\@dottedtocline{2}{1.5em}{3.3em}}
+%%\def\l@subsubsection{\@dottedtocline{3}{3.8em}{3.2em}}
+%\def\l@subsubsection{\@dottedtocline{3}{3.8em}{4em}}
+%%\def\l@paragraph{\@dottedtocline{4}{7.0em}{4.1em}}
+%\def\l@paragraph{\@dottedtocline{4}{7.0em}{5.5em}}
+%%\def\l@subparagraph{\@dottedtocline{5}{10em}{5em}}
+%\def\l@subparagraph{\@dottedtocline{5}{10em}{6.5em}}
+%\def\listoffigures{\section*{List of Figures\@mkboth
+% {LIST OF FIGURES}{LIST OF FIGURES}}\@starttoc{lof}}
+%%\def\l@figure{\@dottedtocline{1}{1.5em}{2.3em}}
+%\def\l@figure{\@dottedtocline{1}{1.5em}{3em}}
+%\def\listoftables{\section*{List of Tables\@mkboth
+% {LIST OF TABLES}{LIST OF TABLES}}\@starttoc{lot}}
+%\let\l@table\l@figure
+
+%%% section style
+\def\section{\@startsection{section}{1}{\z@}{-3.25ex plus -1ex minus 
+ -.2ex}{1.5ex plus .2ex}{\large\bf}}
+\def\subsection{\@startsection{subsection}{2}{\z@}{-3.25ex plus -1ex minus 
+ -.2ex}{1.5ex plus .2ex}{\normalsize\bf}}
+\def\subsubsection{\@startsection{subsubsection}{3}{\z@}{-3.25ex plus
+ -1ex minus -.2ex}{1.5ex plus .2ex}{\normalsize\bf}}
+\def\paragraph{\@startsection
+ {paragraph}{4}{\z@}{3.25ex plus 1ex minus .2ex}{-1em}{\normalsize\bf}}
+\def\subparagraph{\@startsection
+ {subparagraph}{4}{\parindent}{3.25ex plus 1ex minus 
+ .2ex}{-1em}{\normalsize\bf}}
+\def\@sect#1#2#3#4#5#6[#7]#8{\ifnum #2>\c@secnumdepth
+     \def\@svsec{}\else 
+     \refstepcounter{#1}\edef\@svsec{\csname the#1\endcsname.\hskip 1em }\fi
+%                                                           ^
+     \@tempskipa #5\relax
+      \ifdim \@tempskipa>\z@ 
+        \begingroup #6\relax
+          \@hangfrom{\hskip #3\relax\@svsec}{\interlinepenalty \@M #8\par}%
+        \endgroup
+       \csname #1mark\endcsname{#7}\addcontentsline
+         {toc}{#1}{\ifnum #2>\c@secnumdepth \else
+                      \protect\numberline{\csname the#1\endcsname.}\fi
+%                                                                ^
+                    #7}\else
+        \def\@svsechd{#6\hskip #3\@svsec #8\csname #1mark\endcsname
+                      {#7}\addcontentsline
+                           {toc}{#1}{\ifnum #2>\c@secnumdepth \else
+                             \protect\numberline{\csname the#1\endcsname}\fi
+                       #7}}\fi
+     \@xsect{#5}}
+
+%%% enumerate
+\def\labelenumi{(\theenumi)} 
+\def\theenumi{\arabic{enumi}} 
+\def\labelenumii{(\theenumii)}
+\def\theenumii{\alph{enumii}}
+\def\p@enumii{\theenumi}
+\def\labelenumiii{(\theenumiii)}
+\def\theenumiii{\roman{enumiii}}
+\def\p@enumiii{\theenumi(\theenumii)}
+\def\labelenumiv{(\theenumiv)}
+\def\theenumiv{\Alph{enumiv}} 
+\def\p@enumiv{\p@enumiii\theenumiii}
+
+%%% item
+\def\labelitemi{$\bullet$}
+\def\labelitemii{$\cdot$}
+\def\labelitemiii{$\ast$}
+\def\labelitemiv{\bf --}
+
+%%% figures
+\def\fnum@figure{\figurename \thefigure}
+\def\figurename{図}
+\numberwithin{figure}{section}
+
+%%% equation
+\numberwithin{equation}{section}
+
+%%% new theorems
+% doesn't use italic fonts in theorems (for jlatex)
+\def\@begintheorem#1#2{\trivlist \item[\hskip \labelsep{\bf #1\ #2.}]}
+\def\@opargbegintheorem#1#2#3{\trivlist
+      \item[\hskip \labelsep{\bf #1\ #2\ (#3).}]}
+% numbered like ``Theorem''
+\newtheorem{Theorem}{定理}%[section]
+\newtheorem{Definition}[Theorem]{定義}
+\newtheorem{Example}[Theorem]{例}
+\newtheorem{Lemma}[Theorem]{補題}
+\newtheorem{Proposition}[Theorem]{命題}
+\newtheorem{Remark}[Theorem]{注意}
+\newtheorem{Note}[Theorem]{参考}
+\newtheorem{Hint}[Theorem]{ヒント}
+\newtheorem{Conjecture}[Theorem]{予想}
+\newtheorem{Problem}[Theorem]{問題}
+
+%%% define \newexecise
+\def\newexercise#1{\@ifnextchar[{\@oexcs{#1}}{\@nexcs{#1}}}
+
+\def\@nexcs#1#2{%
+\@ifnextchar[{\@xnexcs{#1}{#2}}{\@ynexcs{#1}{#2}}}
+
+\def\@xnexcs#1#2[#3]{\expandafter\@ifdefinable\csname #1\endcsname
+{\@definecounter{#1}\@addtoreset{#1}{#3}%
+\expandafter\xdef\csname the#1\endcsname{\expandafter\noexpand
+  \csname the#3\endcsname \@excscountersep \@excscounter{#1}}%
+\global\@namedef{#1}{\@excs{#1}{#2}}\global\@namedef{end#1}{\@endexercise}}}
+
+\def\@ynexcs#1#2{\expandafter\@ifdefinable\csname #1\endcsname
+{\@definecounter{#1}%
+\expandafter\xdef\csname the#1\endcsname{\@excscounter{#1}}%
+\global\@namedef{#1}{\@excs{#1}{#2}}\global\@namedef{end#1}{\@endexercise}}}
+
+\def\@oexcs#1[#2]#3{\expandafter\@ifdefinable\csname #1\endcsname
+  {\global\@namedef{the#1}{\@nameuse{the#2}}%
+\global\@namedef{#1}{\@excs{#2}{#3}}%
+\global\@namedef{end#1}{\@endexercise}}}
+
+\def\@excs#1#2{\refstepcounter
+    {#1}\@ifnextchar[{\@yexcs{#1}{#2}}{\@xexcs{#1}{#2}}}
+
+\def\@xexcs#1#2{\@beginexercise{#2}{\csname
+    the#1\endcsname}\ignorespaces}
+\def\@yexcs#1#2[#3]{\@opargbeginexercise{#2}{\csname
+       the#1\endcsname}{#3}\ignorespaces}
+
+\def\@excscounter#1{\noexpand\arabic{#1}}
+\def\@excscountersep{.}
+\def\@beginexercise#1#2{\it \trivlist \item[\hskip \labelsep{\bf #1\ #2}]}
+\def\@opargbeginexercise#1#2#3{\it \trivlist
+      \item[\hskip \labelsep{\bf #1\ #2\ (#3)}]}
+\def\@endexercise{\endtrivlist}
+
+%%% new exercises
+% doesn't use italic fonts in exercises (for jlatex)
+\def\@beginexercise#1#2{\trivlist \item[\hskip \labelsep{\bf [#1#2]}]}
+\def\@opargbeginexercise#1#2#3{\trivlist
+      \item[\hskip \labelsep{\bf [#1#2]\ (#3)}]}
+%      \item[\hskip \labelsep{\bf [#1#2]\ (#3).}]}
+\def\@endexercise{\endtrivlist}
+% mondai
+\newexercise{question}{}%[section]
+\def\qref#1{{\bf [\ref{#1}]}}
+\def\qstar#1{$\!\!\!$#1$\;$}
+
+%%% new environment ``pf''
+\def\@plus{plus}
+\def\pf{%
+  \par\topsep6\p@\@plus6\p@
+  \trivlist
+  \item[\hskip\labelsep\it\proofname.]\ignorespaces}
+\def\endpf{\qed\endtrivlist}
+\@namedef{pf*}#1{\par\toks@\expandafter{\proofname}%
+  \edef\restoreproofname{\def\noexpand\proofname{\the\toks@}}%
+  \def\proofname{#1}\pf\restoreproofname\ignorespaces}
+\expandafter\let\csname endpf*\endcsname=\endpf
+%\def\qedsymbol{\RIfM@\bgroup\else$\bgroup\aftergroup$\fi
+%  \vcenter{\hrule\hbox{\vrule\@height.6em\kern.6em\vrule}\hrule}\egroup}
+\def\qedsymbol{\RIfM@\bgroup\else$\bgroup\aftergroup$\fi
+  \vcenter{\hrule\hbox{\vrule\@height.8em\kern.6em\vrule}\hrule}\egroup}
+\def\qed{\RIfM@\else\unskip\nobreak\fi\quad\qedsymbol}
+\def\proofname{Proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% script fonts
+%
+
+%\new@mathgroup\rsfs@group
+%\define@mathgroup\mv@normal\rsfs@group{rsfs}{m}{n}
+%\define@mathgroup\mv@bold\rsfs@group{rsfs}{m}{n}
+
+%\def\scr{\protect\pscr}
+%\def\pscr{\RIfM@\expandafter\scr@\else
+%                 \expandafter\nonmatherr@\expandafter\scr\fi}
+%\edef\scr@{\noexpand\use@mathgroup
+%          \expandafter\noexpand\csname =rsfs\endcsname
+%          \rsfs@group}
+
+%\new@fontshape{rsfs}{m}{n}{%
+%      <5>rsfs5%
+%      <6>rsfs5%
+%      <7>rsfs7%
+%      <8>rsfs7%
+%      <9>rsfs10 at0.9pt%
+%      <10>rsfs10%
+%      <11>rsfs10 at10.95pt%
+%      <12>rsfs10 at12pt%
+%      <14>rsfs10 at14.4pt%
+%      <17>rsfs10 at17.28pt%
+%      <20>rsfs10 at20.74pt%
+%      <25>rsfs10 at24.88pt%
+%      }{}
+%\extra@def{rsfs}{}{\noaccents@}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% japanese new fontshape
+%
+
+\ifx\gtfam\undefined %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% NTT JTeX
+
+\else %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% ASCII JTeX
+
+\parindent     = 1zw
+\leftmargini   = 1.8zw
+\leftmarginii  = 0.88\leftmargini
+\leftmarginiii = 0.75\leftmargini
+\leftmarginiv  = 0.68\leftmargini
+\leftmarginv   = 0.40\leftmargini
+\leftmarginvi  = 0.40\leftmargini
+\leftmargin    = \leftmargini
+
+%\new@fontshape{min}{m}{n}{%
+%      <5>min5%
+%      <6>min6%
+%      <7>min7%
+%      <8>min8%
+%      <9>min9%
+%      <10>min10%
+%      <11>min10 at10.95pt%
+%      <12>min10 at12pt%
+%      <14>min10 at14.4pt%
+%      <17>min10 at17.28pt%
+%      <20>min10 at20.74pt%
+%      <25>min10 at24.88pt%
+%      }{}
+%\extra@def{min}{}{}
+
+%\new@fontshape{min}{m}{it}{%
+%      <5>min5%
+%      <6>min6%
+%      <7>min7%
+%      <8>min8%
+%      <9>min9%
+%      <10>min10%
+%      <11>min10 at10.95pt%
+%      <12>min10 at12pt%
+%      <14>min10 at14.4pt%
+%      <17>min10 at17.28pt%
+%      <20>min10 at20.74pt%
+%      <25>min10 at24.88pt%
+%      }{}
+%\extra@def{min}{}{}
+
+%\new@fontshape{min}{b}{n}{%
+%      <5>goth5%
+%      <6>goth6%
+%      <7>goth7%
+%      <8>goth8%
+%      <9>goth9%
+%      <10>goth10%
+%      <11>goth10 at10.95pt%
+%      <12>goth10 at12pt%
+%      <14>goth10 at14.4pt%
+%      <17>goth10 at17.28pt%
+%      <20>goth10 at20.74pt%
+%      <25>goth10 at24.88pt%
+%      }{}
+%\extra@def{goth}{}{}
+
+%\new@fontshape{min}{bx}{n}{%
+%      <5>goth5%
+%      <6>goth6%
+%      <7>goth7%
+%      <8>goth8%
+%      <9>goth9%
+%      <10>goth10%
+%      <11>goth10 at10.95pt%
+%      <12>goth10 at12pt%
+%      <14>goth10 at14.4pt%
+%      <17>goth10 at17.28pt%
+%      <20>goth10 at20.74pt%
+%      <25>goth10 at24.88pt%
+%      }{}
+%\extra@def{goth}{}{}
+
+%\new@fontshape{goth}{m}{n}{%
+%      <5>goth5%
+%      <6>goth6%
+%      <7>goth7%
+%      <8>goth8%
+%      <9>goth9%
+%      <10>goth10%
+%      <11>goth10 at10.95pt%
+%      <12>goth10 at12pt%
+%      <14>goth10 at14.4pt%
+%      <17>goth10 at17.28pt%
+%      <20>goth10 at20.74pt%
+%      <25>goth10 at24.88pt%
+%      }{}
+%\extra@def{goth}{}{}
+
+%\new@fontshape{goth}{bx}{n}{%
+%      <5>goth5%
+%      <6>goth6%
+%      <7>goth7%
+%      <8>goth8%
+%      <9>goth9%
+%      <10>goth10%
+%      <11>goth10 at10.95pt%
+%      <12>goth10 at12pt%
+%      <14>goth10 at14.4pt%
+%      <17>goth10 at17.28pt%
+%      <20>goth10 at20.74pt%
+%      <25>goth10 at24.88pt%
+%      }{}
+%\extra@def{goth}{}{}
+
+\fi %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\makeatother

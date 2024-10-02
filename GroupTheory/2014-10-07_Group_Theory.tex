@@ -1,0 +1,2748 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% 代数学概論I演習 (群論の演習)
+%
+% 黒木 玄 (東北大学理学部数学教室, kuroki@math.tohoku.ac.jp)
+%
+\def\VERSION{1999年10月5日(火)\quad (最終変更2014年10月7日(火))}
+%
+% 日本語 AMS LaTeX でコンパイルしてください.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\documentstyle[amstex,amssymb,amscd,12pt,enshu]{jarticle}
+
+\documentclass[12pt,twoside]{jarticle}
+\usepackage{amsmath,amssymb,amscd}
+\usepackage{enshu}
+\usepackage{mathrsfs}
+\newcommand\scr{\mathscr}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% private macros
+%
+
+\def\nsub{\triangleleft}
+\def\nsup{\triangleright}
+
+\def\suchthat{\mathop{\text{\rm s.t.}}}
+\def\AND{\mathop{\text{\rm and}}}
+\def\OR{\mathop{\text{\rm or}}}
+\def\UNDEFINED{\mathop{\text{\rm\bf undefined}}}
+\def\eval{\mathop{\text{\rm\bf eval}}}
+\def\Power{{\cal P}}
+
+%\def\Sym{\mathop{\frak S}\nolimits}
+%\def\Alt{\mathop{\frak A}\nolimits}
+\def\Sym{S}
+\def\Alt{A}
+
+
+\def\Lie#1{{\frak #1}}
+\def\su{\Lie{su}}
+\def\g{\Lie{g}}
+
+\def\Ad{\mathop{\text{\rm Ad}}\nolimits}
+\def\ad{\mathop{\text{\rm ad}}\nolimits}
+
+\def\Ext{\mathop{\text{\rm Ext}}\nolimits}
+\def\Sol{\mathop{\text{\rm Sol}}\nolimits}
+\def\End{\mathop{\text{\rm End}}\nolimits}
+\def\Aut{\mathop{\text{\rm Aut}}\nolimits}
+\def\Int{\mathop{\text{\rm Int}}\nolimits}
+\def\Out{\mathop{\text{\rm Out}}\nolimits}
+\def\Func{\mathop{\text{\rm Func}}\nolimits}
+\def\pt{{\text{\rm pt}}}
+\def\Cone{\mathop{\text{\rm Cone}}\nolimits}
+\def\diag{\mathop{\text{\rm diag}}\nolimits}
+\def\gr{\mathop{\text{\rm gr}}\nolimits}
+
+\def\eps{\varepsilon}
+\def\Lk{\mathop{\text{\rm Lk}}\nolimits}
+\def\Tw{\mathop{\text{\rm Tw}}\nolimits}
+\def\Span{\mathop{\text{\rm Span}}\nolimits}
+\def\Sigmatilde{{\tilde\Sigma}}
+\def\Gammatilde{{\tilde\Gamma}}
+\def\Ctilde{{\tilde C}}
+\def\Ktilde{{\tilde K}}
+\def\sign{\mathop{\text{\rm sgn}}\nolimits}
+\def\lgl{\langle}
+\def\rgl{\rangle}
+
+\def\Cech{\v Cech}
+\def\Poincare{Poincar\'e}
+\def\Moebius{M\"obius}
+
+\def\cA{{\cal A}}
+\def\cB{{\cal B}}
+\def\cC{{\cal C}}
+\def\cD{{\cal D}}
+\def\cK{{\cal K}}
+\def\Sd{\mathop{\text{\rm Sd}}\nolimits}
+\def\Sdtilde{\mathop{\widetilde{\text{\rm Sd}}}\nolimits}
+\def\Int{\mathop{\text{\rm Int}}\nolimits}
+\def\Cyl{\mathop{\text{\rm Cyl}}\nolimits}
+\def\curl{\mathop{\text{\rm curl}}\nolimits}
+\def\I{{\bold I}}
+\def\lowa{\underline{a}}
+\def\upa{\overline{a}}
+\def\pt{{\text{\rm pt}}}
+\def\Cone{\mathop{\text{\rm Cone}}\nolimits}
+
+%%% categories
+\def\Sets{{\cal{S}\text{\it ets}}}
+\def\Mod{{\cal{M}\text{\it od}}}
+\def\Alg{{\cal{A}\text{\it lg}}}
+\def\Top{{\cal{T}\!\text{\it op}}}
+\def\Htp{{\cal{H}\text{\it tp}}}
+\def\Rings{{\cal{R}\text{\it ings}}}
+\def\Ob{\mathop{\text{\rm Ob}}\nolimits}
+\def\op{{\text{\rm op}}}
+
+%%% setminus
+\def\setminus{-}
+
+%%% misc
+\def\O{\cal{O}}
+%\def\Sch{\mathop{\cal{S}}\nolimits}  % Schwartz space
+\def\Sch{\mathop{\scr{S}}\nolimits}  % Schwartz space
+\def\Area{\mathop{\text{\rm Area}}\nolimits}
+\def\Length{\mathop{\text{\rm Length}}\nolimits}
+\def\Vol{\mathop{\text{\rm Vol}}\nolimits}
+%\def\Top{\mathop{\text{\rm Top}}\nolimits}
+\def\rank{\mathop{\text{\rm rank}}\nolimits}
+\def\id{\text{\rm id}}
+\def\II{I\!I}
+\def\Mellin{{\cal M}}
+\def\e{{\text{\rm e}}}
+\def\Per{\mathop{\text{\rm Per}}\nolimits}
+\def\Hdr{H_{\text{\rm DR}}}
+\def\pe{\wp}
+\def\Div{{\text{\rm Div}}}
+\def\deg{{\text{\rm deg}}}
+\def\bdr{\partial}
+\def\sn{\mathop{\text{\rm sn}}\nolimits}
+\def\cn{\mathop{\text{\rm cn}}\nolimits}
+\def\dn{\mathop{\text{\rm dn}}\nolimits}
+\def\bcdot{{\raise0.2ex \hbox{\bf.}}}
+\def\bdot{{\raise0.4ex \hbox{\bf.}}}
+\def\Hdr{H_{\text{\tiny DR}}}
+\def\zbar{{\bar z}}
+\def\wbar{{\overline w}}
+\def\Zero{{\text{\Large 0}}}
+\def\vt{\vartheta}
+\def\Omegahat{\widehat\Omega}
+\def\Hom{\mathop{\text{\rm Hom}}\nolimits}
+\def\H{{\frak H}}
+
+%%%
+\def\cosec{\mathop{\mbox{\rm cosec}}\nolimits}
+\def\sec{\mathop{\mbox{\rm sec}}\nolimits}
+
+%%% E-mail address
+\def\atmark{\char'100}
+\def\emailaddress{{\tt kuroki{\atmark}math.tohoku.ac.jp}}
+
+%%% C^n function
+%\def\Class#1{\text{$\text{\rm C}^{#1}$}}
+\def\Class#1{\text{$C^{#1}$}}
+
+%%% N, Z, Q, R, C, P, F
+\def\N{{\Bbb N}} % the set of natural numbers
+\def\Z{{\Bbb Z}} % the set of rational integers
+\def\Q{{\Bbb Q}} % the set of rational numbers
+\def\R{{\Bbb R}} % the set of real numbers
+\def\C{{\Bbb C}} % the set of complex numbers
+\def\P{{\Bbb P}}
+\def\F{{\Bbb F}}
+
+%%% real part, imaginary part
+\def\Repart{\mathop{\text{\rm Re}}\nolimits} % real part
+\def\Impart{\mathop{\text{\rm Im}}\nolimits} % imaginary part
+
+%%% Log
+\def\Log{\mathop{\text{\rm Log}}\nolimits}
+
+%%% upper half plane, unit disk
+\def\UH{{\frak H}} % Upper Half plane
+\def\UD{D}         % Unit Disk
+
+%%% operators acting complex functions
+\def\del{\partial}  % del
+\def\delbar{\overline{\partial}}  % del bar
+\def\Res{\mathop{\text{\rm Res}}} % residue
+\def\ord{\mathop{\text{\rm ord}}\nolimits} % order
+\def\arg{\mathop{\text{\rm arg}}\nolimits} % arg
+
+%%% operators acting on matrices
+%\def\trace{\mathop{\text{\rm Tr}}\nolimits}          % trace
+\def\trace{\mathop{\text{\rm tr}}\nolimits}          % trace
+\def\transposed#1{\,\vphantom{#1}^t\mskip-1.5mu{#1}} % transpose
+%\def\transposed#1{{#1}^t} % transpose
+\def\det{\mathop{\text{\rm det}}\nolimits}          % determinant
+\def\bg#1{\text{\Large #1}}
+%\newcommand{\bigzerol}{\smash{\hbox{\bg 0}}}
+%\newcommand{\bigzerou}{\smash{\lower1ex\hbox{\bg 0}}}
+%\newcommand{\bigstarl}{\smash{\hbox{\bg {*}}}}
+%\newcommand{\bigstaru}{\smash{\lower1.5ex\hbox{\bg {*}}}}
+
+%%% Ker, Coker, Im, Coim
+\def\Ker{\mathop{\text{\rm Ker}}\nolimits}   % kernel
+\def\Coker{\mathop{\text{\rm Coker}}\nolimits} % cokernel
+\def\Im{\mathop{\text{\rm Im}}\nolimits}     % image
+\def\Coim{\mathop{\text{\rm Coim}}\nolimits} % coimage
+
+%%% injection, surjection, isomorphism
+\def\injto{\hookrightarrow}
+\def\onto{\twoheadrightarrow}
+\def\isoto{\overset\sim\longrightarrow}
+\def\isom{\cong}
+
+%%% derivative
+\def\od#1#2{\frac{d #1}{d #2}}
+\def\pd#1#2{\frac{\partial #1}{\partial #2}}
+\def\rd{\partial}
+
+%%% vector analysis
+\def\grad{\mathop{\text{\rm grad}}\nolimits}
+\def\rot{\mathop{\text{\rm rot}}\nolimits}
+\def\div{\mathop{\text{\rm div}}\nolimits}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title{\bfseries 代数学概論A演習}
+
+\author{黒木 玄 \quad (東北大学理学研究科)}
+
+%\date{\VERSION}
+\date{2014年10月7日(火)}
+
+\maketitle
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\setcounter{page}{1}       % この数から始まる
+%\setcounter{section}{-1}   % この数の次から始まる
+\setcounter{theorem}{0}    % この数の次から始まる
+\setcounter{question}{0}   % この数の次から始まる
+\setcounter{footnote}{0}   % この数の次から始まる
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\section{はじめに}
+%
+%第 \ref{sec:logic} 節と第 \ref{sec:set-theory} 節と第 \ref{sec:quotient} 節
+%では簡単に論理学と集合論の復習を行なう. 
+%しかし, この演習の目的は論理学と集合論の復習ではないので, 
+%それらの節はサービスであると考えて欲しい. 演習の本論は
+%第 \ref{sec:fund-groups} 節から始まる. このプリントを最初に読む場合は
+%第 \ref{sec:fund-groups} 節から読み始めて欲しい.
+%もしも, 退屈な抽象論よりも具体的な実例を求めるなら,
+%第 \ref{sec:examples-of-groups} 節にいきなり飛んでも構わない.
+%要するに, 始めから順番に読んで行き必要はないのである.
+%
+%{\bf [番号]} から始まる段落は演習問題である. 演習問題を解き, その解答を黒板
+%に書き, 演習の時間にそれを説明してもらう. ただし, 以下のルールを守らなければ
+%いけない:
+%\begin{itemize}
+%\item 黒板に書いた解答には学籍番号と名前を書いておくこと.
+%\item 数式だけの解答は認めない. 日本語もしくは英語を用いて, 通常の文章として
+%  意味が通る解答を書かなければいけない.
+%\item 他人から解答そのものもしくは重大なヒントを教えてもらった場合には, それ
+%  を教えてくれた人への謝辞を書かなければいけない.
+%\item 解答を作成するときに決定的な役目を果たした文献があるならば, それが何か
+%  についても記しおくこと.
+%\item 問題が間違っている場合には適切に修正して解くか, その間違いが致命的であ
+%  ることを黒板の上で指摘すること.
+%\item できるだけ質問すること.
+%\end{itemize}
+%
+%基本的に演習問題の解答を黒板の前で説明した人に単位をやる予定であるが, 実際の
+%単位の認定方法は演習の様子を見てから決めるつもりである.
+%
+%このプリントを作成するために私が参考にした文献は最後の参考文献の欄に挙げてあ
+%る. 抽象代数学に現われる諸概念がどのような意味を持っているかに関しては,
+%I.~R.~Shafarevich の ``Basic Notions of Algebra'' \cite{Shafarevich} が非常
+%に面白い本である. 多くの分野における本質的なアイデアと重要な例が多数解説され
+%ていて楽しい. 非本質的な抽象論の泥沼に陥らないために, そのような本を参照して
+%おくことは必要だと思う. もっと易しい本には堀田良之の『加群十話』 \cite{10wa} 
+%をすすめる. この本は線型代数さえ知っていれば確実に読み込なすことができ, 代数
+%学にどのような面白い話があるかを知ることができる.
+%
+%\newpage
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{small}
+\tableofcontents
+\end{small}
+%\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\begin{small}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%\section{論理学}
+%\label{sec:logic}
+%
+%この節 (および第 \ref{sec:set-theory} 節) に関しては, 
+%文献 \cite{Kisoron}, \cite{Shugoron} および \cite{MacLane} の第11章を参考に
+%した. この節で述べる内容の厳密な取り扱いには記号論理学の知識が必要であるが, 
+%この演習の目的は論理学そのものではないので細部は曖昧な言い方でごまかすことに
+%する.  厳密な取り扱いおよび詳しい説明については文献を参照して欲しい.
+%
+%\subsection{論理的言葉遣い}
+%\label{ss:language}
+%
+%数学的に明確な主張は以下の言葉を組み合わせることによって表現可能である:
+%
+%\begin{description}
+%\item[(and)]
+%  $A$ かつ $B$. \quad
+%  $A$ and $B$. \quad
+%  ($A$ と $B$ の両方が成立する.)
+%\item[(or)]
+%  $A$ または $B$. \quad
+%  $A$ or $B$. \quad
+%  (少なくとも $A$ か $B$ のどちらかが成立する.  両方が成立しても構わない.)
+%\item[(not)]
+%  $A$ でない. \quad
+%  not $A$.
+%\item[(if, imply)]
+%  もしも $A$ ならば $B$ である. \quad
+%  $A$ は $B$ を導く. \quad
+%  If $A$, then $B$. \quad
+%  $A$ implies $B$. \quad
+%  $A \implies B$.
+%\item[(equivalence)]
+%  $A$ と $B$ は同値である. \quad
+%  $A$ であるときかつそのときに限って $B$ である. \quad
+%  $A$ is equivalent to $B$. \quad
+%  $A$ if and only if $B$. \quad
+%  $A$ iff $B$. \quad
+%  $A \iff B$.
+%\item[(for all)]
+%  任意の $x$ に対して $A(x)$. \quad
+%  $A(x)$ for all $x$. \quad
+%  $A(x)$ for every $x$. \quad
+%  $\forall x$ $A(x)$. \quad
+%  $A(x)$ $\forall x$.
+%\item[(exist)]
+%  $A(x)$ を満たす $x$ が存在する. \quad
+%  ある $x$ が存在して $A(x)$. \quad
+%  There exists $x$ such that $A(x)$. \quad
+%  $A(x)$ for some $x$. \quad
+%  $\exists x$ s.t. $A(x)$. \quad
+%  $\exists x$ $A(x)$.
+%\item[(equality)]
+%  $a$ と $b$ は等しい. \quad
+%  $a$ is equal to $b$. \quad
+%  $a$ equals $b$. \quad
+%  $a=b$. \quad
+%  ($a=b$ でないことを $a\ne b$ と略記する.)
+%\end{description}
+%
+%これらに関する論理学の説明はこの演習の目的にそぐわないので省略する. これらの
+%言葉使いを自由にかつ正確にそして直観的に扱えるようにならなればいけない. その
+%ためには実際にこれらの言葉を用いて数学の文章を書く練習をこなす必要がある.
+%
+%\begin{question}
+%  簡単な定理の内容およびその証明を以上の言葉遣い(およびそれと同じ意味の言葉
+%  遣い)のみを用いて書き下し説明せよ. \qed
+%\end{question}
+%
+%\begin{Example}
+%  「$A(x)$ を満たす任意の $x$ に対して $B(x)$」は「任意の $x$ に
+%  対して $A(x)$ ならば $B(x)$」と同じ意味である. 「任意の $x$ に対
+%  して」という言葉がなまで登場することはほとんどなく, むしろこの形で登場する
+%  のが普通である.
+%  例えば, $\eps$-$\delta$ 論法によく登場する「任意の $\eps > 0$ に対して」は
+%  「任意の正の実数 $\eps$ に対して」と同じ意味である.
+%\end{Example}
+%
+%\begin{Example}
+%  「$A(x)$ を満たすある $x$ が存在して $B(x)$」は「ある $x$ が存
+%  在して $A(x)$ かつ $B(x)$」と同じ意味である. 「ある $x$ が存
+%  在して」という言葉がなまで登場することはほとんどなく, むしろこの形で登場す
+%  るのが普通である.
+%  例えば, $\eps$-$\delta$ 論法によく登場する「ある $\delta > 0$ が存在して」
+%  は「ある正の実数 $\delta$ が存在して」と同じ意味である.
+%  なお, 日本語としては, 「ある $x$ が存在して $A(x)$ を満たしている」という
+%  言い方は不自然であり, 「$A(x)$ を満たしているような $x$ が存在する」と言う
+%  べきなのだが, 慣習として前者の言い方も許されている.
+%\end{Example}
+%
+%\begin{Example}[一意存在]
+%  ここで重要な一意的存在について説明しよう.
+%  \begin{quote}
+%    $A(x)$ を満たす $x$ が一意に存在する. \quad
+%    (唯一の $x$ が存在して $A(x)$.\quad
+%    There exists a unique $x$ such that $A(x)$. \quad
+%    $\exists ! x$ s.t $A(x)$. \quad
+%    $\exists ! x$ $A(x)$.)
+%  \end{quote}
+%  という言いまわしは数学によく登場する. これらは以下の二つの主張の論理積 (and) 
+%  と同じ意味である:
+%  \begin{itemize}
+%  \item[(a)]
+%    $A(x)$ を満たす $x$ が存在する. \quad
+%    ($\exists x$ s.t. $A(x)$.)
+%  \item[(b)]
+%    任意の $x_1$, $x_2$ に対して $A(x_1)$ かつ $A(x_2)$ ならば 
+%    $x_1=x_2$. \quad \hfill\break
+%    ($\forall x_1 \forall x_2$, $A(x_1)$ and $A(x_2)$ $\implies$ $x_1=x_2$.)
+%  \end{itemize}
+%\end{Example}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%\subsection{函数記号の導入}
+%\label{ss:function}
+%
+%この節の中では, 任意の $x_1,\dots,x_n$ に対して, 条件 $A(x_1,\dots,x_n,y)$を
+%みたす $y$ が一意に存在する(ちょうど一つ存在する)と仮定する:
+%\begin{equation*}
+%  \forall x_1,\dots,x_n\, \exists ! y \suchthat A(x_1,\dots,x_n,y).
+%\end{equation*}
+%
+%このとき, $x_1,\dots,x_n$ に対して $A(x_1,\dots,x_n,y)$ を満たす $y$ を対応
+%させる函数記号として $f(x_1,\dots,x_n,y)$ を導入することは自然である:
+%\begin{equation*}
+%  \forall x_1,\dots,x_n,\ A(x_1,\dots,x_n, f(x_1,\dots,x_n)).
+%  \tag{$*$}
+%\end{equation*}
+%実際, 数学においては日常茶飯事のごとく行なわれる.
+%このやり方で自由に新函数記号を導入しても構わないのは, 以下で説明するように,
+%それによって主張の表現可能性と証明可能性が本質的に何も変化しないからである.
+%
+%上のやり方で新しい記号 $f$ を導入しても, 数学的に表現できる主張の範囲は本質
+%的には増えない.  なぜなら, 記号 $f$ を含む主張 $F$ と同値な $f$ を含まない主
+%張 $F^{-f}$ を自然に構成できるからである.
+%実際, 次の手続きで $F$ から $F^{-f}$ を構成することができる (\cite{Kisoron}
+%p.38):
+%
+%\begin{quote}
+%  $F$ の中に含まれる $f(t_1,\dots,t_n)$ でどの $t_i$ にも $f$ が含まれないも
+%  のをひとつ選び, それを新変数 $y$ に置き換えたものを $F_1(y)$ とし, 主張 
+%  $F'$ を $\exists y$ s.t. $A(t_1,\dots,t_n,y)$ and $F_1(y)$ と定める.
+%  もしも, $F'$ が $f$ をまだ含んでいるなら, 同様の手続きを繰り返して, 全ての 
+%  $f$ を消去した結果を $F^{-f}$ とする.
+%\end{quote}
+%
+%$F$ と $F_1(f(t_1,\dots,t_n))$ が等しいことに注意すれば, $F$ と $F'$ が同値
+%であることは以下のように示される.
+%
+%$F$ すなわち $F_1(f(t_1,\dots,t_n))$ を仮定する.
+%($*$) より $A(t_1,\dots,t_n, f(t_1,\dots,t_n))$ が成立する.
+%よって, $y$ として $f(t_1,\dots,t_n))$ を考えることによって,
+%$\exists y$ s.t. $A(t_1,\dots,t_n, y)$ and $F_1(y)$ すなわち $F'$ が示される.
+%
+%逆に, $F'$ を仮定する.
+%すなわち, $A(t_1,\dots,t_n, y)$ と $F_1(y)$ の両方を満たす $y$ が存在すると
+%仮定する. 
+%($*$) より $A(t_1,\dots,t_n, f(t_1,\dots,t_n))$ が成立する.
+%この節の始めに仮定したことより, $A(t_1,\dots,t_n, y)$ を満たす $y$ は唯一な
+%ので, $y = f(t_1,\dots,t_n)$.
+%したがって, $F_1(f(t_1,\dots,t_n))$ すなわち $F$ が示された.
+%
+%以上によって, $F$ と $F'$ の同値性が示された.
+%
+%次に証明可能な主張が増えないことについて説明しよう. 上の説明より, $f$ を含む
+%主張は自然にそれと同値な $f$ を含まない主張に置き換えることができる. したが
+%って, 証明されるか否かを考察する主張 $F$ は $f$ を含んでないと仮定して良い.
+%実は次の結果が知られている:
+%\begin{quote}
+%  この節の最初の仮定のもとで, $f$ を含まない主張 $F$ の証明が記号 $f$ を用い
+%  て可能ならば, $f$ を用いずに証明可能である.
+%\end{quote}
+%この結果を正確に説明するためには1階の古典術語論理の知識が必要である.
+%正確な内容とその証明については \cite{Kisoron} 系 3.11 もしくは \cite{Shugoron}
+%pp.213-215 を見よ. 前者には完全性定理を用いた証明が書いてあり, 後者には
+%直接的な証明が書いてある.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%\section{集合論}
+%\label{sec:set-theory}
+%
+%集合に関して最も基礎的なのは, $a$ が集合 $A$ に属する ($a$ belongs to $A$,
+%$a$ is in $A$, or $a$ is an element of $A$) という概念であり, 
+%通常 $a\in A$ と表記される.
+%また, 「$a\in A$でない」を「$a\not\in A$」と略記する.
+%
+%「$A$ に属す任意の $x$ に対して」を「任意の $x\in A$ に対して」もしくは
+%「$\forall x\in A$」と略記し, 
+%「$A$ に属すある $x$ が存在して」を「ある $x\in A$ が存在して」もしくは
+%「$\exists x\in A$」と略記する.
+%
+%\subsection{包含関係 (inclusion relation)}
+%\label{ss:inlusion}
+%
+%$A$, $B$ は集合であるとする. 任意の $x\in A$ に対して $x\in B$ が成立すると
+%き, $A\subset B$ と書き, 
+%$A$ は $B$ の部分集合である ($A$ is a subset of $B$),
+%$A$ は $B$ に含まれる ($A$ is contained in $B$), 
+%$B$ は $A$ を含む ($B$ contains $A$) と言う.
+%
+%\subsection{外延性公理 (axiom of extesionality)}
+%\label{ss:extensionality}
+%
+%集合 $A$, $B$ に対して, $A\subset B$ かつ $B \subset A$ ならば $A=B$ である.
+%(もちろん, この逆も成立している.) すなわち, $A=B$ であることを証明するために
+%は, $A$ と $B$ が互いに相手を含んでいることを示せばよい.
+%
+%\subsection{空集合の公理 (axiom of empty set)}
+%\label{ss:empty}
+%
+%ある集合 $X$ が存在して, 任意の $x$ に対して $x\not\in X$.  
+%すなわち, 要素を何一つ持たない集合 $X$ が存在する.
+%外延性公理から, そのような $X$ は一意的であることがわかる. 
+%そこで, その $X$ を $\emptyset$ と表わし, 空集合 (empty set) と呼ぶ.
+%
+%\subsection{クラス (class)}
+%\label{ss:class}
+%
+%$x$ に関する任意の条件 $P(x)$ に対して, 
+%$P(x)$ を満たす全ての $x$ の集まりを $\{\,x\mid P(x)\,\}$ と表わす:
+%\begin{equation*}
+%  a \in \{\,x\mid P(x)\,\} \iff P(a).
+%  \tag{$*$}
+%\end{equation*}
+%ただし, この記号法を安易に用いると容易に矛盾が生じてしまう.
+%例えば, $P(x)$ として「$x$ は集合でかつ $x\not\in x$」を選び, 
+%$a=\{\,x\mid P(x)\,\}$ と置くとき, もしもこの $a$ が集合ならば, ($*$) から
+%\begin{equation*}
+%  a \in a \iff a \not\in a
+%\end{equation*}
+%が容易に導かれ矛盾してしまう. これが有名な Russel の paradox である.
+%
+%以下においては, 
+%$\{\,x\mid P(x)\,\}$ は常に集合であるとは限らないと考えることにし,
+%集合とは限らない $\{\,x\mid P(x)\,\}$ をクラス (class) と呼び,
+%実際にそれが集合でないとき, 固有のクラス (proper class) と呼ぶことにする.
+%もしも, $\{\,x\mid \text{$x$ は集合でかつ $x \not\in x$}\,\}$ が集合でない
+%ならば Russel の paradox は避けられる.
+%
+%任意の函数記号 $f(x_1,\dots,x_n)$ と条件 $P(x_1,\dots,x_n)$ に対して,
+%\begin{equation*}
+%  \{\, f(x_1,\dots,x_n) \mid P(x_1,\dots,x_n) \,\}
+%  :=
+%  \{\, y \mid \exists x_1,\dots,x_n \suchthat
+%       y = f(x_1,\dots,x_n) \AND P(x_1,\dots,x_n) \,\}
+%\end{equation*}
+%と置く. ここで, $:=$ は左辺を右辺で定義するという意味である. もちろん, これ
+%も常に集合になるとは限らない.
+%
+%\subsection{分出公理 (axiom of comprehension, separation, or subset)}
+%\label{ss:comprehension}
+%
+%任意の集合 $A$ と任意の条件 $P(x)$ に対して,
+%\begin{equation*}
+%  \{\, x\in A \mid P(x) \,\}
+%  := \{\, x \mid x\in A \AND P(x)\,\}
+%\end{equation*}
+%は集合である. 
+%$\{\, x\in A \mid P(x) \,\}$ の使用に限れば Russel の paradox を避けることが
+%できる.
+%
+%\subsection{共通部分と補集合 (intersection and complement)}
+%\label{ss:int-compl}
+%
+%分出公理より, 集合 $A$, $B$ に対して, 
+%\begin{equation*}
+%  A \cap B := \{\, x \mid x\in A \AND x \in B \,\}
+%\end{equation*}
+%も集合であることが出る.
+%(なぜなら, $A \cap B = \{\, x\in A \mid x \in B \,\}$.)
+%
+%また, 集合の集合 $\cal A$ が空でなければ,
+%\begin{equation*}
+%  \bigcap{\cal A} := \bigcap_{X\in{\cal A}} X
+%  := \{\, x \mid \forall X\in{\cal A}, x\in X \,\}
+%\end{equation*}
+%も集合であることが証明される. なぜなら, 存在する $A_0\in\cal A$ を取っておけば
+%\begin{equation*}
+%  \bigcap{\cal A} = \bigcap_{X\in{\cal A}} X
+%  = \{\, x \in A_0 \mid \forall X\in{\cal A}, x\in X \,\}.
+%\end{equation*}
+%
+%\begin{question}
+%  もしも, $\cal A$ が空であれば $\bigcap{\cal A}$ はあらゆるものを含むクラス
+%  になってしまうことを説明せよ. \qed
+%\end{question}
+%
+%分出公理より, 集合 $A$, $B$ に対して,
+%\begin{equation*}
+%  A \setminus B = \{\,x\in A\mid x\not\in B\,\}
+%\end{equation*}
+%も集合である. 特に $B$ が $A$ の部分集合であり, $A$ を省略しても誤解が生じな
+%い場合は $A\setminus B$ を $B^c$ と書き, ($A$ における) $B$ の補集合と呼ぶ.
+%
+%\subsection{対集合の公理 (axiom of pair set)}
+%\label{ss:pair-set}
+%
+%任意の $a$, $b$ に対して,
+%\begin{equation*}
+%  \{a,b\} := \{\, x \mid x = a \OR x = b \,\}
+%\end{equation*}
+%は集合である. 特に, 
+%\begin{equation*}
+%  \{a\} := \{\, x \mid x = a \,\} = \{a,a\}
+%\end{equation*}
+%も集合である.
+%
+%\subsection{和集合の公理 (axiom of union)}
+%\label{ss:union}
+%
+%集合の集合 $\cal A$ に対して,
+%\begin{equation*}
+%  \bigcup{\cal A} := \bigcup_{X\in{\cal A}} X
+%  :=  \{\, x \mid \exists X\in{\cal A} \suchthat x\in X \,\}
+%\end{equation*}
+%も集合である. 
+%
+%\subsection{有限集合 (finite set)}
+%\label{ss:finite-set}
+%
+%空集合の公理と対集合の公理と和集合の公理から, 
+%任意有限個 ($0$ 個を含む) の  $a_1,\dots,a_n$ に対して,
+%\begin{equation*}
+%  \{a_1,\dots,a_n\}
+%  = \{\, x \mid x = a_1 \OR \cdots \OR x = a_n \,\}
+%\end{equation*}
+%が集合であることを示せる($n$ に関する帰納法).
+%
+%よって, 任意有限個 ($0$ 個を含む) の集合 $A_1,\dots,A_n$ に対して,
+%\begin{equation*}
+%  A_1\cup\dots\cup A_n
+%  = \{\, x \mid x \in A_1 \OR \cdots \OR x \in A_n \,\}
+%  = \bigcup \{ A_1,\dots,A_n \}
+%\end{equation*}
+%が集合であることも示される.
+%
+%\subsection{巾集合の公理 (axiom of power set)}
+%\label{ss:power-set}
+%
+%任意の集合 $A$ に対して, $A$ の部分集合の全体
+%\begin{equation*}
+%  \Power A := 2^A := \{\, X \mid X \subset A \,\}
+%\end{equation*}
+%も集合である.  これを $A$ の巾集合 (the power set of $A$) と呼ぶ.
+%
+%\begin{question}
+%  空集合 $\emptyset$ の巾集合 $\Power\emptyset$ を求めよ. \qed
+%\end{question}
+%
+%\begin{question}[Cantor の定理]
+%  集合 $A$ からその巾集合 $\Power A$ への全単射は存在しない. \qed
+%\end{question}
+%
+%\subsection{無限公理 (axiom of infinity)}
+%\label{ss:infinity}
+%
+%集合 $A$ に対して, $S(A) := A \cup \{A\}$ と置き, 集合 $S_0,S_1,S_2,\ldots$ 
+%を帰納的に $S_0 := \emptyset$, $S_{n+1} = S(S_n)$ によって定める:
+%\begin{equation*}
+%  S_0 = \{\}, \quad
+%  S_1 = \{S_0\}, \quad
+%  S_2 = \{S_0, S_1\}, \quad
+%  S_3 = \{S_0, S_1, S_2\}, \quad \ldots.
+%\end{equation*}
+%$S_n$ は $n$ 個の要素からなる集合になる. (集合論の世界では $S_n$ のことを単
+%に $n$ と書くことが多い.)
+%全ての $S_n$ を要素に持つ集合が存在するというのが無限公理である:
+%ある集合 $X$ が存在して,
+%\begin{equation*}
+%  \emptyset\in X \quad \AND \quad
+%  \forall x\in X,\; \text{$x$ が集合} \implies S(x)\in X.
+%  \tag{$*$}
+%\end{equation*}
+%無限公理と分出公理より, この ($*$) を満たす全ての $X$ の共通部分
+%\begin{equation*}
+%  \N := \omega :=
+%  \{\, x \mid
+%  \text{すぐ上の条件 ($*$) を満たす任意の集合 $X$ に対して $x\in X$} \,\}
+%\end{equation*}
+%も集合である. $S_n$ を $n$ と書くことにすれば,
+%\begin{equation*}
+%  \N = \{0,1,2,3,\ldots\}, \quad
+%  S(n) = n + 1,\; \forall n \in \N.
+%\end{equation*}
+%$\N$ を自然数全体の集合と呼ぶ.
+%
+%\begin{question}[数学的帰納法]
+%  任意の条件 $P(x)$ に関して次が成立する:
+%  \begin{quote}
+%    もしも $P(0)$ と $\forall x\in\N,\; P(x) \implies P(x+1)$ の両方が成立し
+%    ていれば \hfill\break
+%    $\forall x\in\N,\; P(x)$ が成立する. \qed
+%  \end{quote}
+%\end{question}
+%
+%\subsection{順序対 (ordered pair)}
+%\label{ss:ordered-pair}
+%
+%任意の $a$, $b$ に対して, 記号 $(a,b)$ を用意し, 次の公理を仮定する:
+%\begin{equation*}
+%  (a,b) = (c,d) \implies a = c \;\AND\; b = d.
+%\end{equation*}
+%例えば, $(a,b):=\{\{a\},\{a,b\}\}$ と置けばこの順序対の公理が満たされる.
+%
+%\subsection{直積 (direct product)}
+%\label{ss:product}
+%
+%集合 $A$, $B$ に対して, それらの直積
+%\begin{equation*}
+%  A\times B := \{\, (x,y) \mid x \in A \AND y \in B \,\}
+%\end{equation*}
+%も集合である. 
+%これは公理と思っても良いし, 集合論の範囲内で $(a,b):=\{\{a\},\{a,b\}\}$ と置
+%くことによって証明される定理であると思っても良い.
+%
+%\subsection{関係 (relation)}
+%\label{ss:relation}
+%
+%集合 $A$, $B$ の直積の部分集合 $R\subset A\times B$ を $A$ と $B$ の間の関係
+%(relation) と呼び, $A=B$ のとき $R$ は $A$ における関係であると言う.
+%$(x,y)\in R$ であることを $xRy$ と略記することも多い.
+%
+%集合 $A$, $B$, $C$ 対して,
+%関係 $R\subset A\times B$, $S\subset B\times C$ に対して, 
+%関係 $S\circ R\subset A\times C$ を
+%\begin{equation*}
+%  S\circ R :=
+%  \{\,(x,z)\in A\times C \mid \exists y\in B \suchthat xRy \AND ySz \,\}.
+%\end{equation*}
+%と定義する. これを $R$ と $S$ の合成 (composition) と呼ぶ.
+%
+%集合 $A$ に対して, $=$ の定める $A$ における関係を %
+%$\Delta_A := \{\,(x,x)\mid x\in A\,\}$ と表わす. 
+%
+%関係 $R\subset A\times B$ に対して, 
+%その転置 $R^t\subset B\times A$ を %
+%$R^t:=\{\,(y,x)\mid\,(x,y)\in R\}$ と定める.
+%
+%\begin{question}
+%  集合 $A$, $B$, $C$, $D$ に対して以下が成立する:
+%  \begin{enumerate}
+%  \item 関係 $R\subset A\times B$, $S\subset B\times C$,
+%    $T\subset C\times D$ に対して, 
+%    $T\circ(S\circ R) = (T\circ S)\circ R$.
+%  \item $R\circ\Delta_A = \Delta_B\circ R = R$. 
+%  \item $(S\circ R)^t = R^t\circ S^t$, \quad $(\Delta_A)^t = \Delta_A$.
+%    \qed
+%  \end{enumerate}
+%\end{question}
+%
+%このように, 集合の間の関係は, 集合の間の写像と同様に, 合成に関して結合律を満
+%たし, 単位元を持つ.
+%
+%\subsection{写像 (mapping)}
+%\label{ss:mapping}
+%
+%$f$ が 集合 $A$ から $B$ への写像であることを, $f:A\to B$ と略記する.
+%値域 $B$ が一致してない2つの写像は異なる写像であると約束しておく%
+%\footnote{例えば, 写像 $f:A\to B$ に対して, $f$ と同じ値を持ち値域が $f$ の
+%  像 $f(A)$であるような写像 $f'$ を考えると, $f$ が全射でなくても, $f'$ は全
+%  射になる.  したがって, $f$ と $f'$ は $A$ 上で同じ値を取るのだが, 他の習慣
+%  に合わせるために区別しなければいけない.}.
+%
+%$f:A\to B$ に対して, そのグラフ $\Gamma$ を次のように定義する:
+%\begin{equation*}
+%  \Gamma := \{\,(x,f(x)) \mid x \in A \,\}.
+%\end{equation*}
+%$\Gamma\subset A\times B$ は $A$ と $B$ の間の関係であり,
+%\begin{equation*}
+%  \forall x\in A\, \exists ! y\in B \suchthat (x,y)\in\Gamma
+%  \tag{$*$}
+%\end{equation*}
+%を満たしている. 逆にこの条件を $\Gamma\subset A\times B$ が満たしているとき, 
+%\begin{equation*}
+%  \forall x \in X,\; (x,f(x))\in\Gamma
+%\end{equation*}
+%によって, 写像 $f:A\to B$ を定義することができる. このようにして, 
+%写像 $f:A\to B$ と ($*$) を満たす $\Gamma\subset A\times B$ は1対1に対応して
+%いる%
+%\footnote{写像 $f:A\to B$ よりもむしろそのグラフ $\Gamma$ を考え, 
+%  さらに$A \times B$ の部分集合を写像の一般化と考えるという
+%  発想は結構重要である. 
+%  2つの多様体の間の correspondence の概念はまさにそのような発想に
+%  基いている.}.
+%
+%写像 $f:A\to B$, $g:B\to C$ に対して, その合成 $g\circ f:A\to C$ を %
+%$g\circ f(x) = g(f(x)), \forall x\in A$ によって定めることができる.
+%
+%集合 $A$ の恒等写像を $\id_A$ と書くことにする: 
+%$\id_A:A\to A$ でかつ $\id_A(x) = x \forall x \in A$.
+%
+%\begin{question}
+%  任意の写像 $f$ に対して, $f$ のグラフを $\Gamma(f)$ と書くことにする. 
+%  このとき, 写像 $f:A\to B$, $g:B\to C$ に対して,
+%  $\Gamma(g\circ f) = \Gamma(g)\circ\Gamma(f)$ かつ %
+%  $\Gamma(\id_A) = \Delta_A$. \qed
+%\end{question}
+%
+%以下のように考えれば, 集合の概念のみを用いて, 写像の概念を記述することができ
+%る. まず, 条件 $F(X,Y,\Gamma,x,y)$ を
+%\begin{itemize}
+%\item $X$, $Y$ は集合であり, $\Gamma\subset X\times Y$ であり, 
+%  $\Gamma$ が $\forall x \in X\, \exists ! y\in Y \suchthat (x,y)\in\Gamma$ を
+%  満たしているとき $(x,y)\in\Gamma$,
+%\item そうでないとき $y = \UNDEFINED$ 
+%\end{itemize}
+%と定める. このとき, この $F$ は第 \ref{ss:function} 節の始め条件を満たしている
+%ことを確かめられる. よって, 函数記号 $\eval(X,Y,\Gamma,x)$ を
+%\begin{equation*}
+%  \forall X\; \forall Y\; \forall\Gamma\; \forall x\;
+%  F(X,Y,\Gamma,x, \eval(X,Y,\Gamma,x))
+%\end{equation*}
+%によって導入できる.
+%($*$) を満たす $\Gamma$ の定める写像は $f:X\to Y$ は %
+%$f(x) = \eval(X,Y,\Gamma,x)$ に他ならない (\cite{Shugoron} p.10).
+%このようにして, 写像そのものではなく, 写像のグラフを考えることによって,
+%写像の概念を集合の概念(および論理学)のみを用いて定義することが可能なのである.
+%
+%\subsection{像と逆像とファイバー (imaga, inverse image, and fiber)}
+%\label{ss:im-inv-fiber}
+%
+%写像 $f:A\to B$ に対して, 
+%$C\subset A$ の $f$ による像 $f(C)$,
+%$D\subset B$ の $f$ による逆像 $f^{-1}(D)$,
+%点 $b\in B$ における $f$ のファイバー%
+%\footnote{なぜ, ファイバーと呼ぶかについては演習の時間に説明する予定である.} %
+%$f^{-1}(b)$ を以下のように定義する:
+%\begin{itemize}
+%\item $f(C) := \{\, f(x) \mid x \in C \,\}$,
+%\item $f^{-1}(D) := \{\, x\in A \mid f(x) \in D \,\}$,
+%\item $f^{-1}(b) := \{\, x\in A \mid f(x) = b \,\}$.
+%\end{itemize}
+%
+%\subsection{全射と単射と逆写像 (surjection, injection, and inverse mapping)}
+%\label{ss:sur-in-inv}
+%
+%写像 $f:A\to B$ が全射 (surjection), 単射(injection)であることを, それぞれ以
+%下の条件によって定める:
+%\begin{description}
+%\item[全射] $\forall y\in B\, \exists x\in A \suchthat f(x)=y$.
+%  \quad (これは $f(A) = B$ と同値)
+%\item[単射] $\forall x_1,x_2\in A,\; f(x_1)=f(x_2) \implies x_1=x_2$.
+%\end{description}
+%全射かつ単射である写像を全単射と呼ぶ.
+%
+%写像 $f:A\to B$ に対して, 写像 $g:B\to A$ が $g\circ f = \id_A$ かつ %
+%$f\circ g = \id_B$ を満たしているとき, $g$ を $f$ の逆写像と呼ぶ. 
+%$f$ の逆写像が存在すれば, それは一意に定まるので, それを $f^{-1}$ と書くことに
+%する.
+%
+%\begin{question}
+%  $f:A\to B$, $g:B\to C$ に対して, 以下を示せ:
+%  \begin{enumerate}
+%  \item $g\circ f$ が全射ならば $g$ もそうであるが, $f$ はそうであるとは限ら
+%    ない.
+%  \item $g\circ f$ が単射ならば $f$ もそうであるが, $g$ はそうであるとは限ら
+%    ない.
+%  \item 全単射は逆写像を持つ. 
+%  \qed
+%  \end{enumerate}
+%\end{question}
+%
+%\subsection{引き込みと切断 (retraction and section)}
+%\label{ss:retract-sect}
+%
+%写像 $f:A\to B$ に対して, 写像 $r:B\to A$ が $r\circ f = \id_A$ を満たしてい
+%るとき, $r$ を $f$ の引き込み%
+%\footnote{なぜこう呼ぶかについては演習の時間に説明する予定である.} %
+%(retraction) と呼ぶ. $f$ の引き込み $r$ が存在
+%するとき, $f$ は単射で $r$ は全射になる.
+%
+%\begin{question}
+%  逆に, $f$ が単射であれば, $f$ の引き込みが存在することを以上で述べた公理の
+%  みを使って示せる. しかし, 引き込みは一意的とは限らない. \qed
+%\end{question}
+%
+%写像 $f:A\to B$ に対して, 写像 $s:B\to A$ が $f\circ s = \id_B$ を満たしてい
+%るとき, $s$ を $f$ の切断%
+%\footnote{なぜこう呼ぶかについては演習の時間に説明する予定である.} %
+%(section) と呼ぶ. $f$ の切断 $s$ が存在するとき,
+%$f$ は全射で $s$ は単射になる.
+%
+%実は P.\ J.\ Cohen の有名な仕事によって, 以上で述べた公理のみを用いて, 
+%任意の全射 $f$ が切断を持つことを証明できないことが知られている. 実はそれを
+%主張するのが選択公理 (axiom of choice) である.
+%
+%\subsection{無限直積 (infinite product)}
+%\label{ss:infinite-product}
+%
+%集合 $\Lambda$ から集合の集合 $\cal U$ への写像 $A:\Lambda\to{\cal U}$ に対
+%して, $\{A_\lambda\}_{\lambda\in\Lambda}$ を $\Lambda$ で添字付けられた集合
+%族 (family of sets)と呼ぶ. ここで, $A_\lambda := A(\lambda)$ と置いた.  2つ
+%の集合族 $\{A_\lambda\}_{\lambda\in\Lambda}$, $\{B_\mu\}_{\mu\in M}$ が等し
+%いとは, $\Lambda=M$ でかつ $A_\lambda=B_\lambda$ $\forall \lambda\in\Lambda$
+%が成立することであると定めておく.
+%
+%写像 $x:\Lambda\to{\bigcup\cal U}$ に対して, 
+%$(x_\lambda)_{\lambda\in\Lambda}$ なる族を考える. 
+%ここで, $x_\lambda := x(\lambda)$ と置いた. 
+%2つの $\{x_\lambda\}_{\lambda\in\Lambda}$, $\{y_\mu\}_{\mu\in M}$ が等
+%しいとは, 
+%$\Lambda=M$ でかつ $x_\lambda=y_\lambda$ $\forall \lambda\in\Lambda$ が成立
+%することであると定めておく.
+%
+%集合族 $\{A_\lambda\}_{\lambda\in\Lambda}$ の直積を
+%\begin{equation*}
+%  \prod_{\lambda\in\Lambda}A_\lambda :=
+%  \{\, (x_\lambda)_{\lambda\in\Lambda}
+%  \mid x_\lambda\in A_\lambda\; \forall \lambda\in\Lambda \,\}
+%\end{equation*}
+%と定義する. これが集合であることを今まで述べた公理のみを使って証明できる.
+%(ただし, 写像としての族とそのグラフ(集合の一種)の同一視を用いる.)
+%
+%\subsection{選択公理 (axiom of choice)}
+%\label{ss:choice}
+%
+%写像 $f:A\to B$ が全射ならばある写像 $s:B\to A$ で $f\circ s = \id_B$ を満た
+%すものが存在する.
+%
+%直観的には次のように考えれば選択公理はいかにも成立していそうなことがわかる.
+%$f$ が全射であることと, 任意の $b\in B$ に
+%おける $f$ のファイバー $f^{-1}(b)$ が空でないことは同値である.
+%そこで, 各 $b\in B$ に対して $f^{-1}(b)$ の要素 $s(b)$ を1つずつ選ぶことがで
+%きれば, 写像 $s:B\to A$ で $f\circ s = \id_B$ を満たすものが構成できることが
+%わかる. この直観が $B$ が巨大な無限集合の場合にも適用できると考えることと,
+%選択公理を仮定することは同じことなのである.
+%
+%選択公理には他にも異なる述べ方が様々あり, 選択公理以外の集合論の公理のもとで,
+%同値な定理が幾つも存在する.
+%
+%\begin{question}
+%  以下の各々と上で述べた形の選択公理は同値である:
+%  \begin{enumerate}
+%  \item $\cal A$ が集合の集合でかつ全ての $X\in{\cal A}$ が空でないとき,
+%    写像 $c:{\cal A}\to\bigcup{\cal A}$ で %
+%    $\forall X\in{\cal A},\;c(X)\in X$ を満たすものが存在する.
+%  \item 空でない集合のみからなる集合族 $\{A_\lambda\}_{\lambda\in\Lambda}$ %
+%    の直積 $\prod_{\lambda\in\Lambda}A_\lambda$ は空ではない.
+%  \item 任意の集合 $A$, $B$ と任意の条件 $P(x,y)$ に対して,
+%    \begin{equation*}
+%      \forall x\in A\; \exists y\in B\; \suchthat\; P(x,y)
+%      \implies
+%      \exists y:A\to B\; \suchthat\; \forall x\in A\; P(x,y(x)).
+%      \qed
+%    \end{equation*}
+%  \end{enumerate}
+%\end{question}
+%
+%この問題の最後の部分より, 選択公理が $\forall$ と $\exists$ のある種の交換法
+%則を記述していることがわかる.
+%ちなみに, それと類似した次の主張
+%\begin{enumerate}
+%\item[($*$)] 任意の集合 $A$, $B$ と任意の条件 $P(x,y)$ に対して,
+%  \begin{equation*}
+%    \forall x\in A\;\exists! y\in B\; \suchthat\; P(x,y)
+%    \implies
+%    \exists! y:A\to B\; \suchthat\; \forall x\in A\; P(x,y(x)).
+%  \end{equation*}
+%\end{enumerate}
+%は写像 $f:A\to B$が何であったかを思い出せばあたり前である. 
+%これの $\exists!$ (一意存在) を単なる $\exists$ (存在) に置き換えたものが
+%成立するというのが選択公理なのだ.
+%
+%例えば, 任意の $\eps>0$ に対して, ある $\delta>0$ が存在して……が成立すると
+%き, 各 $\eps>0$ に対してそのような $\delta>0$ を $\delta(\eps)$ と書いたりす
+%ることがよくあるが, それは選択公理を使ったことになる.
+%
+%\subsection{有理数, 実数, 複素数など}
+%\label{ss:various}
+%
+%以上で述べた公理を仮定すれば, この演習で扱う結果は原理的に全て証明可能なはず
+%である.
+%
+%しかし, そのことを確かめるためには, 
+%自然数全体の集合 $\N=\{0,1,2,\ldots\}$ から出発し,
+%(有理)整数環 $\Z = \{\ldots,-2,-1,0,1,2,\ldots\}$,
+%有理数体 $\Q = \{\, x/y \mid x,y\in\Z \AND y\ne0\,\}$,
+%そして, その絶対値に関する完備化としての実数体 $\R$ などを構成し,
+%複素数体 $\C$,
+%行列の空間,
+%有用な初等函数達 ($\cos x$, $\sin x$, $e^x$, $\log x$, $\ldots$),
+%などなどを構成しなければならない.
+%しかし, この演習では, それらの対象の存在と基本性質は認めて, 自由に使って良い
+%ものとする. 
+%
+%\subsection{公理の補足}
+%\label{ss:hosoku}
+%
+%所謂 ZFC のような公理的集合論は超限順序数を扱い易いように公理系が構築されて
+%いる. その辺の事情は公理的集合論の考え方に関する啓蒙書に \cite{Gaishi} があ
+%るので参照されたい.  実は上でこの演習では十分だと述べた公理系からは ZFC に含
+%まれる以下の2つの公理が抜け落ちている. 特に置換公理がないと von Neumann の意
+%味での超限順序数 $\omega+\omega$ の存在さえ証明できない. しかし, この演習で
+%は超限順序数を利用しないので, それらの公理は不要である.
+%
+%\subsubsection{置換公理 (axiom of replacement)}
+%\label{ss:replacement}
+%
+%集合 $A$ と条件 $P(x,y)$ の組が %
+%$\forall x\in A\,\exists!y \suchthat P(x,y)$ を満たしているとする. 
+%すなわち, 任意の $x\in A$ に対して $P(x,y)$ を満たす $y$ が一意に対応してい
+%るとする. 
+%このとき, $x\in A$ に対応する $y$ の全体 %
+%\(
+%  \{\, y \mid \exists x\in A \suchthat P(x,y) \,\}
+%\)
+%は集合である.
+%
+%\subsubsection{基礎の公理 (axiom of foundation)}
+%\label{ss:foundation}
+%
+%ここでは帰納法バージョンの基礎の公理を述べておこう. 次の公理は(適切な修正を
+%施さない限り)集合以外の対象が存在しない世界でないとあまり意味がない.
+%
+%任意に条件 $P(x)$ が与えられたとき, 各集合 $x$ に関して,
+%\begin{quote}
+%  任意の $y\in x$ に対して $P(y)$ であれば %
+%  $x$ 自身に対しても $P(x)$ である
+%\end{quote}
+%が成立しているならば, 全ての集合 $x$ に関して $P(x)$ である. (この公理の仮定
+%部分が成立していれば自然に $P(\emptyset)$ が成立していることに注意せよ.)
+%
+%これは, 任意の集合 $x$ から出発して $x\ni x_1 \ni x_2 \ni \cdots$ と次々に要
+%素を選んで行くと必ず有限で $x_n = \emptyset$ となることと同値である.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{商集合}
+\label{sec:quotient}
+
+\subsection{同値関係, 集合の分割, 全射の関係}
+
+この節では, 同値関係, 集合の分割, 全射の関係を解説する. それらの総体が商集合
+の概念を構成するのである.
+
+\begin{Definition}[同値関係]
+  集合 $A$ における関係 $\sim$ が{\bf 同値関係 (equivalence relation)}である
+  とは, $\sim$ が $A$ の要素に関して以下を満たしていることである:
+  \begin{description}
+  \item[反射律] $x\sim x$,
+  \item[対象律] $x\sim y \implies y\sim x$,
+  \item[推移律] $x\sim y \;\AND\; y\sim z \implies x\sim z$.
+    \qed
+  \end{description}
+\end{Definition}
+
+\begin{Definition}[分割]
+  集合 $A$ の部分集合の集合 $\cal Q$ が以下の条件を満たしているとき, 
+  $\cal Q$ は $A$ の{\bf 分割 (類別, partition)}であると言う:
+  \begin{itemize}
+  \item $A = \bigcup_{X\in{\cal Q}}X$,
+  \item $\forall X\in{\cal Q},\; X\ne\emptyset$,
+  \item $\forall X,Y\in{\cal Q},\; X\ne Y \implies X\cap Y = \emptyset$.
+    \qed
+  \end{itemize}
+\end{Definition}
+
+\begin{Proposition}[全射]
+  写像 $f:A\to B$ が全射 (surjection)であることと %
+  $\forall y\in B,\; f^{-1}(y)\ne\emptyset$ が成立していることは同値である.
+  \qed
+\end{Proposition}
+
+\paragraph{同値関係から分割と全射を構成}
+
+$\sim$ は集合 $A$ における同値関係であるとする.
+$A$ の $\sim$ による商 $A/{\sim}$ を次のように定める:
+\begin{equation*}
+  A/{\sim} := \{\, [x] \mid x\in A \,\},
+  \quad\text{(ここで $[x]:=\{\,y\in A\mid y\sim x\,\}$)}.
+\end{equation*}
+このとき, $A/{\sim}$ は $A$ の分割であり, 
+写像 $p:A\to A/{\sim}$ を $p(x)=[x]\;(\forall x\in A)$ と定めると, 
+$p$ は全射である.
+
+\paragraph{分割から同値関係と全射を構成}
+
+$\cal Q$ は集合 $A$ の分割であるとする.
+このとき, $A$ における同値関係 $\sim$ を
+\begin{equation*}
+  x \sim y \iff \exists X\in{\cal Q} \suchthat x\in X \AND y\in X
+\end{equation*}
+と定めることができ, $A/{\sim} = {\cal Q}$ が成立する.
+また, 上で定義した全射 $p$ を $\forall x\in A,\; x\in p(x)\in {\cal Q}$ %
+という条件で定めることもできる.
+
+\paragraph{全射から同値関係と分割を構成}
+
+全射 $f:A\to B$ に対して, $A$ における同値関係 $\sim$ を
+\begin{equation*}
+  x \sim y \iff f(x) = f(y)
+\end{equation*}
+によって構成できる. このとき,
+\begin{equation*}
+  A/{\sim} = \{\, f^{-1}(y) \mid y \in B \,\}
+\end{equation*}
+が成立している. さらに, 全単射 $\phi:A/{\sim}\to B$ を
+\begin{equation*}
+  \phi([x]) := f(x)\quad\forall x \in A
+\end{equation*}
+によって定めることができる.
+
+\begin{question}
+  以上の3つの構成を証明付きで説明せよ. \qed
+\end{question}
+
+このように, 同値関係, 分割, 全射の概念は商集合という 1 つの概念を別のやり方
+で表現したものだと言って良い.
+
+商集合の元 $[x]\in A/{\sim}$ に対して, 任意の $y\in[x]$ を類 $[x]$ の代表元 
+(representative) と呼ぶ. 
+部分集合 $B\subset A$ が類別 $A/{\sim}$ の完全代表系 (complete system of
+representatives)であるとは, 任意の類 $[x]\in A/{\sim}$ と $B$ の共通部分が
+1点集合になることである定義する.
+任意の類別の完全代表系が取れることと選択公理は同値である.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{任意の関係から生成された同値関係}
+\label{ss:gen-equiv-rel}
+
+%関係に関する一般論については第 \ref{ss:relation} 節を見よ.
+
+%%%\subsection{関係 (relation)}
+%%%\label{ss:relation}
+
+集合 $A$, $B$ の直積の部分集合 $R\subset A\times B$ を $A$ と $B$ の間の関係
+(relation) と呼び, $A=B$ のとき $R$ は $A$ における関係であると言う.
+$(x,y)\in R$ であることを $xRy$ と略記することも多い.
+
+集合 $A$, $B$, $C$ 対して,
+関係 $R\subset A\times B$, $S\subset B\times C$ に対して, 
+関係 $S\circ R\subset A\times C$ を
+\begin{equation*}
+  S\circ R :=
+  \{\,(x,z)\in A\times C \mid \exists y\in B \suchthat xRy \AND ySz \,\}
+\end{equation*}
+と定義する. これを $R$ と $S$ の合成 (composition) と呼ぶ.
+
+集合 $A$ に対して, $=$ の定める $A$ における関係を %
+$\Delta_A := \{\,(x,x)\mid x\in A\,\}$ と表わす. 
+
+関係 $R\subset A\times B$ に対して, 
+その転置 $R^t\subset B\times A$ を %
+$R^t:=\{\,(y,x)\mid\,(x,y)\in R\}$ と定める.
+
+\begin{question}
+  集合 $A$, $B$, $C$, $D$ に対して以下が成立する:
+  \begin{enumerate}
+  \item 関係 $R\subset A\times B$, $S\subset B\times C$,
+    $T\subset C\times D$ に対して, 
+    $T\circ(S\circ R) = (T\circ S)\circ R$.
+  \item $R\circ\Delta_A = \Delta_B\circ R = R$. 
+  \item $(S\circ R)^t = R^t\circ S^t$, \quad $(\Delta_A)^t = \Delta_A$.
+    \qed
+  \end{enumerate}
+\end{question}
+
+このように, 集合の間の関係は, 集合の間の写像と同様に, 合成に関して結合律を満
+たし, 単位元を持つ.
+
+
+$R$ は集合 $A$ における任意の関係であるとする.
+
+$R$ の $n$ 回の合成 $R\circ\dots\circ R$ を一時的に $R^n$ と略記する.
+$R^0 := \Delta_A$ と置く. ($\Delta_A$ は $=$ に対応する $A$ における関係であ
+る.)
+
+$R$ が反射律を満たしてなくても, $A$ における関係 $S$ を
+\begin{equation*}
+  xSy \iff x=y \OR xRy
+\end{equation*}
+と定めると $S$ は反射律を満たす. 
+$S$ は集合として $R$ を含み反射律を満たす最小の関係である.
+特に, $R$ が反射律を満たすことと $R=S$ は同値である.  
+集合としては $S=\Delta_A\cup R = R^0 \cup R^1$ である. 
+
+$R$ が対称律を満たしてなくても, $A$ における関係 $S$ を
+\begin{equation*}
+  xSy \iff xRy \OR yRx
+\end{equation*}
+と定めると $S$ は対称律を満たす. 
+$S$ は集合として $R$ を含み対称律を満たす最小の関係である.
+特に, $R$ が対称律を満たすことと $R=S$ は同値である. 
+集合としては $S=R\cup R^t$ である.
+
+$R$ が推移律を満たしてなくても, $xSy$ を
+\begin{quote}
+  長さ $2$ 以上の列 $x_0,\dots,x_n$ で %
+  $x=x_0, x_0Rx_1, x_1Rx_2, \dots, x_{n-1}Rx_n, x_n=y$ を%
+  満たすものが存在することである
+\end{quote}
+と定義することによって $A$ における関係 $S$ を定めると $S$ は推移律を満たす.
+$S$ は集合として $R$ を含み推移律を満たす最小の関係である.
+特に, $R$ が推移律を満たすことと $R=S$ は同値である.
+集合としては $S=\bigcup_{n=1}^\infty R^n$ である.
+
+$R$ が同値関係でなくても, 関係 $T$ を
+\begin{align*} 
+  & xSy \iff xRy \OR yRx; \\
+  & xTy \iff \exists n\in\N\, \exists x_0,\ldots,x_n \suchthat
+             x=x_0, x_0Sx_1, x_1Sx_2, \dots, x_{n-1}Sx_n, x_n=y
+\end{align*}
+と定めると $T$ は同値関係になる. 
+$T$ は集合として $R$ を含む最小の同値関係である.
+特に, $R$ が同値関係であることと $R=T$ は同値である. 
+集合としては $T = \bigcup_{n=0}^\infty (R\cup R^t)^n$ である%
+\footnote{数もしくは作用素の類に関しては $\sum_{n=0}^\infty A^n$ を Neumann 
+  級数と呼ぶ. 収束するとき, それは $(1-A)^{-1}$ に等しくなる. 
+  ここでは形式的に関係 $S=R\cup R^t$ の Neumann 級数もどきが現われていること
+  に注意せよ.}.
+この $T$ を $R$ から生成された同値関係と呼ぶ.
+
+\begin{question}
+  以上の結果を証明せよ. \qed
+\end{question}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\end{small}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{群に関する基本的な事柄}
+\label{sec:fund-groups}
+
+\subsection{群 (group) の定義}
+\label{ss:group-def}
+
+この節では群 (group) の定義を行なう.
+
+実際には, 群ではではなく, 環 (ring), 可換環 (commutative ring), 斜体 (skew
+field), 体 (field), 代数 (多元環, algebra)などなども定義しておかなければ, 
+極めて不便である. 群の理論は群だけでは決して閉じないのである%
+\footnote{このことはあらゆる数学に当てはまる.}.
+しかし, それらの定義は講義や教科書にまかせて省略する.
+もちろん, それらの言葉をこの演習で自由に用いるかもしれないので, 
+自学自習しておくことが望ましい.
+
+\begin{Definition}[群 (group)]
+  集合 $G$, 2項演算 $\cdot:G\times G\to G$, $(x,y)\mapsto xy$, 要素 $1\in G$, 
+  単項演算 $G\to G$, $x\mapsto x^{-1}$ の4つ組で以下
+  の公理を満たすものを{\bf 群 (group)} と呼ぶ:
+  \begin{description}
+  \item[結合律] $(xy)z = x(yz)\quad (\forall x,y,z\in G)$;
+  \item[単位元] $1x = x1 = x\quad (\forall x\in G)$;
+  \item[逆元] $x^{-1}x = xx^{-1} = 1\quad (\forall x\in G)$.
+  \end{description}
+  要素 $1$ を $G$ の単位元, $x^{-1}$ を $x$ の逆元と呼ぶ. 
+%  なお, 4つ組 $(G,\,\cdot\,,1,(\;\;)^{-1})$ を毎回並べるのは面倒なので, %
+  このとき $G$ は群であると言う. 群 $G$ がさらに次を満たしていると
+  き, $G$ を{\bf 可換群 (commutative group)}
+  もしくは {\bf Abel 群 (Abelian group)}と呼ぶ:
+  \begin{description}
+  \item[可換性] $xy = yx\quad \forall x,y\in G$.
+  \end{description}
+  Abel 群の $\,\cdot\,$, $1$, $(\;\;)^{-1}$ をそれぞれ %
+  $+$, $0$, $-(\;\;)$ と書くことがある. 
+  そのとき $G$ は{\bf 加法群 (additive group)}であると言う.
+  群 $G$ が有限集合であるとき, $G$ は{\bf 有限群 (finite group)}であると言い, 
+  $G$ の要素の個数を $G$ の{\bf 位数 (order)}と呼ぶ.
+  \qed
+\end{Definition}
+
+\begin{question}
+  集合 $G$ に結合律を満たす2項演算 $\cdot:G\times G\to G$ が与えられていると
+  き以下が成立する:
+  \begin{enumerate}
+  \item[(1)] $1_L,1_R\in G$ が $1_Lx = x1_R = x\;(\forall x\in G)$ を満たし
+    ていれば $1_L=1_R$ である.  (つまり, 左単位元と右単位元は一致する.)
+  \item[(2)] $1_L\in G$ が $1_Lx = x\;(\forall x\in G)$ を満たしていたとしても,
+    $x1_R = x\;(\forall x\in G)$ を満たす $1_R\in G$ が存在しない場合がある.
+    (つまり, 左単位元があっても, 右単位元があるとは限らない.)
+  \item[(3)] $1\in G$ が $1x=x1=x$ ($\forall x\in G$) を満たしているとき,
+    任意の $a,l,r\in G$ に対して $la=ar=1$ ならば $l=r$ である. 
+    (つまり, 両側単位元が存在するとき, 左逆元と右逆元は一致する.)
+  \item[(4)] $1_Lx=x\;(\forall x\in G)$ を満たす要素 $1_L\in G$ と %
+    $x^Lx=1_L\;(\forall x\in G)$ を満たす写像 $(\;\;)^L:G\to G$ が存在する
+    ならば $G$ は群である.
+    (つまり, 左単位元と左逆元を持つような結合律を満たす2項演算が与えられた
+    集合は群である.)
+  \item[(5)] $1_Lx=x\;(\forall x\in G)$ を満たす要素 $1_L\in G$ と %
+    $xx^R=1_L\;(\forall x\in G)$ を満たす写像 $(\;\;)^R:G\to G$ が存在しても, 
+    $G$ が群にならない場合がある.
+    (つまり, 左単位元と右逆元があっても群になるとは限らない.)
+    \qed
+  \end{enumerate}
+\end{question}
+
+\noindent ヒント: 
+\begin{itemize}
+\item[(2)] 写像 $p:A\to A$ が $p\circ p = p$ を満たしていると仮定する.
+  $G := \{\, p\circ f\mid f:A\to A\,\}$ と置き, 
+  $G$ に2項演算を写像の合成によって定めておく. 
+  このとき, その2項演算は結合律を満たし, $p\in G$ は左単位元になる.
+  しかし, $\id_A\not\in G$ であることもあり得るので, 右単位元が存在するとは
+  限らない. そのような例を具体的に構成して調べてみよ.
+\item[(4)]
+  $x=1_Lx=x^{LL}x^Lx=x^{LL}1_L$ なので $xx^L=x^{LL}1_Lx^L=x^{LL}x^L=1_L$. 
+  よって, $x1_L=xx^Lx=1_Lx=x$.
+\item[(5)] 集合 $A$ と $a\in A$ に対して, $B:=A\setminus\{a\}$ と置き,
+  $G$ を次のように定める:
+  \begin{equation*}
+    G = \{\, f:A\to A \mid
+    \text{$f$ の $B$ への制限は $B$ から $B$ への全単射であり, 
+          $f(a)\in B$} \,\}.
+  \end{equation*}
+  $G$ は写像の合成に関して閉じているので, 写像の合成によって結合律を満た
+  す2項演算を $G$ に定めることができる.
+  そのとき, 任意の $b\in B$ に対して, 
+  $1_b\in G$ を $1_b(x)=x$ ($x\in B$), $1_b(a)=b$ と定めると, 
+  $1_b$ は $G$ の左単位元である. 
+  $f\in G$ に対して $f^R\in G$ を %
+  $f^R(x)=f^{-1}(x)$ ($x\in B$), $f^R(a)=f^{-1}(b)$ と定め
+  ると $f\circ f^R = 1_b$ が成立する. 
+  しかし, $f(a)\ne f(b)$ を満たす $f\in G$ に対して %
+  $g\circ f = 1_b$ を満たす $g\in G$ は存在しない.
+  このような $f$ は $B$ が2つ以上の元を持てば存在する.
+  以上の議論の細部を埋めよ.
+\end{itemize}
+
+\begin{question}[群の直積]
+  $G$, $H$ が群であるとき, $G\times H$ に積を %
+  $(g_1,h_1)(g_2,h_2) = (g_1g_2,h_1h_2)$ ($g_i\in G$, $h_i\in H$) と定義する
+  と $G\times H$ は自然に群をなす.
+  \qed
+\end{question}
+
+群の部分集合 $A\subset G$ が $G$ を{\bf 生成する(generate)} もしくは
+$G$ の{\bf 生成系 (generating system)}であるとは, 
+$G$ の任意の元を $A$ の元およびその逆元の有限個の積で表わすことができること
+であると定義する. ただし $0$ 個の元の積は単位元になると約束しておく.
+唯一の元から生成される群を{\bf 巡回群 (cyclic group)}と呼ぶ.
+
+\begin{question}
+  以下を示せ:
+  \begin{enumerate}
+  \item $\Z$ は加法に関して巡回群である.
+  \item 任意の巡回群は Abel 群である.
+  \item 位数が素数に等しい有限群は巡回群である.
+    \qed
+  \end{enumerate}
+\end{question}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{部分群と剰余類 (subgroup and coset)}
+\label{ss:subgroup-coset}
+
+\begin{Definition}[部分群 (subgroup)]
+  $G$ が群であるとき,  $H\subset G$ が
+  \begin{itemize}
+  \item $x,y\in H \implies xy\in H$,
+  \item $1\in H$,
+  \item $x\in H \implies x^{-1}\in H$
+  \end{itemize}
+  を満たしていれば, $G$ の演算を $H$ に制限することによって, $H$ は自然に群
+  とみなせる. このとき, $H$ は $G$ の{\bf 部分群(subgroup)}であると言う.
+  \qed
+\end{Definition}
+
+群 $G$ の部分群 $H$, $K$ と $a\in G$ に対して次のように置く:
+\begin{itemize}
+\item $HK := \{\, xy \mid x\in H \AND y\in K \,\}$, \quad
+      $H^{-1} := \{\, x^{-1} \mid x\in H \,\}$.
+\item $Ha := \{\, xa \mid x\in H \,\}$, \quad
+      $aK := \{\, ax \mid x\in K \,\}$, \quad
+      $HaK := \{\, xay \mid x\in H \AND y\in K\,\}$.
+\end{itemize}
+$Ha$ を $a$ の{\bf 右剰余類(right coset)}と呼び, 
+$aH$ を $a$ の{\bf 左剰余類(left coset)}と呼び, 
+$HaK$ を $a$ の{\bf 両側剰余類(two-sided coset)}と呼ぶ.
+
+\begin{question}
+  $G$ が群であるとき,  $H\subset G$ が部分群であるための必要十分条件は, 
+  $HH\subset H$, $1\in H$, $H^{-1}\subset H$ が成立することである.
+  \qed
+\end{question}
+
+さらに, 以下のように置く:
+\begin{itemize}
+\item $H\backslash G := \{\, Hx \mid x\in G \,\}$;
+\item $G/K           := \{\, xK \mid x\in G \,\}$;
+\item $H\backslash G/K := \{\, HxK \mid x\in G \,\}$.
+\end{itemize}
+それぞれを,
+$G$ を $H$ で左から割ってできる{\bf 右剰余類空間 (right coset space)},
+$G$ を $H$ で右から割ってできる{\bf 左剰余類空間 (left coset space)},
+$G$ を $H$ と $K$ で左右から割ってできる
+{\bf 両側剰余類空間 (two-sided coset space)}と呼ぶ. 
+
+\begin{question}
+  群 $G$ のその部分群 $K$ に対して, $G$ の同値関係 $\sim$ を %
+  \begin{equation*}
+    x\sim y \iff \exists h\in K \suchthat xh = y
+  \end{equation*}
+  によって定めることができる. 右辺の条件は $xK = yK$, $y\in xK$ のそれぞれと
+  同値であり. このとき, $G/K = G/{\sim}$ が成立している. 
+  これを証明し, $H\backslash G$ と $H\backslash G/K$ についても同様の結果が
+  成立していることを説明せよ. \qed 
+\end{question}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{群の作用 (action of group) の定義}
+\label{ss:def-action}
+
+群 $G$ が集合 $X$ に左から(もしくは右から){\bf 作用 (act)}しているとは, 
+以下を満たす $\cdot:G\times X\to X$ (もしくは $\cdot:X\times G\to X$) が与え
+られていることである:
+\begin{itemize}
+\item $(gh)x=g(hx)$ (もしくは $x(gh) = (xg)h$) \quad
+  $\forall g,h\in G,\; \forall x\in X$;
+\item $1x = x$ (もしくは $x1 = x$) \quad
+  $\forall x\in X$.
+\end{itemize}
+$G$ が(左もしくは右から)作用する集合のことを(左もしくは右) $G$ 集合
+と呼ぶことにする.
+
+\begin{question}[置換群と対称群]
+  以下を示せ:
+  \begin{enumerate}
+  \item 任意の集合 $X$ に対して, $\Aut X$ を $X$ からそれ自身への全単射全体
+    の集合と定め, $\Aut X$ の2項演算を写像の合成によって定めると, 
+    $\Aut X$ は自然に群をなす. 
+  \item さらに, $\Aut X$ は $X$ に左から自然に作用している.
+  \end{enumerate}
+  $\Aut X$ は集合 $X$ の置換群(permutation group)と呼ばれている.
+  特に $A=\{1,2,\dots,n\}$ であるとき, $\Sym_n := \Aut A$ と置き, 
+  $\Sym_n$ を $n$ 次の対称群(symmetric group)と呼ぶ.
+  $\Sym_n$ の位数は $n!$ である.
+  \qed
+\end{question}
+
+\noindent $\Aut X$ の部分群を集合 $X$ の{\bf 変換群 (transformation group)} 
+と呼ぶ. 群の具体例の多くが変換群として与えられる. それはなぜかと言うと, 群論
+はある意味で空間の対称性(symmetry)を扱う分野だからである. これがどういう意味
+なのか知りたい人は, あとで群の具体例に関する問題を大量に出すので, そちらを見
+て欲しい. 
+とにかく, 群論においては, 群そのものを考えるだけでは不十分であり, 
+{\bf 群とその作用の組を考えることが重要である}ことを忘れてはならない!
+
+\paragraph{参考} 以下はすぐには理解できない思想に関する話なので難しいと思った
+ら読み飛ばして欲しい:
+\begin{itemize}
+\item 幾何的な空間とそこに作用する変換群の組によって幾何学を分類するという思
+  想が, Felix Klein による有名なエルランゲン・プログラム(Erlanger Programm)
+  である.
+\item これとは別に G.\ F.\ B.\ Riemann の多様体の幾何学という思想がある.
+  多様体は一般に対称性がほとんどないし群も作用していない. 
+\item これらの思想はファイバー・バンドルの理論で統一されている. すなわち, 多
+  様体の各点に Klein の意味での変換群の幾何学が乗っているような状況を呼ぶ考え,
+  それが多様体方向に接続を通して繋がっているという状況を考えることができるの
+  である. この考え方はゲージ理論や保型形式論など広い応用範囲を持っている.
+\end{itemize}
+
+以下, 簡単のため多くの場合において, 左作用のみに関して説明する. 右作用に関し
+ても同様である.
+
+左 $G$ 集合の間の写像 $\phi:X\to Y$ が $G$ 準同型(写像)であるとは, 
+$\phi(gx) = g\phi(x)$ ($x\in X$) が成立することであると定める.
+
+\begin{question}
+  $G$ 集合の間の $G$ 準同型の合成も準同型であり, 
+  $G$ 集合 $X$ に対して$\id_X$ も $G$ 準同型である.  $G$ 準同型が全単射であ
+  るとき, その逆写像も $G$ 準同型である. そのときその全単射 $G$ 準同型を $G$
+  同型と呼ぶ. \qed
+\end{question}
+
+以下, 群 $G$ が集合 $X$ に左から作用しているとする.
+
+$x\in X$ の $G$ 軌道 ($G$-orbit) とは集合 %
+$Gx = \{\, gx \mid g\in G \,\}$ のことである.
+
+$x\in X$ に対して, $G_x := \{\,g\in G\mid gx=x\,\}$ と置くと, $G_x$ は $G$ 
+の部分群をなす. $G_x$ を
+点 $x$ における{\bf 等方部分群 (isotropy subgroup)}もしくは
+点 $x$ の{\bf 固定部分群 (subgroup of stability)}と呼ぶ.
+
+\begin{question}[軌道と剰余類空間の同型]
+  以下を示せ:
+  \begin{enumerate}
+  \item $G$ の任意の部分群 $H$ に対して, 左剰余類空間 $G/H$ は %
+    $g(xH) := (gx)H$ ($g,x\in G$) によって自然に左 $G$ 集合である.
+  \item 左 $G$ 集合 $X$ と点 $x\in X$ に対して, 
+    $G$ 同型 $\phi:G/G_x\to Gx$ を $\phi(gG_x):=gx$ ($g\in G$) によって定め
+    ることができる.
+  \item $G$ の $X$ への作用が{\bf 推移的 (transitive)}であるとは $G$ の軌道
+    が唯一つで $X$ 全体に一致してしまうことであると定義する. 上の結果より,
+    $G$ の $X$ への作用が $transitive$ であれば, 点 $x\in X$ を選ぶごとに,
+    $G/G_x$ から $X$ への $G$ 同型が自然に得られる.
+    \qed
+  \end{enumerate}
+\end{question}
+
+$X$ の $G$ の作用による{\bf 商空間(quotient space)}
+もしくは{\bf 軌道空間(orbit space)}と
+は,
+\begin{equation*}
+  G\backslash X := \{\, Gx \mid x \in X \,\}
+\end{equation*}
+のことである.
+
+\begin{question}
+  $X$ における同値関係 $\sim$ を
+  \begin{equation*}
+    x \sim y \iff \exists g\in G \suchthat gx = y
+  \end{equation*}
+  と定めることができる. この右辺の条件は $y\in Gx$, $Gx=Gy$ のそれぞれと同値
+  である. このとき, $G\backslash X = X/{\sim}$ が成立する. 
+  この類別を $X$ の $G$ の作用による{\bf 軌道分解 (orbit decomposition)}と呼
+  ぶ.
+  \qed
+\end{question}
+
+\begin{question}
+  群 $G$ とその部分群 $H$ を考える. $H$ は左からの積によって $G$ に自然に作
+  用している. 
+  この左作用に関する軌道空間は第 \ref{ss:subgroup-coset} 節で定義
+  された $H\backslash G$ に等しい. \qed
+\end{question}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{群の表現 (representation of group) の定義}
+\label{ss:def-representation}
+
+$V$ は体 $K$ 上のベクトル空間であるとする. $G$ の $V$ への左作用が線形である
+とき, すなわち,
+\begin{equation*}
+  g(v_1 + v_2) = gv_1 + gv_2, \quad
+  g(kv) = k (gv) \quad
+  (g\in G,\; v,v_i\in V,\; k\in K)
+\end{equation*}
+が成立しているとき, $G$ の $V$ への作用は {\bf $G$ の (左)表現 ((left)
+representation of $G$)}と呼ばれている.
+
+\begin{question}[一般線形群]
+  $V$ は体 $K$ 上のベクトル空間であるとする. このとき, $V$ のベクトル空間と
+  しての同型写像全体 $GL(V)$ は写像の合成に関して自然に群をなし, 
+  $GL(V)$ の$V$ への自然な作用は $GL(V)$ の $V$ における表現である.
+  $GL(V)$ は一般線形群 (general linear group) と呼ばれている.
+  特に $V=K^n$ のとき, $GL_n(K):=GL(V)$ と書く.
+  $GL_n(K)$ は可逆な $n\times n$ 行列全体のなす群と同一視できる.
+  \qed
+\end{question}
+
+$V$, $W$ は体 $K$ 上のベクトル空間であり, $V$, $W$ における $G$ の左表現が定
+められていると仮定する. このとき, 線形写像 $\phi:V\to W$ が $G$ の表現の準同
+型 (homomorphism of representations of $G$) もしくはより簡潔に $G$ 準同型
+($G$-homomorphism) であるとは, $\phi(gv)=g\phi(v)$ ($g\in G,\; v\in V$) が成
+立していることであると定義する.
+
+\begin{question}
+  $G$ の表現の間の $G$ 準同型の合成も準同型であり, 
+  $G$ の表現 $V$ に対して$\id_V$ も $G$ 準同型である.
+  表現の $G$ 準同型が全単射であるとき, 
+  その逆写像も表現の $G$ 準同型である.
+  そのときその全単射 $G$ 準同型を $G$ の表現の同型写像と呼ぶ. \qed
+\end{question}
+
+\begin{question}[群の作用の量子化]
+  群 $G$ が集合 $X$ と $Y$ に右から作用しているとする.
+  さらに, $X$ と $Y$ は有限集合であると仮定する. 
+  任意の集合 $A$ に対して, 体 $K$ に値を持つ $A$ 上の函数の全体のなす $K$ 上
+  のベクトル空間を $\Func(A)$ と書くことにし, 
+  $V = \Func(X)$, $W = \Func(Y)$ と置く.
+  このとき, 以下を示せ:
+  \begin{enumerate}
+  \item $G$ の $V$ における左表現を %
+    $(g\phi)(x) := \phi(xg)$ ($g\in G,\; \phi\in V,\; x\in X$) によって定め
+    ることができる.  $W$ についても同様である.
+  \item $V$ から $W$ への線形写像 $L$ と %
+    $X\times Y$ 上の $K$ 値函数 $k\in\Func(X\times X)$ は
+    \begin{equation*}
+      (L\phi)(y) := \sum_{x\in X} \phi(x) k(x,y) \quad
+      (\phi\in V,\; y\in Y)
+    \end{equation*}
+    によって一対一に対応している. (ヒント: 数ベクトルと行列の理論.)
+  \item $\id_V$ に対応する $k\in\Func(X\times X)$ は Kronecker のデルタ %
+    $k(x,y) = \delta_{x,y}$ ($x,y\in X$) である.
+    ($\delta_{x,y}$ は $x=y$ なら $1$ であり, そうでないなら $0$ である.)
+  \item $k\in\Func(X\times Y)$ が $V$ から $W$ への $G$ 準同型に対応する
+    ための必要十分条件は $k(xg, yg) = k(x,y)$ ($x,y\in X,\; g\in G$) が成立
+    することである.
+  \item 特に, $G$ のある部分群 $H$, $K$ について %
+    $X=H\backslash G$, $Y=K\backslash G$ であるならば,
+    $G$ 準同型を与える函数 $k\in\Func(X\times Y)$ と %
+    両側剰余類空間上の函数 $f\in\Func(H\backslash G/K)$ が %
+    $k(Hx,Ky) = f(Hxy^{-1}K)$ ($x,y\in G$) によって一対一に対応する.
+  \end{enumerate}
+  両側剰余類空間の重要性はこのような考察をしてみるとよくわかる.
+  \qed
+\end{question}
+
+\paragraph{参考} 以下はすぐには理解できない思想に関する話なので難しいと思った
+ら読み飛ばして欲しい:
+\begin{itemize}
+\item 変換群とその作用の組を考察することはある意味で群論の古典力学版であると
+  言える. これに対して, 群とその表現を考察することは群論の量子力学版であると
+  言える. そして, 群の表現を幾何的に構成するためには,群が作用する多様体の上
+  の函数空間を考え, そこへの群の作用を考えれば良いことが知られている(古典論
+  の量子化). 
+\item エルランゲン・プログラムや Riemann の幾何学の量子力学版を考えることが
+  できる. ファイバー・バンドルの幾何学の量子力学版は場の量子論である.
+\item 実は, おおっぴらに言っている人を見たことがないが, あらゆる数学は何らか
+  の意味で量子化されねばならないという思想が現代にはあって, 実際その思想のも
+  とで様々な数学の様々な量子化が研究されている.
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{群の準同型 (homomorphism)}
+\label{ss:homomorphism}
+
+\begin{Definition}[群の準同型 (homomorphism of groups)]
+  群の間の写像 $f:G\to H$ が(群の)準同型写像 (homomorophism) であるとは, 
+  $f$ が $f(xy) = f(x)f(y)$, $f(1)=1$, $f(x^{-1})=f(x)^{-1}$
+  ($\forall x,y\in G$) を満たしていることである.
+  \qed
+\end{Definition}
+
+\begin{question}[群の準同型写像]
+  以下を示せ:
+  \begin{enumerate}
+  \item 群の間の写像 $f:G\to H$ が $f(xy) = f(x)f(y)$ ($\forall x,y\in G$) 
+    のみを満たしていることと, $f$ が準同型であることは同値である.
+  \item 群 $G$ の恒等写像 $\id_G$ は準同型であり, 準同型写像の合成もまた準同
+    型である.
+  \item 準同型写像が逆写像を持てばその逆写像も準同型である. 逆写像を持つよう
+    な群の準同型写像を群の{\bf 同型写像 (isomorphism of groups)} と呼ぶ.
+  \qed
+  \end{enumerate}
+\end{question}
+
+\begin{question}
+  群 $G$ の集合 $X$ への左作用と $G$ から $X$ からそれ自身への全単射全体のな
+  す群 $\Aut X$ への準同型写像は自然に一対一に対応していることを示せ.
+  \qed
+\end{question}
+
+\noindent ヒント: $\rho:G\to\Aut X$ と $\alpha:G\times X\to X$ の間の自然な
+対応 $\rho(g)(x) = \alpha(g,x)$ を考えよ.
+
+\begin{question}
+  $V$ が体 $K$ 上のベクトル空間であるとき, 群 $G$ の $V$ における左表現と
+  $G$ から $GL(V)$ への準同型写像が自然に一対一に対応していることを示せ.
+  \qed
+\end{question}
+
+\begin{Definition}[正規部分群 (normal subgroup)]
+  群 $G$ の部分群 $H$ が $G$ の{\bf 正規部分群 (normal subgroup)}であるとは,
+  任意の $g\in G$ に対して $Hg=gH$ ({\it i.e., $gHg^{-1}=H$})が成立すること
+  である. $G$ が $G$ 自身と $\{1\}$ 以外の正規部分群を持たないとき, $G$ は単
+  純群 (simple group)であると言う.
+  \qed
+\end{Definition}
+
+\begin{question}
+  Abel 群の部分群は全て正規部分群であることを示せ. 
+  正規ではない部分群の例を挙げよ. 
+  \qed
+\end{question}
+
+\begin{question}
+  単純 Abel 群は単位群 $\{1\}$ または素数位数の巡回群である. \qed
+\end{question}
+
+単純 Abel 群はあまりにも単純過ぎてつまらないので, 単に単純群と言った場合には
+Abel 群を除く場合が多い.
+
+\begin{question}[核と像 (kernel and image)]
+  群の準同型 $f:G\to H$ について以下を示せ:
+  \begin{enumerate}
+  \item $f$ の核(kernel of $f$)を %
+    \(
+      \Ker f := f^{-1}(1) = \{\, x\in G \mid f(x) = 1 \,\}
+    \) 
+    と定義する. $\Ker f$ は $G$ の正規部分群である.
+  \item $f$ の像 $\Im f := f(G)$ は $H$ の部分群である.
+    \qed
+  \end{enumerate}
+\end{question}
+
+逆に群 $G$ の任意の正規部分群は $G$ から別の群へのある準同型写像の核に等しく
+なるであろうか? 以下のように答は肯定的である.
+
+\begin{question}[商群 (quotient group))]
+  $G$ は群であるとし, $H$ はその正規部分群であるとし, 
+  $[x]:=xH=Hx$ ($x\in G$) と置く. 
+  このとき, $G/H = G \backslash H = \{\,[x]\mid x\in G\,\}$ であり, 
+  $G/H$ に積を $[x][y] := [xy]$ ($x,y\in G$) によって定義することができて, 
+  $G/H$ が自然の群をなすことを示せ. 
+  この群 $G/H$ を $G$ の正規部分群 $H$ による商群と呼ぶ.
+  さらに, $p:G\to G/H$ を $p(x)=[x]$ ($x\in G$) と定めると,
+  $p$ は全射準同型であり, $\Ker p = H$ が成立することを示せ. \qed
+\end{question}
+
+\begin{question}[準同型定理 (homomorphsim theorem)]
+  群の準同型 $f:G\to H$ に対して, 群の同型写像 $\phi:G/\Ker f\to \Im f$ を %
+  $\phi([x]) = f(x)$ ($x\in G$) と定めることができる.
+  \qed
+\end{question}
+
+群 $G$ からそれ自身への同型写像を $G$ の自己同型(automorphism)と呼ぶ.
+$G$ の自己同型全体が写像の合成に関してなす群を $\Aut G$ と書き, 
+$G$ の{\bf 自己同型群 (automorphism group)}と呼ぶ.
+準同型写像 $\sigma:G\to \Aut G$ を %
+$\sigma(g)(x) = gxg^{-1}$ ($g,x\in G$) と定めることができる.
+$\sigma$ の $\Aut G$ における像を $\Int G$ と書き, 
+$G$ の{\bf 内部自己同型群 (inner automorphism group)}と呼ぶ.
+この $\sigma$ は $G$ の $G$ 自身への左作用を定める.
+この作用に関する $G$ 軌道を $G$ の{\bf 共役類 (conjugate class)}と呼ぶ. すな
+わち, $x\in G$ の共役類とは
+\begin{equation*}
+  C_G(x) := \{\, gxg^{-1} \mid g\in G \,\}
+\end{equation*}
+のことである. $G$ の2つの部分群 $H$, $K$ がある $g\in G$ に関して %
+$gHg^{-1} = K$ となっているとき, $H$ と $K$ は互いに共役であると言う.
+
+\begin{question}
+  以下を示せ:
+  \begin{enumerate}
+  \item $\Int G$ は $\Aut G$ の正規部分群である. 
+    $\Aut G$ の $\Int G$ による商群を $\Out G$ と書き, 
+    {\bf 外部自己同型群 (outer automorphism group)}と呼ぶ.
+  \item $G$ が Abel 群であるための必要十分条件は $G$ の全ての共役類が1点集合
+    になっていることである.
+  \item $G$ の部分群 $H$ が正規であるための必要十分条件は $H$ と共役な $G$ %
+    の部分群が $H$ 自身に限ることである.
+  \qed
+  \end{enumerate}
+\end{question}
+
+\begin{question}
+  対称群 $\Sym_n$ の共役類と $n$ の分割(partition)は一対一に対応している. こ
+  こで, $n$ の分割とは $n$ を正の整数の和で表わすやり方のことである. 例えば, 
+  $4$ の分割は $4=3+1=2+2=2+1+1=1+1+1+1$ の 5 通りがある.
+  \qed
+\end{question}
+
+\noindent ヒント: 任意の $\sigma\in\Sym_n$ に対して, $\sigma$ から生成される
+巡回群 $\sigma$ の $A=\{1,2,\dots,n\}$ への作用による軌道分解を考えると, %
+$n$の分割が得られ, 分割が等しい $\sigma$ が互いに共役であることを示すことが
+できる. $\sigma$ が分割に応じた巡回置換の積で表示されることを示せ.
+
+\begin{question}
+  複素一般線形群 $GL_n(\C)$ の共役類は対角成分に $0$ を含まない Jordan 標準
+  形で分類される. \qed
+\end{question}
+
+群 $G$ の部分集合 $A$ に対する $A$ の{\bf 中心化群 (centralizer)}を %
+\begin{equation*}
+  Z_G(A) := \{\, g\in G\mid ga=ag\;\forall x\in A\,\}
+\end{equation*}
+と定める. $Z(G) := Z_G(G)$ と $G$ の{\bf 中心 (center)}と呼ぶ.
+
+$G$ の部分群 $H$ に対して, $H$ の{\bf 正規化群 (normalizer)}を %
+\begin{equation*}
+  N_G(H) := \{\, g\in G\mid gH = Hg \,\}
+\end{equation*}
+と定める.
+
+\begin{question}
+  以下を示せ:
+  \begin{enumerate}
+  \item $Z(G)$ は $G$ の可換な正規部分群である. 
+  \item 自然な同型写像 $G/Z(G)\isoto\Int G$ が存在する.
+  \item $H$ の正規化群 $N_G(H)$ は $H$ を正規部分群として含むような $G$ の最
+    大の部分群である. 
+  \item $N_G(H)$ は $H$ に共役 $\sigma(g)(h)=ghg^{-1}$ 
+    ($g\in N_G(H),\; h\in H$) によって作用する. この作用は
+    準同型写像 $\sigma:N_G(H)\to\Aut H$ を与える.
+    この準同型の核は $H$ の中心化群 $Z_G(H)$ に等しい.
+    \qed
+  \end{enumerate}
+\end{question}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{群の例}
+\label{sec:examples-of-groups}
+
+\subsection{行列群}
+\label{ss:matrix}
+
+\begin{question}[直交群]
+  ベクトル空間 $\R^n$ に通常の内積とノルムを
+  \begin{align*}
+    &
+    (x,y) := \sum_{i=1}^n x_i y_i \quad
+    (x=(x_1,\dots,x_n)^t, y=(y_1,\dots,y_n)^t\in\R^n)
+    \\ &
+    |x| := \sqrt{(x,x)} \quad
+    (x=(x_1,\dots,x_n)^t\in\R^n)
+  \end{align*}
+  と入れておく. $\R^n$ からそれ自身へのベクトル空間として同型写像で内積を保
+  つもの全体を $O(n)$ と書く:
+  \begin{equation*}
+    O(n) := \{\, A\in GL_n(\R) \mid (Ax,Ay) = (x,y)\; \forall x,y\in \R^n \,\}.
+  \end{equation*}
+  このとき, 以下を示せ:
+  \begin{enumerate}
+  \item $GL_n(\R)$ を可逆な $n$ 次実正方行列全体のなす群と自然に同一視すれば,
+    \begin{equation*}
+      O(n) = \{\, A\in GL_n(\R) \mid AA^t = A^tA = 1_n \,\}.
+    \end{equation*}
+    ここで, $1_n$ は単位行列である. 
+  \item $O(n)$ は写像の合成もしくは行列の積に関して自然に群をなす.
+    この $O(n)$ を $n$ 次直交群 (orthogonal group) と呼ぶ.
+  \item 次が成立する:
+    \begin{equation*}
+      O(n) =
+      \{\, A:\R^n\to\R^n \mid
+      \text{$A$ は線形でかつ $|Ax|=|x|$ $\forall x\in\R^n$} \,\}.
+    \end{equation*}
+    ヒント: 内積をノルムで表示する式が存在する.
+  \item 行列式を取る写像を $\det$ と書くと, $\det:O(n)\to\R^\times$ は群の準
+    同型であり, $\det O(n) = \{\pm1\}$.
+    $\det:O(n)\to\R^\times$ の核を $SO(n)$ と書き, $n$ 次の特殊直交群
+    (special orthogonal group)と呼ぶ.
+    \qed
+  \end{enumerate}
+\end{question}
+
+\begin{question}
+  $SO(n)$ は位相空間として連結かつコンパクトであり, $O(n)$ はちょうど2つの連
+  結成分に分かれる. \qed
+\end{question}
+
+\noindent ヒント: \cite{Satake} p.178
+
+\begin{question}
+  $SO(2)$ は次の形に書ける:
+  \begin{equation*}
+    SO(2) = 
+    \left\{\,
+      \left.
+      \begin{bmatrix}
+        \cos\theta &          - \sin\theta \\
+        \sin\theta & \phantom{-}\cos\theta \\
+      \end{bmatrix}
+      \,\right|\,
+        \theta\in\R
+    \,\right\}.
+    \qed
+  \end{equation*}
+\end{question}
+
+\begin{question}
+  $SO(3)$ の共役類の代表系として, 
+  \begin{equation*}
+    \left\{\,
+      \left.
+      \begin{bmatrix}
+        \cos\theta &          - \sin\theta & 0 \\
+        \sin\theta & \phantom{-}\cos\theta & 0 \\
+                 0 &                     0 & 1 \\
+      \end{bmatrix}
+      \,\right|\,
+        0\leqq \theta \leqq \pi
+    \,\right\}
+  \end{equation*}
+  がとれる. すなわち, $O(3)$ の元はある軸を中心とした回転で表示可能である.
+  \qed
+\end{question}
+
+\begin{question}[ユニタリ群]
+  ベクトル空間 $\C^n$ に通常の内積とノルムを
+  \begin{align*}
+    &
+    (x,y) := \sum_{i=1}^n \bar{x_i} y_i \quad
+    (x=(x_1,\dots,x_n)^t, y=(y_1,\dots,y_n)^t\in\C^n)
+    \\ &
+    |x| := \sqrt{(x,x)} \quad
+    (x=(x_1,\dots,x_n)^t\in\C^n)
+  \end{align*}
+  と入れておく. $\C^n$ からそれ自身へのベクトル空間として同型写像で内積を保
+  つもの全体を $U(n)$ と書く:
+  \begin{equation*}
+    U(n) := \{\, A\in GL_n(\C) \mid (Ax,Ay) = (x,y)\; \forall x,y\in \C^n \,\}.
+  \end{equation*}
+  このとき, 以下を示せ:
+  \begin{enumerate}
+  \item $GL_n(\C)$ を可逆な $n$ 次複素正方行列全体のなす群と自然に同一視すれ
+    ば,
+    \begin{equation*}
+      U(n) = \{\, A\in GL_n(\C) \mid AA^* = A^*A = 1_n \,\}.
+    \end{equation*}
+    ここで, $A^*$ は $A$ を転置して複素共役を取って得られる行列であり,
+    $1_n$ は単位行列である. 
+  \item $U(n)$ は写像の合成もしくは行列の積に関して自然に群をなす.
+    この $U(n)$ を $n$ 次ユニタリ群 (unitary group) と呼ぶ.
+  \item 次が成立する:
+    \begin{equation*}
+      U(n) =
+      \{\, A:\C^n\to\C^n \mid
+      \text{$A$ は線形でかつ $|Ax|=|x|$ $\forall x\in\C^n$} \,\}.
+    \end{equation*}
+    ヒント: 内積をノルムで表示する式が存在する.
+  \item 行列式を取る写像を $\det$ と書くと, $\det:U(n)\to\C^\times$ は群の準
+    同型であり, $\det U(n) = U(1) = \{\,x\in\C\mid|z|=1\,\}$.
+    $\det:U(n)\to U(1)$ の核を $SU(n)$ と書き, $n$ 次の特殊ユニタリ群
+    (special unitary group)と呼ぶ.
+    \qed
+  \end{enumerate}
+\end{question}
+
+\begin{question}
+  $U(n)$ と $SU(n)$ は連結かつコンパクトである. \qed
+\end{question}
+
+\begin{question}
+  $SU(2)$ は次のように書ける:
+  \begin{equation*}
+    SU(2) = 
+    \left\{\,
+      \left.
+      \begin{bmatrix}
+        \phantom{-} z &    w    \\
+           -  \bar{w} & \bar{z} \\
+      \end{bmatrix}
+      \,\right|\,
+        z,w\in\C \;\AND\; |z|^2+|w|^2 = 1
+    \,\right\}.
+    \qed
+  \end{equation*}
+\end{question}
+
+\begin{question}
+  $SU(2)$ は3次元球面 $S^3$ と同相である. \qed
+\end{question}
+
+\begin{question}[三角行列のなす群]
+  体 $K$ に対して, $GL_n(K)$ 内の上三角で対角線上の成分が全て 1 であるような
+  行列全体の集合を $U_n(K)$ と書くと, $U_n(K)$ は $GL_n(K)$ の部分群である.
+  しかし, $n\geqq2$ ならば $GL_n(K)$ の正規部分群ではない. \qed
+\end{question}
+
+\begin{question}[四元数体 (quaternion)]
+  次のように表示された 4 次元の実ベクトル空間を考える:
+  \begin{equation*}
+    {\Bbb H} = \{\, a1 + bi + cj + dk \mid a,b,c,d\in \R \,\}.
+  \end{equation*}
+  この 4 次元のベクトル空間に $1$ が単位元になるような $\R$ 上の代数 
+  (algebra) の構造を 
+  \begin{equation*}
+    i^2 = j^2 = k^2 = -1, \quad
+    ij = -ji = k, \quad
+    jk = -kj = i, \quad
+    ki = -ik = j
+  \end{equation*}
+  という規則によって入れることができる. 以下を示せ:
+  \begin{enumerate}
+  \item 結合律が成立していることを確かめよ.
+  \item 0 以外の $\Bbb H$ の元は積に関して逆元を持つ.
+    すなわち, $\Bbb H$ は斜体(skew field)である.
+    $\Bbb H$ は一般に四元数体 (quaternion) と呼ばれている.
+  \item 乗法群 ${\Bbb H}^\times$ は $SU(2)\times \R_{>0}$ に同型である.
+    \qed
+  \end{enumerate}
+\end{question}
+
+\noindent ヒント: $z=a+bi$, $w=c+di$ と置くと $a+bi+cj+dk=z+wj$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%\subsection{有限体上の古典群}
+%\label{ss:finite-classical}
+
+\begin{question}[有限体上の一般線形群の位数]
+  $\F_q$ は位数 $q$ の(すなわち $q$ 個の元で構成される)有限体であるとする.
+  このとき, $GL_n(\F_q)$ は有限群になり, その位数は
+  \begin{equation*}
+    (q^n-1)(q^n-q)(q^n-q^2)\cdots(q^n-q^{n-1})
+    =q^{n(n-1)/2} (q^n-1)(q^{n-1}-1)\cdots(q^2-1)(q-1)
+  \end{equation*}
+  に等しい. $GL_n(\F_q)$ の部分群 $U_n(\F_q)$ の位数は $q^{n(n-1)/2}$ である.
+  \qed
+\end{question}
+
+\noindent ヒント: $GL_n(K)$ と $K^n$ の中の互いに一次独立な $n$ 本のベクトル
+の組の全体のなす集合は自然に一対一に対応している. まず, 1本目のベクトルは
+$0$ 以外のものを任意に選べる. 2本目のベクトルは1本目のベクトルで張られる直
+線以外から選ばなければいけない. 3本目のベクトルは1本目と2本目のベクトルで張
+られる平面以外から選ばなければいけない. $\cdots\cdots$
+
+\begin{question}
+  有限体の元の個数 $q$ はある素数 $p$ の正巾 $p^e$ に等しい. \qed
+\end{question}
+
+\begin{question}
+  $k$ が有限体であるとき, その乗法群 $k^\times$ は巡回群になる. \qed
+\end{question}
+
+\begin{question}[特殊線形群]
+  体 $K$ に対して, 行列式を取る写像 $\det:GL_n(K)\to K^\times$ は群の準同型
+  写像であり, $\det GL_n(K) = K^\times$ である. $\det:GL_n(K)\to K^\times$ 
+  の核を $SL_n(K)$ と書き, 特殊線形群 (special linear group) と呼ぶ.
+  位数 $q$ 有限体 $\F_q$ に対して, $SL_n(\F_q)$ の位数は,
+  \begin{equation*}
+    q^{n(n-1)/2} (q^n-1)(q^{n-1}-1)\cdots(q^2-1)
+  \end{equation*}
+  に等しい. $SL_n(\F_q)$ の部分群 $U_n(\F_q)$ の位数は $q^{n(n-1)/2}$ である.
+  \qed
+\end{question}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{自由群と基本関係式}
+\label{ss:generators-relations}
+
+\begin{question}[自由群の構成]
+  集合 $A$ は文字の集合であるとし, $A^{-1}$ は $x^{-1}$ ($x\in A$)なる新しい
+  文字全体の集合であるとし, $A$ および $A^{-1}$ の含まれる文字で構成された文
+  字列(すなわち文字を有限個横に並べたもの)全体の集合を $S$ と表わす:
+  \begin{equation*}
+    S :=
+    \bigcup_{n=0}^\infty
+    \{\, x_1\cdots x_n \mid x_1,\dots,x_n\in A\cup A^{-1}\,\}.
+  \end{equation*}
+  ただし, $n=0$ には空の文字列が対応していると考え, 空の文字列を %
+  $\emptyset$ と書くことにする. 2つの文字列を単に繋げるという2項演算を考える
+  ことによって, $S$ には結合律を満たす積が定義され, 空文字列 $\emptyset$ は
+  そ単位元をなす. 
+  $s = x_1\cdots x_n\in S$ ($x_i\in A\cup A^{-1}$) の中の隣りあった %
+  $x_i x_{i+1}$ である $aa^{-1}$ もしくは $a^{-1}a$ ($a\in A$) に等しくなっ
+  ている部分があるとき, その2文字を取り除いてできる文字列を $t$ とし, 
+  $s\sim t$ と書くことにする. 
+  この関係 $\sim$ から生成される同値関係を $\approx$ とし%
+  \footnote{第 \ref{ss:gen-equiv-rel} 節を見よ.}, 
+  $G := S/{\approx}$ と置く. 
+  このとき, $S$ における積が $G$ に群の構造を自然に定めることを示せ.
+  この $G$ を
+  {\bf 集合 $A$ から生成される自由群 (free group generated by $A$)} と
+  呼び, $F_A$ と書くことにし,  $n$ 個の文字から生成された自由群を $F_n$ と
+  書くことにする.
+  \qed
+\end{question}
+
+\begin{question}[部分集合から生成された(正規)部分群]
+  群 $G$ の部分集合 $A$ に対して以下を示せ:
+  \begin{enumerate}
+  \item $A$ および $A^{-1}$ の要素達の有限個の積全体のなす $G$ の部分集合
+    $H$ は $G$ の部分群で $A$ を含むものの中で最小である.
+    $H$ を $A$ から生成される $G$ の部分群と呼ぶ.
+  \item $\{\, gag^{-1} \mid a\in A,\; g\in G \,\}$ から生成される $G$ の部分
+    群 $N$ は正規部分群であり $A$ を含むものの中で最小である.
+    $N$ を $A$ から生成される $G$ の正規部分群と呼ぶ.
+  \end{enumerate}
+  ただし $0$ 個の要素の積は単位元になると約束しておく. \qed
+\end{question}
+
+\noindent ヒント: $G$ の部分集合 $N$ が $G$ の正規部分群であるための必要十分
+条件は, 1 を含み, 積と逆元で閉じていて, $G$ の共役による作用でも閉じているこ
+とである.
+
+\begin{question}[基本関係式]
+  以下を示せ:
+  \begin{enumerate}
+  \item 集合 $A$ から生成された自由群 $F_A$ を考える. $A$ の文字を $F_A$ の
+    対応する元に移す写像を $i:A\to F_A$ と書く.  このとき, 任意の群 $G$ と任
+    意の写像 $f:A\to G$ に対して, 
+    $\phi\circ i = f$ を満たす準同型写像 $\phi:F_A\to G$ が唯一存在する.
+  \item もしも群 $G$ が $A\subset G$ から生成されるならば, 上の $\phi$ によ
+    って $G$ は $A$ から生成される自由群 $F_A$ の像になる.  そのとき, 準同型
+    定理によって, 同型 $G \isom F_A/\Ker\phi$ が成立する.
+  \end{enumerate}
+  群 $G$ が $A\subset G$ から生成されるとき, 
+  $R\subset F_A$ が生成する正規部分群が $\Ker\phi$ に一致する
+  とき, $\{\,\text{``$r = 1$''}\mid r\in R\,\}$ を生成系 $A$ に関する $G$ の
+  {\bf 基本関係式}と呼ぶ. これは右辺が単位元の等式の集合であるが, 右辺が単位元
+  でない場合は右辺の逆元を両辺にかけて右辺を単位元の等式に直せるので, 右辺が単
+  位元でない等式を関係式として考えても良い.
+  \qed
+\end{question}
+
+\begin{question}
+  群と写像の組 $(F, \iota:A\to F)$ が上の問題の $(F_A, i:A\to F_A)$ と同じ性
+  質を持つならば $F$ は自由群 $F_A$ に同型である. \qed
+\end{question}
+
+\begin{question}
+  複素平面 $\C$ から互いに異なる $n$ 個の点を取り除いてできる位相空間を $X$ 
+  とし, 任意に $x_o\in X$ を取る. 
+  このとき, $X$ の基本群 $\pi_1(X,x_0)$ は $n$ 個の元から生成された
+  自由群 $F_n$ に同型である. 
+  \qed
+\end{question}
+
+\begin{question}
+  向き付け可能なジーナス $g$ の閉曲面の基本群は, 
+  $a_1,\dots,a_g,b_1,\dots,b_g$ から生成され,
+  基本関係式 $a_1b_1a_1^{-1}b_1^{-1}\cdots a_gb_ga_g^{-1}b_g^{-1}=1$ を持つ
+  群に同型である. \qed
+\end{question}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{対称群}
+\label{ss:symmetric}
+
+\begin{question}[一般線形群と対称群の関係]
+  $G = GL_n(K)$ 内の対角行列全体のなす部分群を $T=T_n(K)$ と書くことにする.
+  $T$ の $G$ における中心化群 $Z_G(T)$ と正規化部分群を $N_G(T)$ を考える.
+  このとき, $Z_G(T)=T$ であり, $N_G(T)/T$ は対称群 $W=\Sym_n$ に同型である.
+  \qed 
+\end{question}
+
+\noindent ヒント: 任意の $x \in N_G(T)$ の $T$ への共役による作用は $T$ の対
+角成分のある置換になり, 任意の置換がそのようにして得られる. 
+
+\medskip
+
+\noindent 参考: この結果は簡約代数群 (reductive algebraic group)とその Weyl 
+群の関係に一般化される. $GL_n(K)$ は簡約代数群の最もわかり易い例であり, 
+対称群 $\Sym_n$ は Weyl 群の最もわかり易い例である.
+
+\medskip
+
+\begin{question}
+  $n$ 次対称群 $\Sym_n$ の生成系として, $s_i = (i,i+1)$ ($i=1,\dots,n-1$) が
+  取れ, それらは以下の関係式を満たしている:
+  \begin{itemize}
+  \item[(a)] $s_is_{i+1}s_i = s_{i+1}s_is_{i+1} \quad (i=1,\dots,n-2)$,
+  \item[(b)] $s_is_j=s_js_i \quad (|i-j|\geqq2)$,
+  \item[(c)] $s_i^2 = 1 \quad (i=1,\dots,n-1)$.
+  \qed
+  \end{itemize}
+\end{question}
+
+\begin{question}
+  上の問題の (a), (b), (c) は生成系 $\{s_1,\dots,s_{n-1}\}$ に関
+  する $\Sym_n$ の基本関係式である. \qed
+\end{question}
+
+\noindent 参考: $\{s_1,\dots,s_{n-1}\}$ から生成される群で (a), (b) を基本関
+係式とする群は組紐群(くみひも群, braid group)と呼ばれている. 
+同様に対称群は阿弥陀籤群(あみだくじ群)と呼ぶべきかもしれない%
+\footnote{演習の時間に絵を書いて, これらの理由を説明する予定である.}.
+
+\begin{question}
+  対称群 $\Sym_n$ の元 $\sigma$ が, 互換の積で表わされているとき, そこに登場
+  する互換が偶数個か奇数個かは表示によらずに決まっている. 
+  偶数のとき $\sigma$ は偶置換であると言い, 奇数のとき奇置換であると言う. 
+  $\sign:\Sym_n\to\{\pm1\}$ を $\sigma$ が偶置換なら $\sign(\sigma)=1$,
+  奇置換なら $\sign(\sigma)=-1$ と定めると, $\sign$ は群の準同型写像をなす.
+  $\sign$ の核を $\Alt_n$ と書き, $n$ 次{\bf 交代群 (alternating group)}と呼
+  ぶ. 
+  \qed
+\end{question}
+
+\noindent ヒント: 差積 $\prod_{i<j}(x_i-x_j)$ への作用を調べる. 
+
+\begin{question}
+  以下を示せ:
+  \begin{enumerate}
+  \item 3次の交代群 $\Alt_3$ は位数 3 の巡回群である.
+  \item $n\geqq3$ のとき, $n$ 次交代群 $\Alt_n$ は長さ 3 の巡回置換で生成さ
+    れる.
+  \item 4 次の交代群 $\Alt_4$ は位数 4 の Abel 正規部分群 $V$ を持ち, $V$ に
+    よる剰余群は位数 3 の巡回群になる.
+  \item $n\geqq4$ のとき, $n$ 次交代群 $\Alt_n$ は非 Abel 群である. 
+  \item $n\ne4$ ならば $n$ 次交代群 $\Alt_n$ は単純群である. 
+    \qed
+  \end{enumerate}
+\end{question}
+
+%\bigskip\bigskip{\Large さらに例を追加する予定である.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{群の様々な積}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{直積}
+\label{sec:direct-product}
+
+\begin{question}[群の直積]
+  任意の $a\in A$ に対して群 $G_a$ が対応しているとする.
+  このとき, 集合としての直積
+  \begin{equation*}
+    G := \prod_{a\in A} G_a
+    := \{\, (x_a)_{a\in A} \mid x_a\in G_a \ (a\in A)\,\}
+  \end{equation*}
+  は成分ごとに積を
+  \begin{equation*}
+    (x_a)_{a\in A} (y_a)_{a\in A} = (x_a y_a)_{a\in A}
+    \quad (x_a,y_a\in G_a)
+  \end{equation*}
+  と定めることによって自然に群をなす. これを群の直積と呼ぶ.
+  任意の $a\in A$ に対して, 
+  標準的な射影 (canonical projection) $p_a : G \to G_a$ を
+  \begin{equation*}
+    p_a\left( (x_a)_{a\in A} \right) := x_a
+    \quad (x_a\in G_a)
+  \end{equation*}
+  と定めると $p_a$ は群の準同型写像である.
+  任意の群 $H$ と準同型写像の族 $\{f_a:H\to G_a\}_{a\in A}$ に対して, 
+  直積群への準同型写像 $\phi:H\to G$ で
+  \begin{equation*}
+    p_a\circ\phi = f_a
+    \quad (a\in A)
+  \end{equation*}
+  をみたすものが唯一存在する. 
+  この結果を直積 $(G, \{p_a\})$ の普遍性 (universality) という.
+  さらに, $(H, \{f_a\})$ も普遍性の条件を満たしていれば,
+  上の $\phi$ は同型写像になる.
+  \qed
+\end{question}
+
+\begin{question}[剰余群を取る操作と直積の可換性]
+  任意の $a\in A$ に対して, $G_a$ は群であり, $N_a$ はその正規部分群であると
+  する. このとき, 次の同型が自然に成立している:
+  \begin{equation*}
+    \left(\prod G_a\right)\Big/ \left(\prod N_a \right) \isom \prod (G_a/N_a).
+    \qed
+  \end{equation*}
+\end{question}
+
+\noindent ヒント: 自然な準同型写像たち $\prod G_a \to G_a \to G_a/N_a$ の合
+成を考えると, 直積の普遍性より, 準同型写像 $\prod G_a \to \prod (G_a/N_a)$, 
+$(x_a)\mapsto(x_aN_a)$ が自然に定まる. 
+これが全射でかつその核が $\prod N_a$ であることを示し, 準同型定理を適用せよ.
+
+\begin{question}[直積の判定法]
+  $G$ は群であり, $G_1,\dots,G_n$ はその部分群であるとする. このとき,
+  $\phi: \prod_{i=1}^n G_i \to G$, $(x_i)_{i=1}^n\mapsto x_1\cdots x_n$ が
+  同型写像をなすための必要十分条件は以下が成立することである:
+  \begin{enumerate}
+  \item $G_1,\dots,G_n$ の各々は $G$ の正規部分群である.
+  \item $G_1\cdots G_n = G$.
+  \item 任意の $\nu=1,\dots,n-1$ に対して,
+    ($G_1\dots G_\nu)\cap G_{\nu+1} = \{1\}$.
+  \end{enumerate}
+  このとき, 自然に $G\isom \prod_{i=1}^n G_i$ が成立するという.
+  \qed
+\end{question}
+
+\begin{question}
+  $0$ でない複素数全体のなす乗法群 $\C^\times$ は絶対値が $1$ の複素数全体の
+  なす部分群 $U(1)$ と正の実数全体のなす乗法群 $\R_{>0}$ を含む. このとき, 
+  自然に $\C^\times \isom U(1) \times \R_{>0}$ が成立している. \qed
+\end{question}
+
+\begin{question}
+  四元数体 ${\Bbb H}$ の乗法群 ${\Bbb H}^\times$ は $SU(2)$ に同型な部分群
+  と正の実数全体のなす乗法群 $\R_{>0}$を含んでいる. このとき, 
+  自然に ${\Bbb H}^\times \isom SU(2)\times\R_{>0}$ が成立している.
+\end{question}
+
+\begin{question}
+  直積群 $G=H\times K$ の任意の部分群 $G_1$ について,
+  $H\times\{1\}\subset G_1$ ならば  $K$ の
+  ある部分群 $K_1$ が存在して $G_1=H\times K_1$ となる. \qed
+\end{question}
+
+\begin{question}
+  $H$, $K$ は有限群であり, それらの位数は互いに素であると仮定する.
+  このとき, 直積群 $G = H\times K$ の任意の部分群 $G_1$ に対して,
+  部分群 $H_1\subset H$, $K_1\subset K$ で $G_1=H_1\times K_1$ となるものが
+  存在する.
+\end{question}
+
+\begin{question}[直積因子]
+  $G$ は群であり, $H$ はその部分群であるとする. $G$ のある部分群 $K$ が存在
+  して自然な同型 $G\isom H\times K$ が成立するとき, $H$ は $G$ の直積因子で
+  あるという. 
+  $H$ が $G$ の直積因子ならば $H$ は $G$ の正規部分群である. $G$ の正規部分
+  群 $H$ に対して, 以下の条件は互いに同値である:
+  \begin{enumerate}
+  \item $H$ は $G$ の直積因子である.
+  \item 準同型写像 $p_H:G\to H$ で $p_H\circ i_H = \id_H$ を満たすものが存在
+    する. ここで, $i_H$ は自然な入射 $H\to G$ である.
+  \item 準同型写像 $i_{G/H}:G/H\to G$ で %
+    $p_{G/H}\circ i_{G/H} = \id_{G/H}$ でかつ $\Im i_{G/H}$ が $G$ の正規部
+    分群になるものが存在する. ここで, $p_{G/H}$ は自然な射影 $G\to G/H$ であ
+    る.
+    \qed
+  \end{enumerate}
+\end{question}
+
+\begin{question}
+  素因数分解された正の整数 $n=p_1^{e_1}\cdots p_\nu^{e_\nu}$ に対して,
+  加法群として, 
+  \begin{equation*}
+    \Z/n\Z \isom \Z/p_1^{e_1}\Z \times \dots \times \Z/p_\nu^{e_\nu}\Z.
+    \qed
+  \end{equation*}
+\end{question}
+
+\begin{question}[直既約]
+  群 $G$ が $G$ と $\{1\}$ 以外の正規部分群を持たないとき,
+  $G$ は{\bf 単純 (simple)}であるという.
+  群 $G$ が $G$ と $\{1\}$ 以外の直積因子を持たないとき, 
+  $G$ は{\bf 直既約 (indecomposable)}であるという.
+  以下を示せ:
+  \begin{enumerate}
+  \item 単純群は直既約である.
+  \item 素数 $p$ と正の整数 $e$ に対して, 位数 $p^e$ の巡回群は直既約である.
+  \item 素数以外の $4$ 以上の整数 $n$ に対して, 
+    位数 $n$ の巡回群は単純ではない.
+    \qed
+  \end{enumerate}
+\end{question}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Abel 群の直和}
+\label{sec:direct-sum}
+
+\begin{question}[Abel 群の直和]
+  任意の $a\in A$に対して加法 Abel 群 $M_a$ が対応しているとする.
+  このとき, 群の直積 $\prod_{a\in A} M_a$ は Abel 群をなす.
+  $\{M_a\}$ の直和を次のように定める:
+  \begin{equation*}
+    M := \bigoplus_{a\in A} M_a
+    := \left\{\, \left. (x_a)_{a\in A} \in \prod M_a \,\right|\,
+                 \text{有限個を除いて $x_a=0$} \,\right\}.
+  \end{equation*}
+  これは自然に $\prod_{a\in A} M_a$ の部分群をなす.
+  これを Abel 群の直和と呼ぶ.
+  標準的な入射 (canonical inclusion) $i_a : M_a \to M$ を
+  \begin{equation*}
+    i_a(x_a) := (\delta_{a,b}x_a)_{b\in A}
+    \quad (x_a\in G_a)
+  \end{equation*}
+  と定める. ここで, $\delta_{a,b}$ は Kronecker のデルタである. すなわち,
+  $a=b$ のとき $\delta_{a,b}=1$ で, そうでないとき $\delta_{a,b}=0$.
+  このとき, $i_a$ は群の準同型写像である.
+  任意の Abel 群 $N$ と準同型写像の族 $\{f_a:M_a\to N\}_{a\in A}$ に
+  対して, Abel 群の直和からの準同型写像 $\phi:M\to N$ で
+  \begin{equation*}
+    \phi\circ i_a = f_a
+    \quad (a\in A)
+  \end{equation*}
+  をみたすものが唯一存在する. 
+  この結果を Abel 群の直和 $(M, \{i_a\})$ の普遍性 (universality) という.
+  さらに, $(N, \{f_a\})$ も普遍性の条件を満たしていれば,
+  上の $\phi$ は同型写像になる.
+ \qed
+\end{question}
+
+\begin{question}[剰余群を取る操作と直和の可換性]
+  任意の $a\in A$ に対して, $M_a$ は加法 Abel 群であり, $N_a$ はその部分群で
+  あるとする. このとき, 次の同型が自然に成立している:
+  \begin{equation*}
+    \left(\bigoplus M_a\right)\Big/ \left(\bigoplus N_a \right)
+    \isom \bigoplus (M_a/N_a).
+    \qed
+  \end{equation*}
+\end{question}
+
+\noindent ヒント: 準同型写像 $\bigoplus G_a \to \bigoplus (G_a/N_a)$, 
+$(x_a)\mapsto(x_aN_a)$ が well-defined であることおよび
+それが全射でかつその核が $\bigoplus N_a$ に等しいことを示し,
+準同型定理を適用せよ.
+
+\begin{question}
+  体 $K$ 上の $1$ 次元のベクトル空間の族 $\{K e_a\}_{a\in A}$ の
+  直和 $V = \bigoplus_{a\in A} K e_a$ は自然に $K$ 上ベクトル空間とみなせ,
+  その基底として $\{e_a\}_{a\in A}$ が取れることを示せ.
+  ここで, $e_a$ と $(\delta_{a,b}e_a)_{b\in A}\in V$ を同一視した.  
+  \qed
+\end{question}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{自由積}
+\label{sec:free-product}
+
+\begin{question}[自由積]
+  任意の $a\in A$ に対して群 $G_a$ が対応しているとする.
+  このとき, 次の性質を満たす群 $G$ と
+  準同型写像の族 $\{i_a:G_a\to G\}_{a\in A}$ が存在する: 
+  任意の群 $H$ と準同型写像の族 $\{f_a:G_a\to H\}_{a\in A}$ に対して,
+  準同型写像 $\phi:G\to H$ で $\phi\circ i_a = f_a$ ($a\in A$) を満たすもの
+  が唯一存在する.
+  このような群 $G$ は同型を除いて唯一定まり, $\{G_a\}$ の{\bf 自由積 (free
+  product)} もしくは {\bf 余積 (coproduct)} と呼ばれている.
+  群 $H$, $K$ の自由積を $H*K$ と書く.
+  \qed
+\end{question}
+
+\begin{question}
+  上の問題の結果を認めた上で, 自由積 $\Z*\Z$ が2つの文字から生成される自由群
+  に同型であることを示せ. \qed
+\end{question}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{制限直積}
+\label{sec:restricted-product}
+
+\begin{question}[制限直積]
+  任意の $p\in P$ に対して $G_p$ は群であり, $K_p$ はその部分群であるとする.
+  このとき, 直積群 $\prod G_p$ の部分群を
+  \begin{equation*}
+    \prod\nolimits' G_p
+    := \left\{\, \left. (x_p)_{p\in P} \in \prod G_p \,\right|\,
+                 \text{有限個を除いて $x_p\in G_p$} \,\right\}.
+  \end{equation*}
+  によって定めることができる. これを $\{(G_p,K_p)\}$ の制限直積と呼ぶ. \qed
+\end{question}
+
+\paragraph{参考} 各素数 $p$ に対して $p$ 進体 $\Q_p$ という $\Q$ を含む体
+と $p$ 進整数環 $\Z_p$ という $\Z$ を含み $\Q_p$ に含まれる可換環が存在する. 
+$\Q_p$ は数論的には実数体 $\R$ と同等に扱われるべき体である.
+$P$ を素数全体に $\infty$ という文字を付け加えた集合であるとし,
+素数 $p$ に対して $G_p := GL_n(\Q)$, $G_\infty := GL_n(\R)$ と置き,
+それらの部分群を $K_p := GL_n(\Z_p)$, $K_\infty := O(n)$ と定めておく.
+このとき, $\{(G_p, K_p)\}_{p\in P}$ の制限直積
+\begin{equation*}
+  GL_n({\Bbb A}) = GL_n(\R) \times \prod\nolimits'GL_n(\Q_p)
+\end{equation*}
+を $GL_n(\Q)$ のアデール群と呼ぶ.  特に $GL_1({\Bbb A})$ を $\Q$ のイデール
+群と呼ぶ.  これらは数論で極めて重要な役目を果たす.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{半直積}
+\label{sec:semi-direct-product}
+
+\begin{question}[半直積]
+  $E$ を群とし, $N$ をその正規部分群であるとし, $G=E/N$ と置き,
+  自然な写像を $i_N:N\to E$, $p_G:E\to G$ と書くことにする.
+  このとき, 以下の条件は互いに同値である:
+  \begin{enumerate}
+  \item 準同型写像 $i_G:G\to E$ で $p_G\circ i_G=\id_G$ を満たすものが存在す
+    る.
+  \item $E$ の部分群 $G'$ で $E=G'N$, $G'\cap N=\{1\}$ をみたすものが存在す
+    る. 
+  \item $E$ の部分群 $G'$ が存在して, 任意の $x\in E$ は $x=gn$, 
+    $g\in G'$, $n\in N$ と一意的に表わされる.
+  \end{enumerate}
+  このとき, $E$ を $G$ と $N$ の{\bf 半直積 (semi-direct product)}と呼び,
+  $E = G\ltimes N$ と書く%
+  \footnote{$E\nsup N$ ($N$ は $E$ の正規部分群) と
+  いう記号法と整合的であることに注意すると覚え易い.}. %
+  自然な射影 $p_G$ を通して, $i_G(G)$ と $G'$ は $G$ と同型である.
+  $E$ の群の演算は $x,y\in E$ を $x=hn$, $y=gm$ ($g,h\in G'$, $m,n\in N$) と
+  表わすとき,
+  \begin{equation*}
+    xy = hngm = hg(g^{-1}ng)m,
+    \quad (g^{-1}ng)m\in N, hg\in G'
+  \end{equation*}
+  と書けるので, $G'$ と $N$ の群構造と %
+  $G'$ の $N$ への左作用 $n\mapsto g(n) = gng^{-1}$ から決定される.
+  \qed
+\end{question}
+
+\begin{question}[半直積の作り方]
+  $G$ と $N$ は群であり, 準同型写像 $\sigma:G\to\Aut N$ が与えられていると仮
+  定し, $g(n) = \sigma(g)(n)$ ($g\in G$, $n\in N$) と書くことにする. 
+  このとき, 集合としての直積 $E=G\times N$ に,
+  \begin{equation*}
+    (h,n)(g,m) = (hg, g^{-1}(n)m)
+    \quad (m,n\in N, g,h\in G)
+  \end{equation*}
+  によって積を入れると, $E$ は自然に群をなし, $G$ と $N$ の半直積をなす.
+  \qed
+\end{question}
+
+\begin{question}[アフィン変換群]
+  任意の体 $K$ に対して, $GL_n(K)$ の $K^n$ への作用は
+  半直積 $GL_n(K)\ltimes K^n$ を定める. 
+  これを体 $K$ 上のアフィン変換群と呼ぶ.
+  アフィン変換群 $GL_n(K)\ltimes K^n$ は
+  \begin{equation*}
+    (g, u) v := g(u + v)
+    \quad (g\in GL_n(K), u,v\in K^n)
+  \end{equation*}
+  によって, 集合 $K^n$ に自然に作用している. \qed
+  \qed
+\end{question}
+
+\begin{question}[Euclid 変換群]
+  直交群 $O(n)$ の $\R^n$ への自然な作用は
+  半直積 $O(n)\ltimes\R^n$ を定める.
+  これを $\R^n$ の Euclid 変換群と呼ぶ.
+  Euclid 変換群 $O(n)\ltimes\R^n$ は
+  \begin{equation*}
+    (g, u) v := g(u + v)
+    \quad (g\in GL_n(K), u,v\in K^n)
+  \end{equation*}
+  によって, 集合 $\R^n$ に自然に作用している.
+  そして, この作用は $\R^n$ における
+  自然な距離 $d(v,w) = ||v-w||$ ($v,w\in\R^n$) を保つ. 
+  ここで, $||\cdot||$ は $\R^n$ の通常の Euclid ノルムである.
+  \qed
+\end{question}
+
+\begin{question}[$A_{n-1}$ 型の拡張アフィン Weyl 群の定義]
+  $S_n$ は $A_{n-1}$ 型の Weyl 群と呼ばれる場合がある.
+  成分の置換によって, 対称群 $S_n$ は $\Z^n$ に自然に作用する.
+  この作用が定める半直積 $S_n\ltimes\Z^n$ を $A_{n-1}$ 型の拡張アフィン Weyl 
+  群と呼ぶことがある. 
+  これらは自然に Euclid 変換群の部分群とみなされる.
+  \qed
+\end{question}
+
+\begin{question}[$A_1$ 型の拡張アフィン Weyl 群の生成元]
+  $S_2\ltimes\Z^2$ が以下の元から生成されることを示せ:
+  \begin{equation*}
+    s_1 = (1,2), \quad
+    s_0 = (1,-1)^t(1,2), \quad
+    \omega = (1,0)^t (1,2).
+  \end{equation*}
+  ここで, $S_2$, $\Z^2$ と $S_2\times\{1\}$, $\{1\}\times\Z^2$ のそれぞれを
+  同一視し, $\Z^2$ の元は $(a,b)^t$ と表わした.
+  $(i,j)$ は $i$ と $j$ の互換である.
+  $s_1, s_0, \omega$ が平面のどのような変換になっているかを図を描いて説明せ
+  よ. \qed
+\end{question}
+
+\begin{question}[$A_n$ 型の拡張アフィン Weyl 群の生成元]
+  $G = S_n\ltimes\Z^n$ と置く. $G$ は以下の元から生成される:
+  \begin{align*}
+    &
+    s_i = (i,i+1) \qquad \text{for $i=1,\dots,n-1$},
+    \\ &
+    s_0 = (1,0,\dots,0,-1)^t(1,n),
+    \\ &
+    \omega = (1,0,0,\dots,0)^t (1,2,\dots,n).
+  \end{align*}
+  ここで, $S_n$, $\Z^n$ と $S_n\times\{1\}$, $\{1\}\times\Z^n$ のそれぞれを
+  同一視し, $\Z^n$ の元は $(a_1,\dots,a_n)^t$ と表わした. 
+  $(i,j)$ は $i$ と $j$ の互換であり, $(1,2,\dots,n)$ は %
+  $1 \mapsto 2 \mapsto \dots \mapsto n \mapsto 1$ という巡回置換である. \qed
+\end{question}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{有限群の話}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{基本的な話}
+\label{sec:fundamental}
+
+\begin{question}
+  $G$ が有限群のとき, 以下が成立する:
+  \begin{enumerate}
+  \item $G$ は集合 $X$ に作用しているとする. 任意の $x\in X$ に対して,
+    $$|G_x||Gx|=|G|.$$ ここで, $Gx$ は $x$ の $G$ 軌道であり, $G_x$ は $x$ を
+    固定する元全体のなす $G$ の等方部分群 ($x$ の固定化部分群) である.
+  \item $G$ 軌道全体の集合を $X\backslash G = \{\,Gx\mid x\in X\,\}$ と書く
+    のであった. 
+    $X$ が有限集合であれば $$|X| = \sum_{O\in G\backslash X} |O|.$$
+  \item さらに, $G\backslash X$ の完全代表系 $\{x_1,\dots,x_n\}\subset X$ を
+    取ると, $$|X| = \sum_{i=1}^n \frac{|G|}{|G_{x_i}|}.$$
+  \item $G$ の部分群 $H$ に対して, $$|G|=|G/H||H|.$$ 特に $|H|$ は $|G|$ の約
+    数である(Lagrange). $|G/H|$ を $H$ の $G$ における{\bf 指数 (index)}と呼
+    び, $(G:H)$ と書く.
+  \item $G$ の共役類全体の集合 $C(G) = \{\,C_G(x)\mid x\in G\,\}$ を考える.
+    (ここで $C_G(x) := \{\, gxg^{-1} \mid g\in G \,\}$.) このとき,
+    $$|G| = \sum_{C\in C(G)}|C|.$$
+  \item $C(G)$ の完全代表系 $\{x_1,\dots,x_n\}\subset G$ を取ると, 
+    $$|G| = \sum_{i=1}^n \frac{|G|}{|Z_G(x_i)|}.$$
+    ここで $Z_G(x) := \{\,g\in G\mid gx=xg\,\}$.
+    これを{\bf 類等式}という.
+  \qed
+  \end{enumerate}
+\end{question}
+
+\begin{question}[Fermat]
+  以下を示せ:
+  \begin{enumerate}
+  \item 有限群 $G$ とその任意の元 $a$ に対して $a^{|G|}=1$. 
+  \item 正の整数 $n$ に対して, $\Z/n\Z$ は自然に可換環をなす.
+  \item 一般に可換環 $R$ に対して,
+    \begin{equation*}
+      R^\times :=
+      \{\, a\in R \mid \text{$a$ は $R$ の中で掛け算に関する逆元を持つ} \,\}
+    \end{equation*}
+    と定めると, $R^\times$ は Abel 群をなす.
+  \item $\bar a = a + n\Z\in\Z/n\Z$ ($a\in\Z$) と置く. 
+    $\bar a\in(\Z/n\Z)^\times$ であるための必要十分条件は $a$ が $n$ と互い
+    に素なこと (すなわち $(a,n)=1$ ) である. 
+  \item Euler の函数を $\varphi(n):=|(\Z/n\Z)^\times|$ %
+    と定めると, 任意の $a\in\Z$ に対して, 
+    $(a,n)=1$ ならば $a^{\varphi(n)} \equiv 1 \mod n$.
+    \qed
+  \end{enumerate}
+\end{question}
+
+\begin{question}
+  Euler の函数 $\varphi(n)$ は以下のようにして計算される:
+  \begin{enumerate}
+  \item 素数 $p$ と正の整数 $e$ に対して, $\varphi(p^e)=p^{e-1}(p-1)$.
+  \item 素因数分解された正の整数 $n=p_1^{e_1}\cdots p_\nu^{e_\nu}$ に対して, 
+    $\Z/n\Z \isom \Z/p_1^{e_1}\Z \times \cdots \times \Z/p_\nu^{e_\nu}\Z$ なる
+    可換環の同型が存在する.
+  \item よって, $\varphi(n)=\varphi(p_1^{e_1})\cdots\varphi(p_\nu^{e_\nu})$.
+    \qed
+  \end{enumerate}
+\end{question}
+
+\begin{question}[Sylow]
+  一般に位数が素数 $p$ の巾であるような有限群を {\bf $p$ 群 ($p$-group)}と呼
+  ぶ. $G$ は有限群であるとし, $G$ の位数を割る最大の $p$ の巾は $p^e$ である
+  と仮定する. 
+  このとき, 位数 $p^e$ の $G$ の部分群を $G$ の 
+  {\bf Sylow $p$ 部分群 (Sylow p-subgroup)}と呼ぶ.
+  Sylow $p$ 部分群に関して以下が成立する:
+  \begin{enumerate}
+  \item 任意の素数 $p$ に対して Sylow $p$ 部分群が存在する.
+  \item $G$ の任意の $p$ 部分群はある Sylow $p$ 部分群に含まれている.
+  \item $G$ の Sylow $p$ 部分群は互いに共役である.
+  \item Sylow $p$ 部分群の個数は $p$ を法として $1$ に合同である. \qed
+  \end{enumerate}
+\end{question}
+
+\noindent ヒント: $n:=|G|=p^em$, $(p,m)=1$ と置く.
+
+まず, $(x+1)^{p^em}\equiv(x^{p^e}+1)^m\mod p$ を示すことによって, 
+二項係数に関して, ${n \choose p^e}={p^em\choose p^e}\equiv m \mod p$ が成立し
+ていることを示せ.
+
+Sylow $p$ 部分群の存在は以下のようにして示される. 
+$X := \{\,S\subset G\mid |S|=p^e\,\}$ と置く.
+$G$ を $X$ に $g\cdot S:=\{\,gs\mid s\in S\,\}$ ($g\in G$, $S\in X$) と作用さ
+せることができる.
+$|X|={n \choose q}\equiv m \mod p$ なので $|X|$ は $p$ と互いに素である.
+よって, ある $S\in X$ が存在して, $S$ の $G$ 軌道の元の個数 $|G\cdot S|$ は %
+$p$ と互いに素になる.
+このとき, $S$ の等方部分群 $P:=G_S$ が $G$ の Sylow $p$ 部分群であることがわ
+かる.
+実際, $|G\cdot S|=|G|/|P|$ は $p$ と互いに素なので, 
+$|P|=p^e$ でなければいけない.
+
+残りは以下のようにして証明される.
+$P$ を $G$ の任意の Sylow $p$ 部分群とし, 
+$Y:=\{\,gPg^{-1}\mid g\in G\,\}$ と置く.
+$Y$ は $P$ と共役な Sylow $p$ 部分群全体の集合である.
+$p$ 部分群 $H$ を $Y$ に $h\cdot P':= hP'h^{-1}$ ($h\in H$, $P'\in Y$) によっ
+て作用させることができる.
+この作用の $H$ 軌道の含む元の個数は $|H|$ の約数なので $p$ の巾である.
+一方, $|Y| = |G|/|N_G(P)|$ であり, $P$ は $N_G(P)$ の部分群なので, 
+$|Y|$ は $|G|/|P|=m$ の約数になり, $p$ と互いに素である.
+よって, ある $P'\in Y$ が存在して $P'$ は $H$ の作用で固定される.
+そのとき, $H\subset N_G(P')$ であるので,
+$P'$ が $N_G(P')$ の正規部分群であることに注意すると $HP'$ は $G$ の部分群に
+なることがわかる.
+$HP'$ の位数は $|H||P'|$ の約数になるので, $p$ の巾である.
+しかし, $|HP'|\leqq p^e$ でなければいけないので, $H\subset P'$ であることが
+わかる.
+$H$ として Sylow $p$ 部分群と取れば, ある $P'\in Y$ が存在して $H=P'$ である
+ことがわかる. 
+$H=P$ と取ったとき, $Y$ への作用の不動点は $P$ に限るので, $|Y|$ は $p$ を法
+として $1$ に等しいことがわかる.
+
+\begin{question}
+  標数 $p>0$ の有限体 $\F_q$ について, 有限群 $G=GL_n(\F_q)$ を考える.
+  対角線が成分が全て $1$ で下三角成分が全て $0$ であるような
+  行列からなる $G$ の部分群は Sylow $p$ 部分群である. \qed
+\end{question}
+
+\begin{question}[正規部分群と剰余群の Sylow $p$ 部分群]
+  有限群 $G$ とその Sylow $p$ 部分群 $P$ を考える.
+  このとき, $G$ の正規部分群 $N$ に対して,
+  $P\cap N$ は $N$ の Sylow $p$ 部分群であり,
+  $PN/N$ は $G/N$ の Sylow $p$ 部分群である.
+  \qed
+\end{question}
+
+\begin{question}[Frattini]
+  有限群 $G$ とその正規部分群 $H$ と $H$ の Sylow $p$ 部分群 $Q$ に対して,
+  $G = N_G(Q)H$. \qed
+\end{question}
+
+\begin{question}
+  素数 $p$ について位数 $p^2$ の群は Abel 群になる. \qed
+\end{question}
+
+\begin{question}
+  素数 $p$, $q$ ($p>q$) について位数 $pq$ の群の構造を決定せよ. \qed
+\end{question}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{有限群の世界}
+\label{sec:finite-group-world}
+
+この節はお話である. 以下, 群 $G$ の部分群 $H$ が $G$ の正規部分群であるとき, 
+$G\nsup H$ と書くことにする. 有限群 $G$ に対して, 
+\( G = G_1 \nsup G_2 \nsup G_3 \nsup \cdots \nsup G_{n+1} = \{1\} \),
+\( G_i \ne G_{i+1} \) %
+を満たす部分群の列でこれ以上細分できないもの
+を $G$ の{\bf 組成列 (composition series)}と呼ぶ.
+{\bf 組成剰余群 (composition factor)} 
+$F_i=G_i/G_{i+1}$ ($i=1,\dots,n$) は単純群になる.
+{\bf Jordan-H\"older の定理}より, 
+組成剰余群の全体は順序を除けば組成列の取り方によらないことが知られている.
+
+これによってわかることは, 任意の有限群は幾つかの有限単純群を適切に組成列の形
+でうまいこと組み合わせることによって構成されるということだ.
+
+したがって, 有限群の世界がどうなっているかを知るためには, まず, 有限単純群の
+分類が重要でかつ基本的な問題だということになる. この問題は前世紀の数学の発展
+によって解決されている. 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{thebibliography}{ABC}
+
+\bibitem[群と加群]{gun-kagun}
+堀田良之: 代数入門 --- 群と加群 ---, 数学シリーズ,
+裳華房 1987
+
+\bibitem[十話]{10wa}
+堀田良之: 加群十話 --- 代数学入門 ---, すうがくぶっくす 3, 
+朝倉書店 1988 
+
+%\bibitem[夢]{Kuga1}
+%久賀 道郎: ガロアの夢, 日本評論社
+
+%\bibitem[クーガー]{Kuga2}
+%久賀 道郎: ドクトル クーガー の数学講座 (1, 2), 日本評論社
+
+%\bibitem[形式と機能]{MacLane}
+%S.~マックレーン: 数学 --- その形式と機能, 
+%彌永昌吉監修, 赤尾和男・岡本周一共訳,
+%森北出版, 1992 (原書 1986)
+
+%\bibitem[集合論]{Shugoron}
+%西村敏男, 難波完爾: 公理的集合論, 共立講座現代の数学 2,
+%共立出版株式会社, 1985
+
+\bibitem[佐武]{Satake}
+佐武 一郎: 線型代数学, 数学選書 1, 裳華房
+
+\bibitem[Shaf]{Shafarevich}
+I.\ R.\ Shafarevich: Basic Notions of Algebra,
+Encyclopaedia of Mathematical Sciences, Softcover Series Vol.~11,
+Springer 1997
+
+%\bibitem[数学辞典]{Sugakujiten}
+%岩波 数学辞典 第3版, 日本数学会編集, 岩波書店 1985
+
+%\bibitem[高木]{kaiseki-gairon}
+%高木 貞治: 解析概論, 改定第三版, 岩波書店
+
+%\bibitem[竹内]{Gaishi}
+%竹内外史: 集合とはなにか --- はじめて学ぶ人のために ---, 
+%ブルーバックス B298, 講談社 1976
+
+%\bibitem[基礎論]{Kisoron}
+%田中一之(編著), 鹿島亮, 角田法也, 菊池誠: 数学基礎論講義 --- 不完全性定理と
+%その発展 ---, 日本評論社, 1997
+
+%\bibitem[vdW]{vdW}
+%B.~L.~van der Waerden: Moderne Algebra I, II, Springer
+%(東京図書から邦訳『現代代数学』が出ている.)
+
+\end{thebibliography}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

@@ -1,0 +1,989 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\def\STUDENT{} % \def すると計算問題の解答を印刷しなくなる.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% 線形代数学演習---行列の標準形
+% 
+% 黒木 玄 (東北大学理学部数学教室, kuroki@math.tohoku.ac.jp)
+%
+% この演習問題集は2005年度における東北大学理学部数学科2年生前期の
+% 代数学序論B演習のために作成されました. 
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[12pt,twoside]{jarticle}
+%\documentclass[12pt]{jarticle}
+\usepackage{amsmath,amssymb,amscd}
+\usepackage{eepic}
+\usepackage{enshu}
+%\usepackage{showkeys}
+\allowdisplaybreaks
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setcounter{page}{41}      % この数から始まる
+\setcounter{section}{5}    % この数の次から始まる
+\setcounter{theorem}{0}    % この数の次から始まる
+\setcounter{question}{74}  % この数の次から始まる
+\setcounter{footnote}{0}   % この数の次から始まる
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\ifx\STUDENT\undefined
+%
+% 教師専用
+%
+\newcommand\commentout[1]{#1}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\else
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% 生徒専用
+%
+\newcommand\commentout[1]{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\fi
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\title{\bf 線形代数学演習---行列の標準形
+%  \thanks{この演習問題集は2005年度における東北大学理学部数学科2年生前期の
+%    代数学序論B演習のために作成された.}
+%  \ifx\STUDENT\undefined\\{\normalsize 教師用\quad(計算問題の略解付き)}\fi}
+%  \ifx\STUDENT\undefined\\{\normalsize 計算問題の略解付き}\fi}
+%
+%\author{黒木 玄 \quad (東北大学大学院理学研究科数学専攻)}
+%
+%\date{最終更新2003年11月21日 \quad (作成2005年4月11日)}
+%\date{2004年4月25日}
+
+%\maketitle
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\noindent
+{\Large\bf 線形代数学演習}
+\hfill
+{\large 黒木玄}
+\qquad
+2005年5月23日
+\commentout{\quad (教師用)}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\tableofcontents
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{最小二乗法}
+
+何らかの理由で観測できる量 $x_1,\ldots,x_n,y\in\R$ が近似的に
+\begin{equation*}
+  y = a_1 x_1 + \cdots + a_n x_n 
+  \qquad (\text{$a_i\in\R$ は定数})
+  \tag{$*$}
+\end{equation*}
+の関係で結ばれていることがわかっていると仮定する.
+そのとき, 実際に観測された量 $x_{i1},\ldots,x_{in},y_i\in\R$ 
+($i=1,\ldots,N$) から係数 $a_1,\ldots,a_n\in\R$ を推定するために
+最小二乗法がよく使われる.
+
+最小二乗法では, 誤差 $a_1 x_{i1} + \cdots + a_n x_{in} - y_i$ 
+($i=1,\ldots,N$) の二乗和が最小になるような $a_1,\ldots,a_n\in\R$ を求める.
+
+次の節では行列 $X=[x_{ij}]\in M_{N,n}(\R)$ の rank が $n$ であるとき,
+実際にそのような $a_1,\ldots,a_n\in\R$ が一意的に存在することを証明する.
+ただし証明の細部は演習問題とする.
+実際に証明をフォローしてみれば数学科の授業で普通に習っている線形代数学が
+役に立つことが納得できるだろう.
+
+さらにその次の節では経済学における{\bf Okun の法則 (Okun's law)} を
+題材に取り, 最小二乗法によって日本経済の Okun 係数を求める.
+ただし例によって詳しい計算は演習問題とする.
+
+\begin{rem}
+  $y$ と $x_i$ たちの関係式に定数項がある場合
+  \begin{equation*}
+    y = a_1 x_1 + \cdots + a_n x_n + b
+    \qquad (\text{$a_i,b\in\R$ は定数})
+  \end{equation*}
+  は $a_{n+1}=b$ でかつ $x_{n+1}$ が常に $1$ であると
+  仮定すれば ($*$) の特殊な場合とみなせる.
+  \qed
+\end{rem}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{基礎: 最小値の存在と一意性}
+
+\begin{question}[実対称行列の対角化, 10点]
+  \label{q:real-sym-diag}
+  $P$ が $n$ 次の実対称行列であるならば, 
+  ある $n$ 次直交行列 $U$ で $U^{-1}PU=D$ が実対角行列になるものが存在する.  
+  そのとき $D$ の対角成分には $P$ の全ての固有値が重複を込めて並ぶ.
+  特に実対称行列の固有値はすべて実数であり,
+  $\det P$ は $P$ の固有値全体の積に等しい.
+  \qed
+\end{question}
+
+\begin{proof}[ヒント]
+  $n$ に関する帰納法で $P$ を直交行列で三角化する.
+  $P$ が対称行列であることより $\tp{P}P=P^2=P\tp{P}$ が成立するので,
+  その三角化は実は対角化であることがわかる.
+  別のより洗錬された証明も存在するので,
+  複数の教科書を見た方が良いだろう.
+  \qed
+\end{proof}
+
+\begin{question}[5点]
+  $P$ が $n$ 次の実対称行列ならば次の二つの条件は互いに同値である:
+  \begin{itemize}
+  \item[(a)] $P$ の固有値はすべて正である.
+  \item[(b)] 任意の $0$ でないベクトル $v\in\R^n=M_{n,1}(\R)$ に
+    対して $\tp{v}Pv > 0$ となる. \qed
+  \end{itemize}
+\end{question}
+
+\begin{question}[5点]
+  $P$ は $n$ 次の実対称行列であるとし, $q\in\R^n=M_{n,1}(\R)$, $r\in\R$ を
+  任意に取り, $a\in\R^n$ の函数 $S(a)$ を次のように定める:
+  \begin{equation*}
+    S(a) := \tp{a}Pa + 2\tp{q}a + r.
+  \end{equation*}
+  $P$ の固有値がすべて正ならば $S(a)$ を最小にする $a\in\R^n$ 
+  が唯一存在し, 次のように表わされる:
+  \begin{equation*}
+    a = - P^{-1}q.
+    \qed
+  \end{equation*}
+\end{question}
+
+\begin{proof}[ヒント]
+  $pa^2-2qa = p(x-q/p)^2 - q^2/p$ の行列版を考える.
+  $\tp{(a-P^{-1}q)}P(a-P^{-1}q)$ を計算してみよ.
+  \qed
+\end{proof}
+
+\begin{question}[5点]
+  実 $N\times n$ 行列 $X\in M_{N,n}(\R)$ を任意に取り, $P=\tp{X}X$ と置く.
+  このとき $P$ は $n$ 次の実対称行列であり, 
+  $P$ の全ての固有値は $0$ 以上である.
+  特に $P$ の全ての固有値が正であるための必要十分条件
+  は $\det P\ne 0$ が成立することである.
+  \qed
+\end{question}
+
+\begin{proof}[ヒント]
+  $P$ が実対称行列であることはすぐにわかる.
+  問題 \qref{q:real-sym-diag} の結果より, 
+  $P$ は対角化可能であり, その固有値はすべて実数である.
+  $v\in\R^n=M_{n,1}(\R)$ に対して $\tp{v}Pv=\tp{(Xv)}Xv\ge 0$.
+  \qed
+\end{proof}
+
+\begin{question}[Laplace展開, 10点]
+  $K$ は任意の体であるとし, $N > n$ であるとする.
+  縦長の行列 $X=[x_{ij}]\in M_{N,n}(K)$ と
+  横長の行列 $Y=[y_{ij}]\in M_{n,N}(K)$ について以下が成立する:
+  \begin{equation*}
+    |YX| =
+    \sum_{1\le i_1<\cdots<i_n\le N}
+    \begin{vmatrix}
+      y_{1i_1} & \cdots & y_{1i_n} \\
+      \vdots   &        & \vdots   \\
+      y_{ni_1} & \cdots & y_{ni_n} \\
+    \end{vmatrix}
+    \begin{vmatrix}
+      x_{i_11} & \cdots & x_{i_1n} \\
+      \vdots   &        & \vdots   \\
+      x_{i_n1} & \cdots & x_{i_nn} \\
+    \end{vmatrix}.
+    \qed
+  \end{equation*}
+\end{question}
+
+\begin{proof}[ヒント]
+  $N=n$ の場合の公式 $|YX|=|Y||X|$ の証明の一般化. \qed
+\end{proof}
+
+\begin{question}[5点]
+  $K$ は任意の体であり,  $N > n$ であるとし, 
+  縦長の行列 $X=[x_{ij}]\in M_{N,n}(K)$ を任意に取る.
+  このとき $X$ の rank が $n$ であるための必要十分条件は
+  ある $i_1,\ldots,i_n$ で $1\le i_1<\cdots<i_n\le N$ かつ
+  \begin{equation*}
+    \begin{vmatrix}
+      x_{i_11} & \cdots & x_{i_1n} \\
+      \vdots   &        & \vdots   \\
+      x_{i_n1} & \cdots & x_{i_nn} \\
+    \end{vmatrix}
+    \ne 0
+  \end{equation*}
+  を満たすものが存在することである.  \qed
+\end{question}
+
+\begin{question}[最小二乗法, 5点]
+  $N>n$ であるとし, $X=[x_{ij}]\in M_{N,n}(\R)$, 
+  $y=[y_i]\in\R^N=M_{N,1}(\R)$ を任意に取り, 
+  $a=[a_j]\in\R^n=M_{n,1}(\R)$ の函数 $S(a)$ を次のように定める:
+  \begin{equation*}
+    S(a) = \tp{(Xa-y)}(Xa-y)
+    = \sum_{i=1}^N
+    \left(
+      \sum_{j=1}^n a_j x_{ij} - b_i
+    \right)^2.
+  \end{equation*}
+  もしも $A$ の rank が $n$ ならば $S(a)$ を最小にする $a\in\R^n$ が
+  唯一存在し, 次のように表わされる:
+  \begin{equation*}
+    a = \left( \tp{X}X \right)^{-1} \tp{X}y.
+    \qed
+  \end{equation*}
+\end{question}
+
+\begin{proof}[ヒント]
+  以上の問題を総合すれば簡単に証明できる. \qed
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{応用: Okunの法則}
+
+ほとんどの国では経済成長率と失業率の変化の間に
+次の形のかなり安定した関係が成立している:
+\begin{equation*}
+  (\text{経済成長率}) = - \alpha (\text{失業率の変化}) + \beta
+  \qquad (\text{$\alpha, \beta$ は正の定数})
+\end{equation*}
+この結果は経済学者の Arthur Okun によって1960年代に発見されたので, 
+{\bf Okun の法則 (Okun's law)} と呼ばれている.
+$\alpha$ は {\bf Okun 係数}と呼ばれており, 
+たとえば $\alpha=3$ ならば失業率が $1\%$ 増えると
+経済成長率はその $3$ 倍の $3\%$ 減少することになる.
+
+Okun の法則は{\bf 潜在成長率} (持続可能な自然な経済成長率) を求めるために
+よく使われる. 
+失業率はマイナスにはなれないので, 
+失業率を減らしながらの経済成長はいつかは不可能になってしまう. 
+逆に失業率を毎年増やしながらの経済成長も持続不可能だろう. 
+したがって持続可能な経済成長率は失業率の変化を
+ゼロにするような成長率であると考えられる. すなわち
+\begin{equation*}
+  (\text{Okunの法則から推定した潜在成長率}) = \beta.
+\end{equation*}
+これはかなり大雑把な推定であるが,
+Okun の法則は複雑な経済の世界で珍しいことにかなり安定しているので
+現実の政策を考えるときには非常に役に立つ.
+潜在成長率を達成できなかった中央政府と中央銀行は
+経済政策に失敗した可能性が相当に高い.
+(Okun の法則によって潜在成長率の達成に失敗すると
+失業率が上昇してしまうことに注意せよ.)
+
+\begin{table}[htbp]
+  \centering
+  \begin{tabular}{cccc}
+    歴年 & 失業率(\%) & 失業率の変化(\%) & 経済成長率(\%) \\
+    \hline
+    1988 & 2.5 & & \\
+    1989 & 2.3 & $-$0.2 &  5.3 \\
+    1990 & 2.1 & $-$0.2 &  5.2 \\
+    1991 & 2.1 &  0.0 &  3.4 \\
+    1992 & 2.2 &  0.1 &  1.0 \\
+    1993 & 2.5 &  0.3 &  0.2 \\
+    1994 & 2.9 &  0.4 &  1.1 \\
+    1995 & 3.2 &  0.3 &  1.9 \\
+    1996 & 3.4 &  0.2 &  3.4 \\
+    1997 & 3.4 &  0.0 &  1.9 \\
+    1998 & 4.1 &  0.7 & $-$1.1 \\
+    1999 & 4.7 &  0.6 &  0.1 \\
+    2000 & 4.7 &  0.0 &  2.9 \\
+    2001 & 5.0 &  0.3 &  0.4 \\
+    2002 & 5.4 &  0.4 & $-$0.5 \\
+    2003 & 5.3 & $-$0.1 &  2.5 \\
+  \end{tabular}
+  \caption{日本の失業率と経済成長率}
+  \label{tab:J}
+\end{table}
+
+\begin{question}[日本経済のOkun係数と潜在成長率の推定, 15点]
+  \tableref{tab:J}はインターネットからダウンロードした
+  統計データ \cite{unemp2004}, \cite{SNA2003} から数字をコピーして作成した.
+  \tableref{tab:J}に最小二乗法を適用して
+  日本経済の Okun 係数 $\alpha$ と潜在成長率 $\beta$ を推定せよ.
+  \qed
+\end{question}
+
+\begin{proof}[ヒント]
+  $y=(\text{経済成長率})$, $n=2$, $x_1=(\text{失業率の変化})$, $x_2=1$,
+  $a_1=-\alpha$, $a_2=\beta$, $N=15$ とみなし, 前節までの結果を用いよ.
+  まず $15\times 2$ 行列 $X$ の第1列に\tableref{tab:J}の失業率の変化を代入し,
+  第2列の成分はすべて $1$ であるとする.
+  次に $y\in\R^{15}$ には\tableref{tab:J}の経済成長率を代入する.
+  そして $a=\tp{[-\alpha,\beta]}$ を $a=(\tp{X}X)^{-1}\tp{X}y$ に
+  よって計算する.
+  電卓やコンピューターを用いて $\alpha$, $\beta$ の近似値を求めよ.
+  \qed
+\end{proof}
+
+\commentout{
+\begin{proof}[略解]
+  $\alpha=6.11034=(\text{Okun係数の推定値})$, 
+  $\beta=2.98726\%=(\text{潜在成長率の推定値})$.
+  日本経済の潜在成長率は $3\%$ 程度である可能性が高く,
+  日本政府と日本銀行は経済政策に10年以上に渡って失敗し続け,
+  失業率を $2\%$ 台から $5\%$ に上昇させてしまった.
+  失業率を $1\%$ 下げるためには潜在成長率よりも $6\%$ も高い
+  経済成長率を必要とする.
+  \qed
+\end{proof}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{体上のベクトル空間の理論}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{可換環上の加群と体上のベクトル空間の定義}
+
+体とそれ上のベクトル空間を一般的に定義する手間と可換環とそれ上の加群を定義す
+る手間にはさほど違いはないので, より一般的な可換環とそれ上の加群をまとめて定
+義してしまおう.
+
+\begin{definition}[可換環と体]
+  \label{def:ring-field}
+  $R$ が{\bf 環 (commutative ring)} であるとは $R$ が集合であり,
+  加法 $+:R\times R\to R$
+  と $0\in R$
+  と加法の逆元を取る操作 $-:R\to R$
+  と乗法 $\cdot:R\times R\to R$
+  と $1\in R$ が与えられていて,
+  以下が成立していることである:
+  \begin{enumerate}
+  \item $R$ は加法に関して可換群をなす. すなわち $a,b,c\in M$ に対して,
+    \begin{enumerate}
+    \item $(a + b) + c = a + (b + c)$;
+    \item $0 + a = a + 0 = a$;
+    \item $(-a) + a = a + (-a) = 0$;
+    \item $a + b = b + a$.
+    \end{enumerate}
+  \item 乗法 $\cdot:R\times R\to R$ は{\bf 結合的 (associative)} かつ
+    {\bf 双加法的 (bi-additive)} であり, $1\in R$ は乗法に関する単位元になる.
+    すなわち $a,b,c\in R$ に対して,
+    \begin{enumerate}
+    \item $(ab)c = a(bc)$;
+    \item $a(b + c) = ab + ac$;
+    \item $(a + b)c = ac + bc$;
+    \item $1a = a1 = a$.
+    \end{enumerate}
+  \end{enumerate}
+  さらに次の条件が成立しているならば $R$ は{\bf 可換環(commutative ring)} 
+  であるという:
+  \begin{enumerate}
+    \setcounter{enumi}{2}
+  \item $R$ の乗法は{\bf 可換 (commutative)} である. 
+    すなわち $a,b\in R$ に対して $ab=ba$.
+  \end{enumerate}
+  さらに次の条件が成立しているならば $R$ は{\bf 体 (field)} であるという%
+  \footnote{{\bf 可換体 (commutative field)} と呼ぶ場合もある.
+    非可換な体は{\bf 斜体 (skew field)} と呼ばれる.}:
+  \begin{enumerate}
+    \setcounter{enumi}{3}
+  \item 任意の $a\in R\setminus\{0\}$ に対してある $b\in R\setminus\{0\}$ が
+    存在して $ba = ab = 1$.
+  \end{enumerate}
+  このような $b$ は $a$ に対して一意的に定まる. 
+  実際 $ba=1$, $ab'=1$ ならば $b'=1b'=(ba)b'=b(ab')=b1=b$.
+  要するに $0$ でない $a\in R$ に対してその逆元 $a^{-1}=1/a$ が常に $R$ 自身の
+  中に存在するような可換環を体と呼ぶのである.
+  たとえば $\Q$, $\R$, $\C$ は体である.
+  \qed
+\end{definition}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{question}[二元体, 5点]
+  集合 $\bF_2=\{0,1\}$ に次のように加法と乗法を定めると $\bF_2$ は体をなす:
+  \begin{align*}
+    &
+    0+0=0, \quad 0+1=1, \quad 1+0=1, \quad 1+1=0; 
+    \\ &
+    0\cdot0=0, \quad 0\cdot1=0, \quad 1\cdot0=0, \quad 1\cdot1=1.
+    \qed
+  \end{align*}
+\end{question}
+
+\begin{guide}[有限体]
+  一般に素数 $p$ が与えられたとき, 集合 $\bF_p=\{0,1,\ldots,p-1\}$ に
+  通常の整数の和と積の $p$ で割った余りを考えることに
+  よって $\bF_p$ の加法と乗法を定めると $\bF_p$ は体をなす.
+  有限個の元しか持たない体を{\bf 有限体 (finite field)} と呼ぶ.
+  有限体の元の個数 (有限体の位数と呼ばれる) は
+  素数の巾 $q=p^e$ ($p$ は素数, $e$ は正の整数) になる.
+  位数 $q$ の有限体は $\cF_q$ と表わされる.
+  \qed
+\end{guide}
+
+\begin{guide}[ガロア]
+  なお, 有限体は{\bf Galois 体 (Galois filed)} と呼ばれ $GF(q)$ と
+  表わされることもある. \'Evariste Galois (エヴァリスト・ガロア,
+  1811.10.25--1832.5.31) は19世紀の初頭に登場した天才数学者の一人である.
+  決闘で悲劇的な結末をむかえたことで有名である%
+  \footnote{おすすめの伝記はインフェルト \cite{Infeld} である.}.
+  群 (group) を導入して対称性 (symmetry) の概念を数学的に明確にし, 
+  方程式をその対称性を調べることに統制する
+  という考え方を導入したのは Galois である.
+  19世紀は天才数学者が次々に登場した世紀であり, その歴史は非常に面白い.
+  \qed
+\end{guide}
+
+\begin{guide}[有限体上の幾何]
+  慣れ親しんで来た実数体や複素数体の世界と有限体の世界はまるで違っているよう
+  に見えるかもしれない.  しかし, 実際にはそうではないことが知られている.
+  実数体をもとにして定義された図形には連続性の直観が適用でき, 
+  トポロジーの理論が展開される. 
+  有限体上の代数多様体 (これもある種の図形) に対しても
+  トポロジーの理論を展開することができることがすでに知られている%
+  \footnote{Grothendieck の etale topology の理論.}.
+  このような驚くべき数学の発展が20世紀のあいだになされた%
+  \footnote{有限体上の幾何は純粋数学的に重要なだけではなく,
+    我々の実生活に関わる応用面でも重要である.
+    有限体はコンピューターと相性が良い.}.
+  \qed
+\end{guide}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{question}[可換環上の多項式環, 5点]
+  $k$ が可換環ならば $k$ 上の一変数多項式環 $R=k[x]$ も自然に可換環をなす.
+  \qed
+\end{question}
+
+\begin{proof}[ヒント]
+  $R$ が可換環であることを確かめるためには,
+  まず加法 $+:R\times R\to R$ 
+  と $0\in R$
+  と加法の逆元 $-:R\to R$
+  と乗法 $\cdot:R\times R\to R$
+  と $1\in R$ の定義を明確にし, 
+  それらが可換環の公理を満たしていることを証明する.
+  \qed
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{definition}[環上の加群と体上のベクトル空間]
+  $R$ は環であるとする.
+  集合 $M$ が {\bf $R$ 上の加群 (module over $R$)} 
+  もしくは{\bf $R$ 加群 ($R$-module)} であるとは
+  加法 $+:M\times M\to M$, 零元 $0\in M$ 
+  と加法に関する逆元を取る操作 $-:M\to M$ 
+  と $R$ の元の $M$ の元への作用 $\cdot:R\times M\to M$ が定義されていて, 
+  以下の $R$ 加群の公理が成立していることである:
+  \begin{enumerate}
+  \item $M$ は加法に関して可換群をなす. 
+    すなわち任意の $u,v,w\in M$ に対して,
+    \begin{enumerate}
+    \item $(u + v) + w = u + (v + w)$;
+    \item $0 + u = u + 0 = u$;
+    \item $(-u) + u = u + (-u) = 0$;
+    \item $u + v = v + u$.
+    \end{enumerate}
+  \item スカラー倍 $\cdot:R\times M\to M$ は結合的かつ{\bf 双加法的 
+      (bi-additive)} であり, $1\in R$ の作用は恒等写像になる.
+    すなわち任意の $a,b\in R$, $u,v\in M$ に対して,
+    \begin{enumerate}
+    \item $(ab)u = a(bu)$;
+    \item $a(u + v) = au + av$;
+    \item $(a + b)u = au + bu$;
+    \item $1u = u$.
+    \end{enumerate}
+  \end{enumerate}
+  特に $R$ が体 $K$ に等しいならば $R$ 加群を
+  {\bf $K$ 上のベクトル空間 (vector space over $K$)} もしくは
+  {\bf $K$ 上の線形空間 (linear space over $K$)} もしくは
+  {\bf $K$ ベクトル空間 ($K$-vector space)} もしくは
+  {\bf $K$ 線形空間 ($K$-linear space)} と呼ぶ.
+  \qed
+\end{definition}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{question}[5点]
+  $K$ は体であるとし, 可換環 $R$ は体 $K$ 上の一変数多項式環 $K[\lambda]$ で
+  あるとし, $M=K^n$ (縦ベクトルの空間) と置き, 
+  正方行列 $A\in M_n(K)$ を任意に固定する.
+  $f(\lambda)\in K[\lambda]$ の $\lambda$ に $A$ を代入すること
+  によって行列 $f(A)\in M_n(K)$ が自然に定義される.
+  そのことを利用して写像 $\cdot:R\times M\to M$ を 
+  \begin{equation*}
+    f(\lambda)\cdot v := f(A)v
+    \qquad
+    (f(\lambda)\in R=K[\lambda],\ v\in M=K^n)
+  \end{equation*}
+  と定める. このとき $M$ は自然に $R=K[\lambda]$ 上の加群をなす. \qed
+\end{question}
+
+\begin{proof}[ヒント]
+  $M=K^n$ は $K$ 上のベクトル空間なので始めから, $+$, $0$, $-$ が定められて
+  いる. スカラー倍 $R\times M\to M$ は問題のように定められている.
+  よってそれらが $R$ 加群の公理を満たしているかどうかを確かめればよい.
+  ($M=K^n$ はベクトル空間なので加法に関して可換群をなすことは改めてチェック
+  しなくてよいだろう.)
+  \qed
+\end{proof}
+
+\begin{guide}
+  上の問題で定義した $K[\lambda]$ 上の加群 $M$ は
+  正方行列 $A\in M_n(K)$ の Jordan 標準形の理論を扱うときに重要になる.
+  正方行列 $A$ の標準形の理論と $A$ に対応する $K[\lambda]$ 加群 $M$ の
+  構造に関する理論は本質的に等しくなる.
+  代数学の基本は環と加群の理論である.
+  \qed
+\end{guide}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{question}[連続函数全体のなすベクトル空間, 5点]
+  \label{q:C0-1}
+  閉区間 $[a,b]$ 上の実数値連続函数全体のなす集合を $C([a,b],\R)$ と
+  書くことにする. $C([a,b],\R)$ は自然に $\R$ 上のベクトル空間をなす.
+  \qed
+\end{question}
+
+\begin{proof}[ヒント]
+  まず, $C([a,b],\R)$ に $+$, $0$, $-$ と
+  スカラー倍 $\cdot:\R\times C([a,b],\R)\to C([a,b],\R)$ を定義せよ.
+  それらが well-defined であることを証明し,
+  さらにそれらがベクトル空間の公理を満たしていることを示せ.
+  たとえば $[a,b]$ 上の実数値連続函数 $f$ と $g$ の和もまた
+  連続函数になることなどを証明しなければいけない.
+  \qed
+\end{proof}
+
+\begin{guide}
+  $K^n$ のようなベクトル空間を扱うのではなく, 
+  より抽象的に体上のベクトル空間を扱う利点の一つは, 
+  上の問題のようにある種の函数全体の空間 (函数空間) をも
+  ベクトル空間として扱えるようになることである.
+  すでに十分習熟しつつあると思われる $K^n$ およびその部分空間で
+  やしなった直観を函数空間にも拡大するように努力せよ.
+  \qed
+\end{guide}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{question}[連続函数全体のなす可換環, 5点]
+  \label{q:C0-2}
+  閉区間 $[a,b]$ 上の実数値連続函数全体のなす集合を $C([a,b],\R)$ と
+  書くことにする. $C([a,b],\R)$ は自然に可換環をなす.
+  \qed
+\end{question}
+
+\begin{proof}[ヒント]
+  $f,g\in C([a,b],\R)$ に対して $[a,b]$ 上の
+  函数 $fg$ を $(fg)(x)=f(x)g(x)$ ($x\in[a,b]$) と定める
+  と, $fg$ が $[a,b]$ 上の連続函数に
+  なること(すなわち $fg\in C([a,b],\R)$ となること)などを証明
+  する必要がある.
+  \qed
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+$n$ 回微分可能でかつ $n$ 階の導函数が連続になる函数を 
+{\bf $C^n$ 級函数 (class-$C^\infty$ function)} 
+もしくは 
+{\bf $C^n$ 函数 ($C^\infty$-function)} と呼ぶ.  
+任意有限回微分可能な函数を 
+{\bf $C^\infty$ 級函数 (class-$C^\infty$ function)}
+もしくは 
+{\bf $C^\infty$ 函数 ($C^\infty$-function)} と呼ぶ.
+
+\begin{question}[Leibnitz rule, 5点]
+  \label{q:Leibnitz-rule}
+  $f$, $g$ が開区間 $(a,b)$ 上の実数値 $C^\infty$ 函数であるとき, %
+  $h(x)=f(x)g(x)$ ($x\in(a,b)$) と置くと, $h$ も開区間 $(a,b)$ 上の
+  実数値 $C^\infty$ 函数であり, その $n$ 階の導函数 $h^{(n)}$ に
+  関して次の公式が成立している:
+  \begin{equation*}
+    h^{(n)}(x) = \sum_{k=0}^n \binom{n}{k} f^{(k)}(x) g^{(n-k)}(x)
+    \qquad (x\in(a,b)).
+  \end{equation*}
+  この公式を積の微分に関する {\bf Leibnitz rule (ライプニッツ則)}
+  と呼ぶ. \qed
+\end{question}
+
+\begin{proof}[ヒント]
+  $n$ に関する帰納法.
+  $n$ から $n+1$ に進むときに $(fg)' = f'g + fg'$ および
+  二項係数 $\binom{n}{k}$ が Pascal の三角形と呼ばれる漸化式を
+  満たしていることを使え.
+  \qed
+\end{proof}
+
+\begin{question}[$C^\infty$ 函数全体のなす可換環, 5点]
+  \label{q:Cinfty}
+  開区間 $(a,b)$ 上の実数値 $C^\infty$ 函数全体のなす集合
+  を $C^\infty((a,b),\R)$ と書くと以下が成立している:
+  \begin{enumerate}
+  \item $C^\infty((a,b),\R)$ は自然に $\R$ 上のベクトル空間をなす.
+  \item $C^\infty((a,b),\R)$ は自然に可換環をなす.
+    \qed
+  \end{enumerate}
+\end{question}
+
+\begin{proof}[ヒント]
+  記号の簡単のため $A=C^\infty((a,b),\R)$ と置く.
+  
+  1. $+:A\times A\to A$, $0_A\in A$, $-:A\to A$, $\cdot:\R\times A\to A$ を
+  次のように定める: $f,g\in A$, $\alpha\in\R$, $x\in (a,b)$ に対して,
+  \begin{equation*}
+    (f+g)(x)=f(x)+g(x), \quad
+    0_A(x) = 0, \quad
+    (-f)(x) = -f(x), \quad
+    (\alpha\cdot f)(x) = \alpha f(x).
+  \end{equation*}
+  この定義のもとで $A$ が $\R$ 上のベクトル空間の公理を満たしていることを示
+  せ.
+
+  2. さらに, $\cdot:A\times A\to A$, $1_A\in A$ を次のように定める:
+  $f,g\in A$, $a\in (a,b)$ に対して,
+  \begin{equation*}
+    (f\cdot g)(x) = f(x)g(x), \quad
+    1_A(x) = 1.
+  \end{equation*}
+  問題 \qref{q:Leibnitz-rule} より, $f\cdot g$ もまた $C^\infty$ 函数なので,
+  写像 $\cdot:A\times A\to A$ は well-defined である(うまく定義されている).
+  よって以上の定義のもとで $A$ が可換環をなすことを示せばよい.
+  \qed
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{加群の準同型とベクトル空間の線形写像の定義}
+\label{sec:def-hom}
+
+\begin{definition}[加群の準同型とベクトル空間の線形写像]
+  $R$ は可換環であり, $M$, $N$ は $R$ 上の加群であるとし, $f:M\to N$ は任意
+  の写像であるとする.  
+  このとき $f$ が {\bf $R$ 加群の準同型}
+  もしくは{\bf 準同型写像 (homomorphism of $R$-modules)} であるとは
+  以下の条件が成立していることである:
+  \begin{enumerate}
+  \item $f(u+v) = f(u) + f(v)$ \quad ($u,v\in M$);
+  \item $f(\alpha u) = \alpha f(u)$ \quad ($\alpha\in R$, $u\in M$).
+  \end{enumerate}
+  $R$ 加群の準同型写像は {\bf $R$ 準同型 ($R$-homomorphism)} と
+  呼ばれることも多い.
+
+  環 $R$ が体 $K$ に等しいとき, $R$ 加群 ($=$ $K$ 加群) は $K$ 上の
+  ベクトル空間と呼ばれるのであった. そのとき $R$ 加群の準同型
+  は $K$ 上の{\bf 線形写像 (linear mapping)} と呼ばれる.
+  \qed
+\end{definition}
+
+\begin{question}[準同型の合成, 5点]
+  $L$, $M$, $N$ は可換環 $R$ 上の加群であり,
+  $f:L\to M$, $g:M\to N$ は $R$ 準同型であるとする.
+  そのとき合成 $g\circ f:L\to N$ も $R$ 準同型である.
+  \qed
+\end{question}
+
+\begin{question}[$\Hom_R$, 5点]
+  \label{q:Hom-set}
+  $R$ は可換環であるとし, $M$, $N$ は $R$ 加群であるとし,
+  \begin{equation*}
+    \Hom_R(M,N) = \{\, f:M\to N \mid \text{$f$ は $R$ 準同型} \,\}
+  \end{equation*}
+  とおく.  $\Hom_R(M,N)$ に加法とスカラー倍の演算を次のように定めることがで
+  きることを示せ:   $f,g\in\Hom_R(M,N)$, $u\in M$, $\alpha\in R$ に対して,
+  \begin{equation*}
+    (f+g)(u) := f(u)+g(u), \qquad (\alpha\cdot f)(u):= \alpha f(u).
+  \end{equation*}
+  これによって $\Hom_R(M,N)$ は自然に $R$ 加群とみなせる. \qed
+\end{question}
+
+\begin{rem}
+  上の問題で特に $R$ が体 $K$ に等しいとき, $M$, $N$ は $K$ 上のベクトル空間
+  であり,
+  \begin{equation*}
+    \Hom_R(M,N) = 
+    \Hom_K(M,N) = \{\, f:M\to N \mid \text{$f$ は $K$ 上の線形写像} \,\}
+  \end{equation*}
+  である.  $\Hom_K(M,N)$ は自然に $K$ 上のベクトル空間をなす.  
+  \qed
+\end{rem}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{question}[行列の定める線形写像, 5点]
+  $K$ は任意の体であるとし, $K$ の元を成分に持つ $n$ 次元縦ベ
+  クトル全体の空間を $K^n$ と表わし, $m\times n$ 行列全体の空間
+  を $M_{m,n}(K)$ と書くことにする. このとき, 任意の $m\times n$ 
+  行列 $A\in M_{m,n}(K)$ に対して, 写像 $f_A : K^n\to K^m$ を
+  \begin{equation*}
+    f_A(u) := Au \in K^m \qquad (u\in K^n)
+  \end{equation*}
+  と定めると, $f_A$ は $K$ 上の線形写像である. \qed
+\end{question}
+
+\begin{proof}[ヒント]
+  この問題の結果はほとんど自明 (trivial) である. 
+  我々は $f_A$ のことを単に $A$ と書いてきたのであった. \qed
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{question}[積分作用素, 15点]
+  問題 \qref{q:C0-1} の結果より, 閉区間 $[a,b]$ 上の実数値連続函数全体
+  の集合 $C([a,b],\R)$ は自然に $\R$ 上のベクトル空間とみなされる%
+  \footnote{「連続な」という形容詞は英語では ``continuous'' である.
+    記号 $C([a,b],\R)$ の $C$ は「連続」という意味である.}.
+  $K(x,y)$ は $[a,b]\times[a,b]$ 上の任意の実数値連続函数であるとする.
+  このとき, $\R$ 上の線形写像 $T:C([a,b],\R)\to C([a,b],\R)$ を
+  \begin{equation*}
+    (Tf)(x) := \int_a^b K(x,y)f(y)\,dy
+    \qquad (f\in C([a,b],\R),\ x\in [a,b])
+  \end{equation*}
+  と定めることができることを示せ($Tf$ もまた $[a,b]$ 上の連続函数になること
+  も示せ).
+  この $T$ は{\bf 積分作用素 (integral operator)} と呼ばれ, $K(x,y)$ は
+  その{\bf 核函数 (kernel function)} と呼ばれる%
+  \footnote{線形写像 $f:U\to V$ の核 $\Ker f = \{\,x\in U\mid f(x)=0\,\}$ 
+    とは無関係であることに注意せよ.}.
+  \qed
+\end{question}
+
+\begin{proof}[ヒント]
+  閉区間 $[a,b]$ 上の積分について以下が成立することを自由に用いてよい%
+  \footnote{以下の条件は積分の定義の仕方 (Riemann, Lebesgue) によらずに
+    成立している.  以下の条件は積分が $x$ 軸と函数のグラフで囲まれた部分の面
+    積 ($x$ 軸より下の部分の面積は $-1$ 倍する) であるという直観より, 
+    当然成立すべき事柄ばかりである.}:
+  \begin{enumerate}
+  \item (連続函数の積分可能性) \quad 
+    任意の $f\in C([a,b],\R)$ は $[a,b]$ 上で積分可能である.
+  \item (積分の線形性) \quad
+    任意の $f,g\in C([a,b],\R)$ と $\alpha\in\R$ に対して,
+    \begin{equation*}
+      \int_a^b (f(x)+g(x))\,dx = \int_a^b f(x)\,dx + \int_a^b g(x)\,dx,
+      \qquad
+      \int_a^b \alpha f(x)\,dx = \alpha \int_a^b f(x)\,dx.
+    \end{equation*}
+  \item (積分の単調性) \quad
+    任意の $f,g\in C([a,b],\R)$ に対して, 
+    \begin{equation*}
+      f(x)\le g(x) \ (x\in[a,b]) 
+      \implies
+      \int_a^b f(x)\,dx \le \int_a^b g(x)\,dx.
+    \end{equation*}
+  \item (積分の絶対値の評価) \quad
+    $f\in C([a,b],\R)$ に対して, 
+    その絶対値 $|f|$ の $[a,b]$ での最大値を $M$ と書くと%
+    \footnote{一般に $\R^n$ の有界閉集合上の実数値連続函数は最大値と最小値を
+      持つ.}, 
+    \begin{equation*}
+      \left|\int_a^b f(x)\,dx\right| 
+      \le \int_a^b|f(x)|\,dx
+      \le \int_a^b M\,dx = M(b-a).
+    \end{equation*}
+  \end{enumerate}
+  さらに, $K(x,y)$ の $[a,b]\times [a,b]$ 上での一様連続性を用いてよい%
+  \footnote{一般に $\R^n$ の有界閉集合上の実数値連続函数は一様連続である.}.
+
+  $f\in C([a,b],\R)$ を任意に取り, $|f|$ の $[a,b]$ での最大値を $M$ と
+  書くと, 任意の $x_0,x\in [a,b]$ に対して,
+  \begin{align*}
+    |(Tf)(x) - (Tf)(x_0)| 
+    &
+    = \left|\int_a^b (K(x,y) - K(x_0,y))f(y)\,dy \right|
+    \\  &
+    \le \int_a^b |K(x,y)-K(x_0,y)||f(y)|\,dy
+    \\ &
+    \le M \int_a^b |K(x,y)-K(x_0,y)|\, dy.
+  \end{align*}
+  連続函数 $K(x,y)$ の $[a,b]\times[a,b]$ 上での一様連続性より, 
+  任意の $\eps>0$ に対して, ある $\delta > 0$ が存在
+  して,  $|x-x_0|\le\delta$ ならば $|K(x,y)-K(x_0,y)|\le\eps/(M(a-b))$ 
+  ($y\in [a,b]$ は任意でよい) となる.
+  よって $|x-x_0|\le\delta$ ならば
+  \begin{equation*}
+    |(Tf)(x) - (Tf)(x_0)| \le M \int_a^b \frac{\eps}{M(a-b)}\,dy = \eps.
+  \end{equation*}
+  これで $Tf$ が $[a,b]$ 上の連続函数であることが示された.
+  \qed
+\end{proof}
+
+\begin{rem}[積分作用素と行列の定める線形写像の類似]
+  積分作用素 $T$ の定義は行列の定める線形写像の定義と似ている.  
+  実際, $A=[a_{ij}]\in M_{m,n}(\R)$, $v=[v_i]\in \R^n$ に
+  対して, $Av\in\R^m$ の第 $i$ 成分を $(Av)_i$ と書くと,
+  \begin{equation*}
+    (Av)_i = \sum_{j=1}^n a_{ij}v_j.
+  \end{equation*}
+  一方, 積分作用素 $T$ は次のように定義されたのであった:
+  \begin{equation*}
+    (Tf)(x) = \int_a^b K(x,y)f(y)\,dy.
+  \end{equation*}
+  以上の2つの式を比べれば, 以下のような類似関係があることがわかる:
+  \begin{alignat*}{2}
+    &
+    \text{積分作用素 $T$}    \;\leftrightarrow\;\text{行列 $A$},
+    & \qquad &
+    \text{函数 $f$}          \;\leftrightarrow\;\text{縦ベクトル $v$},
+    \\ &
+    \text{核函数 $K(x,y)$}   \;\leftrightarrow\;\text{行列の成分 $a_{ij}$},
+    & \qquad &
+    \text{積分 $\int_a^b dy$}\;\leftrightarrow\;\text{有限和 $\sum_{j=1}^n$}.
+    \qed
+  \end{alignat*}
+\end{rem}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{question}[微分作用素, 10点]
+  問題 \qref{q:Cinfty} の結果より, 開区間 $(a,b)$ 上の実数値 $C^\infty$ 函数
+  全体のなす集合 $C^\infty((a,b),\R)$ は自然に $\R$ 上のベクトル空間で
+  かつ可換環とみなされる.  
+  記号の簡単のため $A=C^\infty((a,b),\R)$ と置く.
+  以下が成立することを示せ:
+  \begin{enumerate}
+  \item $f\in A$ に対して, 写像 $\hat{f}:A\to A$ を
+    \begin{equation*}
+      \hat{f}(g) := f\cdot g \qquad (g\in A)
+    \end{equation*}
+    と定めると, $\hat{f}$ は $\R$ 上の線形写像である.
+  \item 写像 $\d:A\to A$ を
+    \begin{equation*}
+      \d(f) := f' \qquad (f\in A,\ \text{$f'$ は $f$ の導函数})
+    \end{equation*}
+    と定めると, $\d$ は $\R$ 上の線形写像である.
+  \item $a_0,a_1,\ldots,a_n\in A$ に対して写像 $P:A\to A$ を
+    \begin{equation*}
+      P(f) := a_n f^{(n)} + a_{n-1}f^{(n-1)} + \cdots + a_1 f' + a_0 f
+      \quad (f\in A)
+    \end{equation*}
+    と定める.  ここで $f^{(k)}$ は $f$ の $k$ 階の導函数である.
+    このとき $P$ は $\R$ 上の線形写像である.
+  \item 任意の $f\in A$ に対して $[\d,\hat{f}]=\widehat{f'}$. 
+    ($[A,B]=AB-BA$ である.)
+  \end{enumerate}
+  $P$ は{\bf 線形常微分作用素 (linear ordinary differential operator)} 
+  と呼ばれ,
+  \begin{equation*}
+    P = a_n\d^n + a_{n-1}\d^{n-1} + \cdots + a_1\d + a_0
+  \end{equation*}
+  と書かれる. \qed
+\end{question}
+
+\begin{proof}[ヒント]
+  4は次のようにして証明される. 任意の $g\in A$ を取ると,
+  \begin{equation*}
+    \d(\hat{f}(g)) = \d(fg) = (fg)'
+    = f'g + fg' = \widehat{f'}(g) + \hat{f}(\d(g))
+  \end{equation*}
+  なので $\d(\hat{f}(g)) - \hat{f}(\d(g)) = \widehat{f'}(g)$.
+  これで $[\d,\hat{f}]=\d\widehat{f}-\widehat{f}\d=\widehat{f'}$ が証明され
+  た. \qed
+\end{proof}
+
+\begin{guide}
+  \label{guide:merit-of-generalization}
+  積分作用素と微分作用素は線形写像を作るための材料として行列と同じくらい基本
+  的である.  数ベクトルと行列の理論をベクトル空間と線形写像の理論に一般化し
+  ておくことのメリットの一つはある種の函数全体のなす空間のあいだの微分作用素
+  や積分作用素も扱えるようになることである.
+  \qed
+\end{guide}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{question}[多項式係数の微分作用素, 10点]
+  \label{q:polyn-diff-op}
+  複素係数の一変数多項式環 $\C[x]$ は自然に $\C$ 上のベクトル空間をなす.
+  以下が成立することを示せ:
+  \begin{enumerate}
+  \item $f\in \C[x]$ に対して, 写像 $\hat{f}:\C[x]\to\C[x]$ を
+    \begin{equation*}
+      \hat{f}(g) := f\cdot g \qquad (g\in \C[x])
+    \end{equation*}
+    と定めると, $\hat{f}$ は $\C$ 上の線形写像である.
+  \item 写像 $\d:\C[x]\to\C[x]$ を
+    \begin{equation*}
+      \d(f) := f' \qquad (f\in\C[x],\ \text{$f'$ は $f$ の導函数})
+    \end{equation*}
+    と定めると, $\d$ は $\C$ 上の線形写像である.
+  \item $a_0,a_1,\ldots,a_n\in\C[x]$ に対して写像 $P:\C[x]\to\C[x]$ を
+    \begin{equation*}
+      P(f) := a_n f^{(n)} + a_{n-1}f^{(n-1)} + \cdots + a_1 f' + a_0 f
+      \quad (f\in A)
+    \end{equation*}
+    と定める.  ここで $f^{(k)}$ は $f$ の $k$ 階の導函数である.
+    このとき $P$ は $\C$ 上の線形写像である.
+  \item $[\d,\widehat{x^i}]=i\widehat{x^{i-1}}$. 
+    特に $[\d,\hat{x}]=1$. 
+    ($[A,B]=AB-BA$ である.)
+  \end{enumerate}
+  $P$ は{\bf 多項式係数の線形常微分作用素 
+    (linear ordinary differential operator with polynomial coefficients)} 
+  と呼ばれ,
+  \begin{equation*}
+    P = a_n\d^n + a_{n-1}\d^{n-1} + \cdots + a_1\d + a_0
+  \end{equation*}
+  と書かれる. \qed
+\end{question}
+
+%\begin{rem}
+%  上の問題 \qref{q:polyn-diff-op} の結果は
+%  問題 \qref{q:sl2-1}, \qref{q:sl2-2} で応用される.
+%  \qed
+%\end{rem}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{thebibliography}{ABC}
+
+\bibitem[I]{Infeld}
+インフェルト,~L.,
+ガロアの生涯—神々の愛でし人
+市井三郎訳, 
+日本評論社, 新版第3版, 1996
+
+%\bibitem[佐武]{satake} 佐武一郎: 線型代数学, 裳華房数学選書 1, 324頁.
+
+%\bibitem[杉浦]{sugiura}
+%杉浦光夫, Jordan標準形と単因子論 I, II, 岩波講座基礎数学, 線型代数 iii, 1976
+
+%\bibitem[齋藤]{saito} 齋藤正彦: 線型代数入門, 東京大学出版会基礎数学 
+%1, 278頁.
+
+%\bibitem[H1]{gun-kagun}
+%堀田良之, 代数入門——群と加群——, 数学シリーズ, 裳華房, 1987
+
+%\bibitem[H2]{10wa}
+%堀田良之, 加群十話——加群入門——, すうがくぶっくす 3, 朝倉書店, 1988
+
+%\bibitem[H3]{Ho}
+%堀田良之, 環と体 1 --- 可換環論, 岩波講座現代数学の基礎 15, 岩波書店, 1997
+
+%\bibitem[志賀]{shiga}
+%志賀浩二: 集合への30講, 朝倉書店 数学30講シリーズ 3, 187頁.
+
+\bibitem[失業率]{unemp2004}
+労働力調査　長期時系列データ \\
+{\tt http://www.stat.go.jp/howto/case1/01.htm} \\
+から「第3表(3)年齢階級(5歳階級)，男女別完全失業者数及び完全失業率」 \\
+{\tt http://www.stat.go.jp/data/roudou/longtime/zuhyou/lt03-03.xls} \\
+をダウンロード
+
+\bibitem[GDP]{SNA2003} 
+平成15年度国民経済計算 \\
+{\tt http://www.esri.cao.go.jp/jp/sna/h17-nenpou/17annual-report-j.html} \\
+から「4．主要系列表（3）経済活動別国内総生産　実質暦年」\\
+{\tt http://www.esri.cao.go.jp/jp/sna/h17-nenpou/80fcm3r\verb,_,jp.xls} \\
+をダウンロード
+
+\end{thebibliography}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

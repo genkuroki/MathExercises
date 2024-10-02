@@ -1,0 +1,281 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\STUDENT{} % \def すると計算問題の解答を印刷しなくなる.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% 線形代数学演習---行列の標準形
+% 
+% 黒木 玄 (東北大学理学部数学教室, kuroki@math.tohoku.ac.jp)
+%
+% この演習問題集は2005年度における東北大学理学部数学科2年生前期の
+% 代数学序論B演習のために作成されました. 
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[12pt,twoside]{jarticle}
+%\documentclass[12pt]{jarticle}
+\usepackage{amsmath,amssymb,amscd}
+\usepackage{eepic}
+\usepackage{enshu}
+%\usepackage{showkeys}
+\allowdisplaybreaks
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setcounter{page}{53}      % この数から始まる
+\setcounter{section}{7}    % この数の次から始まる
+\setcounter{theorem}{0}    % この数の次から始まる
+\setcounter{question}{95}  % この数の次から始まる
+\setcounter{footnote}{0}   % この数の次から始まる
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\ifx\STUDENT\undefined
+%
+% 教師専用
+%
+\newcommand\commentout[1]{#1}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\else
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% 生徒専用
+%
+\newcommand\commentout[1]{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\fi
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\title{\bf 線形代数学演習---行列の標準形
+%  \thanks{この演習問題集は2005年度における東北大学理学部数学科2年生前期の
+%    代数学序論B演習のために作成された.}
+%  \ifx\STUDENT\undefined\\{\normalsize 教師用\quad(計算問題の略解付き)}\fi}
+%  \ifx\STUDENT\undefined\\{\normalsize 計算問題の略解付き}\fi}
+%
+%\author{黒木 玄 \quad (東北大学大学院理学研究科数学専攻)}
+%
+%\date{最終更新2003年11月21日 \quad (作成2005年4月11日)}
+%\date{2004年4月25日}
+
+%\maketitle
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\noindent
+{\Large\bf 線形代数学演習}
+\hfill
+{\large 黒木玄}
+\qquad
+2005年5月30日
+\commentout{\quad (教師用)}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\tableofcontents
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{一般の線形空間における部分空間, 一次独立性, 基底}
+
+体 $K$ 上の変数 $x$ に関する1変数多項式環を $K[x]$ と書くことにする.
+$K[x]$ は自然に $K$ 上の線形空間とみなされる.
+
+\begin{question}[5点]
+  $V := \{\, f\in\C[x] \mid f(-a)=\overline{f(a)}\ (a\in\R) \,\}$ %
+  ($\overline{\phantom{A}}$ は複素共役) と置く.
+  $\C[x]$ は自然に $\C$ 上および $\R$ 上のベクトル空間とみなされる.
+  $V$ は $\C[x]$ の $\C$ 上の部分空間ではないが, %
+  $\R$ 上の部分空間になることを示せ.
+  \qed
+\end{question}
+
+\begin{question}[5点]
+  $\F_2=\{0,1\}$ は二元体であるとし, %
+  $V:=\{\, f\in\F_2[x] \mid f(-x)^2=f(x)^2\,\}$ と置く.
+  このとき $V=\F_2[x]$ であることを示せ.
+  \qed
+\end{question}
+
+\begin{question}[5点]
+  $\R$ 上の複素数値 $C^\infty$ 函数全体の集合 $C^\infty(\R)$ は
+  自然に $\C$ 上のベクトル空間とみなされる.
+  任意に $a,b\in C^\infty(\R)$ を取り, $C^\infty(\R)$ の部分集合 $V$ を
+  \begin{equation*}
+    V := \{\, v\in C^\infty(\R)
+    \mid v''+ av'+ bv = 0 \,\}
+  \end{equation*}
+  と定める. ここで $v''+ av'+ bv = 0$ は %
+  $v''(x)+ a(x)v'(x)+ b(x)v(x) = 0$ ($x\in\R$) が成立するという意味である.
+  このとき $V$ は $C^\infty(\R)$ の $\C$ 上の部分空間である.
+  \qed
+\end{question}
+
+\begin{question}[二階の線形常微分方程式の解空間, 5点]
+  \label{q:ODE-a,b}
+  $\R$ 上の複素数値 $C^\infty$ 函数全体の集合 $C^\infty(\R)$ は
+  自然に $\C$ 上のベクトル空間とみなされる.
+  任意に $a,b\in C^\infty(\R)$ を取り, $V\subset C^\infty(\R)$ を
+  \begin{equation*}
+    V := \{\, v\in C^\infty(\R) \mid v''+ av'+ bv = 0 \,\}
+  \end{equation*}
+  と定める. ここで「$v''+ av'+ bv = 0$」は %
+  「任意の $x\in \R$ に対して $v''(x)+ a(x)v'(x)+ b(x)v(x) = 0$ が成立する」と
+  いう意味である. このとき $V$ は $C^\infty(\R)$ の部分空間である.
+  \qed
+\end{question}
+
+\begin{question}[Riccati型微分方程式, 5点]
+  \label{q:Riccati1}
+  任意に $a,b\in C^\infty(\R)$ を取り, $Q \subset C^\infty(\R)$ を
+  \begin{equation*}
+    Q := \{\, q\in C^\infty(\R) \mid q' = q^2 - aq + b \,\}
+  \end{equation*}
+  と定める. このとき $Q$ は $C^\infty(\R)$ の部分空間ではない.
+  \qed
+\end{question}
+
+\begin{question}[10点]
+  \label{q:Riccati2}
+  問題 \qref{q:ODE-a,b} の $V$ と
+  問題 \qref{q:Riccati1} の $Q$ の関係について考える.
+  $q\in Q$ を任意に取り, $C^\infty(\R)$ の部分集合 $W$ を
+  \begin{equation*}
+    W := \{\, w\in C^\infty(\R) \mid w' + qw = 0 \,\}
+  \end{equation*}
+  と定める. このとき $W$ は $V$ の $\C$ 上の部分空間である.
+  \qed
+\end{question}
+
+\begin{proof}[ヒント]
+  $\d=d/dx$ と置き, $\d^2+a\d+b$ を $\d+q$ で右から割り算してみよ.
+  ここで割り算とは小学校のときに習ったような商と余りを求める割り算のことである.
+  商は $\d+a-q$ となり, 余りは $b-q'-(a-q)q$ になる.
+  \qed
+\end{proof}
+
+\begin{question}[10点]
+  $K$ は任意の体であるとし, $a_{ij}\in K$ ($i>j\ge 0$) を任意に取る.
+  $f_i\in K[x]$  ($i=0,1,2,\ldots$) を次のように定義する:
+  \begin{equation*}
+    f_i(x) = a_{i0} + a_{i1}x + \cdots + a_{i,i-1}x^{i-1} + x^i,
+  \end{equation*}
+  ($f_0(x)=1$ であることに注意.)
+  このとき $f_0,f_1,f_2,\ldots$ が $K[x]$ の基底になることを示せ.
+  \qed
+\end{question}
+
+\begin{proof}[ヒント]
+  $f_0,f_1,f_2,\ldots$ の一次独立性および
+  任意の $f\in K[x]$ が $f_0,f_1,f_2,\ldots$ の $K$ 係数有限一次結合で
+  表わされることを示せばよい. 
+  (もしくは任意の $f\in K[x]$ が $f_0,f_1,f_2,\ldots$ の $K$ 係数
+  有限一次結合で一意に表わされることを示せばよい.)
+  \qed
+\end{proof}
+
+\begin{question}[10点]
+  \label{q:lin-indep-x^k}
+  $A$ は $\R$ の任意の無限部分集合であるとする.
+  $A$ 上の実数値函数全体の集合は自然に実ベクトル空間をなす
+  (このことは認めて使ってよい).
+  $0$ 以上の整数 $i$ に対して $A$ 上の実数値函数 $f_i$ を
+  \begin{equation*}
+    f_i(x) = x^i \qquad (x\in A)
+  \end{equation*}
+  と定める. このとき $f_0,f_1,f_2,\ldots$ が一次独立であることを示せ.
+  \qed
+\end{question}
+
+\begin{proof}[ヒント]
+  $A$ は無限集合なので任意の $n=1,2,3,\ldots$ に対して
+  互いに異なる元 $a_1,\ldots,a_n\in A$ を取れる.
+  このとき Vandermonde 行列式の公式より, $n\times n$ 行列
+  \begin{equation*}
+    A_n = 
+    \begin{bmatrix}
+      a_1^0     & a_2^0     & \cdots & a_n^0     \\
+      a_1^1     & a_2^1     & \cdots & a_n^0     \\
+      \vdots    & \vdots    & \ddots & \vdots    \\
+      a_1^{n-1} & a_2^{n-1} & \cdots & a_n^{n-1} \\
+    \end{bmatrix}
+  \end{equation*}
+  は可逆になる. このことを使って $f_0,f_1,\ldots,f_{n-1}$ が一次独立
+  であることを示せ. \qed
+\end{proof}
+
+\begin{question}[15点]
+  $p$ は素数であるとし, $\F_p=\{0,1,\ldots,p-1\}$ は $p$ 元体であるとする.
+  $\F_p$ 上の $\F_p$ 値函数全体の集合は $\F_p$ 上のベクトル空間をなす.
+  $\F_p$ 上の $\F_p$ 値函数 $f_0,f_1,f_2,\ldots$ を次のように定める:
+  \begin{equation*}
+    f_i(x) = x^i \qquad (x\in\F_p).
+  \end{equation*}
+  このとき $f_0,f_1,\ldots,f_{p-1}$ は一次独立であるが, %
+  $f_1,f_2,\ldots,f_p$ は一次従属であることを示せ.
+  \qed
+\end{question}
+
+\begin{proof}[ヒント]
+  $f_0,f_1,\ldots,f_{p-1}$ の一次独立性の証明は
+  問題 \qref{q:lin-indep-x^k} と同じ.
+  実は任意の $a\in\F_p$ に対して $a^p=a$ となる
+  (この結果の証明は代数学の教科書を参照せよ).
+  感じがつかめなければ $p=2,3,5$ の場合にどうなっているかをチェックしてみよ.
+  \qed
+\end{proof}
+
+\begin{rem}
+  上の問題の結果を見て変数 $x$ に関する $\F_p$ 上の多項式環 $\F_p[x]$ に
+  おいても $x^p=x$ であると誤解してはいけない. 
+  $\F_p$ 係数の多項式とそれを $\F_p$ 上の函数とみなしたものは
+  厳密に区別されなければいけない.
+  $K$ が無限体であれば $K[x]$ の元と $K$ 上の多項式函数を同一視できる
+  のでそのような区別は必要ない.
+  \qed
+\end{rem}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\begin{thebibliography}{ABC}
+
+%\bibitem[I]{Infeld}
+%インフェルト,~L.,
+%ガロアの生涯—神々の愛でし人
+%市井三郎訳, 
+%日本評論社, 新版第3版, 1996
+
+%\bibitem[佐武]{satake} 佐武一郎: 線型代数学, 裳華房数学選書 1, 324頁.
+
+%\bibitem[杉浦]{sugiura}
+%杉浦光夫, Jordan標準形と単因子論 I, II, 岩波講座基礎数学, 線型代数 iii, 1976
+
+%\bibitem[齋藤]{saito} 齋藤正彦: 線型代数入門, 東京大学出版会基礎数学 
+%1, 278頁.
+
+%\bibitem[H1]{gun-kagun}
+%堀田良之, 代数入門——群と加群——, 数学シリーズ, 裳華房, 1987
+
+%\bibitem[H2]{10wa}
+%堀田良之, 加群十話——加群入門——, すうがくぶっくす 3, 朝倉書店, 1988
+
+%\bibitem[H3]{Ho}
+%堀田良之, 環と体 1 --- 可換環論, 岩波講座現代数学の基礎 15, 岩波書店, 1997
+
+%\bibitem[志賀]{shiga}
+%志賀浩二: 集合への30講, 朝倉書店 数学30講シリーズ 3, 187頁.
+
+% \bibitem[失業率]{unemp2004}
+% 労働力調査　長期時系列データ \\
+% {\tt http://www.stat.go.jp/howto/case1/01.htm} \\
+% から「第3表(3)年齢階級(5歳階級)，男女別完全失業者数及び完全失業率」 \\
+% {\tt http://www.stat.go.jp/data/roudou/longtime/zuhyou/lt03-03.xls} \\
+% をダウンロード
+
+% \bibitem[GDP]{SNA2003} 
+% 平成15年度国民経済計算 \\
+% {\tt http://www.esri.cao.go.jp/jp/sna/h17-nenpou/17annual-report-j.html} \\
+% から「4．主要系列表（3）経済活動別国内総生産　実質暦年」\\
+% {\tt http://www.esri.cao.go.jp/jp/sna/h17-nenpou/80fcm3r\verb,_,jp.xls} \\
+% をダウンロード
+
+%\end{thebibliography}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

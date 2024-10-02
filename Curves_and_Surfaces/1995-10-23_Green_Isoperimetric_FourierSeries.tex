@@ -1,0 +1,747 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% 幾何学概論 I 演習
+%
+% 黒木 玄 (東北大学理学部数学教室, kuroki@math.tohoku.ac.jp)
+%
+% 曲線・曲面論
+%
+% 日本語 AMS LaTeX でコンパイルしてください.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\ifx\gtfam\undefined
+% \documentstyle[amstex,amssymb,12pt,enshu]{j-article} % NTT
+%%\documentstyle[amstex,amssymb,showkeys,12pt,enshu]{j-article}  % NTT
+%\else
+% \documentstyle[amstex,amssymb,12pt,enshu]{jarticle}  % ASCII
+%%\documentstyle[amstex,amssymb,showkeys,12pt,enshu]{jarticle}  % ASCII
+%\fi
+
+\documentclass[12pt,twoside]{jarticle}
+\usepackage{amsmath,amssymb,amscd}
+\usepackage{enshu}
+%\usepackage{mathrsfs}
+%\newcommand\scr{\mathscr}
+
+\def\qstar#1{$\!\!\!$#1$\;$}
+
+%%% misc
+\def\O{\cal{O}}
+%\def\Sch{\mathop{\cal{S}}\nolimits}  % Schwartz space
+\def\Sch{\mathop{\scr{S}}\nolimits}  % Schwartz space
+\def\Area{\mathop{\text{\rm Area}}\nolimits}
+\def\Length{\mathop{\text{\rm Length}}\nolimits}
+\def\Vol{\mathop{\text{\rm Vol}}\nolimits}
+\def\Top{\mathop{\text{\rm Top}}\nolimits}
+\def\rank{\mathop{\text{\rm rank}}\nolimits}
+\def\id{\text{\rm id}}
+\def\II{I\!I}
+
+%%%
+\def\cosec{\mathop{\mbox{\rm cosec}}\nolimits}
+\def\sec{\mathop{\mbox{\rm sec}}\nolimits}
+
+%%% E-mail address
+\def\atmark{\char'100}
+\def\emailaddress{{\tt kuroki{\atmark}math.tohoku.ac.jp}}
+
+%%% C^n function
+\def\Class#1{\text{$\text{\rm C}^{#1}$}}
+
+%%% N, Z, Q, R, C, P, F
+\def\N{{\Bbb N}} % the set of natural numbers
+\def\Z{{\Bbb Z}} % the set of rational integers
+\def\Q{{\Bbb Q}} % the set of rational numbers
+\def\R{{\Bbb R}} % the set of real numbers
+\def\C{{\Bbb C}} % the set of complex numbers
+\def\P{{\Bbb P}}
+\def\F{{\Bbb F}}
+
+%%% real part, imaginary part
+\def\Repart{\mathop{\text{\rm Re}}\nolimits} % real part
+\def\Impart{\mathop{\text{\rm Im}}\nolimits} % imaginary part
+
+%%% Log
+\def\Log{\mathop{\text{\rm Log}}\nolimits}
+
+%%% upper half plane, unit disk
+\def\UH{{\frak H}} % Upper Half plane
+\def\UD{D}         % Unit Disk
+
+%%% operators acting complex functions
+\def\del{\partial}  % del
+\def\delbar{\overline{\partial}}  % del bar
+\def\Res{\mathop{\text{\rm Res}}} % residue
+\def\ord{\mathop{\text{\rm ord}}\nolimits} % order
+\def\arg{\mathop{\text{\rm arg}}\nolimits} % arg
+
+%%% operators acting on matrices
+%\def\trace{\mathop{\text{\rm Tr}}\nolimits}          % trace
+\def\trace{\mathop{\text{\rm tr}}\nolimits}          % trace
+\def\transposed#1{\,\vphantom{#1}^t\mskip-1.5mu{#1}} % transpose
+%\def\transposed#1{{#1}^t} % transpose
+\def\det{\mathop{\text{\rm det}}\nolimits}          % determinant
+
+%%% Ker, Coker, Im, Coim
+\def\Ker{\mathop{\text{\rm Ker}}\nolimits}   % kernel
+\def\Coker{\mathop{\text{\rm Ker}}\nolimits} % cokernel
+\def\Im{\mathop{\text{\rm Im}}\nolimits}     % image
+\def\Coim{\mathop{\text{\rm Coim}}\nolimits} % coimage
+
+%%% injection, surjection, isomorphism
+\def\injto{\hookrightarrow}
+\def\onto{\twoheadrightarrow}
+\def\isoto{\overset\sim\longrightarrow}
+
+%%% derivative
+\def\od#1#2{\frac{d #1}{d #2}}
+\def\pd#1#2{\frac{\partial #1}{\partial #2}}
+\def\rd{\partial}
+
+%%% vector analysis
+\def\grad{\mathop{\text{\rm grad}}\nolimits}
+\def\rot{\mathop{\text{\rm rot}}\nolimits}
+\def\div{\mathop{\text{\rm div}}\nolimits}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\setcounter{page}{11}      % この数から始まる
+\setcounter{section}{1}    % この数の次から始まる
+\setcounter{theorem}{0}    % この数の次から始まる
+\setcounter{question}{35}  % この数の次から始まる
+\setcounter{footnote}{0}   % この数の次から始まる
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newlabel{q:alp}{{1}{2}}
+\newlabel{q:vector-prod}{{8}{3}}
+\newlabel{q:FS1}{{10}{3}}
+\newlabel{q:FS2}{{11}{3}}
+\newlabel{q:helix}{{12}{4}}
+\newlabel{q:mat-exp}{{13}{4}}
+
+\newlabel{q:Schmidt}{{19}{6}}
+\newlabel{q:Iwasawa1}{{20}{7}}
+\newlabel{q:Iwasawa2}{{21}{7}}
+\newlabel{q:Iwasawa3}{{23}{7}}
+\newlabel{q:DS1}{{32}{10}}
+\newlabel{q:DS2}{{33}{10}}
+\newlabel{q:DS3}{{34}{10}}
+\newlabel{q:DS4}{{35}{10}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title{\bf 幾何学概論 I 演習}
+
+\author{黒木 玄 \quad (東北大学理学研究科)}
+
+\date{1995年10月23日(月)}
+
+\maketitle
+
+%\makeatletter
+%\noindent
+%{\LARGE \bf \@title} \hfill \@author \quad \@date
+%\bigskip\bigskip
+%\makeatother
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 10-30.tex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\paragraph{演習問題の追加ついて:}
+
+すでに, 演習の時間に話したことだが, 講義中に出された問題や試験で出され
+た問題の解答を演習の時間に発表することも正式に認める.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\paragraph{前回に配ったプリントの訂正:}
+
+前回のプリントに対して, 以下の訂正と追加を行なう.
+\begin{itemize}
+\item 問題 \qref{q:Schmidt}{} における $P=$ の式の中の $|u_i|$ は全て
+  正しくは $|v_i|$ でなければいけない.
+\item 問題 \qref{q:Iwasawa2}{} のヒント: 行列の積は通常の数の積と和の
+  繰り返しで定義されるので, 行列の積で定義された写像の連続性は簡単に示
+  せる. 逆写像は Schmidt の正規直交化法で構成されるので, 逆写像の連続
+  性を示すためには Schmidt の正規直交化法によって得られる写像が連続で
+  あることを確かめれば良い.
+\item 問題 \qref{q:DS1}{} の下に以下を挿入せよ:
+  \begin{quote}
+    参考: この問題の結果は物理学者などには良く知られているようである. 
+    (例えば, \cite{Polyakov}{} の第7章などを見よ.)
+  \end{quote}
+\item 問題 \qref{q:DS4}{} の式を次のように修正する(``$-$'' が抜けていた):
+  \[
+    \pd{}{t_1} F(t_1,t_0) = A(t_1) F(t_1,t_0),
+    \qquad
+    \pd{}{t_0} F(t_1,t_0) = - F(t_1,t_0) A(t_0).
+  \]
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Section. Green の公式
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Green の公式}
+
+すでに多変数の微分積分学の講義などで知っていることだと思うが, Green の
+公式について復習しよう. Green の公式は大変基本的なので頻繁に使われる.
+
+\begin{question}[正方形領域に対する Green の公式]\label{q:Green1}
+  $K=[0,1] \times [0,1]$ と置き, $\Omega$ は $K$ の任意の開近傍である
+  とする. $u$, $v$ は $\Omega$ 上の $C^1$ 函数であるとする. 写像 
+  $q:[0,4]\to\R^2$ を次のように定義する:
+  \[
+    q(t)=
+    \begin{cases}
+      (t,0)   \quad & \text{if}\ t\in [0,1], \\
+      (1,t-1) \quad & \text{if}\ t\in [1,2], \\
+      (3-t,1) \quad & \text{if}\ t\in [2,3], \\
+      (0,4-t) \quad & \text{if}\ t\in [3,4].
+    \end{cases}
+  \]%
+  $q(t)=(x(t),y(t))$ と書くことにする.  $q(t)$ は $K$ の境界を正の向き
+  にまわる曲線である. このとき, 次が成立する:
+  \begin{align*}
+    &
+    \int_0^4 
+    \left( 
+      u(x(t),y(t)) \frac{dx(t)}{dt} + v(x(t),y(t)) \frac{dy(t)}{dt}
+    \right)
+    dt
+    =
+    \int_K
+    \left(
+      \frac{\del v(x,y)}{\del x} - \frac{\del u(x,y)}{\del y} 
+    \right)
+    \,dx\,dy,
+    \\
+    &
+    \int_0^4 
+    \left( 
+      u(x(t),y(t)) \frac{dy(t)}{dt} - v(x(t),y(t)) \frac{dx(t)}{dt}
+    \right)
+    dt
+    =
+    \int_K
+    \left(
+      \frac{\del u(x,y)}{\del x} + \frac{\del v(x,y)}{\del y} 
+    \right)
+    \,dx\,dy.  \qed
+  \end{align*}
+\end{question}
+
+\noindent この公式を Green の公式と呼ぶ. 以下のように省略した方が見易
+い:
+\[
+  \int_{\del K} u \,dx + v \,dy
+  =
+  \int_K (v_x - u_y)\,dx\,dy,
+  \qquad
+  \int_{\del K} u \,dy - v \,dx
+  =
+  \int_K (u_x + v_y)\,dx\,dy.
+\]%
+もちろん, Green の公式は問題 \qref{q:Green1} よりもずっと一般の状況で
+も成立する. 領域 $K$ の形や函数 $u$, $v$ に関する条件もずっと弱めるこ
+とができる. 
+
+\begin{question}[三角形に対する Green の公式]\label{q:Green2}
+  問題 \qref{q:Green1} における正方形型閉域 $K$ を次の三角形型閉域に置
+  き換えた場合の結果を定式化し, それを証明せよ:
+  \[
+    K := \{\, (x,y) \mid x \ge 0, y \ge 0, x + y \le 1 \}.
+  \qed
+  \]
+\end{question}
+
+\begin{question}[一般の場合の Green の公式]\qstar{*}\label{q:Green3}
+  問題 \qref{q:Green1}{} もしくは問題 \qref{q:Green2}{} の結果を認めた
+  上で, (十分に滑らかに)三角形分割可能な閉領域に対する Green の公式の
+  証明の概略について述べよ. \qed
+\end{question}
+
+\begin{question}\label{q:Green4}
+  記号 $dx$, $dy$ を基底にもつベクトル空間を %
+  $V_1$ と書くことにする.  $\R^2$ の開部分集合 $\Omega$ 上の %
+  $C^1$ 函数 $f$ に対して, $\Omega$ 上の $V_1$ 値函数 $df$ を %
+  $df(x,y) = f_x(x,y)\,dx + f_y(x,y)\,dy$ と定義する. %
+  記号 $dx\wedge dy$ を基底にもつベクトル空間を % 
+  $V_2$ と書くことにする. $V_1\times V_1$ から $V_2$ への双線
+  型写像 $(\alpha,\beta)\mapsto \alpha\wedge\beta$ を次のように定める:
+  \[
+    (dx,dx) \mapsto 0, \quad
+    (dx,dy) \mapsto dx\wedge dy, \quad
+    (dy,dx) \mapsto - dx\wedge dy, \quad
+    (dy,dy) \mapsto 0.
+  \]%
+  双線型写像としての $\wedge$ を外積と呼ぶ. $u$, $v$ は $\Omega$ 上の
+  函数であるとし, $\Omega$ 上の $V_1$ 値函数 $\omega$ を %
+  $\omega = u\,dx + v\,dy$ と定める. このような $\omega$ を $\Omega$ %
+  上の 1-form と呼ぶ. 函数 $f$ に対する $df$ は 1-form である. % 
+  $u$, $v$ が $C^1$ 級であるとき, $\omega$ の外微分 $d\omega$ を次のよ
+  うに定める:
+  \[
+    d\omega := du \wedge dx + dv \wedge dy.
+  \]%
+  $\Omega$ 上の $V_2$ 値函数のことを $\Omega$ 上の 2-form と呼ぶ. 
+  1-form $\omega$ の外微分 $d\omega$ は 2-form である. このとき, 次の
+  公式が成立することを示せ:
+  \[
+    d(u\,dx + v\,dy) = (v_x - u_y) dx\wedge dy,
+    \qquad
+    d(u\,dy - v\,dx) = (u_x + v_y) dx\wedge dy.
+  \]%
+  さらに, 以上の記号を用いると, Green の公式は次のように表現されること
+  を説明せよ:
+  \[
+    \int_{\del K} \omega = \int_K d\omega.
+  \qed
+  \]
+\end{question}
+
+\noindent ヒント: この問題は Green の公式の形式的な変形に過ぎないので,
+非常に簡単である.
+
+\noindent 参考: これは, 微分形式の理論の一部をほんの少しだけ切り出すこ
+とによって作られた問題である. Green の公式を
+\[
+  \int_{\del K} \omega = \int_K d\omega.
+\]%
+のように表現できることを示せというのが上の問題の内容だが, この形の公式
+は平面だけではなく任意の $n$ 次元多様体上でも全く同様な形で成立
+する(Stokes の定理).  %
+微分形式 $\omega$ と積分領域 $K$, 外微分 $d\omega$ %
+と境界 $\del K$ の{\bf 双対性}に注意せよ. Stokes の定理はトポロジーに
+おけるコホモロジーとホモロジーの双対性に関係している.
+
+\noindent 参考: Gauss-Green-Stokes の定理は流体力学的もしくは電磁気学
+的直観を使うと理解し易い. ベクトル解析や物理学の教科書なども見て直観を
+養うことが望ましい. それらの本ににはおそらく $\grad$, $\rot$, $\div$ 
+などに関する複雑な公式が書いてあるはずだが, それらの公式は微分形式を使
+えば奇麗に整理される.
+
+複素函数論の演習に属することだが, Green の公式の応用として当然知ってい
+るべきことと思われるので, 以下の問題を出しておく.
+
+偏微分作用素 $\pd{}{z}$, $\pd{}{\bar z}$ を
+\[
+  \pd{}{z}      := \frac{1}{2}\left( \pd{}{x} - i \pd{}{y} \right),
+  \qquad
+  \pd{}{\bar z} := \frac{1}{2}\left( \pd{}{x} + i \pd{}{y} \right).
+\]
+と定義する.
+
+\begin{question}[Cauchy-Riemann の方程式]
+  $\Omega$ は $\C$ の開部分集合であるとし, $f$ は $\Omega$ 上の複素数
+  値 $C^1$ 函数であるとする. 複素数 $z \in \Omega$ を実数 $x$, $y$ に
+  よって $z = x + iy$ と表わし, $f$ を実数値函数 $u$, $v$ によって %
+  $f = u + iv$ と表わしておく. このとき, 以下が成立することを示せ: %
+  \begin{enumerate}
+  \item 
+    \( \displaystyle
+      df
+      = \pd{f}{z}\,dz + \pd{f}{\bar z}\,d\bar{z}.
+    \)
+  \item 
+    \( \displaystyle
+      f(z + h) - f(z) = \pd{f}{z} h + \pd{f}{\bar z} \bar{h} + o(h).
+    \)
+  \item 任意の $z \in \Omega$ に対して, 以下の3つの条件は互いに同値で
+    ある:
+    \begin{enumerate}
+    \item 極限 %
+      \(%
+        \displaystyle \lim\limits_{h\to 0} \frac{f(z+h) - f(z)}{h}
+      \)% 
+      が存在する(複素微分可能性).
+    \item 点 $z$ において, $\displaystyle \pd{f}{\bar z} = 0$.
+    \item 点 $z$ において, $u_x = v_y$, $u_y = - v_x$.
+    \end{enumerate}
+    複素微分可能性と同値な偏微分方程式を {\bf Cauchy-Riemann の方程式} 
+    と呼び, Cauchy-Riemann の方程式をみたす複素函数 $f$ を {\bf 正則函
+      数} (holomorphic function) と呼ぶ.
+    \qed
+  \end{enumerate}
+\end{question}
+
+複素数値 1-form $f(z)\,dz + g(z)\,d{\bar z}$ の曲線 %
+$C = \{\, z(t) \mid a\le t \le b \,\}$ に関する線積分を次のように定義
+する:
+\[
+  \int_C (f(z)\,dz + g(z)\,d{\bar z})
+  :=
+  \int_a^b \left(
+    f(z(t)) \frac{dz(t)}{dt} + g(z(t)) \frac{d\overline{z(t)}}{dt}\,
+  \right) \,dt.
+\]
+
+\begin{question}[Cauchyの積分定理]
+  $\Omega$ は $\C$ の開部分集合であるとし, $f$ は $\Omega$ 上の正則函
+  数であるとする. $U$ は区分的に滑らかな境界を持つ %
+  $\Omega$ の相対コンパクト開部分集合であるとする. このとき, 
+  \[
+    \int_{\partial U} f(z)\,dz = 0.
+  \qed
+  \]
+\end{question}
+
+\noindent ヒント: 複素数値函数に対する Green の公式を自由に用いて良い.
+Cauchy の積分定理は Green の公式を形式的に用いるだけでただちに証明され
+る. そのとき, 次の式を使うと計算が極めて易しくなる:
+\[
+  d(f\,dz) = df \wedge dz
+  = \left( \pd{f}{z}\,dz + \pd{f}{\bar z}\,d\bar{z} \right) \wedge dz
+  = \pd{f}{\bar z}\,d\bar{z} \wedge dz.
+\]
+ここで, $dz\wedge dz = 0$ を使った. 
+
+\noindent 参考: Gauss-Green-Stokes の定理の理解には流体力学的な直観の
+使用が有効であるのであった. Green の公式の応用として簡単に示される 
+Cauchy の積分定理においてもそれは同様である. 複素正則函数は「渦無し湧
+き出し無し」の2次元理想流体の流れを表現しているとみなせるのである. 
+「渦無し湧き出し無し」という条件を微分形で表現したものが 
+Cauchy-Riemann の方程式であり, 積分形で表現したものが Cauchy の積分定
+理である. この立場で書かれた面白い本として \cite{Imai}{} があるので参
+照されたい. 別の解釈として, 正則函数の理論を2次元静電場の理論とみなす
+こともできるが, そのとき電荷を持つ粒子は極によって表現される. 
+
+Green の公式の応用として, Cauchy の積分定理が示されたのだが, その簡単
+な応用として以下の問題を挙げておこう.
+
+\begin{question}
+  $a > 0$ のとき, 任意の $b \in\C$ に対して, 
+  \[
+    \int_{-\infty}^\infty e^{- \frac{1}{2} ax^2  + bx} \,dx
+    =
+    \int_{-\infty}^\infty e^{- \frac{1}{2} a x^2 + \frac{1}{2a}b^2 } \,dx
+    =
+    \sqrt{\frac{2\pi}{a}} e^{\frac{1}{2a}b^2}.
+  \qed
+  \]%
+\end{question}
+
+\noindent ヒント: もしも, $y = x - b$ と積分変数の変換が許されるなら, 
+この問題の前半の等式の証明は簡単である. しかし, $b$ は複素数なので %
+$y$ も複素数になってしまい, 単純にはうまく行かない. そこを何とかするた
+めには, $R>0$ に対する $-R \le x \le R$ における2つの積分の差を Cauchy 
+の積分定理を使って評価すれば良い. (実は, 積分を $b$ の解析函数と見て一
+致の定理を用いても証明できる.) 後半の等式の証明については %
+\cite{Takagi}{} の p.344 などを見よ.
+
+\noindent 参考: ちなみに, この問題の結果は, 解析函数の一致の定理によっ
+て, $a\in\C$ でかつ $\Repart(a)> 0$ ($a$ の実部が正)の場合に拡張される. 
+さらに, 以下の問題のように $1$ 次元から $n$ 次元の場合に上の公式は一般
+化される.
+
+\begin{question}\qstar{*}
+  $A$ は実 $n$ 次正方行列であり, その固有値は全て正であると仮定する. 
+  $x_1,\dots,x_n\in\R$ を縦に並べてできる縦ベクトルを $x\in\R^n$ と表
+  わすことにする. このとき, 任意の複素縦ベクトル $b \in \C^n$ に対して,
+  \[
+    \int_{\R^n}
+      \exp\left( - \frac{1}{2}\transposed{x}Ax + \transposed{b}x \right)
+    \,dx_1\cdots dx_n
+    =
+    \sqrt{\frac{(2\pi)^n}{\det(A)}}
+    \exp\left( \frac{1}{2}\transposed{b}A^{-1}b \right).
+  \qed
+  \]
+\end{question}
+
+\noindent ヒント: 任意の実対称行列は $SO(n)$ の元によって対角化可能で
+ある.
+
+\noindent 参考: 左辺に $A$ の行列式と逆行列が出現したことが印象的であ
+る. この公式は理論物理学でよく使われる. 場の量子論などにおける Feynman
+diagram の手法も(経路積分の立場では)この問題の結果がもとになるのである. 
+上の公式の両辺を$b$ について Taylor 展開し, 両辺の同次の項を比べると,
+$\exp\left( - \frac{1}{2}\transposed{x}Ax \right)$ に $x$ の多項式函数
+をかけたものに関する積分公式が得られる. その公式をある種の diagram を
+使って組合せ論的に表示するというのが Feynman diagram の方法の内容であ
+る. ただし, 場の量子論の場合は無限次元の場合を扱うので, 数学的には満足
+できる形で合理化されているとは言えない.
+
+\medskip
+
+以下においては, 問題を解くために Green の公式を自由に用いて良い.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Section. 等周問題
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{等周問題}
+
+この節の目標は等周不等式の証明の概略を演習問題の羅列によって説明するこ
+とである. 等周問題の Fourier 級数を用いた Hurwitz による取り扱いについ
+ては, \cite{Mizohata}{} の pp.202--204 に簡潔な解説がある. また, 最近
+の成果に触れるためには, 『数理科学』(1995年8月号)における記事 
+\cite{Urakawa}{} およびその文献表が役に立つであろう. 
+
+以下においては, \cite{Urakawa}{} の方針にしたがう. 講義においてはより
+初等的な Fourier 級数を使わない self-contained な証明がなされたようだ
+が, 以下で説明する証明の方針も面白いので知っておくことに意義はあると思
+われる.
+
+\paragraph{等周問題:} 平面上にいて, 与えられた長さ $L$ を持つ単一曲線
+で囲まれた領域のうちで面積が最大になるものは何か?
+
+もちろん, 答は円なのであるが問題はその証明である. 
+
+なお, ここで, {\bf 単一曲線}(simple closed curve)とは平面内の $S^1$ と
+同相な曲線のことである. ({\bf Jordan 曲線}と呼ぶこともある.) この演習
+においては, Jordan 曲線定理は自由に認めて使っても良いことにする. また, 
+曲線も「長さを持つ曲線」まで一般化せず, 主に区分的に滑らかな曲線を扱う.
+(ここで言っていることの意味がわからない人は, \cite{jiten}{} などで 
+「Jordan 曲線」や「曲線の長さ」などに関係する項目を見て欲しい.)
+
+$D$ は閉円板に同相な平面 $\R^2$ 内の有界閉集合であり, %
+$D$ は滑らかな $S^1$ に同相な境界 $C = \partial D$ を持つものと仮定す
+る. 閉曲線 $C$ は $q(t) = (x(t), y(t))$ ($t\in [a,b]$, $q(a)=q(b)$) に
+よってパラメトライズされているものとし, $t$ が増加するとき $q(t)$ は 
+$D$ の周りを正の向き(時計と反対回り)に動くものとする. (図を描け.) %
+$C$ 上の函数(正確には 1-form)の積分は $q(t)$ を通して定義されているも
+のとする.
+
+閉領域 $D$ の面積を $\Area(D)$ と書き, 曲線 $C$ の長さを $\Length(C)$ %
+と書くことにする. それらは以下のように表わされる:
+\[
+  \Area(D)
+  = \int_D dx\,dy,
+  \qquad
+  \Length(C)
+  = \int_C |dq|
+  = \int_a^b \sqrt{\dot{x}(t)^2 + \dot{y}(t)^2}\,dt.
+\]
+
+以下の目標は次の定理を証明することである.
+
+\paragraph{定理 (等周不等式)} 以上の記号のもとで, 次の不等式が成立する:
+\[
+    \Length(C)^2 \ge 4\pi \Area(D)
+\]%
+さらに, この不等式において等号が成立するための必要十分条件は, 曲線 $C$ 
+が円であることである.  \qed
+
+\begin{question}\label{q:area}
+  以下の等式が成立することを示せ:
+  \begin{align*}
+    \Area(D)
+    & =   \int_C x\,dy =   \int_a^b x(t) \dot{y}(t) \,dt
+    \\
+    & = - \int_C y\,dx = - \int_a^b y(t) \dot{x}(t) \,dt.
+  \qed
+  \end{align*}
+\end{question}
+
+\begin{question}\label{q:length-area}
+  $L = \Length(C)$, $A = \Area(D)$ と置く. パラメーター $t$ を
+  \[
+    \sqrt{\dot{x}(t)^2 + \dot{y}(t)^2} = 2\pi/L
+  \]%
+  を満たすように取れて, しかも, それが動く範囲を区間 $[0,2\pi]$ (すな
+  わち, $a=0$, $b=2\pi$)にできることを示せ. そのとき, $t$ は弧長パラメー
+  ターとどのような関係にあるか? このパラメーター付けのもとで, 任意の実
+  数 $a$ に対して, 次の等式が成立することを示せ:
+  \[
+    \frac{L^2}{2\pi} - 2 A
+    = \int_0^{2\pi} \left( \dot{y}(t) - (x(t) - a) \right)^2  \,dt
+    + \int_0^{2\pi} \left( \dot{x}(t)^2 - (x(t) - a)^2 \right)\,dt.
+  \qed
+  \]
+\end{question}
+
+\noindent ヒント: $x(t)$ の代わりに $x(t) - a$ を考え, %
+問題 \qref{q:area}{} の結果と次の明らかな等式の差を考えれば良い:
+\[
+  \int_0^{2\pi} (\dot{x}(t)^2 + \dot{y}(t)^2)\,dt = \frac{L^2}{2\pi}.
+\]
+
+\noindent 注意: この問題によって, 等周不等式は次の定理に帰着できること
+がわかる.
+
+\paragraph{定理 (Wirtinger の不等式)}
+$f(t)$ は $\R$ 上の周期 $2\pi$ を持つ実数値 $C^1$ 函数であり,
+\[
+  \int_0^{2\pi} f(t)\, dt = 0
+\]%
+を満たしていると仮定する. このとき, 次の不等式が成立する:
+\[
+  \int_0^{2\pi} \dot{f}(t)^2 \,dt \ge \int_0^{2\pi} f(t)^2\,dt.
+\]%
+さらに, この不等式において等号が成立するための必要十分条件は, $f(t)$ %
+が $f(t) = c \cos t + d \sin t$ ($c,d \in \R$) と表わされることである. 
+\qed
+
+\noindent 参考: この不等式は, 「$f(t)$ の平均が $0$ のとき, $|f(t)|$ %
+が大きくなるためには, その変化の激しさを表わす $|\dot{f}(t)|$ が大きく
+なればいけない」という直観の数学的表現の一つである. 大事な点は, 等式が
+成立することがあるという意味で, Wirtinger の不等式は最良の結果を与えて
+いるという点である.
+
+\begin{question}
+  Wirtinger の不等式から不等式 $\Length(L)^2 \ge 4\pi \Area(D)$ を導け.
+  \qed
+\end{question}
+
+\noindent ヒント: 問題 \qref{q:length-area}{} の結果を用いる. %
+$f(t) = x(t) - a$ と置き, $a$ の値を条件 $\int_0^{2\pi} f(t)\, dt = 0$ 
+が成立するように取る.
+
+これで, 等周不等式の定理の前半の結果が Wirtinger の不等式から導かれた
+ことになる. 後半の等号が成立するための条件に関する主張も次のようにして
+導くことができる.
+
+\begin{question}
+  区間 $[0,2\pi]$ 上の実数値 $C^1$ 函数 $x(t)$, $y(t)$ が %
+  \[
+    x(t) = a + c \cos t + d \sin t,
+    \quad
+    \dot{y}(t) = x(t) - a,
+    \quad
+    \frac{1}{2\pi} \int_0^{2\pi} y(t)\,dt = b,
+    \quad
+    a,b,c,d \in \R
+  \]%
+  をみたしているとき, 曲線 $(x(t), y(t))$ ($0 \le t \le 2\pi$) は%
+  中心 $(a,b)$, 半径 $r = \sqrt{c^2 + d^2}$ の円を描くことを示せ. \qed
+\end{question}
+
+\noindent 参考: 等周不等式が Wirtinger の不等式のような解析学における
+sharp な不等式と密接な関係があるという事実は重要である. 他の不等式
+(Sobolev の不等式など)との関係については \cite{Urakawa}{} を参照せよ.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Section. Fourier 級数
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Fourier 級数}
+
+前節によって, Wirtinger の不等式から等周不等式が導かれることがわかった. 
+よって, 等周不等式の証明を完成するためにはWirtinger の不等式を証明すれ
+ば良い. そのためには周期函数の Fourier 級数展開に関する準備が必要であ
+る. しかし, これは幾何の演習であるので, Fourier 解析に関する準備を厳密
+に行なうことは避け, おおらかにかつ形式的に議論を進める. Fourier 解析に
+関する厳密な議論は解析の講義における Hilbert 空間論および Lebesgue 積
+分論の応用において行なわれるであろう.
+
+\begin{question}[Wirtinger の不等式の証明の方針]\label{q:Fourier1}
+  以下に現われる無限和はすべて収束し, 極限の交換が全て形式的に許される
+  という{\bf おおらか}仮定のもとで以下を示せ.  $\R$ 上の函数 $f(t)$ が % 
+  \[%
+    f(t)
+    = \frac{c_0}{2} + \sum_{k=1}^\infty (c_k \cos(kt) + d_k \sin(kt)),
+    \qquad
+    c_k, d_k \in \R
+  \]%
+  と表わされていると仮定する. このとき, $f(t)$ は Fourier 級数展開され
+  ているていると言う. このとき, 以下が成立する:
+  \begin{enumerate}
+  \item 
+    \( \displaystyle
+      c_k = \frac{1}{\pi} \int_0^{2\pi} \cos(kt)\, f(t) \,dt,
+      \qquad
+      d_k = \frac{1}{\pi} \int_0^{2\pi} \sin(kt)\, f(t) \,dt.
+    \)
+  \item
+    \( \displaystyle
+      \int_0^{2\pi} f(t)^2 \,dt
+      = \pi \left(
+          \frac{{c_0}^2}{2} + \sum_{k=1}^\infty ({c_k}^2 + {d_k}^2)
+        \right)
+    \)
+    \qquad (Parseval の等式).
+  \item $\int_0^{2\pi} f(t) \,dt = 0$ を仮定する. このとき, $c_0 = 0$ %
+    であり, 次の不等式が成立する:
+    \[
+      \int_0^{2\pi} \left( \frac{df(t)}{dt} \right)^2 \,dt
+      \ge
+      \int_0^{2\pi} f(t)^2 \,dt.
+    \]
+    しかも, 等号が成立するための必要十分条件は, %
+    $2$ 以上の全ての $k$ に対して $c_k = d_k = 0$ が成立することである.
+    \qed
+  \end{enumerate}
+\end{question}
+
+\noindent この形式的な問題によって, Wirtinger の不等式を厳密に証明する
+ためには,以下の問題を解けば良さそうなことがわかる.
+
+\paragraph{問題.} 
+上の問題の記号のもとで, Fourier 級数は収束するとすれば周期 $2\pi$ を持
+つ周期函数になる. 逆に任意の周期函数は Fourier 級数展開可能であるか? 
+もしもそれが駄目なら, どのような周期函数が Fourier 級数展開可能である
+か? 適当な条件のもとで Parseval の等式を証明せよ.
+
+\medskip
+
+\noindent 実際, Fourier 級数展開の理論をやると, これらの問題が十分満足
+な形で肯定的に解決されるのである.
+
+\medskip
+
+$\cos(kt)$, $\sin(kt)$ に関する Fourier 級数論を直接展開するよりも, 函
+数を複素数値函数まで拡張し $\exp(ikt)$ ($k \in \Z$) に関する Fourier 
+級数論を展開する方が, 計算的にはずっと易しくなる.
+
+\begin{question}\label{q:Fourier2}
+  $\exp(ikt)$ ($k \in \Z$)に対して, 問題 \qref{q:Fourier1}{} と類似の
+  問題を定式化し, 問題 \qref{q:Fourier1}{} と同様に収束や極限の交換な
+  どに関する{\bf おおらかな}仮定のもとで, その問題を解け. \qed
+\end{question}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{thebibliography}{ABC}
+
+%\bibitem[Gardner]{Gardner}
+%Martin~Gardner: 自然界における左と右, 紀伊国屋書店
+
+\bibitem[今井]{Imai}
+今井 功: 流体力学と複素解析, 日本評論社
+
+%\bibitem[小林]{Kobayashi}
+%小林 昭七: 曲線と曲面の微分幾何, 裳華房
+
+\bibitem[溝畑]{Mizohata}
+溝畑 茂: ルベーグ積分, 岩波全書 265, 岩波書店
+
+\bibitem[Polyakov]{Polyakov}
+A.~M.~Polyakov: Gauge fields and strings, harwood academic publishers,
+Contemporary concepts in physics, Volume 3, 1987
+
+%\bibitem[佐武]{Satake}
+%佐武 一郎: 線型代数学, 裳華房
+
+\bibitem[数学辞典]{jiten}
+岩波数学辞典, 第三版, 岩波書店
+
+\bibitem[高木]{Takagi}
+高木 貞治: 解析概論, 改訂第三版, 岩波書店
+
+%\bibitem[朝永]{Tomonaga}
+%朝永 振一郎: 量子力学 I, 第2版, 物理学大系, 基礎物理学篇 VIII, みすず書房
+
+\bibitem[浦川]{Urakawa}
+浦川 肇: 等周不等式, 数理科学 1995-8, 特集/現代の不等式, 20--24
+
+%\bibitem[WW]{WW}
+%E.~T.~Whittaker and G.~N.~Watson: A course of modern analysis,
+%Cambridge University Press, Fourth Edition, 1927, Reprinted 1992
+
+%\bibitem[山内・杉浦]{YS}
+%山内恭彦, 杉浦光雄: 連続群論入門, 新数学シリーズ 18, 培風館
+
+%\bibitem[横田]{Yokota}
+%横田一郎: 群と位相, 基礎数学選書 5, 裳華房
+
+\end{thebibliography}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

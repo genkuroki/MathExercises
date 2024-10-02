@@ -1,0 +1,1918 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\def\STUDENT{} % \def すると計算問題の解答を印刷しなくなる.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% 線形代数学演習---行列の標準形
+% 
+% 黒木 玄 (東北大学理学部数学教室, kuroki@math.tohoku.ac.jp)
+%
+% この演習問題集は2005年度における東北大学理学部数学科2年生前期の
+% 代数学序論B演習のために作成されました. 
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[12pt,twoside]{jarticle}
+%\documentclass[12pt]{jarticle}
+\usepackage{amsmath,amssymb,amscd}
+\usepackage{eepic}
+\usepackage{enshu}
+%\usepackage{showkeys}
+\allowdisplaybreaks
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setcounter{page}{21}      % この数から始まる
+\setcounter{section}{2}    % この数の次から始まる
+\setcounter{theorem}{0}    % この数の次から始まる
+\setcounter{question}{36}  % この数の次から始まる
+\setcounter{footnote}{0}   % この数の次から始まる
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\ifx\STUDENT\undefined
+%
+% 教師専用
+%
+\newcommand\commentout[1]{#1}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\else
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% 生徒専用
+%
+\newcommand\commentout[1]{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\fi
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\title{\bf 線形代数学演習---行列の標準形
+%  \thanks{この演習問題集は2005年度における東北大学理学部数学科2年生前期の
+%    代数学序論B演習のために作成された.}
+%  \ifx\STUDENT\undefined\\{\normalsize 教師用\quad(計算問題の略解付き)}\fi}
+%  \ifx\STUDENT\undefined\\{\normalsize 計算問題の略解付き}\fi}
+%
+%\author{黒木 玄 \quad (東北大学大学院理学研究科数学専攻)}
+%
+%\date{最終更新2003年11月21日 \quad (作成2005年4月11日)}
+%\date{2004年4月25日}
+
+%\maketitle
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\noindent
+{\Large\bf 線形代数学演習}
+\hfill
+{\large 黒木玄}
+\qquad
+2005年4月25日
+\commentout{\quad (教師用)}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\tableofcontents
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section*{論理と集合に関する注意}
+
+\begin{enumerate}
+\item 集合のあいだの写像 $f:X\to Y$ と $y\in Y$ に対して %
+  $f^{-1}(y)=\{\,x\in X\mid f(x)=y\,\}$ である. 
+  $f$ が全単射でない場合は記号法 $f^{-1}(y)$ はこのような意味で
+  用いられる. ($f^{-1}(y)$ は $f$ の $y$ におけるファイバーと呼ばれる.)
+  $f$ が全単射でない限り, $f^{-1}(f(x))=x$ と考えてはいけない.
+
+\item 証明は $\implies$ や $\iff$ を用いた「論理計算」で行なうよりも
+  通常の文章で書いた方が短かくなることが多い.
+  論理を記号計算で理解できることは重要な数学的事実であるが,
+  それに頼って記号計算で論理的な命題を理解しようとするのは好ましくない.
+  
+\item 通常の証明には論理記号として $\wedge$, $\vee$, $\rightarrow$ などを使
+  うのは好ましくない. その理由はそれらを通常の数学の記号として使いたい
+  からである. たとえば数列の極限を $a_n\rightarrow\alpha$ のように書くことは
+  すでに知っているはずである. 微分形式の外積で $\wedge$ が使用される.
+  「ならば」の意味で矢印を使いたい場合には $\rightarrow$ では
+  なく $\implies$ の方を使うことが多い.
+
+\item 集合に関して $X=Y\cup Z$ のとき $X=Y \iff Z\subset Y$ である.
+  $X=Y$ と $Z=\emptyset$ は同値ではないことに注意せよ.
+
+\item 余計な括弧は付けない. たとえば $A\subset(A\cup B)$ の括弧は余計である.
+
+\item 論理がわかっているかどうかは曖昧な文を正確に扱えるかどうかを見ればわかる.
+  論理を理屈ではなく, 記号計算で理解しようとしている人は, ちょっとでも曖昧な
+  文に出会った途端にわからなくなる. 曖昧に見える文をうまく解釈して正確な論理
+  に焼き直す (もしくは近似する) ことは重要である.
+  
+\item 普遍的な数学的数学的真理を扱っているのに「題意」という言葉を
+  使うのは格好悪いと思う.
+
+\item 基本的な集合算
+  \begin{enumerate}
+  \item 集合の
+    %共通部分, 和, 差, 
+    直積, 羃. 
+    $X,Y$ が集合であるとき \\%
+%    $X\cap Y = \{\,x\mid \text{$x\in X$ かつ $x\in Y$}\,\}$, %
+%    $X\cup Y = \{\,x\mid \text{$x\in X$ または $x\in Y$}\,\}$, %
+%    $X\setminus Y = \{\,x\mid \text{$x\in X$ だが $x\in Y$ ではない}\,\}$, %
+    $X\times Y=\{\,(x,y)\mid x\in X,\, y\in Y\,\}$, %
+    $Y^X=\{\, f \mid f:X\to Y \,\}$ も集合である. 
+  \item 部分集合. $X$ が集合である
+    とき $\{\,x\in X\mid \text{$x$ は〜を満たす}\,\}$ も集合である.
+  \item 写像による像. $f$ が $X$ を定義域とする写像で
+    あるとき $f(X)=\{\, f(x)\mid x\in X\,\}$ も集合である.
+    (例: $W\subset\R^n$, $v\in\R^n$ のとき $v+W=\{\,v+w\mid w\in W\,\}$.)
+  \end{enumerate}
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{固有値と固有ベクトルの復習}
+
+この節では, 固有値と固有ベクトルについて簡単に復習し, 
+$2$ 次および $3$ 次正方行列の
+ジョルダン標準形 (Jordan normal form)の計算の仕方を扱う.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{固有値と固有ベクトル}
+
+複素 $n$ 次正方行列 $A$ と複素数 $\alpha$ に
+対して, $0$ でない縦ベクトル $u$ で
+\begin{equation*}
+  A u = \alpha u
+\end{equation*}
+を満たすものが存在するとき,  $\alpha$ を $A$ の{\bf 固有値 (eigen value)}と
+呼び, $u$ を $A$ の{\bf 固有ベクトル (eigen vector)}と呼ぶ.
+行列 $A$ を与えてその固有値と固有ベクトルをすべて求める問題を固有値問題と呼ぶ.
+固有値 $\alpha$ に対して,
+\begin{equation*}
+  \{\, u\in\C^n \mid Au = \alpha u \,\}
+  = \{\, u\in\C^n \mid (A-\alpha E)u = 0 \,\}
+  = \Ker(A - \alpha E)
+\end{equation*}
+を $\alpha$ に対応する{\bf 固有空間 (eigen space)}と呼ぶ.
+
+複素 $n$ 次正方行列 $A$ と複素数 $\alpha$ に $0$ でない縦ベクトル $u$ が
+ある $k=1,2,3,\ldots$ に関して
+\begin{equation*}
+  (A - \alpha E)^k u = 0
+\end{equation*}
+を満たしているとき, $u$ を $A$ の{\bf 一般固有ベクトル}と呼ぶ.
+$(A - \alpha E)^k u = 0$ となる最小の $k$ を取るとき,
+$k=1$ ならば $u$ は固有ベクトルになり,
+$k>1$ の場合には $v = (A - \alpha E)^{k-1}u$ と置けば $v$ は固有値 $\alpha$ 
+に対する固有ベクトルになる.  よって $\alpha$ は $A$ の固有値になる. 
+行列 $A$ を与えてその固有値と一般固有ベクトルをすべて求める問題を
+一般固有値問題と呼ぶ.  固有値 $\alpha$ に対して, 
+\begin{equation*}
+  W(A,\alpha) 
+  = \{\, u\in\C^n \mid (A - \alpha E)^k u = 0 \ (\exists k = 1,2,3,\ldots)\,\}
+\end{equation*}
+を $\alpha$ に対応する{\bf 一般固有空間 (generalized eigen space)}と呼ぶ.
+
+複素 $n$ 次正方行列 $A$ に対して, 
+その{\bf トレース (trace)}, {\bf 行列式 (determinant)} を
+それぞれ $\trace A$, $\det A = |A|$ と書くことにし, 
+$A$ の{\bf 特性多項式 (characteristic polynomial)} $p_A(\lambda)$ を
+次のように定める:
+\begin{equation*}
+  p_A(\lambda) = \det(\lambda E - A).
+\end{equation*}
+ここで, $E$ は $n$ 次単位行列である. 
+このとき $\lambda$ に関する $n$ 次方程式 $p_A(\lambda)=0$ を $A$ の
+{\bf 特性方程式 (characteristic equation)} と呼ぶ. 
+%たとえば $2$ 次正方行列
+%\begin{equation*}
+%  A = 
+%  \begin{bmatrix}
+%    a & b \\
+%    c & d \\
+%  \end{bmatrix}
+%\end{equation*}
+%に対して,
+%\begin{equation*}
+%  \trace A = a + d,
+%  \qquad
+%  \det A = |A| = ad - bc.
+%\end{equation*}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{question}[簡単過ぎるので3点]
+  \label{q:char-poly-2.1}
+  複素 $2$ 次正方行列 $A$ の特性多項式 $p_A(\lambda)$ について以下が成立する
+  ことを直接的な計算によって証明せよ: 
+  \begin{enumerate}
+  \item[(1)] \( p_A(\lambda) = \lambda^2 - \trace(A)\lambda + \det(A) \).
+  \item[(2)] \( p_A(A) = 0 \) \quad ($2$ 次正方行列の Cayley-Hamilton の定理).
+  \qed
+  \end{enumerate}
+\end{question}
+
+\noindent 
+参考: この結果は受験数学の勉強でおなじみであろう.
+忘れた人は復習して欲しい.  
+以下の問題の結論のほとんどが一般の $n$ 次正方行列に対して適切に一般化される. 
+Cayley-Hamilton の定理の証明として,
+\begin{equation*}
+ p_A(A) = \det(AE - A) = \det(A - A) = \det 0 = 0
+\end{equation*}
+は{\bf 誤り}である. 
+
+どこがまずいかを理解するためには記号に騙されないようにしなければいけない.
+$p_A(A)$ は行列である.  $AE - A$ も行列である.  
+しかし $\det(AE-A)$ は数である.  
+$p_A(A)=\det(AE-A)$ という計算は左辺が行列で右辺が数なのでナンセンスである.
+
+しかし, 実は上のナンセンスな計算にかなり近い考え方で 
+Cayley-Hamilton の定理を証明することができる
+(佐武 \cite{satake} 137頁, 杉浦 \cite{sugiura} 65--66頁).
+\secref{sec:Cayley-Hamilton} の前半でその方法を紹介する.
+
+ついでに述べておけば, 「$\det 0$」の $0$ は行列のゼロであるが, 
+その次の「$= 0$」の $0$ は数のゼロである.
+この2つの「$0$」は同じ記号で書かれているが意味が違うことに注意しなければいけ
+ない.  この演習ではベクトルのゼロも単に「$0$」と書く.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{question}[5点]
+  2つの縦ベクトル %
+  $u=\tp{[a, c]}$, $v=\tp{[b, d]}$ に対して%
+  \footnote{$\tp{[\ ]}$ は転置を意味している.}, 2次正方行列 $A$ を
+  \begin{equation*}
+    A := [u, v] = \begin{bmatrix} a & b \\ c & d \end{bmatrix}
+  \end{equation*}
+  と定める. このとき, 以下の条件は互いに同値であることを直接証明せよ:
+  \begin{enumerate}
+  \item[(a)] $A$ の逆行列が存在する.
+  \item[(b)] $\det(A) \ne 0$.
+  \item[(c)] 任意の $\xi,\eta\in\C$ に対して, %
+    $\xi u + \eta v = 0$ ならば $\xi = \eta = 0$.
+  \qed
+  \end{enumerate}
+\end{question}
+
+\noindent 
+解説: このように $u$ と $v$ が一次独立であるという条件 (c) と
+条件 (a), (b) は同値なのである. もちろん, 同様の結果が $n$ 次正方行列に対し
+ても成立する. 一般の場合を証明するには線形代数の一般論を展開することが自然で
+あるが, $n=2$ の特殊な場合は直接計算のみで証明することも易しいので, 
+一度は経験しておくべきである.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{question}[15点]\label{q:det-nxn}
+  $A$ は $n$ 次正方行列であるとする. このとき以下の条件は互いに同値である:
+  \begin{enumerate}
+  \item[(a)] $A$ の逆行列が存在する.
+  \item[(b)] $\det A \ne 0$.
+  \item[(c)] $A$ の $n$ 本の列ベクトルは一次独立である.
+  \item[(d)] $A$ の $n$ 本の行ベクトルは一次独立である.
+  \item[(e)] 任意のゼロでない縦ベクトル $u$ に対して $Au\ne0$.
+    \qed
+  \end{enumerate}
+\end{question}
+
+\noindent 
+ヒント: 線形代数の任意の教科書を参照せよ. なお, 
+この問題の結論はその証明を復習した後では証明抜きで自由に用いて良い.
+\qed
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{question}[5点]
+  $A$ は複素 $n$ 次正方行列であり, $p_A(\lambda)$ はその特性多項式であるとす
+  る.  このとき, 複素数 $\alpha$ が $A$ の固有値であるための必要十分条件
+  は $p_A(\alpha)=0$ が成立することである. 
+  \qed
+\end{question}
+
+\noindent 
+ヒント: 問題 \qref{q:det-nxn} を $A - \alpha E$ に適用せよ.
+\qed
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{question}[5点]
+  任意の $a,b,c\in\C$ に対して, $a\ne0$ならば, 
+  ある $\alpha,\beta\in\C$ で次を満たすものが存在することを厳密に証明せよ:
+  \begin{equation*}
+    a \lambda^2 + b \lambda + c 
+    = a(\lambda - \alpha)(\lambda - \beta).
+    \qed
+  \end{equation*}
+\end{question}
+
+\noindent 
+参考: これは $2$ 方程式に関する結果だが, 
+同様のことが任意の複素係数 $n$ 次代数方程式に対して成立する(代数学の基本定理). 
+これ以後この演習では代数学の基本定理を証明抜きで自由に用いて良いことにする. 
+(代数学の基本定理には様々な証明の仕方がある. おそらく複素函数論の授業で証明
+の仕方の一つを習うことになるだろう.)
+\qed
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{2次正方行列の Jordan 標準形と指数函数の計算の仕方}
+\label{sec:2x2-Jordan}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{question}[簡単だが一度はやるべき問題なので10点]
+  行列 $B$ を次のように定める:
+  \begin{equation*}
+    B = 
+    \begin{bmatrix}
+        7 &  2 \\
+       -8 & -1 \\
+     \end{bmatrix}.
+   \end{equation*}
+   可逆な行列 $P$ と数 $\alpha$ で %
+   $P^{-1}BP = 
+   \begin{bmatrix}
+     \alpha & 1 \\
+     0 & \alpha \\
+   \end{bmatrix}$ をみたすものを求めよ. 
+   \qed
+\end{question}
+
+\commentout{
+\begin{proof}[略解とコメント]
+$B$ の固有多項式は $(\lambda-3)^2$ なので 
+Cayley-Hamilton の定理より $(B-3E)^2=0$.  
+よって $v=
+\begin{bmatrix}
+  0 \\
+  1 \\
+\end{bmatrix}$ と置き, $u = (B-3E)v = (\text{$B-3E$ の第 $2$ 列}) = 
+\begin{bmatrix}
+  2 \\
+  -4 \\
+\end{bmatrix}$ と置くと, $(B-3E)u=(B-3E)^2v=0$. そのとき
+\begin{equation*}
+  Bu = 3u, \qquad Bv = u + 3v.
+\end{equation*}
+すなわち $P = [u,v] = 
+\begin{bmatrix}
+   2 & 0 \\
+  -4 & 1 \\
+\end{bmatrix}$ と置くと $P^{-1}BP=
+\begin{bmatrix}
+  3 & 1 \\
+  0 & 3 \\
+\end{bmatrix}$.
+
+\medskip\noindent {\bf コメント.} 
+$2$ 次や $3$ 次の正方行列の Jordan 標準形への相似変換の計算
+は Cayley-Hamilton の定理を使うと楽にできる.
+\qed
+\end{proof}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{question}[10点]
+  \label{q:normal-form-2.1}
+  複素 $2$ 次正方行列 $A$ の特性方程式 $p_A(\lambda)=0$ の解
+  を $\alpha$, $\beta$ と書くことにする. 
+  $\alpha \ne \beta$ であるとき, 以下が成立する:
+  \begin{enumerate}
+  \item[(1)] $A \ne \alpha E$ かつ $A \ne \beta E$.
+  \item[(2)] 行列 $A - \beta E$ の $0$ でない列ベクトルの1つを $u$ と書き%
+    \footnote{行列 $X=\begin{bmatrix}a&b\\c&d\end{bmatrix}$ に対して, 
+      ベクトル $\begin{bmatrix}a\\c\end{bmatrix}$,
+      $\begin{bmatrix}b\\d\end{bmatrix}$ を $X$ の列ベクトルと呼ぶ.
+      $X \ne 0$ ならば列ベクトルの少なくともいずれか片方は $0$ ではない.}, %
+    行列 $A - \alpha E$ の $0$ でない列ベクトルの1つを $v$ と書くことにする. 
+    このとき次が成立する:
+    \begin{equation*}
+      Au = \alpha u,  \qquad  Av = \beta v.
+    \end{equation*}
+    (ヒント: $Au=\alpha u$ と $(A-\alpha E)u=$ は同値である.
+    この考え方は今後自由に使われる. 
+    Cayley-Hamilton の定理より $(A-\alpha E)(A-\beta E)=0$ であるが, 
+    その等式を $A-\alpha E$ が $A-\beta E$ の2本の列ベクトルに作用する式とみ
+    なしてみよ.  この考え方も今後頻繁に用いられる.)
+  \item[(3)] $2$ 次正方行列 $P$ を $P := [u, v]$ と定めると%
+    \footnote{縦ベクトル $u=\begin{bmatrix}a\\c\end{bmatrix}$, 
+      $v=\begin{bmatrix}b\\d\end{bmatrix}$ に対して, 
+      $[u, v] = \begin{bmatrix}a&b\\c&d\end{bmatrix}$ であると考えよ.}, %
+    $P$ は逆行列を持つ. 
+  \item[(4)] 次が成立する:
+    \begin{equation*}
+      P^{-1} A P = \begin{bmatrix}\alpha & 0\\0 & \beta\end{bmatrix}.
+    \end{equation*}
+  \item[(5)] 任意の $k=1,2,3,\ldots$ に対して,
+    \begin{equation*}
+      A^k = P \begin{bmatrix}\alpha^k & 0\\0 & \beta^k\end{bmatrix} P^{-1}.
+    \end{equation*}
+  \item[(6)] 任意の $t\in\C$ に対して,
+    \begin{equation*}
+      e^{At} =
+      P
+      \begin{bmatrix}
+        e^{\alpha t} & 0 \\
+        0 & e^{\alpha t} \\
+      \end{bmatrix}
+      P^{-1}.
+    \qed
+    \end{equation*}
+  \end{enumerate}
+\end{question}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{question}[15点]
+  \label{q:normal-form-2.2}
+  2次正方行列 $A$ の特性方程式 $p_A(\lambda)=0$ が
+  重解 $\alpha$ を持ち,  $A \ne \alpha E$ であると仮定する.
+  このとき, 以下が成立する:
+  \begin{enumerate}
+  \item[(1)] 行列 $A - \alpha E$ の $0$ でない列ベクトルの1つを $u$ と書くこと
+    にする. このとき, $Au = \alpha u$ が成立する. 
+    (ヒント: $(A-\alpha E)(A-\alpha E)=0$.)
+  \item[(2)] ある縦ベクトル $v$ で $(A - \alpha E)v=u$ を満たすものが存在する.
+    (ヒント: $u$ が $A - \alpha E$ の
+    左側の列ベクトルならば $v=\tp{[1, 0]}$ とし, 
+    右側の列ベクトルならば $v=\tp{[0, 1]}$ とすれば良い.)
+  \item[(3)] $P := [u, v]$ と置くと $P$ は逆行列を持つ.
+    (ヒント: $u$ と $v$ の一次結合に $A - \alpha E$ を作用させてみよ.)
+  \item[(4)] 次が成立する:
+    \begin{equation*}
+      P^{-1} A P = \begin{bmatrix}\alpha & 1\\0 & \alpha\end{bmatrix}.
+    \end{equation*}
+  \item[(5)] 任意の $k=1,2,3,\ldots$ に対して,
+    \begin{equation*}
+      A^k = 
+      P
+      \begin{bmatrix} \alpha^k & k\alpha^{k-1} \\ 0 & \alpha^k \end{bmatrix}
+      P^{-1}. 
+    \end{equation*}
+  \item[(6)] 任意の $t\in\C$ に対して,
+    \begin{equation*}
+      e^{At} =
+      P
+      \begin{bmatrix}
+        e^{\alpha t} & t e^{\alpha t} \\
+        0            &   e^{\alpha t} \\
+      \end{bmatrix}
+      P^{-1}.
+    \qed
+    \end{equation*}
+  \end{enumerate}
+\end{question}
+
+以上によって, 複素 $2$ 次正方行列 $A$ に対して, 正則行列 $P$ をうまくとって,
+$P^{-1}AP$ を次のどちらかの形にできることがわかった:
+\begin{equation*}
+  \begin{bmatrix} \alpha & 0 \\ 0 & \beta \\ \end{bmatrix},
+  \qquad
+  \begin{bmatrix} \alpha & 1 \\ 0 & \alpha \\ \end{bmatrix}.
+\end{equation*}
+この結果は任意の複素 $n$ 次正方行列 (より一般には代数閉体上の $n$ 次正方行列) 
+に拡張される (Jordan標準型の理論).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{2次正方行列の Jordan 標準形の計算と応用}
+\label{sec:2x2-calc-app}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{question}[5点]
+\label{q:[0,4;-1,4]]}
+  行列 %
+  \(
+    A =
+    \begin{bmatrix}
+       0 & 4 \\
+      -1 & 4 \\
+    \end{bmatrix}
+  \) の固有値と固有ベクトルをすべて求めよ. \qed
+\end{question}
+
+\commentout{
+\noindent
+略解: $p_A(\lambda)=(\lambda-2)^2$ かつ $A\ne 2E$. 
+よって固有値は $2$ だけ. 固有ベクトルとして $A - 2E$ の列ベクトルが取れる.
+\qed
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{question}[小問各5点]
+\label{q:k-jou}
+  以下の行列の $k$ 乗を求めよ ($k=1,2,3,\ldots$):
+  \begin{equation*}
+    \text{(1)}\quad
+    \begin{bmatrix} 1 & 2 \\ 2 & 4 \end{bmatrix},
+    \qquad
+    \text{(2)}\quad
+    \begin{bmatrix} 1 & 3 \\ 1 & -1 \end{bmatrix},
+    \qquad
+    \text{(3)}\quad
+    \begin{bmatrix} 1 & - 1 \\ 1 & 3 \end{bmatrix},
+    \qquad
+    \text{(4)}\quad
+    \begin{bmatrix} 5 & 1 \\ -1 & 3 \end{bmatrix}.
+    \qed
+  \end{equation*}
+\end{question}
+
+\noindent 
+ヒント: 問題 \qref{q:char-poly-2.1}, \qref{q:normal-form-2.1}, 
+\qref{q:normal-form-2.2} の結果を使うことを考えよ.
+\qed
+
+\commentout{
+\medskip
+\noindent
+略解:
+\begin{enumerate}
+\item[(1)] 
+  \( %
+    \begin{bmatrix} 1 & 2 \\ 2 & 4 \end{bmatrix}^2
+    = 5 \begin{bmatrix} 1 & 2 \\ 2 & 4 \end{bmatrix}
+  \) %
+  より, %
+  \( %
+    \begin{bmatrix} 1 & 2 \\ 2 & 4 \end{bmatrix}^k
+    = 5^{k-1} \begin{bmatrix} 1 & 2 \\ 2 & 4 \end{bmatrix}
+  \). %
+\item[(2)] 
+  \( %
+    \begin{bmatrix} 1 & 3 \\ 1 & -1 \end{bmatrix}^2 = 4E
+  \) %
+  を用いて $k$ の偶奇で場合分けするか, 問題 \qref{q:normal-form-2.1} の
+  結果を用いて,
+  {\small
+  \begin{equation*}
+      \begin{bmatrix} 1 & 3 \\ 1 & -1 \end{bmatrix}^k
+    = \begin{bmatrix} 3 & -1 \\ 1 & 1 \end{bmatrix}
+      \begin{bmatrix} 2^k & 0 \\ 0 & (-2)^k \end{bmatrix}
+      \frac{1}{4}
+      \begin{bmatrix} 1 & 1 \\ -1 & 3 \end{bmatrix}
+    = \frac{1}{4}
+      \begin{bmatrix}
+        3\cdot 2^k + (-2)^k & 3\cdot 2^k - 3\cdot(-2)^k \\
+               2^k - (-2)^k &        2^k + 3\cdot(-2)^k
+      \end{bmatrix}.
+  \end{equation*}
+  }
+\item[(3)] 問題 \qref{q:normal-form-2.2} の結果を用いて,
+  \begin{equation*}
+      \begin{bmatrix} 1 & -1 \\ 1 & 3 \end{bmatrix}^k
+    = \begin{bmatrix} -1 & 1 \\ 1 & 0 \end{bmatrix}
+      \begin{bmatrix} 2^k & k\cdot 2^{k-1} \\ 0 & 2^k \end{bmatrix}
+      \begin{bmatrix} 0 & 1 \\ 1 & 1 \end{bmatrix}
+    = \begin{bmatrix}
+        2^k - k\cdot 2^{k-1} & -k\cdot 2^{k-1} \\
+        k\cdot 2^{k-1}       & 2^k + k\cdot 2^{k-1}
+      \end{bmatrix}.
+  \end{equation*}
+\item[(4)] 問題 \qref{q:normal-form-2.2} の結果を用いて,
+  \begin{equation*}
+      \begin{bmatrix} 5 & 1 \\ -1 & 3 \end{bmatrix}^k
+    = \begin{bmatrix} 1 & 0 \\ -1 & 1 \end{bmatrix}
+      \begin{bmatrix} 4^k & k\cdot 4^{k-1} \\ 0 & 4^k \end{bmatrix}
+      \begin{bmatrix} 1 & 0 \\ 1 & 1 \end{bmatrix}
+    = \begin{bmatrix}
+        4^k + k\cdot 4^{k-1} & k\cdot 4^{k-1} \\
+        - k\cdot 4^{k-1}     & 4^k - k\cdot 4^{k-1}
+      \end{bmatrix}.
+  \end{equation*}
+\end{enumerate}
+以上の式が実際に正しいことを $k=1,2,3$ の場合に確かめてみよ.
+\qed
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{question}[20点]
+\label{q:shokichimondaiwotoke}
+  次の微分方程式の初期値問題を解け:
+  \begin{alignat*}{3}
+    \ddot x & = - 2 x +   y, &
+    x(0) & = - 1, &
+    \dot x(0) & = 1, 
+    \\
+    \ddot y & =     x - 2 y, &
+    \qquad y(0) & = 1, &
+    \qquad \dot y(0) & = 1.
+  \end{alignat*}
+  ここで, $\dot x$, $\ddot x$, etc は $t$ による導函数 $dx/dt$,
+  $d^2x/dt^2$, etc を表わしているものとする.  \qed
+\end{question}
+
+\noindent
+ヒント: 縦ベクトル値函数 $u$ を % 
+$u=\tp{[x, y]}$ と定め, 行列 $A$ を %
+$A=\begin{bmatrix}-2&1\\1&-2\end{bmatrix}$ と定め, 縦ベクトル $u_0$, $u_1$ 
+を $u_0=\tp{[-1, 1]}$, $u_1=\tp{[1, 1]}$ と定めると, 
+問題の方程式は次のように書き直される:
+\begin{equation*}
+  \ddot u = Au, \qquad u(0)=u_0, \qquad \dot u(0)=u_1.
+\end{equation*}
+このとき, 可逆行列 $P$ を用いて, $u=Pv$ と置くと, この方程式は次のように変
+形される:
+\begin{equation*}
+  \ddot v = P^{-1}APv, \qquad v(0)=P^{-1}u_0, \qquad \dot v(0)=P^{-1}u_1.
+\end{equation*}
+問題 \qref{q:normal-form-2.1} の方法を使うと, 適当な $P$ を見付けて %
+$P^{-1}AP$ を実対角行列にできることがわかる. (実は, $P$ として直交行列がと
+れることもわかる.) その対角成分は負であるので, 問題は次の形の微分方程式を解
+くことに帰着されることがわかる:
+\begin{equation*}
+  \ddot z = - \alpha^2 z, \qquad z(0)=a, \qquad \dot z(0)= \alpha b
+  \qquad (\alpha > 0).
+\end{equation*}
+この方程式の解は
+\( %
+  z = a \cos \alpha t + b \sin \alpha t
+\) %
+である.
+\qed
+
+\commentout{
+\medskip
+\noindent
+略解: 
+\( \displaystyle %
+  P = \frac{1}{\sqrt{2}}
+  \begin{bmatrix}
+    1 & -1 \\
+    1 & 1 
+  \end{bmatrix}
+\) %
+と置くと, $P$ は直交行列(すなわち $P^{-1}=\tp{P}$)でかつ,
+\( %
+  P^{-1}AP =
+  \begin{bmatrix}
+    -1 &  0 \\
+     0 & -3 
+  \end{bmatrix}
+\). %
+よって,
+\( %
+  \begin{bmatrix} x \\ y \end{bmatrix} 
+  = P \begin{bmatrix} X \\ Y \end{bmatrix} 
+\) %
+と置くと, 問題の方程式は次の方程式に変換される:
+\begin{align*}
+  & \ddot X = - X, \qquad X(0) = 0, \qquad \dot X(0) = \sqrt{2},
+  \\
+  & \ddot Y = - Y, \qquad Y(0) = \sqrt{2}, \qquad \dot Y(0) = 0.
+\end{align*}
+これを解くと,
+\begin{equation*}
+  X = \sqrt{2} \sin t, \qquad Y = \sqrt{2} \cos \sqrt{3} t.
+\end{equation*}
+よって, $x$, $y$ は
+\begin{equation*}
+  x = \sin t - \cos\sqrt{3}t, 
+  \qquad
+  y = \sin t + \cos\sqrt{3}t.
+\end{equation*}
+となる. 
+\qed
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{$3$ 次以上の正方行列の特性多項式}
+\label{sec:char-polyn}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{question}[5点]
+  $A$ は $n$ 次正方行列であり, $\alpha$ はその固有値であり, 
+  $u$ は対応する固有ベクトルであるとする. 
+  このとき, 文字 $\lambda$ の任意の多項式 $f(\lambda)$ に
+  対して $f(A)u=f(\alpha)u$ が成立する. 
+  \qed
+\end{question}
+
+\noindent 
+ヒント: たとえば $f(\lambda)=\lambda^k$ のとき $f(A)u = A^k u = \alpha^k u$.
+\qed
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{question}[8点]
+  \label{q:char-poly-3.1}
+  複素 $3$ 次正方行列 $A=[a_{ij}]$ の特性多項式 $p_A(\lambda)$ に対して以下
+  が成立することを直接的な計算によって証明せよ: 
+  \begin{enumerate}
+  \item[(1)] 
+    $p_A(\lambda) = \lambda^3 - \trace(A)\lambda^2 + b\lambda - \det(A)$.
+    ここで,
+    \begin{align*}
+      &
+      \trace(A) = a_{11} + a_{22} + a_{33}, 
+      \\ &
+      b = 
+      \begin{vmatrix}
+        a_{11} & a_{12} \\
+        a_{21} & a_{22} \\
+      \end{vmatrix}
+      +
+      \begin{vmatrix}
+        a_{11} & a_{13} \\
+        a_{31} & a_{33} \\
+      \end{vmatrix}
+      +
+      \begin{vmatrix}
+        a_{22} & a_{23} \\
+        a_{32} & a_{33} \\
+      \end{vmatrix},
+      \\ &
+      \det(A) =
+        a_{11}a_{22}a_{33}
+      + a_{12}a_{23}a_{31}
+      + a_{13}a_{21}a_{32}
+      - a_{11}a_{23}a_{32}
+      - a_{13}a_{22}a_{31}
+      - a_{12}a_{21}a_{33}.
+    \end{align*}
+  \item[(2)] \( p_A(A) = 0 \) \quad ($3$ 次正方行列の Cayley-Hamilton の定理).
+  \qed
+  \end{enumerate}
+\end{question}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{question}[20点]
+  複素 $n$ 次正方行列 $A=[a_{ij}]$ の特性多項式を
+  \begin{equation*}
+    p_A(\lambda) 
+    = \lambda^n - s_1 \lambda^{n-1} + s_2 \lambda^{t-2} + \cdots + (-1)^n s_n
+  \end{equation*}
+  と書くとき,
+  \begin{equation*}
+    s_k = \sum_{1\le i_1<\cdots<i_k\le n}
+    \begin{vmatrix}
+      a_{i_1i_1} & \cdots & a_{i_1i_k} \\
+      \vdots     &        & \vdots \\
+      a_{i_ki_1} & \cdots & a_{i_ki_k} \\
+    \end{vmatrix}.
+    \qed
+  \end{equation*}
+\end{question}
+
+\noindent 
+解説: この問題の結論は上の問題 \qref{q:char-poly-3.1} (1) の一般化になってい
+る.
+\qed
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{$3$ 次正方行列の Jordan 標準形の求め方}
+\label{sec:3x3-Jordan}
+
+以下の問題 %
+$\text{\qref{q:normal-form-3.1}},\ldots,\text{\qref{q:normal-form-3.5}}$ を
+解く前に \qref{q:jordan-3x3-1} を先に解いて感じをつかんでおいた方が良いかも
+しれない. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{question}[10点]
+  \label{q:normal-form-3.1}
+  複素 $3$ 次正方行列 $A$ が
+  互いに異なる3つの固有値 $\alpha$, $\beta$, $\gamma$ を持つとき, 
+  以下が成立する:
+  \begin{enumerate}
+  \item[(1)] 
+    $(A - \alpha E)(A - \beta E) \ne 0$ 
+    かつ $(A - \alpha E)(A - \gamma E) \ne 0$ 
+    かつ $(A - \beta E)(A - \gamma E) \ne 0$.
+    (ヒント: $\gamma$ に対応する固有ベクトルに $(A - \alpha E)(A - \beta E)$ 
+    を作用させると $0$ にならないことがわかる.)
+  \item[(2)] 
+    $(A - \beta E)(A - \gamma E)$ の $0$ でない列ベクトルの1つを $u$ と書き,
+    $(A - \alpha E)(A - \gamma E)$ の $0$ でない列ベクトルの1つを $v$ と書き,
+    $(A - \alpha E)(A - \beta E)$ の $0$ でない列ベクトルの1つを $w$ と書く
+    ことにする.  このとき次が成立する:
+    \begin{equation*}
+      Au = \alpha u,  \quad  Av = \beta v, \quad Aw = \gamma w.
+    \end{equation*}
+    (ヒント: $(A-\alpha E)(A-\beta E)(A-\gamma E)=0$)
+  \item[(3)] $3$ 次正方行列 $P$ を $P := [u, v, w]$ と定めると $P$ は逆行列
+    を持つ. 
+  \item[(4)] 次が成立する:
+    \begin{equation*}
+      P^{-1} A P 
+      = 
+      \begin{bmatrix}
+        \alpha & 0 & 0 \\
+        0 & \beta & 0 \\
+        0 & 0 & \gamma \\
+      \end{bmatrix}.
+      \qed
+    \end{equation*}
+  \end{enumerate}
+\end{question}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{question}[15点]
+  \label{q:normal-form-3.2}
+  複素 $3$ 次正方行列 $A$ の特性多項式 $p_A(\lambda)$ は
+  \begin{equation*}
+    p_A(\lambda) = (\lambda - \alpha)^2 (\lambda - \gamma),
+    \qquad \alpha \ne \gamma
+  \end{equation*}
+  という形をしており,
+  \begin{equation*}
+    (A - \alpha E)(A - \gamma E)\ne 0
+  \end{equation*}
+  が成立していると仮定する.  このとき, 以下が成立する:
+  \begin{enumerate}
+  \item[(1)] $(A - \alpha E)^2 \ne 0$.
+    (ヒント: $\gamma$ に対応する固有ベクトルに $(A - \alpha E)^2$ 
+    を作用させると $0$ にならないことがわかる.)
+  \item[(2)] 
+    $(A - \alpha E)(A - \gamma E)$ の $0$ でない列ベクトルの1つを $u$ と書き,
+    $(A - \alpha E)^2$ の $0$ でない列ベクトルの1つを $w$ と書くことにする. 
+    このとき次が成立する:
+    \begin{equation*}
+      Au = \alpha u,  \qquad Aw = \gamma w.
+    \end{equation*}
+  \item[(3)] $A - \gamma E$ の $0$ でない列ベクトル $v$ 
+    で $u = (A - \alpha E)v$ を満たすものが存在する.
+  \item[(4)] $3$ 次正方行列 $P$ を $P := [u, v, w]$ と定めると $P$ は逆行列
+    を持つ. 
+  \item[(5)] 次が成立する:
+    \begin{equation*}
+      P^{-1} A P 
+      = 
+      \begin{bmatrix}
+        \alpha & 1 & 0 \\
+        0 & \alpha & 0 \\
+        0 & 0 & \gamma \\
+      \end{bmatrix}.
+      \qed
+    \end{equation*}
+  \end{enumerate}
+\end{question}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{question}[15点]
+  \label{q:normal-form-3.3}
+  複素 $3$ 次正方行列 $A$ の特性多項式 $p_A(\lambda)$ は
+  \begin{equation*}
+    p_A(\lambda) = (\lambda - \alpha)^2 (\lambda - \gamma),
+    \qquad \alpha \ne \gamma
+  \end{equation*}
+  という形をしており,
+  \begin{equation*}
+    (A - \alpha E)(A - \gamma E) = 0
+  \end{equation*}
+  が成立していると仮定する.  このとき, 以下が成立する:
+  \begin{enumerate}
+  \item[(1)] $A - \alpha E$ の $0$ でない列ベクトル $w$ を取れる.
+  \item[(2)] $A - \gamma E$ の2つの列ベクトル $u$, $v$ で一次独立なものを取
+    れる.
+    (ヒント: もしもそうでないならば $\rank(A - \gamma E) = 1$ となる.
+    したがって $\gamma$ に対応する固有空間の次元
+    は $3-\rank(A - \gamma E)=2$ になる.  そのとき, 
+    特性多項式 $p_A(\lambda)$ は $(\lambda-\gamma)^2$ で割り切れる
+    ので最初の仮定に反する.)
+  \item[(3)] $3$ 次正方行列 $P$ を $P := [u, v, w]$ と定めると $P$ は逆行列
+    を持つ. 
+  \item[(4)] 次が成立する:
+    \begin{equation*}
+      P^{-1} A P 
+      = 
+      \begin{bmatrix}
+        \alpha & 0 & 0 \\
+        0 & \alpha & 0 \\
+        0 & 0 & \gamma \\
+      \end{bmatrix}.
+      \qed
+    \end{equation*}
+  \end{enumerate}
+\end{question}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{question}[15点]
+  \label{q:normal-form-3.4}
+  複素 $3$ 次正方行列 $A$ の特性多項式 $p_A(\lambda)$ は
+  \begin{equation*}
+    p_A(\lambda) = (\lambda - \alpha)^3
+  \end{equation*}
+  という形をしており,
+  \begin{equation*}
+    (A - \alpha E)^2 \ne 0
+  \end{equation*}
+  が成立していると仮定する.  このとき, 以下が成立する:
+  \begin{enumerate}
+  \item[(1)] $(A - \alpha E)^2$ の $0$ でない列ベクトルの1つを $u$ とすると, 
+    ある縦ベクトル $w$ で $u = (A - \alpha E)^2 w$ を満たすものが
+    存在する.  $v = (A - \alpha E)w$ と置く.
+  \item[(2)] $3$ 次正方行列 $P$ を $P := [u, v, w]$ と定めると $P$ は逆行列
+    を持つ. 
+  \item[(3)] 次が成立する:
+    \begin{equation*}
+      P^{-1} A P 
+      = 
+      \begin{bmatrix}
+        \alpha & 1 & 0 \\
+        0 & \alpha & 1 \\
+        0 & 0 & \alpha \\
+      \end{bmatrix}.
+      \qed
+    \end{equation*}
+  \end{enumerate}
+\end{question}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{question}[15点]
+  \label{q:normal-form-3.5}
+  複素 $3$ 次正方行列 $A$ の特性多項式 $p_A(\lambda)$ は
+  \begin{equation*}
+    p_A(\lambda) = (\lambda - \alpha)^3
+  \end{equation*}
+  という形をしており,
+  \begin{equation*}
+    A \ne \alpha E, \qquad (A - \alpha E)^2 = 0
+  \end{equation*}
+  が成立していると仮定する.  このとき, 以下が成立する:
+  \begin{enumerate}
+  \item[(1)] $A - \alpha E$ の $0$ でない列ベクトルの1つを $u$ とする.
+    ある縦ベクトル $v$ で $(A - \alpha E)v = u$ を満たすものが存在する.
+  \item[(2)] $u$ と一次独立な縦ベクトル $w$ で $Aw=\alpha w$ を満たすものが
+    存在する.  (ヒント: もしもそうでなければ $3 - \rank(A - \alpha) = 1$ で
+    ある.  しかし, $(A - \alpha E)^2 = 0$ より %
+    $2(3 - \rank(A - \alpha E)) \ge 3$ であるから, 矛盾する.)
+  \item[(3)] $3$ 次正方行列 $P$ を $P := [u, v, w]$ と定めると $P$ は逆行列
+    を持つ. 
+  \item[(4)] 次が成立する:
+    \begin{equation*}
+      P^{-1} A P 
+      = 
+      \begin{bmatrix}
+        \alpha & 1 & 0 \\
+        0 & \alpha & 0 \\
+        0 & 0 & \alpha \\
+      \end{bmatrix}.
+      \qed
+    \end{equation*}
+  \end{enumerate}
+\end{question}
+
+以上によって, 複素 $3$ 次正方行列 $A$ に対して, 正則行列 $P$ をうまくとって,
+$P^{-1}AP$ を次のどれかの形にできることがわかった:
+\begin{equation*}
+  \begin{bmatrix}
+    \alpha & 0 & 0 \\
+    0 & \beta  & 0 \\
+    0 & 0 & \gamma \\
+  \end{bmatrix},
+  \qquad
+  \begin{bmatrix}
+    \alpha & 1 & 0 \\
+    0 & \alpha & 0 \\
+    0 & 0 & \gamma \\
+  \end{bmatrix},
+  \qquad
+  \begin{bmatrix}
+    \alpha & 1 & 0 \\
+    0 & \alpha & 1 \\
+    0 & 0 & \alpha \\
+  \end{bmatrix}.
+\end{equation*}
+すなわち, 複素 $3$ 次正方行列は上の形の行列のどれかに相似である.  この形の行
+列を {\bf Jordan 標準形}と呼ぶ.
+
+この結果は任意の複素 $n$ 次正方行列 (より一般には代数閉体上の $n$ 次正方行列)
+に対して拡張される(Jordan標準型の理論).  以上の $n=3$ の場合でもまだわかり難
+いかもしれないが, 任意の複素 $n$ 次正方行列 $A$ は問題 \qref{q:exp-Jordan} 
+の $J = J(k,\alpha)$ の形の行列を対角線に並べた行列と相似になることを証明で
+きる.  $A$ と相似な $J$ の形の行列を対角線に並べた行列を $A$ の{\bf Jordan 
+標準形} と呼ぶ.  $J$ の形の行列を並べる順序だけが違う Jordan 標準形は同じも
+のだとみなす.  二つの複素 $n$ 次正方行列 (より一般には代数閉体上の二つの $n$ 
+次正方行列) が互いに相似であるための必要十分条件は同じ Jordan 標準形を持つこ
+とであることが講義の方で証明されることになる.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{question}[小問各8点]
+\label{q:jordan-3x3-1}
+  以下の行列の Jordan 標準形と標準形に相似変換する行列を求めよ:
+  \begin{equation*}
+    \text{(1)}\quad
+    A =
+    \begin{bmatrix}
+      -1 &  0 &  0 \\
+      -5 &  2 &  3 \\
+      -1 &  0 & -1 \\
+    \end{bmatrix},
+    \qquad
+    \text{(2)}\quad
+    B =
+    \begin{bmatrix}
+      3 & 0 & -1 \\
+      1 & 4 & -7 \\
+      0 & 1 & -1 \\
+    \end{bmatrix}.
+    \qed
+  \end{equation*}
+\end{question}
+
+\noindent
+ヒント: (1) $p_A(\lambda)=(\lambda+1)^2(\lambda-2)$ で
+かつ $(A+E)(A-2E)\ne 0$ なので問題 \qref{q:normal-form-3.2} を使えば良い. 
+(2) $p_B(\lambda)=(\lambda-2)^3$ でかつ $(A-2E)^2\ne0$ なので
+問題 \qref{q:normal-form-3.4} を使えば良い.
+
+\commentout{
+\medskip\noindent
+略解: 計算結果は次のようになる:
+\begin{align*}
+  &
+  \text{(1)} \quad
+  A = PJP^{-1},
+  \quad
+  P =
+  \begin{bmatrix}
+     0 &  1 &  0 \\
+     1 &  1 & -1 \\
+    -1 &  1 &  0 \\
+  \end{bmatrix},
+  \quad
+  J = 
+  \begin{bmatrix}
+    -1 &  1 &  0 \\
+     0 & -1 &  0 \\
+     0 &  0 &  2 \\
+  \end{bmatrix},
+  \\ &
+  \text{(2)} \quad
+  B = QKQ^{-1},
+  \quad
+  Q =
+  \begin{bmatrix}
+    1 & 1 & 1 \\
+    3 & 1 & 0 \\
+    1 & 0 & 0 \\
+  \end{bmatrix},
+  \quad
+  K = 
+  \begin{bmatrix}
+    2 & 1 & 0 \\
+    0 & 2 & 1 \\
+    0 & 0 & 2 \\
+  \end{bmatrix}.
+  \qed
+\end{align*}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{行列の指数函数}
+\label{sec:exp}
+
+複素 $n$ 次正方行列 $A$ の指数函数 $\exp A = e^A$ を次のように定める:
+\begin{equation*}
+  \exp A = e^A 
+  = \sum_{k=0}^\infty \frac{1}{k!} A^k
+  = E + A + \frac{1}{2}A^2 + \frac{1}{3!}A^3 + \frac{1}{4!}A^4 + \cdots.
+\end{equation*}
+ここで $E$ は単位行列である.
+この演習では, この定義の無限級数が複素正方行列 $A$ に関して広義一様絶対収束
+するという事実や $A$ の成分に関する偏微分を項別微分によって計算できるという
+事実などを証明抜きで自由に用いて良い.  無限級数の収束性などについては気にせ
+ずに形式的な計算を自由に行なって良い.
+
+\bigskip
+
+{\Large この演習の主要な目標の一つは
+具体的に与えられた正方行列 $A$ に対して $e^{At}$ を
+計算できるようになることである.}
+
+\bigskip
+
+他にも様々な目標があるが, この演習を受講する人はこの目標を常に頭の片隅に置い
+ておくことが望ましい.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{行列の指数函数の基本性質}
+\label{sec:sec-exp-properties}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{question}[8点]
+  $A$ は複素正方行列であるとする. 
+  このとき, 複素数 $t$ の行列値函数 $e^{At}$ は次を満たしている:
+  \begin{equation*}
+    \od{t}e^{At} = A e^{At} = e^{At} A,
+    \qquad e^{A0} = E.
+    \qed
+  \end{equation*}
+\end{question}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{question}[8点]
+  $A$, $P$ は複素 $n$ 次正方行列であり, $P$ は逆行列を持つと仮定する.
+  このとき,
+  \begin{equation*}
+    e^{PAP^{-1}} = P e^A P^{-1}.
+    \qed
+  \end{equation*}
+\end{question}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{question}[15点]
+  \label{q:exp(A+B)}
+  2つの複素 $n$ 次正方行列 $A$, $B$ が互いに可換%
+  \footnote{$A$ と $B$ が{\bf 可換 (commutative)} であるとは $AB = BA$ が成
+    立することである.}%
+  ならば,
+  \begin{equation*}
+    e^{A+B} = e^A e^B = e^B e^A.
+    \qed
+  \end{equation*}
+\end{question}
+
+\noindent
+ヒント: $AB=BA$ であれば次の二項定理を利用できる:
+\begin{equation*}
+  (A + B)^k = \sum_{i=0}^k \binom{k}{i} A^i B^{k-i}.
+\end{equation*}
+ここで,
+\begin{equation*}
+  \binom{k}{i} = \frac{k!}{i!(k-i)!}.
+\qed
+\end{equation*}
+
+\medskip
+\noindent 
+注意: 可換性の仮定は本質的である.  その条件を外すとこの問題の結論は一般に成
+立しなくなる.
+\qed
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{question}[15点]
+  \(
+    A =
+    \begin{bmatrix}
+      1 & 0 \\
+      0 & -1 \\
+    \end{bmatrix}
+  \) と %
+  \(
+    B =
+    \begin{bmatrix}
+      0 & 1 \\
+      0 & 0 \\
+    \end{bmatrix}
+  \) に対して $e^{At+Bs}$, $e^{At} e^{Bs}$, $e^{Bs} e^{At}$ は互いに異なる.
+  \qed
+\end{question}
+
+\noindent
+ヒント:   \(
+  e^{At} =
+  \begin{bmatrix}
+    e^t & 0 \\
+    0 & e^{-t} \\
+  \end{bmatrix}
+\), \(
+  e^{Bs} =
+  \begin{bmatrix}
+    1 & s \\
+    0 & 1 \\
+  \end{bmatrix}
+\), \(
+  e^{At+Bs} =
+  \begin{bmatrix}
+    e^t & s t^{-1} \sinh t \\
+    0 & e^{-t} \\
+  \end{bmatrix}
+\).
+\qed
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{簡単に計算できる行列の指数函数の例}
+\label{sec:sec-exp-easy}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{question}[15点]
+  複素正方行列 $A$, $B$, $C$ を次のように定義する:
+  \begin{equation*}
+    A =
+    \begin{bmatrix}
+      \alpha & 0 \\
+      0 & \beta \\
+    \end{bmatrix},
+    \quad
+    B =
+    \begin{bmatrix}
+      \alpha & 1 \\
+      0 & \alpha \\
+    \end{bmatrix},
+    \quad
+    C =
+    \begin{bmatrix}
+      0 & -1 \\
+      1 &  0 \\
+    \end{bmatrix}.
+  \end{equation*}
+  ここで $\alpha,\beta\in\C$ である. 
+  $e^{At}$, $e^{Bt}$, $e^{Ct}$ を計算せよ. 
+  $e^{C(t+s)} = e^{Ct}e^{Cs}$ から三角函数の加法公式を導け.
+  \qed
+\end{question}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{question}[簡単なので5点]
+  $A$ は複素 $m$ 次正方行列であり, $B$ は複素 $n$ 次正方行列であるとし, %
+  $m+n$ 次正方行列 $X$ を %
+  \(
+    X =
+    \begin{bmatrix}
+      A & 0 \\
+      0 & B \\
+    \end{bmatrix}
+  \)
+  と定める. このとき, %
+  \(
+    e^X =
+    \begin{bmatrix}
+      e^A & 0 \\
+      0 & e^B \\
+    \end{bmatrix}.
+    \qed
+  \)
+\end{question}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{question}[15点]
+  \label{q:exp-Jordan}
+  複素数 $\alpha$ に対して $k$ 次正方行列 $J = J(k,\alpha)$ を次のように定め
+  る:
+  \begin{equation*}
+    J = J(k,\alpha) = 
+    \begin{bmatrix}
+    \alpha   & 1      &        & \bigzerou \\
+             & \alpha & \ddots &   \\
+             &        & \ddots & 1 \\
+    \bigzerol &     &        & \alpha
+    \end{bmatrix}
+    \quad (\text{$k$ 次正方行列}).
+  \end{equation*}
+  この形の行列を {\bf Jordan ブロック}と呼ぶ.
+  $e^{Jt}$ を計算せよ. \qed
+\end{question}
+
+\noindent
+ヒント: 対角成分の一つ右上に $1$ が並び他の成分が $0$ の $n$ 次
+正方行列を $N$ と書くと, $J = \alpha E + N$ である. 
+$\alpha E$ と $N$ は互いに可換なので, \qref{q:exp(A+B)} より,
+\begin{equation*}
+  e^{Jt} = e^{\alpha t E} e^{tN} = e^{\alpha t} e^{tN}.
+\end{equation*}
+よって, $e^{tN}$ を計算すれば良い.
+\qed
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{定数係数線形常微分方程式と定数係数線形差分方程式への応用}
+\label{sec:sec-exp-app}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\bigskip
+
+函数 $f$ に対して, 
+\begin{equation*}
+  a_n(x)f^{(n)}+a_{n-1}(x)f^{(n-1)}+\cdots+a_2(x)f''+a_1(x)f'+a_0(x)f
+\end{equation*}
+を対応させる微分作用素を
+\begin{equation*}
+  a_n(x)\partial^n+\cdots+a_2(x)\partial^2+a_1(x)\partial+a_0(x)
+\end{equation*}
+と書くことにする. 例えば, 
+\begin{align*}
+  & \partial f = df/dx = f', \\
+  & (\partial^2 + a(x)) f = f'' + a(x)f, \\
+  & (\partial + a(x))(\partial + b(x))f = (\partial + a(x))(f'+b(x)f) \\
+  & \quad
+    = f'' +(b(x)f)' + a(x)(f'+b(x)f) 
+    = f'' + (a(x)+b(x))f' + (b'(x) + a(x)b(x)) f.
+\end{align*}
+
+\begin{question}[25点]
+  次の線形常微分方程式の解空間を求めよ:
+  \begin{equation*}
+    (\partial - \alpha_1)^{k_1} \cdots (\partial - \alpha_m)^{k_m} u = 0.
+  \end{equation*}
+  ここで, $\alpha_1,\ldots,\alpha_m$ は互いに異なる複素数であり, 
+  $k_1,\ldots,k_m$ は正の整数であるとする.
+  \qed
+\end{question}
+
+\noindent ヒント: 公式 %
+\( %
+  \partial (e^{\alpha x} f) = e^{\alpha x} (\partial + \alpha) f
+\) %
+より,
+\( %
+  (\partial - \alpha)^k(e^{\alpha x} f)
+  = e^{\alpha x} \partial^k f
+\) %
+が成立することがわかる. これより, 線形常微分方程式
+\begin{equation*}
+  (\partial - \alpha)^k u = 0
+  \tag{$*$}
+\end{equation*}
+の任意の解は
+\begin{equation*}
+  u = (a_0 + a_1 x + \cdots + a_{k-1} x^{k-1}) e^{\alpha x},
+  \qquad
+  \text{$a_i$ は定数}
+\end{equation*}
+と表わされることがわかる. なお, 上の問題を解くために, 
+問題の方程式の解の全体が自然に $(k_1 + \cdots + k_m)$ 次元のベクトル空間をな
+すという結果を用いて良い. 
+\qed
+
+\medskip
+\noindent
+参考: $v_0,v_1,\ldots,v_{k-1}$ を
+\( %
+  v_j = (\partial - \alpha)^j u
+  \quad
+  (j=0,1,\ldots,k-1)
+\) %
+と定め, 
+\begin{equation*}
+  v =
+  \begin{bmatrix}
+    v_0 \\ \vdots \\ v_{k-1}
+  \end{bmatrix},
+  \quad
+  J =
+  \begin{bmatrix}
+    \alpha   & 1      &        & \bigzerou \\
+             & \alpha & \ddots &   \\
+             &        & \ddots & 1 \\
+    \bigzerol &     &        & \alpha
+  \end{bmatrix}
+  \quad (\text{$k$ 次正方行列})
+\end{equation*}
+と置くと, 方程式 ($*$) は方程式 $\partial v = J v$ に変換される.
+$J$ が Jordan ブロックの形になっていることに注意せよ.
+線形常微分方程式 $\partial v = J v$ の一般解は
+\begin{equation*}
+  v = e^{Jx}v_0, \qquad \text{$v_0$ は定数ベクトル}
+\end{equation*}
+と書ける.  この結果に問題 \qref{q:exp-Jordan} を適用しても上のヒントの結論が
+得られる.
+\qed
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\bigskip
+
+整数 $x\in\Z$ の函数 $f(x)$ に対して, 整数 $x$ の函数
+\begin{equation*}
+  x\mapsto
+  a_n(x)f(x+n)+a_{n-1}(x)f(x+n-1)+\cdots+a_1(x)f(x+1)+a_0(x)f(x)
+\end{equation*}
+を対応させる差分作用素を
+\begin{equation*}
+  a_n(x)\sigma^n+a_{n-1}(x)\sigma^{n-1}
+  +\cdots+a_2(x)\sigma^2+a_1(x)\sigma+a_0(x)
+\end{equation*}
+と書くことにする. 例えば, 
+\begin{align*}
+  & \sigma f(x) = f(x+1), \\
+  & (\sigma^2 + a(x))f(x) = f(x+1) + a(x)f(x), \\
+  & (\sigma + a(x))(\sigma + b(x))f(x) = (\sigma + a(x))(f(x+1)+b(x)f(x)) \\
+  & \quad
+    = f(x+2) + b(x+1)f(x+1) + a(x)(f(x+1)+b(x)f(x)) \\
+  & \quad
+    = f(x+2) + (a(x)+b(x+1))f(x+1) + (b(x+1) + a(x)b(x))f(x).
+\end{align*}
+
+\begin{question}[25点]
+  次の線形差分方程式の解空間を求めよ:
+  \begin{equation*}
+    (\sigma - \alpha_1)^{k_1} \cdots (\sigma - \alpha_m)^{k_m} u = 0.
+  \end{equation*}
+  ここで, $\alpha_1,\ldots,\alpha_m$ は $0$ でない互いに異なる複素数で
+  あり, $k_1,\ldots,k_m$ は正の整数であるとする.
+  \qed
+\end{question}
+
+\noindent ヒント: 公式 %
+\( %
+  (\sigma-\alpha)(\alpha^x f(x)) = \alpha^{x+1}(\sigma-1)f(x)
+\) %
+より,
+\( %
+  (\sigma - \alpha)^k(\alpha^xf(x))
+  = \alpha^{x+k}(\sigma-1)^k f(x)
+\) %
+が成立することがわかる. これより, $\alpha\ne0$ のとき線形差分方程式
+\begin{equation*}
+  (\sigma - \alpha)^k u = 0
+  \tag{$*$}
+\end{equation*}
+の任意の解は
+\begin{equation*}
+  u(x) = (a_0 + a_1 x + a_2 x^{[2]}+\cdots + a_{k-1} x^{[k-1]}) \alpha^x,
+  \qquad
+  \text{$a_i$ は定数}
+\end{equation*}
+と表わされることがわかる. ここで,
+\begin{equation*}
+  x^{[i]} = x(x-1)\cdots(x-i+1)
+\end{equation*}
+である. $x^{[i]}$ は $(\sigma - 1)x^{[i]}=ix^{[i-1]}$ を満たしている.
+\qed
+
+\medskip
+\noindent
+参考: $v_0,v_1,\ldots,v_{k-1}$ を
+\( %
+  v_j = (\sigma - \alpha)^j u
+  \quad
+  (j=0,1,\ldots,k-1)
+\) %
+と定め, 
+\begin{equation*}
+  v =
+  \begin{bmatrix}
+    v_0 \\ \vdots \\ v_{k-1}
+  \end{bmatrix},
+  \quad
+  J =
+  \begin{bmatrix}
+    \alpha   & 1      &        & \bigzerou \\
+             & \alpha & \ddots &   \\
+             &        & \ddots & 1 \\
+    \bigzerol &     &        & \alpha
+  \end{bmatrix}
+  \quad (\text{$k$ 次正方行列})
+\end{equation*}
+と置くと, 方程式 ($*$) は方程式 $\sigma v = J v$ に変換される.
+$J$ が Jordan ブロックの形になっていることに注意せよ.
+線形差分方程式 $\sigma v = J v$ の一般解は次のようになる:
+\begin{equation*}
+  v = J^x v_0, \qquad \text{$v_0$ は定数ベクトル}
+\end{equation*}
+と書ける.  この結果を用いて上のヒントの結論を導くこともできる. 
+
+対角成分の一つ右上に $1$ が並び他の成分が $0$ の $n$ 次
+正方行列を $N$ と書くと, $J = \alpha E + N$ である. 
+$\alpha E$ と $N$ は互いに可換なので, 
+$x$ が $0$ 以上の整数のとき二項定理が適用できる. $N^k=0$ であるから,
+\begin{equation*}
+  J^x 
+  = (\alpha E + N)^x 
+  = \sum_{i=0}^{k-1} \binom{x}{i} \alpha^{x-i}N^i.
+\end{equation*}
+ここで,
+\begin{equation*}
+  \binom{x}{i} = \frac{x(x-1)\cdots(x-i+1)}{i!} = \frac{x^{[i]}}{i!}.
+\end{equation*}
+これは $x$ が負の整数であっても定義されていることに注意せよ.
+\qed
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{question}[10点]
+  整数 $x$ の函数 $u$ に関する次の線形差分方程式の解空間を求めよ:
+  \begin{equation*}
+    u(x+2) - 5 u(x+1) + 6 u(x) = 0.
+  \qed
+  \end{equation*}
+\end{question}
+
+\noindent
+ヒント: この問題の方程式は $(\sigma-2)(\sigma-3)u = 0$ と書き直せる. 
+よって, 解は $u(x) =  a 2^x + b 3^x$ の形をしている.
+\qed
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{question}[10点]
+  整数 $x$ の函数 $u$ に関する次の線形差分方程式の解空間を求めよ:
+  \begin{equation*}
+    u(x+2) - 4 u(x+1) + 4 u(x) = 0.
+  \qed
+  \end{equation*}
+\end{question}
+
+\noindent
+ヒント: この問題の方程式は $(\sigma-2)^2 u = 0$ と書き直せる. よって,
+解は $u(x) =  2^x(a + bx)$ の形をしている.
+\qed
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Cayley-Hamilton の定理}
+\label{sec:Cayley-Hamilton}
+
+以下, 単に「数」「$n$ 次正方行列」を言えば「複素数」「複素 $n$ 次正方行列」
+であることにする.  体について知っている人は「体 $K$ の元」「$K$ の元を成分に
+持つ $n$ 次正方行列」であると考えても良い.  $E$ は $n$ 次単位行列であるとす
+る. 
+
+数を係数とする多項式 $f(\lambda)=\sum_{i=1}^N a_i\lambda^i$ と $n$ 次正方行
+列 $A$ に対して, $n$ 次正方行列 $f(A)$ を次のように定義する:
+\begin{equation*}
+  f(A) = \sum_{i=0}^N a_i A^i 
+  = a_N A^N + a_{N-1}A^{N-1} + \cdots + a_1 A + a_0 E
+\end{equation*}
+$f(\lambda)$ の定数項 $a_0$ が $f(A)$ では $a_0 E$ となっていることに注意せ
+よ.
+
+\begin{theorem}[Cayley-Hamilton の定理]
+  任意の $n$ 次正方行列 $A$ と
+  その特性多項式 $p_A(\lambda)=\det(\lambda E - A)$ に
+  ついて $p_A(A)=0$.  \qed
+\end{theorem}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Cayley-Hamilton の定理の直接的証明}
+\label{sec:CH-direct}
+
+{\bf Cayley-Hamilton の定理の直接的証明:} 
+$A=[a_{ij}]$ は $n$ 次正方行列であるとし, 
+その特性多項式を $p_A(\lambda)=\det(\lambda E - A)$ と表わす.
+$\lambda E - A$ の $(i,j)$ 余因子を $f_{ij}(\lambda)$ と書くと,
+\begin{equation*}
+  p_A(\lambda)\delta_{ik}
+  = \sum_{j=1}^n f_{ij}(\lambda) (\delta_{kj}\lambda - a_{kj}).
+\end{equation*}
+この等式の両辺は $\lambda$ の多項式なので $\lambda$ に $A$ を代入できる:
+\begin{equation*}
+  p_A(A)\delta_{ik} = \sum_{j=1}^n f_{ij}(A)(\delta_{kj}A - a_{kj}E).
+\end{equation*}
+さらにこの等式の両辺を $e_k$ に%
+\footnote{$e_1,\dots,e_n$ は $K^n$ の標準的な基底.}%
+左から作用させて $k=1,\dots,n$ について和を取ると, 
+\begin{equation*}
+  p_A(A)e_i
+  = \sum_{j=1}^n f_{ij}(A)\Bigl( A e_j - \sum_{k=1}^n a_{kj} e_k \Bigr)
+  = 0.
+\end{equation*}
+最後の等号は $Ae_j=\sum_{k=1}^n e_k a_{kj}$ から出る. 
+よって $p_A(A)=0$ である.
+\qed
+
+\begin{question}[15点]
+  上の証明の細部を埋め, 黒板を用いて詳しく説明せよ. \qed
+\end{question}
+
+Cayley-Hamilton の定理の上のような証明の背後には
+行列係数の多項式の剰余定理が隠れている.  
+直接的に行列版の剰余定理を用いることを避けている分だけ
+証明が簡単になっている.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{行列係数多項式の剰余定理を用いた証明}
+\label{sec:CH-remainder}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+以下の証明の方針は杉浦 \cite{sugiura} の65--66頁にある.  
+
+\begin{question}[行列係数多項式の剰余定理, 20点]
+\label{q:matrix-remainder-theorem}
+  $A$ は $n$ 次正方行列であり, 
+  $F(\lambda)$ は $n$ 次正方行列を係数とする $\lambda$ の多項式であるとする:
+  \begin{equation*}
+    F(\lambda) = \sum_{i=0}^N F_i \lambda^i = \sum_{i=0}^N \lambda^i F_i,
+    \qquad \text{$F_i$ は $n$ 次正方行列}.
+  \end{equation*}
+  このとき, 以下が成立する:
+  \begin{enumerate}
+  \item[(1)] $n$ 次正方行列 $R$ と $n$ 次正方行列を係数とする $\lambda$ の多 
+    項式 $Q(\lambda)$ で
+    \begin{equation*}
+      F(\lambda) = Q(\lambda)(\lambda E - A) + R
+    \end{equation*}
+    を満たすものが一意に存在し, 次が成立する:
+    \begin{equation*}
+      R = \sum_{i=0}^N F_i A^i.
+    \end{equation*}
+  \item[(2)] $n$ 次正方行列 $R$ と $n$ 次正方行列を係数とする $\lambda$ の多 
+    項式 $Q(\lambda)$ で
+    \begin{equation*}
+      F(\lambda) = (\lambda E - A)Q(\lambda) + R
+    \end{equation*}
+    を満たすものが一意に存在し, 次が成立する:
+    \begin{equation*}
+      R = \sum_{i=0}^N A^i F_i.
+    \end{equation*}
+  \item[(3)] 数が係数の任意の多項式 $f(\lambda)$ に対して, 
+    $f(A)=0$ (行列としてゼロ) が成立するための必要十分条件は
+    ある $n$ 次正方行列係数の多項式 $G(\lambda)$ 
+    で $f(\lambda)E = G(\lambda)(\lambda E - A)$ を満たすものが
+    存在することである.
+  \item[(4)] 数が係数の任意の多項式 $f(\lambda)$ に対して, 
+    $f(A)=0$ (行列としてゼロ) が成立するための必要十分条件は
+    ある $n$ 次正方行列係数の多項式 $G(\lambda)$ 
+    で $f(\lambda)E = (\lambda E - A)G(\lambda)$ を満たすものが
+    存在することである.
+    \qed
+  \end{enumerate}
+\end{question}
+
+\noindent
+ヒント: $\lambda E - A$ に関して割り算の筆算の仕方がそのまま成立していること 
+がすぐにわかる.  ただし, 行列の積の順序は一般に交換不可能なので右割り算と左
+割り算の区別をしなければいけないことに注意しなければいけない.
+たとえば $N=3$ の場合にその筆算を実行してみよ.  
+一般の $N$ でも場合も同様であることがすぐに納得できるだろう.
+
+証明の方針は以下の通り. 
+(2), (4) は (1), (3) と同様に証明できるので, (1), (3) のみについて証明の方針
+を説明する.
+
+(1)の証明の方針: $N$ に関する数学的帰納法によって $R$, $Q(\lambda)$ の存在
+を証明する.  (帰納法の仮定に $R$ の形に関する仮定も入れておく.)
+$R$, $Q(\lambda)$ の一意性を示すために, $R_1$, $Q_1(\lambda)$ 
+も $F(\lambda) = Q_1(\lambda)(\lambda E - A) + R_1$ を満たしていると仮定する.  
+そのとき, $(Q(\lambda) - Q_1(\lambda))(\lambda E - A) = R_1 - R$ であるから, 
+もしも $Q(\lambda) \ne Q_1(\lambda)$ ならば左辺には $\lambda$ を含む項が残る
+が, 右辺は定数行列なので矛盾する. 
+よって, $Q(\lambda) = Q_1(\lambda)$ かつ $R_1 = R$ である. 
+
+(3)の証明の方針: $F(\lambda)=f(\lambda)E$ に (1) を適用すれば, ある行列係数
+の多項式 $Q(\lambda)$ が存在して
+\begin{equation*}
+  f(\lambda)E = Q(\lambda)(\lambda E - A) + f(A)
+\end{equation*}
+が成立する.  よって, $f(A)=0$ ならば $G(\lambda)=Q(\lambda)$ と
+置けば $f(\lambda)E = G(\lambda)(\lambda E - A)$ を満たす $G(\lambda)$ の存
+在が示される.  逆に, そのような $G(\lambda)$ が存在するならば, (1) の一意性
+の主張より $G(\lambda)=Q(\lambda)$ かつ $0 = f(A)$ である. 
+\qed
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\medskip
+\noindent
+参考: 一般に行列係数のモニックな多項式による割り算も同様に可能である.  ここ
+で, 行列係数の多項式が{\bf モニック (monic)} であるとは最高次の係数が単位行
+列であることである.
+
+\begin{question}[15点]
+  $F(\lambda)$, $A(\lambda)$ は $n$ 次正方行列係数の多項式であり, 
+  $A(\lambda)$ はモニックでかつ $d$ 次であるとする
+  (すなわち $A(\lambda)$ の最高次の項は $E \lambda^d$). 
+  このとき, $n$ 次正方行列係数の多項式 $Q(\lambda)$ と
+  次数が $d-1$ 以下の $n$ 次正方行列係数の多項式 $R(\lambda)$ で
+  \begin{equation*}
+    F(\lambda) = Q(\lambda)A(\lambda) + R(\lambda)
+  \end{equation*}
+  を満たすものが一意的に存在する. \qed
+\end{question}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{question}[15点]
+  問題 \qref{q:matrix-remainder-theorem} の(3)または(4)を用いて, 
+  Cayley-Hamilton の定理を証明せよ. \qed
+\end{question}
+
+\noindent
+ヒント: 一般に $n$ 次正方行列 $X$ に対して,
+その $(j,i)$ 余因子を $(i,j)$ 成分に持つ $n$ 次正方行列を $\Delta$ と
+書くと, $\Delta X = X \Delta = \det(X)E$ が成立する.  
+この結果を $X = \lambda E - A$ に適用する.  $\lambda E - A$ 
+の $(j,i)$ 余因子を $(i,j)$ 成分に持つ行列を $G(\lambda)$ と書くと, 
+$G(\lambda)(\lambda E - A) = (\lambda E - A)G(\lambda) = p_A(\lambda) E$.
+\qed
+
+\bigskip
+\noindent
+{\large {\bf まとめ:} 数を係数とする多項式に関する剰余定理は行列を係数とする
+  多項式に拡張される.  行列版の剰余定理を前提にすれば行列式に関する基本的な
+  結果から Cayley-Hamilton の定理がただちに導かれる.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{正方行列の三角化可能性を用いた証明}
+\label{sec:CH-triangulation}
+
+Cayley-Hamilton の定理は別のやり方でも証明できる.  以下では最も素朴な方法だ
+と考えられる行列の三角化可能性を用いた証明を紹介しよう.
+
+\begin{question}[10点]
+\label{q:nilpotent-matrix}
+  $A$ は対角成分がすべて $0$ であるような上三角 $n$ 次正方行列であるとする.
+  このとき $A^n=0$.
+  \qed
+\end{question}
+
+\noindent
+ヒント: $A$ の $(i,j)$ 成分を $a_{ij}$ と書くと, 
+$A$ に関する仮定は $a_{ij}=0$ ($j<i+1$) と同値になる.
+$A^p$ の $(i,j)$ 成分が $j<i+p$ のとき $0$ になることを示せ.
+$p=1,2,3,\ldots$ に対して $A^p$ を計算するとその $0$ でない成分の
+ありかがだんだん右上に移動して行く.
+\qed
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{question}[複素正方行列の三角化可能性, 20点]
+\label{q:triangularizable2}
+  $A$ は複素 $n$ 次正方行列であるとする%
+  \footnote{代数閉体の元を成分に持つ行列を考えても良い.}.  %
+  $A$ の特性多項式 $p_A(\lambda)=\det(\lambda E - A)$ の互いに異なる根の全体
+  は $\alpha_1,\ldots,\alpha_r$ であり, $p_A(\lambda)$ は次のように表わされ
+  ているとする:
+  \begin{equation*}
+    p_A(\lambda)=\det(\lambda E - A)
+    = (\lambda-\alpha_1)^{n_1}\cdots(\lambda-\alpha_r)^{n_r}.
+  \end{equation*}
+  このとき, 正則な複素 $n$ 次正方行列 $P$ で $P^{-1}AP$ が上三角行列になり, 
+  しかも $P^{-1}AP$ の対角部分が特性多項式の根を重複を含めて全部並べ
+  た $\diag(\alpha_1,\dots,\alpha_1,\dots,\alpha_r,\dots,\alpha_r)$ 
+  (各 $\alpha_i$ が $n_i$ 個ずつ順番に並ぶ) に等しくなるものが存在する.
+  \qed
+\end{question}
+
+\begin{proof}[ヒント]
+$n$ に関する数学的帰納法.  $A$ の固有値 $\alpha$ とそれに付随する固
+有ベクトル $v$ が存在する. $v$ は単位ベクトルに取れ, $v$ を含む
+正規直交基底 $p_1=v,p_2,\dots,p_n$ が取れる.  
+このとき, $P=[p_1\ \cdots\ p_n]$ と置くと, $P^{-1}AP$ は次の形になる:
+\begin{equation*}
+  P^{-1}AP = 
+  \begin{bmatrix}
+    \alpha & b_{12} & \cdots & b_{1n} \\
+       0   & b_{22} & \cdots & b_{2n} \\
+    \vdots & \vdots &        & \vdots \\
+       0   & b_{n2} & \cdots & b_{nn} \\
+  \end{bmatrix}.
+\end{equation*}
+行列 $B=[b_{ij}]_{2\le i,j\le n}$ に帰納法の仮定を用いよ.
+\qed
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{question}[15点]
+  問題 \qref{q:nilpotent-matrix}, \qref{q:triangularizable2} の結果を
+  用いて Cayley-Hamilton の定理を証明せよ. \qed
+\end{question}
+
+\noindent
+ヒント: $p_A(P^{-1}AP)=P^{-1}p_A(A)P$ より, 
+$A$ は問題 \qref{q:triangularizable2} における $P^{-1}AP$ の
+形をしていると仮定して良い.  $A$ の対角線部分には
+対角成分がすべて $\alpha_i$ であるような $n_i$ 次の上三角行列が並んでいると
+みなせる.  よって, $(A-\alpha_j E)^{n_j}$ の対角線部分には
+対角成分がすべて $(\alpha_i-\alpha_j)^{n_i}$ であるような $n_i$ 次上三角行列
+が並ぶ.  ただし, $i=j$ 番目のブロックは問題 \qref{q:nilpotent-matrix} の
+結果より $n_j$ 次の巾零行列になる.  
+実はこのことだけから $(A-\alpha_j)^{n_j}$ を $j=1,\dots,r$ について掛け合わ
+せると零行列になることを示せる.  たとえば $r=4$ の場合は
+\begin{align*}
+  &
+  \begin{bmatrix}
+    0 & * & * & * \\
+      & * & * & * \\
+      &   & * & * \\
+      &   &   & * \\
+  \end{bmatrix}
+  \begin{bmatrix}
+    * & * & * & * \\
+      & 0 & * & * \\
+      &   & * & * \\
+      &   &   & * \\
+  \end{bmatrix}
+  \begin{bmatrix}
+    * & * & * & * \\
+      & * & * & * \\
+      &   & 0 & * \\
+      &   &   & * \\
+  \end{bmatrix}
+  \begin{bmatrix}
+    * & * & * & * \\
+      & * & * & * \\
+      &   & * & * \\
+      &   &   & 0 \\
+  \end{bmatrix}
+  \\
+  = &
+  \begin{bmatrix}
+    0 & 0 & * & * \\
+      & 0 & * & * \\
+      &   & * & * \\
+      &   &   & * \\
+  \end{bmatrix}
+  \begin{bmatrix}
+    * & * & * & * \\
+      & * & * & * \\
+      &   & 0 & * \\
+      &   &   & * \\
+  \end{bmatrix}
+  \begin{bmatrix}
+    * & * & * & * \\
+      & * & * & * \\
+      &   & * & * \\
+      &   &   & 0 \\
+  \end{bmatrix}
+  \\
+  = &
+  \begin{bmatrix}
+    0 & 0 & 0 & * \\
+      & 0 & 0 & * \\
+      &   & 0 & * \\
+      &   &   & * \\
+  \end{bmatrix}
+  \begin{bmatrix}
+    * & * & * & * \\
+      & * & * & * \\
+      &   & * & * \\
+      &   &   & 0 \\
+  \end{bmatrix}
+  \\
+  = &
+  \begin{bmatrix}
+    0 & 0 & 0 & 0 \\
+      & 0 & 0 & 0 \\
+      &   & 0 & 0 \\
+      &   &   & 0 \\
+  \end{bmatrix}.
+  \qed
+\end{align*}
+
+\bigskip
+\noindent
+{\large {\bf まとめ:} 複素 $n$ 次正方行列%
+  \footnote{もしくは代数閉体の元を成分に持つ $n$ 次正方行列}
+  の三角化可能性を $n$ に関する帰納法で証明できる.
+  その結果から Cayley-Hamilton の定理がただちに導かれる.}
+
+\bigskip
+\noindent
+比較: \secref{sec:CH-direct}と\secref{sec:CH-remainder}の方法の特徴は
+特性多項式の根 (固有値) を一切使わずに Cayley-Hamilton の定理を
+証明できたことである.  
+そのために行列式に関する基本的な結果と
+(本質的に)行列係数多項式の剰余定理を用いた.  
+それに対して\secref{sec:CH-triangulation}では
+行列係数多項式の剰余定理を用いていないが, 
+特性多項式の根を本質的に用いている.  
+特性多項式の根を自由に利用するためには代数学の基本定理%
+\footnote{代数学の基本定理とは「1次以上の複素係数1変数多項式は複素数の中に
+  必ず根を持つ」という定理である.}
+が必要になる%
+\footnote{複素数体の部分体 (例えば実数体や有理数体) の元を成分に持つ行列
+  ではなく, 一般の体 $K$ の元を成分に持つ行列を扱う場合
+  には $K$ 係数多項式の分解体の存在定理が必要になる.}.  %
+どちらの方法も一長一短なので両方覚えておくと良いだろう.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{thebibliography}{ABC}
+
+\bibitem[佐武]{satake} 佐武一郎: 線型代数学, 裳華房数学選書 1, 324頁.
+
+\bibitem[杉浦]{sugiura}
+杉浦光夫, Jordan標準形と単因子論 I, II, 岩波講座基礎数学, 線型代数 iii, 1976
+
+%\bibitem[齋藤]{saito} 齋藤正彦: 線型代数入門, 東京大学出版会基礎数学 
+%1, 278頁.
+
+%\bibitem[H1]{gun-kagun}
+%堀田良之, 代数入門——群と加群——, 数学シリーズ, 裳華房, 1987
+
+%\bibitem[H2]{10wa}
+%堀田良之, 加群十話——加群入門——, すうがくぶっくす 3, 朝倉書店, 1988
+
+%\bibitem[H3]{Ho}
+%堀田良之, 環と体 1 --- 可換環論, 岩波講座現代数学の基礎 15, 岩波書店, 1997
+
+%\bibitem[志賀]{shiga}
+%志賀浩二: 集合への30講, 朝倉書店 数学30講シリーズ 3, 187頁.
+
+\end{thebibliography}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

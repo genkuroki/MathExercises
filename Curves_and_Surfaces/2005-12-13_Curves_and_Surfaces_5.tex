@@ -1,0 +1,1988 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\def\STUDENT{} % \def すると計算問題の解答を印刷しなくなる.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[12pt,twoside]{jarticle}
+%\documentclass[12pt]{jarticle}
+\usepackage{amsmath,amssymb,amscd}
+\usepackage{eepic}
+\usepackage{enshu}
+\newcommand\qstar[1]{}
+%\usepackage{showkeys}
+\allowdisplaybreaks
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newlabel{q:kappa(t)-tau(t)}{{26}{10}}
+\newlabel{q:Fourier-coeff}{{65}{23}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setcounter{page}{26}      % この数から始まる
+\setcounter{section}{4}    % この数の次から始まる
+\setcounter{theorem}{0}    % この数の次から始まる
+\setcounter{question}{67}  % この数の次から始まる
+\setcounter{footnote}{0}   % この数の次から始まる
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\ifx\STUDENT\undefined
+%
+% 教師専用
+%
+\newcommand\commentout[1]{#1}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\else
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% 生徒専用
+%
+\newcommand\commentout[1]{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\fi
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\title{\bf 幾何学序論B演習
+%  \ifx\STUDENT\undefined\\{\normalsize 教師用\quad(計算問題の略解付き)}\fi}
+%\author{黒木 玄 \quad (東北大学大学院理学研究科数学専攻)}
+%\date{2005年10月4日(火)}
+%\maketitle
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\noindent
+{\Large\bf 幾何学序論B演習}
+\hfill
+{\large 黒木玄}
+\qquad
+2005年12月6日(火)
+\commentout{\quad (教師用)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\tableofcontents
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{曲面論 (Gauss曲率と平均曲率)}
+
+途中の理屈が難しいと感じた場合には
+\secref{sec:clac-K,H}の計算問題を解いて図を描くことから
+始めるのが良いと思う. 曲率の計算問題は講義の``試験対策''にもなる.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{添字の付け方のルール}
+
+縦ベクトルの空間とみなされた $\R^n$ のベクトル $\u$ の第 $i$ 成分
+を $u^i$ のように添字を右上に書いて表わすことにする.
+縦ベクトルは印刷時にスペースを取るので $\u=(u^1,\ldots,u^n)$ のように
+書くことも許すことにする. 
+
+添字を右上に書くと「べき」と勘違いしてしまう可能性があるので
+誤解しないように注意して欲しい. 数学では内容的に
+異なるものを同じような記号で表現することがよくある.
+
+縦ベクトルの空間 $\R^n$ の標準的な基底を $\e_i$ と書くことにする.
+$\e_i$ は第 $i$ 成分だけが $1$ で他は $0$ であるような縦ベクトルである.
+このとき縦ベクトル $\u\in\R^n$ は $\u=\sum_i u^i\e_i$ と表わされる.
+上下で対になっている添字に関する和になっていることに注意せよ.
+
+横ベクトルの空間とみなされた $\R^n$ のベクトル $\p$ の第 $i$ 成分
+を $p_i$ のように添字を右下に書いて表わすことにする.
+
+横ベクトルの空間 $\R^n$ の標準的な基底を $\e^i$ と書くことにする.
+$\e^i$ は第 $i$ 成分だけが $1$ で他は $0$ であるような横ベクトルである.
+このとき横ベクトル $\p\in\R^n$ は $\p=\sum_i p_i\e^i$ と表わされる.
+この場合も上下で対になっている添字に関する和になっている.
+
+縦ベクトルの空間 $\R^n$ から縦ベクトルの空間 $\R^m$ への線形写像と
+みなされた $m\times n$ 行列 $A$ の第 $(i,j)$ 成分を $a^i{}_j$ と書く
+ことにする. このように書いておけば縦ベクトル $\u=(u^j)\in\R^n$ の
+線形写像 $A$ による像 $\v=A\u$ の第 $i$ 成分
+は $v^i=\sum_j a^i{}_ju^j$ と表わされる. 
+この場合も上下で対になっている添字に関する和になっている.
+
+縦ベクトルの空間 $\R^n$ 上の二次形式を表現する実対称行列 $A$ 
+の第 $(i,j)$ 成分を $a_{ij}$ と書くことにする. このとき $A$ で表現された
+二次形式 $Q(\x)$ は $Q(\x) = \sum_{i,j} a_{ij}x^ix^j$ と表わされる.
+この場合も上下で対になっている添字に関する和になっている.
+
+\begin{summary}[添字の付け方の基本原則]\quad
+\begin{itemize}
+ \item 縦ベクトルの成分の添字は右上に書き, 横ベクトルの成分の添字は右下
+       に書く.
+ \item 縦ベクトルの空間の基底の添字は右下に書き, 横ベクトルの空間の基底
+       の添字は右上に書く. 成分の添字と基底の添字は上下が逆になっている.
+ \item 縦ベクトルの空間から縦ベクトルの空間への線形写像を表現する行列の
+       第 $(i,j)$ 成分を $a^i{}_j$ のように表わす.
+ \item 二次形式を表現する対称行列の第 $(i,j)$ 成分を $a_{ij}$ と表わす.
+ \item 以上のようなルールのもとで数学的に自然な和は
+       上下で対になった添字に関する和になっている.
+ \qed 
+\end{itemize}
+\end{summary}
+
+\begin{guide}[Einstein notation]
+ 上下で対になった和に関する記号 $\sum$ を省略して書く場合がある.
+ その記号法は前世紀の始めに Albert Einstein (1879--1955) が
+ 一般相対性理論の微分幾何的な定式化の研究中に採用したの
+ で Einstein notation と呼ばれている.
+ こまめに $\sum$ を書くのは結構面倒なのでこの記号法は便利である.
+ Einstein notation を使う場合にはそのことを断ってからにして欲しい.
+
+ 現代数学の流儀では「座標不変な定式化によってできる限り成分に
+ 触らずに計算すること」が主流になっているので, Einstein notation は
+ 多用されない. 
+ 複雑な計算の意味を理解するためには座標不変な定式化が不可欠である. 
+
+ しかし, 最初からあらゆる計算の意味がわかっているわけではないので,
+ 成分表示による強引な計算もできるようになっていた方が得である.
+ 座標不変な定式化と成分表示による計算の両方をマスターしておくことが
+ 好ましい. 
+
+ この演習では座標不変な定式化を学ぶ前の準備として $\R^3$ の中の
+ 曲面(片)を成分表示を用いて扱う.  したがって Einstein notation が
+ 便利な場合がかなり出て来るだろう.
+ \qed
+\end{guide}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{逆写像定理の復習}
+
+\begin{definition}[$\R^n$ の開集合の微分同相]
+ $U$, $V$ は $\R^n$ の開集合であるとし, 写像 $\f:U\to V$ を考える.
+ $\f$ が{\bf 微分同相 (diffeomorphism)} であるとは,
+ $\f$ が逆写像を持つ $C^\infty$ 写像であり, 
+ 逆写像 $\f^{-1}$ も $C^\infty$ 写像になることである.
+ \qed
+\end{definition}
+
+\begin{question}
+ $U$, $V$ は $\R^n$ の開集合であるとし, 
+ $U$ の座標系を $\u=(u^1,\ldots,u^n)$ と書き, 
+ $V$ の座標系を $\v=(v^1,\ldots,v^n)$ と書くことにする.
+ 写像 $\f:U\to V$, $\u\mapsto(f^1(\u),\ldots,f^n(\u))$ は微分同相である
+ と仮定し, その逆写像を $\g:V\to U$, $\v\mapsto(g^1(\v),\ldots,g^n(\v))$ 
+ と書くことにする.
+ $n\times n$ 行列値函数 $\dfrac{d\f}{d\u}(\u)$ と $\dfrac{d\g}{d\v}(\v)$ 
+ を次のように定める:
+ \begin{equation*}
+  \dfrac{d\f}{d\u}(\u)=
+   \begin{bmatrix}
+    \dfrac{\d f^1}{\d u^1}(\u) & \cdots & \dfrac{\d f^1}{\d u^n}(\u) \\
+    \vdots                     &        & \vdots \\
+    \dfrac{\d f^n}{\d u^1}(\u) & \cdots & \dfrac{\d f^n}{\d u^n}(\u) \\
+   \end{bmatrix},
+   \qquad
+  \dfrac{d\g}{d\v}(\v)=
+   \begin{bmatrix}
+    \dfrac{\d g^1}{\d v^1}(\v) & \cdots & \dfrac{\d g^1}{\d v^n}(\v) \\
+    \vdots                     &        & \vdots \\
+    \dfrac{\d g^n}{\d v^1}(\v) & \cdots & \dfrac{\d g^n}{\d v^n}(\v) \\
+   \end{bmatrix}.
+ \end{equation*}
+ このとき任意の $\u\in U$ に対して $\dfrac{d\f}{d\u}(\u)$ は逆行列を持ち, 
+ $\v=\f(\u)$ のとき次の公式が成立している:
+ \begin{equation*}
+  \dfrac{d\g}{d\v}(\v) = \left( \dfrac{d\f}{d\u}(\u) \right)^{-1}.
+  \qed
+ \end{equation*}
+\end{question}
+
+\begin{proof}[ヒント]
+ 合成函数の偏導函数に関する chain rule を $\g\circ\f=\id_U$ に
+ 適用してみよ. \qed
+\end{proof}
+
+\begin{question}[線形写像の逆写像定理]
+ $n\times n$ 実行列 $A$ に対して, 
+ $A$ の定める線形写像 $A:\R^n\to\R^n$, $\u\mapsto A\u$ 
+ が $\R^n$ から $\R^n$ への微分同相写像になるための必要十分条件は %
+ $|A|\ne 0$ が成立することである. 
+ \qed
+\end{question}
+
+次の逆写像定理はこの結果の一般化である. 
+この演習では逆写像定理を証明抜きに自由に用いて良い.
+
+\begin{theorem}[逆写像定理 (inverse mapping theorem)]
+ $U$ と $V$ は $\R^n$ の開集合であり, 写像
+ \begin{equation*}
+  \f:U\to V, \qquad
+  \u=(u^1,\ldots,u^n)\mapsto (f^1(\u),\ldots,f^n(\u))
+ \end{equation*}
+ は $C^\infty$ 級であるとする.
+ 点 $\u_0\in U$ において $\f$ の Jacobian が $0$ でないと仮定する.
+ すなわち次が成立していると仮定する:
+ \begin{equation*}
+  \left|\dfrac{d\f}{d\u}(\u_0)\right|
+  =
+  \begin{vmatrix}
+   \dfrac{\d f^1}{\d u^1}(\u_0) & \cdots & \dfrac{\d f^1}{\d u^n}(\u_0) \\
+   \vdots                       &        & \vdots \\
+   \dfrac{\d f^n}{\d u^1}(\u_0) & \cdots & \dfrac{\d f^n}{\d u^n}(\u_0) \\
+  \end{vmatrix}
+  \ne 0.
+ \end{equation*} 
+ このとき $\u_0$ の開近傍 $U_0\subset U$ が存在して, %
+ $\f(U_0)$ は $V$ の開集合になり, %
+ $\f$ は $U_0$ から $\f(U_0)$ への微分同相写像を定める.
+ \qed
+\end{theorem}
+
+\begin{guide}[逆写像定理の直観的説明]
+ 微分可能写像は局所的に一次写像でよく近似される. 
+ その一次写像が逆写像を持つための必要十分条件は 
+ Jacobian が $0$ にならないことである.
+ そのときもとの写像も局所的に逆写像を持つ.
+ これが逆写像定理である.
+ (このことについては演習の時間にすでに詳しく説明した.)
+ \qed
+\end{guide}
+
+\begin{question}[2次元極座標]
+ $\theta_0\in\R$ を任意に取り固定する.
+ $\R^2$ の開集合 $U$ と写像 $\f:U\to\R^2$ を次のように定める:
+ \begin{align*}
+  &
+  U = \{\,(r,\theta)\in\R^2\mid r > 0,\; |\theta-\theta_0|<\pi\,\},
+  \\ &
+  \f(r,\theta) = (r\cos\theta, r\sin\theta)
+  \qquad ((r,\theta)\in U).
+ \end{align*}
+ このとき $\f$ は $U$ から $f(U)$ への微分同相写像を定めることを示せ.
+ ただし $U$ および $\f(U)$ および $\R^2$ における
+ 半径 $r$ の円周の図を描いて説明せよ.
+ \qed
+\end{question}
+
+\begin{proof}[ヒント]
+ $\f:U\to f(U)$ の逆写像もまた $C^\infty$ になることは
+ 逆写像定理より $\f$ の Jacobian を計算すればわかる.
+ \qed
+\end{proof}
+
+\begin{question}[3次元極座標]
+ $\theta_0\in\R$ を任意に取り固定する.
+ $\R^3$ の開集合 $U$ と写像 $\f:U\to\R^3$ を次のように定める:
+ \begin{align*}
+  &
+  U = \{\,(r,\theta,\phi)\in\R^3
+      \mid r > 0,\; |\theta-\theta_0|<\pi,\; |\phi|<\pi/2 \,\},
+  \\ &
+  \f(r,\theta,\phi) = (r\cos\theta\cos\phi, r\sin\theta\cos\phi, r\sin\phi)
+  \qquad ((r,\theta,\phi)\in U).
+ \end{align*}
+ このとき $\f$ は $U$ から $\f(U)$ への微分同相写像を定めることを示せ.
+ ただし $U$ および $\f(U)$ および $\f(U)$ を含む $\R^3$ における
+ 半径 $r$ の球面の図を描いて説明せよ.
+ \qed
+\end{question}
+
+次の問題は易しい.
+
+\begin{question}[一次函数の陰函数定理]
+ $m\leqq n$ であるとし, 
+ $m\times m$ 実行列 $A'$ と $m\times(n-m)$ 実行列 $A''$ と
+ 縦ベクトル $\b\in\R^m$ を任意に取る.
+ $\R^n$ の元を $\x'\in\R^m$, $\x''\in\R^{n-m}$ に
+ よって $(\x',\x'')$ と表わす.
+ 写像 $\f:\R^n\to\R^m$ を次のように定める:
+ \begin{equation*}
+  \f(\x',\x'') = A'\x' + A''\x'' + \b \in \R^m
+   \qquad (\x'\in\R^m,\; \x''\in\R^n).
+ \end{equation*}
+ このとき $|A'|\ne 0$ ならば写像 $\g:\R^{n-m}\to\R^m$ 
+ で $\f(\g(\x''),\x'') = 0$ を満たすものが一意に存在し, 
+ 次のように表わされる:
+ \begin{equation*}
+  \g(\x'') = - A'^{-1}A''\x'' - A'^{-1}\b.
+  \qed
+ \end{equation*}
+\end{question}
+
+一般の場合の陰函数定理について述べるために記号を準備しよう.
+$m\leqq n$ であるとし, %
+$U$ は $\R^n$ の開集合であるとし, 函数
+\begin{equation*}
+ \f:U\to \R^m, \qquad
+ \x=(x^1,\ldots,x^n) \mapsto (f^1(\u),\ldots,f^m(\u))
+\end{equation*}
+は $C^\infty$ 級であるとする. 
+$U$ の元を $\x'=(x^1,\ldots,x^m)\in\R^m$ 
+と $\x''=(x^{m+1},\ldots,x^n)\in\R^{n-m}$ 
+によって $\x=(\x',\x'')$ と表わしておく.
+$\dfrac{\d\f}{\d\x'}$, $\dfrac{\d\f}{\d\x''}$ を次のように定める:
+\begin{equation*}
+ \dfrac{\d\f}{\d\x'}=
+  \begin{bmatrix}
+   \dfrac{\d f^1}{\d x^1} & \cdots & \dfrac{\d f^1}{\d u^m} \\
+   \vdots                 &        & \vdots \\
+   \dfrac{\d f^m}{\d x^1} & \cdots & \dfrac{\d f^m}{\d x^m} \\
+  \end{bmatrix},
+  \qquad
+ \dfrac{\d\f}{\d\x''}=
+  \begin{bmatrix}
+   \dfrac{\d f^1}{\d x^{m+1}} & \cdots & \dfrac{\d f^1}{\d x^n} \\
+   \vdots                     &        & \vdots \\
+   \dfrac{\d f^m}{\d x^{m+1}} & \cdots & \dfrac{\d f^m}{\d x^n} \\
+  \end{bmatrix}.
+\end{equation*}
+さらに $\R^{n-m}$ の開集合上の $\R^m$ 値
+函数 $\g(\x'')=(g^1(\x''),\ldots,g^m(\x''))$ に
+対して $\dfrac{d\g}{d\x''}$ を次のように定める:
+\begin{equation*}
+ \dfrac{d\g}{d\x''}=
+  \begin{bmatrix}
+   \dfrac{\d g^1}{\d x^{m+1}} & \cdots & \dfrac{\d g^1}{\d x^n} \\
+   \vdots                     &        & \vdots \\
+   \dfrac{\d g^m}{\d x^{m+1}} & \cdots & \dfrac{\d g^m}{\d x^n} \\
+  \end{bmatrix}.
+\end{equation*}
+以上の記号のもとで次の陰函数定理が成立している.
+
+\begin{theorem}[陰函数定理 (implicit function theorem)]
+ $m\leqq n$ であるとし, %
+ $U$ は $\R^n$ の開集合であるとし, 
+ 函数 $\f:U\to \R^m$ は $C^\infty$ 級であるとする.
+ このとき, もしも $\x_0=(\x'_0,\x''_0)\in U$ について
+ \begin{equation*}
+  \f(\x_0) = 0, \qquad
+  \left| \dfrac{\d\f}{\d\x'}(\x_0) \right| \ne 0
+ \end{equation*}
+ が成立しているならば, 
+ $\x'_0$ の開近傍 $U'_0\subset\R^m$ 
+ と $\x''_0$ の開近傍 $U''_0\subset\R^{n-m}$ で
+ $U'_0\times U''_0\subset U$ および以下の条件を満たすものが存在する:
+ \begin{enumerate}
+  \item[(1)] 任意の $\x''\in U''_0$ に対して $\f(\x',\x'')=0$ を
+   満たす $\x'\in U'_0$ が一意に存在する.
+   その $\x'$ を $\g(\x'')$ と書くことにする. 
+   このようにして定まる函数 $\g:U''_0\to U'_0$ は $\f$ の $U''_0$ 上での
+   {\bf 陰函数 (implicit function)} と呼ばれる.
+  \item[(2)] $\g$ は $C^\infty$ 函数である.
+  \item[(3)] 任意の $\x''\in U''_0$ に対して, 
+   $\x=(\g(\x''),\x'')$ と置くと次が成立している:
+   \begin{equation*}
+    \dfrac{d\g}{d\x''}(\x'')
+    = - \left(\dfrac{\d\f}{\d\x'}(\x)\right)^{-1} \dfrac{\d\f}{\d\x''}(\x).
+    \qed
+   \end{equation*}
+ \end{enumerate}
+\end{theorem}
+
+\begin{question}
+ 逆写像定理から陰函数定理を導け. \qed
+\end{question}
+
+\begin{proof}[ヒント]
+ 以下の略証で省略した計算を埋めよ. \qed
+\end{proof}
+
+\begin{proof}[略証]
+ 写像 $\h:U\to \R^m\times\R^{n-m}$ を次のように定める:
+ \begin{equation*}
+  \h(\x) = (\f(\x),\x'')
+  \qquad (\x=(\x',\x'')\in U).
+ \end{equation*} 
+ 基本的な方針は $\h$ に対して逆写像定理を適用することである.
+ この $\h$ に関して次の公式が成立している:
+ \begin{equation*}
+  \dfrac{d\h}{d\x} = 
+  \begin{bmatrix}
+   \d\f/\d\x' & \d\f/\d\x'' \\
+   0_{n-m,m}  & E_{n-m} \\
+  \end{bmatrix}.
+ \end{equation*}
+ ここで $0_{n-m,m}$, $E_{n-m}$ はそれぞれ $(n-m)\times m$ の零行列
+ と $n-m$ 次の単位行列である. $\d\h/\d\x$ が逆行列を持つための
+ 必要十分条件は $\d\f/\d\x'$ が逆行列を持つことであり, 
+ そのとき次の公式が成立している:
+ \begin{equation*}
+  \left(\dfrac{d\h}{d\x}\right)^{-1} = 
+  \begin{bmatrix}
+   (\d\f/\d\x')^{-1} & -(\d\f/\d\x')^{-1}\d\f/\d\x'' \\
+   0_{n-m,m}         & E_{n-m} \\
+  \end{bmatrix}.
+ \end{equation*}
+ 逆写像定理より $\x_0=(\x'_0,\x''_0)$ の開近傍 $U_0\subset U$ が存在して, 
+ $\h(U_0)$ は $(0,\x_0'')$ の開近傍になり, 
+ $\h$ は $U_0$ から $\h(U_0)$ への微分同相写像を定める.
+ $\x'_0$ の開近傍 $U'_0\subset\R^m$ 
+ と $\x''_0$ の開近傍 $U''_0\subset\R^{n-m}$ で
+ $U'_0\times U''_0\subset U_0$ を満たすものが
+ 存在するので $U_0=U'_0\times U''_0$ と仮定してよい.
+
+ (1) $(\x',\x'')\in U_0$ に対して $\h(\x',\x'')=(0,\x'')$ と 
+ $\f(\x',\x'')=0$ は同値である. 
+ よって $\h:U_0\to\h(U_0)$ が全単射であることより, 
+ $\x''\in U''_0$ に対して $\f(\x',\x'')=0$ を
+ 満たす $\x'\in U'_0$ が一意に存在することがわかる.
+ この $\x'$ を $\g(\x'')$ と書くことにする.
+
+ (2) $\h:U_0\to\h(U_0)$ の逆写像 $\h^{-1}:\h(U_0)\to U_0$ を
+ \begin{equation*}
+  \h^{-1}(\y)=\bigl(\k(\y',\y''),\;\i(\y',\y'')\bigr)
+  \qquad
+  (\y=(\y',\y'')\in\h(U_0),\;\y'\in\R^m,\;\y''\in U''_0)
+ \end{equation*}
+ と表わすと, 任意の $\y=(\y',\y'')\in\h(U_0)$ に対して
+ \begin{equation*}
+  (\y',\y'') = \y = \h(\h^{-1}(\y)) 
+   = \bigl(\f(\k(\y',\y''),\i(\y',\y'')),\; \i(\y',\y'')\bigr)
+ \end{equation*}
+ すなわち
+ \begin{equation*}
+  \i(\y',\y'')=\y'', \qquad \f(\k(\y',\y''),\y'')=\y'
+ \end{equation*}
+ が成立する. $\h^{-1}$ も $C^\infty$ であることより $\k$ も $C^\infty$ 
+ である. 任意の $\x''\in U''_0$ に対して %
+ $\k(0,\x'')\in U'_0$ かつ $\f(\k(0,\x''),\x'')=0$ であるから %
+ $\k(0,\x'')=\g(\x'')$ である. よって $\g$ も $C^\infty$ である.
+
+ (3) さらに $\x=(\x',\x'')\in U_0$ に対して $\y=(\f(\x),\x'')$ と置くと
+ 次の公式が成立していることもわかる:
+ \begin{equation*}
+  \dfrac{d\h^{-1}}{d\y}(\y) =
+  \begin{bmatrix}
+   \dfrac{\d\k}{\d\y'}(\y) & \dfrac{\d\k}{\d\y''}(\y) \\
+   0_{n-m,m}               & E_{n-m} \\
+  \end{bmatrix}
+  =
+  \begin{bmatrix}
+   \left(\dfrac{\d\f}{\d\x'}(\x)\right)^{-1} & -\left(\dfrac{\d\f}{\d\x'}(\x)\right)^{-1}\dfrac{\d\f}{\d\x''}(\x) \\
+   0_{n-m,m}                                 & E_{n-m} \\
+  \end{bmatrix}.
+ \end{equation*}
+ これより陰函数定理の(3)が成立していることがわかる.
+ \qed
+\end{proof}
+
+\begin{question}
+ 陰函数定理から逆写像定理を導け. \qed
+\end{question}
+
+\begin{proof}[ヒント]
+ 逆写像定理の $\f$ に対して函数  $\h:U\times V\to\R^n$ を次のように定める:
+ \begin{equation*}
+  \h(\u,\v) = \f(\u) - \v
+  \qquad (\u\in U,\; \v\in V).
+ \end{equation*}
+ この $\h$ に陰函数定理を適用せよ. \qed
+\end{proof}
+
+\begin{guide}
+ 逆写像定理もしくは陰函数定理は「図形の滑らかさ」
+ (もしくは「写像のファイバーの滑らかさ」) について考えるときの基礎になる.
+ それらの定理は{\bf 微分可能多様体 (differentiable manifold)} の
+ 定義の基礎になっているだけではなく, 
+ {\bf 滑らかな代数多様体 (smooth algebraic variety)} を
+ 定義するときの考え方の基礎にもなっている.
+ 重要な定理なので詳しく復習しておくことが望ましい.
+ \qed
+\end{guide}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{$\R^3$ 内の $C^\infty$ 曲面の定義}
+
+$\R^2$ の座標を $\u=(u^1,u^2)$ と書くことにし, 
+$\R^3$ の座標を $\x=(x^1,x^2,x^3)$ と書くことにする.
+$\u$, $\x$ を縦ベクトルとみなす.
+$U$ は $\R^2$ の開集合であるとし, 
+写像 $\x\colon U \to \R^3$ は $C^\infty$ 級であるとし, 
+\begin{equation*}
+ \x(\u) = (x^1(\u), x^2(\u), x^3(\u)) 
+  = (x^1(u^1,u^2), x^2(u^1,u^2), x^3(u^1,u^2))
+\end{equation*}
+と書くことする. 記号 $\x$ を $\R^3$ の座標 $\x$ と写像 $\x\colon U \to \R^3$ 
+の2通りの意味に用いる. 混同しないようにして欲しい. 
+添字を書くのが面倒な場合には
+\begin{equation*}
+ (u,v) = (u^1,u^2), \qquad (x,y,z) = (x^1,x^2,x^3)
+\end{equation*}
+と定義しておき, $(u,v)$ と $(x,y,z)$ の方を使う場合もある.
+
+\begin{definition}[$\R^3$ 内の $C^\infty$ 曲面]
+ \label{def:surface}
+ $M$ が {\bf $\R^3$ 内の $C^\infty$ 曲面 ($C^\infty$-surface in $\R^3$)}
+ であるとは, $M$ が $\R^3$ の部分集合であり, 
+ 任意の点 $P\in M$ に対して, $\R^2$ の開集合 $U$ と %
+ 写像 $\x\colon U \to \R^3$ の組で以下の条件を
+ みたすものが存在することである:
+ \begin{enumerate}
+  \item[(i)] $\x:U\to\R^3$ は $C^\infty$ 写像である.
+  \item[(ii)] $\x(U)$ は点 $P$ を含む $M$ の開集合であり, 
+   $\x:U\to\x(U)$ は同相写像である.
+  \item[(iii)] 任意の $\u\in U$ に
+   対して $\dfrac{\d\x}{\d u^1}(\u)$, $\dfrac{\d\x}{\d u^2}(\u)$ は一次独立である.
+ \end{enumerate}
+ このような $(U,\x)$ を {\bf $C^\infty$ 曲面片 
+ (regular parametrized $C^\infty$-surface)} もしくは
+ {\bf $C^\infty$ 座標近傍 ($C^\infty$-coordinate patch)} と呼ぶ.
+ \qed
+\end{definition}
+
+\begin{question}
+ 図を描いて上の定義についてできる限りわかり易く説明せよ. 
+ \qed
+\end{question}
+
+\begin{question}[行列の rank]
+  行列の rank の定義を説明し, 以下の条件が互いに同値なことを示せ:
+  \begin{enumerate}
+  \item[(a)] 2つのベクトル %
+    \(
+    \begin{bmatrix}
+      a^1{}_1 \\
+      a^2{}_1 \\
+      a^3{}_1 \\
+    \end{bmatrix}
+    \), %
+    \(
+    \begin{bmatrix}
+      a^1{}_2 \\
+      a^2{}_2 \\
+      a^3{}_2 \\
+    \end{bmatrix}
+    \) %
+    は一次独立である.
+  \item[(b)] 行列 %
+    \( \displaystyle
+    \begin{bmatrix}
+      a^1{}_1 & a^1{}_2 \\
+      a^2{}_1 & a^2{}_2 \\
+      a^3{}_1 & a^3{}_2 \\
+    \end{bmatrix}
+    \) の rank は $2$ である.
+  \item[(c)] 3つの行列式 %
+    \(
+    \begin{vmatrix}
+      a^2{}_1 & a^2{}_2 \\
+      a^3{}_1 & a^3{}_2 \\
+    \end{vmatrix}
+    \), %
+    \(
+    \begin{vmatrix}
+      a^1{}_1 & a^1{}_2 \\
+      a^3{}_1 & a^3{}_2 \\
+    \end{vmatrix}
+    \), %
+    \(
+    \begin{vmatrix}
+      a^1{}_1 & a^1{}_2 \\
+      a^2{}_1 & a^2{}_2 \\
+    \end{vmatrix}
+    \) %
+    のうち少なくとも1つは0でない.
+  \end{enumerate}
+  この結果より, \definitionref{def:surface} の条件(iii)は
+  以下の条件 (iii)', (iii)'' と同値であることが導かれる:
+ \begin{enumerate}
+  \item[(iii)'] 任意の $\u\in U$ に対して, 行列 %
+    \( \displaystyle
+    \begin{bmatrix}
+     \dfrac{\d x^1}{\d u^1}(\u) & \dfrac{\d x^1}{\d u^2}(\u) 
+     \\[\medskipamount]
+     \dfrac{\d x^2}{\d u^1}(\u) & \dfrac{\d x^2}{\d u^2}(\u)
+     \\[\medskipamount]
+     \dfrac{\d x^3}{\d u^1}(\u) & \dfrac{\d x^3}{\d u^2}(\u)
+     \\
+    \end{bmatrix}
+    \) の rank は $2$ である.
+  \item[(iii)''] 任意の $\u\in U$ に対して, 次の3つの行列式 %
+    \[
+    \begin{vmatrix}
+     \dfrac{\d x^1}{\d u^1}(\u) & \dfrac{\d x^1}{\d u^2}(\u) 
+     \\[\medskipamount]
+     \dfrac{\d x^2}{\d u^1}(\u) & \dfrac{\d x^2}{\d u^2}(\u)
+     \\
+    \end{vmatrix},
+    \qquad
+    \begin{vmatrix}
+     \dfrac{\d x^1}{\d u^1}(\u) & \dfrac{\d x^1}{\d u^2}(\u) 
+     \\[\medskipamount]
+     \dfrac{\d x^3}{\d u^1}(\u) & \dfrac{\d x^3}{\d u^2}(\u)
+     \\
+    \end{vmatrix},
+    \qquad
+    \begin{vmatrix}
+     \dfrac{\d x^2}{\d u^1}(\u) & \dfrac{\d x^2}{\d u^2}(\u)
+     \\[\medskipamount]
+     \dfrac{\d x^3}{\d u^1}(\u) & \dfrac{\d x^3}{\d u^2}(\u)
+     \\
+    \end{vmatrix}
+    \] %
+    の少なくとも1つは0でない.
+  \qed
+ \end{enumerate}
+\end{question}
+
+{\bf\large 次の問題は全員が解かなければいけない.}
+
+\begin{question}
+ $\R^3$ 内の単位球面 %
+ $S^2=\{\,(x,y,z)\in\R^3\mid x^2+y^2+z^3=1\,\}$ 
+ が $\R^3$ 内の $C^\infty$ 曲面であることを証明せよ.
+ \qed
+\end{question}
+
+$S^2$ を覆う $C^\infty$ 曲面片を構成すればよい.
+この問題には無限通りの解答がある. 
+
+\begin{proof}[ヒント1 (半球面)]
+ $U=\{\,(u,v)\in\R^2\mid u^2+v^2<1\,\}$ と置く.
+ $\f_\pm,\g_\pm,\h_\pm:U\to S^2$ を次のように定める:
+ $(u,v)\in U$ に対して
+ \begin{align*}
+  &
+  \f_\pm(u,v) = \left(\pm\left(1-\sqrt{u^2+v^2}\right),u,v\right),
+  \\ &
+  \g_\pm(u,v) = \left(u,\pm\left(1-\sqrt{u^2+v^2}\right),v\right),
+  \\ &
+  \h_\pm(u,v) = \left(u,v,\pm\left(1-\sqrt{u^2+v^2}\right)\right).
+ \end{align*}
+ このとき $(U,\f_\pm),(U,\g_\pm),(U,\h_\pm)$ は $C^\infty$ 曲面片であり, 
+ それらで $S^2$ の全体が覆われている. \qed
+\end{proof}
+
+\begin{proof}[ヒント2 (立体射影)]
+ $(u,v)\in\R^2$ に対して  $(u,v,0)$ と $(0,0,\mp 1)$ を結ぶ
+ 直線と $S^2$ が交わる点を $(x,y,z)$ とする. 
+ $(u,v)\in\R^2$ に対して $(x,y,z)\in S^2$ を対応させる写像
+ を $\x_\pm$ と表わす. このとき $(\R^2,\x_\pm)$ は $C^\infty$ 曲面片であり, 
+ それらで $S^2$ の全体が覆われている. \qed
+\end{proof}
+
+\begin{proof}[ヒント3 (球面座標)]
+ 曲面片 $(U,\f)$ を次のように定義できる:
+ \begin{align*}
+  &
+  U = \{\,(\theta,\phi)\in\R^2
+      \mid |\theta|<\pi,\; |\phi|<\pi/2 \,\},
+  \\ &
+  \f(\theta,\phi) = (\cos\theta\cos\phi, \sin\theta\cos\phi, \sin\phi)
+  \qquad ((\theta,\phi)\in U).
+ \end{align*}
+ $x,y,z$ の立場を変えて同じような曲面片を幾つか構成し, 
+ それらで $S^2$ を覆うことができる. \qed
+\end{proof}
+
+{\bf 次の問題も可能な限り, 解いておいて欲しい.}
+
+\begin{question}[トーラス]
+ \label{q:torus1}
+ $0<r<R$ であると仮定し, $M$ を次のように定める:
+ \begin{equation*}
+  M=\{\,
+   \x(\theta,\phi)=
+   ((R+r\cos\phi)\cos\theta, (R+r\cos\phi)\sin\theta, r\sin\phi)
+  \mid \theta,\phi\in\R \,\}.
+ \end{equation*}
+ $M$ が $\R^3$ 内の $C^\infty$ 曲面になることを示し, 
+ その概形を描け.
+ \qed
+\end{question}
+
+\begin{proof}[ヒント]
+ $xz$ 平面の $x>0$ の部分に含まれる円 $(x,z)=(R+r\cos\phi,r\sin\phi)$ 
+ を $z$ 軸のまわりに角度 $\theta$ 回転させてできる図形(トーラス)を考えれば
+ この問題の $\x(\theta,\phi)$ の式が得られる.
+ \qed
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{$\R^3$ 内の $C^\infty$ 曲面の陰函数表示}
+
+\begin{question}[曲面の陰函数表示]
+ \label{q:f(x,y,z)=0}
+ $f$ は $\R^3=\{(x,y,z)\}$ 上の実数値 $C^\infty$ 函数であるとし, 
+ \begin{equation}
+  M := \{\,(x,y,z)\in\R^3\mid f(x,y,z)=0 \,\}
+ \end{equation}
+ と置く. もしも $M$ 上の各点 $\x_0=(x_0,y_0,z_0)$ 
+ おいて $f_x(\x_0), f_y(\x_0), f_z(\x_0)$ のうち少なくとも一つが $0$ 
+ でなければ $M$ は $\R^3$ 内の $C^\infty$ 曲面になることを示せ. 
+ \qed
+\end{question}
+
+\begin{proof}[ヒント]
+ 陰函数定理の簡単な応用である.
+ $f_x(\x_0)\ne 0$ のとき, 
+ 陰函数定理より $x_0\in\R$ の開近傍 $I$ 
+ と $(y_0,z_0)\in\R^2$ の開近傍 $U\subset\R^2$ 
+ で以下の条件を満たすものが存在する:
+ \begin{enumerate}
+  \item[(1)] 任意の $(y,z)\in U$ に対して $f(x,y,z)=0$ を
+   満たす $x\in I$ が一意に存在する.
+   その $x$ を $g(y,z)$ と書くことにする. 
+  \item[(2)] 陰函数 $g(y,z)$ は $U$ 上の $C^\infty$ 函数である.
+ \end{enumerate}
+ $C^\infty$ 写像 $\x:U\to\R^3$ を $\x(y,z)=(g(y,z),y,z)$ と定める.
+ このとき $\x(U)=M\cap(I\times U)$ は $M$ の開集合であり, 
+ $\x$ は $U$ から $\x(U)$ への同相写像を定めることがわかる.
+ 任意の $(y,z)\in U$ に対して $\x_y(y,z)$, $\x_z(y,z)$ が一次独立に
+ なることもすぐにわかる.
+ \qed
+\end{proof}
+
+\begin{question}
+ 問題 \qref{q:f(x,y,z)=0} の結果を応用することによって, 
+ $a,b,c\in\R$ がどれも $0$ でないとき, 
+ \[
+   f(x,y,z) := ax^2 + by^2 + cz^2 - 1 = 0
+ \]
+ が $\R^3$ 内の $C^\infty$ 曲面を定めることを証明せよ.
+ \qed
+\end{question}
+
+\begin{question}[トーラス]
+ \label{q:torus2}
+ $0<r<R$ のとき次の方程式が $\R^3$ 内の $C^\infty$ 曲面を定めることを示せ:
+ \begin{equation*}
+  f(x,y,z) := (x^2+y^2+z^2-R^2-r^2)^2 - 4R^2(r^2-z^2) = 0.
+ \end{equation*}
+ この曲面の図を描け. \qed
+\end{question}
+
+\begin{proof}[ヒント1]
+ 問題 \qref{q:torus1} に帰着せよ. 
+ $(x,y,z)=((R+r\cos\phi)\cos\theta, (R+r\cos\phi)\sin\theta, r\sin\phi)$
+ を $f(x,y,z)$ に代入してみよ.
+ \qed
+\end{proof}
+
+\begin{proof}[ヒント2]
+ 問題 \qref{q:f(x,y,z)=0} の結果を使う.
+ $f=0$ と仮定する.
+ $f_z=2z(x^2+y^2+z^2+3R^2-r^2)$ と $R>r$ より $f_z=0$ ならば $z=0$ である.
+ $z=0$ のとき $f=0$ から $(x^2+y^2-R^2-r^2)^2=4R^2r^2\ne 0$ が
+ 出るので, $f_x=0$ ならば $x=0$ である.
+ 同様に $f_y=0$ ならば $y=0$ である.
+ したがってもしも $f_x=f_y=f_z=0$ ならば $x=y=z=0$ である.
+ しかし $x=y=z=0$ ならば $f=(R^2-r^2)^2>0$ であるからそれは不可能である. 
+ したがって $f_x,f_y,f_z$ のうちどれか一つは $0$ にならない.
+
+ 曲面の図は $f(x,y,z)=0$ が
+ 次の連立方程式と同値であることに気付けば描ける:
+ \begin{equation*}
+  X^2+Y^2=1, \quad
+  W^2+Z^2=1, \quad
+  x=(R+rW)X, \quad
+  y=(R+rW)Y, \quad
+  z=rZ.
+ \qed
+ \end{equation*}
+\end{proof}
+
+\begin{question}
+ $a^2+b^2=1$ を満たす 有理数の組 $(a,b)\in\Q^2$ は
+ 次のように表わされることを示せ:
+ \begin{equation*}
+  (a,b) = (0,1),\; \left(\frac{2t}{t^2+1},\;\frac{t^2-1}{t^2+1}\right),
+  \quad t\in\Q.
+  \qed
+ \end{equation*}
+\end{question}
+
+\begin{proof}[ヒント]
+ 立体射影を使う. 
+ $a^2+b^2=1$, $(a,b)\in\Q^2$, $(a,b)\ne(0,1)$ と仮定する.
+ このとき $(0,1)$ と $(a,b)$ を結ぶ直線と $x$ 軸の交点
+ を $(t,0)$ と書くと $t=a/(1-b)$ なので $t$ もまた有理数である.
+ 逆にこの $t$ で $a,b$ を表示すれば求める結果が得られる.
+ \qed
+\end{proof}
+
+\begin{rem}
+ $a$ と $b$ を通分して $a^2+b^2=1$ の両辺の分母を払えば %
+ $X^2+Y^2=Z^2$, $Z\ne 0$ を満たす
+ 整数の三つ組 $(X,Y,Z)\in\Z^3$ がすべて得られる.
+ このように立体射影には初等整数論への簡単な応用がある. 
+ (この応用で本質的なことは平面曲線 $x^2+y^2=1$ と
+ 射影直線 $\P^1$ が $\Q$ 上双有理同値なことである.)
+ \qed
+\end{rem}
+
+\begin{question}
+ $a^2+b^2+c^2=1$ を満たす 有理数の三つ組 $(a,b,c)\in\Q^3$ は
+ 次のように表わされることを示せ:
+ \begin{equation*}
+  (a,b,c) 
+  = (0,0,1),\; 
+    \left(
+     \frac{2s}{s^2+t^2+1},\;
+     \frac{2t}{s^2+t^2+1},\;
+     \frac{s^2+t^2-1}{s^2+t^2+1}
+    \right),
+  \quad (s,t)\in\Q^2.
+  \qed
+ \end{equation*}
+\end{question}
+
+\begin{proof}[ヒント]
+ 立体射影を使う. 
+ $a^2+b^2+c^2=1$, $(a,b,c)\in\Q^3$, $(a,b,c)\ne(0,0,1)$ と仮定する.
+ このとき $(0,0,1)$ と $(a,b,c)$ を結ぶ直線と平面 $z=0$ の
+ 交点を $(s,t,0)$ と書くと $s=a/(1-c)$, $t=b/(1-c)$ 
+ なので $s,t$ もまた有理数である.
+ 逆にこの $s,t$ で $a,b,c$ を表示すれば求める結果が得られる.
+ \qed
+\end{proof}
+
+\begin{rem}
+ $a,b,c$ を通分して $a^2+b^2+b^3=1$ の両辺の分母を払えば %
+ $X^2+Y^2+Z^2=W^2$, $W\ne 0$ を満たす整数の
+ 四つ組 $(X,Y,Z,W)\in\Z^4$ がすべて得られる.
+ このように立体射影には初等整数論への簡単な応用がある. 
+ (この応用の本質は曲面 $x^2+y^2+z^2=1$ と射影平面 $\P^2$ 
+ が $\Q$ 上双有理同値なことである.)
+ \qed
+\end{rem}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{$\R^3$ 内の $C^\infty$ 曲面が微分可能多様体とみなせること}
+
+大雑把に言えば, 
+$n$ 次元の{\bf 微分可能多様体 (differentiable manifold)} とは %
+「$\R^n$ の開集合たちを微分同相写像によって貼り合わせたもの
+とみなせる Hausdorff 空間」のことである. 
+より正確な定義は3年生の前期に習う.
+
+次の問題は $\R^3$ 内の $C^\infty$ 曲面
+が $2$ 次元の微分可能多様体とみなせることを意味している.
+
+\begin{question}
+ $M$ は $\R^3$ 内の $C^\infty$ 曲面であるとする. %
+ $(U,\x)$, $(V,\y)$ は $M$ の $C^\infty$ 座標近傍であるとする. 
+ このとき
+ \begin{equation*}
+   \x^{-1}(\x(U)\cap\y(V))
+   \xrightarrow{\x}
+   \x(U)\cap\y(V)
+   \xrightarrow{\y^{-1}}
+   \y^{-1}(\x(U)\cap\y(V))
+ \end{equation*}
+ という写像の合成 $\phi$ は $C^\infty$ 写像になる. 
+ $\phi$ の逆写像も同様に $C^\infty$ になることがわかるので, 
+ $\phi$ は微分同相写像である.
+ \qed
+\end{question}
+
+\begin{proof}[ヒント]
+ $U$ の座標系を $\u=(u^1,u^2)$ と書き, $V$ の座標系を $\v=(v^1,v^2)$ と
+ 書き, $\x=(x^1,x^2,x^3)$, $\y=(y^1,y^2,y^2)$ と書くことにする.
+
+ 任意に $P\in \x(U)\cap\y(V)$ を取り, 
+ $\y(\v_0)=P$ を満たす $\v_0\in V$ を取る.
+ $C^\infty$ 曲面片の定義の(iii)''より, ある $i,j$ が存在して
+ \begin{equation*}
+ \begin{vmatrix}
+  \dfrac{\d y^i}{\d v^1}(\v_0) & \dfrac{\d y^i}{\d v^2}(\v_0) \\
+  \dfrac{\d y^j}{\d v^1}(\v_0) & \dfrac{\d y^j}{\d v^2}(\v_0) \\
+ \end{vmatrix} \ne 0,
+ \qquad
+ 1\leqq i<j\leqq 3.
+ \end{equation*}
+ この $i,j$ を用いて $C^\infty$ 写像 $\p:M\to\R^2$ 
+ を $\p(\x)=(x^i,x^j)$ ($\x=(x^1,x^2,x^3)\in M$) と定める.
+ $\p\circ\y:\v\mapsto(y^i(\v),y^j(\v))$ に逆写像定理を適用すると, %
+ $\v_0$ のある開近傍 $V_0\subset\y^{-1}(\x(U)\cap\y(V))$ が存在して, %
+ $\p(\y(V_0))$ は $\R^2$ の開集合になり, 
+ $\p\circ\y$ は $V_0$ から $\p(\y(V_0))$ への微分同相写像を定める.
+ $\Omega:=\y(V_0)$, $U_0:=\x^{-1}(\Omega)$ とおく.
+ $C^\infty$ 曲面片の定義の(ii)より %
+ $\Omega$ は $M$ における $P$ の開近傍をなし, 
+ $U_0$ は $U$ における $\u_0$ の開近傍をなす.
+ 以上の記号のもとで $\phi$ の $U_0$ への制限は
+ \begin{equation*}
+  U_0
+  \xrightarrow{\p\circ\x|_{U_0}}
+  \p(\Omega)
+  \xrightarrow{(\p\circ\y|_{V_0})^{-1}}
+  V_0
+ \end{equation*}
+ という $C^\infty$ 写像の合成に等しいことがわかる. 
+ よって $\phi$ は任意の $\u_0\in\x^{-1}(\x(U)\cap\y(V))$ のある開近傍
+ で $C^\infty$ である. すなわち $\phi$ は $C^\infty$ である.
+ \qed
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{第一基本形式と第二基本形式の定義}
+
+$M$ は $\R^3$ 内の $C^\infty$ 曲面であるとする. 
+以下では, $M$ の $C^\infty$ 座標近傍 $(U,\x)$ をひとつ固定し, 
+もっぱらその上で議論を展開する.
+$U$ の座標を $\u = (u^1, u^2)$ と書き, $\x=(x^1,x^2,x^3)$ と書く.
+
+$\d\x/\d u^1$, $\d\x/\d u^2$ は任意の $\u\in U$ において, 
+点 $\x(\u)$ における曲面 $M$ の接平面の基底をなす. 
+接平面に垂直で長さが $1$ のベクトル $\n=\n(\u)$ が次のように定義される:
+\[
+  \n = \n(\u) := 
+  \frac
+  {\dfrac{\d\x}{\d u^1} \times \dfrac{\d\x}{\d u^2}}
+  {\left|\dfrac{\d\x}{\d u^1} \times \dfrac{\d\x}{\d u^2}\right|}.
+\]
+ここで $\times$ は $\R^3$ におけるベクトル積であり, 
+$|\ |$ は $\R^3$ における通常の内積 $\cdot$ に関するノルムである.
+$\x$ の全微分は次のように書ける:
+\[
+  d\x = \sum_{i=1}^2 \dfrac{\d\x}{\d u^i}  \, du^i.
+\]
+図を描いてこれらの定義を憶えよ.
+
+\begin{definition}[第一基本形式, 第二基本形式]
+ {\bf 第一基本形式 (first fundamental form)} $I$ 
+ と{\bf 第二基本形式 (second fundamental form)} $\II$ を以下のように定める:
+  \[
+    I  = \sum_{i,j=1}^2 g_{ij}(u) \, du^i du^j
+    := d\x \cdot d\x,
+    \qquad
+    \II = \sum_{i,j=1}^2 h_{ij}(u) \, du^i du^j
+    := - d\x \cdot d\n.
+  \]
+  より具体的に書くと, 
+  \[
+    g_{ij} 
+    = \dfrac{\d\x}{\d u^i} \cdot \dfrac{\d\x}{\d u^j},
+    \qquad
+    h_{ij}
+    = - \dfrac{\d\x}{\d u^i} \cdot \dfrac{\d\n}{\d u^j}
+    = \dfrac{\d^2\x}{\d u^i\d u^j} \cdot \n.
+  \]
+  $h_{ij}$ の表示の二つ目の等号は $\dfrac{\d\x}{\d u^i}\cdot\n=0$ の両辺
+  を $u_j$ で偏微分すれば得られる. 特に $h_{ji}=h_{ij}$ である.
+  ($\n$ の偏導函数の計算は大変なので, $\x$ の二階の偏導函数の方を計算する
+  ことによって第二基本形式を求める方が良い. 
+  $\n$ の偏導函数は逆に第一および第二基本形式から計算する.
+  Weingarten の公式 \qref{q:dn} を見よ.)
+
+  第一基本形式と第二基本形式は曲面片の接空間上の実対称形式を定める:
+  \begin{align*}
+   g(\v,\w) = \v\cdot\w = \sum_{i,j} g_{ij} v^i w^j,
+   \quad
+   h(\v,\w) = \sum_{i,j} h_{ij} v^iw^j.
+  \end{align*}
+  ここで
+  \begin{equation*}
+   \v = \sum_i v^i \pdfrac{\x}{u^i},
+    \quad
+    \w = \sum_i w^i \pdfrac{\x}{u^i},
+    \quad
+    v^i,w^i\in\R.
+  \end{equation*}
+
+  $(u^1,u^2)=(u,v)$, $(x^1,x^2,x^3)=(x,y,z)$ と書くとき, 
+  次のような記号もよく使われる:
+  \begin{align*}
+   &
+   E = g_{11} = \x_u\cdot\x_u, \quad
+   F = g_{12} = g_{21} = \x_u\cdot\x_v, \quad
+   G = g_{22} = \x_v\cdot\x_v,
+   \\ &
+   L = h_{11} = \x_{uu}\cdot\n, \quad
+   M = h_{12} = h_{21} = \x_{uv}\cdot\n, \quad
+   N = h_{11} = \x_{vv}\cdot\n.
+  \end{align*}
+  この記号法のもとで
+  \[
+   I = E\,du\,du + 2F\,du\,dv + G\,dv\,dv,
+   \qquad
+   \II = L\,du\,du + 2M\,du\,dv + N\,dv\,dv.
+  \]
+
+  行列 $[g_{ij}]$ は正定値実対称行列であり, 逆行列を持つことを示せる.
+  $g$, $g^{ij}$ を次のように定義する:
+  \begin{equation*}
+   g = \det[g_{ij}] =
+   \begin{vmatrix}
+    E & F \\
+    F & G \\
+   \end{vmatrix}
+   = EG -F^2,
+   \qquad
+   [g^{ij}] = [g_{ij}]^{-1} =
+   \dfrac{1}{EG-F^2}
+   \begin{bmatrix}
+     G & -F \\
+    -F &  E \\
+   \end{bmatrix}.
+  \end{equation*}
+  このとき $[g_{ij}]$ が正定値実対称行列であることから %
+  $[g^{ij}]$ も正定値実対称行列になり, 次が成立している:
+ \begin{equation*}
+  \sum_{j}g^{ij}g_{jk} = \delta^i_k. 
+ \end{equation*}
+ 右辺は Kronecker の delta である. 
+ $g^{ij}$ は下の添字を上に上げるために使われる. 
+ \qed
+\end{definition}
+
+\begin{rem}
+ 第一基本形式は曲面における長さの情報を持っており, 
+ 第二基本形式は曲面が $\R^3$ の中で
+ どのように曲がっているかに関する情報を持っている.
+ \qed
+\end{rem}
+
+\begin{question}[第二基本形式の幾何学的意味]
+  $\u_0=(u_0^1,u_0^2)\in U$ を任意に固定し, 
+  $U$ 上の実数値函数 $f$ を次のように定める: %
+  \[
+    f(\u) = (\x(\u) - \x(\u_0)) \cdot \n(\u_0).
+  \]
+  このとき次が成立する:
+  \[
+    f(\u_0) = 0,
+    \qquad
+    \dfrac{\d f}{\d u^i}(\u_0) = 0,
+    \qquad
+    \dfrac{\d^2 f}{\d u^i\d u^j}(\u_0) = h_{ij}(\u_0).
+  \]
+  よって $f$ は $\u_0$ の近傍で次の形をしている:
+  \[
+    f(\u)
+    =
+    \frac{1}{2}
+    \sum_{i,j} h_{ij}(\u_0) (u^i - u^i_0)(u^j - u^j_0)
+    + o(|u - u_0|^2). 
+  \]
+ 以上の事実を図を描いて説明せよ. \qed
+\end{question}
+
+\begin{question}[第一基本形式に関する補足]
+ 第一基本形式に関して以下が成立している:
+ \begin{enumerate}
+  \item[(1)] 行列 $[g_{ij}]$ は対称行列であり, その固有値は正の実数である.
+   (すなわち第一基本形式は正定値である.)
+  \item[(2)] $g=\det[g_{ij}]>0$ である. 
+  \item[(3)] $\sqrt{g}=\sqrt{\det[g_{ij}]}$ 
+   は $\dfrac{\d\x}{\d u^1}, \dfrac{\d\x}{\d u^2}$ 
+   を二辺に持つ平行四辺形の面積に等しい. すなわち
+   \begin{equation*}
+    \sqrt{g} = \left|\dfrac{\d\x}{\d u^1} \times \dfrac{\d\x}{\d u^2}\right|,
+     \qquad
+    \n = \dfrac{1}{\sqrt{g}}\,\dfrac{\d\x}{\d u^1} \times \dfrac{\d\x}{\d u^2}.
+    \qed
+   \end{equation*}
+ \end{enumerate}
+\end{question}
+
+\begin{proof}[ヒント]
+ (1) $[g_{ij}]$ が対称行列であることは定義より明らか.
+ 一般に実対称行列 $A=[a_{ij}]\in M_n(\R)$ の固有値はすべて実数であり, 
+ $A$ の固有値がすべて正であるための(すなわち正定値であるための)必要十分条件は
+ 任意の $0$ でない $[x^j]\in\R^n$ に対して $\sum_{i,j}a_{ij}x^ix^j>0$ 
+ が成立することである(このことは $A$ を対角化すれば容易に確かめられる). 
+ このことから $\R^N$ における $n$ 個の一次独立な
+ ベクトル $\v_1,\ldots,\v_n$ に対して
+ 実対称行列 $A=[a_{ij}]=[\v_i\cdot\v_j]$ は正定値になることがわかる. 
+ 実際 $\v=\sum_i x^i\v_i\ne 0$ に対して
+ \begin{equation*}
+  \sum_{i,j} a_{ij}x^ix^j
+  = \sum_{i,j} x^i\v_i\cdot x^j\v_j
+  = \v\cdot\v > 0.
+ \end{equation*}
+
+ (2) $g=\det[g_{ij}]=(\text{$[g_{ij}]$ のすべての固有値の積})$.
+
+ (3) 直接的計算によって次が成立することを示せ (Lagrange の公式):
+ \begin{equation*}
+  |\v_1\times\v_2|^2 =
+  \begin{vmatrix}
+   \v_1\cdot\v_1 & \v_1\cdot\v_2 \\
+   \v_2\cdot\v_1 & \v_2\cdot\v_2 \\
+  \end{vmatrix}
+  \qquad (\v_1,\v_2\in\R^3).
+ \end{equation*}
+ この公式を使えば容易である. \qed
+\end{proof}
+
+\begin{guide}[$n$ 次元の場合の Lagrange の公式]
+ $\R^n$ のベクトル $\v_1,\ldots,\v_{n-1}$ に対して
+ 以下の性質を持つベクトル $\n$ が一意に存在する:
+ \begin{itemize}
+  \item[(a)] $\n$ は $\v_1,\ldots,\v_{n-1}$ に垂直である.
+  \item[(b)] $\n$ のノルムは $\v_1,\ldots,\v_{n-1}$ で
+   張られる平行 $2(n-1)$ 面体の面積(体積と呼ぶべきか)に等しい.
+  \item[(c)] $\det[\v_1,\ldots,\v_{n-1},\n] \geqq 0$.
+ \end{itemize}
+ $\R^n$ の標準的な正規直交基底を $\e_i$ と書き, $\v_j$ を
+ $\v_j=\sum a^i{}_j\e_i$ と表わしたとき, 
+ $\n$ は次のように表わされる:
+ \begin{equation*}
+  \n = 
+  \sum_{i=1}^n
+  \begin{vmatrix}
+   a^1{}_1     & a^1{}_2     & \ldots & a^1{}_{n-1} \\
+   \vdots      & \vdots      &        & \vdots \\
+   a^{i-1}{}_1 & a^{i-1}{}_2 & \ldots & a^{i-1}{}_{n-1} \\
+   a^{i+1}{}_1 & a^{i+1}{}_2 & \ldots & a^{i+1}{}_{n-1} \\
+   \vdots      & \vdots      &        & \vdots \\
+   a^n{}_1     & a^n{}_2     & \ldots & a^n{}_{n-1} \\
+  \end{vmatrix}
+  \e_i
+  =
+  \begin{vmatrix}
+   a^1{}_1 & a^1{}_2 & \ldots & a^1{}_{n-1} & \e_1 \\
+   a^2{}_1 & a^2{}_2 & \ldots & a^2{}_{n-1} & \e_2 \\
+   a^3{}_1 & a^3{}_2 & \ldots & a^3{}_{n-1} & \e_3 \\
+   \vdots  & \vdots  &        & \vdots      & \vdots \\
+   a^n{}_1 & a^n{}_2 & \ldots & a^n{}_{n-1} & \e_n \\
+  \end{vmatrix}.
+ \end{equation*}
+ $n\times(n-1)$ 行列 $A$ を $A=[\v_1,\ldots,\v_{n-1}]=[a^i{}_j]$ と定め
+ る. このとき次の公式が成立している::
+ \begin{equation*}
+  |\n|^2 = \det[\tp{A}A] = \det[\v_i\cdot\v_j].
+ \end{equation*}
+ 一つ目の等号は $\det[\tp{A}A]$ を Laplace 展開することによって得られる.
+ 二つ目の等号は $A$ の定義より明らか.
+ この公式は $n=3$ の場合の Lagrange の公式の一般化になっている. \qed
+\end{guide}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Weingarten の公式と Weingarten 写像}
+
+\begin{question}[Weingarten の公式]
+ \label{q:dn}
+ $h^i_j$ を次のように定める:
+ \begin{equation*}
+  h^i_j = \sum_k g^{ik}h_{kj}.
+ \end{equation*}
+ すなわち
+ \begin{equation*}
+  \begin{bmatrix}
+   h^1_1 & h^1_2 \\
+   h^2_1 & h^2_2 \\
+  \end{bmatrix}
+  =
+  \dfrac{1}{EG-F^2}
+  \begin{bmatrix}
+   GL-FM & GM-FN \\
+   EM-FL & EN-FM \\
+  \end{bmatrix}.
+ \end{equation*}
+ このとき次の公式が成立している:
+ \begin{equation*}
+  \dfrac{\d\n}{\d u^j}
+  = - \sum_k h^k_j \dfrac{\d\x}{\d u^k}.
+ \end{equation*}
+ すなわち
+ \begin{equation*}
+  \n_u = - \frac{GL-FM}{EG-F^2} \x_u - \frac{EM-FL}{EG-F^2} \x_v, \quad
+  \n_v = - \frac{GM-FN}{EG-F^2} \x_u - \frac{EN-FM}{EG-F^2} \x_v.
+ \end{equation*}
+ この公式を {\bf Weingarten の公式 (Weingarten's formula)} と呼ぶ. 
+ \qed
+\end{question}
+
+\begin{proof}[ヒント]
+ $\n\cdot\n=1$ の両辺を $u^i$ で偏微分すれば $\dfrac{\d\n}{\d u^j}$ 
+ と $\n$ が直交することがわかる. 
+ よって $\dfrac{\d\n}{\d u^j}= - \sum_i a^i_j \dfrac{\d\x}{\d u^i}$ と
+ 表わされる. この両辺と $-\dfrac{\d\x}{\d u^k}$ の内積を取る
+ と第一および第二基本形式の定義より $h_{kj}=\sum_i a^i_j g_{ki}$.
+ よって $a^i_j = \sum_k g^{ik}h_{kj}$.
+ \qed
+\end{proof}
+
+\begin{definition}[Weingarten写像]
+  行列 $[h^i_j]$ が定める曲面片の接空間の線形変換 $A$ を
+ {\bf Weingarten の写像 (Weingarten mapping)} と呼ぶ:
+ \begin{equation*}
+  A : \pdfrac{\x}{u^j} 
+  \mapsto \sum_i h^i_j \pdfrac{\x}{u^i} = -\dfrac{\d\n}{\d u^j}.
+ \qed
+ \end{equation*}
+\end{definition}
+
+\begin{question}[Weingarten写像の対称性]
+ \label{q:W-sym}
+ Weingarten写像 $A$ は次を満たしている:
+ \begin{equation*}
+  g(A(\v),\w) = g(\v,A(\w)) = h(\v,\w),
+  \qquad
+  \v = \sum_i v^i \pdfrac{\x}{u^i},
+  \quad
+  \w = \sum_i w^i \pdfrac{\x}{u^i}.
+ \end{equation*}
+ 特に Weingarten 写像 $A$ は接空間の計量 $g(\ ,\ )$ に関して対称である.
+ 接空間の計量 $g(\ ,\ )$ に関する正規直交基底による Weingarten 写像の
+ 行列表現は実対称行列になる.
+ \qed
+\end{question}
+
+\begin{proof}[ヒント]
+ $g(A(\v),\w)=h(\v,\w)$ は次のように証明される:
+ \begin{equation*}
+  g(A(\v),\w)
+  = \sum_{i,j,k} g_{kj} h^k_i v^i w^j 
+  = \sum_{i,j} h_{ij} v^i w^j
+  = h(\v,\w).
+ \end{equation*}
+ $I$, $\II$ は実対称形式なので $I(\v,A(\w))=\II(\v,\w)$ も成立することが
+ わかる.
+ \qed
+\end{proof}
+
+\begin{rem}
+ Weingarten 写像を $g(A(\v),\w)=h(\v,\w)$ によって定義することもできる.
+ \qed
+\end{rem}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Christofell の記号}
+
+\begin{definition}[Christofell の記号]
+ $U$ 上の各点で $\dfrac{\d\x}{\d u^1},\dfrac{\d\x}{\d u^1},\n$ 
+ は $\R^3$ の基底になるので, $\dfrac{\d^2\x}{\d u^i\d u^j}$ は
+ 次のように表わされる:
+ \begin{equation*}
+  \dfrac{\d^2\x}{\d u^i\d u^j}
+  = \sum_{k=1}^2\Gamma^k_{ij}\dfrac{\d\x}{\d u^k} + h_{ij}\n.
+ \end{equation*}
+ これを {\bf Gauss の公式}と呼ぶ.
+ 各 $\Gamma^k_{ij}$ は $U$ 上の $C^\infty$ 函数であり, 
+ {\bf Christoffel の記号 (Christofell's symbols)} と呼ばれる.
+ 定義より明らかに $\Gamma^k_{ji}=\Gamma^k_{ij}$ が成立している.
+ \qed
+\end{definition}
+
+\begin{guide}[標構 (frame) の概念の重要性]
+ 標構 (frame) の概念は数学的に重要である.
+ 曲線や曲面は曲がっているので非線形な数学の属する対象である.
+ しかし Frenet-Serret の公式や曲面論の基本方程式は frame に関する
+ 線形微分方程式の形をしている.
+ このように frame は非線形な数学と線形な数学を
+ 関係付ける役目を果たしている.
+ このような考え方はソリトン方程式の佐藤理論のような現代の可積分系の
+ 理論でも基本的な役目を果たしている.
+ \qed
+\end{guide}
+
+\begin{question}[Christofell の記号に関する補足]
+ \label{q:Ch-hosoku}
+ $\Gamma^k_{ij}$ は次のように表わされる:
+ \begin{equation*}
+  \Gamma^k_{ij} 
+   = \sum_s g^{ks}\,\dfrac{\d\x}{\d u^s}\cdot\dfrac{\d^2\x}{\d u^i\d u^j}.
+ \end{equation*}
+ 上下で対になっている添字に関する和になっていることに注意せよ. \qed
+\end{question}
+
+\begin{proof}[ヒント]
+ $[g^{ij}]$ は $[g_{ij}]$ の逆行列なので次を示せば良い:
+ \begin{equation*}
+  \dfrac{\d\x}{\d u^s}\cdot\dfrac{\d^2\x}{\d u^i\d u^j}
+  = \sum_t g_{st} \Gamma^t_{ij}.
+ \end{equation*}
+ しかしこれは Gauss の公式より明らかである. \qed
+\end{proof}
+
+\begin{question}[Christofell の記号の第一基本形式だけのよる表示]
+ \label{q:Ch=ggg}
+ Christoffel の記号は $g_{ij}$ のみを使って次のように表わされる:
+ \begin{equation*}
+  \Gamma^k_{ij}
+   =
+   \frac{1}{2}
+   \sum_s g^{ks}
+   \left(
+      \dfrac{\d g_{sj}}{\d u^i} 
+    + \dfrac{\d g_{si}}{\d u^j}
+    - \dfrac{\d g_{ij}}{\d u^s}
+   \right).
+  \qed
+ \end{equation*}
+\end{question}
+
+\begin{proof}[ヒント]
+ 問題 \qref{q:Ch-hosoku} の結果より, 次の公式を示せば十分である:
+ \begin{equation*}
+    \dfrac{\d g_{lj}}{\d u^i} 
+  + \dfrac{\d g_{li}}{\d u^j}
+  - \dfrac{\d g_{ij}}{\d u^l}
+  =
+  2\,\dfrac{\d\x}{\d u^l}\cdot\dfrac{\d^2\x}{\d u^i\d u^j}.
+ \end{equation*}
+ この公式は $g_{ij}=\dfrac{\d\x}{\d u^i}\cdot\dfrac{\d\x}{\d u^i}$ 
+ の両辺を $u^l$ で偏微分して得られる等式の $i,j,l$ を適当に取り替えて
+ 左辺を計算すれば容易に証明される.
+ \qed
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{曲面論の基本方程式と Gauss-Codazzi の方程式}
+
+\begin{theorem}[曲面論の基本方程式]
+ Gauss の公式と Weingarten の公式 (\qref{q:dn})
+ \begin{equation*}
+  \dfrac{\d\x_i}{\d u^j} = \sum_k \Gamma^k_{ij}\x_k + h_{ij}\n,
+  \qquad
+  \dfrac{\d\n}{\d u^j} = \sum_k h^k_j\x_k
+ \end{equation*}
+ をまとめると次の公式が得られる:
+ \begin{equation*}
+  \dfrac{\d}{\d u^j} [\x_1,\x_2,\n]
+  =
+  [\x_1,\x_2,\n]
+  \begin{bmatrix}
+   \Gamma^1_{1j} & \Gamma^1_{2j} & -h^1_j \\
+   \Gamma^2_{1j} & \Gamma^2_{2j} & -h^2_j \\
+   h_{1j}        & h_{2j}        & 0 \\
+  \end{bmatrix}.
+ \end{equation*} 
+ ここで
+ \begin{equation*}
+  \x_i = \dfrac{\d\x}{\d u^i}, \qquad
+  \n = \dfrac{\x_1\times\x_2}{|\x_1\times\x_2|}
+ \end{equation*}
+ この公式を{\bf 曲面論の基本方程式}と呼び, %
+ $[\x_1,\x_2,\n]$ を {\bf Gauss 標構 (Gauss frame)}と呼ぶ.
+ これは曲線に関する Frenet-Serret の公式の曲面論での類似物である.
+ \qed
+\end{theorem}
+
+\begin{question}[完全可積分条件]
+ \label{q:integrability}
+ $U$ は $\R^d$ の開集合であり, 
+ $A_i$ ($i=1,\dots,d)$ は $\u=(u^1,\dots,u^d)\in U$ 
+ の $M(n,\R)$ に値を持つ $C^\infty$ 函数であり, 
+ $\Phi$ は $GL_n(\R)$ に値を持つ $C^\infty$ 函数であり, 
+ \begin{equation*}
+  \pd{u^i}\Phi = \Phi A_i \qquad (i = 1,\dots,d)
+  \tag{$*$}
+ \end{equation*}
+  が成立していると仮定する. このとき,
+  \begin{equation*}
+    \pdfrac{A_j}{u^i} - \pdfrac{A_i}{u^j} + A_i A_j - A_j A_i = 0
+    \qquad
+    (i,j = 1,\dots,d)
+  \end{equation*}
+  が成立する. これを線形偏微分方程式 ($*$) 
+  の{\bf 完全可積分条件}もしくは{\bf 零曲率条件}と呼ぶ.
+  \qed
+\end{question}
+
+\begin{proof}
+ $\dfrac{\d}{\d u^i}\dfrac{\d}{\d u^j}\Phi
+ =\dfrac{\d}{\d u^j}\dfrac{\d}{\d u^i}\Phi$ を ($*$) を使って
+ 書き直せば完全可積分条件が得られる.
+ \qed
+\end{proof}
+
+\begin{guide}
+ $U$ は $\R^d$ の単連結かつ連結な開集合であるとし, 
+ $A_i$ ($i=1,\dots,d)$ は $\u=(u^1,\dots,u^d)\in U$ 
+ の $M(n,\R)$ に値を持つ $C^\infty$ 函数であるとする.
+ もしも $A_i$ ($i=1,\dots,d)$ が完全可積分条件を満たしているならば
+ 任意の $\u_0\in U$ に対して $U$ 上の $GL_n(\R)$ に値を
+ 持つ $C^\infty$ 函数 $\Phi$ で ($*$) および $\Phi(\u_0)=E_n$ を
+ 満たすものが一意に存在する($E_n$ は $n$ 次の単位行列).
+ \qed
+\end{guide}
+
+\begin{question}[Gauss-Codazzi の方程式]
+ 曲面論の基本方程式の完全可積分条件
+ は $g_{ij}$ と $h_{ij}$ に関する次の連立微分方程式と同値である:
+ \begin{align*}
+  &
+  \sum_t
+  g_{lt}
+  \left(
+  \pdfrac{\Gamma^t_{ij}}{u^k} - \pdfrac{\Gamma^t_{ik}}{u^j}
+  +
+  \sum_s (\Gamma^s_{ij}\Gamma^t_{sk} - \Gamma^s_{ik}\Gamma^t_{sj})
+  \right)
+  =
+  h_{ik}h_{jl} - h_{ij}h_{kl},
+  \tag{\text{Gaussの方程式}}
+  \\ &
+  \pdfrac{h_{ij}}{u^k} - \pdfrac{h_{ik}}{u^j}
+  +
+  \sum_s (\Gamma^s_{ij}h_{lk} - \Gamma^s_{ik}h_{sj})
+  = 0.
+  \tag{\text{Codazziの方程式}}
+ \end{align*}
+ ただし $\Gamma^k_{ij}$ は問題 \qref{q:Ch=ggg} の公式によって $g_{ij}$ 
+ で表わされていると考える. Gauss の方程式の左辺は $g_{ij}$ だけで
+ 表わされており, 右辺は $h_{ij}$ だけで表わされている. 
+ Codazzi の方程式は $\Gamma^k_{ij}$ を係数とする $h_{ij}$ に関する
+ 一階の偏微分方程式の形をしている.
+ \qed
+\end{question}
+
+\begin{proof}[ヒント]
+ 問題 \qref{q:integrability} の結果を使う. 
+ 行列値函数 $\Gamma_j$, $h_j$, $\bar h_j$, $A_j$ を次のように定める:
+ \begin{equation*}
+  \Gamma_j =
+  \begin{bmatrix}
+   \Gamma^1_{1j} & \Gamma^1_{2j} \\
+   \Gamma^2_{1j} & \Gamma^2_{2j} \\
+  \end{bmatrix},
+  \quad
+  h_j = [h_{1j}, h_{2j}],
+  \quad
+  \bar h_j =
+  \begin{bmatrix}
+   h^1_j \\
+   h^2_j \\
+  \end{bmatrix},
+  \quad
+  A_j =
+  \begin{bmatrix}
+   \Gamma_j & -\bar h_j \\
+   h_j      & 0 \\
+  \end{bmatrix}.
+ \end{equation*}
+ このとき曲面論の基本方程式の完全可積分条件は次のように書ける:
+ \begin{equation*}
+  \pdfrac{A_k}{u^j} - \pdfrac{A_j}{u^k} + A_j A_k - A_k A_j = 0.
+ \end{equation*}
+ この方程式は次と同値である:
+ \begin{align*}
+  &
+  \pdfrac{\Gamma_k}{u^j} - \pdfrac{\Gamma_j}{u^k}
+  + \Gamma_j\Gamma_k - \Gamma_k\Gamma_j
+  -(\bar h_j h_k - \bar h_k h_j)
+  = 0,
+  \tag{1}
+  \\ &
+  \pdfrac{h_k}{u^j} - \pdfrac{h_j}{u^k}
+  + h_j\Gamma_k - h_k\Gamma_j
+  = 0,\
+  \tag{2}
+  \\ &
+  \pdfrac{\bar h_k}{u^j} - \pdfrac{\bar h_j}{u^k}
+  + \Gamma_j\bar h_k - \Gamma_k\bar h_j
+  = 0,
+  \tag{3}
+  \\ &
+  h_j\bar h_k - h_k\bar h_j = 0.
+  \tag{4}
+ \end{align*}
+ (1), (2) はそれぞれ Gauss の方程式と Codazzi の方程式と同値である.
+ 常に $h_j\bar h_k = \sum_{s,t}g^{st}h_{sj}h_{tk} = h_k\bar h_j$ 
+ なので (4) は $0=0$ という自明な方程式である.
+ あとは $h^i_j$ と $\Gamma^k_{ij}$ の定義および(2)から(3)が
+ 導かれることを示せばよい.
+ そのためには次の公式が成立することを使えばよい:
+ \begin{equation*}
+ \pdfrac{g^{ij}}{u^k}
+ =
+ - \sum_{s,t} g^{is}g^{jt}\pdfrac{g_{st}}{u^k}
+ =
+ - \sum_s (g^{is}\Gamma^j_{sk} + g^{js}\Gamma^i_{sk}).
+ \end{equation*}
+ この計算の一つ目の等号は $U$ 上の $GL_N(\R)$ 値函数 $A$ に
+ 対して $\dfrac{\d A^{-1}}{\d u^k} = -A^{-1}\dfrac{\d A}{\d u^k}A^{-1}$ 
+ が成立することから出る. 二つ目の等号は問題 \qref{q:Ch=ggg} の公式
+ から出る.
+ \qed
+\end{proof}
+
+\begin{theorem}[曲面論の基本定理]
+ $U$ が $\R^2$ の連結かつ単連結な開集合であり, 
+ $g_{ij}$, $h_{ij}$ は $U$ 上の実数値 $C^\infty$ 函数であり, 
+ $[g_{ij}]$ は正定値実対称行列であり, $[h_{ij}]$ は実対称行列であるとす
+ る. このとき $g_{ij}$, $h_{ij}$ に関する Gauss-Codazzi の方程式が
+ 成立しているならばある $U$ を定義域とする $C^\infty$ 曲面片 $(U,\x)$ で
+ 第一および第二基本形式が $g_{ij}$, $h_{ij}$ に一致するものが存在する.
+ さらにそのような曲面片は $\R^3$ の等長変換を除いて一意的である.
+ \qed
+\end{theorem}
+
+\begin{guide}[Sine-Gordon 方程式]
+ 曲面論の基本定理は数学的に
+ 「綺麗な曲面」「面白い曲面」を 構成するための基礎になる.
+ 詳しくは剣持勝衛『曲面論講義』\cite{Kenmotsu} を参照せよ.
+ 可積分系との関連については田中・伊達『KdV方程式』 \cite{TD} の
+ 第9章「Sine-Gordon方程式」を参照せよ.
+
+ 文献 \cite{TD} 第9章では負の Gauss 曲率一定 $K=-c^2<0$ の曲面には
+ 局所的に第一および第二基本形式が
+ \begin{equation*}
+  I = \cos^2\theta\,d\sigma^2 + \sin^2\theta\,d\tau^2, \qquad
+  \II = c\sin\theta\cos\theta(d\sigma^2 - d\tau^2)
+ \end{equation*}
+ と表示されるような座標系 $(\tau,\sigma)$ が存在して,
+ Gauss-Codazzi の方程式が Sine-Gordon 方程式
+ \begin{equation*}
+  \theta_{\sigma\sigma} - \theta_{\tau\tau} = c^2 \sin\theta\cos\theta
+ \end{equation*}
+ に帰着することが解説されている. さらに Sine-Gordon 方程式の
+ 多重ソリトン解や準周期解の構成法が説明されている. 
+ Sine-Gordon 方程式は古典的な無限次元古典可積分系として有名である.
+
+ 文献 \cite{Kenmotsu} の定理1.5では正の平均曲率一定 $H>0$ の曲面には
+ 局所的に第一および第二基本形式が
+ \begin{equation*}
+  I = \frac{e^{2\omega}}{2H}(du^2+dv^2), \qquad
+  \II = e^\omega\cosh\omega\,du^2 + e^\omega\sinh\omega\,dv^2
+ \end{equation*}
+ と表示されるような座標系 $(u,v)$ を入れることができ, 
+ Gauss-Codazzi の方程式が双曲的 Sine-Gordon 方程式 (sinh-Gordon 方程式)
+ \begin{equation*}
+  \omega_{uu} + \omega_{vv} + 2H\cosh\omega\sinh\omega = 0
+ \end{equation*}
+ に帰着することが解説されている. さらに第6章「輪環面」ではトーラス
+ (輪環面)の $\R^3$ への平均曲率一定のはめ込みが存在することが説明されている.
+ \qed
+\end{guide}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{主曲率, Gauss 曲率, 平均曲率の定義}
+
+\begin{question}[線形代数からの準備]
+ \label{q:XinvY}
+ $X,Y$ は $n$ 次の実対称行列であるとする.
+ $X$ の固有値はすべて正であると仮定する.
+ このとき $X^{-1}Y$ の固有値はすべて実数である.
+ \qed
+\end{question}
+
+\begin{proof}[ヒント]
+ $X$ の平方根 $R$ を構成しよう.
+ $X$ は直交行列 $P$ で対角化できる: %
+ $X=PDP^{-1}=PD\tp{P}$, $D=\diag(\kappa_1,\ldots,\kappa_n)$.
+ $\kappa_i>0$ より $\sqrt{D} = \diag(\sqrt{\kappa_1},\ldots.\sqrt{\kappa_n})$, 
+ $R = P\sqrt{D}P^{-1}=P\sqrt{D}\tp{P}$ と置くと %
+ $R$ も固有値がすべて正の実対称行列であり, $X=R^2$ が成立している.
+ このとき $RX^{-1}YR^{-1}=R^{-1}YR^{-1}$ は実対称行列なので固有値はすべ
+ て実数である. $RX^{-1}YR^{-1}$ と $X^{-1}Y$ の固有値は等しいので
+ これで $X^{-1}Y$ の固有値がすべて実数であることがわかった.
+ \qed
+\end{proof}
+
+\begin{question}
+ 行列 $[h^i_j]$ の固有値 $\kappa_i$ ($i=1,2$) が
+ すべて実数になることを示せ.
+ \qed
+\end{question}
+
+\begin{proof}[ヒント1]
+ 問題 \qref{q:XinvY} の結果
+ を $X=[g_{ij}]$, $Y=[h_{ij}]$, $[h^i_j] = X^{-1}Y $ に適用せよ. \qed
+\end{proof}
+
+\begin{proof}[ヒント2]
+ 問題 \qref{q:W-sym} の結果より, 行列 $[h^i_j]$ の定める Weingarten 写像
+ は計量 $g(\ ,\ )$ に関して対称である. すなわち 計量 $g(\ ,\ )$ に関する
+ 行列表現は実対称行列になる. 
+ したがって Weingarten 写像 $A$ の固有値は実数になる.
+ \qed
+\end{proof}
+
+\begin{definition}[主曲率, Gauss 曲率, 平均曲率]
+ 行列 $[h^i_j]$ の固有値を $\kappa_i$ ($i=1,2$) を
+ {\bf 主曲率 (principal curvature)} と呼ぶ. 
+ {\bf Gauss 曲率} $K$ と{\bf 平均曲率} $H$ を次のように定義する:
+ \begin{align*}
+  &
+  K = \kappa_1\kappa_2
+    = \det[h^i_j]
+    = \frac{\det[h_{ij}]}{\det[g_{ij}]}
+    = \frac{LN-M^2}{EG-F^2},
+  \\ &
+  H = \frac{\kappa_1+\kappa_2}{2}
+    = \frac{1}{2}\trace\big[h^i_j\big]
+    = \frac{1}{2}\frac{EN-2FM+GL}{EG-F^2}.
+   \qed
+ \end{align*}
+\end{definition}
+
+\begin{question}[楕円点, 放物点, 双曲点]
+ $K>0$, $K=0$, $K<0$ となる曲面上の点をそれぞれ
+ {\bf 楕円点, 放物点, 双曲点}と呼ぶ.
+ それぞれの近傍の様子が大体どのようになっているかを
+ 図を描いて説明せよ. 
+ \qed
+\end{question}
+
+\begin{question}[主方向と臍点]
+ 主曲率 $\kappa_i$ は Weingarten 写像 $A$ の固有値とみなせる.
+ $\kappa_i$ に属する $A$ の固有ベクトルを $\v_i$ と書く.
+ $\kappa_1\ne\kappa_2$ のとき $g(\v_1,\v_2)=0$ が成立することを示せ.
+
+ $\v_1,\v_2$ の方向を{\bf 主方向 (principal direction)} と呼ぶ.
+ $\kappa_1=\kappa_2$ となる点を曲面の{\bf 臍点(せいてん, umbilic point)} 
+ と呼ぶ. 臍点ではあらゆる方向が主方向になる.
+ \qed
+\end{question}
+
+\begin{proof}[ヒント]
+ 問題 \qref{q:W-sym} の結果より $A$ は計量 $g(\ ,\ )$ に関して対称である.
+ よって $g(\v_1,\v_2)=0$ を実対称行列の異なる固有値に
+ 属する固有ベクトルが互いに直交することと全く同様に証明できる.
+ \qed
+\end{proof}
+
+\begin{rem}
+ 上の方では計算のし易さを重視して, Weingarten 写像ではなく, 
+ 行列 $[h^i_j]$ を表に出して種々の曲率を定義したが, 
+ Weingarten 写像をもとに定義する方が本当は好ましい.
+ 数学的(もしくは幾何的)に好ましい定義の仕方と
+ 計算に便利な定義の仕方は異なることがよくある.
+ \qed
+\end{rem}
+
+\begin{question}[Weingarten の公式と Gauss 曲率]
+ Weingarten の公式(\qref{q:dn})から次を導け:
+ \begin{equation*}
+  \n_1\times\n_2 = K(\x_1\times\x_2),
+  \qquad
+  \n_i=\pdfrac{\n}{u^i}, \quad \x_i=\pdfrac{\x}{u^i}.
+  \qed
+ \end{equation*}
+\end{question}
+
+\begin{proof}[ヒント]
+ Weingarten の公式 $\n_j=-(h^1_j\x_1+h^2_j\x_2)$ より,
+ \begin{equation*}
+  \n_1\times\n_2
+  =(h^1_1\x_1+h^2_1\x_2)\times(h^1_2\x_1+h^2_2\x_2)
+  =(h^1_1h^2_2-h^2_1h^1_2)\x_1\times\x_2
+  =K\,\x_1\times\x_2.
+  \qed
+ \end{equation*}
+\end{proof}
+
+\begin{question}[スケール変換]
+  曲面片 $(U,\x)$ の Gauss 曲率, 平均曲率をそれぞれ $K$, $H$ と書く.
+  $R>0$ のとき $R$ 倍に拡大した曲面片 $(U,R\x)$ の Gauss 曲率を
+  平均曲率はそれぞれ $R^{-2}K$, $R^{-1}H$ になる.
+  \qed
+\end{question}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{曲率の計算問題}
+\label{sec:clac-K,H}
+
+\begin{question}
+ $\x$ が $\x(\u) = (\u, f(\u)) = (u_1, u^2, f(u^1, u^2))$ の形をして
+ いるとき, $g_{ij}$, $h_{ij}$, $K$, $H$ を $f$ の式で表わせ. \qed
+\end{question}
+
+\commentout{
+\begin{proof}[略解]
+ $a=\x,f$ に対して $a_i=\d a/\d u^i$, $a_{ij}=\d^2a/\d u^1\d u^2$ と
+ 書くことにする. このとき,
+ \begin{align*}
+  &
+  \x_1 = (1,0,f_1), \quad
+  \x_2 = (0,1,f_2), \quad
+  \\ &
+  g_{11} = 1+f_1^2, \quad
+  g_{12} = g_{21} = f_1f_2, \quad
+  g_{22} = 1+f_2^2, \quad
+  \\ &
+  g = f_1^2+f_2^2+1, \quad
+  \n = \frac{(-f_1,-f_2,1)}{\sqrt{g}},
+  \\ &
+  \x_{ij} = (0,0,f_{ij}), \quad
+  h_{ij} = \frac{f_{ij}}{\sqrt{g}},
+  \\ &
+  K = \frac{f_{11}f_{22}-f_{12}^2}{(f_1^2+f_2^2+1)^2}, \quad
+  H = \frac{1}{2}
+      \frac
+      {(1+f_1^2)f_{22}-2f_1f_2f_{12}+(1+f_2^2)f_{11}}
+      {(f_1^2+f_2^2+1)^{3/2}}.
+  \qed
+ \end{align*}
+\end{proof}
+}
+
+\begin{question}
+  $a,b>0$ のとき, 以下の曲面の概形を描け:
+  \begin{enumerate}
+  \item $\{\,(x,y, a x^2 + b y^2) \mid x,y \in \R \,\}$,
+  \item $\{\,(x,y, a x^2  )       \mid x,y \in \R \,\}$,
+  \item $\{\,(x,y, a x^2 - b y^2) \mid x,y \in \R \,\}$.
+  \end{enumerate}
+  さらにそれぞれの曲面の $K$, $H$ を求めよ.
+  \qed
+\end{question}
+
+\begin{question}[半球面]
+ 次の曲面片の $K$, $H$ を求めよ:
+ \begin{equation*}
+  \x(x,y) = (x,y,\sqrt{r^2-x^2-y^2}).
+  \qed
+ \end{equation*}
+\end{question}
+
+\begin{question}[回転面]
+ $\u=(s,\theta)=(u^1, u^2)$ と置く. 
+ $s$ の函数 $x,z$ が
+ \begin{equation*}
+  (x')^2 + (z')^2 = 1, \qquad x > 0
+ \end{equation*}
+ を満たしていると仮定し, $\x$ が
+ \begin{equation*}
+  \x(s,\theta)
+  = (x(s)\cos\theta, x(s)\sin\theta, z(s))
+ \end{equation*}
+ の形をしていると仮定する. 
+ このとき $\x(s,\theta)$ は回転面の上を動く. 
+ このことを図を書いて説明せよ. 
+ $g_{ij}$, $h_{ij}$, $K$, $H$ を $x$, $z$ の式で表わせ.  \qed
+\end{question}
+
+\commentout{
+\begin{proof}[略解]
+ 以下のように計算される:
+ \begin{align*}
+  &
+  g_{11} = 1, \quad
+  g_{12} = 0, \quad
+  g_{22} = x^2, \quad
+%  \\ &
+  g = x^2, \quad
+  \n = (-z'(s)\cos\theta, -z'(s)\sin\theta, x'(s)),
+  \\ &
+  h_{11} = x'z'' - z'x'', \quad
+  h_{12} = h_{21} = 0, \quad
+  h_{22} = x z', \quad
+%  \\ &
+  K = -\frac{x''}{x}, \quad
+  H = \frac{z'}{2x} - \frac{x''}{2z'}.
+  \qed
+ \end{align*}
+\end{proof}
+}
+
+\begin{question}[球面]
+ $r>0$ とし, 次の曲面片を考える:
+ \begin{equation*}
+  \x(\theta,\phi) 
+  = (r\cos\theta\cos\phi, r\sin\theta\cos\phi, r\sin\phi).
+ \end{equation*}
+ 図を描いて, 第一基本形式, 第二基本形式, Gauss 曲率, 平均曲率を求めよ. 
+ $K$, $H$ は $r$ にどのように依存するか?
+ \qed
+\end{question}
+
+\begin{question}[トーラス]
+  $0 < r < R$ であるとし, 次の曲面片を考える:
+ \begin{equation*}
+    \x(\theta,\phi)
+    =(
+    (R + r \cos\phi)\cos\theta,\;
+    (R + r \cos\phi)\sin\theta,\;
+         r \sin\phi          ).
+ \end{equation*}
+ $I$, $\II$, $K$, $H$ を計算せよ.
+ 曲面の図を描き, どの部分で $K>0$, $K=0$, $K<0$ となるかを図示せよ. \qed
+\end{question}
+
+\begin{question}[楕円面]
+  次の曲面片の図を描き, Gauss 曲率と平均曲率を求めよ:
+  \begin{equation*}
+    \x(\theta,\phi)
+    =(a\cos\theta\cos\phi,b\sin\theta\cos\phi,c\sin\phi).
+    \qed
+  \end{equation*}
+\end{question}
+
+\begin{question}[一葉双曲面]
+  次の曲面片の図を描き, Gauss 曲率と平均曲率を求めよ:
+  \begin{equation*}
+    \x(\theta,\phi)
+    =(a\cos\theta\cosh\phi,b\sin\theta\cosh\phi,c\sinh\phi).
+    \qed
+  \end{equation*}
+\end{question}
+
+\begin{question}[二葉双曲面]
+  次の曲面片の図を描き, Gauss 曲率と平均曲率を求めよ:
+  \begin{equation*}
+    \x(\theta,\phi)
+    =(a\cos\theta\sinh\phi,b\sin\theta\sinh\phi,c\cosh\phi).
+    \qed
+  \end{equation*}
+\end{question}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{少し難しい問題}
+
+\begin{question}
+  定数 $c>0$ に対して, ガウス曲率が一定($K=-c^2$)の回転面を構成せよ. \qed
+\end{question}
+
+\begin{proof}[ヒント]
+  \cite{UY} pp.~77--80. \qed
+\end{proof}
+
+\begin{question}
+  平均曲率がいたるところ $0$ ($H=0$)の回転面を構成せよ. \qed
+\end{question}
+
+\begin{proof}[ヒント]
+  \cite{UY} p.~80 練習問題 8 の 6. \qed
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{微積分の問題の追加}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{$n$ 次元球体の体積}
+
+\begin{question}[球体の体積と球面の面積]
+  球座標 %
+  \(
+    (x,y,z)
+    =
+    (r\cos\phi\,\cos\theta,\; 
+     r\cos\phi\,\sin\theta,\; 
+     r\sin\phi)
+  \) %
+  を用いて, 半径 $R$ の球体の体積と半径 $R$ の球面の面積がそれぞれ %
+  $\displaystyle \frac{4}{3}\pi R^3$, %
+  $\displaystyle 4 \pi R^2$ %
+  になることを証明せよ. \qed
+\end{question}
+
+ついでに, $n$ 次元球体の体積も求めてしまおう. $\Repart s > 0$ のとき, 
+積分
+\[
+  \Gamma(s) = \int_0^\infty e^{-x} x^{s-1} dx
+\]
+は絶対収束する. $\Gamma(s)$ をガンマ函数と呼ぶ. 
+
+\begin{question}
+  \(
+    \Delta(n)
+    =
+    \{\, (x_1,\dots,x_n)\in\R^n 
+    \mid  x_1 \ge 0, \dots, x_n \ge 0,\ x_1 + \dots + x_n \le 1
+    \,\}
+  \) と置く. %
+  ($\Delta(n)$ は $n$ 次元単体と呼ばれている.) %
+  $s$, $l_i$ は正の実数であるとする. 以下の公式を証明せよ:
+  \begin{align*}
+    & 
+    \int_0^\infty e^{-x^2}\,dx = \frac{\sqrt{\pi}}{2},
+    \qquad
+    \Gamma(1/2) = \sqrt{\pi}, 
+    \qquad
+    \Gamma(s+1) = s \Gamma(s),
+    \\
+    &
+    \int_{\Delta(n)}
+    x_1{}^{l_1-1} \cdots x_n{}^{l_n-1} \,dx_1\cdots dx_n
+    =
+    \frac{\Gamma(l_1)\cdots\Gamma(l_n)}
+         {\Gamma(l_1 + \dots + l_n + 1)}.
+  \qed
+  \end{align*}
+\end{question}
+
+\begin{question}
+  半径 $R$ の $n$ 次元球体の体積は次に等しい:
+  \[
+    \frac{\Gamma(\frac{1}{2})^n}{\Gamma(\frac{n}{2}+1)} R^n
+    =
+    \begin{cases}
+      \displaystyle
+      \frac{\pi^k}{k!} R^{2k},
+      & \text{if $n = 2k$ ($k=1,2,\ldots$)},
+      \\
+      \displaystyle
+      \frac{2^{k+1}\pi^k }{\prod_{i=1}^k(2i+1)}R^{2k+1}, 
+      & \text{if $n = 2k+1$ ($k=0,1,2,\ldots$)}.
+    \qed
+    \end{cases}
+  \]
+\end{question}
+
+\begin{proof}[ヒント]
+\(
+  B(n,R)
+  =
+  \{\, (x_1,\dots,x_n)\in\R^n 
+  \mid  x_1 \ge 0, \dots, x_n \ge 0,\ x_1^2 + \dots + x_n^2 \le R^2
+  \,\}
+\) と置くと, 半径 $R$ の $n$ 次元球体の体積は %
+$2^n \int_{B(n,R)} dx_1\cdots dx_n$ に等しい. %
+これの計算は, 積分変数を $y_i = x_i^2/R^2$ と置換すると, 上のガンマ函
+数の公式の場合に帰着される. (球面座標を使った全く別の方法で証明するこ
+ともできる.)
+\qed
+\end{proof}
+
+\begin{guide}
+半径 $R$ の $n-1$ 次元球面の面積は
+半径 $R$ の $n$ 次元球体の体積を $R$ で微分すれば得られる.
+\qed  
+\end{guide}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{微分形式に関する追加の問題}
+
+以下は, 微分形式に関する問題の追加である.
+
+\begin{question}
+  $\phi = f(x,y)\,dx + g(x,y)\,dy$ は %
+  $K = \{\,(x,y)\mid a\leqq x\leqq b$, $c\leqq y \leqq d\,\}$ 上の $C^1$ 級
+  の $1$ 形式であり, $d\phi = 0$ を満たしていると仮定する. 
+  $K$ 内の点 $(x_0,y_0)$ から別の点 $(x_1, y_1)$ への道の族 
+  $C^s : \alpha^s(t)=(x^s(t),y^s(t))$ ($0\leqq t\leqq 1$, $-\eps<s<\eps$),
+  $\alpha^s(0)=(x_0,y_0)$, $\alpha^s(1)=(x_1,y_1)$ を考える. 
+  ただし, $\alpha^s(t)$ は $s$ と $t$ に関して $C^1$ 級であるものとする. 
+  このとき, 以下が成立することを示せ:
+  \begin{equation*}
+    \frac{d}{ds} \int_{C^s}\phi = 0
+    \qquad
+    \left(
+      \text{{\it i.e.},}\quad
+      \frac{d}{ds}
+      \int_0^1 \left(
+        f(\alpha^s(t))\frac{dx^s(t)}{dt} + g(\alpha^s(t))\frac{dy^s(t)}{dt}
+      \right)\, dt
+      = 0
+    \right).
+    \qed
+  \end{equation*}
+\end{question}
+
+\begin{proof}[ヒント]
+  $\dot x = \partial x^s(t)/\partial t$, 
+  $x' = \partial x^s(t)/\partial s$, etc と置くと, 次の公式が成立している:
+  \begin{equation*}
+    \frac{d}{ds}\int_{C^s}\phi
+    = \int_0^1 (g_x - f_y)(x'\dot y -  y'\dot x)\, dt.
+    \qed
+  \end{equation*}
+\end{proof}
+
+\begin{question}
+  $\phi$ は閉単位円板 $D=\{x^2+y^2\leqq1\}$ の近傍上の $C^1$ 級 1 形式で
+  あり, $\int_{\partial D} \phi \ne 0$ であると仮定する. このとき, $D$ のあ
+  る近傍上の微分可能函数 $f$ で $df = \phi$ を満たすものが存在しないことを示
+  せ. \qed
+\end{question}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{thebibliography}{AB}
+
+\bibitem[UY]{UY} 梅原雅顕, 山田光太郎, 曲線と曲面—微分幾何的アプローチ—, 
+  裳華房, 2002
+
+\bibitem[K]{Kenmotsu} 剣持勝衛, 曲面論講義—平均曲率一定曲面入門—, 
+  培風館, 2000
+ 
+\bibitem[TD]{TD} 田中俊一, 伊達悦朗, KdV方程式, 紀伊國屋数学叢書 16, 1975, 1985
+
+\end{thebibliography}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

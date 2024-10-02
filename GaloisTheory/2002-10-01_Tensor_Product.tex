@@ -1,0 +1,1634 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% 代数学概論III演習——体のガロア理論
+%
+% 黒木 玄 (東北大学理学部数学教室, kuroki@math.tohoku.ac.jp)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[12pt,twoside]{jarticle}
+\usepackage{amsmath,amssymb,amscd}
+\usepackage{enshu}
+%\usepackage{showkeys}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title{\bf 代数学概論III演習——テンソル積}
+
+\author{黒木 玄 \quad (東北大学大学院理学研究科数学専攻)}
+
+\date{2002年10月1日(火) Ver.~2}
+
+\maketitle
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\setcounter{page}{1}       % この数から始まる
+\setcounter{section}{-1}   % この数の次から始まる
+\setcounter{theorem}{0}    % この数の次から始まる
+\setcounter{question}{0}   % この数の次から始まる
+\setcounter{footnote}{0}   % この数の次から始まる
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{small}
+\tableofcontents
+\end{small}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{演習の進め方}
+
+この時間は代数学の演習を以下のような方針で行なう:
+\begin{itemize}
+\item 問題が解けた人もしくは指名された人は黒板に解答を書きそれを発表すること.
+  (発表の順番は私が黒板を見て決めます.) そのとき, 問題の番号と自分の氏名・
+  学籍番号を書くことを忘れないこと.
+\item 数式だけの説明不足の解答は, 正式な解答とは認めない. 言葉を正確に用いて
+  詳しく内容を説明すること.
+\item 問題が解けたと思って発表しても解答が完全でない場合は次の時間に再発表す
+  ること.  (すぐに修正できた場合はその時間中に再発表してもよい.)
+\item すでに他の人が解いてしまった問題あっても, 別の方法もしくはより良い方法
+  で解けた場合はそれを発表してもよい.
+\item 演習問題を改良してから解いても良い. その改良が非常に良いものの場合は高
+  く評価されるであろう.
+\item なお, 演習問題自体が間違っている場合が多々あると思う. その場合は, 問題
+  を適切に修正してから解くこと. 適切に訂正不可能な場合は, 反例などを挙げ, そ
+  の理由を説明すること. 面白い反例を挙げた場合の評価は高い.
+\end{itemize}
+
+ただし, この演習の時間の最初の2回分はテンソル積について講義をする.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{ベクトル空間のテンソル積}
+
+$K$ は体であるとし, $U$, $V$ は $K$ 上のベクトル空間であるとする%
+\footnote{線形代数に関しては佐武一郎著『線型代数学』 \cite{satake} が定番の
+  教科書である.  ベクトル空間のテンソル積についても詳しい解説がある.}.
+
+勝手にベクトル $u\in U$ と $v\in V$ を持って来て, それらの積 (product) を自
+由に考えることができれば便利であろう.  「積」と呼んで良さそうな操作の構成の
+仕方には色々ある.  しかし, あらゆる積の構成の仕方の中で最も普遍的な方法が本
+質的に一意的に存在する.  
+それがベクトルおよびベクトル空間の{\bf テンソル積(tensor product)} である.
+
+以下のような順序でテンソル積について説明することにする:
+\begin{itemize}
+\item 2つのベクトル $u\in U$ と $v\in V$ のテンソル積が
+  含まれるベクトル空間を $U$ と $V$ の基底を用いて構成する.
+  そのベクトル空間は2つのベクトル空間 $U$ と $V$ のテンソル積と呼ばれ,
+  $U\o V$ もしくは体 $K$ 上のベクトル空間のテンソル積であることを強調し
+  て $U\o_K V$ と書かれる.
+\item 2つのベクトル $u\in U$ と $v\in V$ の
+  テンソル積 $u\o v\in U\o V$ を構成し, 基本的な性質について説明する.
+\item テンソル積 $\o : U\times V \to U \o V$ の普遍性を証明する.
+\item ベクトル空間のテンソル積の構成が $U$ と $V$ の基底の取り方によらないこ
+  とを証明する.
+\item 次の節では可換とは限らない環上の加群のテンソル積を逆に普遍性によって定
+  義して, その存在と同型を除いた一意性を証明する.
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{基底を用いたテンソル積の定義}
+
+$U$ と $V$ は体 $K$ 上のベクトル空間であるとし%
+\footnote{$K$ が体のとき $K$ 加群を $K$ 上のベクトル空間と呼ぶ.}, 
+$\{u_i\}_{i\in I}$ と $\{v_j\}_{j\in J}$ はそれぞれ $U$ と $V$ の $K$ 上の基
+底であるとする.  各 $i\in I$, $j\in J$ に対して記号 $u_i\o v_j$ を用意する.
+集合 $\{u_i\o v_j\}_{(i,j)\in I\times J}$ を基底として持つ $K$ 上のベクトル
+空間を $U\o V$ もしくは $U\o_K V$ と書き, 
+$K$ 上のベクトル空間 $U$ と $V$ の $K$ 上でのテンソル積と呼ぶ. 作り方から
+\begin{equation*}
+  \dim U\o V = \dim U\cdot\dim V
+\end{equation*}
+が成立していることがわかる.
+
+\begin{question}
+  ベクトル空間の直和 $U\oplus V \isom U\times V$ について,
+  \begin{equation*}
+    \dim U\oplus V = \dim U + \dim V
+  \end{equation*}
+  が成立していることを示せ. \qed
+\end{question}
+
+\begin{rem}
+  ベクトル空間の直積はテンソル積に等しくないのでそれらの区別に注意せよ.  
+  有限個のベクトル空間の直積は直和の方に等しい. 無限個のゼロでないベクトル空
+  間の直積は直和に等しくない.  一般に直和は直積の部分空間として定義される. 
+  ベクトル空間の族 $\{V_j\}_{j\in J}$ に対して, 
+  その直和は次のように定義される:
+  \begin{equation*}
+    \bigoplus_{j\in J} V_j =
+    \Big\{\, (v_j)_{j\in J}\in\prod_{j\in J}V_j \Bigm|
+    \text{有限個を除いて $v_j=0$}\,\Big\}.
+  \end{equation*}
+  この直和の定義は一般の環上の加群の場合でも同様である. \qed
+\end{rem}
+
+\begin{example}
+  例えば, $U$ と $V$ がともに $2$ 次元の実ベクトル空間 $\R^2$ に等しいとき,
+  $U = V = \R^2$ の基底を
+  \begin{equation*}
+    e_1=\begin{bmatrix}1\\0\end{bmatrix}, \qquad
+    e_2=\begin{bmatrix}0\\1\end{bmatrix}
+  \end{equation*}
+  と取れば,
+  $U$ と $V$ の $\R$ 上でのテンソル積 $U\o V=\R^2\o \R^2$ は %
+  \begin{align*}
+    &
+    e_1\o e_1 = 
+    \begin{bmatrix}1\\0\end{bmatrix}\o\begin{bmatrix}1\\0\end{bmatrix},
+    \qquad
+    e_1\o e_2 = 
+    \begin{bmatrix}1\\0\end{bmatrix}\o\begin{bmatrix}0\\1\end{bmatrix},
+    \\ &
+    e_2\o e_1 = 
+    \begin{bmatrix}0\\1\end{bmatrix}\o\begin{bmatrix}1\\0\end{bmatrix},
+    \qquad
+    e_2\o e_2 = 
+    \begin{bmatrix}0\\1\end{bmatrix}\o\begin{bmatrix}0\\1\end{bmatrix}
+  \end{align*}
+  を基底として持つ $4$ 次元の実ベクトル空間になる.
+  \qed
+\end{example}
+
+\begin{question}
+  $K$ 上の $m$ 変数多項式環 $K[x_1,\ldots,x_m]$ 
+  と $n$ 変数多項式環 $K[y_1,\ldots,y_n]$ の $K$ 上でのテンソル積
+  が $K$ 上の $m+n$ 変数多項式環 $K[x_1,\ldots,x_m,y_1,\ldots,y_n]$ と自然に
+  同一視されることを示せ:
+  \begin{equation*}
+    K[x_1,\ldots,x_m]\o_K K[y_1,\ldots,y_n]
+    = K[x_1,\ldots,x_m,y_1,\ldots,y_n].
+  \end{equation*}
+  すなわち, 変数の個数を増やすという操作が体 $K$ 上のテンソル積によって実現
+  可能である. 
+  (ヒント: $x_1^{i_1}\cdots x_m^{i_m}\o y_1^{j_1}\cdots y_n^{j_n}$ 
+  を $x_1^{i_1}\cdots x_m^{i_m}y_1^{j_1}\cdots y_n^{j_n}$ と同一視せよ.)
+  \qed
+\end{question}
+
+2つの体が $K\subset L$ という関係にあり, $L$ の四則演算の $K$ への制限が $K$ 
+の四則演算に一致しているとき, $L/K$ と書き%
+\footnote{$/$ を商の記号と混同しないように注意せよ.},
+$L$ は $K$ の{\bf 拡大体 (extension field)} であると言う.
+もちろん, そのとき $K$ は $L$ の{\bf 部分体 (subfield)} である.
+
+拡大体の例には, $\C/\R$, $\Q(\sqrt{-1})/\Q$, $\C(x,\sqrt{x^3+1})/\C(x)$ など
+がある. ここで, 体の拡大 $L/K$ と $\alpha\in L$ に対して $K(\alpha)$ は $K$ 
+と $\alpha$ を含む $L$ 最小の部分体である. $\C(x)$ は複素 $1$ 変数の有理式全
+体のなす体である.
+
+\begin{question}
+  $L$ が $K$ の拡大体であるとき, $L$ は自然に $K$ 上のベクトル空間とみなせる
+  ことを説明し,
+  $\C$ は $\R$ 上の2次元のベクトル空間であり,
+  $\R$ は $\Q$ 上の無限次元のベクトル空間であることを示せ.
+  (ヒント: $L$ の元の $K$ の元によるスカラー倍を $K$ の積演算によって定義す
+  る.)
+  \qed
+\end{question}
+
+\begin{question}
+  $K$ が $L$ の部分体であるとき, $L$ 上の任意のベクトル空間は自然に $K$ 上の
+  ベクトル空間とみなせることを説明せよ. 
+  (ヒント: $L$ の元によるスカラー倍が定義されていれば, それを $K$ に制限すれ
+  ば $K$ の元によるスカラー倍が定義される.) \qed
+\end{question}
+
+さて, それでは逆に $L$ が $K$ の拡大体であるとき, 
+$K$ 上のベクトル空間から $L$ 上のベクトル空間を自然に得ることはできないだろ
+うか?  実はテンソル積を使えば自然にそういう操作を定義できる.
+
+\begin{question}
+  $L$ は $K$ の拡大体であり, $V$ は基底 $\{v_j\}_{j\in J}$ を持つ $K$ 上のベ
+  クトル空間であるとする. 
+  このとき, $V_L = L\o_K V$ と基底 $\{v_j\}_{j\in J}$ を持つ $L$ 上のベクト
+  ル空間が自然に同一視できることを示せ.
+  (ヒント: $1\o v_j$ と $v_j$ を同一視せよ.)
+  \qed
+\end{question}
+
+\begin{question}
+  $2$ 以上の自然数 $n$ と体 $K$ に対して, 
+  $\lie{sl}_n(K)$ と $\lie{su}(n)$ を次のように定義する:
+  \begin{align*}
+    &
+    \lie{sl}_n(K) = \{\, A\in M_n(K) \mid \trace A = 0 \,\}, 
+    \\ &
+    \lie{su}(n) = \{\, A\in \lie{sl}_n(\C) \mid A^* = - A^* \,\}.
+  \end{align*}
+  ここで, $M_n(K)$ は体 $K$ 係数の $n$ 次正方行列全体のなす代数である.
+  $\lie{sl}_n(K)$ は $M_n(K)$ の $K$ 上の部分空間をなし,
+  $\lie{su}(n)$ は $\lie{sl}_n(\C)$ の $\R$ 上の部分空間をなす.
+  このとき, 自然に
+  \begin{equation*}
+    \C\o_\R\lie{sl}_n(\R) = \lie{sl}_n(\C) = \C\o_\R\lie{su}(n)
+  \end{equation*}
+  とみなせることを示せ. 
+  (ヒント: $\lie{sl}_n(\R)$ と $\lie{su}(n)$ の $\R$ 上の次元
+  が $\lie{sl}_n(\C)$ の $\C$ 上の次元に等しいことに注意せよ.) \qed
+\end{question}
+
+\begin{guide}
+  上の問題における $\lie{sl}_n(\C)$, $\lie{sl}_n(\R)$, $\lie{su}(n)$ は
+  行列の演算 $[A,B]=AB-BA$ (交換子, commutator) で閉じている.
+  それらはそれぞれ Lie 群 $SL_n(\C)$, $SL_n(\R)$, $SU(n)$ の Lie 代数 
+  (Lie 環, Lie algebra) である.  これらの Lie 群の定義は次の通り:
+  \begin{align*}
+    &
+    SL_n(K) = \{\, g\in M_n(K) \mid \det g = 1 \,\},
+    \\ &
+    SU(n) = \{\, g\in SL_n(\C) \mid g^* g = g g^* = 1 \,\}.
+  \end{align*}
+  行列で表示されている Lie 群の Lie 代数は単位元 (単位行列) における接空間に 
+  Lie bracket を交換子 $[A,B]=AB-BA$ で定めたものとして定義される. 
+  有限群が離散で有限な対称性の抽象化であるのと同様に, 
+  Lie 群や Lie 代数の理論は連続的な対称性の抽象化である%
+  \footnote{有限群と Lie 群の表現論入門については, 
+    平井武著『線形代数と群の表現 I, II』 \cite{hirai} が大変な名著なのでおす
+    すめである.  代表的な有限群と Lie 群を題材にそれらの直観的意味と物理的意
+    味がわかるように解説されている.
+    代数方程式の Galois 理論で重要になる対称群および交代群の構造とその意味に
+    ついても詳しく書いてあるので, その点においてもおすすめである.}. 
+
+  我々がこれから扱う有限次拡大体の Galois 理論では有限群が活躍する.
+  代数方程式 $x^n + a_1 x^{n-1} + \cdots + a_n = 0$ の裏には Galois 群という
+  隠れた対称性 (hidden symmetry) がひそんでおり, その対称性を調べればもとの
+  方程式の性質を知ることができる.
+
+  代数方程式を微分方程式に置き換えた場合にも対称性を調べるというアイデアは極
+  めて強力である.  ただし, 群として Lie 群のような連続的な群も合わせて考えな
+  ければいけない.  我々の世界の物理法則の多くは微分方程式で記述できるので, 
+  微分方程式の対称性を群の概念を用いて研究することは自然現象を理解するために
+  も重要である. 
+
+  19世紀初頭に登場した天才少年の \'Evariste Galois (1811.10.25--1832.5.31)
+  が確立した「方程式の構造をその対称性を調べることによって分析する」という
+  画期的なアイデアは数学を用いる科学全体に浸透している%
+  \footnote{最近では, 
+    現実に現われる対称性を分析するためには群の概念では足らず, 
+    群の概念を様々に一般化しなければいけないことがわかっている. 
+    一般化の代表格が量子群の理論である.}.  \qed
+\end{guide}
+
+$U$ のベクトル $u$ は $U$ の基底 $\{u_i\}_{i\in I}$ を用いて,
+\begin{equation*}
+  u = \sum_{i\in I} a_i u_i
+  \qquad
+  (\text{$a_i\in K$ は有限個を除いて $0$})
+\end{equation*}
+と一意に表わせる. 同様に $V$ のベクトル $v$ も 
+\begin{equation*}
+  v = \sum_{j\in J} b_j v_j
+  \qquad
+  (\text{$b_j\in K$ は有限個を除いて $0$})
+\end{equation*}
+と一意に表わせる. 
+このとき, ベクトル $u$ と $v$ のテンソル積 $u\o v\in U\o V$ を
+次のように定める: 
+\begin{equation*}
+  u\o v = \sum_{i\in I,\,j\in J} a_i b_j (u_i\o v_j).
+\end{equation*}
+これで, テンソル積写像
+\begin{equation*}
+  \o : U \times V \to U\o V,\quad (u,v)\mapsto u\o v
+\end{equation*}
+が定まった. 上の $u\o v$ の定義式はテンソル積に関する双線形性
+\begin{align}
+  &
+  (au + a'u')\o (bv + b'v') 
+  \notag \\
+  & \quad = ab(u\o v) + ab'(u\o v') + a'b(u'\o v) + a'b'(u'\o v')
+  \label{eq:vec-tensor-bilin}
+  \\
+  & \qquad\quad (u,u'\in U,\; v,v'\in V,\; a,a',b,b'\in K)
+  \notag 
+\end{align}
+を認めれば当然成立していなければいけない式である. 
+
+\begin{question}
+  上の定義のもとでベクトルのテンソル積 $\o: U \times V \to U\o V$ が実際に
+  双線形性 \eqref{eq:vec-tensor-bilin} を満たしていることを示せ. 
+  \qed
+\end{question}
+
+\begin{question}
+  $V$ が体 $K$ 上のベクトル空間であるとしき,
+  写像 $f: K\o_K V\to V$, $a\o v\mapsto v$ と
+  写像 $g: V\o_K K\to V$, $v\o a\mapsto v$ はともに $K$ 上の
+  ベクトル空間の同型写像である.
+  この同型写像によって, $1\otimes v = v = v\otimes 1$ と同一視し,
+  $K\o_K V = V = V\o_K K$ とみなすことが多い. 
+  そのとき, $K\o_K(\bullet)$ や $(\bullet)\o_K K$ という操作は何もしないのと
+  同じになる.
+  \qed
+\end{question}
+
+以上においては, 2つのベクトル空間および2つのベクトルのテンソル積を定義したが,
+任意有限個のベクトル空間および任意の有限個のベクトルのテンソル積も同様に定義
+される.
+
+$V_1,\ldots,V_n$ は体 $K$ 上のベクトル空間であり,
+各 $V_\nu$ には基底 $\{v_{\nu,j}\}_{j\in J_\nu}$ が定められているとする.
+このとき, 
+\begin{equation*}
+  \{v_{1,j_1}\o\cdots\o v_{n,j_n}\}
+  _{(j_1,\ldots,j_n)\in J_1\times\cdots\times J_n}
+\end{equation*}
+を基底に持つベクトル空間を $V_1\o\cdots\o V_n$ と書く.
+
+\begin{question}
+  $\o:U\times V\to U\o V$ の場合と同様にして, 多重線形写像
+  \begin{equation*}
+    V_1\times\cdots\times V_n \to V_1\o\cdots\o V_n, \quad
+    (v_1,\cdots,v_n) \mapsto v_1\o\cdots\o v_n
+  \end{equation*}
+  が自然に定義されることを説明せよ. \qed
+\end{question}
+
+\begin{question}
+  ベクトル空間 $U$, $V$, $W$ のテンソル積は自然に結合法則
+  \begin{equation*}
+    (U\o V)\o W = U\o V\o W = U\o(V\o W)
+  \end{equation*}
+  を満たしているとみなせることを説明せよ.  
+  (ヒント： $(u\o v)\o w = u\o v\o w = u\o(v\o w)$ と同一視せよ.)
+  \qed
+\end{question}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{テンソル代数と対称対数と交代代数}
+
+\begin{definition}[テンソル代数]
+  体 $K$ 上のベクトル空間 $V$ に対して, 
+  $n$ 個の $V$ の $K$ 上でのテンソル積 $V\o\cdots\o V$ を $T^n(V)$
+  もしくは $V^{\o n}$ と表わすことにする.
+  $n=0$ のとき, $T^0(V) = V^{\o0} = K$ と置く.
+  $V^{\o m}\o V^{\o n}$ と $V^{\o (m+n)}$ は自然に同一視される.
+  $K$ 上のベクトル空間 $T(V)$ を次のように定める:
+  \begin{equation*}
+    T(V) = \bigoplus_{n=0}^\infty T^n(V) = \bigoplus_{n=0}^\infty V^{\o n}.
+  \end{equation*}
+  $T(V)$ における積を, $a\in V^{\o m}=T^m(V)$ と $b\in V^{\o n}=T^n(V)$ に対
+  して,  $ab = a\o b\in V^{\o m}\o V^{\o n}=V^{\o (m+n)}=T^{m+n}(V)$ と置く
+  ことによって定めることができる. このとき, $T(V)$ は $K$ 上の $1$ を持つ結
+  合代数をなす.  
+  $T(V)$ を $V$ から生成される{\bf テンソル代数 (tensor algebra)} と呼ぶ.
+  \qed
+\end{definition}
+
+\begin{question}\label{q:pre-Weyl-reciprocity}
+  $V$ は基底 $\{x_i\}_{i\in I}$ を持つ体 $K$ 上のベクトル空間であるとする.
+  置換群 $S_m$ の $V^{\o m}$ への作用を次のように定めることができる:
+  \begin{equation*}
+    \sigma(x_{i_1}\o\cdots\o x_{i_m}) 
+    = x_{i_{\sigma(1)}}\o\cdots\o x_{i_{\sigma(m)}}
+    \quad (i_\mu\in I,\; \sigma\in S_m).
+  \end{equation*}
+  一般線形群 $GL(V)=\Aut_K(V)$ の $V^{\o m}$ への作用を次のように定めること
+  ができる:
+  \begin{equation*}
+    g (x_{i_1}\o\cdots\o x_{i_m})
+    = (g x_{i_1})\o\cdots\o(g x_{i_m})
+    \quad (i_\mu\in I,\; g\in GL(V)).
+  \end{equation*}
+  $S_m$ の作用と $GL(V)$ の作用が互いに可換である. 
+  よって, $V^{\o m}$ には直積群 $S_m\times GL(V)$ が作用する. \qed
+\end{question}
+
+\begin{guide}[Weyl の相互律]\label{guide:Weyl-reciprocity}
+  ここで詳しく説明するとはできないが, 
+  上の問題 \qref{q:pre-Weyl-reciprocity}
+  で $K=\C$, $V=\C^n$ の場合は置換群 $S_m$ と一般線形群 $GL_n(\C)$ 
+  の表現のあいだの重要な関係を導く. 
+  $S_m\times GL_n(\C)$ の表現として $V^{\o m}$ を既約表現の直和に分解すると,
+  その各既約成分は $S_m$ の既約表現 $L^{S_m}_Y$ と $GL_n(\C)$ の
+  既約表現 $L^{GL_n(\C)}_Y$ のテンソル積 (ここで $Y$ は重さ%
+  \footnote{\cite{satake} p.~247 では「長さ」と呼ばれている.} %
+  が $m$ で高さが $n$ 以下の Young 図形) に同型である.  
+  これを Weyl の相互律と呼ぶ.   
+  Weyl の相互律に関する簡単な説明は \cite{satake} 第V章の pp.~247--251 にあ
+  る.  興味のある方は参照されたい.  \qed
+\end{guide}
+
+\begin{definition}[対称代数と交代代数]
+  $V$ は体 $K$ 上のベクトル空間であるとする. 
+  \begin{itemize}
+  \item[(1)] テンソル代数 $T(V)$ の $\{\,u\o v - v\o u\mid u,v\in V\,\}$ か
+    ら生成される両側イデアルを $\cJ$ と書き, 
+    $S(V)=T(V)/\cJ$ (テンソル代数を $\cJ$ で割った剰余代数) と置く.  
+    $S(V)$ を $V$ から生成される{\bf 対称代数 (symmetric algebra)} と呼ぶ.
+  \item[(2)] テンソル代数 $T(V)$ の $\{\,v\o v \mid v\in V\,\}$ から生成され
+    る両側イデアルを $\cK$ と書き, $\bigwedge(V)=T(V)/\cK$ 
+    (テンソル代数を $\cK$ で割った剰余環) と置く.  
+    $\bigwedge(V)$ を $V$ から生成される{\bf 交代代数 (alternative algebra)} 
+    と呼ぶ. 
+    $\bigwedge(V)$ の積は $a\wedge b$ のように $\wedge$ を用いて表わすことが
+    多い. \qed
+  \end{itemize}
+\end{definition}
+
+\begin{question}
+  $V$ は体 $K$ 上のベクトル空間であるとする.
+  \begin{itemize}
+  \item[(1)] $T^p(V)$ の $S(V)$ での像を $S^p(V)$ と書くと,
+    $S(V) = \bigoplus_{p=0}^\infty S_p(V)$.
+    (ヒント: $\cJ^p=T^p(V)\cap\cJ$ と置く
+    と $\cJ=\bigoplus_{p=0}^\infty \cJ_p$.)
+  \item[(2)] $\{x_i\}_{i\in I}$ は $V$ の基底であり, $I$ には全順序が入って
+    いるとする. $x_i$ の $S(V)$ における像も $x_i$ と書くことにする.
+    このとき, $\{\,x_{i_1}\cdots x_{i_p}\mid 
+    i_\nu\in I,\; i_1\le\cdots\le i_p\,\}$ は $S^p(V)$ の基底である.
+    \qed
+  \end{itemize}
+\end{question}
+
+\begin{question}
+  $K$ は標数 $0$ の体であり, 
+  $V$ は基底 $\{x_i\}_{i\in I}$ を持つ体 $K$ 上のベクトル空間であるとする.
+  $T^p(V)$ の部分空間 $\Sym^p(V)$ を次のように定める:
+  \begin{equation*}
+    \Sym^p(V) 
+    = \{\,a\in T^p(V) \mid \sigma(a)=a\; (\forall \sigma\in S_p)\,\}.
+  \end{equation*}
+  このとき, $T(V)$ から $S(V)$ への自然な射影は同型 $\Sym^p(V) \isomto S^p(V)$
+  を誘導する. これの逆写像 $\sym: S^p(V)\isomto\Sym^p$ は
+  \begin{equation*}
+    \sym(x_{i_1}\cdots x_{i_p})
+    =\frac{1}{p!} \sum_{\sigma\in S_p} 
+    x_{i_{\sigma(1)}}\o\cdots\o x_{i_{\sigma(p)}}
+  \end{equation*}
+  と書ける.  これによって, $S^p(V)=\Sym^p(V)$ と同一視することが多い. \qed
+\end{question}
+
+\begin{question}
+  $V$ は体 $K$ 上のベクトル空間であるとする.
+  \begin{itemize}
+  \item[(1)] $T^p(V)$ の $\bigwedge(V)$ での像を $\bigwedge^p(V)$ と書くと,
+    $\bigwedge(V) = \bigoplus_{p=0}^\infty \bigwedge_p(V)$.
+    (ヒント: $\cK^p=T^p(V)\cap\cK$ と置く
+    と $\cK=\bigoplus_{p=0}^\infty \cK_p$.)
+  \item[(2)] $\{x_i\}_{i\in I}$ は $V$ の基底であり, $I$ には全順序が入って
+    いるとする. $x_i$ の $S(V)$ における像も $x_i$ と書くことにする.
+    このとき, $\{\,x_{i_1}\wedge\cdots\wedge x_{i_p}\mid 
+    i_\nu\in I,\; i_1<\cdots<i_p\,\}$ は $\bigwedge^p(V)$ の基底である.
+    \qed
+  \end{itemize}
+\end{question}
+
+\begin{question}
+  $K$ は標数 $0$ の体であり, 
+  $V$ は基底 $\{x_i\}_{i\in I}$ の体 $K$ 上のベクトル空間であるとする.
+  $T^p(V)$ の部分空間 $\Alt^p(V)$ を次のように定める:
+  \begin{equation*}
+    \Alt^p(V) 
+    = \{\,a\in T^p(V) \mid 
+    \sigma(a)=\sign(\sigma)\,a\; (\forall \sigma\in S_p)\,\}.
+  \end{equation*}
+  このとき, $T(V)$ から $\bigwedge(V)$ への自然な射影は同型 %
+  $\Alt^p(V) \isomto \bigwedge^p(V)$ を誘導する. 
+  これの逆写像 $\alt:\bigwedge^p(V)\isomto \Alt^p(V)$ が
+  \begin{equation*}
+    \alt(x_{i_1}\wedge\cdots\wedge x_{i_p})
+    =\frac{1}{p!} \sum_{\sigma\in S_p} 
+    \sign(\sigma)\, x_{i_{\sigma(1)}}\o\cdots\o x_{i_{\sigma(p)}}
+  \end{equation*}
+  で与えられる. 
+  これによって, $\bigwedge^p(V)=\Alt^p(V)$ と同一視することが多い. \qed
+\end{question}
+
+\begin{guide}
+  対称代数 $S(V)$ と交代代数 $\bigwedge(V)$ の定義は以下のように一般化される:
+  \begin{itemize}
+  \item[(1)] $\frakg$ は標数 $0$ の体 $K$ 上の Lie 代数であるとする.
+    $T(\frakg)$ の $A\o B - B\o A - [A,B]$ ($A,B\in\frakg$) から生成される両
+    側イデアルを $\cJ(\frakg)$ と書き,
+    $U(\frakg)=T(\frakg)/\cJ(\frakg)$ と置く.
+    $U(\frakg)$ を Lie 代数 $\frakg$ の
+    {\bf 普遍包絡代数 (universal enveloping algebra)} と呼ぶ.
+    $\frakg$ が Abelian (すなわち $[\frakg,\frakg]=0$) ならば $S(V)$ の定義
+    が再現される.
+    $S(V)$ の場合と同様に,
+    $\{X_i\}_{i\in I}$ を $\frakg$ の基底とし, $I$ に全順序を入れておけ
+    ば, $X_{i_1}\cdots X_{i_n}$ ($n=0,1,2,\ldots$, $i_1\le\cdots\le i_n$) は
+    $U(\frakg)$ の基底になる (Poincar\'e-Birkhoff-Witt の定理, PBW の定理).
+    PBW の定理の証明についてはたとえば \cite{tanisaki} などの Lie 代数の教科
+    書を参照せよ.
+  \item[(2)] $V$ は体 $K$ 上のベクトル空間であり, $Q$ は $V$ 上の2次形式%
+    \footnote{ある双線形写像 $Q:V\times V\to K$ から定まる $V$ 上の $K$ 値函
+      数 $Q[x]=Q(x,x)$ ($x\in V$) を $V$ 上の2次形式と呼ぶ.}%
+    であるとする. 
+    $T(V)$ の $x^2 + Q(x)$ ($x\in V$) から生成される両側イデアルを $\cK(Q)$ 
+    と書き, $C(Q)=T(V)/\cK(Q)$ と置く.
+    $C(Q)$ を2次形式 $Q$ の{\bf Clifford 代数 (Clifford 環, Clifford algebra)} 
+    と呼ぶ. 
+    $Q=0$ ならば $C(Q)$ の定義は $\bigwedge(V)$ の定義が再現される.
+    $\bigwedge(V)$ の場合と同様に,
+    $\{\psi_i\}_{i\in I}$ を $V$ の基底とし, $I$ に全順序を入れておけ
+    ば, $\psi_{i_1}\cdots\psi_{i_n}$ ($n=0,1,2,\ldots$, $i_1<\cdots< i_n$) 
+    は $C(Q)$ の基底になる.  よって $V$ の次元が $n$ ならば $C(Q)$ の次元
+    は $2^n$ になる. 
+  \end{itemize}
+  これらの一般化は Lie 群や Lie 代数の表現論および量子力学における Fermion 
+  の扱いなどで基本的な役目を果たす.
+  \qed
+\end{guide}
+
+\begin{question}[Hamilton の四元数体]
+  $\bH=\R^4$ の自然な基底 $e_1,e_2,e_3,e_4$ を $1,i,j,k$ と書き,
+  $\bH$ に $1=e_1$ を単位元とする$\R$ 上の代数の構造を次の式によって与えるこ
+  とにする:
+  \begin{equation*}
+    i^2 = j^2 = k^2 = -1, \quad
+    ij=-ji=k,\quad jk=-kj=i, \quad ki=-ik=j.
+  \end{equation*}
+  このとき, $\bH$ が斜体 (skew field) をなすことを示せ.
+  $\bH$ を Hamilton の{\bf 四元数体 (quaternion field)} と呼ぶ. \qed
+\end{question}
+
+\begin{question}
+  $V=\R^2$ の自然な基底 $e_1,e_2$ を $I,J$ と書き, 
+  $V$ 上の2次形式 $Q$ を次のように定める:
+  \begin{equation*}
+    Q[aI+bJ] = a^2 + b^2  \quad (a,b\in\R).
+  \end{equation*}
+  このとき, Clifford 代数 $C(Q)$ は $1, I, J, IJ$ を基底に持つ.
+  $1,I,J,IJ\in C(Q)$ のそれぞれと $1,i,j,k\in\bH$ を対応させることによって,
+  $C(Q)$ と四元数体 $\bH$ が同型になることを示せ. 
+  このことから, Clifford 代数は四元数体の一般化になっていることがわかる.
+  \qed
+\end{question}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{ベクトル空間のテンソル積の普遍性}
+
+さて, ベクトル空間のテンソル積を基底を用いて天下りに定義したのであった.
+そのため以下のような疑問が生じる:
+\begin{itemize}
+\item ベクトル空間の基底を用いたテンソル積の定義は基底の取り方によらずに定ま
+  っているのであろうか?
+\item あのように天下りに定義したテンソル積の概念は自然なのであろうか?
+\end{itemize}
+これらの疑問はテンソル積の普遍性による特徴付けが得られれば一挙に解決する.
+{\bf 普遍性 (universality)} もしく
+は{\bf 普遍写像性質 (universal mapping property)} による
+代数的操作の特徴付けは抽象代数学を学ぶものが通り抜けなければならない重大な関
+門になっている.  そこが突破できれば抽象代数学においてどのような操作が自然で
+あるかについて明確なイメージが得られるようになる.
+
+$U$, $V$, $W$ は体 $K$ 上のベクトル空間であるとする. 
+$U$ のベクトル $u$ と $V$ のベクトル $v$ が与えられたとき, 
+$W$ のベクトル $f(u,v)$ を与える演算 $f : U\times V \to W$ が「積」と呼ばれ
+るためには, $f$ が双線形性を満たしていると仮定するのが自然である.
+テンソル積 $\o : U\times V \to U\o V$ も双線形写像であった.
+
+テンソル積 $\o : U\times V \to U\o V$ は
+定義域を $U\times V$ に固定した双線形写像 $f : U\times V \to W$ の中で
+特別な位置を占めている%
+\footnote{テンソル積は「積」の親玉である.}.
+
+\begin{theorem}[テンソル積の普遍性]
+  $U$, $V$, $W$ は体 $K$ 上のベクトル空間であるとする.
+  このとき, 任意の双線形写像 $f: U\times V\to W$ に対して,
+  線形写像 $\phi: U\o V \to W$ で 
+  \begin{equation}
+    \label{eq:v-t-u}
+    \phi(u\o v) = f(u,v) \qquad (u\in U,\; v\in V) 
+  \end{equation}
+  を満たすものが一意に存在する. 
+  この性質をテンソル積の{\bf 普遍性 (universality)} と呼ぶ.
+
+  よって, $f$ を $\phi$ に対応させることによって,
+  $U\times V$ から $W$ への双線形写像の全体と
+  $U\o V$ から $W$ への線形写像の全体は一対一に対応する.
+\end{theorem}
+
+\begin{proof}
+  $U\o V$ を定義するときに用いた $U$ の基底を $\{u_i\}_{i\in I}$ と書き,
+  $V$ の基底を $\{v_j\}_{j\in J}$ と書く. 
+  $U\o V$ は $\{u_i\o v_j\}_{(i,j)\in I\times J}$ を基底とする $K$ 上のベクト
+  ル空間であった.
+
+  もしも線形写像 $\phi: U\o V \to W$ が \eqref{eq:v-t-u} を満たしていれば,
+  \begin{equation}
+    \label{eq:v-t-u'}
+    \phi(u_i\o v_j) = f(u_i, v_j) \qquad (i\in I,\; j\in J)
+  \end{equation}
+  が成立する. 一般に線形写像は定義域の基底における値から一意に決まるので, 
+  \eqref{eq:v-t-u} を満たす $\phi$ は一意的である.
+
+  逆に, 線形写像 $\phi: U\o V \to W$ を条件 \eqref{eq:v-t-u'} によって定める
+  ことができる.  任意に $u\in U$, $v\in V$ を取る. このとき, $u$, $v$ は次の
+  ように表わせる: 
+  \begin{equation*}
+    u = \sum_{i\in I} a_i u_i, \quad
+    v = \sum_{j\in J} b_j v_j  \quad (a_i,b_j\in K).
+  \end{equation*}
+  よって,
+  \begin{align*}
+    \phi(u\o v)
+    &
+    = \phi\Big( \sum_{i,j} a_i b_j (u_i\o v_j) \Big) 
+    = \sum_{i,j} a_i b_j \phi(u_i\o v_j)
+    \\ &
+    = \sum_{i,j} a_i b_j f(u_i, v_j)
+    = f\Big(\sum_i a_i u_i,\; \sum_j b_j v_j\Big)
+    = f(u,v).
+  \end{align*}
+  これで, \eqref{eq:v-t-u} を満たす $\phi$ の存在が示せた.
+
+  線形写像 $\phi: U\o V\to W$ に対して
+  双線形写像 $f: U\times V\to W$ を \eqref{eq:v-t-u} の両辺を交換した式によ
+  って定めることができる. これによって, $f$ を $\phi$ に対応させる写像の逆写
+  像が得られる.
+  これで, $U\times V$ から $W$ への双線形写像の全体と
+  $U\o V$ から $W$ への線形写像の全体が一対一に対応することもわかった.
+  \qed
+\end{proof}
+
+\begin{theorem}[テンソル積の普遍性による特徴付け]
+  $U$, $V$, $S$, $T$ は $K$ 上のベクトル空間であり,
+  双線形写像 $\sigma: U\times V\to S$ はテンソル積の普遍性と同様の条件を満た
+  していると仮定する. すなわち, 任意の双線形写像 $f: U\times V\to W$ に対し
+  て, 線形写像 $\phi: S \to W$ で $\phi\circ\sigma = f$ を満たすものが一意に
+  存在すると仮定する. 
+  双線形写像 $\tau: U\times V\to T$ も同様の条件を満たしていると仮定する.
+
+  このとき, 線形同型写像 $\phi:S\isomto T$ で $\phi\circ\sigma=\tau$ を満た
+  すものが一意に存在する. 
+
+  特に $S$ として $U\o V$ を取れば,
+  テンソル積の普遍性と同様の条件を満たす $T$ は $U\o V$ と自然に同型になる
+  ことがわかる. すなわち, テンソル積は普遍性の条件によって同型を除いて一意に
+  特徴付けられる.
+
+  また, $S$, $T$ として $U$, $V$ の基底の取り方を変えて作ったテンソル積を取
+  ればテンソル積の構成は基底の取り方によらないこともわかる.
+\end{theorem}
+
+\begin{proof}
+  $W$ として $T$ を取ることによって, 
+  線形写像 $\phi: S \to T$ で $\phi\circ\sigma=\tau$ を満たすものが一意に存
+  在する.
+  同様にして, 線形写像 $\psi: T \to S$ で $\psi\circ\tau=\sigma$ を満たすも
+  のが一意に存在する.
+  $\psi\circ\phi: S\to S$ は $(\psi\circ\phi)\circ\sigma=\sigma$ を満たして
+  いる. そのような線形写像は $S$ の普遍性より
+  一意的なので $\psi\circ\phi=\id_S$ となる%
+  \footnote{この証明のポイントはここである. 普遍性で特徴付けられる代数的操作
+    は他にも存在するが, その自然な同型を除いた一意性も全く同様の議論によって
+    証明される.  この辺はわかってしまえば決まり切ったワンパターンの議論に過
+    ぎないことが納得できる.  なお, このような証明を紙もしくは黒板の上に書く
+    場合には可換図式を描くことによって行なうのが普通である.  演習の時間には
+    実際に可換図式を描いて説明する予定である.  手書きの世界と印刷物の世界は
+    異なることに注意して欲しい.  私は数学的に自然な考え方は手書きの世界の方
+    に近いと考えている.}.  %
+  同様にして $\phi\circ\psi=\id_T$ も示される.  
+  これで, $\phi$, $\psi$ が同型写像であることがわかった.  \qed
+\end{proof}
+
+以上の結果を以下のようにまとめることができる:
+\begin{itemize}
+\item ベクトル空間のテンソル積を次のように普遍性の条件によって定義し直すこと
+  ができる. 
+  $U$, $V$ が $K$ 上のベクトル空間であるとき, 
+  $K$ 上のベクトル空間 $T$ と双線形写像 $\tau:U\times V\to T$ の組が
+  $U$ と $V$ のテンソル積であるとは, %
+  $K$ 上の任意のベクトル空間 $W$ と任意の双線形写像 $f:U\times V\to W$ の組
+  に対して, 線形写像 $\phi:T\to W$ で $\phi\circ\tau=f$ を満たすものが一意に
+  存在することである.
+\item 以上の普遍性の条件によって定義されたテンソル積は同型を除いて一意的であ
+  る.  そこで, $U$ と $V$ のテンソル積 $(T, \tau)$ を $(U\o V, \o)$ と書くこ
+  とにする.
+\item テンソル積を具体的に構成するためには, $U$ と $V$ に基底を定めて, 
+  $U$ の基底と $V$ の基底の直積集合を基底として持つ
+  ベクトル空間を $U\o V$ とすれば良い.
+\end{itemize}
+次の節では一般の環上の加群のテンソル積を普遍性によって定義する.
+
+\begin{question}[テンソル代数の普遍性]
+  $V$ は体 $K$ 上のベクトル空間であり, $i:V\injto T(V)$ は $V$ のテンソル代
+  数への自然な埋め込みであるとする. $A$ は $1$ を持つ $K$ 上の任意の結合的代
+  数であり, $f:V\to A$ は任意の線形写像であるとする. 
+  このとき, $K$ 上の $1$ を持つ結合代数の準同型写像 $\phi:T(V)\to A$ 
+  で $\phi\circ i=f$ を満たすものが一意に存在する. \qed
+\end{question}
+
+\begin{question}[対称代数の普遍性]
+  $V$ は体 $K$ 上のベクトル空間であり, $i:V\injto S(V)$ は $V$ の対称代数へ
+  の自然な埋め込みであるとする. $A$ は $1$ を持つ $K$ 上の任意の結合的代数で
+  あり, $f:V\to A$ は線形写像であり, $f(u)f(v)=f(v)f(u)$ ($u,v\in V$) を満た
+  していると仮定する. 
+  このとき, $K$ 上の $1$ を持つ結合代数の準同型写像 $\phi:S(V)\to A$ 
+  で $\phi\circ i=f$ を満たすものが一意に存在する. \qed
+\end{question}
+
+\begin{question}[交代代数の普遍性]
+  以上の問題を参考にして交代代数 $\bigwedge(V)$ の普遍性を定式化して証明せよ.
+  (ヒント: $f(u)^2=0$ を仮定する.)
+  \qed 
+\end{question}
+
+\begin{question}[普遍包絡代数の普遍性]
+  以上の問題を参考にして Lie 代数 $\frakg$ の普遍包絡代数 $U(\frakg)$ の普遍
+  性を定式化して証明せよ. 
+  (ヒント: $f(A)f(B) - f(B)f(A) - f([A,B])$ ($A,B\in\frakg$) を仮定する.)
+  \qed 
+\end{question}
+
+\begin{question}[Clifford 代数の普遍性]
+  上の問題を参考にして2次形式 $Q:V\to K$ の Clifford 代数 $C(Q)$ の普遍性を
+  定式化して証明せよ. 
+  (ヒント: $f(x)^2 = - Q(x)$ ($\psi\in V$) を仮定する.)
+  \qed
+\end{question}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{環上の加群のテンソル積}
+
+以下, $A$ は可換とは限らない環であるとする%
+\footnote{単に環と言う場合には結合的で $1$ を持つという条件を仮定する.}.
+環上の加群になっているとは限らない加法群を単に加群と呼ぶことにする.
+加群は $\Z$ 加群とみなせる.
+右 $A$ 加群 $M$ を右 $A$ 加群であることを強調するために $M_A$ と書き,
+左 $A$ 加群 $N$ を左 $A$ 加群であることを強調するために ${}_AN$ と書くことが
+ある.
+
+\subsection{普遍性によるテンソル積の定義}
+
+右 $A$ 加群 $M$ と左 $A$ 加群 $N$ と加群 $W$ に対して,
+写像 $f:M\times N\to W$ が
+\begin{align*}
+  &
+  f(x+x',y) = f(x,y) + f(x',y) \qquad (x,x'\in M,\;y\in N),
+  \\ &
+  f(x,y+y') = f(x,y) + f(x,y') \qquad (x\in M,\;y,y'\in N)
+\end{align*}
+を満たしているとき, $f$ は{\bf 双加法的 (biadditive)} であると言う.
+$f$ が双加法的でかつ
+\begin{equation*}
+  f(xa,y) = f(x,ay) \qquad (x\in M,\; y\in N,\; a\in A)
+\end{equation*}
+を満たしているとき, $f$ は{\bf $A$-balanced} であると言う.
+
+\begin{definition}[環上の加群のテンソル積]
+  $M$ は右 $A$ 加群であり, $N$ は左 $A$ 加群であるとする.
+  加群 $T$ と $A$-balanced 写像 $\tau:M\times N\to T$ の組
+  が $M$ と $N$ の $A$ 上でのテンソル積であるとは, 
+  任意の加群 $W$ と任意の $A$-balanced 写像 $f:M\times N\to W$ の組に対して, 
+  加群の準同型 $\phi: T\to W$ で $\phi\circ\tau = f$ を満たすものが一意に存
+  在することである.  
+  後で説明するようにテンソル積は自然な同型を除いて一意に存在する.
+  そこで, $M$ と $N$ の $A$ 上でのテンソル積 $(T,\tau)$ を $(M\o_A N,\o)$ と
+  書くことにする.  定義より, $\o:M\times N\to M\o_A N$ は $A$-balanced なので
+  \begin{align*}
+  &
+  (x+x')\o y = x\o y + x'\o y \qquad (x,x'\in M,\;y\in N),
+  \\ &
+  x\o (y+y') = x\o y + x\o y' \qquad (x\in M,\;y,y'\in N),
+  \\ &
+  xa\o y = x\o ay \qquad (x\in M,\; y\in N,\; a\in A)
+  \end{align*}
+  を満たしている. また, 条件 $\phi\circ\tau = f$ を $\o$ を用いて表わすと,
+  \begin{equation*}
+    \phi(x\o y) = f(x,y) \qquad (x\in M,\; y\in N)
+  \end{equation*}
+  と \eqref{eq:v-t-u} と同様の形になる. \qed 
+\end{definition}
+
+$A$ が可換環であれば右 $A$ 加群と左 $A$ 加群を区別する必要はない.
+特に体 $K$ 上のベクトル空間は左 $K$ 加群かつ右 $K$ 加群である.
+よって, 上のテンソル積の定義はベクトル空間のテンソル積の定義の一般化になって
+いる.
+
+\begin{theorem}[テンソル積の一意性]
+  右 $A$ 加群 $M$ と左 $A$ 加群 $N$ の $A$ 上でのテンソル積は自然な同型を除
+  いて一意的である. 
+\end{theorem}
+
+\begin{proof}
+  ベクトル空間の場合と完全に同様. \qed
+\end{proof}
+
+\begin{question}
+  上の定理の証明を書き下せ. \qed
+\end{question}
+
+\begin{rem}
+  右および左 $A$ 加群の場合はベクトル空間と違って基底を取ることができるとは
+  限らない.  よって, ベクトル空間の場合とは異なる方法でテンソル積を構成する
+  必要がある. \qed
+\end{rem}
+
+\begin{guide}
+  基底を取ることのできる左 $A$ 加群を自由左 $A$ 加群と呼ぶ. 
+  すなわち, 左 $A$ 加群 $M$ が{\bf 自由 (free)} であるとは,
+  $M$ の部分集合 $\{v_j\}_{j\in J}$ が存在して, 任意の $v$ が
+  \begin{equation*}
+    v = \sum_{j\in J} a_j v_j  \qquad
+    (\text{$a_j\in A$ は有限個を除いて $0$})
+  \end{equation*}
+  と一意に表わされることである. 
+  (このとき $\{v_j\}_{j\in J}$ を $M$ の{\bf 基底 (basis)} と呼ぶ.)
+  上の条件は自然な同型
+  \begin{equation*}
+    \bigoplus_{j\in J} A v_j \isomto M,
+    \quad (a_j v_j)_{j\in J} \mapsto \sum_{j\in J} a_j v_j
+  \end{equation*}
+  が成立することと同値である.
+  よって, 自由左 $A$ 加群は $A$ と同型な加群の直和になっているような加群のこ 
+  とであると言っても良い. 
+
+  体の基本定理は体上の加群 (すなわちベクトル空間) は全て自由加群であるという
+  結果である.  体上のベクトル空間の議論が簡単になるのは基底を取って様々な操
+  作を行なうことができるからである.
+  \qed
+\end{guide}
+
+\begin{theorem}[テンソル積の存在]
+\label{theorem:exists-tensor}
+  任意の右 $A$ 加群 $M$ と任意の左 $A$ 加群 $N$ に対して,
+  $M$ と $N$ の $A$ 上でのテンソル積が存在する.
+\end{theorem}
+
+\begin{proof}
+  構成の仕方だけを示そう.
+  直積集合 $M\times N$ から生成される自由加群を $\cT$ と書く. 
+  すなわち, $\cT$ の任意の元は
+  \begin{equation*}
+    \sum_{x\in M,\;y\in N} n_{xy} \cdot (x,y)
+    \qquad
+    (\text{$n_{xy}\in\Z$ は有限個を除いて $0$})
+  \end{equation*}
+  と一意に表わせる.  以下のような元から生成される $\cT$ の部分群を $\cN$ と
+  書く: 
+  \begin{alignat*}{2}
+    & (x+x',y) - (x,y) - (x',y)  &\qquad& (x,x'\in M,\; y\in N), \\
+    & (x,y+y') - (x,y) - (x,y')  &\qquad& (x\in M,\; y,y'\in N), \\
+    & (xa,y) - (x,ay) &\qquad& (x\in M,\; y\in N,\; a\in A).
+  \end{alignat*}
+  加群 $T$ を $T=\cT/\cN$ と定め, $\cT$ から $T$ への自然な射影を $p$ と書く.
+  写像 $\tau:M\times N\to T$ を $\tau(x,y)=p((x,y))$  ($x\in M$, $y\in N$) 
+  と定める.
+  実はこの $(T,\tau)$ がテンソル積の条件を満たしている.  \qed
+\end{proof}
+
+\begin{question}
+  上の証明中の $(T,\tau)$ が実際にテンソル積の条件を満たしていることを証明せ
+  よ. \qed
+\end{question}
+
+以上において教科書に書いてある証明の細部を省略した.  重要なのはテンソル積を
+より直観的に理解することである.  そのためにはテンソル積の具体例とその一般化
+がどのようになっているかを知ることが重要である.  テンソル積を定義するのはそ
+れが基本的で有用だからである.  そのことを理解するためには実際にテンソル積を
+使ってみなければいけない.
+
+ここで少し脱線して, 直積と直和の普遍性に関する問題を出しておく.  直和と直積
+に限らず, 数学的に自然な操作の多くが普遍性によって特徴付け可能である.
+
+\begin{question}[直積と直和の普遍性]
+  $\{M_j\}_{j\in J}$ は(左) $A$ 加群の族であるとする. 
+  任意の $k\in J$ に対して,
+  $\pi_k:\prod_{j\in J}M_j\to M_k$ を %
+  $\pi_k((v_j)_{j\in J}) = v_k$ と定め,
+  $\iota_k:M_k\to\bigoplus_{j\in J}M_j$ を %
+  $\iota_k v_k = (\tilde v_j)_{j\in J}$ と定める.
+  ここで, $\tilde v_k = v_k$ でかつ $\tilde v_j = 0$ ($j\ne k$) である.
+  このとき, 以下が成立する:
+  \begin{itemize}
+  \item[(1)] 任意の $A$ 加群 $W$ と
+    任意の準同型の族 $\{f_j:W\to M_j\}_{j\in J}$ に対して, \\
+    準同型 $\phi:W\to\prod_{j\in J}M_j$ 
+    で $\pi_j\circ\phi=f_j$ ($j\in J$) を満たすものが一意に存在する.
+  \item[(2)] 任意の $A$ 加群 $W$ と
+    任意の準同型の族 $\{f_j:M_j\to W\}_{j\in J}$ に対して, \\
+    準同型 $\phi:\bigoplus_{j\in J}M_j\to W$ 
+    で $\phi\circ\iota_j=f_j$ ($j\in J$) を満たすものが一意に存在する.
+  \end{itemize}
+  これらの性質を直積加群と直和加群の普遍性と呼ぶ. \qed
+\end{question}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{テンソル積の基本性質}
+
+\begin{question}
+\label{q:right-exact-1}
+  右 $A$ 加群 $M$ と左 $A$ 加群 $N$ のテンソル積 $M\o_A N$ は %
+  部分集合 $\{x\o y\}_{(x,y)\in M\times N}$ から加群として生成される.
+  すなわち, $M\o_A N$ の任意の元は $\sum_i x_i\o y_i$  ($x_i\in M$, 
+  $y_i\in N$) の形で表示される.  (注意: 表示は一意的ではない.)
+  この事実を\theoremref{theorem:exists-tensor}の証明の構成を用いずに,
+  テンソル積の普遍性だけを用いて証明せよ.
+  (ヒント: $\{x\o y\}_{(x,y)\in M\times N}$ から生成される $M\o_A N$ の部分
+  加群を $T'$ と書くと, $\tau=\o:T=M\times N\to M\o_A N$ の像は $T'$ に含ま
+  れている. 
+  よって, $\tau':M\times N\to T'$, $(x,y)\mapsto x\o y$ が定まる.
+  テンソルの普遍性より, 加群の準同型 $\phi':T=M\o N\to T'$ 
+  で $\phi'\circ\tau=\tau'$ を満たすものが存在する.
+  $\phi'$ と包含写像 $T'\injto T=M\o_A N$ の合成は $\phi\circ\tau=\tau$ を満
+  たしている. テンソル積の普遍性より $\phi=\id_T$ である.)
+  \qed
+\end{question}
+
+\begin{question}[テンソル積の函手性]
+  右 $A$ 加群の準同型 $f:M\to M'$ と左 $A$ 加群の準同型 $g:N\to N'$ に対して, 
+  加群の準同型 $f\o g: M\o_A N \to M'\o_A N'$ で次の図式を可換にするものが一
+  意に存在する:
+  \begin{equation*}
+    \begin{CD}
+      M\times N       @>{\o}>> M\o N \\
+      @V{f\times g}VV          @VV{f\o g}V \\
+      M'\times N'     @>{\o}>> M'\o N.
+    \end{CD}
+  \end{equation*}
+  ここで, $f\times g$ は $(x,y)\in M\times N$ 
+  を $(f(x),f(y))\in M'\times N'$ に移す写像である. 
+  (ヒント: $f\times g$ と $\o$ の合成は $A$-balanced である.)
+  この対応 $(f,g)\mapsto f\o g$ は以下を満たしている:
+  \begin{itemize}
+  \item[(1)] $\id_M\o \id_N = \id_{M\o N}$.
+  \item[(2)] 上と別に右 $A$ 加群の準同型 $f':M'\to M''$ 
+    と左 $A$ 加群の準同型 $g':N'\to N''$ が与えられた
+    とき, $(f'\circ f)\o(g'\circ g) = (f'\o g')\circ(f\o g)$. 
+  \end{itemize}
+  以上の性質をテンソル積の{\bf 函手性 (functoriality)} と呼ぶ. \qed
+\end{question}
+
+\begin{guide}
+  2つの加群からテンソル積加群を作る操作が, 加群のあいだの準同型からテンソル
+  積のあいだの準同型写像を作る操作に拡張可能であるというのが, テンソル積の函
+  手性である.  加群のような代数系はその準同型写像とワンセットで考える方が自
+  然であり, 加群を別の加群に対応させる操作は加群のあいだの準同型を対応先の加
+  群のあいだの準同型に対応させる操作に拡張しておく方が自然である.  このよう
+  な考え方は{\bf 圈 (category)} と{\bf 函手 (functor)} の理論に抽象化されて
+  おり, 現代数学に不可欠の言葉になっている. 
+
+  その言葉を使えば, 上の問題の結果を「テンソル積は右 $A$ 加群の圈と左 $A$ 加
+  群の圈の直積圈から加群の圈への函手である」とまとめることができる.
+  \qed
+\end{guide}
+
+\begin{question}
+  $M$ は右 $A$ 加群であり, $N$ は左 $A$ 加群であり, $W$ は加群であるとする.
+  このとき, $M\times N$ から $W$ への $A$-balanced 写像全体のなす加群を %
+  $\Bal_A(M,N;W)$ と書くことにする. 加群 $X$ から加群 $Y$ への加群の準同型写
+  像の全体のなす加群を $\Hom_\Z(X,Y)$ と書くことにする. このとき, テンソル積
+  の普遍性より, 自然な同型
+  \begin{equation*}
+    \Hom_\Z(M\o_A N, W) \isomto \Bal_A(M,N;W), 
+    \quad \phi \mapsto \phi\circ\o
+  \end{equation*}
+  が成立していることを示せ.\qed
+\end{question}
+
+\begin{guide}
+  上の問題の結果は圏論の言葉を使えば
+  「テンソル積は $\Bal_A(M,N;\bullet)$ の表現函手である」と述べることができる. 
+  \qed
+\end{guide}
+
+\begin{question}
+  $A$, $B$, $C$ は可換とは限らない環であるとし, $M$ は両側 $(A,B)$ 加群であ
+  り, $N$ は両側 $(B,C)$ 加群であるとする.  $M$ には左から $A$ が作用し, 右
+  から $B$ が作用し, $N$ には左から $B$ が作用し, 右から $C$ が作用している.
+  このとき, $M\o_B N$ は自然に両側 $(A,C)$ 加群とみなせる.
+  (ヒント: $a\in A$ の $M$ への左作用 $l_a:M\to M$, $x\mapsto ax$ は右 $B$ 
+  加群の準同型なので, $a$ の $M\o_A N$ への作用を $l_a\o\id_N$ と定めること
+  ができる.)
+  \qed
+\end{question}
+
+\begin{question}[テンソル積の結合性]
+  $A$, $B$ は可換とは限らない環であるとし,
+  $L$ は右 $A$ 加群であり, $M$ は両側 $(A,B)$ 加群であり, $N$ は左 $B$ 加群
+  であるとする. このとき, 次の自然な同型が成立している:
+  \begin{equation*}
+    (L\o_A M)\o_B N \isomto L\o_A(M\o_B N),
+    \quad (x\o y)\o z\mapsto x\o(y\o z).
+    \qed
+  \end{equation*}
+\end{question}
+
+\begin{question}[テンソル積と $\Hom$ の関係]
+  $A$, $B$ は可換とは限らない環であるとし,
+  $L$ は左 $A$ 加群であり, $M$ は両側 $(A,B)$ 加群であり, $N$ は左 $B$ 加群
+  であるとする. このとき, 次の自然な同型が成立している:
+  \begin{equation*}
+    \Hom_A(M\o_B N, L) \isomto \Hom_B(N,\Hom_A(M,L)),
+    \quad f \mapsto \Big(y\mapsto\big(x\mapsto f(x\o y)\big)\Big)
+  \end{equation*}
+  ただし, $f\in\Hom_A(M,L)$ への $b\in B$ の左作用は $(bf)(x)=f(xb)$ 
+  ($x\in M$) と定めておく. \qed 
+\end{question}
+
+\begin{question}[テンソル積と直和の可換性]
+\label{q:tensor-sum}
+  右 $A$ 加群の族 $\{M_i\}_{i\in I}$ と左 $A$ 加群の族 $\{N_j\}_{j\in J}$ に
+  対して, 
+  \begin{equation*}
+    \Big( \bigoplus_{i\in I} M_i \Big)\o\Big( \bigoplus_{j\in J} N_j \Big)
+    \isom \bigoplus_{i\in I,\;j\in J} (M_i \o N_j).
+  \end{equation*}
+  左 $A$ 加群の直和に関しても同様の同型が成立する. 
+  (ヒント: $M=\bigoplus_i M_i$, $N=\bigoplus_j N_j$ と置き,
+  $x_i\in M_i$ に対応する $M$ の元をも $x_i$ と書き, $N_j$ の元についても同
+  様とする. 
+  $A$-balanced 写像 $M\times N\to\bigoplus_{i,j}(M_i\o N_j)$,
+  $(\sum_i x_i, \sum_j y_j)\mapsto \sum_{i,j} x_i\o y_j$ から,
+  左辺から右辺の写像が得られる. 
+  $A$-balanced 写像 $M_i\times N_j\to M\o N$, 
+  $x_i\o y_j\mapsto x_i\o x_j$ を $i,j$ について加えれば右辺から左辺への写像
+  が得らえる. 
+  以上によって得られた左辺と右辺のあいだの写像は互いに逆写像になっている.) 
+  \qed
+\end{question}
+
+\begin{question}
+\label{q:tensor-A}
+  右 $A$ 加群 $M$ と左 $A$ 加群 $N$ に対して, 自然な同型
+  \begin{equation*}
+    M\o_A A \isom M, \qquad A\o_A N \isom N
+  \end{equation*}
+  が存在する.  この同型によって $M\o_A A = M$, $A\o_A N = N$ と同一視するこ
+  とにする. このとき, 右 $A$ 加群の準同型 $f:M\to M'$ 
+  と左 $A$ 加群の準同型 $g:N\to N'$ に対して,
+  \begin{equation*}
+    f\o\id_A = f, \qquad \id_A\o g = g.
+  \end{equation*}
+  (ヒント: $A$ の $M$ への右作用 $M\times A\to M$ は $A$-balanced 写像である
+  から, 自然な写像 $\phi:M\o_A A\to M$, $x\o a\mapsto xa$ が得られる.
+  写像 $\psi:M\to M\o_A A$, $x\mapsto x\o 1$ は $\phi$ の逆写像である.)
+  \qed
+\end{question}
+
+\begin{question}[テンソル積の右完全性]
+\label{q:right-exact-2}
+  右 $A$ 加群 $M$ と左 $A$ 加群の完全列
+  \begin{equation*}
+    \begin{CD}
+      N_1 @>{f}>> N_2 @>{g}>> N_3 @>>> 0
+    \end{CD}
+  \end{equation*}
+  に対して, 
+  \begin{equation*}
+    \begin{CD}
+      M\o N_1 @>{\id_M\o f}>> M\o N_2 @>{\id_M\o g}>> N_3 @>>> 0
+    \end{CD}
+  \end{equation*}
+  は完全列になる.  左 $A$ 加群と右 $A$ 加群の立場を交換しても同様の結果が成
+  立している.  この性質を加群の{\bf 右完全性 (right exactness)} と呼ぶ.
+  (ヒント: \qref{q:right-exact-1} より $\id_M\o g$ の全射性
+  と $\Image(\id_M\o f)\subset\Ker(\id_M\o g)$ が出る.
+  よって, $\Ker(\id_M\o g)\subset\Image(\id_M\o f)$ を示すことが問題になる.)
+  \qed
+\end{question}
+
+\begin{question}
+  テンソル積が単射性を保たない例を示そう.
+  $3:\Z\to\Z$ は整数を3倍する写像であるとする. 
+  もちろんそれは単射である.
+  しかし, $(\Z/3\Z)\o_\Z\Z\isom\Z/3\Z\ne0$ であり,
+  $\id_{\Z/3\Z}\o 3 : (\Z/3\Z)\o_\Z\Z\to(\Z/3\Z)\o_\Z\Z$ はゼロ写像になる.
+  \qed
+\end{question}
+
+\begin{question}\label{q:tensor-Z-mod}
+  $\Z$ 上の有限生成加群 $M$, $N$ に対して $M\o_\Z N$ を計算するにはどうすれ
+  ば良いか?  有限生成 Abel 群の基本定理より, 
+  $\Z$ 上の有限生成加群は $\Z$ および $\Z/(p^e)$ ($p$ は素数で $e$ は正の整
+  数) の形の $\Z$ 加群の直和になっている. よって, これらの $\Z$ 加群の $\Z$ 
+  上でのテンソル積の計算ができれば良い.  
+  $\Z$ を $\Z$ 上テンソル積しても何もしないのと同じことなので, 
+  結局, 次の公式を知っていれば十分であることがわかる:
+  \begin{align*}
+    \Z/m\Z\o_\Z\Z/n\Z \isom \Z/d\Z
+    \qquad (\text{$m$, $n$ は正の整数で $d$ はそれらの最大公約数}).
+  \end{align*}
+  この公式を証明せよ.  
+  (ヒント: 問題 \qref{q:tensor-R/I} の結果
+  と $(\Z/n\Z)/(m\Z/n\Z)\isom\Z/(m\Z+n\Z)$ を使う.) 
+  特に $m$ と $n$ が互いに素なとき $\Z/m\Z\o_\Z\Z/n\Z=0$ である.
+  \qed
+\end{question}
+
+\begin{question}\label{q:tensor-Q-over-Z}
+  $m$ が $0$ でない整数ならば $\Q\o_\Z\Z/m\Z=0$. \qed
+\end{question}
+
+\begin{question}
+  問題 \qref{q:tensor-Z-mod} と \qref{q:tensor-Q-over-Z} の内容を単項イデア
+  ル整域に一般化せよ. \qed
+\end{question}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{係数拡大と群の誘導表現}
+
+\begin{definition}[係数制限, 係数拡大]
+  $A$, $B$ は可換とは限らない環であるとし, 環準同型 $i:A\to B$ が与えられて
+  いるとする. このとき $B$ は {\bf $A$ 代数 ($A$-algebra)} であるという. 
+
+  $A$ の $B$ への右からの作用が $x\cdot a = x\phi(a)$ ($a\in A$, $x\in B$) 
+  によって定義される. 
+  さらに, $B$ の $B$ 自身への左からの作用が $b\cdot x = bx$ ($b,x\in B$) に
+  よって定義される. これによって, $B$ は両側 $(B,A)$ 加群とみなされる.
+
+  左 $B$ 加群 $N$ への $A$ の左からの作用を $a\cdot y = \phi(a)y$ 
+  ($a\in A$, $y\in N$) によって定めることによって, $N$ は左 $A$ 加群とみなせ
+  る. この $A$ 加群 $N$ を $B$ 加群 $N$ の $A$ への
+  {\bf 係数制限 (scalar restriction)} と呼ぶ.
+
+  左 $A$ 加群 $M$ に対して, 左 $B$ 加群 $B\o_A M$ を $M$ の $B$ による
+  {\bf 係数拡大 (scalar extension)} と呼ぶ. \qed
+\end{definition}
+
+\begin{question}
+  $A$, $B$ は可換とは限らない環であるとし, $B$ は $A$ 代数であるとする. 
+  $M$ は左 $A$ 加群であるとし, $N$ は左 $B$ 加群であるとする. 
+  このとき, 自然な同型
+  \begin{equation*}
+    \Hom_B(B\o_A M, N) \isomto \Hom_A(M, N), 
+    \quad f \mapsto \big(x \mapsto f(1\o x)\big)
+  \end{equation*}
+  が得られる. 右辺の $N$ は $A$ への係数制限である. \qed
+\end{question}
+
+\begin{question}\label{q:tensor-R/I}
+  $I$ は $A$ の両側イデアルであり, $N$ は左 $A$ 加群であるとすると,
+  自然な同型
+  \begin{equation*}
+    A/I\o_A N \isom N/IN
+  \end{equation*}
+  が得られる.  (ヒント: 短完全列 $0\to I\to A\to A/I\to 0$ に $N$ を右からテ
+  ンソル積すると, 完全列 $I\o_A N\to N \to A/I\o_R N\to 0$ が得られる.) \qed
+\end{question}
+
+\begin{question}
+  $\C[x]$ の任意の極大イデアルはある $a\in\C$ に対する $\frakm_a = (x - a)$
+  に一致する.  $M = \C[x]^n$ のとき,  $(f_1(x),\ldots,f_n(x))\in M$ 
+  を $(f_1(a),\ldots,f_n(a))\in\C^n$ に対応させる写像は
+  同型写像 $M/\frakm_a M\isomto \C^n$ を誘導する. 
+  この同型写像と \qref{q:tensor-R/I} の同型写像の合成に
+  よって $\C[x]/\frakm_a\o_{\C[x]}M$ と $\C^n$ を同一視すると,
+  \begin{equation*}
+    (1\bmod~\frakm_a)\o(f_1(x),\ldots,f_n(x)) = (f_1(a),\ldots,f_n(a))
+  \end{equation*}
+  となる.  すなわち, $1\bmod~\frakm_a\in\C[x]/\frakm_a$ を $\C[x]$ 上テンソ
+  ル積する操作はベクトル値函数の変数 $x$ に数 $a$ を代入する操作に対応してい
+  る. \qed
+\end{question}
+
+\begin{guide}
+  以上では剰余環 $A/I$ や $\C[x]/\frakm_a$ による係数拡大を扱ったが, 
+  \secref{sec:flatness}では可換環 $R$ の局所化による係数拡大を扱う. 
+  剰余環と違って局所化は平坦性 (flatness) という良い性質を満たしている. \qed
+\end{guide}
+
+係数拡大の重要な応用例である群の誘導表現について説明しよう.
+
+\begin{definition}[群環]
+  $G$ は群であるとし, $K$ は体であるとする. $G$ を基底として持つ $K$ 上のベ
+  クトル空間を $K[G]$ と書き, $K[G]$ に $1$ を持つ $K$ 上の結合代数の構造を
+  \begin{equation*}
+    \Big(\sum_{x\in G} a_x x\Big)
+    \Big(\sum_{y\in G} b_y y\Big)
+    =
+    \sum_{x\in G,\;y\in G} a_x b_y \cdot gh
+    =
+    \sum_{z\in G} \Big(\sum_{xy=z} a_x b_y\Big) z
+    \quad
+    (a_x,b_y\in K)
+  \end{equation*}
+  と入れることができる. これは $K[G]$ の基底 $G$ に定義された群の積を $K[G]$ 
+  に線形に拡張しただけである. 
+  特に $K[G]$ の積に関する単位元 $1$ は $G$ の単位元 $e$ に一致する.
+  $K[G]$ を $G$ の $K$ 上での{\bf 群環 (group algebra, 群代数)} と呼ぶ.
+  \qed
+\end{definition}
+
+\begin{definition}[群の表現]
+  $G$ は群であるとする. このとき, $V$ が $G$ の $K$ 上での
+  {\bf 表現 (representation)} であるとは $V$ が $K$ 上の
+  ベクトル空間でかつ積 $G\times V\to V$, $(g,v)\mapsto gv$ が定義
+  されていて, $g(hv)=(gh)v$ ($g,h\in G$, $v\in V$) 
+  および $g(au+bv)=a(gu)+b(gv)$ ($g\in G$, $u,v\in V$, $a,b\in K$) が成立し
+  ていることである. 
+  \qed
+\end{definition}
+
+\begin{question}[誘導表現]
+  $G$ が群であり, $H$ がその部分群であるとき, 以下を示せ:
+  \begin{itemize}
+  \item[(1)] $H$ の体 $K$ 上での表現 $V$ は自然に $K[H]$ 加群とみなせる.
+  \item[(2)] $K[H]$ は自然に $K[G]$ の $K$ 部分代数とみなせる.
+  \item[(3)] $W = K[G]\o_{K[H]} V$ は自然に $K[G]$ 加群とみなせる%
+    \footnote{$W = K[G]\o_{K[H]} V$ は $K[H]$ 加群 $V$ の $K[G]$ への係数拡
+      大である.}.
+  \item[(4)] 任意の $K[G]$ 加群は $G$ の $K$ 上での表現とみなせる.
+  \end{itemize}
+  以上の手続きによって, 群 $G$ 部分群 $H$ の表現 $V$ から $G$ の表現 $W$ が
+  得られる. $W = K[G]\o_{K[H]} V$ を $H$ の表現 $V$ から誘導された $G$ の
+  {\bf 誘導表現 (induced representation)} と呼ぶ. 
+  \qed
+\end{question}
+
+\begin{question}[巡回群から二面体群への誘導表現]
+\label{q:ind-dihed}
+  $3$ 以上の整数 $n$ に対して, 
+  2つの生成元 $a$, $b$ から生成される群で次の基本関係式を持つものを $D_n$ と
+  書き, {\bf 二面体群 (dihedral group)} と呼ぶ%
+  \footnote{直観的に言えば $D_n$ は正 $n$ 角形をそれ自身の上に合同に移す変換
+    全体のなす群である.  $a$ は正 $n$ 角形を $2\pi/n$ だけ回転させる変換であ
+    り, $b$ は1つの対称軸に関する線対称変換である. $ab$ は $b$ を定めるとき
+    に使った軸を $-\pi/n$ だけ回転させた軸に関する対称変換である.
+    詳しい説明は \cite{hirai} I の pp.~17--19 を参照せよ.}:
+  \begin{equation*}
+    a^n = e, \quad b^2 = e, \quad (ab)^2 = e.
+  \end{equation*}
+  これらの関係式からたとえば $ab=ba^{-1}$ が出る.
+  $D_n$ の位数は $2n$ であり,
+  \begin{equation*}
+    D_n = \{ e, a, a^2, \ldots, a^{n-1}, b, ab, a^2b, \ldots, a^{n-1}b\}.
+  \end{equation*}
+  $a$ から生成される $D_n$ の位数 $n$ の巡回部分群を $C_n$ と書くことにする.
+  以下を示せ:
+  \begin{itemize}
+  \item[(1)] $\zeta = \exp(2\pi\sqrt{-1}/n)$ と置き, $k=1,2,3,\ldots$ とする.  
+    $V_k=\C v_k$ は基底 $v_k$ を持つ $1$ 次元複素ベクトル空間であるとする.
+    $C_n$ の $V_k$ における $\C$ 上の $1$ 次元表現を次のように定めることがで
+    きる:
+    \begin{equation*}
+      a^i v = \zeta^{ki} v
+      \quad (v\in V,\; i\in\Z).
+    \end{equation*}
+  \item[(2)] $C_n$ の表現 $V_k$ の $D_n$ への誘導表現
+    を $W_k=\C[D_n]\o_{\C[C_n]}V_k$ と書く.
+    $W_k$ は $2$ 次元の複素ベクトル空間であり, 
+    $e\o v_k$, $b\o v_k$ を基底に持つ.
+  \item[(3)] その基底に関して $a$ と $b$ の作用を書き下すと次のようになる:
+    \begin{alignat*}{2}
+      &
+      a(e\o v_k) = \zeta^k \cdot e\o v_k,
+      & \quad &
+      a(b\o v_k) = \zeta^{-k}\cdot b\o v_k,
+      \\ &
+      b(e\o v_k) = b\o v_k,
+      & \quad &
+      b(b\o v_k) = e\o v_k.
+    \end{alignat*}
+  \end{itemize}
+  (ヒント: たとえば, $a(b\o v_k) = (ab)\o v_k = (ba^{-1})\o v_k 
+  = b\o(a^{-1}v_k) = \zeta^{-k} (b\o v_k)$.)
+  \qed
+\end{question}
+
+\begin{guide}
+  群の誘導表現の重要性やその哲学に関しては \cite{hirai} II の第22章を参照せ
+  よ.  群の表現を構成・分類し, その構造を詳しく調べることは様々な意味で重要
+  である.  誘導表現は群の表現をより構成が簡単な部分群の表現から系統的に構成
+  する方法を与える.  \qed
+\end{guide}
+
+\begin{question}[代数のテンソル積]
+  $A$, $B$ は可換とは限らない環であり, 共に可換環 $R$ 上の代数であるとし,
+  $R$ の $A$, $B$ における像はそれぞれの中心に含まれていると仮定する.
+  このとき, $A\o_R B$ にも自然に $R$ 代数の構造が入ることを示せ. 
+  (ヒント: $(a',b')\mapsto (aa')\o(bb')$ は $R$-balanced なので, 
+  積を $(a\o b)(a'\o b')=(aa')\o(bb')$ と定めることができる.) \qed
+\end{question}
+
+\begin{question}
+  $R$ が可換環であるとき, $R$ 上の全行列環 $M_n(R)$ に関して $R$ 代数の同型
+  \begin{equation*}
+    M_m(R)\o_R M_n(R) \isom M_{mn}(R).
+  \end{equation*}
+  が成立している. \qed
+\end{question}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{平坦加群と局所化の平坦性}
+\label{sec:flatness}
+
+\begin{definition}[平坦性]
+  右 $A$ 加群 $M$ が右 $A$ 加群として{\bf 平坦 (flat)} 
+  もしくは {\bf $A$ 平坦 ($A$-flat)} であるとは, 
+  左 $A$ 加群とその準同型で構成された任意の短完全列 
+  \begin{equation*}
+    \begin{CD}
+      0 @>>> N_1 @>{f}>> N_2 @>{g}>> N_3 @>>> 0
+    \end{CD}
+  \end{equation*}
+  に対して, 
+  \begin{equation*}
+    \begin{CD}
+      0 @>>> M\o N_1 @>{\id_M\o f}>> M\o N_2 @>{\id_M\o g}>> N_3 @>>> 0
+    \end{CD}
+  \end{equation*}
+  も完全列になることである. すなわち, $M\o_A(\bullet)$ が{\bf 完全 (exact)} 
+  である\footnote{完全列を保つという性質を exactness と呼ぶ.}とき, $M$ は
+  平坦もしくは $A$ 平坦であると言う%
+  \footnote{任意の長さの完全列を保つための必要十分条件は短完全列を保つことで
+    ある.}. 
+  $M\o_A(\bullet)$ は右完全なので平坦であるための必要十分条件は単射を保つこ
+  とである.
+  左 $A$ 加群の平坦性も同様に定義する.\qed
+\end{definition}
+
+\begin{question}
+  右 $A$ 加群 $P$ が{\bf 射影加群 (projective module)} であるとは, 
+  任意の右 $A$ 加群の全射準同型 $f:M\onto N$ と
+  右 $A$ 加群準同型 $\phi:P\to N$ に対して,
+  ある右 $A$ 加群準同型 $\psi:P\to M$ で $f\circ\psi=\phi$ を満たすものが存
+  在することである.  (射の向きを逆にして, {\bf 入射加群 (injective module)} 
+  が定義される.  左加群の場合も同様に定義する.) 
+
+  射影加群であることとある自由加群の直和因子%
+  \footnote{加群 $M$ の部分加群 $N$ が $M$ の直和因子であるとは $M$ の部分加
+    群 $N'$ で $M=N\oplus N'$ を満たすものが存在することである.}%
+  になることが同値であることを示せ.  
+  \qed
+\end{question}
+
+\begin{question}
+  $M$ は右 $A$ 加群であるとき, 以下が成立する:
+  \begin{itemize}
+  \item[(1)] $M$ が自由加群ならば $M$ は平坦である.
+  \item[(2)] $A$ が体であれば $M$ は常に平坦である.
+  \item[(3)] $M$ が平坦であればその右 $A$ 加群としての直和因子も平坦である.
+  \item[(4)] $M$ が射影加群ならば $M$ は平坦である.
+  \end{itemize}
+  (ヒント: \qref{q:tensor-sum}, \qref{q:tensor-A} を用いよ.) \qed
+\end{question}
+
+\begin{question}[ねじれ部分と非平坦性]
+  $R$ は可換環であるとし, $M$ は右 $R$ 加群であるとする.
+  このとき, $x\in M$ に対して
+  零因子でない $a\in R$ で $xa=0$ を満たすものが存在するとき,
+  $x$ は{\bf ねじれ元 (torsion element)} であると言う.
+  $M$ のねじれ元全体のなす $R$ 部分加群を $M_\tor$ と書き, 
+  $M$ の{\bf ねじれ部分 (torsion part)} と呼ぶ.
+  $M_\tor = 0$ すなわち $M$ が $0$ 以外のねじれ元を持たないとき, %
+  $M$ は{\bf ねじれを持たない (torsion-free)} と言う.
+  $M_\tor = M$ すなわち $M$ がねじれ元のみで構成されているとき, %
+  $M$ は{\bf ねじれ $R$ 加群 (torsion $R$-module)} であると言う.
+  左 $R$ 加群に関しても同様に定義する.
+
+  可換環 $R$ 上の加群 $M$ が平坦であれば $M$ はねじれを持たないことを示せ.
+  (ヒント: $M$ がねじれ元 $x\ne 0$ を持つと仮定する. 
+  零因子でないある $a\in A$ で $xa=0$ となるものが存在する.
+  $a$ は非零因子なので $a$ による積 $a:R\to R$, $r\mapsto ar$ は単射である.
+  $R$ は可換なので $a:R\to R$ は $R$ 準同型でもある.
+  よって, 準同型 $\id_M\o a:M\o_R R\to M\o_R R$ が得られる.
+  $M\to M\o_R R$, $v\mapsto v\o1$ は同型なので $x\o 1\ne 0$ である.
+%  しかし, $(\id_M\o a)(x\o 1) = x\o a = xa\o 1 = 0\o 1 = 0$.
+%  よって, $M\o_R(\bullet)$ は単射を保たない.)
+  以下略.)
+  \qed
+\end{question}
+
+\begin{question}
+  $R$ が単項イデアル整域%
+  \footnote{{\bf 整域 (integral domain)} とは零因子を持たない可換環のことで
+    ある.  {単項イデアル整域 (principal ideal domain, PID)} とは任意のイデア
+    ルが高々1つの元から生成されるような整域のことである. 1つの元から生成され
+    るイデアルを{\bf 単項イデアル (principal ideal)} と呼ぶ.}%
+  で, $M$ が有限生成 $R$ 加群であるとき, 以下の条件は互いに同値である:
+  \begin{itemize}
+  \item[(a)] $M$ は $R$ 平坦である.
+  \item[(b)] $M$ はねじれを持たない (torsion-free).
+  \item[(c)] $M$ は自由 $R$ 加群である. \qed
+  \end{itemize}
+\end{question}
+
+\begin{guide}
+  実はより一般に, $R$ が単項イデアル整域で, $M$ が $R$ 上の任意の加群である
+  とき, $M$ が $R$ 平坦であるための必要十分条件は$M$ がねじれを持たないこと
+  である.
+
+  これは松村英之著『可換環論』 \cite{matsumura} の定理 7.7 を単項イデアル整
+  域に適用すれば証明できる.  
+  その定理の内容は「可換環 $R$ 上の加群 $M$ が $R$ 平坦であるための必要十分
+  条件は, $R$ の任意の有限生成イデアル $I$ に対して自然な写像 $I\o_R M\to M$
+  が単射になることである」と述べることができる. (それは, $I\o_R M\isomto IM$
+  と同値である.)
+
+  $R$ は単項イデアル整域で $M$ はねじれを持たない $R$ 加群であるとし, この定
+  理を適用してみよう.  
+  この場合は $R$ の有限生成イデアルとして単項イデアル $I=(a)\ne 0$ の場合だ
+  けを考えれば良い. 
+  $M\to I\o_R M$, $x\mapsto a\o x$ は同型写像である.
+  よって, $I\o_R M\to M$ は $a\o x\mapsto ax$ ($x\in M$) と表わせる. 
+  $a\o x \ne 0$ と $x\ne 0$ は同値であり, 
+  $M$ はねじれを持たないので $x\ne 0$ と $ax\ne 0$ は同値である.
+  これで $I\o_R M\to M$ が単射であることが示された.
+  ここに上に引用した定理を適用すれば $M$ が平坦であることがわかる. 
+  \qed
+\end{guide}
+
+\begin{definition}[可換環および加群の局所化]
+  $R$ は可換環であるとする.
+  $R$ の部分集合 $S$ が $1$ を含み $0$ を含まず積で閉じているとき, 
+  $S$ を $R$ の{\bf 乗法的集合 (multiplicative set)} と呼ぶ.
+  $S$ は $R$ の乗法的集合とし, $M$ は $R$ 加群とする.
+
+  直積集合 $M\times S$ に
+  \begin{equation*}
+    (x,s)\sim (y,t)
+    \iff \text{ある $a\in S$ が存在して $a(t x - s y) = 0$}
+  \end{equation*}
+  によって同値関係 $\sim$ を入れ, $M\times S$ の $\sim$ による
+  商集合を $M_S = (M\times S)/{\sim}$ と表わす. 
+  $(x,s)\in M\times S$ で代表される $M_S$ の類を $x/s$ と表わす.
+  $M = R$ の場合から集合 $R_S$ が定義される%
+  \footnote{$R$, $M$ から $R_S$, $M_S$ を作る操作は $S$ を分母に置いた分数を
+    構成することなので, $R_S$, $M_S$ をそれぞれ $S^{-1}R$, $S^{-1}M$ と書く
+    流儀もある.}.
+  加法 $+:M_S\times M_S\to M_S$ と積 $\cdot:R_S\times M_S\to M_S$ を
+  次のように定めることができる:
+  \begin{align*}
+    &
+    x/s + y/t = (t x + s y)/(st)  \qquad (x,y\in M,\;s,t\in S),
+    \\ &
+    (r/s)(m/t) = (rm)/(st)  \qquad (r\in R,\; m\in M,\; s,t\in S).
+  \end{align*}
+  $M = R$ の場合を考えればこれによって $R_S$ は可換環をなすことを示せる. 
+  さらに $M_S$ が $R_S$ 加群をなすことを示せる.  
+  $R_S$ を $S$ による$R$の{\bf 局所化 (localization)} と呼び, $M_S$ を $S$
+  による $M$ の{\bf 局所化 (localization)} と呼ぶ.
+
+  写像 $i_S: M\to M_S$ を $i_S(x) = x/1$ ($x\in M$) と定める. 
+  $M = R$ のとき $i_S: R\to R_S$ は可換環の準同型であることを示せ
+  る.  よって, $R_S$ は $R$ 代数とみなせる.
+  ただし, $R_S$ への $r\in R$ の作用は $i_S(r)$ 倍で定める.
+  さらに $i_S:M\to M_S$ が $R$ 加群の準同型写像になることを示せる.
+  ただし, $M_S$ への $r\in R$ の作用は $i_S(r)$ 倍で定める.
+  $f:M\to N$ が $R$ 加群のあいだの準同型であるとき,
+  $R_S$ 加群の準同型 $f_S:M_S\to N_S$ を%
+  \begin{equation*}
+    f_S(x/s) = f(x)/s   \qquad (x\in M,\; s\in S)
+  \end{equation*}
+  と定めることができる.  このとき,
+  \begin{equation*}
+    f_S(i_S(x)) = f_S(x/1) = f(x)/1 = i_S(f(x))
+    \qquad (x\in M).
+    \qed
+  \end{equation*}
+\end{definition}
+
+\begin{question}
+  上の定義の中で「できる」「示せる」と書いてある部分の証明を書き下せ. \qed
+\end{question}
+
+\begin{question}
+  $R$ が可換環であり, $S$ がその乗法的集合であり, $M$ が $R$ 加群であるとき,
+  $R_S$ 加群の同型写像
+  \begin{equation*}
+    R_S\o_R M \isomto M_S, \quad (r/s)\o x \mapsto (rx)/s
+  \end{equation*}
+  が得られる. すなわち, $R$ 加群 $M$ の $R_S$ への係数拡大は $M$ の $S$ によ
+  る局所化に同型である. 
+  この同型写像によって $R_S\o_R M$ と $M_S$ を同一視することにする.
+  そのとき, $R$ 加群のあいだの準同型 $f : M\to N$ に対する %
+  $\id_{R_S}\o f : R_S\o_R M \to R_S\o_R N$ は $f_S:M_S\to N_S$ に
+  対応している.  \qed
+\end{question}
+
+\begin{question}\label{q:loc-Z-Q}
+  $R=\Z$, $S=\{\,s\in\Z\mid s\ne 0\,\}$ のとき $R_S=\Q$ である. \qed
+\end{question}
+
+\begin{question}\label{q:loc-Laurent}
+  $R=\C[x]$ , $S=\{1,x,x^2,x^3,\ldots\}$ のとき,
+  $R_S=\C[x,x^{-1}]$ である. 
+  ここで, $\C[x,x^{-1}]$ は複素係数の Laurent 多項式環である. 
+  $\C[x,x^{-1}]$ は定義より $\{x^m\}_{m\in\Z}$ を $\C$ 基底として持つ.
+  \qed
+\end{question}
+
+\begin{question}
+  $R$ が可換環であり, $P$ がその素イデアルのとき, $S = R - P$ は $R$ の乗法
+  的集合であることを示せ. 
+  $R$ の $S$ による局所化を $R_P$ と書き, $R$ の $P$ による局所化と呼ぶ. 
+  たとえば, $R=\Z$, $P=(5)$ のとき, 
+  \begin{equation*}
+    R_P = \Z_{(5)} = \{\, p/q \mid p\in\Z,\; q\in\Z,\; 5\not|q\,\}
+  \end{equation*}
+  であることを説明せよ. \qed
+\end{question}
+
+\begin{question}\label{q:loc-zero}
+  $R = \C[x]$ で $P=(x)$ のとき, $P$ は $R$ の素イデアルであり, 
+  \begin{equation*}
+    R_P = \C[x]_{(x)} 
+    = \{\, f(x)\in\C(x) \mid \text{$f(x)$ は $x=0$ の近傍で正則である}\,\}. 
+    \qed 
+  \end{equation*}
+\end{question}
+
+\begin{guide}
+  問題 \qref{q:loc-Laurent}, \qref{q:loc-zero} の例は
+  分数を作る操作をどうして局所化と呼ぶかを理解するための助けになる.
+  何を局所化するかというと, 函数の定義域を局所化するのである.
+  
+  まず, 問題 \qref{q:loc-Laurent} の例を見てみよう. 
+  多項式 $f(x)\in\C[x]$ は複素平面 $\C$ 全体の上の正則函数とみなせる.  
+  それに対して, Laurent 多項式 $g(x)\in\C[x,x^{-1}]$ は多項式を $x^m$ 
+  で割って得られる函数なので原点に極を持ち, $x=0$ では値が定義されていないか
+  もしれない.
+  局所化によって, $\C[x]$ から $\C[x,x^{-1}]$ にうつる操作は函数の定義域を複
+  素平面 $\C$ の全体から $\C-\{0\}$ に制限することに対応していると考えられる.
+
+  次に, 問題 \qref{q:loc-zero} の例を見てみよう. 
+  $f(x)\in\C[x]_{(x)}$ は原点の近傍で正則な有理函数である.
+  原点から離れたところに極があって値が定義されてないかもしれない.
+  よって, 素イデアル $(x)$ による局所化は原点の近傍に定義域を制限する操作に
+  対応していると考えらえる. 
+
+  それでは, 問題 \qref{q:loc-Z-Q} と同様に,
+  多項式環 $\C[x]$ を $S = \C[x] - \{0\}$ で局所化すれば
+  有理函数体 $\C(x)$ が得られることはどのように解釈したら良いのだろうか? 
+  有理式 $f(x)\in\C(x)$ は有限個の極を除いて値が定義されている. しかし,
+  その極は複素平面上のあらゆる場所に生じ得る. $\C[x]_{(x)}$ の場合は原点だけ
+  には極を許さないのであった.  $\C(x)$ に含まれる函数の場合はそれに含まれる
+  函数は極に触れないようにうまく一般の点を選ばなければ値が定義されないので, 
+  それは複素平面の一般点 (generic point) で定義された函数とみなせる.
+
+  $\Z$ の場合は函数ではなく数の話になってしまうので, 以上のような直観を直接
+  適用することはできないが, 形式的にはかなり似た状況になっている. 
+  函数と数の類似性は現代数学において欠くことのできないアイデアである. \qed
+\end{guide}
+
+\begin{question}
+  $R$ が可換環で $S$ がその乗法的集合のとき, 
+  $R$ の $S$ による局所化 $R_S$ は $R$ 平坦である. 
+  (ヒント: 森田康夫著『代数概論』 \cite{morita} の第IV章命題2.8.) 
+  たとえば, $\Q$ は $\Z$ 平坦であり, 
+  $\C[x,x^{-1}]$ は $\C[x]$ 平坦である.  \qed
+\end{question}
+
+\begin{guide}
+  局所化の平坦性は直観的に言えば「代数の世界においては函数の定義域の ``開部
+  分集合'' 上への制限によって完全列が保たれること」を意味している%
+  \footnote{$k$ は体であり, $R=k[x_1,\ldots,x_n]$ とする. 
+    このとき, $f\in R$, $f\not\in k$ とすると $R/(f)$ は
+    ねじれ元 $1\bmod~(f)$ を持つので平坦ではない. 直観的には, 
+    $R/(f)$ の $R$ 上のテンソル積は $f=0$ で定義される閉部分集合上への定
+    義域の制限を意味している.  函数の定義域の次元が下がった閉部分集合上への
+    制限は単射性を保たない.}.  \qed
+\end{guide}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{thebibliography}{AB}
+
+\bibitem[Hi]{hirai}
+平井武: 線形代数と群の表現 I, II, すうがくぶっくす 20, 21, 朝倉書店, 2001
+
+%\bibitem[Ho]{hotta}
+%堀田良之: 代数入門—群と加群—, 数学シリーズ, 裳華房, 1987
+
+%\bibitem[I]{iwasawa}
+%岩澤健吉: 代数函数論, 岩波書店, 1952, 1989
+
+\bibitem[Ma]{matsumura}
+松村英之: 可換環論, 共立出版, 1980, 2000 (英語版: Matsumura, Hideyuki:
+Commutative ring theory, Cambridge studies in advanced mathematics 8, 
+Cambridge University Press, 1986)
+
+\bibitem[Mo]{morita}
+森田康夫: 代数概論, 数学選書 9, 裳華房, 1987
+
+%\bibitem[Mu]{mumford}
+%Mumford, David: The Red Book of Varieties and Schemes, 
+%Lecture Notes in Mathematics 1358, Springer-Verlag, 1980, 1988
+
+%\bibitem[R]{reid}
+%リード, M. (Reid, Miles): 可換環論入門, 伊藤由佳理訳, 岩波書店, 2000
+
+\bibitem[S]{satake}
+佐武一郎: 線型代数学, 数学選書 1, 裳華房, 1974
+
+%\bibitem[Take]{takeuchi}
+%竹内端三: 楕圓凾數論, 岩波全書, 1936, 1996
+
+\bibitem[Tan]{tanisaki}
+谷崎俊之: リー代数と量子群, 共立出版, 2002
+
+%\bibitem[U]{umemura}
+%梅村浩: 楕円函数論——楕円曲線の解析学, 東京大学出版会, 2000
+
+\end{thebibliography}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

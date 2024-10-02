@@ -1,0 +1,491 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\def\STUDENT{} % \def すると計算問題の解答を印刷しなくなる.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[12pt,twoside]{jarticle}
+%\documentclass[12pt]{jarticle}
+\usepackage{amsmath,amssymb,amscd}
+\usepackage{eepic}
+\usepackage{enshu}
+\newcommand\qstar[1]{}
+%\usepackage{showkeys}
+\allowdisplaybreaks
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setcounter{page}{20}      % この数から始まる
+\setcounter{section}{3}    % この数の次から始まる
+\setcounter{theorem}{0}    % この数の次から始まる
+\setcounter{question}{58}  % この数の次から始まる
+\setcounter{footnote}{0}   % この数の次から始まる
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\ifx\STUDENT\undefined
+%
+% 教師専用
+%
+\newcommand\commentout[1]{#1}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\else
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% 生徒専用
+%
+\newcommand\commentout[1]{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\fi
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\title{\bf 幾何学序論B演習
+%  \ifx\STUDENT\undefined\\{\normalsize 教師用\quad(計算問題の略解付き)}\fi}
+%\author{黒木 玄 \quad (東北大学大学院理学研究科数学専攻)}
+%\date{2005年10月4日(火)}
+%\maketitle
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\noindent
+{\Large\bf 幾何学序論B演習}
+\hfill
+{\large 黒木玄}
+\qquad
+2005年11月22日(火)
+\commentout{\quad (教師用)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\tableofcontents
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{講義における等周不等式の証明への補足}
+
+%講義における等周不等式の証明で使われた道具について
+%演習問題の羅列によって解説を行なうことにする.
+
+\subsection{Green の公式と面積}
+
+\begin{question}[Green の公式]
+ 長方形 $K=[a,b]\times [c,d]$ 上の $C^1$ 函数 $f,g$ に関する Green の公式
+ \begin{equation*}
+  \int_{\partial K} (f\,dx + g\,dy) = \int_K (g_x - f_y)\,dx\,dy
+ \end{equation*}
+ を証明せよ. ここで左辺の $\partial K$ は $K$ の境界を左回りに回る経路である. \qed
+\end{question}
+
+\begin{proof}[ヒント]
+ 左辺の意味がよくわからない人は左辺を次に等しいことを認め,
+ そこから出発して構わない:
+ \begin{equation*}
+  \int_{\partial K} (f\,dx + g\,dy)
+   = \int_a^b f(x,c) \,dx
+   + \int_c^d g(b,y) \,dy
+   + \int_b^a f(x,d) \,dx
+   + \int_d^c g(a,y) \,dy.
+ \end{equation*}
+ この積分で $(x,y)$ がどのように動くかを図に描いてみよ. \qed
+\end{proof}
+
+\begin{guide}[微分形式]
+ $\omega = f\,dx + g\,dy$ と置くと
+ \begin{align*}
+  d\omega &= df\wedge dx + dg\wedge dy
+%  \\ &
+  = (f_x\,dx + f_y\,dy)\wedge dx
+  + (g_x\,dx + g_y\,dy)\wedge dy
+  \\ &
+%  = f_y\, dy\wedge dx
+%  + g_x\, dx\wedge dy
+%  \\ &
+  = 
+  - f_y\, dx\wedge dy
+  + g_x\, dx\wedge dy
+  = (g_x - f_y)\,dx\wedge dy.
+ \end{align*}
+ ここで計算規則 $dx\wedge dx = dy\wedge dy = 0$, 
+ $dy\wedge dx = - dx\wedge dy$ を用いた. 
+ よって Green の公式は次のように書き直される:
+ \begin{equation*}
+  \int_{\partial K} \omega = \int_K d\omega.
+ \end{equation*}
+ この形の公式は $n$ 次元でも成立している(Stokes の定理). 
+ 微分形式の言葉を使うと Gauss-Green-Stokes の定理は
+ 極めて美しい形で書き下すことができる%
+ \footnote{被積分函数の理論だけを取り出した「微分形式とその外微分」の理論と
+ 積分領域の理論だけを取り出した「chain とその境界」の理論は
+ 別々に展開でき, 前者は de Rham cohomology の理論と呼ばれており, 
+ 後者は homology の理論と呼ばれている. 
+ それらは「積分」によって双対の関係になっている.}.
+ \qed
+\end{guide}
+
+%\begin{question}[三角形型領域におけるGreenの公式]
+%  三角形型の領域 %
+%  $K = \{\, (x,y) \mid x,y\geqq0, x+y \leqq 1\,\}$ に
+%  関する Green の公式を直接的な計算で証明せよ. \qed
+%\end{question}
+
+\begin{question}[面積]
+ $\R^2$ における区分的に滑らかな境界を持つ一般の領域 $K$ に関する
+ Green の公式を用いて次を示せ:
+ \begin{equation*}
+  \text{($K$ の面積)} 
+  = \frac{1}{2} \int_{\partial K} (x\,dy - y\,dx)
+  = \int_{\partial K} x\,dy
+  = - \int_{\partial K} y\,dx.
+ \end{equation*}
+ 特に $K$ が区分的に滑らかな単純閉曲線で囲まれた領域であり, 
+ 境界 $\partial K$ が左回りに $(x(t),y(t))$ ($t_0\le t \le t_1$) で
+ パラメーター付けられているならば
+ \begin{equation*}
+  \text{($K$ の面積)} 
+  = \frac{1}{2} \int_{t_0}^{t_1} (xy' - yx')\,dt
+  = \int_{t_0}^{t_1} xy' \,dt
+  = - \int_{t_0}^{t_1} yx' \,dt.
+  \qed
+ \end{equation*}
+\end{question}
+
+\begin{proof}[ヒント]
+ Green の公式を $(f,g)=(-y/2,x/2),(0,x),(-y,0)$ の場合に適用してみよ.
+ \qed
+\end{proof}
+
+%\begin{question}
+% 上の問題の公式の講義における「幾何的証明」に関して詳しく説明せよ.
+% \qed
+%\end{question}
+
+以下はおまけの問題である.
+
+せっかくなので, 複素函数論の問題も出しておく. $\C$ の複素座標を $z$ と書き,
+実座標 $(x,y)$ を $z=x+iy$ によって入れる.
+
+\begin{question}
+  記号 $dx$, $dy$ を基底にもつ複素ベクトル空間を $V=\C dx+\C dy$ と書
+  き, $\C$ の開集合 $U$ 上の微分可能函数 $f$ に対して, $V$に値を
+  もつ次の函数を考える:
+  \[
+    df = \frac{\d f}{\d x}dx + \frac{\d f}{\d y}dy.
+  \]%
+  これを $f$ の外微分と呼ぶ. このとき $dz,d\bar{z}\in V$ は $df$ の定義
+  より $dz=dx+i\,dy$, $d\bar{z}=dx-i\,dy$ となる. 等式
+  \[
+    df = A\,dz + B\,d\bar{z}
+  \]%
+  によって, $U$ 上の函数 $A$, $B$ を定義すると次が成立する:
+  \[
+    A =
+    \frac{1}{2}
+    \left(
+      \frac{\d f}{\d x} + \frac{1}{i} \frac{\d f}{\d y}
+    \right),
+    \qquad
+    B =
+    \frac{1}{2}
+    \left(
+      \frac{\d f}{\d x} - \frac{1}{i} \frac{\d f}{\d y}
+    \right). 
+    \qed
+  \]%
+\end{question}
+
+\noindent そこで, 作用素 $\frac{\d}{\d z}$,
+$\frac{\d}{\d\bar{z}}$, を次のように定義する:
+\[
+  \frac{\d}{\d z} =
+  \frac{1}{2}
+  \left( \frac{\d}{\d x} + \frac{1}{i} \frac{\d}{\d y} \right),
+  \qquad
+  \frac{\d}{\d\bar z} =
+  \frac{1}{2}
+  \left( \frac{\d}{\d x} - \frac{1}{i} \frac{\d}{\d y} \right).
+\]%
+$\frac{\d}{\d z}$, $\frac{\d}{\d\bar{z}}$ の定義はこの天下り的
+な公式を暗記するより, 上の問題の定式化の形で憶えた方が楽である. また, 
+微分形式の計算は非常に便利なので, 早目に修得するように努力した方が良い. 
+$df$ の定義を真似て $\d f$, $\dbar f$ を次のように定義する:
+\[
+  \d f = \frac{\d f}{\d z}dz,
+  \qquad
+  \dbar f = \frac{\d f}{\d\bar z}d\bar{z}.
+\]%
+
+\begin{question}\label{q:seisoku-kansu}
+  $\C$ の開集合 $U$ 上の $C^1$ 函数 $f$ に対して以下の条件が互
+  いに同値であることを証明せよ:
+  \begin{enumerate}
+  \item[(1)] 任意の $z\in U$ に対して次の極限が存在する:
+    \[
+      \lim_{h\to 0}\frac{f(z+h) - f(z)}{h}.
+    \]%
+%    \label{item:fukuso-bibun}
+  \vskip -\bigskipamount
+  \vskip -\bigskipamount
+  \item[(2)] $U$ 上で, $\dbar f = 0$.
+  \item[(3)] 実数値函数 $u$, $v$ によって, $f$ を $f = u + iv$ と表示すると
+    $U$ 上で次が成立する:
+    \[
+      u_x = v_y,
+      \qquad
+      u_y = - v_x.
+    \]
+%  \item[(4)] 実数値函数 $u$, $v$ によって, $f$ を $f = u - iv$ と表示すると
+%    $U$ 上で次が成立する:
+%    \[
+%      v_x - u_y = 0,
+%      \qquad
+%      u_x + v_y = 0.
+%    \]
+  \end{enumerate}
+  そして, これらの条件のどれかが成立すれば (1) %(\ref{item:fukuso-bibun})
+  の極限は $\pdfrac{f}{z}(z)$ に一致する. 
+  \qed
+\end{question}
+
+\noindent この問題の条件をみたす函数 $f$ を $U$ 上の正則函数
+(holomorphic function on $U$)と呼ぶ. 正則函数を特徴付けている微分
+方程式(2)または(3)を Cauchy-Riemann の方程式と呼ぶ. 
+%(4) とGreen の公式の関係に注意せよ.
+
+%上の問題において $f$ は $C^1$ 函数であることを仮定した. 
+%しかし, $C^1$ 性を仮定せずに正則函数を定義する流儀もある. 
+%(もちろん, $C^1$ 性を仮定する定義と結果的には同値になる.) 例えば,
+%\cite{Takagi} の第5章%
+%\footnote{\cite{Takagi} の第5章はたったの 67 頁しかない. し
+%  かし, 初等函数とガンマ函数の理論を含んでおり内容的には豊かである. 
+%  しかも, その解説は簡潔で美しい.}%
+%はそのような流儀で書かれている. その流儀の方が数学的な美しさにおいて勝
+%るのであるが, 実用的に $C^1$ 性を仮定しても不都合が生じることはない.
+
+\begin{question}[矩形型領域における Cauchy の積分定理]
+  実数 $a < b$, $c < d$ に対する矩形型領域 %
+  $U = \{\, x + iy \mid a<x<b, c<y<d\,\}$ を考える. %
+  $f$ が $\overline U$ の近傍における $C^1$ 函数であるとき, 次が成立
+  する:
+  \[
+    \int_{\d U} f\,dz = \int_U  \dbar f \wedge dz.
+  \]%
+  特に, $f$ の $U$ への制限が正則函数ならば次が成立する:
+  \[
+    \int_{\d U} f\,dz = 0.
+  \]%
+  正則函数に関するこの結果は, Cauchy の積分定理と呼ばれている.
+  \qed
+\end{question}
+
+\noindent ヒント: Green の公式. $dz\wedge dz = 0$ より, 
+\(
+  d(f\,dz) = df\wedge dz = \dbar f \wedge dz.
+\) %
+が成立する%
+\footnote{ここで微分形式の記号を用いているが, 解答において微分形式の
+  概念を用いることを強制するつもりはない. しかし, 微分形式の概念を用い
+  た方が証明はもちろん簡単になる.}. \qed
+%
+
+
+%\begin{question}[正則函数の不定積分]
+%  $U$ は $\C$ の中の開円板であるとし, $f$ は $U$ 上の正則函
+%  数であるとする. 固定された点 $a\in U$ から任意の点 $z\in U$ 
+%  への滑らかな道 $\gamma$ を取り, 積分
+%  \[
+%    F(z) = \int_{\gamma} f(z)\,dz
+%  \]%
+%  を考える. このとき, $F(z)$ は積分経路 $\gamma$ の取り方によらず $a$,
+%  $z$ のみによって決まり, さらに, $F'(z)=f(z)$ が成立している.
+%\end{question}
+
+
+\begin{question}[Cauchy の積分公式] 
+  実数 $a < b$, $c < d$ に対する矩形型領域 %
+  $U = \{\, x + iy \mid a<x<b, c<y<d\,\}$ を考える. %
+  $f$ が $\overline U$ の近傍上の $C^1$ 函数であるとき, 次が成立する:
+  \[
+    f(z)
+    =
+    \frac{1}{2\pi i}
+    \left(
+      \int_{\d U} \frac{f(\zeta)\,d\zeta}{\zeta - z}
+      -
+      \int_U \frac{\dbar f(\zeta) \wedge d\zeta}{\zeta - z}
+    \right)
+    \qquad
+    \text{for}\quad z\in U
+  \]%
+  特に, $f$ の $U$ への制限が正則函数ならば次が成立する:
+  \[
+    f(z)
+    =
+    \frac{1}{2\pi i}
+    \int_{\d U} \frac{f(\zeta)\,d\zeta}{\zeta - z}.
+    \qquad
+    \text{for}\quad z\in U.
+  \]%
+  この公式は Cauchy の積分公式(もしくは積分表示)と呼ばれている. 
+  \qed
+\end{question}
+
+\noindent ヒント: まず, $z$ を中心とする十分小さな半径 %
+$\varepsilon > 0$ を持つ開円板 $U_\varepsilon(z)$ を取り, %
+$U - U_\varepsilon(z)$ に対する Green の公式を考え, %
+$\varepsilon \to 0$ の極限を考える. \qed
+
+%\begin{question}[Cauchy の係数評価式]
+%  $R > 0$ に対して, $D_R = \{\, z\in\C \mid |z| < R$ \,\} と置く. $f$ 
+%  は $D_R$ 上の正則函数であるとする. $D_R$ 上で $|f|\le M$ が成立して
+%  いると仮定する. このとき, $0< r < R$ ならば,
+%  \[
+%    \sup_{z\in D_r}
+%      \left| \frac{1}{n!} \frac{d^n}{dz^n} f(z) \right|
+%    \le
+%    \frac{M r}{(R - r)^{n+1}}.
+%  \qed
+%  \]%
+%\end{question}
+
+
+%\begin{question}
+%  任意の正則函数は複素解析函数であることを示せ. \qed
+%\end{question}
+
+\subsection{Fourier 級数展開と Wirtinger の不等式}
+
+{\bf Fourier 級数}の理論によって周期 $2\pi$ を持つ任意の実数値 $C^\infty$ 函数 
+$f(t)$ は一様絶対収束する次の形の級数で一意的に表わされることが知られている:
+\begin{equation*}
+ f(t) = \frac{1}{2}a_0 + \sum_{n=1}^\infty(a_n\cos nt + b_n\sin nt),
+  \qquad a_n,b_n\in\R.
+\tag{$*$}
+\end{equation*}
+この表示を $f(t)$ の {\bf Fourier (級数)展開}と呼ぶ.
+$f(t)$ が $C^\infty$ 級であるという仮定
+から, $a_n$, $b_n$ は $n\to\infty$ で急激に $0$ に近づき,
+級数 ($*$) は項別微分可能であることも導かれる.
+ここでは以上の結果を認めて使うことにする.
+
+\begin{question}
+ \label{q:Fourier-coeff}
+ ($*$) から次を導け:
+ \begin{align*}
+  &
+  a_m = \frac{1}{\pi}\int_0^{2\pi} f(t)\cos mt\,dt
+  \qquad (m=0,1,2,\ldots),
+  \\ &
+  b_n = \frac{1}{\pi}\int_0^{2\pi} f(t)\sin nt\,dt
+  \qquad (n=1,2,3\ldots).
+  \qed
+ \end{align*}
+\end{question}
+
+\begin{proof}[ヒント]
+ $m,n=1,2,3,\ldots$ に対して次の公式が成立している:
+ \begin{align*}
+  &
+  \frac{1}{\pi}\int_0^{2\pi} \cos mt \cos nt \,dt = \delta_{m,n},
+  \quad
+  \frac{1}{\pi}\int_0^{2\pi} \sin mt \sin nt \,dt = \delta_{m,n},
+  \\ &
+  \frac{1}{\pi}\int_0^{2\pi} \cos mt \sin nt \,dt = 0.
+ \end{align*}
+ これらの公式と一様絶対収束と定積分の順序の交換を使う.
+ \qed
+\end{proof}
+
+\begin{question}
+ $f(t)$ が $C^\infty$ 級であるという仮定から, 任意の $k=0,1,2,\ldots$ に
+ 対して $n^k a_n$, $n^k b_n$ が $n\to\infty$ で $0$ に収束することを導け.
+ \qed
+\end{question}
+
+\begin{proof}[ヒント]
+ ひとつ上の問題の $a_n$, $b_n$ の公式を $f$ の 
+ $k$ 階の導函数 $f^{(k)}$ に適用し, 部分積分してみよ.
+ もしくは $f$ の Fourier 展開を項別微分してみよ.
+ $f^{(k)}$ の Fourier 展開も一様絶対収束することを認めて使って良い.
+ \qed
+\end{proof}
+
+\begin{question}[Wirtinger の不等式]
+ $\int_0^{2\pi}f(t)\,dt = 0$ と仮定し, ($*$) から次の不等式を導け:
+ \begin{equation*}
+  \int_0^{2\pi} f(t)^2 \,dt \leqq \int_0^{2\pi} f'(t)^2\, dt.
+ \end{equation*}
+ さらに等号が成立するための必要十分条件は
+ \begin{equation*}
+  f(t) = a_1 \cos t + b_1 \sin t
+ \end{equation*}
+ と同値であることも示せ. \qed
+\end{question}
+
+\begin{proof}[ヒント]
+ ($*$) のもとで $\int_0^{2\pi}f(t)\,dt = 0$ は
+ \begin{equation*}
+  f(t) = \sum_{n=1}^\infty(a_n\cos nt + b_n\sin nt)
+ \end{equation*}
+ と同値である. このとき
+ \begin{equation*}
+  f'(t) = \sum_{n=1}^\infty(n b_n\cos nt - n a_n \sin nt).
+ \end{equation*}
+ 問題 \qref{q:Fourier-coeff} のヒントの公式を用いて次を示せ:
+ \begin{equation*}
+  \frac{1}{\pi}\int_0^{2\pi} f(t)^2 = \sum_{n=1}^\infty(a_n^2+b_n^2),
+  \qquad
+  \frac{1}{\pi}\int_0^{2\pi} f'(t)^2 = \sum_{n=1}^\infty n^2(a_n^2+b_n^2).
+ \end{equation*}
+ この公式から Wirtinger の不等式およびその等号成立条件がただちに導かれる.
+ \qed
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\begin{thebibliography}{ABC}
+
+%\bibitem[Gardner]{Gardner}
+%Martin~Gardner: 自然界における左と右, 紀伊国屋書店
+
+%\bibitem[小林]{Kobayashi}
+%小林 昭七: 曲線と曲面の微分幾何, 裳華房
+
+%\bibitem[久賀]{Kuga}
+%久賀 道郎: ドクトル クーガー の数学講座 1, 2, 日本評論社
+
+%\bibitem[松島]{Matsushima}
+%松島与三: 多様体入門, 数学選書 5, 裳華房
+
+%\bibitem[Polyakov]{Polyakov}
+%A.~M.~Polyakov: Gauge fields and strings, harwood academic publishers,
+%Contemporary concepts in physics, Volume 3, 1987
+
+%\bibitem[Poh]{Poh}
+%W.~Pohl,
+%{\em DNA and differential geometry},
+%Math. Intell. {\bf 3}, 1980, 20--27.
+
+%\bibitem[PoR]{PoR}
+%W.~Pohl and G.~Roberts,
+%{\em Topological considerations in the theory of replication of DNA},
+%J.~Math.~Biology {\bf 6}, 1978, 383--402.
+
+%\bibitem[佐武]{Satake}
+%佐武 一郎: 線型代数学, 裳華房
+
+%\bibitem[数学辞典]{jiten}
+%岩波数学辞典, 第三版, 岩波書店
+
+%\bibitem[高木]{Takagi}
+%高木貞治: 解析概論, 改訂第三版, 岩波書店
+
+%\bibitem[田村]{Tamura}
+%田村一朗: トポロジー, 岩波全書 276, 岩波書店
+
+%\bibitem[朝永]{Tomonaga}
+%朝永振一郎: 量子力学 I, 第2版, 物理学大系, 基礎物理学篇 VIII, みすず書房
+
+%\bibitem[WW]{WW}
+%E.~T.~Whittaker and G.~N.~Watson: A course of modern analysis,
+%Cambridge University Press, Fourth Edition, 1927, Reprinted 1992
+
+%\bibitem[山内・杉浦]{YS}
+%山内恭彦, 杉浦光雄: 連続群論入門, 培風館, 新数学シリーズ 18
+
+%\bibitem[横田]{Yokota}
+%横田一郎: 群と位相, 裳華房, 基礎数学選書 5
+
+%\end{thebibliography}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

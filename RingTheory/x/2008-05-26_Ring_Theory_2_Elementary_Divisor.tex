@@ -1,0 +1,717 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\STUDENT{} % \def すると計算問題の解答を印刷しなくなる.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[12pt,twoside]{jarticle}
+%\documentclass[12pt]{jarticle}
+\usepackage{amsmath,amssymb,amscd}
+\usepackage{eepic}
+\usepackage{enshu}
+%\usepackage{showkeys}
+
+\setlength{\oddsidemargin}{0cm}
+\setlength{\evensidemargin}{0cm}
+\setlength{\topmargin}{-1.8cm}
+\setlength{\textheight}{26cm}
+%\setlength{\topmargin}{-0.8cm}
+%\setlength{\textheight}{24cm}
+\setlength{\textwidth}{16cm}
+
+\allowdisplaybreaks
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setcounter{page}{1}       % この数から始まる
+%\setcounter{section}{-1}   % この数の次から始まる
+\setcounter{theorem}{0}    % この数の次から始まる
+\setcounter{question}{0}   % この数の次から始まる
+\setcounter{footnote}{0}   % この数の次から始まる
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\ifx\STUDENT\undefined
+%
+% 教師専用
+%
+\newcommand\commentout[1]{#1}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\else
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% 生徒専用
+%
+\newcommand\commentout[1]{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\fi
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{\bf 代数学概論B演習
+  \ifx\STUDENT\undefined\\{\normalsize 教師用\quad(計算問題の略解付き)}\fi}
+\author{黒木 玄 \quad (東北大学大学院理学研究科数学専攻)}
+\date{2008年5月26日(月)}
+\maketitle
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\noindent
+%{\Large\bf 代数学概論B演習}
+%\hfill
+%{\large 黒木玄}
+%\qquad
+%2008年4月14日(月)
+%\commentout{\quad (教師用)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\tableofcontents
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\setcounter{section}{-1}
+
+\section{行列の単因子論}
+\label{sec:elementary-divisor}
+
+この節の目標は次の定理を証明することである.
+
+\begin{theorem}[行列の単因子論]
+\label{theorem:elementary-divisor}
+  $\Z$ の元を成分に持つ $(m,n)$ 型行列 $A\in M_{m,n}(\Z)$ を任意に取る. 
+  このとき行列の基本変形によって $A$ を
+  \begin{equation*}
+    \begin{bmatrix}
+      e_1 &     &        &     &   & & \bigzerou \\
+          & e_2 &        &     &   & & \\
+          &     & \ddots &     &   & & \\
+          &     &        & e_s &   & & \\
+          &     &        &     & 0 & & \\
+      \bigzerol & &      &     &   & \ddots & \\
+    \end{bmatrix}
+  \end{equation*}
+  の形の行列で次をみたすものに変形できる:
+  \begin{equation*}
+    e_1\mid e_2\mid\cdots\mid e_s, \qquad e_s\ne 0.
+  \end{equation*}
+  しかもこのような $e_1,\dots,e_s$ は $\pm1$ 倍を除いて一意に定まる.  
+  $e_1,\dots,e_s$ を行列 $A$ の{\bf 単因子 (elementary divisors)} と呼ぶ%
+  \footnote{任意の可換環において $0\in R$ は任意の $a\in R$ で割り切れる
+    (なぜならば $0=0\cdot a$).
+    よって $N=\min\{m,n\}$, $e_{s+1}=\cdots=e_N=0$ と
+    置けば $e_1\mid e_2\mid\cdots\mid e_N$ が成立する.
+    したがって $0$ を例外扱いする必要はなく, $0$ も単因子に含めておいても問
+    題は生じない.}. 
+  (単因子として正のものを選ぶことにすれば単因子は行列 $A$ から一意に定まる.)
+ \qed
+\end{theorem}
+
+証明を後回しにして例をひとつ挙げておこう.
+
+\begin{example}
+\label{example:1}
+ 行列 $A$ を次のように定める:
+ \begin{equation*}
+  A =
+  \begin{bmatrix}
+    0 &  1 &  5 &  1 \\
+    2 &  1 & 19 &  5 \\
+    6 & -1 & 43 & 11 \\
+  \end{bmatrix}.
+ \end{equation*}
+ このとき行列の基本変形を $\rightarrow$ で表わすと,
+ \begin{align*}
+  &
+  \begin{bmatrix}
+    0 &  1 &  5 &  1 \\
+    2 &  1 & 19 &  5 \\
+    6 & -1 & 43 & 11 \\
+  \end{bmatrix}
+  \xrightarrow{\text{第1,2列を交換}}
+  \begin{bmatrix}
+     1 & 0 &  5 &  1 \\
+     1 & 2 & 19 &  5 \\
+    -1 & 6 & 43 & 11 \\
+  \end{bmatrix}
+  \\ &
+  \xrightarrow[(\text{第4列})-(\text{第1列})]{(\text{第3列})-5\times(\text{第1列})}
+  \begin{bmatrix}
+     1 & 0 &  0 &  0 \\
+     1 & 2 & 14 &  4 \\
+    -1 & 6 & 48 & 12 \\
+  \end{bmatrix}
+  \xrightarrow[(\text{第3行})+(\text{第1行})]{(\text{第2行})-(\text{第1行})}
+  \begin{bmatrix}
+    1 & 0 &  0 &  0 \\
+    0 & 2 & 14 &  4 \\
+    0 & 6 & 48 & 12 \\
+  \end{bmatrix}
+  \\ &
+  \xrightarrow[(\text{第4列})-2\times(\text{第2列})]{(\text{第3列})-7\times(\text{第2列})}
+  \begin{bmatrix}
+    1 & 0 & 0 & 0 \\
+    0 & 2 & 0 & 0 \\
+    0 & 6 & 6 & 0 \\
+  \end{bmatrix}
+  \xrightarrow{(\text{第4行})-3\times(\text{第2行})}
+  \begin{bmatrix}
+    1 & 0 & 0 & 0 \\
+    0 & 2 & 0 & 0 \\
+    0 & 0 & 6 & 0 \\
+  \end{bmatrix}.
+ \end{align*}
+ このとき $1\mid 2\mid 6$ が成立しているので $1,2,6$ は行列 $A$ の単因子である.
+ \qed
+\end{example}
+
+
+\begin{proof}[行列の単因子の存在の証明1]
+ $m$ に関する帰納法.  $A=0$ ならば何もすることはない. 
+ よって $A\ne 0$ と仮定して良い.
+ $A$ に基本変形をほどこした結果全体の集合を $\cE$ と書き, 
+ ある $B\in\cE$ の成分になっているような $\Z$ の元全体の集合を $\cF$ と
+ 書くことにする. $\cF$ に含まれる $0$ でない元の中で
+ 絶対値が最小のものを $e_1$ とする.
+ $e_1$ を第 $(1,1)$ 成分とする $B\in\cE$ が存在する. 
+ $B$ の第 $1$ 列と第 $1$ 行における第 $(1,1)$ 成分以外の成分の中に $e_1$ で
+ 割り切れないものが存在するとすれば, 
+ 基本変形によってその割り切れない成分から $e_1$ の整数倍を引き去ること
+ によって $e_1$ よりも絶対値が小さい $0$ でない整数を構成できるので %
+ $e_1$ の絶対値の最小性に反する.
+ したがって 第 $1$ 列と第 $1$ 行のすべての成分は $e_1$ で割り切れる.
+ そのことから行列の基本変形によって, 第 $(1,1)$ 成分の $e_1$ を変えずに
+ それ以外の第 $1$ 列と第 $1$ 行の成分を $0$ にできることがわかる.
+ その結果を \(
+  C =
+  \begin{bmatrix}
+    e_1 & 0 \\
+    0   & C' \\
+  \end{bmatrix}
+ \) と書くことにする. ここで $C'$ は $(m-1,n-1)$ 型行列である.
+ もしも $C'$ の成分の中に $e_1$ で割り切れない成分が存在するとすれば 
+ その成分を含む $C$ の列を第1列に加えてから上と同様の議論を行なうことに
+ よって, $e_1$ の絶対値の最小性に矛盾することがわかる.
+ よって $C'$ のすべての成分は $e_1$ で割り切れる.
+ あとは $C'$ に帰納法の仮定を適用すれば証明が終わる.
+ $C'$ の基本変形で「$C'$ のすべての成分が $e_1$ で割り切れる」という性質が
+ 保たれることに注意せよ.
+ \qed
+\end{proof}
+
+\begin{rem}
+ 上の証明1はそのままでは行列の単因子を計算するためのアルゴリズム
+ (有限時間ステップで必ず終わる計算手続き)を与えない. 
+ なぜならば無限集合 $\cE,\cF$ を扱ってしまっているからである.
+ しかし下の証明2はアルゴリズムを与える.
+ \qed
+\end{rem}
+
+\begin{proof}[行列の単因子の存在の証明2]
+$A=[a_{ij}]\in M_{m,n}(R)$ に以下の手続きで基本変形をほどこす:
+\begin{enumerate}
+\item $A=0$ ならば手続きを終了する.
+\item 行と列の置換によって, $A$ の $0$ でない絶対値が最小の成分を第 $(1,1)$ 成
+  分に持って来て, 改めてその行列を $A$ として次に進む.
+\item 以下のサブルーチンを実行する:
+  \begin{enumerate}
+  \item $a_{21},\dots,a_{m1}$ のすべてが $a_{11}$ で割り切れるならば
+    第 $1$ 行の整数倍を第 $2,\dots,m$ 行に
+    加えて第 $(2,1),\dots,(m,1)$ 成分をすべて $0$ にする.
+    その結果を改めて $A$ として次に進む.
+  \item $a_{21},\dots,a_{m1}$ のどれかが $a_{11}$ で割り切れない
+    ならば行の基本変形を用いて第 $1$ 列に Euclid の互除法を適用して $A$ を
+    次の形に変形する:
+    \begin{equation*}
+      \begin{bmatrix}
+        a & b \\
+        0 & B \\
+      \end{bmatrix},
+      \qquad
+      0\ne a\in R,\quad
+      b\in M_{1,n-1}(R),\quad 
+      B\in M_{m-1,n-1}(R).
+    \end{equation*}
+    ここで $a$ は $A$ の第 $1$ 列の最大公約数であり, 
+    $|a|<|a_{11}|$ が成立している.
+    変形した結果を改めて $A$ として次に進む.
+  \item $a_{12},\dots,a_{1n}$ のすべてが $a_{11}$ で割り切れるならば
+    第 $1$ 列の整数倍を第 $2,\dots,m$ 列に
+    加えて第 $(1,2),\dots,(1,n)$ 成分をすべて $0$ にする.
+    その結果を改めて $A$ として次に進む.
+  \item $a_{12},\dots,a_{1n}$ のどれかが $a_{11}$ で割り切れない
+    ならば列の基本変形を用いて第 $1$ 行に Euclid の互除法を適用して $A$ を
+    次の形に変形する:
+    \begin{equation*}
+      \begin{bmatrix}
+        a & 0 \\
+        c & B \\
+      \end{bmatrix},
+      \qquad
+      0\ne a\in R,\quad
+      c\in M_{m-1,1}(R),\quad 
+      B\in M_{m-1,n-1}(R).
+    \end{equation*}
+    ここで $a$ は $A$ の第 $1$ 行の最大公約元であり, 
+    $|a|<|a_{11}|$ が成立している.
+    その結果を改めて $A$ として次に進む.
+  \item もしも $A$ が次の形をしていたらこのサブルーチンを終了する:
+    \begin{equation*}
+      \begin{bmatrix}
+        a & 0 \\
+        0 & B \\
+      \end{bmatrix},
+    \qquad
+    0\ne a\in R,\quad
+    B\in M_{m-1,n-1}(R).
+    \tag{$\sharp$}
+    \end{equation*}
+    このサブルーチンは必ず有限ステップで終了する. 
+    なぜならば, $a_{11}$ で第 $1$ 列もしくは第 $1$ 行のどれかの成分が
+    割り切れないならば $|a_{11}|$ が小さくなって行くからである.
+    そして $a_{11}$ で第 $1$ 列と第 $1$ 行の両方の成分がすべて割り切れる
+    ならば $A$ は ($\sharp$) の形に変形されてしまう.
+  \end{enumerate}
+\item この時点で $A$ は ($\sharp$) の形をしている.  
+  もしも $B$ のある成分が $a$ で割り切れないならば, 
+  その成分が存在する列もしくは行を第 $1$ 列もしくは第 $1$ 行に加える.
+  その結果を改めて $A$ としてステップ 3 に戻る.
+\item $B$ のすべての成分が $a$ で割り切れるならば $B$ に対して
+  この手続き自身を再帰的(帰納的)に適用する.  
+  (行列 $B$ を基本変形しても「$B$ のすべての成分が $a$ で割り切れる」
+  という性質が保たれることに注意せよ.)
+\item この手続きの全体を終了する.
+  この手続き全体は必ず有限ステップで終了する.
+  なぜならば, ステップ3の終了時に $B$ のある成分が $a$ で割り切れないならば
+  ステップ4を経由してステップ3に戻り, ステップ(b)で $|a_{11}|$ が
+  小さくなって行くからである.
+\end{enumerate}
+以上のようにして行列 $A$ を行列の基本変形によって
+\theoremref{theorem:elementary-divisor}の形に変形できることがわかる.
+\qed
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\medskip
+\noindent
+
+整数を成分の持つ $(m,n)$ 型行列 $A\in M_{m,n}(\Z)$ に対して %
+$A$ のすべての $i$ 次小行列式%
+\footnote{$(m,n)$ 型行列の $i$ 次小行列式は $\binom{m}{i}\binom{n}{i}$ 通り
+  存在する.}%
+の最大公約数を $d_i(A)$ と書き, $A$ の{\bf 行列式因子 (determinantal
+divisors)} と呼ぶ%
+\footnote{単因子の記号 $e_i$ は elementary divisor の頭文字を取っており,
+  行列式因子の記号 $d_i$ は determinantal divisor の頭文字を取っている.
+  堀田 \cite{gun-kagun} では単因子は $d_i$ と表わされ, 
+  行列式因子を $\varDelta_i$ と表わされているので混乱しないように注意せよ.}.
+
+\begin{lemma}[行列式因子の基本変形による不変性]
+\label{lemma:invariance-det-div}
+  行列式因子は基本変形によって ($\pm1$ 倍を除いて) 不変である.
+\end{lemma}
+
+\begin{proof}
+行列 $B$ は以下のどれかであるとする：
+\begin{itemize}
+ \item[(1)] $B$ は $A$ のある行(または列)を $\pm1$ 倍したものである.
+ \item[(2)] $B$ は $A$ のある行(または列)の整数倍を他の行(または列)
+  に加えてできる行列である.
+ \item[(3)] $B$ は $A$ の二つの異なる行(または列)を交換したものである.
+\end{itemize}
+行列の基本変形はこれらの基本操作の有限回の繰り返しのことなので, 
+以上の場合について $d_i(A)$ と $d_i(B)$ が等しいことを示せばよい.
+さらに行列の基本変形は逆変形を持ち, 逆変形も基本変形なので, 
+$d_i(B)$ が $d_i(A)$ で割り切れることを示せば十分である.
+そのためには $B$ の $i$ 次の小行列式が $d_i(A)$ で割り切れることを示せばよい.
+
+(1)と(3)の場合. 
+$B$ の $i$ 次の小行列式は $A$ の $i$ 次の小行列式の $\pm1$ 倍になる
+ので, $B$ の $i$ 次の小行列式は $d_i(A)$ で割り切れる.
+
+(2)の場合. 
+$B$ の $i$ 次の小行列式は $A$ の $i$ 次の小行列式の整数倍の和の形
+になるので $d_i(A)$ で割り切れる.
+\qed
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+次の命題を証明すれば\theoremref{theorem:elementary-divisor}の証明が完了する.
+
+\begin{prop}[単因子と行列式因子の関係]
+\label{prop:elem-div-det-div}
+  行列 $A\in M_{m,n}(\Z)$ の単因子を $e_1,\dots,e_s$ と書き, 
+  行列式因子を $d_1,\dots,d_k$ ($k=\min\{m,n\}$) と書くとき, 
+  必要ならばそれぞれを適切に $\pm1$ 倍することによって次が成立する:
+  \begin{equation*}
+    d_1 = e_1,\ d_2 = e_1e_2,\ \dots,\ d_s = e_1e_2\cdots e_s,
+    \qquad
+    d_i = 0 \quad (i>s).
+  \end{equation*}
+  これは次と同値なので行列 $A$ の単因子は $A$ から $\pm1$ 倍を除いて
+  一意に定まることもわかる:
+  \begin{equation*}
+    e_1 = d_1,\ e_2 = d_2/d_1,\ \ldots,\ e_s = d_s/d_{s-1},
+    \qquad
+    0=d_i/d_{i-1} \quad (i>s).
+  \end{equation*}
+\end{prop}
+
+\begin{proof}
+行列 $A$ を基本変形することによって次の形の行列 $B$ が得られたとする:
+\begin{equation*}
+  B =
+  \begin{bmatrix}
+    e_1 &     &        &     &   & & \bigzerou \\
+        & e_2 &        &     &   & & \\
+        &     & \ddots &     &   & & \\
+        &     &        & e_s &   & & \\
+        &     &        &     & 0 & & \\
+    \bigzerol & &      &     &   & \ddots & \\
+  \end{bmatrix},
+  \qquad
+  e_1\mid e_2\mid\cdots\mid e_s, \quad
+  e_s\ne 0.
+\end{equation*}
+\lemmaref{lemma:invariance-det-div} より, 
+必要なら適当に $\pm1$ 倍すれば $d_i(A)=d_i(B)$ である. 
+しかし, $d_i(B)$ は容易に計算できる: %
+$d_1(B) = e_1$, $d_2(B) = e_1e_2$, $\ldots$, $d_r(B) = e_1e_2\cdots e_s$,
+$d_i(B) = 0$ ($i>s$).
+\qed
+\end{proof}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{有限生成 Abel 群の基本定理}
+\label{sec:finitely-generated-Abelian-group}
+
+以下Abel群を加法群として扱う.
+
+有限個のAbel群 $M_1,M_2,\ldots,M_k$ の
+直積 $M_1\times M_2\times\cdots\times M_k$ を
+直和の記号を用いて $M_1\oplus M_2\oplus\cdots\oplus M_k$
+と書くことにする. 
+このとき $M_1\oplus M_2\oplus\cdots\oplus M_k$ の元 $v$ は
+\begin{equation*}
+ v = v_1+v_2+\cdots+v_k, 
+ \qquad v_i\in M_i
+\end{equation*}
+と一意に表わされる(これが直和の定義だと考えてよい).
+
+Abel群 $M$ が {\bf 有限生成 (finitely generated)} であるとは
+ある $v_1,\dots,v_n\in M$ で
+\begin{equation*}
+  M = \Z v_1 + \cdots + \Z v_n
+\end{equation*}
+を満たすものが存在することであると定める.
+このとき, $M$ は $v_1,\ldots,v_n$ から生成されると言い, 
+$v_1,\ldots,v_n$ を $M$ の生成元と呼ぶ.
+そのとき任意の $v\in M$ は
+\begin{equation*}
+  v = a_1 v_1 + \cdots + a_n v_n,
+  \qquad
+  a_1,\dots,a_n\in\Z
+\end{equation*}
+と表わされるが, この表示の一意性が成立するとは限らないことには注意せよ.  
+表示の一意性が成立するときには群の同型
+\begin{equation*}
+ M = \Z v_1\oplus\cdots\oplus\Z v_n \cong \Z^n,
+ \qquad
+ v=a_1 v_1 + \cdots + a_n v_n \leftrightarrow (a_1,\ldots,a_n)
+\end{equation*}
+が成立している. このとき $M$ は有限生成{\bf 自由}Abel群であると言い, %
+$v_1,\ldots,v_n$ を $M$ の{\bf 自由基底}と呼ぶ.
+
+この節の目標は次の定理の証明の概略と応用例について説明することである.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{theorem}[有限生成Abel群の基本定理1]
+\label{theorem:fhAg1}
+ $M$ は有限生成 Abel 群であるとする.
+ このとき $2$ 以上の整数 $e_1,\cdots,e_s$ と $0$ 以上の整数 $r$ で
+ 次を満たすものが一意に存在する:
+ \begin{equation*}
+   M \cong (\Z/e_1\Z)\oplus\cdots\oplus(\Z/e_s\Z)\oplus\Z^r
+  \quad (\text{加法群の同型}),
+  \qquad
+  e_1\mid\cdots\mid e_s.
+  \qed
+ \end{equation*}
+\end{theorem}
+
+一般に正の整数 $n$ が $n=p_1^{m_1}\cdots p_k^{m_k}$ 
+($p_i$ は互いに異なる素数, $m_\nu$ は正の整数) と素因数分解されているとき,
+中国式剰余定理
+\begin{equation*}
+ \Z/n\Z \cong (\Z/p_1^{m_1}\Z)\oplus\cdots\oplus(\Z/p_k^{m_k}\Z)
+ \quad (\text{加法群の同型}) 
+\end{equation*}
+が成立している. したがって上の定理における各 $e_i$ を素因数分解すること
+によって次の結果が得られる(詳しい証明は略).
+
+\begin{theorem}[有限生成Abel群の基本定理2]
+\label{theorem:fhAg2}
+ $M$ は有限生成 Abel 群であるとする.
+ このとき素数 $p_1,\ldots,p_N$ (重複を許す)と正の整数 $m_1,\ldots,m_N$ 
+ と $0$ 以上の整数 $r$ で次を満たすものが存在する:
+ \begin{equation*}
+   M \cong (\Z/p_1^{m_1}\Z)\oplus\cdots\oplus(\Z/p_N^{m_N}\Z)\oplus\Z^r
+  \quad (\text{加法群の同型}).
+ \end{equation*}
+ しかも $r$ は $M$ から一意に定まり, $(p_1^{m_1},\ldots,p_N^{m_N})$ は
+ 並べる順序を除いて $M$ から一意に定まる. \qed
+\end{theorem}
+
+\begin{example}
+ $n$ が $2$ 以上の整数のとき $M=\Z/n\Z$ は $\bar 1 =1+n\Z$ から生成される
+ 有限生成Abel群である.  
+ $M=\Z/n\Z$ に対する\theoremref{theorem:fhAg1} の $s,e_i,r$ 
+ は $s=1$, $e_1=n$, $r=0$ となる.
+ \qed
+\end{example}
+
+\begin{example}
+ $n$ が $0$ の整数のとき $M=\Z^n$ は標準基底 $e_1,\ldots,e_n$ から
+ 生成される有限生成Abel群である. ここで $e_i$ は第 $i$ 成分だけが $1$ で
+ 他の成分はすべて $0$ のベクトルである(\theoremref{theorem:fhAg1}の $e_i$
+ との区別に注意せよ).  $\Z^0=\{0\}$ と考える.
+ $M=\Z^n$ に対する\theoremref{theorem:fhAg1} の $s,e_i,r$ 
+ は $s=0$, $r=n$ となる.
+ \qed
+\end{example}
+
+\begin{example}
+ $\Z^2$ の部分群 $N$ を $N=\{\,(x,y)\in\Z^2\mid x+y=0 \}$ と定め, 
+ $M=\Z^2/N$ とおく.  
+ このとき $M$ は $v_1=(1,0)\MOD N\,(=(1,0)+N)$, $v_2=(0,1)\MOD N\,(=(0,1)+N)$ から
+ 生成される有限生成Abel群である.
+ $M\cong\Z$ を次のようにして証明できる.
+ 加法群の準同型 $f:M\to\Z$ を $f(x,y)=x+y$ ($(x,y)\in\Z^2$) と定める.
+ このとき任意の $a\in\Z$ に対して $f(a,0)=a$, $(a,0)\in\Z^2$ なので %
+ $f$ は全射である.
+ さらに $(x,y)\in\Z^2$ に対して $f(x,y)=0 \iff x+y=0$ なので %
+ $\Ker f = N$ であることもわかる.
+ よって群の準同型定理より $M=\Z^2/N \cong \Z$ となる.
+ $M=\Z^2/N$ に対する\theoremref{theorem:fhAg1} の $s,e_i,r$ 
+ は $s=0$, $r=1$ となる.
+ \qed
+\end{example}
+
+\begin{example}
+ $n$ は $2$ 以上の整数であるとし, 
+ $\Z^2$ の部分群 $N$ を $N=\{\,(x,y)\mid x=y\equiv 0\MOD n\,\}$ と定め, 
+ $M=\Z^2/N$ とおく.
+ このとき $M$ は $v_1=(1,0)\MOD N\,(=(1,0)+N)$, $v_2=(0,1)\MOD N\,(=(0,1)+N)$ から
+ 生成される有限生成Abel群である.
+ $M\cong\Z/n\Z\oplus\Z$ を次のようにして証明できる.
+ 加法群の準同型 $f:M\to\Z/n\Z\oplus\Z$ 
+ を $f(x,y)=(x\MOD n, y-x)$ ($(x,y)\in\Z^2$) と定める.
+ このとき任意の $a,b\in\Z$ に対して %
+ $f(a,a+b)=(a\MOD n, b)$, $(a,a+b)\in\Z^2$ なので $f$ は全射である.
+ さらに $(x,y)\in\Z^2$ に対して $f(x,y)=(0\MOD n, 0) \iff x=y\equiv 0\MOD n$
+ なので $\Ker f = N$ であることもわかる.
+ よって群の準同型定理より $M=\Z^2/N \cong \Z/n\Z\oplus\Z$ となる.
+ $M=\Z^2/N$ に対する\theoremref{theorem:fhAg1} の $s,e_i,r$ 
+ は $s=1$, $e_1=n$, $r=1$ となる.
+ \qed
+\end{example}
+
+\begin{example}
+ $M=(\Z/20\Z)\oplus(\Z/30\Z)$ とおく. $20\nmid 30$ に注意せよ.
+ このとき中国式剰余定理と $20=2^2\cdot 5$, $30=2\cdot 3\cdot 5$, 
+ $2^2\cdot3\cdot5=60$, $2\cdot 5=10$ より
+ \begin{align*}
+  M
+  &
+  \cong ((\Z/2^2\Z)\oplus(\Z/5\Z))\oplus((\Z/2\Z)\oplus(\Z/3\Z)\oplus(\Z/5\Z))
+  \\ &
+  \cong ((\Z/2\Z)\oplus(\Z/5\Z))\oplus((\Z/2^2\Z)\oplus(\Z/3\Z)\oplus(\Z/5\Z))
+  \\ &
+  \cong (\Z/10\Z)\oplus(\Z/60\Z).
+ \end{align*}
+ $10\mid 60$ に注意せよ.
+ よって $M$ に対する\theoremref{theorem:fhAg1} の $s,e_i,r$ 
+ は $s=2$, $e_1=10$, $e_2=60$, $r=0$ となる.
+ \qed
+\end{example}
+
+\begin{proof}[\theoremref{theorem:fhAg1}の証明の概略]
+ 1. $M$ は $w'_1,\ldots,w'_m$ から生成される有限生成Abel群であると仮定する.
+ このとき群の全射準同型 $f:\Z^m\to M$ を %
+ $f(a_1,\ldots,a_m)=a_1w'_1+\cdots+a_mw'_m$ ($a_i\in\Z$) と定めることができる.
+ よって $N=\Ker f$ とおくと群の準同型定理より $M\cong \Z^m/N$ である.
+
+ 2. $N$ は $m$ 個以下の元 $w_1,\ldots,w_n\in\Z^m$ ($n\leqq m$) 
+ から生成される(要証明).
+ よって群の準同型 $g:\Z^n\to \Z^m$ を %
+ $g(b_1,\ldots,b_n)=b_1w_1+\cdots+b_nw_n$ ($b_i\in\Z$) と定める
+ と $\Image g = N$ が成立している.
+ $\Z^n$, $\Z^m$ の元を列(縦)ベクトルで表わすことにし, 
+ $w_j\in\Z^m$ を第 $j$ 列ベクトルに持つ $(m,n)$ 型行列を $A$ と書くと, %
+ $g(x)=Ax$ ($x\in\Z^n$) が成立している(簡単なことだが要確認).
+
+ 3. \theoremref{theorem:elementary-divisor}(行列の単因子論)の結果より, 
+ 行列 $A$ は基本変形によって次の形に変形される:
+ \begin{equation*}
+  B =
+  \begin{bmatrix}
+    e_1 &     &        &     &   & \bigzerou \\
+        & e_2 &        &     &   & \\
+        &     & \ddots &     &   & \\
+        &     &        & e_s &   & \\
+        &     &        &     & 0 & \\
+        &     &        &     &   & \ddots \\
+    \bigzerol & &      &     &   & \\
+  \end{bmatrix},
+  \qquad
+  \begin{cases}
+    e_1=e_2=\cdots=e_l=1, \quad \\
+    e_{l+1}\mid e_{l+1}\mid\cdots\mid e_s, \\
+    \text{$e_{l+1},\ldots,e_s$ は $2$ 以上の整数}. \\
+  \end{cases}
+ \end{equation*}
+ そして行列の列に関する基本変形を与える行列は $\Z^n$ の自由基底を取り換え, 
+ 行列の行に関する基本変形を与える行列は $\Z^m$ の自由基底を取り換える
+ (簡単なことだが要確認).
+ よって適当に取り換えられた自由基底に関する準同型 $g$ の行列表示が $B$ で
+ あると考えてよい.
+ すなわち, $\Z^n$ のある自由基底 $u_1,\ldots,u_n$ と %
+ $\Z^m$ のある自由基底 $v_1,\ldots,v_m$ が存在して次が成立している:
+ \begin{equation*}
+  g(u_1) = e_1v_1,\quad \ldots,\quad
+  g(u_s)=e_sv_s, \quad
+  g(u_{s+1})=\cdots=g(u_n)=0.
+ \end{equation*}
+ したがって $N=\Image g=\Z e_1v_1\oplus\cdots\oplus\Z e_sv_s$.
+
+ 4. $M\cong\Z^m/N$ は次のように計算される(要証明):
+ \begin{align*}
+  M \cong \Z^m/N
+  &=\frac
+   {\,\,\,\Z\phantom{e_1}v_1\oplus\cdots\oplus\Z\phantom{e_1}v_s\oplus\Z v_{s+1}\oplus\cdots\oplus\Z v_m}
+   {\Z e_1v_1\oplus\cdots\oplus\Z e_sv_s\phantom{\oplus\Z v_{s+1}\oplus\cdots\oplus\Z v_m}}
+  \\ &
+  \cong
+  (\Z/e_1\Z)\oplus\cdots\oplus(\Z/e_s\Z)\oplus\Z^{m-s}.
+ \end{align*}
+ さらに $e_1=\cdots=e_l=1$ と $\Z/1\Z=\Z/\Z\cong 0$ より
+ \begin{equation*}
+  M \cong (\Z/e_{l+1}\Z)\oplus\cdots\oplus(\Z/e_s\Z)\oplus\Z^{m-s}.
+ \end{equation*}
+ ここで $e_{l+1}\mid\cdots\mid e_s$ でかつ %
+ $e_{l+1},\ldots,e_s$ は $2$ 以上の整数であることに注意すれば
+ \theoremref{theorem:fhAg1}の同型の存在が示されたことがわかる.
+ 同型の右辺の一意性の証明については略.
+ \qed
+\end{proof}
+
+\begin{rem}
+ 上の証明は行列の単因子を求めることによって
+ \theoremref{theorem:fhAg1}の同型の右辺を計算する方法を与えている.
+ 一般に $\Z$ の元を成分に持つ $(m,n)$ 型行列 $A$ が行列の基本変形によって
+  \begin{equation*}
+    \begin{bmatrix}
+      a_1 &     &        &\bigzerou \\
+          & a_2 &        &        \\
+          &     & \ddots &        \\
+      \bigzerol &  &     & \ddots \\
+    \end{bmatrix}
+  \end{equation*}
+ の形に変形されるとき, $A$ の $n$ 本の列ベクトルから生成される $\Z^m$ の
+ 部分群を $N$ と書き, $M=\Z^m/N$ とおくと, 
+ \begin{equation*}
+  M\cong
+  \begin{cases}
+   \Z/a_1\Z\oplus\cdots\oplus\Z/a_m\Z               & (m\leqq n), \\
+   \Z/a_1\Z\oplus\cdots\oplus\Z/a_n\Z\oplus\Z^{m-n} & (m\geqq n). \qed \\
+  \end{cases}
+ \end{equation*}
+\end{rem}
+
+\begin{example}
+ \exampleref{example:1}の行列 $A$ を考える.
+ $A$ の第 $j$ 列ベクトルを $w_j\in\Z^3$ と書き, 
+ $w_1,w_2,w_3,w_4$ から生成される $\Z^3$ の部分群を $N$ と書き, 
+ $M=\Z^3/N$ とおく.
+ \exampleref{example:1}の結果より次が成立していることがわかる:
+ \begin{equation*}
+  M \cong (\Z/1\Z)\oplus(\Z/2\Z)\oplus(\Z/6\Z)
+    \cong (\Z/2\Z)\oplus(\Z/6\Z)
+    \cong (\Z/2\Z)\oplus(\Z/2\Z)\oplus(\Z/3\Z).
+ \end{equation*}
+ 最後の同型で中国式剰余定理を使った.
+ \qed
+\end{example}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{ねじれ部分}
+
+Abel群(加法群) $M$ に対してその{\bf ねじれ部分 (torsion part)} $M_\tor$ を
+\begin{equation*}
+ M_\tor = 
+ \{\, v\in M \mid \text{ある $0$ でない $a\in\Z$ が存在して $av=0$} \,\}
+\end{equation*}
+と定める. $M_\tor$ は $M$ の部分群になる(要証明).
+
+\begin{theorem}
+ $M$ が有限生成Abel群であるとき以下が成立している:
+ \begin{enumerate}
+  \item $M/M_\tor$ は有限生成自由Abel群である.
+  \item $M$ は自由 $\iff$ $M_\tor=0$.
+  \item $M$ は有限 $\iff$ $M=M_\tor$.
+ \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+ 有限生成Abel群の基本定理より $M=(\Z/e_1\Z)\oplus\cdots\oplus(\Z/e_s\Z)\oplus\Z^r$
+ ($e_i\geqq 2$)と仮定してよい(なぜか?).
+ このとき $M_\tor = (\Z/e_1\Z)\oplus\cdots\oplus(\Z/e_s\Z)$ である.
+ よって, $M/M_\tor\cong\Z^r$ が有限生成自由Abel群であることと %
+ $M$ は有限 $\iff$ $M=M_\tor$ であることがわかる.
+ さらに有限生成Abel群の基本定理の一意性の主張より, %
+ $M$ は自由 $\iff$ $M=\Z^r$ $\iff$ $M_\tor=0$.
+ \qed
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{問題}
+
+\begin{proof}[問題1]
+ $\Z$ の元を成分として持つ行列 \(
+  A =
+  \begin{bmatrix}
+    4 & 2 &  4 &  4 \\
+    3 & 1 &  3 &  3 \\
+    7 & 5 &  3 & 11 \\
+    7 & 1 & 11 &  3 \\
+  \end{bmatrix}
+ \) を行列の基本変形によって \(
+  B = 
+  \begin{bmatrix}
+    a & 0 & 0 & 0 \\
+    0 & b & 0 & 0 \\
+    0 & 0 & c & 0 \\
+    0 & 0 & 0 & d \\
+  \end{bmatrix}
+ \) ($a\mid b\mid c\mid d$, $a,b,c,d\geqq 0$) の形に変形せよ. 
+ 行列 $A$ の4本の列ベクトルから生成される $\Z^4$ の部分群を $N$ と書き, 
+ $M=\Z^4/N$ とおく. 有限生成Abel群の基本定理の意味で $M$ の構造を決定せよ.
+ \qed
+\end{proof}
+
+\begin{proof}[問題2]
+ $M=(\Z/40\Z)\oplus(\Z/18\Z)\oplus(\Z/12\Z)$ とおく.
+ $M\cong(\Z/e_1\Z)\oplus\cdots\oplus(\Z/e_s\Z)$, 
+ $e_1\mid\cdots\mid e_s$, $e_i\geqq 2$ を満たす $e_i$ たちを求めよ.
+ \qed
+\end{proof}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{thebibliography}{AB}
+
+\bibitem{gun-kagun}
+堀田良之, 代数入門---群と加群, 数学シリーズ, 裳華房, 1987
+
+%\bibitem{hotta-1988}
+%堀田良之, 加群十話---代数学入門, すうがくぶっくす3, 朝倉書店, 1988
+
+\end{thebibliography}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
